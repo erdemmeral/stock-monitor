@@ -294,15 +294,15 @@ class RealTimeMonitor:
                 target_date = datetime.now(tz=pytz.UTC) + target_dates[timeframe]
 
                 # Add to portfolio if first cycle is complete
-                if self.first_cycle_complete:
-                    self.portfolio.add_position(
-                        symbol=symbol,
-                        entry_price=current_price,
-                        target_price=target_price,
-                        target_date=target_date,
-                        timeframe=timeframe
-                    )
-                    logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
+                
+                self.portfolio.add_position(
+                    symbol=symbol,
+                    entry_price=current_price,
+                    target_price=target_price,
+                    target_date=target_date,
+                    timeframe=timeframe
+                )
+                logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
 
 
                 timeframe_text = {'1h': '1 hour', '1wk': '1 week', '1mo': '1 month'}[best_timeframe[0]]
