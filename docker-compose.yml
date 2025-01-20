@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  stock_monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - FLASK_ENV=development
+    restart: unless-stopped
