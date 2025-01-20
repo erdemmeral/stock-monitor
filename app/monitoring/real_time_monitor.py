@@ -212,12 +212,20 @@ class RealTimeMonitor:
     
     async def analyze_and_notify(self, symbol: str, articles: list, prices: pd.DataFrame):
     # Initialize deadlines
+        logger.info(f"📊 Comprehensive Stock Analysis: {symbol}")
+        logger.info(f"Total News Articles Analyzed: {len(articles)}")
+
         deadlines = {
             '1h': timedelta(hours=1),
             '1wk': timedelta(days=7),
             '1mo': timedelta(days=30)
         }
-
+        analysis_summary = {
+                'symbol': symbol,
+                'total_articles': len(articles),
+                'valid_predictions': {},
+                'decision': 'No Action'
+        }
         # Start message with stock alert and articles summary
         message = f"🔔 <b>Stock Alert: {symbol}</b>\n\n"
         message += f"📰 <b>Recent News Articles:</b>\n"
@@ -234,6 +242,12 @@ class RealTimeMonitor:
         valid_timeframes = {}
         for timeframe in self.thresholds.keys():
             valid_preds = []
+            timeframe_analysis = {
+                'total_predictions': 0,
+                'valid_predictions': [],
+                'mean_prediction': 0,
+                'meets_threshold': False
+            }
             for article_data in articles:
                 predictions = article_data['predictions']
                 publish_time = datetime.fromtimestamp(article_data['article']['providerPublishTime'], tz=pytz.UTC)
@@ -246,14 +260,34 @@ class RealTimeMonitor:
                 if (timeframe in predictions and 
                 time_passed < deadline and 
                 time_remaining_ratio >= 0.7):
+                
                     valid_preds.append(predictions[timeframe])
+                    timeframe_analysis['valid_predictions'].append(predictions[timeframe])
+
 
             if valid_preds:
                 aggregated_pred = sum(valid_preds) / len(valid_preds)
                 threshold = self.thresholds[timeframe]
+
+                timeframe_analysis.update({
+                    'total_predictions': len(valid_preds),
+                    'mean_prediction': aggregated_pred,
+                    'meets_threshold': aggregated_pred > 0 and aggregated_pred >= threshold
+                })
+                #Log detailed timeframe analysis
+                logger.info(f"🔍 {timeframe} Analysis:")
+                logger.info(f"  Total Predictions: {timeframe_analysis['total_predictions']}")
+                logger.info(f"  Mean Prediction: {aggregated_pred:.2f}%")
+                logger.info(f"  Threshold: {threshold}%")
+                logger.info(f"  Meets Threshold: {timeframe_analysis['meets_threshold']}")
+
                 # Only include if prediction is positive AND exceeds threshold
                 if aggregated_pred > 0 and aggregated_pred >= threshold:
                     valid_timeframes[timeframe] = aggregated_pred
+                    analysis_summary['valid_predictions'][timeframe] = {
+                        'prediction': aggregated_pred,
+                        'score': aggregated_pred / threshold
+                    }
 
         if not valid_timeframes:
             return  # Don't send message if no predictions meet criteria
@@ -279,6 +313,13 @@ class RealTimeMonitor:
             best_timeframe = max(valid_timeframes.items(), 
                             key=lambda x: abs(x[1]/self.thresholds[x[0]]))
             if abs(best_timeframe[1]/self.thresholds[best_timeframe[0]]) >= 1.0:
+                analysis_summary['decision'] = f"BUY - {best_timeframe[0]} Signal"
+            
+                # Log decision details
+                logger.info("🟢 BUY SIGNAL DETECTED")
+                logger.info(f"Best Timeframe: {best_timeframe[0]}")
+                logger.info(f"Prediction Strength: {best_timeframe[1]:.2f}%")
+                
                 # Get current price
                 current_price = prices['Close'].iloc[-1]
                 timeframe = best_timeframe[0]
@@ -317,8 +358,17 @@ class RealTimeMonitor:
                     f"Based on {len(articles)} news articles\n"
                     f"Latest Deadline: {deadline.strftime('%Y-%m-%d %H:%M:%S UTC')}"
                 )
-
+        else:
+            logger.info("🔘 No Strong Signals - No Action")
         # Check if predictions already happened
+
+        # Log final analysis summary
+        logger.info("📈 Stock Analysis Summary:")
+        logger.info(f"Symbol: {analysis_summary['symbol']}")
+        logger.info(f"Total Articles: {analysis_summary['total_articles']}")
+        logger.info(f"Valid Predictions: {list(analysis_summary['valid_predictions'].keys())}")
+        logger.info(f"Final Decision: {analysis_summary['decision']}")
+
         opportunity_messages = []
         is_missed_opportunity = False  # Flag to track if this is a missed opportunity
 
@@ -386,7 +436,7 @@ class RealTimeMonitor:
 
         await self.send_telegram_alert(message)
 
-        
+        return analysis_summary
        
     async def handle_telegram_update(self, request):
         try:
