@@ -1,0 +1,500 @@
+2025-01-19 15:29:46,024 - INFO - Starting new training session. Logging to: logs/training_20250119_152946.log
+2025-01-19 15:29:46,025 - INFO - Starting new training session. Logging to: logs/training_20250119_152946.log
+2025-01-19 15:29:46,026 - INFO - Starting new training session. Logging to: logs/training_20250119_152946.log
+2025-01-19 15:29:46,025 - INFO - Starting new training session. Logging to: logs/training_20250119_152946.log
+2025-01-19 15:29:46,596 - INFO - Processing CRM - 2025-01-18 22:50:48 UTC
+2025-01-19 15:29:46,631 - INFO - Processing CRKN - 2025-01-17 17:30:00 UTC
+2025-01-19 15:29:46,643 - INFO - Processing CRL - 2025-01-17 20:38:39 UTC
+2025-01-19 15:29:46,652 - INFO - Processing CRMD - 2025-01-07 15:30:00 UTC
+2025-01-19 15:29:47,384 - INFO - Retrieved article length: 6337 characters
+2025-01-19 15:29:47,424 - INFO - Retrieved article length: 6543 characters
+2025-01-19 15:29:47,494 - INFO - Retrieved article length: 531 characters
+2025-01-19 15:29:47,528 - INFO - CRKN: 1h change of 73.37%
+2025-01-19 15:29:47,547 - INFO - Retrieved article length: 7387 characters
+2025-01-19 15:29:47,611 - INFO - CRL: 1h change of -7.60%
+2025-01-19 15:29:47,628 - INFO - CRKN: 1wk change of -3.85%
+2025-01-19 15:29:47,675 - INFO - CRMD: 1h change of 33.70%
+2025-01-19 15:29:47,692 - INFO - CRL: 1wk change of -13.84%
+2025-01-19 15:29:47,724 - INFO - CRKN: 1mo change of -37.50%
+2025-01-19 15:29:47,725 - INFO - Processing CRKN - 2025-01-15 17:00:00 UTC
+2025-01-19 15:29:47,752 - INFO - CRM: 1mo change of -9.04%
+2025-01-19 15:29:47,752 - INFO - Processing CRM - 2025-01-18 16:00:15 UTC
+2025-01-19 15:29:47,775 - INFO - CRL: 1mo change of -14.16%
+2025-01-19 15:29:47,775 - INFO - Processing CRL - 2025-01-17 18:44:42 UTC
+2025-01-19 15:29:47,776 - INFO - CRMD: 1wk change of 57.90%
+2025-01-19 15:29:47,877 - INFO - CRMD: 1mo change of 23.55%
+2025-01-19 15:29:47,877 - INFO - Processing CRMD - 2024-12-20 15:21:01 UTC
+2025-01-19 15:29:48,482 - INFO - Retrieved article length: 3563 characters
+2025-01-19 15:29:48,554 - INFO - Retrieved article length: 5681 characters
+2025-01-19 15:29:48,586 - INFO - Retrieved article length: 1503 characters
+2025-01-19 15:29:48,595 - INFO - Retrieved article length: 552 characters
+2025-01-19 15:29:48,605 - INFO - CRL: 1h change of -7.60%
+2025-01-19 15:29:48,645 - INFO - CRM: 1mo change of -9.04%
+2025-01-19 15:29:48,645 - INFO - Processing CRM - 2025-01-18 00:25:00 UTC
+2025-01-19 15:29:48,651 - INFO - CRKN: 1h change of -6.37%
+2025-01-19 15:29:48,659 - INFO - CRL: 1wk change of -13.84%
+2025-01-19 15:29:48,688 - INFO - CRMD: 1h change of 2.02%
+2025-01-19 15:29:48,711 - INFO - CRL: 1mo change of -14.16%
+2025-01-19 15:29:48,711 - INFO - Processing CRL - 2025-01-17 15:22:34 UTC
+2025-01-19 15:29:48,743 - INFO - CRKN: 1wk change of -6.02%
+2025-01-19 15:29:48,786 - INFO - CRMD: 1wk change of -10.57%
+2025-01-19 15:29:48,839 - INFO - CRKN: 1mo change of -45.89%
+2025-01-19 15:29:48,839 - INFO - Processing CRKN - 2025-01-15 01:00:00 UTC
+2025-01-19 15:29:48,887 - INFO - CRMD: 1mo change of 17.81%
+2025-01-19 15:29:48,887 - INFO - Processing CRMD - 2024-12-19 16:30:00 UTC
+2025-01-19 15:29:49,469 - INFO - Retrieved article length: 1085 characters
+2025-01-19 15:29:49,631 - INFO - CRM: 1mo change of -9.04%
+2025-01-19 15:29:49,632 - INFO - Processing CRM - 2025-01-18 00:06:05 UTC
+2025-01-19 15:29:49,636 - INFO - Retrieved article length: 5277 characters
+2025-01-19 15:29:49,638 - INFO - Retrieved article length: 1918 characters
+2025-01-19 15:29:49,645 - INFO - CRKN: 1h change of -6.37%
+2025-01-19 15:29:49,705 - INFO - Retrieved article length: 2628 characters
+2025-01-19 15:29:49,709 - INFO - CRKN: 1wk change of -6.02%
+2025-01-19 15:29:49,714 - INFO - CRL: 1h change of -7.60%
+2025-01-19 15:29:49,735 - INFO - CRMD: 1h change of 3.75%
+2025-01-19 15:29:49,767 - INFO - CRL: 1wk change of -13.84%
+2025-01-19 15:29:49,774 - INFO - CRKN: 1mo change of -45.89%
+2025-01-19 15:29:49,774 - INFO - Processing CRKN - 2025-01-13 14:00:00 UTC
+2025-01-19 15:29:49,822 - INFO - CRL: 1mo change of -14.16%
+2025-01-19 15:29:49,822 - INFO - Processing CRL - 2025-01-17 14:15:00 UTC
+2025-01-19 15:29:49,831 - INFO - CRMD: 1wk change of -12.19%
+2025-01-19 15:29:49,928 - INFO - CRMD: 1mo change of 10.64%
+2025-01-19 15:29:49,928 - INFO - Processing CRMD - 2024-11-26 16:30:00 UTC
+2025-01-19 15:29:50,319 - INFO - Retrieved article length: 167 characters
+2025-01-19 15:29:50,483 - INFO - CRM: 1mo change of -9.04%
+2025-01-19 15:29:50,484 - INFO - Processing CRM - 2025-01-17 21:01:03 UTC
+2025-01-19 15:29:50,493 - INFO - Retrieved article length: 5773 characters
+2025-01-19 15:29:50,503 - INFO - CRL: 1h change of -7.60%
+2025-01-19 15:29:50,507 - INFO - Retrieved article length: 4524 characters
+2025-01-19 15:29:50,555 - INFO - CRL: 1wk change of -13.84%
+2025-01-19 15:29:50,603 - INFO - CRKN: 1h change of 3.54%
+2025-01-19 15:29:50,607 - INFO - CRL: 1mo change of -14.16%
+2025-01-19 15:29:50,607 - INFO - Processing CRL - 2025-01-16 21:39:14 UTC
+2025-01-19 15:29:50,613 - INFO - Retrieved article length: 4548 characters
+2025-01-19 15:29:50,705 - INFO - CRKN: 1wk change of -4.58%
+2025-01-19 15:29:50,711 - INFO - CRMD: 1h change of -2.43%
+2025-01-19 15:29:50,811 - INFO - CRMD: 1wk change of -11.09%
+2025-01-19 15:29:50,811 - INFO - CRKN: 1mo change of -48.77%
+2025-01-19 15:29:50,811 - INFO - Processing CRKN - 2024-12-28 01:30:08 UTC
+2025-01-19 15:29:50,914 - INFO - CRMD: 1mo change of -32.72%
+2025-01-19 15:29:50,914 - INFO - Processing CRMD - 2024-11-04 16:30:00 UTC
+2025-01-19 15:29:51,222 - INFO - Retrieved article length: 156 characters
+2025-01-19 15:29:51,424 - INFO - Retrieved article length: 524 characters
+2025-01-19 15:29:51,517 - INFO - CRM: 1mo change of -8.29%
+2025-01-19 15:29:51,517 - INFO - Processing CRM - 2025-01-17 20:13:55 UTC
+2025-01-19 15:29:51,520 - INFO - CRL: 1h change of -8.94%
+2025-01-19 15:29:51,606 - INFO - CRL: 1wk change of -13.74%
+2025-01-19 15:29:51,631 - INFO - Retrieved article length: 2906 characters
+2025-01-19 15:29:51,693 - INFO - CRL: 1mo change of -15.84%
+2025-01-19 15:29:51,694 - INFO - Processing CRL - 2025-01-16 16:00:00 UTC
+2025-01-19 15:29:51,730 - INFO - CRKN: 1h change of 7.05%
+2025-01-19 15:29:51,795 - INFO - Retrieved article length: 1481 characters
+2025-01-19 15:29:51,823 - INFO - CRKN: 1wk change of -18.40%
+2025-01-19 15:29:51,896 - INFO - CRMD: 1h change of -1.55%
+2025-01-19 15:29:51,919 - INFO - CRKN: 1mo change of -70.45%
+2025-01-19 15:29:51,919 - INFO - Processing CRKN - 2024-12-27 00:30:00 UTC
+2025-01-19 15:29:52,003 - INFO - CRMD: 1wk change of -12.96%
+2025-01-19 15:29:52,107 - INFO - CRMD: 1mo change of 17.57%
+2025-01-19 15:29:52,107 - INFO - Processing CRMD - 2024-11-04 13:37:33 UTC
+2025-01-19 15:29:52,319 - INFO - Retrieved article length: 1646 characters
+2025-01-19 15:29:52,362 - INFO - Retrieved article length: 5279 characters
+2025-01-19 15:29:52,372 - INFO - CRL: 1h change of -8.94%
+2025-01-19 15:29:52,424 - INFO - CRL: 1wk change of -13.74%
+2025-01-19 15:29:52,432 - INFO - CRM: 1mo change of -8.29%
+2025-01-19 15:29:52,433 - INFO - Processing CRM - 2025-01-17 19:40:00 UTC
+2025-01-19 15:29:52,478 - INFO - CRL: 1mo change of -15.84%
+2025-01-19 15:29:52,478 - INFO - Processing CRL - 2025-01-16 00:13:11 UTC
+2025-01-19 15:29:52,793 - INFO - Retrieved article length: 10064 characters
+2025-01-19 15:29:52,897 - INFO - CRKN: 1h change of 7.05%
+2025-01-19 15:29:53,000 - INFO - CRKN: 1wk change of -24.28%
+2025-01-19 15:29:53,055 - INFO - Retrieved article length: 4038 characters
+2025-01-19 15:29:53,063 - INFO - CRMD: 1h change of -1.55%
+2025-01-19 15:29:53,069 - INFO - CRMD: 1wk change of -12.96%
+2025-01-19 15:29:53,074 - INFO - CRMD: 1mo change of 17.57%
+2025-01-19 15:29:53,074 - INFO - Processing CRMD - 2024-11-01 15:21:42 UTC
+2025-01-19 15:29:53,096 - INFO - CRKN: 1mo change of -81.00%
+2025-01-19 15:29:53,096 - INFO - Processing CRKN - 2024-12-23 17:43:00 UTC
+2025-01-19 15:29:53,158 - INFO - Retrieved article length: 349 characters
+2025-01-19 15:29:53,212 - INFO - Retrieved article length: 4757 characters
+2025-01-19 15:29:53,222 - INFO - CRL: 1h change of -8.94%
+2025-01-19 15:29:53,275 - INFO - CRM: 1mo change of -8.29%
+2025-01-19 15:29:53,275 - INFO - Processing CRM - 2025-01-17 10:17:00 UTC
+2025-01-19 15:29:53,275 - INFO - CRL: 1wk change of -13.74%
+2025-01-19 15:29:53,329 - INFO - CRL: 1mo change of -15.84%
+2025-01-19 15:29:53,329 - INFO - Processing CRL - 2025-01-15 13:55:58 UTC
+2025-01-19 15:29:53,824 - INFO - Retrieved article length: 5302 characters
+2025-01-19 15:29:53,856 - INFO - Retrieved article length: 3756 characters
+2025-01-19 15:29:53,925 - INFO - CRKN: 1h change of -7.87%
+2025-01-19 15:29:53,969 - INFO - Retrieved article length: 6444 characters
+2025-01-19 15:29:54,020 - INFO - CRKN: 1wk change of -29.00%
+2025-01-19 15:29:54,042 - INFO - Retrieved article length: 548 characters
+2025-01-19 15:29:54,083 - INFO - CRMD: 1wk change of -3.65%
+2025-01-19 15:29:54,085 - INFO - CRM: 1mo change of -8.29%
+2025-01-19 15:29:54,119 - INFO - CRKN: 1mo change of -85.29%
+2025-01-19 15:29:54,119 - INFO - Processing CRKN - 2024-12-17 17:15:00 UTC
+2025-01-19 15:29:54,128 - INFO - CRL: 1h change of -12.30%
+2025-01-19 15:29:54,179 - INFO - CRMD: 1mo change of 20.50%
+2025-01-19 15:29:54,179 - INFO - Processing CRMD - 2024-10-31 10:07:01 UTC
+2025-01-19 15:29:54,209 - INFO - CRL: 1wk change of -13.74%
+2025-01-19 15:29:54,248 - INFO - Processing CRNC - 2025-01-15 15:22:20 UTC
+2025-01-19 15:29:54,304 - INFO - CRL: 1mo change of -15.53%
+2025-01-19 15:29:54,483 - INFO - Processing CRNX - 2025-01-17 19:12:22 UTC
+2025-01-19 15:29:54,871 - INFO - Retrieved article length: 4392 characters
+2025-01-19 15:29:54,970 - INFO - CRKN: 1h change of -19.94%
+2025-01-19 15:29:55,019 - INFO - Retrieved article length: 7477 characters
+2025-01-19 15:29:55,033 - INFO - Retrieved article length: 4639 characters
+2025-01-19 15:29:55,063 - INFO - CRKN: 1wk change of -45.90%
+2025-01-19 15:29:55,126 - INFO - CRNC: 1h change of -7.48%
+2025-01-19 15:29:55,133 - INFO - CRMD: 1h change of -24.59%
+2025-01-19 15:29:55,158 - INFO - CRKN: 1mo change of -86.28%
+2025-01-19 15:29:55,209 - INFO - CRNC: 1wk change of -37.66%
+2025-01-19 15:29:55,232 - INFO - CRMD: 1wk change of 3.57%
+2025-01-19 15:29:55,287 - INFO - Processing CROX - 2025-01-17 19:35:33 UTC
+2025-01-19 15:29:55,295 - INFO - CRNC: 1mo change of 66.40%
+2025-01-19 15:29:55,296 - INFO - Processing CRNC - 2025-01-06 16:00:00 UTC
+2025-01-19 15:29:55,333 - INFO - CRMD: 1mo change of 17.62%
+2025-01-19 15:29:55,340 - INFO - Retrieved article length: 6882 characters
+2025-01-19 15:29:55,506 - INFO - Processing CRS - 2025-01-17 23:00:00 UTC
+2025-01-19 15:29:55,516 - INFO - CRNX: 1wk change of -24.42%
+2025-01-19 15:29:55,598 - INFO - CRNX: 1mo change of -30.40%
+2025-01-19 15:29:55,598 - INFO - Processing CRNX - 2025-01-11 01:15:00 UTC
+2025-01-19 15:29:56,028 - INFO - Retrieved article length: 1513 characters
+2025-01-19 15:29:56,105 - INFO - Retrieved article length: 1818 characters
+2025-01-19 15:29:56,133 - INFO - CROX: 1h change of -6.35%
+2025-01-19 15:29:56,183 - INFO - Retrieved article length: 5425 characters
+2025-01-19 15:29:56,191 - INFO - CRNC: 1h change of -14.09%
+2025-01-19 15:29:56,229 - INFO - CROX: 1wk change of -9.99%
+2025-01-19 15:29:56,273 - INFO - CRNC: 1wk change of 57.77%
+2025-01-19 15:29:56,289 - INFO - CRS: 1h change of 4.09%
+2025-01-19 15:29:56,320 - INFO - Retrieved article length: 3318 characters
+2025-01-19 15:29:56,327 - INFO - CROX: 1mo change of -10.52%
+2025-01-19 15:29:56,327 - INFO - Processing CROX - 2025-01-17 15:36:06 UTC
+2025-01-19 15:29:56,363 - INFO - CRNC: 1mo change of 64.02%
+2025-01-19 15:29:56,363 - INFO - Processing CRNC - 2025-01-06 14:40:07 UTC
+2025-01-19 15:29:56,413 - INFO - CRNX: 1h change of -9.89%
+2025-01-19 15:29:56,457 - INFO - CRS: 1wk change of 14.05%
+2025-01-19 15:29:56,496 - INFO - CRNX: 1wk change of -27.55%
+2025-01-19 15:29:56,587 - INFO - CRNX: 1mo change of -34.03%
+2025-01-19 15:29:56,588 - INFO - Processing CRNX - 2025-01-10 21:19:22 UTC
+2025-01-19 15:29:56,591 - INFO - CRS: 1mo change of 18.66%
+2025-01-19 15:29:56,592 - INFO - Processing CRS - 2025-01-17 16:32:00 UTC
+2025-01-19 15:29:57,000 - INFO - Retrieved article length: 528 characters
+2025-01-19 15:29:57,009 - INFO - CROX: 1h change of -6.35%
+2025-01-19 15:29:57,073 - INFO - CROX: 1wk change of -9.99%
+2025-01-19 15:29:57,098 - INFO - Retrieved article length: 159 characters
+2025-01-19 15:29:57,106 - INFO - CRNC: 1h change of -14.09%
+2025-01-19 15:29:57,111 - INFO - CRNC: 1wk change of 57.77%
+2025-01-19 15:29:57,139 - INFO - CROX: 1mo change of -10.52%
+2025-01-19 15:29:57,139 - INFO - Processing CROX - 2025-01-16 17:11:47 UTC
+2025-01-19 15:29:57,164 - INFO - CRNC: 1mo change of 64.02%
+2025-01-19 15:29:57,165 - INFO - Processing CRNC - 2025-01-04 16:11:12 UTC
+2025-01-19 15:29:57,293 - INFO - Retrieved article length: 3070 characters
+2025-01-19 15:29:57,302 - INFO - CRS: 1h change of 4.09%
+2025-01-19 15:29:57,367 - INFO - CRS: 1wk change of 14.05%
+2025-01-19 15:29:57,386 - INFO - Retrieved article length: 558 characters
+2025-01-19 15:29:57,432 - INFO - CRS: 1mo change of 18.66%
+2025-01-19 15:29:57,433 - INFO - Processing CRS - 2025-01-16 19:51:00 UTC
+2025-01-19 15:29:57,474 - INFO - CRNX: 1h change of -17.18%
+2025-01-19 15:29:57,557 - INFO - CRNX: 1wk change of -26.95%
+2025-01-19 15:29:57,643 - INFO - CRNX: 1mo change of -36.56%
+2025-01-19 15:29:57,643 - INFO - Processing CRNX - 2025-01-10 15:00:00 UTC
+2025-01-19 15:29:57,883 - INFO - Retrieved article length: 4113 characters
+2025-01-19 15:29:57,965 - INFO - Retrieved article length: 2572 characters
+2025-01-19 15:29:57,990 - INFO - CROX: 1h change of -6.15%
+2025-01-19 15:29:58,064 - INFO - CRNC: 1h change of 134.30%
+2025-01-19 15:29:58,085 - INFO - CROX: 1wk change of -10.80%
+2025-01-19 15:29:58,146 - INFO - CRNC: 1wk change of 57.80%
+2025-01-19 15:29:58,154 - INFO - Retrieved article length: 4742 characters
+2025-01-19 15:29:58,183 - INFO - CROX: 1mo change of -11.48%
+2025-01-19 15:29:58,183 - INFO - Processing CROX - 2025-01-16 02:15:23 UTC
+2025-01-19 15:29:58,228 - INFO - CRNC: 1mo change of 64.02%
+2025-01-19 15:29:58,229 - INFO - Processing CRNC - 2025-01-03 23:59:02 UTC
+2025-01-19 15:29:58,263 - INFO - CRS: 1h change of 3.12%
+2025-01-19 15:29:58,442 - INFO - CRS: 1wk change of 11.80%
+2025-01-19 15:29:58,476 - INFO - Retrieved article length: 11000 characters
+2025-01-19 15:29:58,484 - INFO - CRNX: 1h change of -17.18%
+2025-01-19 15:29:58,537 - INFO - CRNX: 1wk change of -26.95%
+2025-01-19 15:29:58,588 - INFO - CRS: 1mo change of 16.60%
+2025-01-19 15:29:58,588 - INFO - Processing CRS - 2025-01-16 17:37:00 UTC
+2025-01-19 15:29:58,589 - INFO - CRNX: 1mo change of -36.56%
+2025-01-19 15:29:58,589 - INFO - Processing CRNX - 2025-01-06 16:00:00 UTC
+2025-01-19 15:29:58,916 - INFO - Retrieved article length: 3363 characters
+2025-01-19 15:29:58,926 - INFO - CROX: 1h change of -6.15%
+2025-01-19 15:29:58,985 - INFO - Retrieved article length: 1134 characters
+2025-01-19 15:29:58,992 - INFO - CROX: 1wk change of -10.80%
+2025-01-19 15:29:59,057 - INFO - CROX: 1mo change of -11.48%
+2025-01-19 15:29:59,057 - INFO - Processing CROX - 2025-01-10 12:05:11 UTC
+2025-01-19 15:29:59,069 - INFO - CRNC: 1h change of 134.30%
+2025-01-19 15:29:59,154 - INFO - CRNC: 1wk change of 85.89%
+2025-01-19 15:29:59,236 - INFO - CRNC: 1mo change of 70.81%
+2025-01-19 15:29:59,236 - INFO - Processing CRNC - 2025-01-03 16:00:00 UTC
+2025-01-19 15:29:59,336 - INFO - Retrieved article length: 3409 characters
+2025-01-19 15:29:59,345 - INFO - CRS: 1h change of 3.12%
+2025-01-19 15:29:59,355 - INFO - Retrieved article length: 2274 characters
+2025-01-19 15:29:59,412 - INFO - CRS: 1wk change of 11.80%
+2025-01-19 15:29:59,443 - INFO - CRNX: 1h change of -3.82%
+2025-01-19 15:29:59,478 - INFO - CRS: 1mo change of 16.60%
+2025-01-19 15:29:59,478 - INFO - Processing CRS - 2025-01-16 16:05:00 UTC
+2025-01-19 15:29:59,525 - INFO - CRNX: 1wk change of -29.16%
+2025-01-19 15:29:59,608 - INFO - CRNX: 1mo change of -34.92%
+2025-01-19 15:29:59,608 - INFO - Processing CRNX - 2024-12-16 16:00:00 UTC
+2025-01-19 15:29:59,744 - INFO - Retrieved article length: 5862 characters
+2025-01-19 15:29:59,847 - INFO - CROX: 1h change of 1.57%
+2025-01-19 15:29:59,956 - INFO - CROX: 1wk change of -8.73%
+2025-01-19 15:30:00,052 - INFO - CROX: 1mo change of -8.91%
+2025-01-19 15:30:00,053 - INFO - Processing CROX - 2025-01-09 02:15:21 UTC
+2025-01-19 15:30:00,125 - INFO - Retrieved article length: 4539 characters
+2025-01-19 15:30:00,134 - INFO - CRNC: 1h change of 134.30%
+2025-01-19 15:30:00,140 - INFO - CRNC: 1wk change of 85.89%
+2025-01-19 15:30:00,193 - INFO - CRNC: 1mo change of 70.81%
+2025-01-19 15:30:00,193 - INFO - Processing CRNC - 2025-01-02 16:00:00 UTC
+2025-01-19 15:30:00,203 - INFO - Retrieved article length: 2765 characters
+2025-01-19 15:30:00,213 - INFO - CRS: 1h change of 3.12%
+2025-01-19 15:30:00,279 - INFO - CRS: 1wk change of 11.80%
+2025-01-19 15:30:00,346 - INFO - CRS: 1mo change of 16.60%
+2025-01-19 15:30:00,346 - INFO - Processing CRS - 2025-01-16 15:57:00 UTC
+2025-01-19 15:30:00,387 - INFO - Retrieved article length: 9196 characters
+2025-01-19 15:30:00,474 - INFO - CRNX: 1h change of 4.42%
+2025-01-19 15:30:00,558 - INFO - CRNX: 1wk change of -8.37%
+2025-01-19 15:30:00,643 - INFO - CRNX: 1mo change of -37.76%
+2025-01-19 15:30:00,643 - INFO - Processing CRNX - 2024-12-11 04:44:00 UTC
+2025-01-19 15:30:00,850 - INFO - Retrieved article length: 3380 characters
+2025-01-19 15:30:00,959 - INFO - Retrieved article length: 3582 characters
+2025-01-19 15:30:01,042 - INFO - CRNC: 1h change of 133.45%
+2025-01-19 15:30:01,043 - INFO - CROX: 1wk change of -8.04%
+2025-01-19 15:30:01,101 - INFO - Retrieved article length: 2968 characters
+2025-01-19 15:30:01,110 - INFO - CRS: 1h change of 3.12%
+2025-01-19 15:30:01,125 - INFO - CRNC: 1wk change of 93.86%
+2025-01-19 15:30:01,142 - INFO - CROX: 1mo change of -9.04%
+2025-01-19 15:30:01,142 - INFO - Processing CROX - 2025-01-08 16:11:00 UTC
+2025-01-19 15:30:01,177 - INFO - CRS: 1wk change of 11.80%
+2025-01-19 15:30:01,211 - INFO - CRNC: 1mo change of 70.81%
+2025-01-19 15:30:01,211 - INFO - Processing CRNC - 2024-12-25 15:26:16 UTC
+2025-01-19 15:30:01,246 - INFO - CRS: 1mo change of 16.60%
+2025-01-19 15:30:01,246 - INFO - Processing CRS - 2025-01-16 15:55:00 UTC
+2025-01-19 15:30:01,507 - INFO - Retrieved article length: 3280 characters
+2025-01-19 15:30:01,598 - INFO - CRNX: 1h change of -4.58%
+2025-01-19 15:30:01,680 - INFO - CRNX: 1wk change of -6.60%
+2025-01-19 15:30:01,762 - INFO - CRNX: 1mo change of -39.79%
+2025-01-19 15:30:01,763 - INFO - Processing CRNX - 2024-12-09 17:21:25 UTC
+2025-01-19 15:30:01,807 - INFO - Retrieved article length: 10585 characters
+2025-01-19 15:30:01,904 - INFO - CROX: 1h change of -3.81%
+2025-01-19 15:30:01,948 - INFO - Retrieved article length: 4077 characters
+2025-01-19 15:30:02,005 - INFO - CROX: 1wk change of -8.04%
+2025-01-19 15:30:02,035 - INFO - CRNC: 1h change of 13.84%
+2025-01-19 15:30:02,101 - INFO - CROX: 1mo change of -11.75%
+2025-01-19 15:30:02,102 - INFO - Processing CROX - 2025-01-07 19:14:00 UTC
+2025-01-19 15:30:02,118 - INFO - CRNC: 1wk change of 136.89%
+2025-01-19 15:30:02,121 - INFO - Retrieved article length: 4915 characters
+2025-01-19 15:30:02,130 - INFO - CRS: 1h change of 3.12%
+2025-01-19 15:30:02,196 - INFO - CRS: 1wk change of 11.80%
+2025-01-19 15:30:02,200 - INFO - CRNC: 1mo change of 346.10%
+2025-01-19 15:30:02,263 - INFO - CRS: 1mo change of 16.60%
+2025-01-19 15:30:02,263 - INFO - Processing CRS - 2025-01-16 00:15:00 UTC
+2025-01-19 15:30:02,308 - INFO - Processing CRUS - 2025-01-16 00:00:00 UTC
+2025-01-19 15:30:02,697 - INFO - Retrieved article length: 522 characters
+2025-01-19 15:30:02,740 - INFO - Retrieved article length: 8584 characters
+2025-01-19 15:30:02,787 - INFO - CRNX: 1h change of -2.10%
+2025-01-19 15:30:02,842 - INFO - CROX: 1h change of -3.81%
+2025-01-19 15:30:02,871 - INFO - CRNX: 1wk change of -8.93%
+2025-01-19 15:30:02,943 - INFO - CROX: 1wk change of -5.56%
+2025-01-19 15:30:02,951 - INFO - CRNX: 1mo change of -28.56%
+2025-01-19 15:30:03,039 - INFO - CROX: 1mo change of -10.14%
+2025-01-19 15:30:03,064 - INFO - Retrieved article length: 1551 characters
+2025-01-19 15:30:03,122 - INFO - Processing CRVO - 2024-12-12 15:45:21 UTC
+2025-01-19 15:30:03,123 - INFO - Retrieved article length: 1318 characters
+2025-01-19 15:30:03,131 - INFO - CRS: 1h change of 3.12%
+2025-01-19 15:30:03,197 - INFO - CRS: 1wk change of 11.80%
+2025-01-19 15:30:03,202 - INFO - Processing CRVS - 2025-01-13 15:30:00 UTC
+2025-01-19 15:30:03,263 - INFO - CRS: 1mo change of 16.60%
+2025-01-19 15:30:03,264 - INFO - CRUS: 1wk change of -1.44%
+2025-01-19 15:30:03,350 - INFO - CRUS: 1mo change of -5.11%
+2025-01-19 15:30:03,350 - INFO - Processing CRUS - 2025-01-10 17:04:48 UTC
+2025-01-19 15:30:03,409 - INFO - Processing CRWD - 2025-01-19 15:00:00 UTC
+2025-01-19 15:30:03,873 - INFO - Retrieved article length: 1605 characters
+2025-01-19 15:30:03,964 - INFO - CRVO: 1h change of -12.32%
+2025-01-19 15:30:04,047 - INFO - CRVO: 1wk change of -78.74%
+2025-01-19 15:30:04,084 - INFO - Retrieved article length: 13148 characters
+2025-01-19 15:30:04,130 - INFO - CRVO: 1mo change of -83.40%
+2025-01-19 15:30:04,131 - INFO - Processing CRVO - 2024-12-12 15:00:00 UTC
+2025-01-19 15:30:04,148 - INFO - Retrieved article length: 3825 characters
+2025-01-19 15:30:04,182 - INFO - CRVS: 1h change of -1.43%
+2025-01-19 15:30:04,233 - INFO - CRUS: 1h change of -1.95%
+2025-01-19 15:30:04,282 - INFO - CRVS: 1wk change of -14.07%
+2025-01-19 15:30:04,326 - INFO - CRUS: 1wk change of 1.43%
+2025-01-19 15:30:04,384 - INFO - CRVS: 1mo change of -38.53%
+2025-01-19 15:30:04,384 - INFO - Processing CRVS - 2025-01-08 00:01:00 UTC
+2025-01-19 15:30:04,409 - INFO - CRUS: 1mo change of -3.29%
+2025-01-19 15:30:04,410 - INFO - Processing CRUS - 2025-01-08 17:41:00 UTC
+2025-01-19 15:30:04,610 - INFO - Retrieved article length: 8872 characters
+2025-01-19 15:30:04,716 - INFO - CRWD: 1h change of 1.23%
+2025-01-19 15:30:04,811 - INFO - CRWD: 1wk change of 2.34%
+2025-01-19 15:30:04,908 - INFO - CRWD: 1mo change of -8.04%
+2025-01-19 15:30:04,908 - INFO - Processing CRWD - 2025-01-19 12:40:00 UTC
+2025-01-19 15:30:04,926 - INFO - Retrieved article length: 4211 characters
+2025-01-19 15:30:04,935 - INFO - CRVO: 1h change of -12.32%
+2025-01-19 15:30:04,941 - INFO - CRVO: 1wk change of -78.74%
+2025-01-19 15:30:04,947 - INFO - CRVO: 1mo change of -83.40%
+2025-01-19 15:30:04,947 - INFO - Processing CRVO - 2024-12-11 15:57:03 UTC
+2025-01-19 15:30:05,268 - INFO - Retrieved article length: 1691 characters
+2025-01-19 15:30:05,322 - INFO - Retrieved article length: 4772 characters
+2025-01-19 15:30:05,365 - INFO - CRVS: 1h change of -10.16%
+2025-01-19 15:30:05,477 - INFO - CRVS: 1wk change of -4.57%
+2025-01-19 15:30:05,569 - INFO - Retrieved article length: 6409 characters
+2025-01-19 15:30:05,572 - INFO - CRVS: 1mo change of -37.61%
+2025-01-19 15:30:05,572 - INFO - Processing CRVS - 2025-01-07 17:18:50 UTC
+2025-01-19 15:30:05,573 - INFO - CRUS: 1mo change of -2.60%
+2025-01-19 15:30:05,573 - INFO - Processing CRUS - 2025-01-07 17:30:00 UTC
+2025-01-19 15:30:05,637 - INFO - CRWD: 1h change of 1.23%
+2025-01-19 15:30:05,702 - INFO - CRWD: 1wk change of 2.34%
+2025-01-19 15:30:05,722 - INFO - Retrieved article length: 502 characters
+2025-01-19 15:30:05,767 - INFO - CRWD: 1mo change of -8.04%
+2025-01-19 15:30:05,767 - INFO - Processing CRWD - 2025-01-18 15:30:00 UTC
+2025-01-19 15:30:05,808 - INFO - CRVO: 1h change of -84.18%
+2025-01-19 15:30:05,935 - INFO - CRVO: 1wk change of -78.74%
+2025-01-19 15:30:06,341 - INFO - Retrieved article length: 5107 characters
+2025-01-19 15:30:06,521 - INFO - Retrieved article length: 9468 characters
+2025-01-19 15:30:07,255 - INFO - Retrieved article length: 3597 characters
+2025-01-19 15:30:07,498 - ERROR - CRVO: No price data found, symbol may be delisted (1d 2024-11-06 -> 2025-01-15)
+2025-01-19 15:30:07,499 - INFO - Processing CRVO - 2024-12-11 15:16:06 UTC
+2025-01-19 15:30:07,626 - ERROR - CRVS: No price data found, symbol may be delisted (1h 2025-01-05 -> 2025-01-09)
+2025-01-19 15:30:07,822 - ERROR - CRWD: No price data found, symbol may be delisted (1h 2025-01-16 -> 2025-01-20)
+2025-01-19 15:30:08,234 - INFO - Retrieved article length: 1679 characters
+2025-01-19 15:30:08,241 - INFO - CRVO: 1h change of -84.18%
+2025-01-19 15:30:08,249 - INFO - CRVO: 1wk change of -78.74%
+2025-01-19 15:30:08,250 - ERROR - CRVO: No price data found, symbol may be delisted (1d 2024-11-06 -> 2025-01-15)
+2025-01-19 15:30:08,250 - INFO - Processing CRVO - 2024-12-11 14:34:49 UTC
+2025-01-19 15:30:08,363 - ERROR - CRUS: No price data found, symbol may be delisted (1h 2025-01-05 -> 2025-01-09)
+2025-01-19 15:30:09,050 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-12-28 -> 2025-01-17)
+2025-01-19 15:30:09,181 - INFO - Retrieved article length: 512 characters
+2025-01-19 15:30:09,190 - INFO - CRVO: 1h change of -84.18%
+2025-01-19 15:30:09,195 - INFO - CRVO: 1wk change of -78.74%
+2025-01-19 15:30:09,196 - ERROR - CRVO: No price data found, symbol may be delisted (1d 2024-11-06 -> 2025-01-15)
+2025-01-19 15:30:09,196 - INFO - Processing CRVO - 2024-12-10 21:14:22 UTC
+2025-01-19 15:30:09,317 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2025-01-08 -> 2025-01-28)
+2025-01-19 15:30:09,439 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-12-28 -> 2025-01-17)
+2025-01-19 15:30:10,102 - INFO - Retrieved article length: 492 characters
+2025-01-19 15:30:10,188 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-12-03 -> 2025-02-11)
+2025-01-19 15:30:10,189 - INFO - Processing CRVS - 2024-12-18 21:23:45 UTC
+2025-01-19 15:30:10,604 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2024-12-14 -> 2025-02-22)
+2025-01-19 15:30:10,605 - INFO - Processing CRWD - 2025-01-17 18:48:09 UTC
+2025-01-19 15:30:10,675 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-12-03 -> 2025-02-11)
+2025-01-19 15:30:10,677 - INFO - Processing CRUS - 2024-12-14 16:14:25 UTC
+2025-01-19 15:30:11,254 - INFO - Retrieved article length: 3002 characters
+2025-01-19 15:30:11,293 - ERROR - CRVO: No price data found, symbol may be delisted (1h 2024-12-08 -> 2024-12-12)
+2025-01-19 15:30:11,356 - INFO - Retrieved article length: 4505 characters
+2025-01-19 15:30:11,448 - INFO - Retrieved article length: 5436 characters
+2025-01-19 15:30:12,261 - ERROR - CRVO: No price data found, symbol may be delisted (1d 2024-11-30 -> 2024-12-20)
+2025-01-19 15:30:12,305 - ERROR - CRUS: No price data found, symbol may be delisted (1h 2024-12-12 -> 2024-12-16)
+2025-01-19 15:30:12,498 - ERROR - CRWD: No price data found, symbol may be delisted (1h 2025-01-15 -> 2025-01-19)
+2025-01-19 15:30:12,646 - ERROR - CRVS: No price data found, symbol may be delisted (1h 2024-12-16 -> 2024-12-20)
+2025-01-19 15:30:13,281 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-12-04 -> 2024-12-24)
+2025-01-19 15:30:13,559 - ERROR - CRVO: No price data found, symbol may be delisted (1d 2024-11-05 -> 2025-01-14)
+2025-01-19 15:30:13,559 - INFO - Processing CRVO - 2024-12-10 19:37:14 UTC
+2025-01-19 15:30:13,639 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-12-08 -> 2024-12-28)
+2025-01-19 15:30:13,742 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 15:30:14,175 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-11-09 -> 2025-01-18)
+2025-01-19 15:30:14,175 - INFO - Processing CRUS - 2024-12-06 17:25:00 UTC
+2025-01-19 15:30:14,262 - INFO - Retrieved article length: 2681 characters
+2025-01-19 15:30:14,263 - ERROR - CRVO: No price data found, symbol may be delisted (1h 2024-12-08 -> 2024-12-12)
+2025-01-19 15:30:14,264 - ERROR - CRVO: No price data found, symbol may be delisted (1d 2024-11-30 -> 2024-12-20)
+2025-01-19 15:30:14,264 - ERROR - CRVO: No price data found, symbol may be delisted (1d 2024-11-05 -> 2025-01-14)
+2025-01-19 15:30:14,264 - INFO - Processing CRVO - 2024-12-10 19:05:51 UTC
+2025-01-19 15:30:14,702 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-11-13 -> 2025-01-22)
+2025-01-19 15:30:14,702 - INFO - Processing CRVS - 2024-12-18 16:31:56 UTC
+2025-01-19 15:30:14,886 - INFO - Retrieved article length: 5442 characters
+2025-01-19 15:30:14,966 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 15:30:14,967 - INFO - Processing CRWD - 2025-01-17 18:18:58 UTC
+2025-01-19 15:30:14,997 - INFO - Retrieved article length: 497 characters
+2025-01-19 15:30:14,998 - ERROR - CRVO: No price data found, symbol may be delisted (1h 2024-12-08 -> 2024-12-12)
+2025-01-19 15:30:14,999 - ERROR - CRVO: No price data found, symbol may be delisted (1d 2024-11-30 -> 2024-12-20)
+2025-01-19 15:30:15,000 - ERROR - CRVO: No price data found, symbol may be delisted (1d 2024-11-05 -> 2025-01-14)
+2025-01-19 15:30:15,488 - INFO - Retrieved article length: 554 characters
+2025-01-19 15:30:15,489 - ERROR - CRVS: No price data found, symbol may be delisted (1h 2024-12-16 -> 2024-12-20)
+2025-01-19 15:30:15,490 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-12-08 -> 2024-12-28)
+2025-01-19 15:30:15,668 - INFO - Retrieved article length: 520 characters
+2025-01-19 15:30:15,669 - ERROR - CRWD: No price data found, symbol may be delisted (1h 2025-01-15 -> 2025-01-19)
+2025-01-19 15:30:15,775 - ERROR - CRUS: No price data found, symbol may be delisted (1h 2024-12-04 -> 2024-12-08)
+2025-01-19 15:30:15,944 - ERROR - Error getting news for CRWS: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:16,485 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-11-13 -> 2025-01-22)
+2025-01-19 15:30:16,485 - INFO - Processing CRVS - 2024-12-18 15:30:00 UTC
+2025-01-19 15:30:16,718 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 15:30:16,881 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-11-26 -> 2024-12-16)
+2025-01-19 15:30:16,937 - ERROR - Error getting news for CSBR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:17,198 - INFO - Retrieved article length: 17179 characters
+2025-01-19 15:30:17,198 - ERROR - CRVS: No price data found, symbol may be delisted (1h 2024-12-16 -> 2024-12-20)
+2025-01-19 15:30:17,199 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-12-08 -> 2024-12-28)
+2025-01-19 15:30:17,688 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 15:30:17,688 - INFO - Processing CRWD - 2025-01-16 22:53:58 UTC
+2025-01-19 15:30:17,874 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-11-01 -> 2025-01-10)
+2025-01-19 15:30:17,875 - INFO - Processing CRUS - 2024-12-05 17:30:00 UTC
+2025-01-19 15:30:17,957 - ERROR - Error getting news for CSCI: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:18,199 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-11-13 -> 2025-01-22)
+2025-01-19 15:30:18,200 - INFO - Processing CRVS - 2024-12-18 14:45:00 UTC
+2025-01-19 15:30:18,422 - INFO - Retrieved article length: 151 characters
+2025-01-19 15:30:18,668 - INFO - Retrieved article length: 4066 characters
+2025-01-19 15:30:18,892 - INFO - Retrieved article length: 3400 characters
+2025-01-19 15:30:18,893 - ERROR - CRVS: No price data found, symbol may be delisted (1h 2024-12-16 -> 2024-12-20)
+2025-01-19 15:30:18,894 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-12-08 -> 2024-12-28)
+2025-01-19 15:30:18,930 - ERROR - Error getting news for CSCO: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:19,579 - ERROR - CRWD: No price data found, symbol may be delisted (1h 2025-01-14 -> 2025-01-18)
+2025-01-19 15:30:19,644 - ERROR - CRUS: No price data found, symbol may be delisted (1h 2024-12-03 -> 2024-12-07)
+2025-01-19 15:30:19,956 - ERROR - Error getting news for CSGP: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:19,978 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-11-13 -> 2025-01-22)
+2025-01-19 15:30:19,979 - INFO - Processing CRVS - 2024-12-18 00:01:00 UTC
+2025-01-19 15:30:20,645 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-11-25 -> 2024-12-15)
+2025-01-19 15:30:20,862 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2025-01-06 -> 2025-01-26)
+2025-01-19 15:30:20,948 - INFO - Retrieved article length: 4254 characters
+2025-01-19 15:30:20,948 - ERROR - CRVS: No price data found, symbol may be delisted (1h 2024-12-16 -> 2024-12-20)
+2025-01-19 15:30:20,949 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-12-08 -> 2024-12-28)
+2025-01-19 15:30:21,014 - ERROR - Error getting news for CSLM: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:21,521 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-10-31 -> 2025-01-09)
+2025-01-19 15:30:21,522 - INFO - Processing CRUS - 2024-12-05 00:00:00 UTC
+2025-01-19 15:30:21,801 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2024-12-12 -> 2025-02-20)
+2025-01-19 15:30:21,802 - INFO - Processing CRWD - 2025-01-16 21:05:35 UTC
+2025-01-19 15:30:21,929 - ERROR - Error getting news for CSLMR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:21,985 - ERROR - CRVS: No price data found, symbol may be delisted (1d 2024-11-13 -> 2025-01-22)
+2025-01-19 15:30:22,232 - INFO - Retrieved article length: 1388 characters
+2025-01-19 15:30:22,233 - ERROR - CRUS: No price data found, symbol may be delisted (1h 2024-12-03 -> 2024-12-07)
+2025-01-19 15:30:22,233 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-11-25 -> 2024-12-15)
+2025-01-19 15:30:22,234 - ERROR - CRUS: No price data found, symbol may be delisted (1d 2024-10-31 -> 2025-01-09)
+2025-01-19 15:30:22,524 - INFO - Retrieved article length: 7183 characters
+2025-01-19 15:30:22,525 - ERROR - CRWD: No price data found, symbol may be delisted (1h 2025-01-14 -> 2025-01-18)
+2025-01-19 15:30:22,847 - ERROR - Error getting news for CSLMU: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:22,949 - ERROR - Error getting news for CSLR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:23,313 - ERROR - Error getting news for CSX: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:23,517 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2025-01-06 -> 2025-01-26)
+2025-01-19 15:30:23,949 - ERROR - Error getting news for CTCX: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:23,985 - ERROR - Error getting news for CTAS: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:24,207 - ERROR - Error getting news for CTHR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:24,435 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2024-12-12 -> 2025-02-20)
+2025-01-19 15:30:24,435 - INFO - Processing CRWD - 2025-01-16 19:01:36 UTC
+2025-01-19 15:30:25,005 - ERROR - Error getting news for CTLT: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:25,006 - ERROR - Error getting news for CTKB: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:25,106 - ERROR - Error getting news for CTM: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:25,337 - INFO - Retrieved article length: 535 characters
+2025-01-19 15:30:25,337 - ERROR - CRWD: No price data found, symbol may be delisted (1h 2025-01-14 -> 2025-01-18)
+2025-01-19 15:30:25,919 - ERROR - Error getting news for CTMX: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:26,158 - ERROR - Error getting news for CTOR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:26,345 - ERROR - Error getting news for CTNT: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:26,348 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2025-01-06 -> 2025-01-26)
+2025-01-19 15:30:26,856 - ERROR - Error getting news for CTOS: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:27,277 - ERROR - Error getting news for CTRA: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:27,305 - ERROR - CRWD: No price data found, symbol may be delisted (1d 2024-12-12 -> 2025-02-20)
+2025-01-19 15:30:27,341 - ERROR - Error getting news for CTRE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:27,863 - ERROR - Error getting news for CTRM: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:28,225 - ERROR - Error getting news for CTSH: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:28,235 - ERROR - Error getting news for CTSO: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:28,370 - ERROR - Error getting news for CTV: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:28,930 - ERROR - Error getting news for CTVA: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:29,290 - ERROR - Error getting news for CUBA: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:29,324 - ERROR - Error getting news for CTXR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:29,687 - ERROR - Error getting news for CUBE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:29,957 - ERROR - Error getting news for CUE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:30,344 - ERROR - Error getting news for CURB: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:30,346 - ERROR - Error getting news for CULL: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:30,623 - ERROR - Error getting news for CURI: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:30,919 - ERROR - Error getting news for CURV: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:31,282 - ERROR - Error getting news for CVBF: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:31,292 - ERROR - Error getting news for CUZ: Expecting value: line 1 column 1 (char 0)
+2025-01-19 15:30:31,593 - ERROR - Error getting news for CVI: Expecting value: line 1 column 1 (char 0)

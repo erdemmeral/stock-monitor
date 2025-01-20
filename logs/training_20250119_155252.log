@@ -1,0 +1,767 @@
+2025-01-19 15:52:52,490 - INFO - Starting new training session. Logging to: logs/training_20250119_155252.log
+2025-01-19 15:52:53,135 - INFO - Processing JOBY - 2025-01-14 20:35:12 UTC
+2025-01-19 15:52:53,175 - INFO - Processing JNVR - 2025-01-16 16:00:00 UTC
+2025-01-19 15:52:53,258 - INFO - Processing JPM - 2025-01-19 13:50:00 UTC
+2025-01-19 15:52:53,330 - INFO - Processing JPST - 2024-12-06 21:00:00 UTC
+2025-01-19 15:52:53,974 - INFO - Retrieved article length: 1989 characters
+2025-01-19 15:52:54,027 - INFO - Retrieved article length: 4925 characters
+2025-01-19 15:52:54,035 - INFO - Retrieved article length: 5630 characters
+2025-01-19 15:52:54,461 - INFO - Retrieved article length: 1681 characters
+2025-01-19 15:52:55,262 - INFO - JOBY: 1h change of 2.08%
+2025-01-19 15:52:55,315 - INFO - JPM: 1h change of 2.30%
+2025-01-19 15:52:55,349 - INFO - JOBY: 1wk change of -16.89%
+2025-01-19 15:52:55,352 - INFO - JNVR: 1wk change of -5.68%
+2025-01-19 15:52:55,445 - INFO - JOBY: 1mo change of -4.33%
+2025-01-19 15:52:55,446 - INFO - Processing JOBY - 2025-01-08 20:18:36 UTC
+2025-01-19 15:52:55,447 - INFO - JNVR: 1mo change of 10.89%
+2025-01-19 15:52:55,447 - INFO - JPM: 1wk change of 8.04%
+2025-01-19 15:52:55,447 - INFO - Processing JNVR - 2024-12-26 16:00:00 UTC
+2025-01-19 15:52:55,458 - INFO - Processing JPST - 2024-10-28 22:29:35 UTC
+2025-01-19 15:52:55,572 - INFO - JPM: 1mo change of 8.73%
+2025-01-19 15:52:55,573 - INFO - Processing JPM - 2025-01-19 13:37:00 UTC
+2025-01-19 15:52:56,176 - INFO - Retrieved article length: 2083 characters
+2025-01-19 15:52:56,337 - INFO - Retrieved article length: 6840 characters
+2025-01-19 15:52:56,383 - INFO - Retrieved article length: 1409 characters
+2025-01-19 15:52:56,387 - INFO - JPM: 1h change of 2.30%
+2025-01-19 15:52:56,435 - INFO - JPM: 1wk change of 8.04%
+2025-01-19 15:52:56,473 - INFO - JOBY: 1h change of -3.51%
+2025-01-19 15:52:56,483 - INFO - JPM: 1mo change of 8.73%
+2025-01-19 15:52:56,483 - INFO - Processing JPM - 2025-01-19 13:30:00 UTC
+2025-01-19 15:52:56,560 - INFO - JOBY: 1wk change of -2.62%
+2025-01-19 15:52:56,640 - INFO - Retrieved article length: 6536 characters
+2025-01-19 15:52:56,644 - INFO - Processing JOBY - 2025-01-07 15:14:51 UTC
+2025-01-19 15:52:56,736 - INFO - JNVR: 1h change of 5.19%
+2025-01-19 15:52:56,842 - INFO - JNVR: 1wk change of 24.37%
+2025-01-19 15:52:56,860 - INFO - Processing JRSH - 2024-12-26 14:18:59 UTC
+2025-01-19 15:52:56,934 - INFO - JNVR: 1mo change of 45.04%
+2025-01-19 15:52:56,935 - INFO - Processing JNVR - 2024-11-11 16:00:00 UTC
+2025-01-19 15:52:57,181 - INFO - Retrieved article length: 147 characters
+2025-01-19 15:52:57,209 - INFO - Retrieved article length: 6363 characters
+2025-01-19 15:52:57,232 - INFO - JPM: 1h change of 2.30%
+2025-01-19 15:52:57,279 - INFO - JPM: 1wk change of 8.04%
+2025-01-19 15:52:57,302 - INFO - JOBY: 1h change of -3.51%
+2025-01-19 15:52:57,327 - INFO - JPM: 1mo change of 8.73%
+2025-01-19 15:52:57,332 - INFO - Processing JPM - 2025-01-19 12:33:00 UTC
+2025-01-19 15:52:57,477 - INFO - JOBY: 1mo change of 4.08%
+2025-01-19 15:52:57,477 - INFO - Processing JOBY - 2024-12-20 14:00:00 UTC
+2025-01-19 15:52:57,597 - INFO - Retrieved article length: 6119 characters
+2025-01-19 15:52:57,775 - INFO - JRSH: 1wk change of -1.44%
+2025-01-19 15:52:57,786 - INFO - Retrieved article length: 6214 characters
+2025-01-19 15:52:57,869 - INFO - JRSH: 1mo change of 5.18%
+2025-01-19 15:52:57,869 - INFO - Processing JRSH - 2024-11-15 15:50:48 UTC
+2025-01-19 15:52:57,877 - INFO - JNVR: 1h change of 30.99%
+2025-01-19 15:52:57,963 - INFO - JNVR: 1wk change of -3.33%
+2025-01-19 15:52:58,044 - INFO - Retrieved article length: 6605 characters
+2025-01-19 15:52:58,048 - INFO - JNVR: 1mo change of 17.86%
+2025-01-19 15:52:58,048 - INFO - Processing JNVR - 2024-11-06 16:00:00 UTC
+2025-01-19 15:52:58,096 - INFO - JPM: 1h change of 2.30%
+2025-01-19 15:52:58,141 - INFO - JPM: 1wk change of 8.04%
+2025-01-19 15:52:58,188 - INFO - JPM: 1mo change of 8.73%
+2025-01-19 15:52:58,189 - INFO - Processing JPM - 2025-01-19 01:12:42 UTC
+2025-01-19 15:52:58,251 - INFO - Retrieved article length: 6302 characters
+2025-01-19 15:52:58,346 - INFO - JOBY: 1h change of -8.70%
+2025-01-19 15:52:58,439 - INFO - JOBY: 1wk change of 4.57%
+2025-01-19 15:52:58,530 - INFO - JOBY: 1mo change of 42.58%
+2025-01-19 15:52:58,531 - INFO - Processing JOBY - 2024-12-17 14:00:00 UTC
+2025-01-19 15:52:58,572 - INFO - Retrieved article length: 3949 characters
+2025-01-19 15:52:58,773 - INFO - JRSH: 1wk change of 14.09%
+2025-01-19 15:52:58,904 - INFO - Retrieved article length: 7538 characters
+2025-01-19 15:52:58,927 - INFO - JRSH: 1mo change of 16.39%
+2025-01-19 15:52:58,927 - INFO - Processing JRSH - 2024-11-13 10:13:15 UTC
+2025-01-19 15:52:58,955 - INFO - JPM: 1h change of 2.30%
+2025-01-19 15:52:59,001 - INFO - JPM: 1wk change of 8.04%
+2025-01-19 15:52:59,048 - INFO - JPM: 1mo change of 8.73%
+2025-01-19 15:52:59,048 - INFO - Processing JPM - 2025-01-18 17:00:00 UTC
+2025-01-19 15:52:59,050 - INFO - Retrieved article length: 16755 characters
+2025-01-19 15:52:59,172 - INFO - Retrieved article length: 5497 characters
+2025-01-19 15:52:59,194 - INFO - JNVR: 1h change of -1.47%
+2025-01-19 15:52:59,258 - INFO - JOBY: 1h change of 3.73%
+2025-01-19 15:52:59,278 - INFO - JNVR: 1wk change of -6.63%
+2025-01-19 15:52:59,347 - INFO - JOBY: 1wk change of 7.39%
+2025-01-19 15:52:59,365 - INFO - JNVR: 1mo change of 17.67%
+2025-01-19 15:52:59,365 - INFO - Processing JNVR - 2024-11-04 16:00:00 UTC
+2025-01-19 15:52:59,434 - INFO - JOBY: 1mo change of 29.27%
+2025-01-19 15:52:59,434 - INFO - Processing JOBY - 2024-12-13 14:00:00 UTC
+2025-01-19 15:52:59,707 - INFO - Retrieved article length: 3000 characters
+2025-01-19 15:52:59,753 - INFO - Retrieved article length: 4151 characters
+2025-01-19 15:52:59,805 - INFO - JPM: 1h change of 1.41%
+2025-01-19 15:52:59,854 - INFO - JRSH: 1h change of 10.37%
+2025-01-19 15:52:59,943 - INFO - JPM: 1wk change of 6.59%
+2025-01-19 15:52:59,950 - INFO - JRSH: 1wk change of 13.82%
+2025-01-19 15:53:00,051 - INFO - JRSH: 1mo change of 21.27%
+2025-01-19 15:53:00,052 - INFO - Processing JRSH - 2024-11-12 17:00:08 UTC
+2025-01-19 15:53:00,072 - INFO - JPM: 1mo change of 8.73%
+2025-01-19 15:53:00,072 - INFO - Processing JPM - 2025-01-18 17:00:00 UTC
+2025-01-19 15:53:00,086 - INFO - Retrieved article length: 5545 characters
+2025-01-19 15:53:00,183 - INFO - JNVR: 1h change of 4.40%
+2025-01-19 15:53:00,209 - INFO - Retrieved article length: 7049 characters
+2025-01-19 15:53:00,269 - INFO - JNVR: 1wk change of -8.39%
+2025-01-19 15:53:00,299 - INFO - JOBY: 1h change of -1.21%
+2025-01-19 15:53:00,356 - INFO - JNVR: 1mo change of 1.41%
+2025-01-19 15:53:00,356 - INFO - Processing JNVR - 2024-10-22 15:00:00 UTC
+2025-01-19 15:53:00,439 - INFO - JOBY: 1wk change of -2.04%
+2025-01-19 15:53:00,526 - INFO - JOBY: 1mo change of 60.65%
+2025-01-19 15:53:00,527 - INFO - Processing JOBY - 2024-12-10 14:00:00 UTC
+2025-01-19 15:53:00,689 - INFO - Retrieved article length: 3356 characters
+2025-01-19 15:53:00,730 - INFO - Retrieved article length: 685 characters
+2025-01-19 15:53:00,739 - INFO - JPM: 1h change of 1.41%
+2025-01-19 15:53:00,786 - INFO - JPM: 1wk change of 6.59%
+2025-01-19 15:53:00,824 - INFO - JRSH: 1h change of 11.54%
+2025-01-19 15:53:00,835 - INFO - JPM: 1mo change of 8.73%
+2025-01-19 15:53:00,835 - INFO - Processing JPM - 2025-01-18 15:49:00 UTC
+2025-01-19 15:53:00,920 - INFO - JRSH: 1wk change of 11.11%
+2025-01-19 15:53:01,017 - INFO - JRSH: 1mo change of 21.83%
+2025-01-19 15:53:01,017 - INFO - Processing JRSH - 2024-11-12 16:00:00 UTC
+2025-01-19 15:53:01,100 - INFO - Retrieved article length: 6839 characters
+2025-01-19 15:53:01,190 - INFO - JNVR: 1h change of -17.54%
+2025-01-19 15:53:01,235 - INFO - Retrieved article length: 8223 characters
+2025-01-19 15:53:01,280 - INFO - JNVR: 1wk change of -10.17%
+2025-01-19 15:53:01,324 - INFO - JOBY: 1h change of -9.63%
+2025-01-19 15:53:01,366 - INFO - JNVR: 1mo change of -8.11%
+2025-01-19 15:53:01,407 - INFO - JOBY: 1wk change of -10.85%
+2025-01-19 15:53:01,485 - INFO - Processing JSPR - 2025-01-08 15:00:00 UTC
+2025-01-19 15:53:01,502 - INFO - JOBY: 1mo change of 56.08%
+2025-01-19 15:53:01,502 - INFO - Processing JOBY - 2024-12-05 19:53:14 UTC
+2025-01-19 15:53:01,574 - INFO - Retrieved article length: 5883 characters
+2025-01-19 15:53:01,623 - INFO - JPM: 1h change of 1.41%
+2025-01-19 15:53:01,670 - INFO - JPM: 1wk change of 6.59%
+2025-01-19 15:53:01,718 - INFO - JPM: 1mo change of 8.73%
+2025-01-19 15:53:01,839 - INFO - Processing JTAI - 2024-12-24 16:30:00 UTC
+2025-01-19 15:53:01,940 - INFO - Retrieved article length: 14691 characters
+2025-01-19 15:53:01,949 - INFO - JRSH: 1h change of 11.54%
+2025-01-19 15:53:01,955 - INFO - JRSH: 1wk change of 11.11%
+2025-01-19 15:53:01,962 - INFO - JRSH: 1mo change of 21.83%
+2025-01-19 15:53:01,962 - INFO - Processing JRSH - 2024-11-11 15:26:51 UTC
+2025-01-19 15:53:02,075 - INFO - Retrieved article length: 1723 characters
+2025-01-19 15:53:02,165 - INFO - JOBY: 1h change of 12.48%
+2025-01-19 15:53:02,210 - INFO - Retrieved article length: 16269 characters
+2025-01-19 15:53:02,269 - INFO - JOBY: 1wk change of -5.12%
+2025-01-19 15:53:02,300 - INFO - JSPR: 1h change of -65.02%
+2025-01-19 15:53:02,359 - INFO - JOBY: 1mo change of 97.71%
+2025-01-19 15:53:02,388 - INFO - JSPR: 1wk change of -73.70%
+2025-01-19 15:53:02,469 - INFO - Processing JTAIZ - 2025-01-19 15:45:00 UTC
+2025-01-19 15:53:02,478 - INFO - JSPR: 1mo change of -76.14%
+2025-01-19 15:53:02,478 - INFO - Processing JSPR - 2025-01-06 16:00:00 UTC
+2025-01-19 15:53:02,591 - INFO - Retrieved article length: 6883 characters
+2025-01-19 15:53:02,680 - INFO - JTAI: 1h change of 80.18%
+2025-01-19 15:53:02,766 - ERROR - JTAIZ: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 15:53:02,767 - INFO - JTAI: 1wk change of 3.41%
+2025-01-19 15:53:02,778 - INFO - Retrieved article length: 3374 characters
+2025-01-19 15:53:02,847 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 15:53:02,852 - INFO - JTAI: 1mo change of -43.15%
+2025-01-19 15:53:02,852 - INFO - Processing JTAI - 2024-12-12 16:30:00 UTC
+2025-01-19 15:53:02,876 - INFO - JRSH: 1h change of 10.37%
+2025-01-19 15:53:02,931 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 15:53:02,931 - INFO - Processing JTAIZ - 2025-01-19 15:45:00 UTC
+2025-01-19 15:53:02,969 - INFO - JRSH: 1wk change of 8.22%
+2025-01-19 15:53:03,084 - INFO - JRSH: 1mo change of 20.08%
+2025-01-19 15:53:03,084 - INFO - Processing JRSH - 2024-11-08 16:00:00 UTC
+2025-01-19 15:53:03,175 - INFO - Retrieved article length: 6259 characters
+2025-01-19 15:53:03,265 - INFO - JSPR: 1h change of -11.33%
+2025-01-19 15:53:03,359 - INFO - JSPR: 1wk change of -73.84%
+2025-01-19 15:53:03,446 - INFO - JSPR: 1mo change of -77.01%
+2025-01-19 15:53:03,446 - INFO - Processing JSPR - 2024-12-03 00:30:00 UTC
+2025-01-19 15:53:03,562 - INFO - Retrieved article length: 6795 characters
+2025-01-19 15:53:03,651 - INFO - JTAI: 1h change of -30.56%
+2025-01-19 15:53:03,709 - INFO - Retrieved article length: 5619 characters
+2025-01-19 15:53:03,742 - INFO - JTAI: 1wk change of -13.17%
+2025-01-19 15:53:03,750 - ERROR - JTAIZ: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 15:53:03,756 - INFO - Retrieved article length: 1475 characters
+2025-01-19 15:53:03,792 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 15:53:03,829 - INFO - JTAI: 1mo change of -71.88%
+2025-01-19 15:53:03,829 - INFO - Processing JTAI - 2024-11-27 16:30:00 UTC
+2025-01-19 15:53:03,833 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 15:53:03,833 - INFO - Processing JTAIZ - 2025-01-19 15:41:34 UTC
+2025-01-19 15:53:03,936 - INFO - JRSH: 1wk change of 8.91%
+2025-01-19 15:53:04,038 - INFO - JRSH: 1mo change of 17.48%
+2025-01-19 15:53:04,038 - INFO - Processing JRSH - 2024-11-04 16:00:00 UTC
+2025-01-19 15:53:04,263 - INFO - Retrieved article length: 8838 characters
+2025-01-19 15:53:04,354 - INFO - JSPR: 1h change of -1.77%
+2025-01-19 15:53:04,440 - INFO - JSPR: 1wk change of -9.94%
+2025-01-19 15:53:04,534 - INFO - JSPR: 1mo change of -6.62%
+2025-01-19 15:53:04,534 - INFO - Processing JSPR - 2024-11-16 17:33:55 UTC
+2025-01-19 15:53:04,597 - INFO - Retrieved article length: 6265 characters
+2025-01-19 15:53:04,612 - INFO - Retrieved article length: 7680 characters
+2025-01-19 15:53:04,653 - ERROR - JTAIZ: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 15:53:04,694 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 15:53:04,736 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 15:53:04,736 - INFO - Processing JTAIZ - 2025-01-19 15:40:00 UTC
+2025-01-19 15:53:04,774 - INFO - JTAI: 1wk change of -37.01%
+2025-01-19 15:53:04,796 - INFO - Retrieved article length: 1895 characters
+2025-01-19 15:53:04,873 - INFO - JTAI: 1mo change of -77.58%
+2025-01-19 15:53:04,873 - INFO - Processing JTAI - 2024-11-22 16:30:00 UTC
+2025-01-19 15:53:05,044 - INFO - JRSH: 1wk change of 10.98%
+2025-01-19 15:53:05,149 - INFO - JRSH: 1mo change of 14.68%
+2025-01-19 15:53:05,275 - INFO - Retrieved article length: 4864 characters
+2025-01-19 15:53:05,342 - INFO - Processing JUNE - 2024-10-29 16:12:00 UTC
+2025-01-19 15:53:05,422 - INFO - JSPR: 1h change of -12.08%
+2025-01-19 15:53:05,459 - INFO - Retrieved article length: 4999 characters
+2025-01-19 15:53:05,501 - ERROR - JTAIZ: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 15:53:05,510 - INFO - JSPR: 1wk change of -4.09%
+2025-01-19 15:53:05,549 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 15:53:05,590 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 15:53:05,591 - INFO - Processing JTAIZ - 2025-01-19 15:36:14 UTC
+2025-01-19 15:53:05,604 - INFO - JSPR: 1mo change of 30.10%
+2025-01-19 15:53:05,604 - INFO - Processing JSPR - 2024-11-14 00:30:00 UTC
+2025-01-19 15:53:05,672 - INFO - Retrieved article length: 2868 characters
+2025-01-19 15:53:05,763 - INFO - JTAI: 1h change of -2.94%
+2025-01-19 15:53:05,860 - INFO - JTAI: 1wk change of -26.36%
+2025-01-19 15:53:05,958 - INFO - JTAI: 1mo change of -74.11%
+2025-01-19 15:53:05,958 - INFO - Processing JTAI - 2024-11-18 16:30:00 UTC
+2025-01-19 15:53:06,305 - INFO - Retrieved article length: 6240 characters
+2025-01-19 15:53:06,320 - INFO - Retrieved article length: 5863 characters
+2025-01-19 15:53:06,371 - INFO - Retrieved article length: 8408 characters
+2025-01-19 15:53:06,402 - INFO - JSPR: 1h change of -14.46%
+2025-01-19 15:53:06,413 - ERROR - JTAIZ: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 15:53:06,415 - INFO - JUNE: 1h change of 1.62%
+2025-01-19 15:53:06,456 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 15:53:06,498 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 15:53:06,498 - INFO - Processing JTAIZ - 2025-01-19 15:35:15 UTC
+2025-01-19 15:53:06,513 - INFO - JUNE: 1wk change of 3.81%
+2025-01-19 15:53:06,602 - INFO - JUNE: 1mo change of -6.39%
+2025-01-19 15:53:06,675 - INFO - JSPR: 1mo change of 42.73%
+2025-01-19 15:53:06,676 - INFO - Processing JSPR - 2024-11-08 19:28:13 UTC
+2025-01-19 15:53:06,697 - INFO - Retrieved article length: 6243 characters
+2025-01-19 15:53:06,793 - INFO - Processing JUNS - 2025-01-13 16:00:00 UTC
+2025-01-19 15:53:06,795 - INFO - JTAI: 1h change of 26.11%
+2025-01-19 15:53:06,882 - INFO - JTAI: 1wk change of -45.43%
+2025-01-19 15:53:06,979 - INFO - JTAI: 1mo change of -84.49%
+2025-01-19 15:53:06,979 - INFO - Processing JTAI - 2024-11-17 16:10:21 UTC
+2025-01-19 15:53:07,161 - INFO - Retrieved article length: 6210 characters
+2025-01-19 15:53:07,203 - ERROR - JTAIZ: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 15:53:07,245 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 15:53:07,288 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 15:53:07,288 - INFO - Processing JTAIZ - 2025-01-19 15:34:48 UTC
+2025-01-19 15:53:07,449 - INFO - Retrieved article length: 1942 characters
+2025-01-19 15:53:07,457 - INFO - Retrieved article length: 7648 characters
+2025-01-19 15:53:07,546 - INFO - JSPR: 1h change of 7.82%
+2025-01-19 15:53:07,547 - INFO - JUNS: 1h change of -34.51%
+2025-01-19 15:53:07,637 - INFO - JSPR: 1wk change of -8.59%
+2025-01-19 15:53:07,637 - INFO - JUNS: 1wk change of -48.24%
+2025-01-19 15:53:07,721 - INFO - JUNS: 1mo change of -45.27%
+2025-01-19 15:53:07,721 - INFO - Processing JUNS - 2024-12-05 00:56:00 UTC
+2025-01-19 15:53:07,737 - INFO - JSPR: 1mo change of 27.30%
+2025-01-19 15:53:07,737 - INFO - Processing JSPR - 2024-11-07 15:30:00 UTC
+2025-01-19 15:53:07,868 - INFO - Retrieved article length: 4216 characters
+2025-01-19 15:53:07,954 - INFO - JTAI: 1h change of 13.22%
+2025-01-19 15:53:07,967 - INFO - Retrieved article length: 3617 characters
+2025-01-19 15:53:08,009 - ERROR - JTAIZ: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 15:53:08,042 - INFO - JTAI: 1wk change of -57.09%
+2025-01-19 15:53:08,051 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 15:53:08,093 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 15:53:08,094 - INFO - Processing JTAIZ - 2025-01-19 15:31:55 UTC
+2025-01-19 15:53:08,135 - INFO - JTAI: 1mo change of -84.49%
+2025-01-19 15:53:08,135 - INFO - Processing JTAI - 2024-11-14 16:30:00 UTC
+2025-01-19 15:53:08,534 - INFO - Retrieved article length: 5095 characters
+2025-01-19 15:53:08,626 - INFO - JUNS: 1h change of 76.59%
+2025-01-19 15:53:08,704 - INFO - Retrieved article length: 14529 characters
+2025-01-19 15:53:08,715 - INFO - JUNS: 1wk change of 122.40%
+2025-01-19 15:53:08,792 - INFO - JSPR: 1h change of 10.71%
+2025-01-19 15:53:08,806 - INFO - JUNS: 1mo change of 57.56%
+2025-01-19 15:53:08,806 - INFO - Processing JUNS - 2024-12-03 03:00:00 UTC
+2025-01-19 15:53:08,884 - INFO - JSPR: 1wk change of -7.22%
+2025-01-19 15:53:08,898 - INFO - Retrieved article length: 4418 characters
+2025-01-19 15:53:08,940 - ERROR - JTAIZ: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 15:53:08,970 - INFO - JSPR: 1mo change of 37.26%
+2025-01-19 15:53:08,970 - INFO - Processing JSPR - 2024-10-24 15:00:00 UTC
+2025-01-19 15:53:08,983 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 15:53:08,985 - INFO - Retrieved article length: 14434 characters
+2025-01-19 15:53:09,024 - ERROR - JTAIZ: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 15:53:09,078 - INFO - JTAI: 1h change of -17.92%
+2025-01-19 15:53:09,137 - INFO - Processing JVA - 2024-12-04 20:10:37 UTC
+2025-01-19 15:53:09,164 - INFO - JTAI: 1wk change of -61.80%
+2025-01-19 15:53:09,247 - INFO - JTAI: 1mo change of -78.97%
+2025-01-19 15:53:09,247 - INFO - Processing JTAI - 2024-11-13 17:45:00 UTC
+2025-01-19 15:53:09,701 - INFO - Retrieved article length: 5592 characters
+2025-01-19 15:53:09,701 - INFO - Retrieved article length: 8205 characters
+2025-01-19 15:53:09,789 - INFO - JUNS: 1h change of 25.91%
+2025-01-19 15:53:09,789 - INFO - JSPR: 1h change of -1.42%
+2025-01-19 15:53:09,879 - INFO - JUNS: 1wk change of 179.96%
+2025-01-19 15:53:09,887 - INFO - JSPR: 1wk change of 28.29%
+2025-01-19 15:53:09,907 - INFO - Retrieved article length: 7216 characters
+2025-01-19 15:53:09,966 - INFO - JUNS: 1mo change of 59.38%
+2025-01-19 15:53:09,973 - INFO - JSPR: 1mo change of -2.80%
+2025-01-19 15:53:09,996 - INFO - JVA: 1h change of -8.33%
+2025-01-19 15:53:10,003 - INFO - Retrieved article length: 6798 characters
+2025-01-19 15:53:10,098 - INFO - JTAI: 1h change of -38.18%
+2025-01-19 15:53:10,098 - INFO - JVA: 1wk change of 23.28%
+2025-01-19 15:53:10,186 - INFO - JTAI: 1wk change of -61.80%
+2025-01-19 15:53:10,198 - INFO - JVA: 1mo change of 24.60%
+2025-01-19 15:53:10,198 - INFO - Processing JVA - 2024-11-30 16:15:27 UTC
+2025-01-19 15:53:10,275 - INFO - JTAI: 1mo change of -79.59%
+2025-01-19 15:53:10,300 - INFO - Processing JWEL - 2024-12-20 00:30:00 UTC
+2025-01-19 15:53:10,379 - INFO - Processing JWN - 2025-01-17 12:05:11 UTC
+2025-01-19 15:53:10,411 - INFO - Processing JXG - 2025-01-15 17:30:00 UTC
+2025-01-19 15:53:10,824 - INFO - Retrieved article length: 4778 characters
+2025-01-19 15:53:10,915 - INFO - JVA: 1h change of -2.41%
+2025-01-19 15:53:11,023 - INFO - JVA: 1wk change of 15.34%
+2025-01-19 15:53:11,072 - INFO - Retrieved article length: 3427 characters
+2025-01-19 15:53:11,121 - INFO - JVA: 1mo change of 28.89%
+2025-01-19 15:53:11,122 - INFO - Processing JVA - 2024-11-11 17:00:00 UTC
+2025-01-19 15:53:11,129 - INFO - Retrieved article length: 3676 characters
+2025-01-19 15:53:11,218 - INFO - JXG: 1h change of -22.32%
+2025-01-19 15:53:11,308 - INFO - JXG: 1wk change of 154.13%
+2025-01-19 15:53:11,392 - INFO - JXG: 1mo change of 185.57%
+2025-01-19 15:53:11,434 - INFO - JWN: 1mo change of 3.97%
+2025-01-19 15:53:11,434 - INFO - Processing JWN - 2025-01-16 20:33:00 UTC
+2025-01-19 15:53:11,518 - INFO - Processing JXN - 2025-01-17 00:15:00 UTC
+2025-01-19 15:53:11,638 - INFO - Retrieved article length: 23045 characters
+2025-01-19 15:53:11,737 - INFO - JWEL: 1h change of 14.10%
+2025-01-19 15:53:11,829 - INFO - JWEL: 1wk change of -2.79%
+2025-01-19 15:53:11,859 - INFO - Retrieved article length: 5109 characters
+2025-01-19 15:53:11,919 - INFO - JWEL: 1mo change of 56.46%
+2025-01-19 15:53:11,950 - INFO - JVA: 1h change of -5.97%
+2025-01-19 15:53:12,034 - INFO - Processing JYD - 2025-01-18 15:54:51 UTC
+2025-01-19 15:53:12,052 - INFO - JVA: 1wk change of 13.38%
+2025-01-19 15:53:12,094 - INFO - Retrieved article length: 4849 characters
+2025-01-19 15:53:12,154 - INFO - JVA: 1mo change of 47.93%
+2025-01-19 15:53:12,287 - INFO - Retrieved article length: 3497 characters
+2025-01-19 15:53:12,307 - INFO - Processing JYNT - 2025-01-17 15:43:51 UTC
+2025-01-19 15:53:12,447 - INFO - JWN: 1mo change of 7.06%
+2025-01-19 15:53:12,447 - INFO - Processing JWN - 2025-01-16 18:00:00 UTC
+2025-01-19 15:53:12,473 - INFO - JXN: 1wk change of 3.03%
+2025-01-19 15:53:12,570 - INFO - JXN: 1mo change of 1.13%
+2025-01-19 15:53:12,570 - INFO - Processing JXN - 2025-01-13 20:00:12 UTC
+2025-01-19 15:53:12,690 - INFO - Retrieved article length: 5789 characters
+2025-01-19 15:53:12,843 - INFO - JYD: 1h change of 8.61%
+2025-01-19 15:53:12,943 - INFO - JYD: 1wk change of 30.54%
+2025-01-19 15:53:12,999 - INFO - Retrieved article length: 3939 characters
+2025-01-19 15:53:13,031 - INFO - JYD: 1mo change of 48.04%
+2025-01-19 15:53:13,031 - INFO - Processing JYD - 2024-11-27 20:56:19 UTC
+2025-01-19 15:53:13,097 - INFO - JYNT: 1h change of 8.91%
+2025-01-19 15:53:13,187 - INFO - JYNT: 1wk change of 8.33%
+2025-01-19 15:53:13,189 - INFO - Retrieved article length: 5063 characters
+2025-01-19 15:53:13,262 - INFO - Retrieved article length: 4614 characters
+2025-01-19 15:53:13,274 - INFO - JYNT: 1mo change of 1.54%
+2025-01-19 15:53:13,276 - INFO - Processing JYNT - 2025-01-16 15:05:00 UTC
+2025-01-19 15:53:13,297 - INFO - JWN: 1mo change of 7.06%
+2025-01-19 15:53:13,297 - INFO - Processing JWN - 2025-01-16 16:50:18 UTC
+2025-01-19 15:53:13,349 - INFO - JXN: 1h change of 5.71%
+2025-01-19 15:53:13,446 - INFO - JXN: 1wk change of 3.60%
+2025-01-19 15:53:13,541 - INFO - JXN: 1mo change of -1.84%
+2025-01-19 15:53:13,541 - INFO - Processing JXN - 2024-12-11 00:15:00 UTC
+2025-01-19 15:53:13,814 - INFO - Retrieved article length: 510 characters
+2025-01-19 15:53:13,905 - INFO - JYD: 1h change of 16.68%
+2025-01-19 15:53:13,991 - INFO - JYD: 1wk change of 84.62%
+2025-01-19 15:53:14,022 - INFO - Retrieved article length: 4431 characters
+2025-01-19 15:53:14,023 - INFO - Retrieved article length: 8779 characters
+2025-01-19 15:53:14,085 - INFO - JYD: 1mo change of 279.15%
+2025-01-19 15:53:14,085 - INFO - Processing JYD - 2024-11-27 20:38:00 UTC
+2025-01-19 15:53:14,121 - INFO - JYNT: 1h change of 5.97%
+2025-01-19 15:53:14,129 - INFO - JWN: 1mo change of 7.06%
+2025-01-19 15:53:14,129 - INFO - Processing JWN - 2025-01-15 18:00:00 UTC
+2025-01-19 15:53:14,262 - INFO - JYNT: 1wk change of 6.27%
+2025-01-19 15:53:14,352 - INFO - JYNT: 1mo change of 1.18%
+2025-01-19 15:53:14,353 - INFO - Processing JYNT - 2025-01-08 16:48:00 UTC
+2025-01-19 15:53:14,478 - INFO - Retrieved article length: 6538 characters
+2025-01-19 15:53:14,576 - INFO - JXN: 1h change of -4.70%
+2025-01-19 15:53:14,672 - INFO - JXN: 1wk change of -11.43%
+2025-01-19 15:53:14,760 - INFO - JXN: 1mo change of -21.42%
+2025-01-19 15:53:14,760 - INFO - Processing JXN - 2024-11-19 00:15:00 UTC
+2025-01-19 15:53:14,798 - INFO - Retrieved article length: 5062 characters
+2025-01-19 15:53:14,825 - INFO - Retrieved article length: 3844 characters
+2025-01-19 15:53:14,833 - INFO - JYD: 1h change of 16.68%
+2025-01-19 15:53:14,839 - INFO - JYD: 1wk change of 84.62%
+2025-01-19 15:53:14,844 - INFO - JYD: 1mo change of 279.15%
+2025-01-19 15:53:14,844 - INFO - Processing JYD - 2024-10-29 18:53:56 UTC
+2025-01-19 15:53:15,080 - INFO - Retrieved article length: 3751 characters
+2025-01-19 15:53:15,152 - INFO - JWN: 1mo change of 4.97%
+2025-01-19 15:53:15,152 - INFO - Processing JWN - 2025-01-15 17:40:19 UTC
+2025-01-19 15:53:15,167 - INFO - JYNT: 1h change of -2.64%
+2025-01-19 15:53:15,250 - INFO - JYNT: 1wk change of 12.46%
+2025-01-19 15:53:15,341 - INFO - JYNT: 1mo change of -4.36%
+2025-01-19 15:53:15,341 - INFO - Processing JYNT - 2024-12-31 21:03:32 UTC
+2025-01-19 15:53:15,479 - INFO - Retrieved article length: 4011 characters
+2025-01-19 15:53:15,556 - INFO - Retrieved article length: 986 characters
+2025-01-19 15:53:15,565 - INFO - JXN: 1h change of -2.53%
+2025-01-19 15:53:15,649 - INFO - JYD: 1h change of -1.26%
+2025-01-19 15:53:15,650 - INFO - JXN: 1wk change of -11.62%
+2025-01-19 15:53:15,744 - INFO - JXN: 1mo change of -9.33%
+2025-01-19 15:53:15,744 - INFO - JYD: 1wk change of 22.16%
+2025-01-19 15:53:15,744 - INFO - Processing JXN - 2024-11-07 00:15:00 UTC
+2025-01-19 15:53:15,829 - INFO - JYD: 1mo change of -18.29%
+2025-01-19 15:53:15,829 - INFO - Processing JYD - 2024-10-29 14:34:23 UTC
+2025-01-19 15:53:15,965 - INFO - Retrieved article length: 2743 characters
+2025-01-19 15:53:16,071 - INFO - JWN: 1mo change of 4.97%
+2025-01-19 15:53:16,071 - INFO - Processing JWN - 2025-01-15 14:02:00 UTC
+2025-01-19 15:53:16,102 - INFO - Retrieved article length: 6001 characters
+2025-01-19 15:53:16,204 - INFO - JYNT: 1h change of 9.80%
+2025-01-19 15:53:16,389 - INFO - JYNT: 1mo change of -4.60%
+2025-01-19 15:53:16,390 - INFO - Processing JYNT - 2024-12-04 19:06:48 UTC
+2025-01-19 15:53:16,567 - INFO - Retrieved article length: 1665 characters
+2025-01-19 15:53:16,575 - INFO - JYD: 1h change of -1.26%
+2025-01-19 15:53:16,581 - INFO - JYD: 1wk change of 22.16%
+2025-01-19 15:53:16,587 - INFO - JYD: 1mo change of -18.29%
+2025-01-19 15:53:16,587 - INFO - Processing JYD - 2024-10-23 15:00:00 UTC
+2025-01-19 15:53:16,689 - INFO - Retrieved article length: 27144 characters
+2025-01-19 15:53:16,758 - INFO - Retrieved article length: 2605 characters
+2025-01-19 15:53:16,776 - INFO - JXN: 1h change of 8.20%
+2025-01-19 15:53:16,865 - INFO - JWN: 1mo change of 4.97%
+2025-01-19 15:53:16,866 - INFO - Processing JWN - 2025-01-14 19:56:49 UTC
+2025-01-19 15:53:16,986 - INFO - JXN: 1mo change of -1.09%
+2025-01-19 15:53:16,987 - INFO - Processing JXN - 2024-11-07 00:14:00 UTC
+2025-01-19 15:53:17,073 - INFO - Retrieved article length: 4120 characters
+2025-01-19 15:53:17,246 - INFO - JYNT: 1wk change of -7.78%
+2025-01-19 15:53:17,382 - INFO - JYNT: 1mo change of -7.77%
+2025-01-19 15:53:17,382 - INFO - Processing JYNT - 2024-11-26 15:05:00 UTC
+2025-01-19 15:53:17,560 - INFO - Retrieved article length: 7751 characters
+2025-01-19 15:53:17,727 - INFO - Retrieved article length: 5496 characters
+2025-01-19 15:53:17,737 - INFO - JXN: 1h change of 8.20%
+2025-01-19 15:53:17,749 - INFO - JXN: 1mo change of -1.09%
+2025-01-19 15:53:17,749 - INFO - Processing JXN - 2024-11-06 20:00:11 UTC
+2025-01-19 15:53:17,838 - INFO - Retrieved article length: 5121 characters
+2025-01-19 15:53:17,937 - INFO - JYD: 1h change of 9.05%
+2025-01-19 15:53:17,942 - INFO - JWN: 1mo change of 4.97%
+2025-01-19 15:53:18,029 - INFO - JYD: 1wk change of 2.41%
+2025-01-19 15:53:18,073 - INFO - Processing JZ - 2025-01-18 00:30:00 UTC
+2025-01-19 15:53:18,116 - INFO - JYD: 1mo change of 65.33%
+2025-01-19 15:53:18,188 - INFO - Retrieved article length: 2679 characters
+2025-01-19 15:53:18,280 - INFO - Processing JZXN - 2024-11-23 00:47:41 UTC
+2025-01-19 15:53:18,288 - INFO - JYNT: 1h change of -5.20%
+2025-01-19 15:53:18,414 - INFO - Retrieved article length: 4587 characters
+2025-01-19 15:53:18,425 - INFO - JYNT: 1wk change of 7.87%
+2025-01-19 15:53:18,508 - INFO - JXN: 1h change of 12.54%
+2025-01-19 15:53:18,512 - INFO - JYNT: 1mo change of -12.80%
+2025-01-19 15:53:18,512 - INFO - Processing JYNT - 2024-11-14 21:54:00 UTC
+2025-01-19 15:53:18,692 - INFO - JXN: 1mo change of -1.06%
+2025-01-19 15:53:18,692 - INFO - Processing JXN - 2024-11-05 00:15:00 UTC
+2025-01-19 15:53:18,787 - INFO - Retrieved article length: 4297 characters
+2025-01-19 15:53:18,887 - INFO - JZ: 1h change of 4.45%
+2025-01-19 15:53:18,978 - INFO - JZ: 1wk change of -16.54%
+2025-01-19 15:53:19,032 - INFO - Retrieved article length: 450 characters
+2025-01-19 15:53:19,068 - INFO - JZ: 1mo change of -13.06%
+2025-01-19 15:53:19,068 - INFO - Processing JZ - 2024-11-29 18:03:53 UTC
+2025-01-19 15:53:19,120 - INFO - JZXN: 1h change of -2.90%
+2025-01-19 15:53:19,219 - INFO - JZXN: 1wk change of -7.39%
+2025-01-19 15:53:19,309 - INFO - Retrieved article length: 6513 characters
+2025-01-19 15:53:19,322 - INFO - JZXN: 1mo change of -8.87%
+2025-01-19 15:53:19,322 - INFO - Processing JZXN - 2024-11-23 00:05:00 UTC
+2025-01-19 15:53:19,376 - INFO - Retrieved article length: 5290 characters
+2025-01-19 15:53:19,399 - INFO - JYNT: 1h change of -10.45%
+2025-01-19 15:53:19,465 - INFO - JXN: 1h change of 15.37%
+2025-01-19 15:53:19,490 - INFO - JYNT: 1wk change of 5.86%
+2025-01-19 15:53:19,579 - INFO - Processing JYNT - 2024-11-09 17:41:52 UTC
+2025-01-19 15:53:19,648 - INFO - JXN: 1mo change of 5.25%
+2025-01-19 15:53:19,817 - INFO - Processing K - 2025-01-17 11:00:00 UTC
+2025-01-19 15:53:19,882 - INFO - Retrieved article length: 507 characters
+2025-01-19 15:53:19,980 - INFO - Retrieved article length: 6976 characters
+2025-01-19 15:53:19,988 - INFO - JZXN: 1h change of -2.90%
+2025-01-19 15:53:19,995 - INFO - JZXN: 1wk change of -7.39%
+2025-01-19 15:53:20,001 - INFO - JZXN: 1mo change of -8.87%
+2025-01-19 15:53:20,125 - INFO - JZ: 1wk change of -10.58%
+2025-01-19 15:53:20,147 - INFO - Processing KA - 2025-01-16 16:00:00 UTC
+2025-01-19 15:53:20,218 - INFO - JZ: 1mo change of -13.08%
+2025-01-19 15:53:20,219 - INFO - Processing JZ - 2024-11-29 17:15:00 UTC
+2025-01-19 15:53:20,331 - INFO - Retrieved article length: 4645 characters
+2025-01-19 15:53:20,419 - INFO - JYNT: 1h change of -2.52%
+2025-01-19 15:53:20,491 - INFO - Retrieved article length: 5449 characters
+2025-01-19 15:53:20,507 - INFO - JYNT: 1wk change of -3.57%
+2025-01-19 15:53:20,593 - INFO - JYNT: 1mo change of 2.13%
+2025-01-19 15:53:20,749 - INFO - Processing KACL - 2024-12-18 21:19:03 UTC
+2025-01-19 15:53:20,851 - INFO - K: 1mo change of 1.51%
+2025-01-19 15:53:20,851 - INFO - Processing K - 2025-01-16 09:05:29 UTC
+2025-01-19 15:53:20,895 - INFO - Retrieved article length: 4543 characters
+2025-01-19 15:53:20,908 - INFO - JZ: 1wk change of -10.58%
+2025-01-19 15:53:20,914 - INFO - JZ: 1mo change of -13.08%
+2025-01-19 15:53:20,914 - INFO - Processing JZ - 2024-11-07 17:30:00 UTC
+2025-01-19 15:53:21,065 - INFO - Retrieved article length: 9352 characters
+2025-01-19 15:53:21,476 - INFO - Retrieved article length: 527 characters
+2025-01-19 15:53:21,612 - INFO - Retrieved article length: 5718 characters
+2025-01-19 15:53:21,703 - INFO - Retrieved article length: 3815 characters
+2025-01-19 15:53:21,738 - INFO - KACL: 1mo change of 3.19%
+2025-01-19 15:53:21,738 - INFO - Processing KACL - 2024-12-18 17:15:00 UTC
+2025-01-19 15:53:21,796 - INFO - JZ: 1h change of 14.13%
+2025-01-19 15:53:21,881 - INFO - JZ: 1wk change of 29.17%
+2025-01-19 15:53:21,973 - INFO - K: 1mo change of 1.33%
+2025-01-19 15:53:21,973 - INFO - JZ: 1mo change of -16.40%
+2025-01-19 15:53:21,973 - INFO - Processing K - 2025-01-16 01:43:00 UTC
+2025-01-19 15:53:21,973 - INFO - Processing JZ - 2024-10-23 14:22:00 UTC
+2025-01-19 15:53:22,385 - INFO - Retrieved article length: 2384 characters
+2025-01-19 15:53:22,447 - INFO - KACL: 1mo change of 3.19%
+2025-01-19 15:53:22,566 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:22,567 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:22,568 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:22,569 - INFO - Processing KA - 2025-01-15 15:45:00 UTC
+2025-01-19 15:53:22,600 - INFO - Processing KACLR - 2024-12-18 21:19:03 UTC
+2025-01-19 15:53:22,610 - INFO - Retrieved article length: 260 characters
+2025-01-19 15:53:22,675 - INFO - Retrieved article length: 3888 characters
+2025-01-19 15:53:22,721 - INFO - K: 1mo change of 1.33%
+2025-01-19 15:53:22,721 - INFO - Processing K - 2025-01-16 00:52:00 UTC
+2025-01-19 15:53:22,767 - INFO - JZ: 1h change of 5.79%
+2025-01-19 15:53:22,857 - INFO - JZ: 1wk change of -9.52%
+2025-01-19 15:53:22,953 - INFO - JZ: 1mo change of 26.51%
+2025-01-19 15:53:23,101 - INFO - Processing KACLU - 2024-12-18 21:19:03 UTC
+2025-01-19 15:53:23,251 - INFO - Retrieved article length: 527 characters
+2025-01-19 15:53:23,366 - INFO - Retrieved article length: 6189 characters
+2025-01-19 15:53:23,367 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:23,367 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:23,368 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:23,368 - INFO - Processing KA - 2025-01-01 03:09:16 UTC
+2025-01-19 15:53:23,386 - INFO - Retrieved article length: 147 characters
+2025-01-19 15:53:23,414 - ERROR - KACLR: Period '1mo' is invalid, must be one of ['1d', '5d']
+2025-01-19 15:53:23,491 - INFO - K: 1mo change of 1.33%
+2025-01-19 15:53:23,491 - INFO - Processing K - 2025-01-14 16:00:00 UTC
+2025-01-19 15:53:23,496 - INFO - Processing KACLR - 2024-12-18 17:15:00 UTC
+2025-01-19 15:53:23,926 - INFO - Retrieved article length: 527 characters
+2025-01-19 15:53:24,014 - ERROR - KACLU: No price data found, symbol may be delisted (1h 2024-12-16 -> 2024-12-20)
+2025-01-19 15:53:24,038 - INFO - Retrieved article length: 6909 characters
+2025-01-19 15:53:24,039 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:24,039 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:24,040 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:24,040 - INFO - Processing KA - 2024-12-02 16:45:00 UTC
+2025-01-19 15:53:24,135 - INFO - Retrieved article length: 2384 characters
+2025-01-19 15:53:24,144 - ERROR - KACLR: Period '1mo' is invalid, must be one of ['1d', '5d']
+2025-01-19 15:53:24,155 - INFO - Retrieved article length: 4547 characters
+2025-01-19 15:53:24,196 - INFO - Processing KACLU - 2024-12-18 17:15:00 UTC
+2025-01-19 15:53:24,315 - INFO - Processing KALA - 2024-12-30 16:00:00 UTC
+2025-01-19 15:53:24,562 - INFO - K: 1mo change of 1.34%
+2025-01-19 15:53:24,563 - INFO - Processing K - 2025-01-13 17:40:28 UTC
+2025-01-19 15:53:24,814 - INFO - Retrieved article length: 5166 characters
+2025-01-19 15:53:24,815 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:24,816 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:24,816 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:24,817 - INFO - Processing KA - 2024-11-20 13:46:03 UTC
+2025-01-19 15:53:24,857 - INFO - Retrieved article length: 2384 characters
+2025-01-19 15:53:24,858 - ERROR - KACLU: No price data found, symbol may be delisted (1h 2024-12-16 -> 2024-12-20)
+2025-01-19 15:53:25,034 - INFO - Processing KAR - 2024-12-18 20:00:11 UTC
+2025-01-19 15:53:25,046 - INFO - Retrieved article length: 7431 characters
+2025-01-19 15:53:25,222 - INFO - Retrieved article length: 2388 characters
+2025-01-19 15:53:25,223 - INFO - KALA: 1wk change of 15.20%
+2025-01-19 15:53:25,310 - INFO - KALA: 1mo change of 4.92%
+2025-01-19 15:53:25,310 - INFO - Processing KALA - 2024-11-27 16:00:00 UTC
+2025-01-19 15:53:25,555 - INFO - Retrieved article length: 1700 characters
+2025-01-19 15:53:25,556 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:25,557 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:25,558 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:25,558 - INFO - Processing KA - 2024-11-18 15:10:16 UTC
+2025-01-19 15:53:25,624 - INFO - K: 1mo change of 1.49%
+2025-01-19 15:53:25,625 - INFO - Processing K - 2025-01-08 17:15:06 UTC
+2025-01-19 15:53:25,753 - INFO - Retrieved article length: 4646 characters
+2025-01-19 15:53:25,857 - INFO - KAR: 1h change of -2.29%
+2025-01-19 15:53:25,955 - INFO - KAR: 1wk change of -1.95%
+2025-01-19 15:53:26,070 - INFO - Processing KAR - 2024-12-10 14:08:38 UTC
+2025-01-19 15:53:26,121 - INFO - Retrieved article length: 2368 characters
+2025-01-19 15:53:26,212 - INFO - KALA: 1h change of -5.00%
+2025-01-19 15:53:26,296 - INFO - KALA: 1wk change of 2.88%
+2025-01-19 15:53:26,312 - INFO - Retrieved article length: 707 characters
+2025-01-19 15:53:26,313 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:26,313 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:26,314 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:26,314 - INFO - Processing KA - 2024-11-18 15:00:00 UTC
+2025-01-19 15:53:26,384 - INFO - KALA: 1mo change of 14.71%
+2025-01-19 15:53:26,385 - INFO - Processing KALA - 2024-11-12 16:00:00 UTC
+2025-01-19 15:53:26,386 - INFO - Retrieved article length: 4231 characters
+2025-01-19 15:53:26,630 - INFO - K: 1wk change of 1.19%
+2025-01-19 15:53:26,726 - INFO - Retrieved article length: 4023 characters
+2025-01-19 15:53:26,774 - INFO - K: 1mo change of 1.60%
+2025-01-19 15:53:26,774 - INFO - Processing K - 2025-01-07 18:51:54 UTC
+2025-01-19 15:53:26,822 - INFO - KAR: 1h change of 2.13%
+2025-01-19 15:53:26,912 - INFO - KAR: 1wk change of 1.05%
+2025-01-19 15:53:27,019 - INFO - KAR: 1mo change of 20.94%
+2025-01-19 15:53:27,019 - INFO - Processing KAR - 2024-11-20 17:55:06 UTC
+2025-01-19 15:53:27,126 - INFO - Retrieved article length: 15173 characters
+2025-01-19 15:53:27,126 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:27,127 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:27,128 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:27,128 - INFO - Processing KA - 2024-11-13 16:55:00 UTC
+2025-01-19 15:53:27,167 - INFO - Retrieved article length: 15379 characters
+2025-01-19 15:53:27,257 - INFO - KALA: 1h change of -9.31%
+2025-01-19 15:53:27,349 - INFO - KALA: 1wk change of -3.39%
+2025-01-19 15:53:27,446 - INFO - KALA: 1mo change of 15.07%
+2025-01-19 15:53:27,602 - INFO - Processing KARO - 2025-01-16 10:00:32 UTC
+2025-01-19 15:53:27,710 - INFO - Retrieved article length: 2150 characters
+2025-01-19 15:53:27,793 - INFO - Retrieved article length: 3724 characters
+2025-01-19 15:53:27,794 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:27,795 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:27,795 - ERROR - KA: No timezone found, symbol may be delisted
+2025-01-19 15:53:27,802 - INFO - KAR: 1h change of -1.27%
+2025-01-19 15:53:27,931 - INFO - Processing KAVL - 2025-01-10 16:30:00 UTC
+2025-01-19 15:53:27,996 - INFO - KAR: 1mo change of 26.78%
+2025-01-19 15:53:27,996 - INFO - Processing KAR - 2024-11-09 16:31:05 UTC
+2025-01-19 15:53:28,354 - INFO - Retrieved article length: 4841 characters
+2025-01-19 15:53:28,355 - INFO - Retrieved article length: 2816 characters
+2025-01-19 15:53:28,450 - INFO - KARO: 1h change of -4.66%
+2025-01-19 15:53:28,537 - INFO - KARO: 1wk change of -7.85%
+2025-01-19 15:53:28,622 - INFO - KARO: 1mo change of -4.12%
+2025-01-19 15:53:28,622 - INFO - Processing KARO - 2025-01-16 08:00:50 UTC
+2025-01-19 15:53:28,650 - INFO - Retrieved article length: 10778 characters
+2025-01-19 15:53:28,727 - INFO - Retrieved article length: 4651 characters
+2025-01-19 15:53:28,739 - INFO - KAVL: 1h change of 42.53%
+2025-01-19 15:53:28,761 - INFO - K: 1mo change of 1.48%
+2025-01-19 15:53:28,821 - INFO - KAR: 1h change of -1.72%
+2025-01-19 15:53:28,825 - INFO - KAVL: 1wk change of 23.63%
+2025-01-19 15:53:28,908 - INFO - Processing KBE - 2025-01-06 20:49:00 UTC
+2025-01-19 15:53:28,915 - INFO - KAVL: 1mo change of 60.74%
+2025-01-19 15:53:28,916 - INFO - KAR: 1wk change of 22.35%
+2025-01-19 15:53:29,015 - INFO - KAR: 1mo change of 30.77%
+2025-01-19 15:53:29,015 - INFO - Processing KAR - 2024-11-08 15:23:26 UTC
+2025-01-19 15:53:29,042 - INFO - Processing KBH - 2025-01-17 21:46:56 UTC
+2025-01-19 15:53:29,378 - INFO - Retrieved article length: 30154 characters
+2025-01-19 15:53:29,386 - INFO - KARO: 1h change of -4.66%
+2025-01-19 15:53:29,433 - INFO - KARO: 1wk change of -7.85%
+2025-01-19 15:53:29,483 - INFO - KARO: 1mo change of -4.12%
+2025-01-19 15:53:29,484 - INFO - Processing KARO - 2025-01-15 18:19:10 UTC
+2025-01-19 15:53:29,716 - INFO - Retrieved article length: 244 characters
+2025-01-19 15:53:29,769 - INFO - Retrieved article length: 4414 characters
+2025-01-19 15:53:29,811 - INFO - Retrieved article length: 4570 characters
+2025-01-19 15:53:29,859 - INFO - KAR: 1h change of 11.15%
+2025-01-19 15:53:29,861 - INFO - KBE: 1h change of -1.51%
+2025-01-19 15:53:29,911 - INFO - KBH: 1h change of -1.41%
+2025-01-19 15:53:29,954 - INFO - KAR: 1wk change of 21.62%
+2025-01-19 15:53:29,981 - INFO - KBE: 1wk change of 3.09%
+2025-01-19 15:53:30,055 - INFO - KAR: 1mo change of 27.68%
+2025-01-19 15:53:30,055 - INFO - KBH: 1wk change of 5.30%
+2025-01-19 15:53:30,056 - INFO - Processing KAR - 2024-11-07 16:00:00 UTC
+2025-01-19 15:53:30,093 - INFO - KBE: 1mo change of -5.04%
+2025-01-19 15:53:30,166 - INFO - Retrieved article length: 4529 characters
+2025-01-19 15:53:30,806 - INFO - Retrieved article length: 1998 characters
+2025-01-19 15:53:30,999 - ERROR - KBH: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 15:53:31,000 - INFO - Processing KBH - 2025-01-17 16:00:00 UTC
+2025-01-19 15:53:31,268 - ERROR - KARO: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 15:53:31,458 - ERROR - Error getting news for KBR: JSON decode error
+2025-01-19 15:53:31,459 - INFO - Retrying KBR (Attempt 2/3)
+2025-01-19 15:53:31,764 - INFO - Retrieved article length: 5216 characters
+2025-01-19 15:53:31,774 - INFO - KBH: 1h change of -1.41%
+2025-01-19 15:53:32,153 - ERROR - KAR: No price data found, symbol may be delisted (1h 2024-11-05 -> 2024-11-09)
+2025-01-19 15:53:32,698 - ERROR - KARO: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 15:53:33,144 - ERROR - KBH: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 15:53:33,397 - ERROR - KAR: No price data found, symbol may be delisted (1d 2024-10-28 -> 2024-11-17)
+2025-01-19 15:53:33,653 - ERROR - KARO: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 15:53:33,655 - INFO - Processing KARO - 2025-01-15 01:15:03 UTC
+2025-01-19 15:53:34,406 - INFO - Retrieved article length: 4164 characters
+2025-01-19 15:53:34,407 - ERROR - KARO: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 15:53:34,438 - ERROR - KAR: No price data found, symbol may be delisted (1d 2024-10-03 -> 2024-12-12)
+2025-01-19 15:53:34,438 - INFO - Processing KAR - 2024-11-07 00:15:00 UTC
+2025-01-19 15:53:34,500 - ERROR - KBH: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 15:53:34,501 - INFO - Processing KBH - 2025-01-17 16:00:00 UTC
+2025-01-19 15:53:35,277 - INFO - Retrieved article length: 5376 characters
+2025-01-19 15:53:35,288 - INFO - KBH: 1h change of -1.41%
+2025-01-19 15:53:35,369 - INFO - Retrieved article length: 22381 characters
+2025-01-19 15:53:35,370 - ERROR - KAR: No price data found, symbol may be delisted (1h 2024-11-05 -> 2024-11-09)
+2025-01-19 15:53:35,370 - ERROR - KAR: No price data found, symbol may be delisted (1d 2024-10-28 -> 2024-11-17)
+2025-01-19 15:53:35,371 - ERROR - KAR: No price data found, symbol may be delisted (1d 2024-10-03 -> 2024-12-12)
+2025-01-19 15:53:35,506 - ERROR - KARO: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 15:53:36,462 - ERROR - Error getting news for KBR: JSON decode error
+2025-01-19 15:53:36,464 - INFO - Retrying KBR (Attempt 3/3)
+2025-01-19 15:53:36,655 - ERROR - Error getting news for KBWB: JSON decode error
+2025-01-19 15:53:36,657 - INFO - Retrying KBWB (Attempt 2/3)
+2025-01-19 15:53:36,669 - ERROR - KARO: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 15:53:36,669 - INFO - Processing KARO - 2025-01-15 00:55:37 UTC
+2025-01-19 15:53:36,738 - ERROR - KBH: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 15:53:37,672 - INFO - Retrieved article length: 487 characters
+2025-01-19 15:53:37,673 - ERROR - KARO: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 15:53:38,542 - ERROR - KBH: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 15:53:38,542 - INFO - Processing KBH - 2025-01-16 16:00:00 UTC
+2025-01-19 15:53:38,636 - ERROR - KARO: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 15:53:39,439 - INFO - Retrieved article length: 4444 characters
+2025-01-19 15:53:39,653 - ERROR - KARO: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 15:53:39,656 - INFO - Processing KARO - 2025-01-15 00:22:00 UTC
+2025-01-19 15:53:40,367 - INFO - Retrieved article length: 3788 characters
+2025-01-19 15:53:40,369 - ERROR - KARO: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 15:53:40,672 - ERROR - KBH: No price data found, symbol may be delisted (1h 2025-01-14 -> 2025-01-18)
+2025-01-19 15:53:41,332 - ERROR - KARO: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 15:53:41,465 - ERROR - Error getting news for KBR: JSON decode error
+2025-01-19 15:53:41,468 - ERROR - Failed to get news for KBR after 3 attempts
+2025-01-19 15:53:41,659 - ERROR - Error getting news for KBWB: JSON decode error
+2025-01-19 15:53:41,660 - INFO - Retrying KBWB (Attempt 3/3)
+2025-01-19 15:53:41,992 - ERROR - KBH: No price data found, symbol may be delisted (1d 2025-01-06 -> 2025-01-26)
+2025-01-19 15:53:42,323 - ERROR - KARO: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 15:53:42,324 - INFO - Processing KARO - 2025-01-15 00:13:47 UTC
+2025-01-19 15:53:42,758 - ERROR - Error getting news for KD: JSON decode error
+2025-01-19 15:53:42,760 - INFO - Retrying KD (Attempt 2/3)
+2025-01-19 15:53:43,053 - INFO - Retrieved article length: 675 characters
+2025-01-19 15:53:43,054 - ERROR - KARO: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 15:53:43,162 - ERROR - KBH: No price data found, symbol may be delisted (1d 2024-12-12 -> 2025-02-20)
+2025-01-19 15:53:43,163 - INFO - Processing KBH - 2025-01-15 18:49:23 UTC
+2025-01-19 15:53:43,851 - INFO - Retrieved article length: 6883 characters
+2025-01-19 15:53:44,023 - ERROR - KARO: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 15:53:44,946 - ERROR - KBH: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 15:53:44,999 - ERROR - KARO: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 15:53:45,000 - INFO - Processing KARO - 2025-01-14 15:04:41 UTC
+2025-01-19 15:53:45,632 - INFO - Retrieved article length: 3209 characters
+2025-01-19 15:53:45,918 - ERROR - KBH: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 15:53:46,662 - ERROR - Error getting news for KBWB: JSON decode error
+2025-01-19 15:53:46,662 - ERROR - Failed to get news for KBWB after 3 attempts
+2025-01-19 15:53:46,747 - ERROR - KARO: No price data found, symbol may be delisted (1h 2025-01-12 -> 2025-01-16)
+2025-01-19 15:53:46,983 - ERROR - KBH: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 15:53:46,985 - INFO - Processing KBH - 2025-01-15 17:33:00 UTC
+2025-01-19 15:53:47,603 - INFO - Retrieved article length: 1092 characters
+2025-01-19 15:53:47,604 - ERROR - KBH: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 15:53:47,761 - ERROR - Error getting news for KD: JSON decode error
+2025-01-19 15:53:47,772 - INFO - Retrying KD (Attempt 3/3)
+2025-01-19 15:53:47,869 - ERROR - KARO: No price data found, symbol may be delisted (1d 2025-01-04 -> 2025-01-24)
+2025-01-19 15:53:48,142 - ERROR - Error getting news for KDLY: JSON decode error
+2025-01-19 15:53:48,142 - INFO - Retrying KDLY (Attempt 2/3)
+2025-01-19 15:53:48,550 - ERROR - KBH: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 15:53:48,836 - ERROR - KARO: No price data found, symbol may be delisted (1d 2024-12-10 -> 2025-02-18)
+2025-01-19 15:53:49,601 - ERROR - KBH: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 15:53:49,602 - INFO - Processing KBH - 2025-01-15 15:44:28 UTC
+2025-01-19 15:53:50,151 - ERROR - Error getting news for KDP: JSON decode error
+2025-01-19 15:53:50,152 - INFO - Retrying KDP (Attempt 2/3)
+2025-01-19 15:53:50,314 - INFO - Retrieved article length: 482 characters
+2025-01-19 15:53:50,315 - ERROR - KBH: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 15:53:51,301 - ERROR - KBH: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 15:53:52,678 - ERROR - KBH: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 15:53:52,680 - INFO - Processing KBH - 2025-01-15 14:11:15 UTC
+2025-01-19 15:53:52,773 - ERROR - Error getting news for KD: JSON decode error
+2025-01-19 15:53:52,775 - ERROR - Failed to get news for KD after 3 attempts
+2025-01-19 15:53:53,144 - ERROR - Error getting news for KDLY: JSON decode error
+2025-01-19 15:53:53,146 - INFO - Retrying KDLY (Attempt 3/3)
+2025-01-19 15:53:53,459 - INFO - Retrieved article length: 1924 characters
+2025-01-19 15:53:53,459 - ERROR - KBH: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 15:53:53,920 - ERROR - Error getting news for KELYA: JSON decode error
+2025-01-19 15:53:53,921 - INFO - Retrying KELYA (Attempt 2/3)
+2025-01-19 15:53:54,758 - ERROR - KBH: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 15:53:55,154 - ERROR - Error getting news for KDP: JSON decode error
+2025-01-19 15:53:55,155 - INFO - Retrying KDP (Attempt 3/3)
+2025-01-19 15:53:55,924 - ERROR - KBH: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 15:53:56,894 - ERROR - Error getting news for KEY: JSON decode error
+2025-01-19 15:53:56,894 - INFO - Retrying KEY (Attempt 2/3)
+2025-01-19 15:53:58,147 - ERROR - Error getting news for KDLY: JSON decode error
+2025-01-19 15:53:58,149 - ERROR - Failed to get news for KDLY after 3 attempts
+2025-01-19 15:53:58,923 - ERROR - Error getting news for KELYA: JSON decode error
+2025-01-19 15:53:58,924 - INFO - Retrying KELYA (Attempt 3/3)
+2025-01-19 15:53:59,470 - ERROR - Error getting news for KEYS: JSON decode error
+2025-01-19 15:53:59,472 - INFO - Retrying KEYS (Attempt 2/3)
+2025-01-19 15:54:00,156 - ERROR - Error getting news for KDP: JSON decode error
+2025-01-19 15:54:00,156 - ERROR - Failed to get news for KDP after 3 attempts
+2025-01-19 15:54:01,169 - ERROR - Error getting news for KGEI: JSON decode error
+2025-01-19 15:54:01,169 - INFO - Retrying KGEI (Attempt 2/3)
+2025-01-19 15:54:01,897 - ERROR - Error getting news for KEY: JSON decode error
+2025-01-19 15:54:01,898 - INFO - Retrying KEY (Attempt 3/3)
+2025-01-19 15:54:03,927 - ERROR - Error getting news for KELYA: JSON decode error
+2025-01-19 15:54:03,928 - ERROR - Failed to get news for KELYA after 3 attempts
+2025-01-19 15:54:04,473 - ERROR - Error getting news for KEYS: JSON decode error
+2025-01-19 15:54:04,475 - INFO - Retrying KEYS (Attempt 3/3)
+2025-01-19 15:54:05,274 - ERROR - Error getting news for KGS: JSON decode error
+2025-01-19 15:54:05,275 - INFO - Retrying KGS (Attempt 2/3)
+2025-01-19 15:54:06,170 - ERROR - Error getting news for KGEI: JSON decode error
+2025-01-19 15:54:06,171 - INFO - Retrying KGEI (Attempt 3/3)
+2025-01-19 15:54:06,900 - ERROR - Error getting news for KEY: JSON decode error
+2025-01-19 15:54:06,902 - ERROR - Failed to get news for KEY after 3 attempts
+2025-01-19 15:54:08,388 - ERROR - Error getting news for KHC: JSON decode error
+2025-01-19 15:54:08,388 - INFO - Retrying KHC (Attempt 2/3)
+2025-01-19 15:54:09,478 - ERROR - Error getting news for KEYS: JSON decode error
+2025-01-19 15:54:09,479 - ERROR - Failed to get news for KEYS after 3 attempts
+2025-01-19 15:54:10,276 - ERROR - Error getting news for KGS: JSON decode error
+2025-01-19 15:54:10,278 - INFO - Retrying KGS (Attempt 3/3)
+2025-01-19 15:54:10,429 - ERROR - Error getting news for KIE: JSON decode error
+2025-01-19 15:54:10,431 - INFO - Retrying KIE (Attempt 2/3)
+2025-01-19 15:54:11,172 - ERROR - Error getting news for KGEI: JSON decode error
+2025-01-19 15:54:11,173 - ERROR - Failed to get news for KGEI after 3 attempts
+2025-01-19 15:54:12,165 - ERROR - Error getting news for KIM: JSON decode error
+2025-01-19 15:54:12,166 - INFO - Retrying KIM (Attempt 2/3)
+2025-01-19 15:54:13,390 - ERROR - Error getting news for KHC: JSON decode error
+2025-01-19 15:54:13,392 - INFO - Retrying KHC (Attempt 3/3)
+2025-01-19 15:54:15,279 - ERROR - Error getting news for KGS: JSON decode error
+2025-01-19 15:54:15,280 - ERROR - Failed to get news for KGS after 3 attempts
+2025-01-19 15:54:15,433 - ERROR - Error getting news for KIE: JSON decode error
+2025-01-19 15:54:15,434 - INFO - Retrying KIE (Attempt 3/3)
+2025-01-19 15:54:17,167 - ERROR - Error getting news for KIM: JSON decode error
+2025-01-19 15:54:17,168 - INFO - Retrying KIM (Attempt 3/3)
+2025-01-19 15:54:18,394 - ERROR - Error getting news for KHC: JSON decode error
+2025-01-19 15:54:18,395 - ERROR - Failed to get news for KHC after 3 attempts
+2025-01-19 15:54:20,435 - ERROR - Error getting news for KIE: JSON decode error
+2025-01-19 15:54:20,437 - ERROR - Failed to get news for KIE after 3 attempts
+2025-01-19 15:54:22,170 - ERROR - Error getting news for KIM: JSON decode error
+2025-01-19 15:54:22,172 - ERROR - Failed to get news for KIM after 3 attempts

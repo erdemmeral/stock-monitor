@@ -1,0 +1,959 @@
+2025-01-19 16:13:09,078 - INFO - Starting new training session. Logging to: logs/training_20250119_161309.log
+2025-01-19 16:13:09,083 - INFO - Starting new training session. Logging to: logs/training_20250119_161309.log
+2025-01-19 16:13:09,099 - INFO - Starting new training session. Logging to: logs/training_20250119_161309.log
+2025-01-19 16:13:09,115 - INFO - Starting new training session. Logging to: logs/training_20250119_161309.log
+2025-01-19 16:13:11,186 - ERROR - Error getting news for NVDU: JSON decode error
+2025-01-19 16:13:11,186 - INFO - Retrying NVDU (Attempt 2/3)
+2025-01-19 16:13:11,196 - ERROR - Error getting news for NVDS: JSON decode error
+2025-01-19 16:13:11,200 - INFO - Retrying NVDS (Attempt 2/3)
+2025-01-19 16:13:11,534 - ERROR - Error getting news for NVDX: JSON decode error
+2025-01-19 16:13:11,535 - INFO - Retrying NVDX (Attempt 2/3)
+2025-01-19 16:13:11,582 - ERROR - Error getting news for NVDQ: JSON decode error
+2025-01-19 16:13:11,582 - INFO - Retrying NVDQ (Attempt 2/3)
+2025-01-19 16:13:16,201 - ERROR - Error getting news for NVDU: JSON decode error
+2025-01-19 16:13:16,201 - ERROR - Error getting news for NVDS: JSON decode error
+2025-01-19 16:13:16,202 - INFO - Retrying NVDU (Attempt 3/3)
+2025-01-19 16:13:16,202 - INFO - Retrying NVDS (Attempt 3/3)
+2025-01-19 16:13:16,536 - ERROR - Error getting news for NVDX: JSON decode error
+2025-01-19 16:13:16,538 - INFO - Retrying NVDX (Attempt 3/3)
+2025-01-19 16:13:16,584 - ERROR - Error getting news for NVDQ: JSON decode error
+2025-01-19 16:13:16,584 - INFO - Retrying NVDQ (Attempt 3/3)
+2025-01-19 16:13:21,204 - ERROR - Error getting news for NVDU: JSON decode error
+2025-01-19 16:13:21,204 - ERROR - Error getting news for NVDS: JSON decode error
+2025-01-19 16:13:21,206 - ERROR - Failed to get news for NVDU after 3 attempts
+2025-01-19 16:13:21,206 - ERROR - Failed to get news for NVDS after 3 attempts
+2025-01-19 16:13:21,480 - INFO - Processing NVEC - 2025-01-17 00:05:00 UTC
+2025-01-19 16:13:21,539 - ERROR - Error getting news for NVDX: JSON decode error
+2025-01-19 16:13:21,540 - ERROR - Failed to get news for NVDX after 3 attempts
+2025-01-19 16:13:21,586 - ERROR - Error getting news for NVDQ: JSON decode error
+2025-01-19 16:13:21,586 - ERROR - Failed to get news for NVDQ after 3 attempts
+2025-01-19 16:13:21,807 - INFO - Processing NVFY - 2024-11-18 20:27:00 UTC
+2025-01-19 16:13:21,975 - INFO - Processing NVNI - 2025-01-16 01:00:00 UTC
+2025-01-19 16:13:22,323 - INFO - Retrieved article length: 1807 characters
+2025-01-19 16:13:22,462 - INFO - NVEC: 1h change of -1.01%
+2025-01-19 16:13:22,525 - INFO - Processing NVNO - 2025-01-17 17:58:21 UTC
+2025-01-19 16:13:22,571 - INFO - NVEC: 1wk change of -3.44%
+2025-01-19 16:13:22,674 - INFO - NVEC: 1mo change of 4.10%
+2025-01-19 16:13:22,675 - INFO - Processing NVEC - 2024-12-18 13:05:24 UTC
+2025-01-19 16:13:22,684 - INFO - Retrieved article length: 3696 characters
+2025-01-19 16:13:22,742 - INFO - Retrieved article length: 5127 characters
+2025-01-19 16:13:22,811 - INFO - NVNI: 1h change of 1.29%
+2025-01-19 16:13:22,862 - INFO - NVFY: 1h change of -6.86%
+2025-01-19 16:13:22,891 - INFO - NVNI: 1wk change of -46.96%
+2025-01-19 16:13:22,953 - INFO - NVFY: 1wk change of -47.37%
+2025-01-19 16:13:22,977 - INFO - NVNI: 1mo change of 209.06%
+2025-01-19 16:13:22,977 - INFO - Processing NVNI - 2025-01-13 23:45:46 UTC
+2025-01-19 16:13:23,041 - INFO - NVFY: 1mo change of -63.97%
+2025-01-19 16:13:23,042 - INFO - Processing NVFY - 2024-11-17 16:31:47 UTC
+2025-01-19 16:13:23,268 - INFO - Retrieved article length: 4827 characters
+2025-01-19 16:13:23,393 - INFO - NVNO: 1h change of 2.81%
+2025-01-19 16:13:23,449 - INFO - Retrieved article length: 7205 characters
+2025-01-19 16:13:23,476 - INFO - NVNO: 1wk change of -2.95%
+2025-01-19 16:13:23,550 - INFO - NVEC: 1h change of -2.06%
+2025-01-19 16:13:23,557 - INFO - NVNO: 1mo change of 15.44%
+2025-01-19 16:13:23,557 - INFO - Processing NVNO - 2024-12-16 16:50:00 UTC
+2025-01-19 16:13:23,657 - INFO - NVEC: 1wk change of 6.27%
+2025-01-19 16:13:23,719 - INFO - Retrieved article length: 2839 characters
+2025-01-19 16:13:23,761 - INFO - NVEC: 1mo change of 5.30%
+2025-01-19 16:13:23,761 - INFO - Processing NVEC - 2024-11-19 17:03:08 UTC
+2025-01-19 16:13:23,768 - INFO - Retrieved article length: 1609 characters
+2025-01-19 16:13:23,861 - INFO - NVFY: 1h change of -4.73%
+2025-01-19 16:13:23,906 - INFO - NVNI: 1wk change of -42.28%
+2025-01-19 16:13:23,950 - INFO - NVFY: 1wk change of -46.94%
+2025-01-19 16:13:23,993 - INFO - NVNI: 1mo change of 118.06%
+2025-01-19 16:13:23,994 - INFO - Processing NVNI - 2024-12-26 14:15:00 UTC
+2025-01-19 16:13:24,035 - INFO - NVFY: 1mo change of -63.97%
+2025-01-19 16:13:24,036 - INFO - Processing NVFY - 2024-11-15 00:01:00 UTC
+2025-01-19 16:13:24,494 - INFO - Retrieved article length: 6887 characters
+2025-01-19 16:13:24,702 - INFO - NVEC: 1wk change of -5.99%
+2025-01-19 16:13:24,716 - INFO - Retrieved article length: 6401 characters
+2025-01-19 16:13:24,799 - INFO - NVNI: 1h change of -23.62%
+2025-01-19 16:13:24,813 - INFO - NVEC: 1mo change of 3.85%
+2025-01-19 16:13:24,813 - INFO - Processing NVEC - 2024-11-17 15:34:31 UTC
+2025-01-19 16:13:24,868 - INFO - Retrieved article length: 6414 characters
+2025-01-19 16:13:24,883 - INFO - NVNI: 1wk change of 532.56%
+2025-01-19 16:13:24,905 - INFO - Retrieved article length: 4063 characters
+2025-01-19 16:13:24,956 - INFO - NVNO: 1h change of -1.25%
+2025-01-19 16:13:24,977 - INFO - NVNI: 1mo change of 91.46%
+2025-01-19 16:13:24,977 - INFO - Processing NVNI - 2024-11-18 16:30:00 UTC
+2025-01-19 16:13:24,992 - INFO - NVFY: 1h change of -23.06%
+2025-01-19 16:13:25,039 - INFO - NVNO: 1wk change of -9.03%
+2025-01-19 16:13:25,076 - INFO - NVFY: 1wk change of -37.11%
+2025-01-19 16:13:25,129 - INFO - NVNO: 1mo change of -9.74%
+2025-01-19 16:13:25,129 - INFO - Processing NVNO - 2024-11-27 16:30:00 UTC
+2025-01-19 16:13:25,163 - INFO - NVFY: 1mo change of -66.67%
+2025-01-19 16:13:25,163 - INFO - Processing NVFY - 2024-10-24 16:43:00 UTC
+2025-01-19 16:13:25,684 - INFO - Retrieved article length: 3790 characters
+2025-01-19 16:13:25,685 - INFO - Retrieved article length: 2499 characters
+2025-01-19 16:13:25,786 - INFO - NVEC: 1h change of -2.23%
+2025-01-19 16:13:25,812 - INFO - NVNI: 1h change of -11.96%
+2025-01-19 16:13:25,889 - INFO - NVEC: 1wk change of -6.25%
+2025-01-19 16:13:25,895 - INFO - NVNI: 1wk change of -35.08%
+2025-01-19 16:13:25,907 - INFO - Retrieved article length: 6056 characters
+2025-01-19 16:13:25,976 - INFO - NVNI: 1mo change of 1283.87%
+2025-01-19 16:13:25,976 - INFO - Processing NVNI - 2024-11-16 00:30:00 UTC
+2025-01-19 16:13:25,993 - INFO - NVNO: 1h change of -5.63%
+2025-01-19 16:13:25,998 - INFO - NVEC: 1mo change of -1.16%
+2025-01-19 16:13:25,998 - INFO - Processing NVEC - 2024-11-08 16:13:00 UTC
+2025-01-19 16:13:26,012 - INFO - Retrieved article length: 3487 characters
+2025-01-19 16:13:26,075 - INFO - NVNO: 1wk change of -6.34%
+2025-01-19 16:13:26,101 - INFO - NVFY: 1h change of -16.22%
+2025-01-19 16:13:26,160 - INFO - NVNO: 1mo change of -8.76%
+2025-01-19 16:13:26,160 - INFO - Processing NVNO - 2024-11-20 16:30:00 UTC
+2025-01-19 16:13:26,186 - INFO - NVFY: 1wk change of -22.79%
+2025-01-19 16:13:26,273 - INFO - NVFY: 1mo change of -64.79%
+2025-01-19 16:13:26,422 - INFO - Processing NVOS - 2024-12-19 00:05:00 UTC
+2025-01-19 16:13:26,676 - INFO - Retrieved article length: 2585 characters
+2025-01-19 16:13:26,708 - INFO - Retrieved article length: 7622 characters
+2025-01-19 16:13:26,780 - INFO - NVNI: 1h change of -1.59%
+2025-01-19 16:13:26,809 - INFO - NVEC: 1h change of 1.23%
+2025-01-19 16:13:26,864 - INFO - NVNI: 1wk change of -28.76%
+2025-01-19 16:13:26,897 - INFO - Retrieved article length: 8365 characters
+2025-01-19 16:13:26,914 - INFO - NVEC: 1wk change of -2.51%
+2025-01-19 16:13:26,947 - INFO - NVNI: 1mo change of 1283.87%
+2025-01-19 16:13:26,947 - INFO - Processing NVNI - 2024-11-08 01:30:00 UTC
+2025-01-19 16:13:26,987 - INFO - NVNO: 1h change of -1.36%
+2025-01-19 16:13:27,021 - INFO - Processing NVEC - 2024-11-04 17:10:00 UTC
+2025-01-19 16:13:27,072 - INFO - NVNO: 1wk change of -14.68%
+2025-01-19 16:13:27,155 - INFO - NVNO: 1mo change of -17.06%
+2025-01-19 16:13:27,155 - INFO - Processing NVNO - 2024-11-19 16:15:00 UTC
+2025-01-19 16:13:27,448 - INFO - Retrieved article length: 19478 characters
+2025-01-19 16:13:27,536 - INFO - NVOS: 1h change of 5.92%
+2025-01-19 16:13:27,619 - INFO - NVOS: 1wk change of -10.34%
+2025-01-19 16:13:27,648 - INFO - Retrieved article length: 2016 characters
+2025-01-19 16:13:27,736 - INFO - NVOS: 1mo change of 102.56%
+2025-01-19 16:13:27,739 - INFO - NVNI: 1h change of 12.38%
+2025-01-19 16:13:27,826 - INFO - NVNI: 1wk change of 22.52%
+2025-01-19 16:13:27,843 - INFO - Retrieved article length: 7575 characters
+2025-01-19 16:13:27,871 - INFO - Retrieved article length: 5835 characters
+2025-01-19 16:13:27,894 - INFO - Processing NVRI - 2024-12-23 15:15:00 UTC
+2025-01-19 16:13:27,916 - INFO - NVNI: 1mo change of -36.50%
+2025-01-19 16:13:27,916 - INFO - Processing NVNI - 2024-11-06 16:30:00 UTC
+2025-01-19 16:13:28,042 - INFO - NVNO: 1wk change of -12.48%
+2025-01-19 16:13:28,053 - INFO - NVEC: 1wk change of 2.28%
+2025-01-19 16:13:28,124 - INFO - NVNO: 1mo change of -8.20%
+2025-01-19 16:13:28,124 - INFO - Processing NVNO - 2024-10-31 15:35:00 UTC
+2025-01-19 16:13:28,157 - INFO - NVEC: 1mo change of -3.41%
+2025-01-19 16:13:28,157 - INFO - Processing NVEC - 2024-10-27 15:05:30 UTC
+2025-01-19 16:13:28,652 - INFO - Retrieved article length: 3274 characters
+2025-01-19 16:13:28,701 - INFO - Retrieved article length: 3458 characters
+2025-01-19 16:13:28,738 - INFO - NVNI: 1h change of 36.16%
+2025-01-19 16:13:28,794 - INFO - NVRI: 1h change of 1.67%
+2025-01-19 16:13:28,820 - INFO - NVNI: 1wk change of 23.33%
+2025-01-19 16:13:28,908 - INFO - NVNI: 1mo change of -8.86%
+2025-01-19 16:13:28,925 - INFO - NVRI: 1wk change of 2.53%
+2025-01-19 16:13:28,981 - INFO - Retrieved article length: 6961 characters
+2025-01-19 16:13:28,997 - INFO - Retrieved article length: 3723 characters
+2025-01-19 16:13:29,079 - INFO - NVNO: 1h change of -2.77%
+2025-01-19 16:13:29,094 - INFO - NVRI: 1mo change of 28.66%
+2025-01-19 16:13:29,094 - INFO - Processing NVRI - 2024-11-28 14:40:27 UTC
+2025-01-19 16:13:29,097 - INFO - NVEC: 1h change of 2.00%
+2025-01-19 16:13:29,099 - INFO - Processing NVRO - 2025-01-15 20:23:00 UTC
+2025-01-19 16:13:29,161 - INFO - NVNO: 1wk change of 4.15%
+2025-01-19 16:13:29,203 - INFO - NVEC: 1wk change of -6.76%
+2025-01-19 16:13:29,243 - INFO - NVNO: 1mo change of -32.89%
+2025-01-19 16:13:29,243 - INFO - Processing NVNO - 2024-10-28 15:30:00 UTC
+2025-01-19 16:13:29,316 - INFO - Processing NVEC - 2024-10-25 19:36:00 UTC
+2025-01-19 16:13:29,761 - INFO - Retrieved article length: 5512 characters
+2025-01-19 16:13:29,838 - INFO - Retrieved article length: 3893 characters
+2025-01-19 16:13:29,852 - INFO - NVRO: 1h change of 18.78%
+2025-01-19 16:13:29,931 - INFO - NVRI: 1h change of 1.37%
+2025-01-19 16:13:29,937 - INFO - NVRO: 1wk change of 20.26%
+2025-01-19 16:13:29,986 - INFO - Retrieved article length: 6556 characters
+2025-01-19 16:13:30,015 - INFO - Retrieved article length: 5175 characters
+2025-01-19 16:13:30,023 - INFO - NVRO: 1mo change of 6.03%
+2025-01-19 16:13:30,023 - INFO - Processing NVRO - 2025-01-14 03:09:06 UTC
+2025-01-19 16:13:30,056 - INFO - NVRI: 1wk change of 12.99%
+2025-01-19 16:13:30,068 - INFO - NVNO: 1h change of -1.43%
+2025-01-19 16:13:30,114 - INFO - NVEC: 1h change of -3.59%
+2025-01-19 16:13:30,150 - INFO - NVNO: 1wk change of 3.00%
+2025-01-19 16:13:30,181 - INFO - NVRI: 1mo change of -22.61%
+2025-01-19 16:13:30,181 - INFO - Processing NVRI - 2024-11-27 00:15:00 UTC
+2025-01-19 16:13:30,231 - INFO - NVNO: 1mo change of -31.50%
+2025-01-19 16:13:30,259 - INFO - NVEC: 1wk change of -3.84%
+2025-01-19 16:13:30,370 - INFO - NVEC: 1mo change of 1.23%
+2025-01-19 16:13:30,405 - INFO - Processing NVST - 2025-01-16 15:29:00 UTC
+2025-01-19 16:13:30,550 - INFO - Processing NVTS - 2024-12-24 03:05:44 UTC
+2025-01-19 16:13:30,797 - INFO - Retrieved article length: 6926 characters
+2025-01-19 16:13:30,893 - INFO - NVRO: 1h change of 12.43%
+2025-01-19 16:13:30,977 - INFO - NVRO: 1wk change of 20.26%
+2025-01-19 16:13:31,028 - INFO - Retrieved article length: 2639 characters
+2025-01-19 16:13:31,065 - INFO - NVRO: 1mo change of 5.30%
+2025-01-19 16:13:31,065 - INFO - Processing NVRO - 2025-01-13 16:30:00 UTC
+2025-01-19 16:13:31,071 - INFO - Retrieved article length: 5432 characters
+2025-01-19 16:13:31,119 - INFO - NVRI: 1h change of -2.79%
+2025-01-19 16:13:31,159 - INFO - NVST: 1h change of 6.10%
+2025-01-19 16:13:31,194 - INFO - Retrieved article length: 7207 characters
+2025-01-19 16:13:31,240 - INFO - NVST: 1wk change of 1.07%
+2025-01-19 16:13:31,241 - INFO - NVRI: 1wk change of 12.99%
+2025-01-19 16:13:31,296 - INFO - NVTS: 1h change of 8.14%
+2025-01-19 16:13:31,322 - INFO - NVST: 1mo change of -2.32%
+2025-01-19 16:13:31,323 - INFO - Processing NVST - 2025-01-16 13:47:27 UTC
+2025-01-19 16:13:31,384 - INFO - NVRI: 1mo change of -22.14%
+2025-01-19 16:13:31,385 - INFO - Processing NVRI - 2024-11-26 16:00:00 UTC
+2025-01-19 16:13:31,388 - INFO - NVTS: 1wk change of 7.72%
+2025-01-19 16:13:31,482 - INFO - NVTS: 1mo change of 75.27%
+2025-01-19 16:13:31,482 - INFO - Processing NVTS - 2024-12-09 16:30:00 UTC
+2025-01-19 16:13:31,698 - INFO - Retrieved article length: 8756 characters
+2025-01-19 16:13:31,788 - INFO - NVRO: 1h change of -2.12%
+2025-01-19 16:13:31,876 - INFO - NVRO: 1wk change of 23.18%
+2025-01-19 16:13:31,961 - INFO - NVRO: 1mo change of 5.06%
+2025-01-19 16:13:31,962 - INFO - Processing NVRO - 2024-12-24 20:00:12 UTC
+2025-01-19 16:13:32,090 - INFO - Retrieved article length: 4421 characters
+2025-01-19 16:13:32,092 - INFO - Retrieved article length: 3918 characters
+2025-01-19 16:13:32,099 - INFO - NVST: 1h change of 6.10%
+2025-01-19 16:13:32,141 - INFO - Retrieved article length: 2311 characters
+2025-01-19 16:13:32,151 - INFO - NVST: 1wk change of 1.07%
+2025-01-19 16:13:32,180 - INFO - NVRI: 1h change of -2.79%
+2025-01-19 16:13:32,201 - INFO - NVST: 1mo change of -2.32%
+2025-01-19 16:13:32,202 - INFO - Processing NVST - 2025-01-15 00:10:00 UTC
+2025-01-19 16:13:32,307 - INFO - NVRI: 1wk change of 12.39%
+2025-01-19 16:13:32,334 - INFO - NVTS: 1wk change of 20.00%
+2025-01-19 16:13:32,434 - INFO - NVTS: 1mo change of 24.71%
+2025-01-19 16:13:32,434 - INFO - Processing NVTS - 2024-12-05 16:30:00 UTC
+2025-01-19 16:13:32,434 - INFO - NVRI: 1mo change of -24.05%
+2025-01-19 16:13:32,434 - INFO - Processing NVRI - 2024-11-01 13:51:14 UTC
+2025-01-19 16:13:32,687 - INFO - Retrieved article length: 4559 characters
+2025-01-19 16:13:32,775 - INFO - NVRO: 1h change of 9.37%
+2025-01-19 16:13:32,853 - INFO - Retrieved article length: 2862 characters
+2025-01-19 16:13:32,857 - INFO - NVRO: 1wk change of -10.60%
+2025-01-19 16:13:32,938 - INFO - NVRO: 1mo change of 7.78%
+2025-01-19 16:13:32,938 - INFO - Processing NVRO - 2024-12-19 15:37:36 UTC
+2025-01-19 16:13:32,940 - INFO - NVST: 1h change of 4.27%
+2025-01-19 16:13:33,029 - INFO - NVST: 1wk change of 1.07%
+2025-01-19 16:13:33,118 - INFO - NVST: 1mo change of -3.36%
+2025-01-19 16:13:33,118 - INFO - Processing NVST - 2025-01-09 00:05:00 UTC
+2025-01-19 16:13:33,362 - INFO - Retrieved article length: 1989 characters
+2025-01-19 16:13:33,449 - INFO - NVRI: 1h change of -28.48%
+2025-01-19 16:13:33,479 - INFO - Retrieved article length: 6342 characters
+2025-01-19 16:13:33,578 - INFO - NVRI: 1wk change of -28.86%
+2025-01-19 16:13:33,581 - INFO - NVTS: 1h change of 21.84%
+2025-01-19 16:13:33,667 - INFO - Retrieved article length: 1611 characters
+2025-01-19 16:13:33,676 - INFO - NVTS: 1wk change of 23.74%
+2025-01-19 16:13:33,705 - INFO - NVRI: 1mo change of -27.03%
+2025-01-19 16:13:33,710 - INFO - Processing NVRI - 2024-11-01 10:08:58 UTC
+2025-01-19 16:13:33,754 - INFO - NVRO: 1h change of -6.88%
+2025-01-19 16:13:33,773 - INFO - NVTS: 1mo change of 38.87%
+2025-01-19 16:13:33,773 - INFO - Processing NVTS - 2024-12-04 01:03:00 UTC
+2025-01-19 16:13:33,833 - INFO - Retrieved article length: 10144 characters
+2025-01-19 16:13:33,839 - INFO - NVRO: 1wk change of -14.48%
+2025-01-19 16:13:33,926 - INFO - NVST: 1h change of -5.08%
+2025-01-19 16:13:33,933 - INFO - NVRO: 1mo change of 12.29%
+2025-01-19 16:13:33,934 - INFO - Processing NVRO - 2024-12-18 17:31:46 UTC
+2025-01-19 16:13:34,015 - INFO - NVST: 1wk change of 3.77%
+2025-01-19 16:13:34,101 - INFO - NVST: 1mo change of -1.25%
+2025-01-19 16:13:34,101 - INFO - Processing NVST - 2025-01-08 00:10:00 UTC
+2025-01-19 16:13:34,451 - INFO - Retrieved article length: 3697 characters
+2025-01-19 16:13:34,454 - INFO - Retrieved article length: 6105 characters
+2025-01-19 16:13:34,463 - INFO - NVRI: 1h change of -28.48%
+2025-01-19 16:13:34,469 - INFO - NVRI: 1wk change of -28.86%
+2025-01-19 16:13:34,473 - INFO - NVRI: 1mo change of -27.03%
+2025-01-19 16:13:34,474 - INFO - Processing NVRI - 2024-10-31 14:00:00 UTC
+2025-01-19 16:13:34,556 - INFO - NVTS: 1h change of 32.06%
+2025-01-19 16:13:34,650 - INFO - NVTS: 1wk change of 23.74%
+2025-01-19 16:13:34,673 - INFO - Retrieved article length: 521 characters
+2025-01-19 16:13:34,742 - INFO - NVTS: 1mo change of 46.44%
+2025-01-19 16:13:34,743 - INFO - Processing NVTS - 2024-11-26 16:39:00 UTC
+2025-01-19 16:13:34,758 - INFO - NVRO: 1h change of -13.56%
+2025-01-19 16:13:34,840 - INFO - NVRO: 1wk change of -14.48%
+2025-01-19 16:13:34,919 - INFO - Retrieved article length: 2383 characters
+2025-01-19 16:13:34,922 - INFO - NVRO: 1mo change of 2.70%
+2025-01-19 16:13:34,922 - INFO - Processing NVRO - 2024-12-18 00:30:00 UTC
+2025-01-19 16:13:35,013 - INFO - NVST: 1h change of -2.44%
+2025-01-19 16:13:35,097 - INFO - NVST: 1wk change of 3.77%
+2025-01-19 16:13:35,181 - INFO - NVST: 1mo change of -3.60%
+2025-01-19 16:13:35,181 - INFO - Processing NVST - 2025-01-02 17:40:16 UTC
+2025-01-19 16:13:35,529 - INFO - Retrieved article length: 2673 characters
+2025-01-19 16:13:35,575 - INFO - Retrieved article length: 3338 characters
+2025-01-19 16:13:35,583 - INFO - NVRO: 1h change of -13.56%
+2025-01-19 16:13:35,588 - INFO - NVRO: 1wk change of -14.48%
+2025-01-19 16:13:35,629 - INFO - NVTS: 1h change of -11.33%
+2025-01-19 16:13:35,642 - INFO - NVRO: 1mo change of 2.70%
+2025-01-19 16:13:35,642 - INFO - Processing NVRO - 2024-12-17 16:03:00 UTC
+2025-01-19 16:13:35,724 - INFO - NVTS: 1wk change of 111.80%
+2025-01-19 16:13:35,802 - INFO - Retrieved article length: 49124 characters
+2025-01-19 16:13:35,820 - INFO - NVTS: 1mo change of 50.00%
+2025-01-19 16:13:35,820 - INFO - Processing NVTS - 2024-11-22 16:06:49 UTC
+2025-01-19 16:13:35,891 - INFO - NVRI: 1h change of -28.37%
+2025-01-19 16:13:35,939 - INFO - Retrieved article length: 2730 characters
+2025-01-19 16:13:36,029 - INFO - NVST: 1h change of -1.65%
+2025-01-19 16:13:36,039 - INFO - NVRI: 1wk change of -28.57%
+2025-01-19 16:13:36,117 - INFO - NVST: 1wk change of -1.17%
+2025-01-19 16:13:36,158 - INFO - NVRI: 1mo change of -26.47%
+2025-01-19 16:13:36,158 - INFO - Processing NVRI - 2024-10-24 15:00:00 UTC
+2025-01-19 16:13:36,203 - INFO - NVST: 1mo change of -11.04%
+2025-01-19 16:13:36,203 - INFO - Processing NVST - 2025-01-01 19:40:15 UTC
+2025-01-19 16:13:36,321 - INFO - Retrieved article length: 6983 characters
+2025-01-19 16:13:36,429 - INFO - NVRO: 1h change of -9.44%
+2025-01-19 16:13:36,524 - INFO - NVRO: 1wk change of -6.90%
+2025-01-19 16:13:36,527 - INFO - Retrieved article length: 7274 characters
+2025-01-19 16:13:36,613 - INFO - NVRO: 1mo change of -9.68%
+2025-01-19 16:13:36,630 - INFO - NVTS: 1h change of 30.98%
+2025-01-19 16:13:36,723 - INFO - Processing NVVE - 2025-01-14 16:30:00 UTC
+2025-01-19 16:13:36,729 - INFO - NVTS: 1wk change of 46.28%
+2025-01-19 16:13:36,824 - INFO - NVTS: 1mo change of 60.94%
+2025-01-19 16:13:36,824 - INFO - Processing NVTS - 2024-11-22 00:03:00 UTC
+2025-01-19 16:13:36,871 - INFO - Retrieved article length: 2695 characters
+2025-01-19 16:13:36,888 - INFO - Retrieved article length: 2691 characters
+2025-01-19 16:13:36,969 - INFO - NVRI: 1h change of 1.01%
+2025-01-19 16:13:36,972 - INFO - NVST: 1h change of 1.54%
+2025-01-19 16:13:37,057 - INFO - NVST: 1wk change of -1.17%
+2025-01-19 16:13:37,095 - INFO - NVRI: 1wk change of -30.96%
+2025-01-19 16:13:37,140 - INFO - NVST: 1mo change of -11.20%
+2025-01-19 16:13:37,140 - INFO - Processing NVST - 2024-12-04 15:53:02 UTC
+2025-01-19 16:13:37,204 - INFO - NVRI: 1mo change of -31.81%
+2025-01-19 16:13:37,358 - INFO - Processing NWBI - 2025-01-13 16:00:00 UTC
+2025-01-19 16:13:37,373 - INFO - Retrieved article length: 3378 characters
+2025-01-19 16:13:37,463 - INFO - NVVE: 1h change of -4.26%
+2025-01-19 16:13:37,547 - INFO - NVVE: 1wk change of -21.43%
+2025-01-19 16:13:37,570 - INFO - Retrieved article length: 4195 characters
+2025-01-19 16:13:37,579 - INFO - NVTS: 1h change of 30.98%
+2025-01-19 16:13:37,584 - INFO - NVTS: 1wk change of 46.28%
+2025-01-19 16:13:37,589 - INFO - NVTS: 1mo change of 60.94%
+2025-01-19 16:13:37,590 - INFO - Processing NVTS - 2024-11-15 00:03:00 UTC
+2025-01-19 16:13:37,638 - INFO - NVVE: 1mo change of -16.57%
+2025-01-19 16:13:37,638 - INFO - Processing NVVE - 2025-01-11 04:31:00 UTC
+2025-01-19 16:13:37,854 - INFO - Retrieved article length: 476 characters
+2025-01-19 16:13:37,945 - INFO - NVST: 1h change of -10.27%
+2025-01-19 16:13:38,032 - INFO - NVST: 1wk change of -12.22%
+2025-01-19 16:13:38,116 - INFO - NVST: 1mo change of 1.35%
+2025-01-19 16:13:38,142 - INFO - Retrieved article length: 4185 characters
+2025-01-19 16:13:38,236 - INFO - NWBI: 1h change of 3.99%
+2025-01-19 16:13:38,277 - INFO - Processing NWGL - 2024-11-30 14:29:30 UTC
+2025-01-19 16:13:38,326 - INFO - Retrieved article length: 4246 characters
+2025-01-19 16:13:38,340 - INFO - Retrieved article length: 2257 characters
+2025-01-19 16:13:38,418 - INFO - NVVE: 1h change of -4.90%
+2025-01-19 16:13:38,443 - INFO - NVTS: 1h change of -5.31%
+2025-01-19 16:13:38,501 - INFO - NWBI: 1mo change of -7.78%
+2025-01-19 16:13:38,501 - INFO - Processing NWBI - 2025-01-10 23:00:00 UTC
+2025-01-19 16:13:38,502 - INFO - NVVE: 1wk change of -6.01%
+2025-01-19 16:13:38,552 - INFO - NVTS: 1wk change of 2.54%
+2025-01-19 16:13:38,587 - INFO - NVVE: 1mo change of -16.57%
+2025-01-19 16:13:38,587 - INFO - Processing NVVE - 2024-12-28 03:32:00 UTC
+2025-01-19 16:13:38,651 - INFO - NVTS: 1mo change of 10.20%
+2025-01-19 16:13:38,819 - INFO - Processing NWL - 2025-01-18 00:00:00 UTC
+2025-01-19 16:13:39,115 - INFO - Retrieved article length: 1360 characters
+2025-01-19 16:13:39,281 - INFO - NWGL: 1wk change of -5.61%
+2025-01-19 16:13:39,299 - INFO - Retrieved article length: 2384 characters
+2025-01-19 16:13:39,331 - INFO - Retrieved article length: 4885 characters
+2025-01-19 16:13:39,362 - INFO - NWGL: 1mo change of -18.52%
+2025-01-19 16:13:39,385 - INFO - NWBI: 1h change of -1.80%
+2025-01-19 16:13:39,504 - INFO - NVVE: 1wk change of 34.04%
+2025-01-19 16:13:39,514 - INFO - Processing NWS - 2025-01-18 01:32:00 UTC
+2025-01-19 16:13:39,534 - INFO - Retrieved article length: 1580 characters
+2025-01-19 16:13:39,594 - INFO - NVVE: 1mo change of -18.85%
+2025-01-19 16:13:39,595 - INFO - Processing NVVE - 2024-12-24 00:30:00 UTC
+2025-01-19 16:13:39,600 - INFO - NWBI: 1mo change of -8.74%
+2025-01-19 16:13:39,601 - INFO - Processing NWBI - 2024-12-31 12:47:00 UTC
+2025-01-19 16:13:39,638 - INFO - NWL: 1h change of 1.35%
+2025-01-19 16:13:39,785 - INFO - NWL: 1wk change of 2.85%
+2025-01-19 16:13:39,931 - INFO - NWL: 1mo change of -6.64%
+2025-01-19 16:13:39,932 - INFO - Processing NWL - 2025-01-16 15:47:13 UTC
+2025-01-19 16:13:40,272 - INFO - Retrieved article length: 4370 characters
+2025-01-19 16:13:40,322 - INFO - Retrieved article length: 3188 characters
+2025-01-19 16:13:40,356 - INFO - NVVE: 1h change of -1.65%
+2025-01-19 16:13:40,381 - INFO - Retrieved article length: 155 characters
+2025-01-19 16:13:40,525 - INFO - NWBI: 1wk change of -3.15%
+2025-01-19 16:13:40,526 - INFO - NVVE: 1mo change of -9.45%
+2025-01-19 16:13:40,526 - INFO - Processing NVVE - 2024-11-20 21:06:37 UTC
+2025-01-19 16:13:40,640 - INFO - NWBI: 1mo change of -11.32%
+2025-01-19 16:13:40,641 - INFO - Processing NWBI - 2024-12-31 10:51:00 UTC
+2025-01-19 16:13:40,646 - INFO - NWS: 1mo change of -3.03%
+2025-01-19 16:13:40,647 - INFO - Processing NWS - 2025-01-17 00:58:00 UTC
+2025-01-19 16:13:40,702 - INFO - Retrieved article length: 521 characters
+2025-01-19 16:13:40,810 - INFO - NWL: 1h change of 3.74%
+2025-01-19 16:13:41,110 - INFO - NWL: 1mo change of -11.62%
+2025-01-19 16:13:41,111 - INFO - Processing NWL - 2025-01-09 19:22:00 UTC
+2025-01-19 16:13:41,256 - INFO - Retrieved article length: 459 characters
+2025-01-19 16:13:41,346 - INFO - NVVE: 1h change of -3.01%
+2025-01-19 16:13:41,346 - INFO - Retrieved article length: 2741 characters
+2025-01-19 16:13:41,359 - INFO - NWBI: 1wk change of -3.15%
+2025-01-19 16:13:41,389 - INFO - Retrieved article length: 174 characters
+2025-01-19 16:13:41,412 - INFO - NWBI: 1mo change of -11.32%
+2025-01-19 16:13:41,412 - INFO - Processing NWBI - 2024-12-26 14:08:26 UTC
+2025-01-19 16:13:41,427 - INFO - NVVE: 1wk change of 4.29%
+2025-01-19 16:13:41,512 - INFO - NVVE: 1mo change of -24.94%
+2025-01-19 16:13:41,513 - INFO - Processing NVVE - 2024-11-13 15:00:00 UTC
+2025-01-19 16:13:41,668 - INFO - NWS: 1mo change of -3.28%
+2025-01-19 16:13:41,668 - INFO - Processing NWS - 2025-01-16 19:00:00 UTC
+2025-01-19 16:13:41,801 - INFO - Retrieved article length: 4723 characters
+2025-01-19 16:13:41,905 - INFO - NWL: 1h change of -3.98%
+2025-01-19 16:13:42,077 - INFO - NWL: 1wk change of 1.20%
+2025-01-19 16:13:42,107 - INFO - Retrieved article length: 6823 characters
+2025-01-19 16:13:42,178 - INFO - Retrieved article length: 3923 characters
+2025-01-19 16:13:42,217 - INFO - NWL: 1mo change of 1.91%
+2025-01-19 16:13:42,217 - INFO - Processing NWL - 2024-12-28 17:36:33 UTC
+2025-01-19 16:13:42,263 - INFO - NVVE: 1h change of -1.88%
+2025-01-19 16:13:42,304 - INFO - NWBI: 1wk change of -9.00%
+2025-01-19 16:13:42,327 - INFO - Retrieved article length: 4954 characters
+2025-01-19 16:13:42,346 - INFO - NVVE: 1wk change of -1.91%
+2025-01-19 16:13:42,417 - INFO - NWBI: 1mo change of -10.05%
+2025-01-19 16:13:42,417 - INFO - Processing NWBI - 2024-12-23 20:00:11 UTC
+2025-01-19 16:13:42,428 - INFO - NVVE: 1mo change of -25.48%
+2025-01-19 16:13:42,429 - INFO - Processing NVVE - 2024-11-13 10:24:10 UTC
+2025-01-19 16:13:42,650 - INFO - NWS: 1mo change of -4.55%
+2025-01-19 16:13:42,650 - INFO - Processing NWS - 2025-01-15 14:00:00 UTC
+2025-01-19 16:13:42,967 - INFO - Retrieved article length: 2467 characters
+2025-01-19 16:13:43,101 - INFO - Retrieved article length: 4161 characters
+2025-01-19 16:13:43,108 - INFO - Retrieved article length: 4678 characters
+2025-01-19 16:13:43,109 - INFO - NVVE: 1h change of -1.88%
+2025-01-19 16:13:43,114 - INFO - NVVE: 1wk change of -1.91%
+2025-01-19 16:13:43,119 - INFO - NVVE: 1mo change of -25.48%
+2025-01-19 16:13:43,120 - INFO - Processing NVVE - 2024-11-13 00:30:00 UTC
+2025-01-19 16:13:43,303 - INFO - NWBI: 1wk change of -7.96%
+2025-01-19 16:13:43,314 - INFO - Retrieved article length: 5399 characters
+2025-01-19 16:13:43,342 - INFO - NWL: 1mo change of 5.97%
+2025-01-19 16:13:43,342 - INFO - Processing NWL - 2024-12-27 16:28:00 UTC
+2025-01-19 16:13:43,399 - INFO - NWS: 1h change of 1.54%
+2025-01-19 16:13:43,432 - INFO - NWBI: 1mo change of -9.92%
+2025-01-19 16:13:43,433 - INFO - Processing NWBI - 2024-12-23 08:53:00 UTC
+2025-01-19 16:13:43,594 - INFO - NWS: 1mo change of -5.41%
+2025-01-19 16:13:43,594 - INFO - Processing NWS - 2025-01-14 18:29:00 UTC
+2025-01-19 16:13:43,994 - INFO - Retrieved article length: 5436 characters
+2025-01-19 16:13:44,000 - INFO - Retrieved article length: 19877 characters
+2025-01-19 16:13:44,009 - INFO - NVVE: 1h change of -1.88%
+2025-01-19 16:13:44,014 - INFO - NVVE: 1wk change of -1.91%
+2025-01-19 16:13:44,019 - INFO - NVVE: 1mo change of -25.48%
+2025-01-19 16:13:44,172 - INFO - Processing NWSA - 2025-01-18 01:32:00 UTC
+2025-01-19 16:13:44,174 - INFO - Retrieved article length: 2807 characters
+2025-01-19 16:13:44,187 - INFO - NWBI: 1wk change of -7.96%
+2025-01-19 16:13:44,226 - INFO - NWL: 1wk change of -4.86%
+2025-01-19 16:13:44,239 - INFO - NWBI: 1mo change of -9.92%
+2025-01-19 16:13:44,240 - INFO - Processing NWBI - 2024-12-19 17:00:00 UTC
+2025-01-19 16:13:44,334 - INFO - Retrieved article length: 683 characters
+2025-01-19 16:13:44,386 - INFO - NWL: 1mo change of 11.78%
+2025-01-19 16:13:44,386 - INFO - Processing NWL - 2024-12-26 17:12:00 UTC
+2025-01-19 16:13:44,418 - INFO - NWS: 1h change of 1.87%
+2025-01-19 16:13:44,606 - INFO - NWS: 1mo change of -5.56%
+2025-01-19 16:13:44,606 - INFO - Processing NWS - 2025-01-14 17:30:00 UTC
+2025-01-19 16:13:44,850 - INFO - Retrieved article length: 155 characters
+2025-01-19 16:13:44,921 - INFO - Retrieved article length: 1425 characters
+2025-01-19 16:13:45,014 - INFO - NWBI: 1h change of -6.93%
+2025-01-19 16:13:45,107 - INFO - Retrieved article length: 167 characters
+2025-01-19 16:13:45,128 - INFO - NWBI: 1wk change of -7.15%
+2025-01-19 16:13:45,129 - INFO - NWSA: 1mo change of -4.26%
+2025-01-19 16:13:45,129 - INFO - Processing NWSA - 2025-01-17 00:58:00 UTC
+2025-01-19 16:13:45,210 - INFO - NWL: 1h change of 2.08%
+2025-01-19 16:13:45,242 - INFO - NWBI: 1mo change of -10.17%
+2025-01-19 16:13:45,349 - INFO - NWL: 1wk change of -7.84%
+2025-01-19 16:13:45,376 - INFO - Retrieved article length: 5093 characters
+2025-01-19 16:13:45,378 - INFO - Processing NWTN - 2025-01-15 04:00:00 UTC
+2025-01-19 16:13:45,384 - INFO - NWS: 1h change of 1.87%
+2025-01-19 16:13:45,491 - INFO - NWL: 1mo change of 14.03%
+2025-01-19 16:13:45,491 - INFO - Processing NWL - 2024-12-23 17:00:06 UTC
+2025-01-19 16:13:45,492 - INFO - NWS: 1mo change of -5.56%
+2025-01-19 16:13:45,493 - INFO - Processing NWS - 2025-01-14 14:00:00 UTC
+2025-01-19 16:13:45,826 - INFO - Retrieved article length: 174 characters
+2025-01-19 16:13:45,924 - INFO - NWSA: 1h change of -1.40%
+2025-01-19 16:13:46,097 - INFO - Retrieved article length: 4271 characters
+2025-01-19 16:13:46,106 - INFO - NWSA: 1mo change of -4.12%
+2025-01-19 16:13:46,106 - INFO - Processing NWSA - 2025-01-16 19:00:00 UTC
+2025-01-19 16:13:46,181 - INFO - NWTN: 1h change of -16.36%
+2025-01-19 16:13:46,235 - INFO - Retrieved article length: 4709 characters
+2025-01-19 16:13:46,244 - INFO - NWS: 1h change of 1.87%
+2025-01-19 16:13:46,263 - INFO - NWTN: 1wk change of -27.17%
+2025-01-19 16:13:46,339 - INFO - Retrieved article length: 2921 characters
+2025-01-19 16:13:46,345 - INFO - NWTN: 1mo change of -40.18%
+2025-01-19 16:13:46,345 - INFO - Processing NWTN - 2024-11-19 00:10:00 UTC
+2025-01-19 16:13:46,345 - INFO - NWS: 1mo change of -5.56%
+2025-01-19 16:13:46,345 - INFO - Processing NWS - 2025-01-11 01:31:00 UTC
+2025-01-19 16:13:46,442 - INFO - NWL: 1h change of 1.35%
+2025-01-19 16:13:46,589 - INFO - NWL: 1wk change of -9.54%
+2025-01-19 16:13:46,672 - INFO - Retrieved article length: 4954 characters
+2025-01-19 16:13:46,729 - INFO - NWL: 1mo change of 14.68%
+2025-01-19 16:13:46,729 - INFO - Processing NWL - 2024-12-20 17:41:39 UTC
+2025-01-19 16:13:46,962 - INFO - NWSA: 1mo change of -5.35%
+2025-01-19 16:13:46,962 - INFO - Processing NWSA - 2025-01-15 14:00:00 UTC
+2025-01-19 16:13:47,115 - INFO - Retrieved article length: 403 characters
+2025-01-19 16:13:47,160 - INFO - Retrieved article length: 6024 characters
+2025-01-19 16:13:47,243 - INFO - NWTN: 1h change of -1.64%
+2025-01-19 16:13:47,326 - INFO - NWTN: 1wk change of 5.08%
+2025-01-19 16:13:47,375 - INFO - Retrieved article length: 7026 characters
+2025-01-19 16:13:47,390 - INFO - NWS: 1mo change of -6.09%
+2025-01-19 16:13:47,408 - INFO - NWTN: 1mo change of 43.66%
+2025-01-19 16:13:47,475 - INFO - NWL: 1h change of -5.38%
+2025-01-19 16:13:47,557 - INFO - Processing NXGL - 2025-01-02 18:13:00 UTC
+2025-01-19 16:13:47,583 - INFO - Processing NXL - 2025-01-14 16:30:00 UTC
+2025-01-19 16:13:47,612 - INFO - NWL: 1wk change of -11.61%
+2025-01-19 16:13:47,620 - INFO - Retrieved article length: 5399 characters
+2025-01-19 16:13:47,711 - INFO - NWSA: 1h change of 1.72%
+2025-01-19 16:13:47,742 - INFO - NWL: 1mo change of 15.85%
+2025-01-19 16:13:47,871 - INFO - Processing NXPL - 2024-12-17 16:03:00 UTC
+2025-01-19 16:13:47,904 - INFO - NWSA: 1mo change of -5.64%
+2025-01-19 16:13:47,905 - INFO - Processing NWSA - 2025-01-14 18:29:00 UTC
+2025-01-19 16:13:48,359 - INFO - Retrieved article length: 10364 characters
+2025-01-19 16:13:48,400 - INFO - Retrieved article length: 474 characters
+2025-01-19 16:13:48,446 - INFO - NXL: 1h change of 16.60%
+2025-01-19 16:13:48,484 - INFO - NXGL: 1h change of -16.99%
+2025-01-19 16:13:48,564 - INFO - NXGL: 1wk change of -27.25%
+2025-01-19 16:13:48,586 - INFO - Retrieved article length: 4662 characters
+2025-01-19 16:13:48,605 - INFO - Retrieved article length: 683 characters
+2025-01-19 16:13:48,609 - INFO - NXL: 1mo change of -20.60%
+2025-01-19 16:13:48,609 - INFO - Processing NXL - 2024-12-23 18:00:00 UTC
+2025-01-19 16:13:48,647 - INFO - NXGL: 1mo change of 10.06%
+2025-01-19 16:13:48,647 - INFO - Processing NXGL - 2025-01-02 17:00:00 UTC
+2025-01-19 16:13:48,696 - INFO - NXPL: 1h change of 35.74%
+2025-01-19 16:13:48,795 - INFO - NXPL: 1wk change of 31.11%
+2025-01-19 16:13:48,897 - INFO - NXPL: 1mo change of -3.48%
+2025-01-19 16:13:48,897 - INFO - Processing NXPL - 2024-12-11 16:03:00 UTC
+2025-01-19 16:13:48,914 - INFO - NWSA: 1mo change of -5.61%
+2025-01-19 16:13:48,914 - INFO - Processing NWSA - 2025-01-14 17:30:00 UTC
+2025-01-19 16:13:49,453 - INFO - Retrieved article length: 4823 characters
+2025-01-19 16:13:49,461 - INFO - NXGL: 1h change of -16.99%
+2025-01-19 16:13:49,465 - INFO - Retrieved article length: 6652 characters
+2025-01-19 16:13:49,467 - INFO - NXGL: 1wk change of -27.25%
+2025-01-19 16:13:49,519 - INFO - NXGL: 1mo change of 10.06%
+2025-01-19 16:13:49,519 - INFO - Processing NXGL - 2024-12-06 16:30:00 UTC
+2025-01-19 16:13:49,555 - INFO - NXL: 1h change of 10.49%
+2025-01-19 16:13:49,626 - INFO - Retrieved article length: 5093 characters
+2025-01-19 16:13:49,635 - INFO - NWSA: 1h change of 1.96%
+2025-01-19 16:13:49,638 - INFO - NXL: 1wk change of -30.30%
+2025-01-19 16:13:49,721 - INFO - NXL: 1mo change of -18.77%
+2025-01-19 16:13:49,721 - INFO - Processing NXL - 2024-12-20 22:14:43 UTC
+2025-01-19 16:13:49,745 - INFO - NWSA: 1mo change of -5.61%
+2025-01-19 16:13:49,745 - INFO - Processing NWSA - 2025-01-14 14:00:00 UTC
+2025-01-19 16:13:49,764 - INFO - Retrieved article length: 4598 characters
+2025-01-19 16:13:49,865 - INFO - NXPL: 1h change of 15.05%
+2025-01-19 16:13:49,975 - INFO - NXPL: 1wk change of 46.34%
+2025-01-19 16:13:50,077 - INFO - NXPL: 1mo change of -5.88%
+2025-01-19 16:13:50,078 - INFO - Processing NXPL - 2024-12-10 17:42:50 UTC
+2025-01-19 16:13:50,175 - INFO - Retrieved article length: 2234 characters
+2025-01-19 16:13:50,265 - INFO - NXGL: 1h change of -5.16%
+2025-01-19 16:13:50,320 - INFO - Retrieved article length: 4709 characters
+2025-01-19 16:13:50,328 - INFO - NWSA: 1h change of 1.96%
+2025-01-19 16:13:50,348 - INFO - NXGL: 1wk change of 45.82%
+2025-01-19 16:13:50,428 - INFO - NXGL: 1mo change of 23.38%
+2025-01-19 16:13:50,428 - INFO - Processing NXGL - 2024-11-21 17:00:00 UTC
+2025-01-19 16:13:50,430 - INFO - NWSA: 1mo change of -5.61%
+2025-01-19 16:13:50,431 - INFO - Processing NWSA - 2025-01-11 01:31:00 UTC
+2025-01-19 16:13:50,528 - INFO - Retrieved article length: 506 characters
+2025-01-19 16:13:50,622 - INFO - NXL: 1h change of -19.35%
+2025-01-19 16:13:50,713 - INFO - NXL: 1wk change of -25.88%
+2025-01-19 16:13:50,796 - INFO - NXL: 1mo change of -25.12%
+2025-01-19 16:13:50,796 - INFO - Processing NXL - 2024-11-26 18:00:00 UTC
+2025-01-19 16:13:50,804 - INFO - Retrieved article length: 1068 characters
+2025-01-19 16:13:50,904 - INFO - NXPL: 1h change of 50.60%
+2025-01-19 16:13:51,003 - INFO - NXPL: 1wk change of 40.24%
+2025-01-19 16:13:51,099 - INFO - NXPL: 1mo change of -3.39%
+2025-01-19 16:13:51,099 - INFO - Processing NXPL - 2024-12-10 16:00:00 UTC
+2025-01-19 16:13:51,112 - INFO - Retrieved article length: 403 characters
+2025-01-19 16:13:51,169 - INFO - Retrieved article length: 1692 characters
+2025-01-19 16:13:51,197 - INFO - NWSA: 1h change of -1.03%
+2025-01-19 16:13:51,256 - INFO - NXGL: 1h change of 8.77%
+2025-01-19 16:13:51,375 - INFO - NXGL: 1wk change of -9.14%
+2025-01-19 16:13:51,378 - INFO - NWSA: 1mo change of -6.64%
+2025-01-19 16:13:51,457 - INFO - NXGL: 1mo change of 60.14%
+2025-01-19 16:13:51,457 - INFO - Processing NXGL - 2024-11-16 17:14:57 UTC
+2025-01-19 16:13:51,489 - INFO - Retrieved article length: 6286 characters
+2025-01-19 16:13:51,536 - INFO - Processing NXT - 2025-01-17 23:29:00 UTC
+2025-01-19 16:13:51,581 - INFO - NXL: 1h change of 11.74%
+2025-01-19 16:13:51,670 - INFO - NXL: 1wk change of 7.20%
+2025-01-19 16:13:51,767 - INFO - NXL: 1mo change of 57.54%
+2025-01-19 16:13:51,768 - INFO - Processing NXL - 2024-11-11 16:00:00 UTC
+2025-01-19 16:13:51,959 - INFO - Retrieved article length: 6996 characters
+2025-01-19 16:13:51,969 - INFO - NXPL: 1h change of 50.60%
+2025-01-19 16:13:51,974 - INFO - NXPL: 1wk change of 40.24%
+2025-01-19 16:13:51,980 - INFO - NXPL: 1mo change of -3.39%
+2025-01-19 16:13:51,980 - INFO - Processing NXPL - 2024-12-09 17:18:00 UTC
+2025-01-19 16:13:52,269 - INFO - Retrieved article length: 1935 characters
+2025-01-19 16:13:52,345 - INFO - Retrieved article length: 345 characters
+2025-01-19 16:13:52,353 - INFO - NXGL: 1h change of -1.29%
+2025-01-19 16:13:52,433 - INFO - NXGL: 1wk change of 17.63%
+2025-01-19 16:13:52,514 - INFO - NXGL: 1mo change of 55.59%
+2025-01-19 16:13:52,515 - INFO - Processing NXGL - 2024-11-14 00:40:00 UTC
+2025-01-19 16:13:52,540 - INFO - Retrieved article length: 8421 characters
+2025-01-19 16:13:52,599 - INFO - NXT: 1mo change of 24.58%
+2025-01-19 16:13:52,599 - INFO - Processing NXT - 2025-01-16 01:45:19 UTC
+2025-01-19 16:13:52,625 - INFO - NXL: 1h change of 21.61%
+2025-01-19 16:13:52,710 - INFO - NXL: 1wk change of 20.25%
+2025-01-19 16:13:52,794 - INFO - NXL: 1mo change of 465.71%
+2025-01-19 16:13:52,799 - INFO - Processing NXL - 2024-11-10 16:32:55 UTC
+2025-01-19 16:13:52,932 - INFO - Retrieved article length: 3528 characters
+2025-01-19 16:13:53,039 - INFO - NXPL: 1h change of 18.67%
+2025-01-19 16:13:53,143 - INFO - NXPL: 1wk change of 62.03%
+2025-01-19 16:13:53,244 - INFO - NXPL: 1mo change of 6.90%
+2025-01-19 16:13:53,244 - INFO - Processing NXPL - 2024-11-19 13:39:40 UTC
+2025-01-19 16:13:53,452 - INFO - Retrieved article length: 3427 characters
+2025-01-19 16:13:53,471 - INFO - Retrieved article length: 4930 characters
+2025-01-19 16:13:53,477 - INFO - Retrieved article length: 16584 characters
+2025-01-19 16:13:53,551 - INFO - NXT: 1h change of 4.30%
+2025-01-19 16:13:53,560 - INFO - NXL: 1h change of -6.80%
+2025-01-19 16:13:53,560 - INFO - NXGL: 1h change of -5.26%
+2025-01-19 16:13:53,635 - INFO - NXT: 1wk change of 8.55%
+2025-01-19 16:13:53,642 - INFO - NXGL: 1wk change of 12.73%
+2025-01-19 16:13:53,642 - INFO - NXL: 1wk change of 55.82%
+2025-01-19 16:13:53,723 - INFO - NXT: 1mo change of 25.50%
+2025-01-19 16:13:53,724 - INFO - Processing NXT - 2025-01-15 17:05:00 UTC
+2025-01-19 16:13:53,725 - INFO - NXL: 1mo change of 465.71%
+2025-01-19 16:13:53,726 - INFO - Processing NXL - 2024-11-01 21:00:00 UTC
+2025-01-19 16:13:53,726 - INFO - NXGL: 1mo change of 48.42%
+2025-01-19 16:13:53,726 - INFO - Processing NXGL - 2024-11-12 01:35:00 UTC
+2025-01-19 16:13:54,065 - INFO - Retrieved article length: 1647 characters
+2025-01-19 16:13:54,170 - INFO - NXPL: 1h change of -1.17%
+2025-01-19 16:13:54,273 - INFO - NXPL: 1wk change of -22.73%
+2025-01-19 16:13:54,368 - INFO - NXPL: 1mo change of -3.36%
+2025-01-19 16:13:54,369 - INFO - Processing NXPL - 2024-11-18 16:00:00 UTC
+2025-01-19 16:13:54,499 - INFO - Retrieved article length: 4958 characters
+2025-01-19 16:13:54,525 - INFO - Retrieved article length: 4514 characters
+2025-01-19 16:13:54,571 - INFO - Retrieved article length: 3887 characters
+2025-01-19 16:13:54,588 - INFO - NXGL: 1h change of 2.51%
+2025-01-19 16:13:54,614 - INFO - NXT: 1h change of 16.28%
+2025-01-19 16:13:54,660 - INFO - NXL: 1h change of 31.04%
+2025-01-19 16:13:54,668 - INFO - NXGL: 1wk change of 11.04%
+2025-01-19 16:13:54,700 - INFO - NXT: 1wk change of 8.55%
+2025-01-19 16:13:54,743 - INFO - NXL: 1wk change of 112.29%
+2025-01-19 16:13:54,751 - INFO - NXGL: 1mo change of 102.05%
+2025-01-19 16:13:54,751 - INFO - Processing NXGL - 2024-11-11 17:00:00 UTC
+2025-01-19 16:13:54,782 - INFO - NXT: 1mo change of 20.64%
+2025-01-19 16:13:54,783 - INFO - Processing NXT - 2025-01-14 21:09:29 UTC
+2025-01-19 16:13:54,830 - INFO - NXL: 1mo change of 490.65%
+2025-01-19 16:13:54,831 - INFO - Processing NXL - 2024-11-01 17:42:57 UTC
+2025-01-19 16:13:55,314 - INFO - Retrieved article length: 6062 characters
+2025-01-19 16:13:55,421 - INFO - NXPL: 1h change of 5.13%
+2025-01-19 16:13:55,519 - INFO - Retrieved article length: 7822 characters
+2025-01-19 16:13:55,562 - INFO - Retrieved article length: 1966 characters
+2025-01-19 16:13:55,625 - INFO - NXPL: 1mo change of 8.11%
+2025-01-19 16:13:55,625 - INFO - Processing NXPL - 2024-11-14 14:00:00 UTC
+2025-01-19 16:13:55,647 - INFO - NXT: 1h change of 9.78%
+2025-01-19 16:13:55,649 - INFO - NXGL: 1h change of -1.57%
+2025-01-19 16:13:55,730 - INFO - NXT: 1wk change of 8.55%
+2025-01-19 16:13:55,730 - INFO - NXGL: 1wk change of 18.71%
+2025-01-19 16:13:55,809 - INFO - Retrieved article length: 497 characters
+2025-01-19 16:13:55,812 - INFO - NXGL: 1mo change of 88.40%
+2025-01-19 16:13:55,812 - INFO - NXT: 1mo change of 19.59%
+2025-01-19 16:13:55,812 - INFO - Processing NXT - 2025-01-14 13:45:00 UTC
+2025-01-19 16:13:55,817 - INFO - NXL: 1h change of 31.04%
+2025-01-19 16:13:55,823 - INFO - NXL: 1wk change of 112.29%
+2025-01-19 16:13:55,828 - INFO - NXL: 1mo change of 490.65%
+2025-01-19 16:13:56,007 - INFO - Processing NXU - 2024-11-20 15:29:22 UTC
+2025-01-19 16:13:56,101 - INFO - Processing NYMT - 2025-01-09 12:08:01 UTC
+2025-01-19 16:13:56,551 - INFO - Retrieved article length: 3527 characters
+2025-01-19 16:13:56,559 - INFO - NXT: 1h change of 9.78%
+2025-01-19 16:13:56,603 - INFO - Retrieved article length: 17805 characters
+2025-01-19 16:13:56,611 - INFO - NXT: 1wk change of 8.55%
+2025-01-19 16:13:56,665 - INFO - NXT: 1mo change of 19.59%
+2025-01-19 16:13:56,666 - INFO - Processing NXT - 2025-01-09 17:00:18 UTC
+2025-01-19 16:13:56,709 - INFO - NXPL: 1h change of -16.50%
+2025-01-19 16:13:56,765 - INFO - Retrieved article length: 1321 characters
+2025-01-19 16:13:56,808 - INFO - NXPL: 1wk change of -18.97%
+2025-01-19 16:13:56,856 - INFO - NXU: 1h change of -21.70%
+2025-01-19 16:13:56,907 - INFO - NXPL: 1mo change of 13.27%
+2025-01-19 16:13:56,951 - INFO - NXU: 1wk change of -30.15%
+2025-01-19 16:13:56,977 - INFO - Retrieved article length: 494 characters
+2025-01-19 16:13:57,040 - INFO - NXU: 1mo change of -11.37%
+2025-01-19 16:13:57,040 - INFO - Processing NXU - 2024-11-12 17:00:00 UTC
+2025-01-19 16:13:57,065 - INFO - NYMT: 1h change of -5.90%
+2025-01-19 16:13:57,066 - INFO - Processing NYT - 2025-01-19 08:02:19 UTC
+2025-01-19 16:13:57,169 - INFO - NYMT: 1wk change of 3.47%
+2025-01-19 16:13:57,280 - INFO - Processing NYMT - 2025-01-09 02:14:00 UTC
+2025-01-19 16:13:57,624 - INFO - Retrieved article length: 5988 characters
+2025-01-19 16:13:57,671 - INFO - Retrieved article length: 14088 characters
+2025-01-19 16:13:57,714 - INFO - NXT: 1h change of -3.09%
+2025-01-19 16:13:57,767 - INFO - NXU: 1h change of 20.81%
+2025-01-19 16:13:57,798 - INFO - NXT: 1wk change of 19.53%
+2025-01-19 16:13:57,852 - INFO - NXU: 1wk change of -53.33%
+2025-01-19 16:13:57,883 - INFO - NXT: 1mo change of 21.33%
+2025-01-19 16:13:57,883 - INFO - Processing NXT - 2025-01-08 20:10:14 UTC
+2025-01-19 16:13:57,901 - INFO - Retrieved article length: 6847 characters
+2025-01-19 16:13:57,961 - INFO - NXU: 1mo change of -12.55%
+2025-01-19 16:13:57,962 - INFO - Processing NXU - 2024-10-25 16:25:48 UTC
+2025-01-19 16:13:58,015 - INFO - Retrieved article length: 6565 characters
+2025-01-19 16:13:58,023 - INFO - NYMT: 1h change of -5.90%
+2025-01-19 16:13:58,029 - INFO - NYMT: 1wk change of 3.47%
+2025-01-19 16:13:58,083 - INFO - Processing NYMT - 2025-01-07 17:11:56 UTC
+2025-01-19 16:13:58,151 - INFO - NYT: 1wk change of 2.09%
+2025-01-19 16:13:58,300 - INFO - NYT: 1mo change of -6.48%
+2025-01-19 16:13:58,300 - INFO - Processing NYT - 2025-01-18 19:00:00 UTC
+2025-01-19 16:13:58,677 - INFO - Retrieved article length: 3750 characters
+2025-01-19 16:13:58,687 - INFO - Retrieved article length: 3443 characters
+2025-01-19 16:13:58,771 - INFO - NXU: 1h change of 139.57%
+2025-01-19 16:13:58,774 - INFO - NXT: 1h change of 1.96%
+2025-01-19 16:13:58,858 - INFO - NXU: 1wk change of 106.00%
+2025-01-19 16:13:58,859 - INFO - NXT: 1wk change of 19.53%
+2025-01-19 16:13:58,936 - INFO - Retrieved article length: 525 characters
+2025-01-19 16:13:58,941 - INFO - NXT: 1mo change of 15.59%
+2025-01-19 16:13:58,941 - INFO - Processing NXT - 2025-01-07 13:49:00 UTC
+2025-01-19 16:13:58,947 - INFO - NXU: 1mo change of 6.85%
+2025-01-19 16:13:58,948 - INFO - Processing NXU - 2024-10-24 16:15:00 UTC
+2025-01-19 16:13:59,024 - INFO - NYMT: 1h change of -3.93%
+2025-01-19 16:13:59,126 - INFO - NYMT: 1wk change of 2.77%
+2025-01-19 16:13:59,151 - INFO - Retrieved article length: 391 characters
+2025-01-19 16:13:59,233 - INFO - NYMT: 1mo change of 2.32%
+2025-01-19 16:13:59,234 - INFO - Processing NYMT - 2025-01-01 17:55:05 UTC
+2025-01-19 16:13:59,527 - INFO - NYT: 1mo change of -6.48%
+2025-01-19 16:13:59,528 - INFO - Processing NYT - 2025-01-16 17:40:07 UTC
+2025-01-19 16:13:59,684 - INFO - Retrieved article length: 16807 characters
+2025-01-19 16:13:59,782 - INFO - NXU: 1h change of 127.06%
+2025-01-19 16:13:59,793 - INFO - Retrieved article length: 11546 characters
+2025-01-19 16:13:59,866 - INFO - NXU: 1wk change of 101.96%
+2025-01-19 16:13:59,876 - INFO - NXT: 1h change of 1.96%
+2025-01-19 16:13:59,949 - INFO - NXU: 1mo change of 9.05%
+2025-01-19 16:13:59,959 - INFO - NXT: 1wk change of 22.45%
+2025-01-19 16:13:59,994 - INFO - Retrieved article length: 4768 characters
+2025-01-19 16:14:00,042 - INFO - NXT: 1mo change of 12.90%
+2025-01-19 16:14:00,078 - INFO - NYMT: 1h change of 7.90%
+2025-01-19 16:14:00,167 - INFO - Processing O - 2025-01-19 14:46:00 UTC
+2025-01-19 16:14:00,178 - INFO - NYMT: 1wk change of -1.88%
+2025-01-19 16:14:00,282 - INFO - Processing NYMT - 2024-12-11 00:35:00 UTC
+2025-01-19 16:14:00,396 - INFO - Retrieved article length: 3089 characters
+2025-01-19 16:14:00,622 - INFO - Processing OBDC - 2025-01-16 16:30:00 UTC
+2025-01-19 16:14:00,639 - INFO - NYT: 1wk change of -1.29%
+2025-01-19 16:14:00,803 - INFO - NYT: 1mo change of -6.00%
+2025-01-19 16:14:00,803 - INFO - Processing NYT - 2025-01-15 17:00:00 UTC
+2025-01-19 16:14:00,909 - INFO - Retrieved article length: 5791 characters
+2025-01-19 16:14:01,060 - INFO - Retrieved article length: 6479 characters
+2025-01-19 16:14:01,121 - INFO - O: 1wk change of 5.71%
+2025-01-19 16:14:01,174 - INFO - NYMT: 1h change of -1.49%
+2025-01-19 16:14:01,243 - INFO - Processing O - 2025-01-19 13:05:00 UTC
+2025-01-19 16:14:01,379 - INFO - NYMT: 1mo change of 3.88%
+2025-01-19 16:14:01,379 - INFO - Processing NYMT - 2024-11-19 19:00:51 UTC
+2025-01-19 16:14:01,459 - INFO - Retrieved article length: 8000 characters
+2025-01-19 16:14:01,552 - INFO - OBDC: 1h change of -1.26%
+2025-01-19 16:14:01,563 - INFO - Retrieved article length: 2594 characters
+2025-01-19 16:14:01,660 - INFO - NYT: 1h change of 2.39%
+2025-01-19 16:14:01,735 - INFO - Processing OBDC - 2025-01-13 16:33:00 UTC
+2025-01-19 16:14:01,803 - INFO - NYT: 1wk change of -1.29%
+2025-01-19 16:14:01,943 - INFO - NYT: 1mo change of -5.76%
+2025-01-19 16:14:01,943 - INFO - Processing NYT - 2025-01-15 03:42:00 UTC
+2025-01-19 16:14:01,969 - INFO - Retrieved article length: 5781 characters
+2025-01-19 16:14:02,059 - INFO - Retrieved article length: 516 characters
+2025-01-19 16:14:02,075 - INFO - O: 1wk change of 5.71%
+2025-01-19 16:14:02,128 - INFO - Processing O - 2025-01-19 12:30:00 UTC
+2025-01-19 16:14:02,142 - INFO - NYMT: 1h change of -1.19%
+2025-01-19 16:14:02,254 - INFO - NYMT: 1wk change of 3.15%
+2025-01-19 16:14:02,365 - INFO - NYMT: 1mo change of 7.00%
+2025-01-19 16:14:02,365 - INFO - Processing NYMT - 2024-11-01 15:24:14 UTC
+2025-01-19 16:14:02,547 - INFO - Retrieved article length: 7589 characters
+2025-01-19 16:14:02,636 - INFO - OBDC: 1h change of 2.81%
+2025-01-19 16:14:02,722 - INFO - OBDC: 1wk change of -2.75%
+2025-01-19 16:14:02,737 - INFO - Retrieved article length: 763 characters
+2025-01-19 16:14:02,746 - INFO - NYT: 1h change of 2.39%
+2025-01-19 16:14:02,813 - INFO - Processing OBDC - 2025-01-09 00:30:00 UTC
+2025-01-19 16:14:02,813 - INFO - NYT: 1wk change of -1.29%
+2025-01-19 16:14:02,882 - INFO - NYT: 1mo change of -5.76%
+2025-01-19 16:14:02,883 - INFO - Processing NYT - 2025-01-13 12:07:38 UTC
+2025-01-19 16:14:02,936 - INFO - Retrieved article length: 5691 characters
+2025-01-19 16:14:03,045 - INFO - O: 1wk change of 5.71%
+2025-01-19 16:14:03,094 - INFO - Retrieved article length: 1996 characters
+2025-01-19 16:14:03,098 - INFO - Processing O - 2025-01-19 02:05:00 UTC
+2025-01-19 16:14:03,184 - INFO - NYMT: 1h change of 3.53%
+2025-01-19 16:14:03,297 - INFO - NYMT: 1wk change of 12.24%
+2025-01-19 16:14:03,410 - INFO - NYMT: 1mo change of -2.37%
+2025-01-19 16:14:03,410 - INFO - Processing NYMT - 2024-11-01 10:09:49 UTC
+2025-01-19 16:14:03,533 - INFO - Retrieved article length: 3959 characters
+2025-01-19 16:14:03,605 - INFO - Retrieved article length: 9404 characters
+2025-01-19 16:14:03,631 - INFO - NYT: 1h change of 1.77%
+2025-01-19 16:14:03,694 - INFO - OBDC: 1h change of -3.26%
+2025-01-19 16:14:03,779 - INFO - Retrieved article length: 5337 characters
+2025-01-19 16:14:03,780 - INFO - NYT: 1wk change of -1.70%
+2025-01-19 16:14:03,794 - INFO - OBDC: 1wk change of -1.85%
+2025-01-19 16:14:03,891 - INFO - Processing OBDC - 2025-01-03 17:39:00 UTC
+2025-01-19 16:14:03,919 - INFO - NYT: 1mo change of -8.47%
+2025-01-19 16:14:03,919 - INFO - Processing NYT - 2025-01-11 01:04:00 UTC
+2025-01-19 16:14:04,365 - INFO - Retrieved article length: 4830 characters
+2025-01-19 16:14:04,373 - INFO - NYMT: 1h change of 3.53%
+2025-01-19 16:14:04,379 - INFO - NYMT: 1wk change of 12.24%
+2025-01-19 16:14:04,387 - INFO - NYMT: 1mo change of -2.37%
+2025-01-19 16:14:04,758 - INFO - Retrieved article length: 2600 characters
+2025-01-19 16:14:04,798 - INFO - Retrieved article length: 223 characters
+2025-01-19 16:14:05,133 - ERROR - O: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 16:14:05,482 - ERROR - Error getting news for OBLG: JSON decode error
+2025-01-19 16:14:05,482 - INFO - Retrying OBLG (Attempt 2/3)
+2025-01-19 16:14:05,680 - ERROR - OBDC: No price data found, symbol may be delisted (1h 2025-01-01 -> 2025-01-05)
+2025-01-19 16:14:05,710 - ERROR - NYT: No price data found, symbol may be delisted (1h 2025-01-09 -> 2025-01-13)
+2025-01-19 16:14:06,240 - ERROR - O: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 16:14:06,243 - INFO - Processing O - 2025-01-18 14:24:00 UTC
+2025-01-19 16:14:06,823 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-12-24 -> 2025-01-13)
+2025-01-19 16:14:06,830 - ERROR - NYT: No price data found, symbol may be delisted (1d 2025-01-01 -> 2025-01-21)
+2025-01-19 16:14:06,963 - INFO - Retrieved article length: 6579 characters
+2025-01-19 16:14:07,843 - ERROR - NYT: No price data found, symbol may be delisted (1d 2024-12-07 -> 2025-02-15)
+2025-01-19 16:14:07,844 - INFO - Processing NYT - 2025-01-10 19:52:00 UTC
+2025-01-19 16:14:07,891 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-11-29 -> 2025-02-07)
+2025-01-19 16:14:07,892 - INFO - Processing OBDC - 2025-01-03 17:07:00 UTC
+2025-01-19 16:14:08,188 - ERROR - O: No price data found, symbol may be delisted (1h 2025-01-16 -> 2025-01-20)
+2025-01-19 16:14:08,557 - INFO - Retrieved article length: 174 characters
+2025-01-19 16:14:08,781 - INFO - Retrieved article length: 11259 characters
+2025-01-19 16:14:08,781 - ERROR - OBDC: No price data found, symbol may be delisted (1h 2025-01-01 -> 2025-01-05)
+2025-01-19 16:14:08,782 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-12-24 -> 2025-01-13)
+2025-01-19 16:14:09,220 - ERROR - O: No price data found, symbol may be delisted (1d 2025-01-08 -> 2025-01-28)
+2025-01-19 16:14:09,593 - ERROR - NYT: No price data found, symbol may be delisted (1h 2025-01-08 -> 2025-01-12)
+2025-01-19 16:14:09,914 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-11-29 -> 2025-02-07)
+2025-01-19 16:14:09,916 - INFO - Processing OBDC - 2024-12-17 00:42:00 UTC
+2025-01-19 16:14:10,266 - ERROR - O: No price data found, symbol may be delisted (1d 2024-12-14 -> 2025-02-22)
+2025-01-19 16:14:10,267 - INFO - Processing O - 2025-01-18 14:18:00 UTC
+2025-01-19 16:14:10,484 - ERROR - Error getting news for OBLG: JSON decode error
+2025-01-19 16:14:10,486 - INFO - Retrying OBLG (Attempt 3/3)
+2025-01-19 16:14:10,687 - ERROR - NYT: No price data found, symbol may be delisted (1d 2024-12-31 -> 2025-01-20)
+2025-01-19 16:14:10,851 - INFO - Retrieved article length: 9764 characters
+2025-01-19 16:14:11,062 - INFO - Retrieved article length: 6403 characters
+2025-01-19 16:14:12,032 - ERROR - OBDC: No price data found, symbol may be delisted (1h 2024-12-15 -> 2024-12-19)
+2025-01-19 16:14:12,125 - ERROR - NYT: No price data found, symbol may be delisted (1d 2024-12-06 -> 2025-02-14)
+2025-01-19 16:14:12,174 - ERROR - O: No price data found, symbol may be delisted (1h 2025-01-16 -> 2025-01-20)
+2025-01-19 16:14:13,217 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-12-07 -> 2024-12-27)
+2025-01-19 16:14:13,221 - ERROR - Error getting news for OBT: JSON decode error
+2025-01-19 16:14:13,221 - INFO - Retrying OBT (Attempt 2/3)
+2025-01-19 16:14:13,759 - ERROR - O: No price data found, symbol may be delisted (1d 2025-01-08 -> 2025-01-28)
+2025-01-19 16:14:14,621 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-11-12 -> 2025-01-21)
+2025-01-19 16:14:14,622 - INFO - Processing OBDC - 2024-11-14 16:38:00 UTC
+2025-01-19 16:14:14,791 - ERROR - O: No price data found, symbol may be delisted (1d 2024-12-14 -> 2025-02-22)
+2025-01-19 16:14:14,793 - INFO - Processing O - 2025-01-18 13:26:00 UTC
+2025-01-19 16:14:15,425 - INFO - Retrieved article length: 2562 characters
+2025-01-19 16:14:15,488 - ERROR - Error getting news for OBLG: JSON decode error
+2025-01-19 16:14:15,489 - ERROR - Failed to get news for OBLG after 3 attempts
+2025-01-19 16:14:15,701 - INFO - Retrieved article length: 5971 characters
+2025-01-19 16:14:16,766 - ERROR - OBDC: No price data found, symbol may be delisted (1h 2024-11-12 -> 2024-11-16)
+2025-01-19 16:14:16,813 - ERROR - O: No price data found, symbol may be delisted (1h 2025-01-16 -> 2025-01-20)
+2025-01-19 16:14:16,896 - ERROR - Error getting news for OC: JSON decode error
+2025-01-19 16:14:16,897 - INFO - Retrying OC (Attempt 2/3)
+2025-01-19 16:14:17,760 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-11-04 -> 2024-11-24)
+2025-01-19 16:14:17,884 - ERROR - O: No price data found, symbol may be delisted (1d 2025-01-08 -> 2025-01-28)
+2025-01-19 16:14:18,222 - ERROR - Error getting news for OBT: JSON decode error
+2025-01-19 16:14:18,224 - INFO - Retrying OBT (Attempt 3/3)
+2025-01-19 16:14:18,814 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-10-10 -> 2024-12-19)
+2025-01-19 16:14:18,815 - INFO - Processing OBDC - 2024-11-07 00:37:00 UTC
+2025-01-19 16:14:18,923 - ERROR - O: No price data found, symbol may be delisted (1d 2024-12-14 -> 2025-02-22)
+2025-01-19 16:14:18,924 - INFO - Processing O - 2025-01-18 12:45:00 UTC
+2025-01-19 16:14:19,593 - INFO - Retrieved article length: 6308 characters
+2025-01-19 16:14:19,911 - INFO - Retrieved article length: 26833 characters
+2025-01-19 16:14:20,745 - ERROR - O: No price data found, symbol may be delisted (1h 2025-01-16 -> 2025-01-20)
+2025-01-19 16:14:21,079 - ERROR - OBDC: No price data found, symbol may be delisted (1h 2024-11-05 -> 2024-11-09)
+2025-01-19 16:14:21,898 - ERROR - Error getting news for OC: JSON decode error
+2025-01-19 16:14:21,898 - INFO - Retrying OC (Attempt 3/3)
+2025-01-19 16:14:22,181 - ERROR - O: No price data found, symbol may be delisted (1d 2025-01-08 -> 2025-01-28)
+2025-01-19 16:14:22,245 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-10-28 -> 2024-11-17)
+2025-01-19 16:14:23,224 - ERROR - O: No price data found, symbol may be delisted (1d 2024-12-14 -> 2025-02-22)
+2025-01-19 16:14:23,226 - ERROR - Error getting news for OBT: JSON decode error
+2025-01-19 16:14:23,227 - ERROR - Failed to get news for OBT after 3 attempts
+2025-01-19 16:14:23,798 - ERROR - OBDC: No price data found, symbol may be delisted (1d 2024-10-03 -> 2024-12-12)
+2025-01-19 16:14:24,214 - ERROR - Error getting news for OCAX: JSON decode error
+2025-01-19 16:14:24,215 - INFO - Retrying OCAX (Attempt 2/3)
+2025-01-19 16:14:24,618 - ERROR - Error getting news for OCAXU: JSON decode error
+2025-01-19 16:14:24,619 - INFO - Retrying OCAXU (Attempt 2/3)
+2025-01-19 16:14:24,778 - ERROR - Error getting news for OCC: JSON decode error
+2025-01-19 16:14:24,780 - INFO - Retrying OCC (Attempt 2/3)
+2025-01-19 16:14:26,899 - ERROR - Error getting news for OC: JSON decode error
+2025-01-19 16:14:26,901 - ERROR - Failed to get news for OC after 3 attempts
+2025-01-19 16:14:28,408 - ERROR - Error getting news for OCCI: JSON decode error
+2025-01-19 16:14:28,409 - INFO - Retrying OCCI (Attempt 2/3)
+2025-01-19 16:14:29,216 - ERROR - Error getting news for OCAX: JSON decode error
+2025-01-19 16:14:29,218 - INFO - Retrying OCAX (Attempt 3/3)
+2025-01-19 16:14:29,621 - ERROR - Error getting news for OCAXU: JSON decode error
+2025-01-19 16:14:29,622 - INFO - Retrying OCAXU (Attempt 3/3)
+2025-01-19 16:14:29,781 - ERROR - Error getting news for OCC: JSON decode error
+2025-01-19 16:14:29,784 - INFO - Retrying OCC (Attempt 3/3)
+2025-01-19 16:14:33,410 - ERROR - Error getting news for OCCI: JSON decode error
+2025-01-19 16:14:33,412 - INFO - Retrying OCCI (Attempt 3/3)
+2025-01-19 16:14:34,220 - ERROR - Error getting news for OCAX: JSON decode error
+2025-01-19 16:14:34,222 - ERROR - Failed to get news for OCAX after 3 attempts
+2025-01-19 16:14:34,623 - ERROR - Error getting news for OCAXU: JSON decode error
+2025-01-19 16:14:34,624 - ERROR - Failed to get news for OCAXU after 3 attempts
+2025-01-19 16:14:34,785 - ERROR - Error getting news for OCC: JSON decode error
+2025-01-19 16:14:34,787 - ERROR - Failed to get news for OCC after 3 attempts
+2025-01-19 16:14:35,246 - ERROR - Error getting news for OCCIM: JSON decode error
+2025-01-19 16:14:35,246 - INFO - Retrying OCCIM (Attempt 2/3)
+2025-01-19 16:14:35,735 - ERROR - Error getting news for OCCIN: JSON decode error
+2025-01-19 16:14:35,737 - INFO - Retrying OCCIN (Attempt 2/3)
+2025-01-19 16:14:35,802 - ERROR - Error getting news for OCCIO: JSON decode error
+2025-01-19 16:14:35,802 - INFO - Retrying OCCIO (Attempt 2/3)
+2025-01-19 16:14:38,414 - ERROR - Error getting news for OCCI: JSON decode error
+2025-01-19 16:14:38,416 - ERROR - Failed to get news for OCCI after 3 attempts
+2025-01-19 16:14:38,768 - INFO - Processing OCEA - 2024-11-23 00:45:00 UTC
+2025-01-19 16:14:39,606 - INFO - Retrieved article length: 7230 characters
+2025-01-19 16:14:39,699 - INFO - OCEA: 1h change of 4.49%
+2025-01-19 16:14:39,787 - INFO - OCEA: 1wk change of -3.92%
+2025-01-19 16:14:39,878 - INFO - OCEA: 1mo change of -42.22%
+2025-01-19 16:14:39,878 - INFO - Processing OCEA - 2024-10-22 23:45:00 UTC
+2025-01-19 16:14:40,247 - ERROR - Error getting news for OCCIM: JSON decode error
+2025-01-19 16:14:40,249 - INFO - Retrying OCCIM (Attempt 3/3)
+2025-01-19 16:14:40,729 - INFO - Retrieved article length: 6533 characters
+2025-01-19 16:14:40,739 - ERROR - Error getting news for OCCIN: JSON decode error
+2025-01-19 16:14:40,739 - INFO - Retrying OCCIN (Attempt 3/3)
+2025-01-19 16:14:40,804 - ERROR - Error getting news for OCCIO: JSON decode error
+2025-01-19 16:14:40,805 - INFO - Retrying OCCIO (Attempt 3/3)
+2025-01-19 16:14:40,830 - INFO - OCEA: 1h change of 1.16%
+2025-01-19 16:14:40,918 - INFO - OCEA: 1wk change of -3.94%
+2025-01-19 16:14:41,013 - INFO - OCEA: 1mo change of -30.69%
+2025-01-19 16:14:41,159 - INFO - Processing OCG - 2024-11-13 01:19:00 UTC
+2025-01-19 16:14:42,124 - INFO - Retrieved article length: 27610 characters
+2025-01-19 16:14:42,407 - INFO - OCG: 1mo change of 6.81%
+2025-01-19 16:14:42,531 - INFO - Processing OCGN - 2025-01-17 13:31:40 UTC
+2025-01-19 16:14:43,349 - INFO - Retrieved article length: 2634 characters
+2025-01-19 16:14:43,548 - INFO - OCGN: 1wk change of -18.95%
+2025-01-19 16:14:43,637 - INFO - OCGN: 1mo change of -17.15%
+2025-01-19 16:14:43,637 - INFO - Processing OCGN - 2025-01-16 18:52:06 UTC
+2025-01-19 16:14:44,394 - INFO - Retrieved article length: 508 characters
+2025-01-19 16:14:44,502 - INFO - OCGN: 1h change of -4.18%
+2025-01-19 16:14:44,590 - INFO - OCGN: 1wk change of -21.11%
+2025-01-19 16:14:44,683 - INFO - OCGN: 1mo change of -16.67%
+2025-01-19 16:14:44,684 - INFO - Processing OCGN - 2025-01-16 15:30:00 UTC
+2025-01-19 16:14:45,251 - ERROR - Error getting news for OCCIM: JSON decode error
+2025-01-19 16:14:45,251 - ERROR - Failed to get news for OCCIM after 3 attempts
+2025-01-19 16:14:45,401 - INFO - Retrieved article length: 6504 characters
+2025-01-19 16:14:45,411 - INFO - OCGN: 1h change of -4.18%
+2025-01-19 16:14:45,463 - INFO - OCGN: 1wk change of -21.11%
+2025-01-19 16:14:45,513 - INFO - OCGN: 1mo change of -16.67%
+2025-01-19 16:14:45,513 - INFO - Processing OCGN - 2025-01-13 18:25:31 UTC
+2025-01-19 16:14:45,521 - INFO - Processing OCSL - 2025-01-03 00:05:00 UTC
+2025-01-19 16:14:45,740 - ERROR - Error getting news for OCCIN: JSON decode error
+2025-01-19 16:14:45,742 - ERROR - Failed to get news for OCCIN after 3 attempts
+2025-01-19 16:14:45,807 - ERROR - Error getting news for OCCIO: JSON decode error
+2025-01-19 16:14:45,808 - ERROR - Failed to get news for OCCIO after 3 attempts
+2025-01-19 16:14:46,248 - INFO - Retrieved article length: 541 characters
+2025-01-19 16:14:46,280 - INFO - Retrieved article length: 2515 characters
+2025-01-19 16:14:46,348 - INFO - OCGN: 1h change of -3.05%
+2025-01-19 16:14:46,433 - INFO - OCGN: 1wk change of -20.67%
+2025-01-19 16:14:46,524 - INFO - OCGN: 1mo change of -20.13%
+2025-01-19 16:14:46,524 - INFO - Processing OCGN - 2025-01-13 14:30:00 UTC
+2025-01-19 16:14:46,548 - INFO - OCSL: 1wk change of -1.84%
+2025-01-19 16:14:46,691 - INFO - Processing OCSL - 2024-12-11 16:04:42 UTC
+2025-01-19 16:14:47,290 - INFO - Retrieved article length: 8683 characters
+2025-01-19 16:14:47,298 - INFO - OCGN: 1h change of -3.05%
+2025-01-19 16:14:47,363 - INFO - OCGN: 1wk change of -20.67%
+2025-01-19 16:14:47,413 - INFO - OCGN: 1mo change of -20.13%
+2025-01-19 16:14:47,413 - INFO - Processing OCGN - 2024-12-23 17:39:00 UTC
+2025-01-19 16:14:47,419 - INFO - Retrieved article length: 530 characters
+2025-01-19 16:14:47,569 - INFO - OCSL: 1h change of -1.10%
+2025-01-19 16:14:47,684 - INFO - OCSL: 1wk change of -4.56%
+2025-01-19 16:14:47,795 - INFO - Processing OCSL - 2024-11-21 13:00:33 UTC
+2025-01-19 16:14:48,124 - INFO - Retrieved article length: 9610 characters
+2025-01-19 16:14:48,220 - INFO - OCGN: 1h change of -1.23%
+2025-01-19 16:14:48,308 - INFO - OCGN: 1wk change of -6.07%
+2025-01-19 16:14:48,398 - INFO - OCGN: 1mo change of -22.06%
+2025-01-19 16:14:48,398 - INFO - Processing OCGN - 2024-12-19 18:39:31 UTC
+2025-01-19 16:14:48,567 - INFO - Retrieved article length: 1814 characters
+2025-01-19 16:14:48,783 - INFO - OCSL: 1wk change of 2.06%
+2025-01-19 16:14:48,905 - INFO - OCSL: 1mo change of -4.82%
+2025-01-19 16:14:48,906 - INFO - Processing OCSL - 2024-11-20 16:44:03 UTC
+2025-01-19 16:14:49,232 - INFO - Retrieved article length: 541 characters
+2025-01-19 16:14:49,331 - INFO - OCGN: 1h change of -6.74%
+2025-01-19 16:14:49,420 - INFO - OCGN: 1wk change of -4.84%
+2025-01-19 16:14:49,512 - INFO - OCGN: 1mo change of -29.00%
+2025-01-19 16:14:49,512 - INFO - Processing OCGN - 2024-12-19 14:38:00 UTC
+2025-01-19 16:14:49,671 - INFO - Retrieved article length: 489 characters
+2025-01-19 16:14:49,764 - INFO - OCSL: 1h change of -3.23%
+2025-01-19 16:14:49,871 - INFO - OCSL: 1wk change of 2.06%
+2025-01-19 16:14:49,975 - INFO - OCSL: 1mo change of -4.65%
+2025-01-19 16:14:49,976 - INFO - Processing OCSL - 2024-11-20 16:43:55 UTC
+2025-01-19 16:14:50,217 - INFO - Retrieved article length: 7668 characters
+2025-01-19 16:14:50,225 - INFO - OCGN: 1h change of -6.74%
+2025-01-19 16:14:50,231 - INFO - OCGN: 1wk change of -4.84%
+2025-01-19 16:14:50,281 - INFO - OCGN: 1mo change of -29.00%
+2025-01-19 16:14:50,753 - INFO - Retrieved article length: 485 characters
+2025-01-19 16:14:50,761 - INFO - OCSL: 1h change of -3.23%
+2025-01-19 16:14:50,767 - INFO - OCSL: 1wk change of 2.06%
+2025-01-19 16:14:50,774 - INFO - OCSL: 1mo change of -4.65%
+2025-01-19 16:14:50,774 - INFO - Processing OCSL - 2024-11-20 10:41:48 UTC
+2025-01-19 16:14:51,528 - INFO - Retrieved article length: 29909 characters
+2025-01-19 16:14:51,536 - INFO - OCSL: 1h change of -3.23%
+2025-01-19 16:14:51,542 - INFO - OCSL: 1wk change of 2.06%
+2025-01-19 16:14:51,549 - INFO - OCSL: 1mo change of -4.65%
+2025-01-19 16:14:51,549 - INFO - Processing OCSL - 2024-11-20 10:04:55 UTC
+2025-01-19 16:14:52,272 - INFO - Retrieved article length: 5642 characters
+2025-01-19 16:14:52,280 - INFO - OCSL: 1h change of -3.23%
+2025-01-19 16:14:52,286 - INFO - OCSL: 1wk change of 2.06%
+2025-01-19 16:14:52,293 - INFO - OCSL: 1mo change of -4.65%
+2025-01-19 16:14:52,293 - INFO - Processing OCSL - 2024-11-19 17:30:10 UTC
+2025-01-19 16:14:53,003 - INFO - Retrieved article length: 2376 characters
+2025-01-19 16:14:53,144 - INFO - OCSL: 1h change of -2.55%
+2025-01-19 16:14:53,246 - INFO - OCSL: 1wk change of 1.69%
+2025-01-19 16:14:53,367 - INFO - OCSL: 1mo change of -5.18%

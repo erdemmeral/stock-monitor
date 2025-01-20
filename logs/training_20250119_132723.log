@@ -1,0 +1,1083 @@
+2025-01-19 13:27:23,442 - INFO - Starting new training session. Logging to: logs/training_20250119_132723.log
+2025-01-19 13:27:23,460 - INFO - Starting new training session. Logging to: logs/training_20250119_132723.log
+2025-01-19 13:27:25,108 - INFO - Processing DAL - 2025-01-17 23:53:09 UTC
+2025-01-19 13:27:25,113 - INFO - Processing DAIO - 2024-12-13 20:18:57 UTC
+2025-01-19 13:27:26,385 - INFO - Retrieved article length: 7069 characters
+2025-01-19 13:27:26,423 - INFO - Retrieved article length: 1316 characters
+2025-01-19 13:27:26,499 - INFO - DAIO: 1h change of 2.13%
+2025-01-19 13:27:26,594 - INFO - DAIO: 1wk change of 5.26%
+2025-01-19 13:27:26,667 - INFO - DAL: 1wk change of 7.58%
+2025-01-19 13:27:26,684 - INFO - DAIO: 1mo change of 11.11%
+2025-01-19 13:27:26,766 - INFO - DAL: 1mo change of 6.99%
+2025-01-19 13:27:27,184 - INFO - Processing DAIO - 2024-11-27 19:45:47 UTC
+2025-01-19 13:27:27,267 - INFO - Processing DAL - 2025-01-17 21:29:00 UTC
+2025-01-19 13:27:28,473 - INFO - Retrieved article length: 492 characters
+2025-01-19 13:27:28,559 - INFO - DAIO: 1h change of 3.69%
+2025-01-19 13:27:28,562 - INFO - Retrieved article length: 41385 characters
+2025-01-19 13:27:28,623 - INFO - DAL: 1wk change of 7.58%
+2025-01-19 13:27:28,639 - INFO - DAIO: 1wk change of 1.95%
+2025-01-19 13:27:28,675 - INFO - DAL: 1mo change of 6.99%
+2025-01-19 13:27:28,725 - INFO - DAIO: 1mo change of 10.80%
+2025-01-19 13:27:29,177 - INFO - Processing DAL - 2025-01-17 20:29:00 UTC
+2025-01-19 13:27:29,226 - INFO - Processing DAIO - 2024-11-27 17:00:00 UTC
+2025-01-19 13:27:30,381 - INFO - Retrieved article length: 175 characters
+2025-01-19 13:27:30,440 - INFO - Retrieved article length: 5164 characters
+2025-01-19 13:27:30,443 - INFO - DAL: 1wk change of 7.58%
+2025-01-19 13:27:30,450 - INFO - DAIO: 1h change of 3.69%
+2025-01-19 13:27:30,456 - INFO - DAIO: 1wk change of 1.95%
+2025-01-19 13:27:30,461 - INFO - DAIO: 1mo change of 10.80%
+2025-01-19 13:27:30,497 - INFO - DAL: 1mo change of 6.99%
+2025-01-19 13:27:30,963 - INFO - Processing DAIO - 2024-10-26 15:06:53 UTC
+2025-01-19 13:27:30,998 - INFO - Processing DAL - 2025-01-17 10:53:00 UTC
+2025-01-19 13:27:32,211 - INFO - Retrieved article length: 8298 characters
+2025-01-19 13:27:32,277 - INFO - DAL: 1wk change of 7.58%
+2025-01-19 13:27:32,327 - INFO - Retrieved article length: 1936 characters
+2025-01-19 13:27:32,330 - INFO - DAL: 1mo change of 6.99%
+2025-01-19 13:27:32,494 - INFO - DAIO: 1wk change of 1.57%
+2025-01-19 13:27:32,576 - INFO - DAIO: 1mo change of 3.88%
+2025-01-19 13:27:32,831 - INFO - Processing DAL - 2025-01-16 23:29:00 UTC
+2025-01-19 13:27:33,077 - INFO - Processing DAIO - 2024-10-26 00:00:21 UTC
+2025-01-19 13:27:34,201 - INFO - Retrieved article length: 160 characters
+2025-01-19 13:27:34,295 - INFO - Retrieved article length: 4879 characters
+2025-01-19 13:27:34,312 - INFO - DAIO: 1wk change of 1.57%
+2025-01-19 13:27:34,318 - INFO - DAIO: 1mo change of 3.88%
+2025-01-19 13:27:34,391 - INFO - DAL: 1wk change of 9.63%
+2025-01-19 13:27:34,484 - INFO - DAL: 1mo change of 6.80%
+2025-01-19 13:27:34,820 - INFO - Processing DAIO - 2024-10-24 23:00:00 UTC
+2025-01-19 13:27:34,985 - INFO - Processing DAL - 2025-01-16 18:32:00 UTC
+2025-01-19 13:27:36,122 - INFO - Retrieved article length: 3938 characters
+2025-01-19 13:27:36,154 - INFO - Retrieved article length: 12402 characters
+2025-01-19 13:27:36,185 - INFO - DAL: 1wk change of 9.63%
+2025-01-19 13:27:36,240 - INFO - DAIO: 1h change of 6.25%
+2025-01-19 13:27:36,244 - INFO - DAL: 1mo change of 6.80%
+2025-01-19 13:27:36,324 - INFO - DAIO: 1wk change of 5.93%
+2025-01-19 13:27:36,406 - INFO - DAIO: 1mo change of 8.47%
+2025-01-19 13:27:36,746 - INFO - Processing DAL - 2025-01-16 17:03:00 UTC
+2025-01-19 13:27:37,857 - INFO - Retrieved article length: 7504 characters
+2025-01-19 13:27:37,923 - INFO - DAL: 1wk change of 9.63%
+2025-01-19 13:27:37,977 - INFO - DAL: 1mo change of 6.80%
+2025-01-19 13:27:38,087 - INFO - Processing DALN - 2024-12-04 18:00:00 UTC
+2025-01-19 13:27:38,478 - INFO - Processing DAL - 2025-01-16 00:30:00 UTC
+2025-01-19 13:27:39,536 - INFO - Retrieved article length: 3419 characters
+2025-01-19 13:27:39,633 - INFO - DALN: 1h change of -3.19%
+2025-01-19 13:27:39,719 - INFO - DALN: 1wk change of -8.32%
+2025-01-19 13:27:39,801 - INFO - DALN: 1mo change of 25.62%
+2025-01-19 13:27:39,846 - INFO - Retrieved article length: 2410 characters
+2025-01-19 13:27:39,924 - INFO - DAL: 1wk change of 9.63%
+2025-01-19 13:27:39,975 - INFO - DAL: 1mo change of 6.80%
+2025-01-19 13:27:40,303 - INFO - Processing DALN - 2024-11-19 18:00:00 UTC
+2025-01-19 13:27:41,631 - INFO - Retrieved article length: 4001 characters
+2025-01-19 13:27:41,638 - INFO - Processing DAN - 2025-01-19 02:57:22 UTC
+2025-01-19 13:27:41,823 - INFO - DALN: 1wk change of -3.58%
+2025-01-19 13:27:41,906 - INFO - DALN: 1mo change of 67.05%
+2025-01-19 13:27:42,407 - INFO - Processing DALN - 2024-11-15 14:12:33 UTC
+2025-01-19 13:27:42,792 - INFO - Retrieved article length: 3057 characters
+2025-01-19 13:27:42,985 - INFO - DAN: 1wk change of 12.84%
+2025-01-19 13:27:43,094 - INFO - DAN: 1mo change of 3.69%
+2025-01-19 13:27:43,579 - INFO - Retrieved article length: 1608 characters
+2025-01-19 13:27:43,596 - INFO - Processing DAN - 2025-01-16 18:00:00 UTC
+2025-01-19 13:27:43,669 - INFO - DALN: 1h change of -7.37%
+2025-01-19 13:27:43,763 - INFO - DALN: 1wk change of 12.50%
+2025-01-19 13:27:43,855 - INFO - DALN: 1mo change of 39.51%
+2025-01-19 13:27:44,356 - INFO - Processing DALN - 2024-11-13 00:30:00 UTC
+2025-01-19 13:27:45,138 - INFO - Retrieved article length: 3178 characters
+2025-01-19 13:27:45,236 - INFO - DAN: 1h change of 10.47%
+2025-01-19 13:27:45,332 - INFO - DAN: 1wk change of 11.09%
+2025-01-19 13:27:45,428 - INFO - DAN: 1mo change of 3.19%
+2025-01-19 13:27:45,895 - INFO - Retrieved article length: 17033 characters
+2025-01-19 13:27:45,928 - INFO - Processing DAN - 2025-01-16 00:30:00 UTC
+2025-01-19 13:27:45,981 - INFO - DALN: 1h change of -4.49%
+2025-01-19 13:27:46,069 - INFO - DALN: 1wk change of 12.94%
+2025-01-19 13:27:46,168 - INFO - DALN: 1mo change of 17.43%
+2025-01-19 13:27:46,669 - INFO - Processing DALN - 2024-11-07 00:30:00 UTC
+2025-01-19 13:27:47,247 - INFO - Retrieved article length: 2534 characters
+2025-01-19 13:27:47,261 - INFO - DAN: 1h change of 10.47%
+2025-01-19 13:27:47,314 - INFO - DAN: 1wk change of 11.09%
+2025-01-19 13:27:47,369 - INFO - DAN: 1mo change of 3.19%
+2025-01-19 13:27:47,870 - INFO - Processing DAN - 2024-12-27 16:11:09 UTC
+2025-01-19 13:27:47,924 - INFO - Retrieved article length: 1736 characters
+2025-01-19 13:27:48,014 - INFO - DALN: 1h change of 6.50%
+2025-01-19 13:27:48,100 - INFO - DALN: 1wk change of -13.57%
+2025-01-19 13:27:48,202 - INFO - DALN: 1mo change of 26.03%
+2025-01-19 13:27:49,106 - INFO - Retrieved article length: 3666 characters
+2025-01-19 13:27:49,301 - INFO - DAN: 1wk change of -6.66%
+2025-01-19 13:27:49,399 - INFO - DAN: 1mo change of 51.29%
+2025-01-19 13:27:49,894 - INFO - Processing DAR - 2025-01-13 18:20:08 UTC
+2025-01-19 13:27:49,900 - INFO - Processing DAN - 2024-12-18 14:58:00 UTC
+2025-01-19 13:27:51,043 - INFO - Retrieved article length: 2101 characters
+2025-01-19 13:27:51,142 - INFO - DAR: 1h change of -1.68%
+2025-01-19 13:27:51,153 - INFO - Retrieved article length: 3873 characters
+2025-01-19 13:27:51,248 - INFO - DAR: 1wk change of 5.62%
+2025-01-19 13:27:51,262 - INFO - DAN: 1h change of -9.03%
+2025-01-19 13:27:51,332 - INFO - DAR: 1mo change of 1.10%
+2025-01-19 13:27:51,361 - INFO - DAN: 1wk change of -9.65%
+2025-01-19 13:27:51,464 - INFO - DAN: 1mo change of 51.11%
+2025-01-19 13:27:51,834 - INFO - Processing DAR - 2025-01-08 17:00:00 UTC
+2025-01-19 13:27:51,966 - INFO - Processing DAN - 2024-12-17 14:26:29 UTC
+2025-01-19 13:27:53,147 - INFO - Retrieved article length: 3004 characters
+2025-01-19 13:27:53,234 - INFO - DAR: 1h change of -4.05%
+2025-01-19 13:27:53,243 - INFO - Retrieved article length: 1644 characters
+2025-01-19 13:27:53,317 - INFO - DAR: 1wk change of 11.03%
+2025-01-19 13:27:53,332 - INFO - DAN: 1h change of -7.84%
+2025-01-19 13:27:53,431 - INFO - DAN: 1wk change of -8.87%
+2025-01-19 13:27:53,537 - INFO - DAN: 1mo change of 50.58%
+2025-01-19 13:27:53,903 - INFO - Processing DAR - 2025-01-04 16:49:50 UTC
+2025-01-19 13:27:54,037 - INFO - Processing DAN - 2024-12-11 14:58:00 UTC
+2025-01-19 13:27:55,164 - INFO - Retrieved article length: 2911 characters
+2025-01-19 13:27:55,252 - INFO - DAR: 1h change of 1.08%
+2025-01-19 13:27:55,337 - INFO - DAR: 1wk change of 10.62%
+2025-01-19 13:27:55,420 - INFO - DAR: 1mo change of -7.78%
+2025-01-19 13:27:55,466 - INFO - Retrieved article length: 2679 characters
+2025-01-19 13:27:55,556 - INFO - DAN: 1h change of -4.64%
+2025-01-19 13:27:55,686 - INFO - DAN: 1wk change of 1.41%
+2025-01-19 13:27:55,784 - INFO - DAN: 1mo change of 37.72%
+2025-01-19 13:27:55,921 - INFO - Processing DAR - 2024-12-30 17:40:15 UTC
+2025-01-19 13:27:56,285 - INFO - Processing DAN - 2024-12-02 18:15:00 UTC
+2025-01-19 13:27:57,298 - INFO - Retrieved article length: 3267 characters
+2025-01-19 13:27:57,384 - INFO - DAR: 1h change of 2.73%
+2025-01-19 13:27:57,466 - INFO - DAR: 1wk change of 1.81%
+2025-01-19 13:27:57,520 - INFO - Retrieved article length: 2077 characters
+2025-01-19 13:27:57,550 - INFO - DAR: 1mo change of -8.49%
+2025-01-19 13:27:57,607 - INFO - DAN: 1h change of 5.07%
+2025-01-19 13:27:57,713 - INFO - DAN: 1wk change of 52.22%
+2025-01-19 13:27:57,812 - INFO - DAN: 1mo change of 9.33%
+2025-01-19 13:27:58,051 - INFO - Processing DAR - 2024-12-26 18:10:43 UTC
+2025-01-19 13:27:59,361 - INFO - Retrieved article length: 3862 characters
+2025-01-19 13:27:59,497 - INFO - Processing DARE - 2025-01-09 16:00:00 UTC
+2025-01-19 13:27:59,531 - INFO - DAR: 1wk change of 2.33%
+2025-01-19 13:27:59,615 - INFO - DAR: 1mo change of -10.98%
+2025-01-19 13:28:00,116 - INFO - Processing DAR - 2024-12-13 00:37:46 UTC
+2025-01-19 13:28:00,685 - INFO - Retrieved article length: 11691 characters
+2025-01-19 13:28:00,772 - INFO - DARE: 1h change of -5.54%
+2025-01-19 13:28:00,858 - INFO - DARE: 1wk change of 3.41%
+2025-01-19 13:28:00,940 - INFO - DARE: 1mo change of 4.37%
+2025-01-19 13:28:01,403 - INFO - Retrieved article length: 488 characters
+2025-01-19 13:28:01,441 - INFO - Processing DARE - 2024-12-16 16:50:48 UTC
+2025-01-19 13:28:01,490 - INFO - DAR: 1h change of -5.42%
+2025-01-19 13:28:01,572 - INFO - DAR: 1wk change of -11.77%
+2025-01-19 13:28:01,652 - INFO - DAR: 1mo change of -8.80%
+2025-01-19 13:28:02,153 - INFO - Processing DAR - 2024-12-13 00:10:00 UTC
+2025-01-19 13:28:02,712 - INFO - Retrieved article length: 532 characters
+2025-01-19 13:28:02,889 - INFO - DARE: 1wk change of -1.54%
+2025-01-19 13:28:02,978 - INFO - DARE: 1mo change of -24.09%
+2025-01-19 13:28:03,479 - INFO - Processing DARE - 2024-12-16 16:00:00 UTC
+2025-01-19 13:28:03,636 - INFO - Retrieved article length: 5206 characters
+2025-01-19 13:28:03,646 - INFO - DAR: 1h change of -5.42%
+2025-01-19 13:28:03,655 - INFO - DAR: 1wk change of -11.77%
+2025-01-19 13:28:03,663 - INFO - DAR: 1mo change of -8.80%
+2025-01-19 13:28:04,163 - INFO - Processing DAR - 2024-12-11 00:10:00 UTC
+2025-01-19 13:28:04,637 - INFO - Retrieved article length: 17319 characters
+2025-01-19 13:28:04,656 - INFO - DARE: 1wk change of -1.54%
+2025-01-19 13:28:04,713 - INFO - DARE: 1mo change of -24.09%
+2025-01-19 13:28:05,214 - INFO - Processing DARE - 2024-12-10 16:00:00 UTC
+2025-01-19 13:28:05,426 - INFO - Retrieved article length: 4463 characters
+2025-01-19 13:28:05,517 - INFO - DAR: 1h change of -4.25%
+2025-01-19 13:28:05,603 - INFO - DAR: 1wk change of -16.79%
+2025-01-19 13:28:05,690 - INFO - DAR: 1mo change of -8.71%
+2025-01-19 13:28:06,601 - INFO - Retrieved article length: 14363 characters
+2025-01-19 13:28:06,688 - INFO - DARE: 1h change of 6.98%
+2025-01-19 13:28:06,773 - INFO - DARE: 1wk change of -9.70%
+2025-01-19 13:28:06,855 - INFO - DARE: 1mo change of -16.12%
+2025-01-19 13:28:07,348 - INFO - Processing DASH - 2025-01-13 16:00:58 UTC
+2025-01-19 13:28:07,356 - INFO - Processing DARE - 2024-12-04 16:00:00 UTC
+2025-01-19 13:28:08,510 - INFO - Retrieved article length: 14493 characters
+2025-01-19 13:28:08,547 - INFO - Retrieved article length: 6092 characters
+2025-01-19 13:28:08,597 - INFO - DARE: 1h change of -4.90%
+2025-01-19 13:28:08,633 - INFO - DASH: 1h change of 1.64%
+2025-01-19 13:28:08,767 - INFO - DARE: 1mo change of -20.09%
+2025-01-19 13:28:09,268 - INFO - Processing DARE - 2024-11-15 21:54:28 UTC
+2025-01-19 13:28:09,296 - INFO - Processing DASH - 2025-01-09 17:00:00 UTC
+2025-01-19 13:28:10,531 - INFO - Retrieved article length: 206 characters
+2025-01-19 13:28:10,608 - INFO - Retrieved article length: 40761 characters
+2025-01-19 13:28:10,696 - INFO - DARE: 1h change of -29.49%
+2025-01-19 13:28:10,708 - INFO - DASH: 1wk change of 2.88%
+2025-01-19 13:28:10,781 - INFO - DARE: 1wk change of -15.87%
+2025-01-19 13:28:10,863 - INFO - DARE: 1mo change of -11.04%
+2025-01-19 13:28:11,294 - INFO - Processing DASH - 2025-01-08 17:00:00 UTC
+2025-01-19 13:28:11,378 - INFO - Processing DARE - 2024-11-15 10:19:10 UTC
+2025-01-19 13:28:12,402 - INFO - Retrieved article length: 2066 characters
+2025-01-19 13:28:12,568 - INFO - DASH: 1wk change of 2.88%
+2025-01-19 13:28:12,652 - INFO - DASH: 1mo change of -1.36%
+2025-01-19 13:28:12,672 - INFO - Retrieved article length: 4706 characters
+2025-01-19 13:28:12,683 - INFO - DARE: 1h change of -29.49%
+2025-01-19 13:28:12,691 - INFO - DARE: 1wk change of -15.87%
+2025-01-19 13:28:12,698 - INFO - DARE: 1mo change of -11.04%
+2025-01-19 13:28:13,153 - INFO - Processing DASH - 2025-01-07 17:00:00 UTC
+2025-01-19 13:28:13,199 - INFO - Processing DARE - 2024-11-15 01:10:03 UTC
+2025-01-19 13:28:14,422 - INFO - Retrieved article length: 4231 characters
+2025-01-19 13:28:14,433 - INFO - DARE: 1h change of -29.49%
+2025-01-19 13:28:14,441 - INFO - DARE: 1wk change of -15.87%
+2025-01-19 13:28:14,445 - INFO - Retrieved article length: 3734 characters
+2025-01-19 13:28:14,450 - INFO - DARE: 1mo change of -11.04%
+2025-01-19 13:28:15,203 - INFO - Processing DASH - 2024-12-27 13:05:02 UTC
+2025-01-19 13:28:16,104 - INFO - Processing DATS - 2025-01-08 17:27:19 UTC
+2025-01-19 13:28:16,506 - INFO - Retrieved article length: 6638 characters
+2025-01-19 13:28:16,591 - INFO - DASH: 1h change of -1.29%
+2025-01-19 13:28:16,674 - INFO - DASH: 1wk change of -1.15%
+2025-01-19 13:28:16,754 - INFO - DASH: 1mo change of -1.56%
+2025-01-19 13:28:17,255 - INFO - Processing DASH - 2024-12-18 15:25:40 UTC
+2025-01-19 13:28:17,260 - INFO - Retrieved article length: 529 characters
+2025-01-19 13:28:17,364 - INFO - DATS: 1h change of 59.90%
+2025-01-19 13:28:17,449 - INFO - DATS: 1wk change of 182.70%
+2025-01-19 13:28:17,533 - INFO - DATS: 1mo change of 192.18%
+2025-01-19 13:28:18,034 - INFO - Processing DATS - 2025-01-08 16:42:00 UTC
+2025-01-19 13:28:18,542 - INFO - Retrieved article length: 1457 characters
+2025-01-19 13:28:18,629 - INFO - DASH: 1h change of -5.71%
+2025-01-19 13:28:18,712 - INFO - DASH: 1wk change of -3.59%
+2025-01-19 13:28:19,143 - INFO - Retrieved article length: 5947 characters
+2025-01-19 13:28:19,153 - INFO - DATS: 1h change of 59.90%
+2025-01-19 13:28:19,161 - INFO - DATS: 1wk change of 182.70%
+2025-01-19 13:28:19,214 - INFO - DATS: 1mo change of 192.18%
+2025-01-19 13:28:19,296 - INFO - Processing DASH - 2024-12-07 06:10:00 UTC
+2025-01-19 13:28:19,715 - INFO - Processing DATS - 2024-12-10 16:07:00 UTC
+2025-01-19 13:28:20,801 - INFO - Retrieved article length: 168 characters
+2025-01-19 13:28:20,910 - INFO - Retrieved article length: 3168 characters
+2025-01-19 13:28:21,046 - INFO - DASH: 1mo change of 8.19%
+2025-01-19 13:28:21,081 - INFO - DATS: 1wk change of -10.33%
+2025-01-19 13:28:21,169 - INFO - DATS: 1mo change of 202.79%
+2025-01-19 13:28:21,547 - INFO - Processing DASH - 2024-12-06 15:00:52 UTC
+2025-01-19 13:28:21,670 - INFO - Processing DATS - 2024-12-04 16:07:00 UTC
+2025-01-19 13:28:23,033 - INFO - Retrieved article length: 162 characters
+2025-01-19 13:28:23,054 - INFO - Retrieved article length: 4104 characters
+2025-01-19 13:28:23,142 - INFO - DATS: 1h change of -7.45%
+2025-01-19 13:28:23,202 - INFO - DASH: 1wk change of -2.19%
+2025-01-19 13:28:23,226 - INFO - DATS: 1wk change of -16.34%
+2025-01-19 13:28:23,289 - INFO - DASH: 1mo change of 11.60%
+2025-01-19 13:28:23,309 - INFO - DATS: 1mo change of 524.48%
+2025-01-19 13:28:23,810 - INFO - Processing DATS - 2024-11-17 16:43:34 UTC
+2025-01-19 13:28:24,981 - INFO - Processing DAWN - 2025-01-13 16:00:00 UTC
+2025-01-19 13:28:25,016 - INFO - Retrieved article length: 1587 characters
+2025-01-19 13:28:25,100 - INFO - DATS: 1h change of -20.43%
+2025-01-19 13:28:25,183 - INFO - DATS: 1wk change of -7.96%
+2025-01-19 13:28:25,272 - INFO - DATS: 1mo change of 31.82%
+2025-01-19 13:28:25,773 - INFO - Processing DATS - 2024-11-06 15:41:09 UTC
+2025-01-19 13:28:26,262 - INFO - Retrieved article length: 8523 characters
+2025-01-19 13:28:26,345 - INFO - DAWN: 1h change of -4.78%
+2025-01-19 13:28:26,506 - INFO - DAWN: 1mo change of -6.90%
+2025-01-19 13:28:27,007 - INFO - Processing DAWN - 2025-01-07 18:52:31 UTC
+2025-01-19 13:28:27,056 - INFO - Retrieved article length: 394 characters
+2025-01-19 13:28:27,144 - INFO - DATS: 1h change of 26.02%
+2025-01-19 13:28:27,227 - INFO - DATS: 1wk change of 31.40%
+2025-01-19 13:28:27,313 - INFO - DATS: 1mo change of 46.03%
+2025-01-19 13:28:27,815 - INFO - Processing DATS - 2024-10-31 15:07:00 UTC
+2025-01-19 13:28:28,278 - INFO - Retrieved article length: 541 characters
+2025-01-19 13:28:28,368 - INFO - DAWN: 1h change of -1.97%
+2025-01-19 13:28:28,449 - INFO - DAWN: 1wk change of -1.43%
+2025-01-19 13:28:28,529 - INFO - DAWN: 1mo change of -7.73%
+2025-01-19 13:28:28,990 - INFO - Retrieved article length: 5293 characters
+2025-01-19 13:28:29,030 - INFO - Processing DAWN - 2024-12-26 21:07:00 UTC
+2025-01-19 13:28:29,084 - INFO - DATS: 1h change of -2.65%
+2025-01-19 13:28:29,176 - INFO - DATS: 1wk change of 67.97%
+2025-01-19 13:28:29,266 - INFO - DATS: 1mo change of 46.72%
+2025-01-19 13:28:29,767 - INFO - Processing DATS - 2024-10-30 18:45:00 UTC
+2025-01-19 13:28:30,224 - INFO - Retrieved article length: 7282 characters
+2025-01-19 13:28:30,308 - INFO - DAWN: 1h change of 3.00%
+2025-01-19 13:28:30,471 - INFO - DAWN: 1mo change of -6.00%
+2025-01-19 13:28:30,973 - INFO - Processing DAWN - 2024-12-25 00:30:00 UTC
+2025-01-19 13:28:31,164 - INFO - Retrieved article length: 5321 characters
+2025-01-19 13:28:31,265 - INFO - DATS: 1h change of -12.50%
+2025-01-19 13:28:31,350 - INFO - DATS: 1wk change of 67.97%
+2025-01-19 13:28:31,438 - INFO - DATS: 1mo change of 35.16%
+2025-01-19 13:28:32,213 - INFO - Retrieved article length: 7345 characters
+2025-01-19 13:28:32,301 - INFO - DAWN: 1h change of 1.73%
+2025-01-19 13:28:32,475 - INFO - DAWN: 1mo change of -7.93%
+2025-01-19 13:28:32,976 - INFO - Processing DAWN - 2024-12-23 21:03:06 UTC
+2025-01-19 13:28:33,097 - INFO - Processing DAY - 2025-01-18 17:30:07 UTC
+2025-01-19 13:28:34,386 - INFO - Retrieved article length: 4928 characters
+2025-01-19 13:28:34,461 - INFO - Retrieved article length: 7807 characters
+2025-01-19 13:28:34,662 - INFO - DAY: 1mo change of -10.04%
+2025-01-19 13:28:34,712 - INFO - DAWN: 1mo change of -3.61%
+2025-01-19 13:28:35,163 - INFO - Processing DAY - 2025-01-17 23:54:06 UTC
+2025-01-19 13:28:35,213 - INFO - Processing DAWN - 2024-12-17 16:30:00 UTC
+2025-01-19 13:28:36,369 - INFO - Retrieved article length: 1085 characters
+2025-01-19 13:28:36,380 - INFO - Retrieved article length: 2561 characters
+2025-01-19 13:28:36,465 - INFO - DAY: 1h change of -2.42%
+2025-01-19 13:28:36,467 - INFO - DAWN: 1h change of -1.65%
+2025-01-19 13:28:36,558 - INFO - DAWN: 1wk change of -4.23%
+2025-01-19 13:28:36,566 - INFO - DAY: 1wk change of -2.26%
+2025-01-19 13:28:36,638 - INFO - DAWN: 1mo change of -19.82%
+2025-01-19 13:28:36,651 - INFO - DAY: 1mo change of -9.78%
+2025-01-19 13:28:37,140 - INFO - Processing DAWN - 2024-12-16 17:49:40 UTC
+2025-01-19 13:28:37,152 - INFO - Processing DAY - 2025-01-17 03:20:00 UTC
+2025-01-19 13:28:38,415 - INFO - Retrieved article length: 2079 characters
+2025-01-19 13:28:38,429 - INFO - DAY: 1h change of -2.42%
+2025-01-19 13:28:38,482 - INFO - DAY: 1wk change of -2.26%
+2025-01-19 13:28:38,483 - INFO - Retrieved article length: 4565 characters
+2025-01-19 13:28:38,538 - INFO - DAY: 1mo change of -9.78%
+2025-01-19 13:28:38,652 - INFO - DAWN: 1wk change of -7.85%
+2025-01-19 13:28:38,733 - INFO - DAWN: 1mo change of -20.93%
+2025-01-19 13:28:39,039 - INFO - Processing DAY - 2025-01-15 20:19:29 UTC
+2025-01-19 13:28:39,234 - INFO - Processing DAWN - 2024-12-07 04:53:02 UTC
+2025-01-19 13:28:40,338 - INFO - Retrieved article length: 2230 characters
+2025-01-19 13:28:40,444 - INFO - DAY: 1h change of 1.09%
+2025-01-19 13:28:40,536 - INFO - DAY: 1wk change of -5.59%
+2025-01-19 13:28:40,550 - INFO - Retrieved article length: 2598 characters
+2025-01-19 13:28:40,620 - INFO - DAY: 1mo change of -11.07%
+2025-01-19 13:28:40,723 - INFO - DAWN: 1wk change of -8.02%
+2025-01-19 13:28:40,808 - INFO - DAWN: 1mo change of -20.32%
+2025-01-19 13:28:41,122 - INFO - Processing DAY - 2025-01-15 19:24:35 UTC
+2025-01-19 13:28:42,288 - INFO - Retrieved article length: 2938 characters
+2025-01-19 13:28:42,298 - INFO - DAY: 1h change of 1.09%
+2025-01-19 13:28:42,353 - INFO - DAY: 1wk change of -5.59%
+2025-01-19 13:28:42,408 - INFO - DAY: 1mo change of -11.07%
+2025-01-19 13:28:42,909 - INFO - Processing DAY - 2025-01-15 16:00:00 UTC
+2025-01-19 13:28:44,242 - INFO - Retrieved article length: 1718 characters
+2025-01-19 13:28:44,254 - INFO - DAY: 1h change of 1.09%
+2025-01-19 13:28:44,307 - INFO - DAY: 1wk change of -5.59%
+2025-01-19 13:28:44,360 - INFO - DAY: 1mo change of -11.07%
+2025-01-19 13:28:44,792 - INFO - Processing DBGI - 2024-12-16 23:30:00 UTC
+2025-01-19 13:28:44,861 - INFO - Processing DAY - 2025-01-15 01:24:49 UTC
+2025-01-19 13:28:46,132 - INFO - Retrieved article length: 1891 characters
+2025-01-19 13:28:46,142 - INFO - DAY: 1h change of 1.09%
+2025-01-19 13:28:46,197 - INFO - DAY: 1wk change of -5.59%
+2025-01-19 13:28:46,225 - INFO - Retrieved article length: 9433 characters
+2025-01-19 13:28:46,250 - INFO - DAY: 1mo change of -11.07%
+2025-01-19 13:28:46,313 - INFO - DBGI: 1h change of -32.79%
+2025-01-19 13:28:46,400 - INFO - DBGI: 1wk change of -74.76%
+2025-01-19 13:28:46,484 - INFO - DBGI: 1mo change of -69.66%
+2025-01-19 13:28:46,751 - INFO - Processing DAY - 2025-01-14 20:30:00 UTC
+2025-01-19 13:28:46,985 - INFO - Processing DBGI - 2024-12-12 23:00:00 UTC
+2025-01-19 13:28:48,185 - INFO - Retrieved article length: 1847 characters
+2025-01-19 13:28:48,224 - INFO - Retrieved article length: 5915 characters
+2025-01-19 13:28:48,272 - INFO - DAY: 1h change of 1.12%
+2025-01-19 13:28:48,311 - INFO - DBGI: 1h change of -24.23%
+2025-01-19 13:28:48,353 - INFO - DAY: 1wk change of -5.59%
+2025-01-19 13:28:48,403 - INFO - DBGI: 1wk change of -74.58%
+2025-01-19 13:28:48,437 - INFO - DAY: 1mo change of -10.69%
+2025-01-19 13:28:48,486 - INFO - DBGI: 1mo change of -72.17%
+2025-01-19 13:28:48,987 - INFO - Processing DBGI - 2024-12-11 19:57:18 UTC
+2025-01-19 13:28:50,083 - INFO - Processing DBI - 2025-01-17 14:34:00 UTC
+2025-01-19 13:28:50,217 - INFO - Retrieved article length: 508 characters
+2025-01-19 13:28:50,305 - INFO - DBGI: 1h change of -23.64%
+2025-01-19 13:28:50,391 - INFO - DBGI: 1wk change of -74.58%
+2025-01-19 13:28:50,476 - INFO - DBGI: 1mo change of -74.18%
+2025-01-19 13:28:50,978 - INFO - Processing DBGI - 2024-12-11 17:00:00 UTC
+2025-01-19 13:28:51,433 - INFO - Retrieved article length: 1506 characters
+2025-01-19 13:28:51,528 - INFO - DBI: 1h change of 3.72%
+2025-01-19 13:28:51,625 - INFO - DBI: 1wk change of 4.95%
+2025-01-19 13:28:51,778 - INFO - DBI: 1mo change of -4.19%
+2025-01-19 13:28:52,145 - INFO - Retrieved article length: 5481 characters
+2025-01-19 13:28:52,157 - INFO - DBGI: 1h change of -23.64%
+2025-01-19 13:28:52,168 - INFO - DBGI: 1wk change of -74.58%
+2025-01-19 13:28:52,178 - INFO - DBGI: 1mo change of -74.18%
+2025-01-19 13:28:52,279 - INFO - Processing DBI - 2025-01-17 12:04:33 UTC
+2025-01-19 13:28:52,679 - INFO - Processing DBGI - 2024-12-05 18:30:00 UTC
+2025-01-19 13:28:53,376 - INFO - Retrieved article length: 5939 characters
+2025-01-19 13:28:53,393 - INFO - DBI: 1h change of 3.72%
+2025-01-19 13:28:53,448 - INFO - DBI: 1wk change of 4.95%
+2025-01-19 13:28:53,502 - INFO - DBI: 1mo change of -4.19%
+2025-01-19 13:28:53,898 - INFO - Retrieved article length: 5684 characters
+2025-01-19 13:28:53,986 - INFO - DBGI: 1h change of -2.82%
+2025-01-19 13:28:54,004 - INFO - Processing DBI - 2025-01-15 13:34:26 UTC
+2025-01-19 13:28:54,075 - INFO - DBGI: 1wk change of -33.51%
+2025-01-19 13:28:54,160 - INFO - DBGI: 1mo change of -75.96%
+2025-01-19 13:28:54,661 - INFO - Processing DBGI - 2024-11-20 23:30:12 UTC
+2025-01-19 13:28:55,271 - INFO - Retrieved article length: 4236 characters
+2025-01-19 13:28:55,357 - INFO - DBI: 1h change of 7.89%
+2025-01-19 13:28:55,460 - INFO - DBI: 1wk change of 4.00%
+2025-01-19 13:28:55,871 - INFO - Retrieved article length: 457 characters
+2025-01-19 13:28:55,957 - INFO - DBGI: 1h change of 24.93%
+2025-01-19 13:28:56,040 - INFO - DBGI: 1wk change of 3.74%
+2025-01-19 13:28:56,058 - INFO - Processing DBI - 2025-01-15 12:05:31 UTC
+2025-01-19 13:28:56,127 - INFO - DBGI: 1mo change of -87.25%
+2025-01-19 13:28:56,628 - INFO - Processing DBGI - 2024-11-20 23:00:00 UTC
+2025-01-19 13:28:57,347 - INFO - Retrieved article length: 4099 characters
+2025-01-19 13:28:57,359 - INFO - DBI: 1h change of 7.89%
+2025-01-19 13:28:57,414 - INFO - DBI: 1wk change of 4.00%
+2025-01-19 13:28:57,910 - INFO - Retrieved article length: 5826 characters
+2025-01-19 13:28:57,923 - INFO - DBGI: 1h change of 24.93%
+2025-01-19 13:28:57,932 - INFO - DBGI: 1wk change of 3.74%
+2025-01-19 13:28:57,944 - INFO - DBGI: 1mo change of -87.25%
+2025-01-19 13:28:57,968 - INFO - Processing DBI - 2025-01-13 14:12:00 UTC
+2025-01-19 13:28:58,446 - INFO - Processing DBGI - 2024-11-15 10:17:41 UTC
+2025-01-19 13:28:59,306 - INFO - Retrieved article length: 4083 characters
+2025-01-19 13:28:59,399 - INFO - DBI: 1h change of -3.30%
+2025-01-19 13:28:59,495 - INFO - DBI: 1wk change of 5.93%
+2025-01-19 13:28:59,599 - INFO - DBI: 1mo change of -1.21%
+2025-01-19 13:28:59,833 - INFO - Retrieved article length: 3847 characters
+2025-01-19 13:28:59,920 - INFO - DBGI: 1h change of -16.86%
+2025-01-19 13:29:00,003 - INFO - DBGI: 1wk change of 21.00%
+2025-01-19 13:29:00,090 - INFO - DBGI: 1mo change of -82.63%
+2025-01-19 13:29:00,101 - INFO - Processing DBI - 2025-01-13 12:03:37 UTC
+2025-01-19 13:29:01,298 - INFO - Retrieved article length: 6294 characters
+2025-01-19 13:29:01,318 - INFO - DBI: 1h change of -3.30%
+2025-01-19 13:29:01,373 - INFO - DBI: 1wk change of 5.93%
+2025-01-19 13:29:01,426 - INFO - DBI: 1mo change of -1.21%
+2025-01-19 13:29:01,927 - INFO - Processing DBI - 2024-12-27 17:00:00 UTC
+2025-01-19 13:29:02,849 - INFO - Processing DBRG - 2025-01-10 16:30:00 UTC
+2025-01-19 13:29:03,155 - INFO - Retrieved article length: 8021 characters
+2025-01-19 13:29:03,347 - INFO - DBI: 1wk change of -9.40%
+2025-01-19 13:29:03,450 - INFO - DBI: 1mo change of 14.48%
+2025-01-19 13:29:03,952 - INFO - Processing DBI - 2024-12-19 12:01:21 UTC
+2025-01-19 13:29:04,079 - INFO - Retrieved article length: 2149 characters
+2025-01-19 13:29:04,354 - INFO - DBRG: 1mo change of -12.07%
+2025-01-19 13:29:04,855 - INFO - Processing DBRG - 2024-12-12 15:30:14 UTC
+2025-01-19 13:29:05,343 - INFO - Retrieved article length: 6643 characters
+2025-01-19 13:29:05,430 - INFO - DBI: 1h change of -4.85%
+2025-01-19 13:29:05,529 - INFO - DBI: 1wk change of -6.74%
+2025-01-19 13:29:05,625 - INFO - DBI: 1mo change of 11.82%
+2025-01-19 13:29:06,026 - INFO - Retrieved article length: 1402 characters
+2025-01-19 13:29:06,110 - INFO - DBRG: 1h change of -1.92%
+2025-01-19 13:29:06,204 - INFO - DBRG: 1wk change of -16.79%
+2025-01-19 13:29:06,300 - INFO - DBRG: 1mo change of -14.89%
+2025-01-19 13:29:06,801 - INFO - Processing DBRG - 2024-11-19 00:30:00 UTC
+2025-01-19 13:29:07,232 - INFO - Processing DBVT - 2025-01-14 00:05:00 UTC
+2025-01-19 13:29:08,083 - INFO - Retrieved article length: 3885 characters
+2025-01-19 13:29:08,170 - INFO - DBRG: 1h change of -6.89%
+2025-01-19 13:29:08,262 - INFO - DBRG: 1wk change of 4.23%
+2025-01-19 13:29:08,356 - INFO - DBRG: 1mo change of -30.16%
+2025-01-19 13:29:08,422 - INFO - Retrieved article length: 3250 characters
+2025-01-19 13:29:08,509 - INFO - DBVT: 1h change of 3.17%
+2025-01-19 13:29:08,595 - INFO - DBVT: 1wk change of 31.71%
+2025-01-19 13:29:08,679 - INFO - DBVT: 1mo change of 29.42%
+2025-01-19 13:29:08,857 - INFO - Processing DBRG - 2024-11-02 16:59:47 UTC
+2025-01-19 13:29:09,181 - INFO - Processing DBVT - 2025-01-09 00:05:00 UTC
+2025-01-19 13:29:10,019 - INFO - Retrieved article length: 2076 characters
+2025-01-19 13:29:10,109 - INFO - DBRG: 1h change of -15.81%
+2025-01-19 13:29:10,218 - INFO - DBRG: 1wk change of -20.80%
+2025-01-19 13:29:10,327 - INFO - DBRG: 1mo change of -9.13%
+2025-01-19 13:29:10,493 - INFO - Retrieved article length: 14195 characters
+2025-01-19 13:29:10,582 - INFO - DBVT: 1h change of 49.79%
+2025-01-19 13:29:10,668 - INFO - DBVT: 1wk change of 41.84%
+2025-01-19 13:29:10,760 - INFO - DBVT: 1mo change of 21.99%
+2025-01-19 13:29:10,829 - INFO - Processing DBRG - 2024-11-01 14:15:00 UTC
+2025-01-19 13:29:11,261 - INFO - Processing DBVT - 2024-12-12 17:59:31 UTC
+2025-01-19 13:29:12,004 - INFO - Retrieved article length: 2457 characters
+2025-01-19 13:29:12,091 - INFO - DBRG: 1h change of -19.98%
+2025-01-19 13:29:12,189 - INFO - DBRG: 1wk change of -23.26%
+2025-01-19 13:29:12,287 - INFO - DBRG: 1mo change of -9.94%
+2025-01-19 13:29:12,511 - INFO - Retrieved article length: 2691 characters
+2025-01-19 13:29:12,637 - INFO - DBVT: 1h change of 6.23%
+2025-01-19 13:29:12,723 - INFO - DBVT: 1wk change of -19.65%
+2025-01-19 13:29:12,788 - INFO - Processing DBRG - 2024-10-28 12:00:00 UTC
+2025-01-19 13:29:12,809 - INFO - DBVT: 1mo change of 557.65%
+2025-01-19 13:29:13,310 - INFO - Processing DBVT - 2024-12-12 00:05:00 UTC
+2025-01-19 13:29:13,936 - INFO - Retrieved article length: 4042 characters
+2025-01-19 13:29:14,024 - INFO - DBRG: 1h change of -5.26%
+2025-01-19 13:29:14,113 - INFO - DBRG: 1wk change of -20.84%
+2025-01-19 13:29:14,205 - INFO - DBRG: 1mo change of -10.88%
+2025-01-19 13:29:14,511 - INFO - Retrieved article length: 14610 characters
+2025-01-19 13:29:14,522 - INFO - DBVT: 1h change of 6.23%
+2025-01-19 13:29:14,532 - INFO - DBVT: 1wk change of -19.65%
+2025-01-19 13:29:14,541 - INFO - DBVT: 1mo change of 557.65%
+2025-01-19 13:29:14,706 - INFO - Processing DBRG - 2024-10-21 15:30:00 UTC
+2025-01-19 13:29:15,041 - INFO - Processing DBVT - 2024-12-03 00:30:00 UTC
+2025-01-19 13:29:15,883 - INFO - Retrieved article length: 4106 characters
+2025-01-19 13:29:16,235 - INFO - DBRG: 1wk change of 5.22%
+2025-01-19 13:29:16,280 - INFO - Retrieved article length: 851 characters
+2025-01-19 13:29:16,368 - INFO - DBVT: 1h change of 3.10%
+2025-01-19 13:29:16,372 - INFO - DBRG: 1mo change of -14.73%
+2025-01-19 13:29:16,450 - INFO - DBVT: 1wk change of 668.00%
+2025-01-19 13:29:16,541 - INFO - DBVT: 1mo change of 313.41%
+2025-01-19 13:29:17,043 - INFO - Processing DBVT - 2024-11-12 00:30:00 UTC
+2025-01-19 13:29:18,026 - INFO - Processing DBX - 2025-01-16 02:15:23 UTC
+2025-01-19 13:29:18,255 - INFO - Retrieved article length: 6567 characters
+2025-01-19 13:29:18,350 - INFO - DBVT: 1h change of -8.15%
+2025-01-19 13:29:18,433 - INFO - DBVT: 1wk change of -37.44%
+2025-01-19 13:29:18,520 - INFO - DBVT: 1mo change of 356.74%
+2025-01-19 13:29:19,021 - INFO - Processing DBVT - 2024-11-07 20:07:28 UTC
+2025-01-19 13:29:19,175 - INFO - Retrieved article length: 3349 characters
+2025-01-19 13:29:19,266 - INFO - DBX: 1h change of 2.51%
+2025-01-19 13:29:19,350 - INFO - DBX: 1wk change of 1.73%
+2025-01-19 13:29:19,938 - INFO - Processing DBX - 2025-01-10 02:15:23 UTC
+2025-01-19 13:29:20,282 - INFO - Retrieved article length: 3829 characters
+2025-01-19 13:29:20,369 - INFO - DBVT: 1h change of -14.57%
+2025-01-19 13:29:20,452 - INFO - DBVT: 1wk change of -25.51%
+2025-01-19 13:29:20,536 - INFO - DBVT: 1mo change of 383.82%
+2025-01-19 13:29:21,037 - INFO - Processing DBVT - 2024-11-07 00:30:00 UTC
+2025-01-19 13:29:21,062 - INFO - Retrieved article length: 3242 characters
+2025-01-19 13:29:21,230 - INFO - DBX: 1wk change of 1.83%
+2025-01-19 13:29:21,313 - INFO - DBX: 1mo change of 5.26%
+2025-01-19 13:29:21,813 - INFO - Processing DBX - 2025-01-08 12:02:50 UTC
+2025-01-19 13:29:22,350 - INFO - Retrieved article length: 12139 characters
+2025-01-19 13:29:22,362 - INFO - DBVT: 1h change of -14.57%
+2025-01-19 13:29:22,370 - INFO - DBVT: 1wk change of -25.51%
+2025-01-19 13:29:22,378 - INFO - DBVT: 1mo change of 383.82%
+2025-01-19 13:29:22,989 - INFO - Retrieved article length: 6256 characters
+2025-01-19 13:29:23,074 - INFO - DBX: 1h change of -1.31%
+2025-01-19 13:29:23,155 - INFO - DBX: 1wk change of 1.12%
+2025-01-19 13:29:23,237 - INFO - DBX: 1mo change of 6.66%
+2025-01-19 13:29:23,738 - INFO - Processing DBX - 2025-01-06 16:13:00 UTC
+2025-01-19 13:29:24,159 - INFO - Processing DCGO - 2025-01-07 15:35:00 UTC
+2025-01-19 13:29:24,988 - INFO - Retrieved article length: 6196 characters
+2025-01-19 13:29:25,076 - INFO - DBX: 1h change of -1.87%
+2025-01-19 13:29:25,252 - INFO - DBX: 1mo change of 7.83%
+2025-01-19 13:29:25,391 - INFO - Retrieved article length: 2191 characters
+2025-01-19 13:29:25,485 - INFO - DCGO: 1h change of -1.51%
+2025-01-19 13:29:25,579 - INFO - DCGO: 1wk change of -1.16%
+2025-01-19 13:29:25,667 - INFO - DCGO: 1mo change of -1.65%
+2025-01-19 13:29:25,754 - INFO - Processing DBX - 2025-01-04 02:15:22 UTC
+2025-01-19 13:29:26,168 - INFO - Processing DCGO - 2024-12-19 15:45:11 UTC
+2025-01-19 13:29:26,880 - INFO - Retrieved article length: 3529 characters
+2025-01-19 13:29:27,046 - INFO - DBX: 1wk change of -3.71%
+2025-01-19 13:29:27,132 - INFO - DBX: 1mo change of 7.83%
+2025-01-19 13:29:27,445 - INFO - Retrieved article length: 2548 characters
+2025-01-19 13:29:27,543 - INFO - DCGO: 1h change of 4.15%
+2025-01-19 13:29:27,631 - INFO - DCGO: 1wk change of 6.31%
+2025-01-19 13:29:27,633 - INFO - Processing DBX - 2024-12-28 02:15:22 UTC
+2025-01-19 13:29:28,220 - INFO - Processing DCGO - 2024-12-18 15:35:00 UTC
+2025-01-19 13:29:28,821 - INFO - Retrieved article length: 3591 characters
+2025-01-19 13:29:29,011 - INFO - DBX: 1wk change of 2.49%
+2025-01-19 13:29:29,093 - INFO - DBX: 1mo change of 7.26%
+2025-01-19 13:29:29,382 - INFO - Retrieved article length: 8144 characters
+2025-01-19 13:29:29,471 - INFO - DCGO: 1h change of -1.02%
+2025-01-19 13:29:29,555 - INFO - DCGO: 1wk change of 6.31%
+2025-01-19 13:29:29,595 - INFO - Processing DBX - 2024-12-25 17:40:03 UTC
+2025-01-19 13:29:29,640 - INFO - DCGO: 1mo change of -1.42%
+2025-01-19 13:29:30,141 - INFO - Processing DCGO - 2024-12-16 13:07:58 UTC
+2025-01-19 13:29:30,779 - INFO - Retrieved article length: 1928 characters
+2025-01-19 13:29:30,868 - INFO - DBX: 1h change of 2.09%
+2025-01-19 13:29:30,952 - INFO - DBX: 1wk change of -1.48%
+2025-01-19 13:29:31,035 - INFO - DBX: 1mo change of 13.76%
+2025-01-19 13:29:31,336 - INFO - Retrieved article length: 4157 characters
+2025-01-19 13:29:31,512 - INFO - DCGO: 1wk change of 3.43%
+2025-01-19 13:29:31,536 - INFO - Processing DBX - 2024-12-19 19:43:00 UTC
+2025-01-19 13:29:31,596 - INFO - DCGO: 1mo change of 3.73%
+2025-01-19 13:29:32,097 - INFO - Processing DCGO - 2024-12-10 15:35:00 UTC
+2025-01-19 13:29:32,712 - INFO - Retrieved article length: 6663 characters
+2025-01-19 13:29:32,886 - INFO - DBX: 1wk change of 5.72%
+2025-01-19 13:29:32,967 - INFO - DBX: 1mo change of 10.55%
+2025-01-19 13:29:33,397 - INFO - Retrieved article length: 6490 characters
+2025-01-19 13:29:33,569 - INFO - DCGO: 1wk change of 1.40%
+2025-01-19 13:29:33,657 - INFO - DCGO: 1mo change of 15.85%
+2025-01-19 13:29:34,158 - INFO - Processing DCGO - 2024-12-04 15:35:00 UTC
+2025-01-19 13:29:34,622 - INFO - Processing DCI - 2025-01-14 19:07:00 UTC
+2025-01-19 13:29:35,511 - INFO - Retrieved article length: 7663 characters
+2025-01-19 13:29:35,598 - INFO - DCGO: 1h change of -4.30%
+2025-01-19 13:29:35,793 - INFO - Retrieved article length: 5707 characters
+2025-01-19 13:29:35,809 - INFO - DCGO: 1mo change of 21.97%
+2025-01-19 13:29:35,942 - INFO - DCI: 1h change of 4.41%
+2025-01-19 13:29:36,081 - INFO - DCI: 1wk change of 5.15%
+2025-01-19 13:29:36,227 - INFO - DCI: 1mo change of -2.09%
+2025-01-19 13:29:36,310 - INFO - Processing DCGO - 2024-11-26 15:35:00 UTC
+2025-01-19 13:29:36,728 - INFO - Processing DCI - 2025-01-14 17:40:13 UTC
+2025-01-19 13:29:37,513 - INFO - Retrieved article length: 5916 characters
+2025-01-19 13:29:37,616 - INFO - DCGO: 1h change of -1.35%
+2025-01-19 13:29:37,702 - INFO - DCGO: 1wk change of 2.75%
+2025-01-19 13:29:37,785 - INFO - DCGO: 1mo change of 26.69%
+2025-01-19 13:29:37,846 - INFO - Retrieved article length: 2304 characters
+2025-01-19 13:29:37,858 - INFO - DCI: 1h change of 4.41%
+2025-01-19 13:29:37,909 - INFO - DCI: 1wk change of 5.15%
+2025-01-19 13:29:37,969 - INFO - DCI: 1mo change of -2.09%
+2025-01-19 13:29:38,286 - INFO - Processing DCGO - 2024-11-25 16:11:22 UTC
+2025-01-19 13:29:38,470 - INFO - Processing DCI - 2025-01-13 17:45:13 UTC
+2025-01-19 13:29:39,594 - INFO - Retrieved article length: 7321 characters
+2025-01-19 13:29:39,666 - INFO - Retrieved article length: 2102 characters
+2025-01-19 13:29:39,679 - INFO - DCGO: 1h change of -3.38%
+2025-01-19 13:29:39,753 - INFO - DCI: 1h change of 3.05%
+2025-01-19 13:29:39,762 - INFO - DCGO: 1wk change of 2.69%
+2025-01-19 13:29:39,846 - INFO - DCGO: 1mo change of 28.07%
+2025-01-19 13:29:39,869 - INFO - DCI: 1wk change of 4.09%
+2025-01-19 13:29:39,985 - INFO - DCI: 1mo change of -2.08%
+2025-01-19 13:29:40,486 - INFO - Processing DCI - 2025-01-06 12:07:56 UTC
+2025-01-19 13:29:41,499 - INFO - Processing DCTH - 2025-01-13 16:00:00 UTC
+2025-01-19 13:29:41,711 - INFO - Retrieved article length: 5726 characters
+2025-01-19 13:29:41,797 - INFO - DCI: 1h change of -1.63%
+2025-01-19 13:29:41,912 - INFO - DCI: 1wk change of 1.66%
+2025-01-19 13:29:42,074 - INFO - DCI: 1mo change of -8.65%
+2025-01-19 13:29:42,576 - INFO - Processing DCI - 2025-01-01 17:41:40 UTC
+2025-01-19 13:29:42,647 - INFO - Retrieved article length: 7011 characters
+2025-01-19 13:29:42,732 - INFO - DCTH: 1h change of 5.01%
+2025-01-19 13:29:42,816 - INFO - DCTH: 1wk change of 12.94%
+2025-01-19 13:29:42,898 - INFO - DCTH: 1mo change of 23.58%
+2025-01-19 13:29:43,400 - INFO - Processing DCTH - 2025-01-04 00:01:00 UTC
+2025-01-19 13:29:43,777 - INFO - Retrieved article length: 7690 characters
+2025-01-19 13:29:43,977 - INFO - DCI: 1wk change of -1.76%
+2025-01-19 13:29:44,100 - INFO - DCI: 1mo change of -8.15%
+2025-01-19 13:29:44,602 - INFO - Processing DCI - 2024-12-26 17:45:10 UTC
+2025-01-19 13:29:44,653 - INFO - Retrieved article length: 3773 characters
+2025-01-19 13:29:44,744 - INFO - DCTH: 1h change of 5.59%
+2025-01-19 13:29:44,828 - INFO - DCTH: 1wk change of 6.85%
+2025-01-19 13:29:44,910 - INFO - DCTH: 1mo change of 13.21%
+2025-01-19 13:29:45,412 - INFO - Processing DCTH - 2024-12-30 16:00:00 UTC
+2025-01-19 13:29:45,746 - INFO - Retrieved article length: 2278 characters
+2025-01-19 13:29:45,958 - INFO - DCI: 1wk change of -5.08%
+2025-01-19 13:29:46,080 - INFO - DCI: 1mo change of -6.18%
+2025-01-19 13:29:46,581 - INFO - Processing DCI - 2024-12-25 17:40:11 UTC
+2025-01-19 13:29:46,631 - INFO - Retrieved article length: 5800 characters
+2025-01-19 13:29:46,719 - INFO - DCTH: 1h change of 5.60%
+2025-01-19 13:29:46,805 - INFO - DCTH: 1wk change of 9.54%
+2025-01-19 13:29:46,892 - INFO - DCTH: 1mo change of 36.35%
+2025-01-19 13:29:47,394 - INFO - Processing DCTH - 2024-12-30 14:01:38 UTC
+2025-01-19 13:29:47,783 - INFO - Retrieved article length: 2337 characters
+2025-01-19 13:29:47,868 - INFO - DCI: 1h change of 1.30%
+2025-01-19 13:29:48,032 - INFO - DCI: 1wk change of -5.08%
+2025-01-19 13:29:48,151 - INFO - DCI: 1mo change of -5.13%
+2025-01-19 13:29:48,549 - INFO - Retrieved article length: 6762 characters
+2025-01-19 13:29:48,559 - INFO - DCTH: 1h change of 5.60%
+2025-01-19 13:29:48,567 - INFO - DCTH: 1wk change of 9.54%
+2025-01-19 13:29:48,620 - INFO - DCTH: 1mo change of 36.35%
+2025-01-19 13:29:48,653 - INFO - Processing DCI - 2024-12-19 12:04:31 UTC
+2025-01-19 13:29:49,121 - INFO - Processing DCTH - 2024-12-29 16:10:15 UTC
+2025-01-19 13:29:49,931 - INFO - Retrieved article length: 3688 characters
+2025-01-19 13:29:50,037 - INFO - DCI: 1h change of -4.79%
+2025-01-19 13:29:50,190 - INFO - DCI: 1wk change of -6.28%
+2025-01-19 13:29:50,285 - INFO - Retrieved article length: 3980 characters
+2025-01-19 13:29:50,323 - INFO - DCI: 1mo change of -7.23%
+2025-01-19 13:29:50,375 - INFO - DCTH: 1h change of 3.20%
+2025-01-19 13:29:50,472 - INFO - DCTH: 1wk change of 10.02%
+2025-01-19 13:29:50,562 - INFO - DCTH: 1mo change of 36.35%
+2025-01-19 13:29:51,063 - INFO - Processing DCTH - 2024-12-02 16:30:00 UTC
+2025-01-19 13:29:51,941 - INFO - Processing DD - 2025-01-17 16:32:00 UTC
+2025-01-19 13:29:52,252 - INFO - Retrieved article length: 5215 characters
+2025-01-19 13:29:52,424 - INFO - DCTH: 1wk change of 25.72%
+2025-01-19 13:29:52,510 - INFO - DCTH: 1mo change of 20.67%
+2025-01-19 13:29:53,011 - INFO - Processing DCTH - 2024-12-02 13:32:25 UTC
+2025-01-19 13:29:53,087 - INFO - Retrieved article length: 3070 characters
+2025-01-19 13:29:53,178 - INFO - DD: 1h change of 1.96%
+2025-01-19 13:29:53,328 - INFO - DD: 1wk change of 3.18%
+2025-01-19 13:29:53,473 - INFO - DD: 1mo change of -4.17%
+2025-01-19 13:29:53,974 - INFO - Processing DD - 2025-01-17 15:11:39 UTC
+2025-01-19 13:29:54,210 - INFO - Retrieved article length: 3911 characters
+2025-01-19 13:29:54,231 - INFO - DCTH: 1wk change of 25.72%
+2025-01-19 13:29:54,238 - INFO - DCTH: 1mo change of 20.67%
+2025-01-19 13:29:54,739 - INFO - Processing DCTH - 2024-11-10 16:08:00 UTC
+2025-01-19 13:29:55,222 - INFO - Retrieved article length: 521 characters
+2025-01-19 13:29:55,252 - INFO - DD: 1h change of 1.96%
+2025-01-19 13:29:55,309 - INFO - DD: 1wk change of 3.18%
+2025-01-19 13:29:55,362 - INFO - DD: 1mo change of -4.17%
+2025-01-19 13:29:55,863 - INFO - Processing DD - 2025-01-17 00:33:00 UTC
+2025-01-19 13:29:55,895 - INFO - Retrieved article length: 2104 characters
+2025-01-19 13:29:55,981 - INFO - DCTH: 1h change of -15.75%
+2025-01-19 13:29:56,063 - INFO - DCTH: 1wk change of -9.00%
+2025-01-19 13:29:56,149 - INFO - DCTH: 1mo change of 42.14%
+2025-01-19 13:29:57,115 - INFO - Retrieved article length: 165 characters
+2025-01-19 13:29:57,127 - INFO - DD: 1h change of 1.96%
+2025-01-19 13:29:57,179 - INFO - DD: 1wk change of 3.18%
+2025-01-19 13:29:57,233 - INFO - DD: 1mo change of -4.17%
+2025-01-19 13:29:57,735 - INFO - Processing DD - 2025-01-16 19:16:33 UTC
+2025-01-19 13:29:57,803 - INFO - Processing DDD - 2025-01-14 23:23:37 UTC
+2025-01-19 13:29:58,893 - INFO - Retrieved article length: 536 characters
+2025-01-19 13:29:59,003 - INFO - DD: 1h change of 3.52%
+2025-01-19 13:29:59,020 - INFO - Retrieved article length: 8287 characters
+2025-01-19 13:29:59,108 - INFO - DDD: 1h change of 2.64%
+2025-01-19 13:29:59,152 - INFO - DD: 1wk change of 2.94%
+2025-01-19 13:29:59,202 - INFO - DDD: 1wk change of -10.47%
+2025-01-19 13:29:59,289 - INFO - DDD: 1mo change of -6.67%
+2025-01-19 13:29:59,293 - INFO - DD: 1mo change of -5.01%
+2025-01-19 13:29:59,790 - INFO - Processing DDD - 2025-01-13 16:30:00 UTC
+2025-01-19 13:29:59,794 - INFO - Processing DD - 2025-01-16 19:13:18 UTC
+2025-01-19 13:30:00,934 - INFO - Retrieved article length: 6516 characters
+2025-01-19 13:30:01,110 - INFO - DDD: 1wk change of -9.14%
+2025-01-19 13:30:01,148 - INFO - Retrieved article length: 1787 characters
+2025-01-19 13:30:01,162 - INFO - DD: 1h change of 3.52%
+2025-01-19 13:30:01,200 - INFO - DDD: 1mo change of -5.52%
+2025-01-19 13:30:01,213 - INFO - DD: 1wk change of 2.94%
+2025-01-19 13:30:01,268 - INFO - DD: 1mo change of -5.01%
+2025-01-19 13:30:01,702 - INFO - Processing DDD - 2025-01-07 16:12:30 UTC
+2025-01-19 13:30:01,769 - INFO - Processing DD - 2025-01-16 01:43:00 UTC
+2025-01-19 13:30:02,997 - INFO - Retrieved article length: 7085 characters
+2025-01-19 13:30:03,085 - INFO - DDD: 1h change of -5.68%
+2025-01-19 13:30:03,169 - INFO - DDD: 1wk change of -5.18%
+2025-01-19 13:30:03,251 - INFO - DDD: 1mo change of 13.24%
+2025-01-19 13:30:03,738 - INFO - Retrieved article length: 260 characters
+2025-01-19 13:30:03,751 - INFO - DD: 1h change of 3.52%
+2025-01-19 13:30:03,753 - INFO - Processing DDD - 2025-01-07 00:10:00 UTC
+2025-01-19 13:30:03,804 - INFO - DD: 1wk change of 2.94%
+2025-01-19 13:30:03,856 - INFO - DD: 1mo change of -5.01%
+2025-01-19 13:30:04,356 - INFO - Processing DD - 2025-01-16 01:10:05 UTC
+2025-01-19 13:30:04,991 - INFO - Retrieved article length: 1933 characters
+2025-01-19 13:30:05,002 - INFO - DDD: 1h change of -5.68%
+2025-01-19 13:30:05,011 - INFO - DDD: 1wk change of -5.18%
+2025-01-19 13:30:05,065 - INFO - DDD: 1mo change of 13.24%
+2025-01-19 13:30:05,505 - INFO - Retrieved article length: 517 characters
+2025-01-19 13:30:05,519 - INFO - DD: 1h change of 3.52%
+2025-01-19 13:30:05,566 - INFO - Processing DDD - 2024-12-27 13:02:55 UTC
+2025-01-19 13:30:05,569 - INFO - DD: 1wk change of 2.94%
+2025-01-19 13:30:05,623 - INFO - DD: 1mo change of -5.01%
+2025-01-19 13:30:06,123 - INFO - Processing DD - 2025-01-16 00:42:12 UTC
+2025-01-19 13:30:06,713 - INFO - Retrieved article length: 7021 characters
+2025-01-19 13:30:06,803 - INFO - DDD: 1h change of -1.87%
+2025-01-19 13:30:06,906 - INFO - DDD: 1wk change of -10.79%
+2025-01-19 13:30:06,990 - INFO - DDD: 1mo change of -3.75%
+2025-01-19 13:30:07,300 - INFO - Retrieved article length: 2147 characters
+2025-01-19 13:30:07,312 - INFO - DD: 1h change of 3.52%
+2025-01-19 13:30:07,364 - INFO - DD: 1wk change of 2.94%
+2025-01-19 13:30:07,418 - INFO - DD: 1mo change of -5.01%
+2025-01-19 13:30:07,492 - INFO - Processing DDD - 2024-12-26 19:30:19 UTC
+2025-01-19 13:30:08,668 - INFO - Retrieved article length: 4457 characters
+2025-01-19 13:30:08,755 - INFO - DDD: 1h change of -3.39%
+2025-01-19 13:30:08,842 - INFO - DDD: 1wk change of -14.39%
+2025-01-19 13:30:08,927 - INFO - DDD: 1mo change of -4.35%
+2025-01-19 13:30:09,070 - INFO - Processing DDOG - 2025-01-18 01:45:20 UTC
+2025-01-19 13:30:09,428 - INFO - Processing DDD - 2024-12-23 12:06:54 UTC
+2025-01-19 13:30:10,293 - INFO - Retrieved article length: 3349 characters
+2025-01-19 13:30:10,388 - INFO - DDOG: 1h change of 1.76%
+2025-01-19 13:30:10,469 - INFO - DDOG: 1wk change of -2.45%
+2025-01-19 13:30:10,549 - INFO - DDOG: 1mo change of -11.18%
+2025-01-19 13:30:10,700 - INFO - Retrieved article length: 4463 characters
+2025-01-19 13:30:10,791 - INFO - DDD: 1h change of 5.21%
+2025-01-19 13:30:10,876 - INFO - DDD: 1wk change of -17.38%
+2025-01-19 13:30:10,960 - INFO - DDD: 1mo change of 4.05%
+2025-01-19 13:30:11,050 - INFO - Processing DDOG - 2025-01-18 00:17:36 UTC
+2025-01-19 13:30:11,461 - INFO - Processing DDD - 2024-12-12 20:10:59 UTC
+2025-01-19 13:30:12,258 - INFO - Retrieved article length: 517 characters
+2025-01-19 13:30:12,315 - INFO - DDOG: 1h change of 1.76%
+2025-01-19 13:30:12,369 - INFO - DDOG: 1wk change of -2.45%
+2025-01-19 13:30:12,423 - INFO - DDOG: 1mo change of -11.18%
+2025-01-19 13:30:12,597 - INFO - Retrieved article length: 2618 characters
+2025-01-19 13:30:12,684 - INFO - DDD: 1h change of 22.91%
+2025-01-19 13:30:12,771 - INFO - DDD: 1wk change of 25.45%
+2025-01-19 13:30:12,855 - INFO - DDD: 1mo change of -8.53%
+2025-01-19 13:30:12,924 - INFO - Processing DDOG - 2025-01-17 17:16:00 UTC
+2025-01-19 13:30:14,296 - INFO - Retrieved article length: 6798 characters
+2025-01-19 13:30:14,397 - INFO - DDOG: 1h change of -4.15%
+2025-01-19 13:30:14,478 - INFO - DDOG: 1wk change of -2.12%
+2025-01-19 13:30:14,494 - INFO - Processing DE - 2025-01-17 21:25:00 UTC
+2025-01-19 13:30:14,566 - INFO - DDOG: 1mo change of -9.56%
+2025-01-19 13:30:15,067 - INFO - Processing DDOG - 2025-01-16 20:03:58 UTC
+2025-01-19 13:30:15,741 - INFO - Retrieved article length: 495 characters
+2025-01-19 13:30:15,836 - INFO - DE: 1h change of 5.12%
+2025-01-19 13:30:15,979 - INFO - DE: 1wk change of 10.20%
+2025-01-19 13:30:16,125 - INFO - DE: 1mo change of 3.80%
+2025-01-19 13:30:16,407 - INFO - Retrieved article length: 520 characters
+2025-01-19 13:30:16,588 - INFO - DDOG: 1wk change of -5.23%
+2025-01-19 13:30:16,626 - INFO - Processing DE - 2025-01-16 14:51:34 UTC
+2025-01-19 13:30:16,685 - INFO - DDOG: 1mo change of -11.70%
+2025-01-19 13:30:17,187 - INFO - Processing DDOG - 2025-01-16 20:00:11 UTC
+2025-01-19 13:30:17,892 - INFO - Retrieved article length: 4042 characters
+2025-01-19 13:30:17,985 - INFO - DE: 1h change of 6.26%
+2025-01-19 13:30:18,127 - INFO - DE: 1wk change of 8.96%
+2025-01-19 13:30:18,282 - INFO - DE: 1mo change of 4.03%
+2025-01-19 13:30:18,403 - INFO - Retrieved article length: 4604 characters
+2025-01-19 13:30:18,467 - INFO - DDOG: 1wk change of -5.23%
+2025-01-19 13:30:18,519 - INFO - DDOG: 1mo change of -11.70%
+2025-01-19 13:30:18,782 - INFO - Processing DE - 2025-01-16 14:32:30 UTC
+2025-01-19 13:30:19,020 - INFO - Processing DDOG - 2025-01-16 19:07:34 UTC
+2025-01-19 13:30:19,980 - INFO - Retrieved article length: 525 characters
+2025-01-19 13:30:19,993 - INFO - DE: 1h change of 6.26%
+2025-01-19 13:30:20,046 - INFO - DE: 1wk change of 8.96%
+2025-01-19 13:30:20,100 - INFO - DE: 1mo change of 4.03%
+2025-01-19 13:30:20,123 - INFO - Retrieved article length: 1651 characters
+2025-01-19 13:30:20,187 - INFO - DDOG: 1wk change of -5.23%
+2025-01-19 13:30:20,238 - INFO - DDOG: 1mo change of -11.70%
+2025-01-19 13:30:20,601 - INFO - Processing DE - 2025-01-16 01:45:21 UTC
+2025-01-19 13:30:20,739 - INFO - Processing DDOG - 2025-01-16 19:01:17 UTC
+2025-01-19 13:30:21,814 - INFO - Retrieved article length: 3536 characters
+2025-01-19 13:30:21,825 - INFO - DE: 1h change of 6.26%
+2025-01-19 13:30:21,878 - INFO - DE: 1wk change of 8.96%
+2025-01-19 13:30:21,933 - INFO - DE: 1mo change of 4.03%
+2025-01-19 13:30:21,962 - INFO - Retrieved article length: 2147 characters
+2025-01-19 13:30:22,026 - INFO - DDOG: 1wk change of -5.23%
+2025-01-19 13:30:22,078 - INFO - DDOG: 1mo change of -11.70%
+2025-01-19 13:30:22,434 - INFO - Processing DE - 2025-01-16 01:28:00 UTC
+2025-01-19 13:30:22,579 - INFO - Processing DDOG - 2025-01-16 18:40:04 UTC
+2025-01-19 13:30:23,643 - INFO - Retrieved article length: 135 characters
+2025-01-19 13:30:23,657 - INFO - DE: 1h change of 6.26%
+2025-01-19 13:30:23,711 - INFO - DE: 1wk change of 8.96%
+2025-01-19 13:30:23,766 - INFO - DE: 1mo change of 4.03%
+2025-01-19 13:30:23,787 - INFO - Retrieved article length: 2427 characters
+2025-01-19 13:30:23,852 - INFO - DDOG: 1wk change of -5.23%
+2025-01-19 13:30:23,904 - INFO - DDOG: 1mo change of -11.70%
+2025-01-19 13:30:24,267 - INFO - Processing DE - 2025-01-15 19:29:03 UTC
+2025-01-19 13:30:25,480 - INFO - Retrieved article length: 520 characters
+2025-01-19 13:30:25,572 - INFO - DE: 1h change of 4.21%
+2025-01-19 13:30:25,580 - INFO - Processing DEA - 2025-01-17 19:04:23 UTC
+2025-01-19 13:30:25,738 - INFO - DE: 1wk change of 8.96%
+2025-01-19 13:30:25,917 - INFO - DE: 1mo change of 2.04%
+2025-01-19 13:30:26,418 - INFO - Processing DE - 2025-01-15 15:17:43 UTC
+2025-01-19 13:30:26,807 - INFO - Retrieved article length: 545 characters
+2025-01-19 13:30:26,985 - INFO - DEA: 1wk change of 1.50%
+2025-01-19 13:30:27,077 - INFO - DEA: 1mo change of -1.87%
+2025-01-19 13:30:27,579 - INFO - Processing DEA - 2025-01-14 16:00:00 UTC
+2025-01-19 13:30:27,642 - INFO - Retrieved article length: 525 characters
+2025-01-19 13:30:27,654 - INFO - DE: 1h change of 4.21%
+2025-01-19 13:30:27,707 - INFO - DE: 1wk change of 8.96%
+2025-01-19 13:30:27,762 - INFO - DE: 1mo change of 2.04%
+2025-01-19 13:30:28,263 - INFO - Processing DE - 2025-01-15 14:36:32 UTC
+2025-01-19 13:30:28,837 - INFO - Retrieved article length: 4804 characters
+2025-01-19 13:30:28,928 - INFO - DEA: 1h change of 3.56%
+2025-01-19 13:30:29,160 - INFO - DEA: 1mo change of -1.12%
+2025-01-19 13:30:29,428 - INFO - Retrieved article length: 519 characters
+2025-01-19 13:30:29,438 - INFO - DE: 1h change of 4.21%
+2025-01-19 13:30:29,492 - INFO - DE: 1wk change of 8.96%
+2025-01-19 13:30:29,545 - INFO - DE: 1mo change of 2.04%
+2025-01-19 13:30:29,661 - INFO - Processing DEA - 2024-12-11 16:00:00 UTC
+2025-01-19 13:30:30,870 - INFO - Retrieved article length: 1822 characters
+2025-01-19 13:30:31,085 - INFO - DEA: 1wk change of -8.44%
+2025-01-19 13:30:31,173 - INFO - Processing DECK - 2025-01-17 17:05:00 UTC
+2025-01-19 13:30:31,179 - INFO - DEA: 1mo change of -14.27%
+2025-01-19 13:30:31,681 - INFO - Processing DEA - 2024-12-09 17:35:06 UTC
+2025-01-19 13:30:32,443 - INFO - Retrieved article length: 1715 characters
+2025-01-19 13:30:32,622 - INFO - DECK: 1wk change of 2.35%
+2025-01-19 13:30:32,717 - INFO - DECK: 1mo change of 1.59%
+2025-01-19 13:30:32,857 - INFO - Retrieved article length: 3041 characters
+2025-01-19 13:30:33,035 - INFO - DEA: 1wk change of -10.15%
+2025-01-19 13:30:33,127 - INFO - DEA: 1mo change of -15.20%
+2025-01-19 13:30:33,218 - INFO - Processing DECK - 2025-01-16 20:33:00 UTC
+2025-01-19 13:30:33,628 - INFO - Processing DEA - 2024-12-03 16:00:00 UTC
+2025-01-19 13:30:34,579 - INFO - Retrieved article length: 4849 characters
+2025-01-19 13:30:34,855 - INFO - DECK: 1mo change of 3.06%
+2025-01-19 13:30:35,019 - INFO - Retrieved article length: 4486 characters
+2025-01-19 13:30:35,107 - INFO - DEA: 1h change of -3.06%
+2025-01-19 13:30:35,200 - INFO - DEA: 1wk change of -6.32%
+2025-01-19 13:30:35,296 - INFO - DEA: 1mo change of -15.01%
+2025-01-19 13:30:35,356 - INFO - Processing DECK - 2025-01-16 17:52:47 UTC
+2025-01-19 13:30:35,797 - INFO - Processing DEA - 2024-11-25 19:16:00 UTC
+2025-01-19 13:30:36,498 - INFO - Retrieved article length: 532 characters
+2025-01-19 13:30:36,617 - INFO - DECK: 1mo change of 3.06%
+2025-01-19 13:30:37,118 - INFO - Processing DECK - 2025-01-16 17:17:00 UTC
+2025-01-19 13:30:37,338 - INFO - Retrieved article length: 3438 characters
+2025-01-19 13:30:37,422 - INFO - DEA: 1h change of -1.66%
+2025-01-19 13:30:37,513 - INFO - DEA: 1wk change of -1.41%
+2025-01-19 13:30:37,605 - INFO - DEA: 1mo change of -18.83%
+2025-01-19 13:30:38,106 - INFO - Processing DEA - 2024-11-22 17:51:31 UTC
+2025-01-19 13:30:38,263 - INFO - Retrieved article length: 5530 characters
+2025-01-19 13:30:38,380 - INFO - DECK: 1mo change of 3.06%
+2025-01-19 13:30:38,881 - INFO - Processing DECK - 2025-01-16 16:54:00 UTC
+2025-01-19 13:30:39,417 - INFO - Retrieved article length: 471 characters
+2025-01-19 13:30:39,502 - INFO - DEA: 1h change of 3.15%
+2025-01-19 13:30:39,599 - INFO - DEA: 1wk change of -5.02%
+2025-01-19 13:30:39,691 - INFO - DEA: 1mo change of -20.79%
+2025-01-19 13:30:40,039 - INFO - Retrieved article length: 2373 characters
+2025-01-19 13:30:40,171 - INFO - DECK: 1mo change of 3.06%
+2025-01-19 13:30:40,193 - INFO - Processing DEA - 2024-11-22 17:00:00 UTC
+2025-01-19 13:30:40,672 - INFO - Processing DECK - 2025-01-16 11:41:00 UTC
+2025-01-19 13:30:41,791 - INFO - Retrieved article length: 7538 characters
+2025-01-19 13:30:41,824 - INFO - Retrieved article length: 5095 characters
+2025-01-19 13:30:41,834 - INFO - DEA: 1h change of 3.15%
+2025-01-19 13:30:41,842 - INFO - DEA: 1wk change of -5.02%
+2025-01-19 13:30:41,852 - INFO - DEA: 1mo change of -20.79%
+2025-01-19 13:30:41,908 - INFO - DECK: 1mo change of 3.06%
+2025-01-19 13:30:42,409 - INFO - Processing DECK - 2025-01-16 01:50:20 UTC
+2025-01-19 13:30:43,591 - INFO - Retrieved article length: 3541 characters
+2025-01-19 13:30:43,632 - INFO - Processing DEI - 2025-01-15 15:18:51 UTC
+2025-01-19 13:30:43,711 - INFO - DECK: 1mo change of 3.06%
+2025-01-19 13:30:44,212 - INFO - Processing DECK - 2025-01-15 17:00:00 UTC
+2025-01-19 13:30:44,708 - INFO - Retrieved article length: 530 characters
+2025-01-19 13:30:44,797 - INFO - DEI: 1h change of 5.80%
+2025-01-19 13:30:44,906 - INFO - DEI: 1wk change of -4.27%
+2025-01-19 13:30:45,014 - INFO - DEI: 1mo change of -10.06%
+2025-01-19 13:30:45,475 - INFO - Retrieved article length: 5131 characters
+2025-01-19 13:30:45,515 - INFO - Processing DEI - 2025-01-13 15:43:13 UTC
+2025-01-19 13:30:45,610 - INFO - DECK: 1h change of 3.65%
+2025-01-19 13:30:45,786 - INFO - DECK: 1mo change of 2.42%
+2025-01-19 13:30:46,735 - INFO - Retrieved article length: 521 characters
+2025-01-19 13:30:46,827 - INFO - DEI: 1h change of 5.52%
+2025-01-19 13:30:46,929 - INFO - DEI: 1wk change of -7.60%
+2025-01-19 13:30:47,032 - INFO - DEI: 1mo change of -11.10%
+2025-01-19 13:30:47,406 - INFO - Processing DELL - 2025-01-17 14:00:30 UTC
+2025-01-19 13:30:47,532 - INFO - Processing DEI - 2025-01-03 01:50:00 UTC
+2025-01-19 13:30:48,550 - INFO - Retrieved article length: 7770 characters
+2025-01-19 13:30:48,729 - INFO - Retrieved article length: 3277 characters
+2025-01-19 13:30:48,735 - INFO - DELL: 1wk change of -9.59%
+2025-01-19 13:30:48,818 - INFO - DEI: 1h change of 1.09%
+2025-01-19 13:30:48,823 - INFO - DELL: 1mo change of -7.44%
+2025-01-19 13:30:48,925 - INFO - DEI: 1wk change of -13.24%
+2025-01-19 13:30:49,039 - INFO - DEI: 1mo change of -8.67%
+2025-01-19 13:30:49,324 - INFO - Processing DELL - 2025-01-17 02:15:00 UTC
+2025-01-19 13:30:49,540 - INFO - Processing DEI - 2025-01-02 14:31:11 UTC
+2025-01-19 13:30:50,798 - INFO - Retrieved article length: 530 characters
+2025-01-19 13:30:50,888 - INFO - DEI: 1h change of 1.80%
+2025-01-19 13:30:50,997 - INFO - DEI: 1wk change of -11.31%
+2025-01-19 13:30:51,100 - INFO - DEI: 1mo change of -8.67%
+2025-01-19 13:30:51,421 - INFO - Retrieved article length: 560 characters
+2025-01-19 13:30:51,495 - INFO - DELL: 1wk change of -9.59%
+2025-01-19 13:30:51,548 - INFO - DELL: 1mo change of -7.44%
+2025-01-19 13:30:51,601 - INFO - Processing DEI - 2024-12-14 01:15:00 UTC
+2025-01-19 13:30:52,049 - INFO - Processing DELL - 2025-01-16 21:37:26 UTC
+2025-01-19 13:30:52,993 - INFO - Retrieved article length: 2492 characters
+2025-01-19 13:30:53,084 - INFO - DEI: 1h change of 1.65%
+2025-01-19 13:30:53,192 - INFO - DEI: 1wk change of -4.66%
+2025-01-19 13:30:53,194 - INFO - Retrieved article length: 6854 characters
+2025-01-19 13:30:53,298 - INFO - DEI: 1mo change of -7.09%
+2025-01-19 13:30:53,390 - INFO - DELL: 1wk change of -12.05%
+2025-01-19 13:30:53,483 - INFO - DELL: 1mo change of -8.00%
+2025-01-19 13:30:53,800 - INFO - Processing DEI - 2024-11-14 15:21:29 UTC
+2025-01-19 13:30:53,983 - INFO - Processing DELL - 2025-01-16 16:45:00 UTC
+2025-01-19 13:30:55,268 - INFO - Retrieved article length: 4974 characters
+2025-01-19 13:30:55,269 - INFO - Retrieved article length: 563 characters
+2025-01-19 13:30:55,336 - INFO - DELL: 1wk change of -12.05%
+2025-01-19 13:30:55,356 - INFO - DEI: 1h change of -2.49%
+2025-01-19 13:30:55,389 - INFO - DELL: 1mo change of -8.00%
+2025-01-19 13:30:55,459 - INFO - DEI: 1wk change of 7.33%
+2025-01-19 13:30:55,559 - INFO - DEI: 1mo change of 7.67%
+2025-01-19 13:30:55,890 - INFO - Processing DELL - 2025-01-16 12:19:37 UTC
+2025-01-19 13:30:56,060 - INFO - Processing DEI - 2024-11-12 15:11:24 UTC
+2025-01-19 13:30:57,031 - INFO - Retrieved article length: 496 characters
+2025-01-19 13:30:57,097 - INFO - DELL: 1wk change of -12.05%
+2025-01-19 13:30:57,151 - INFO - DELL: 1mo change of -8.00%
+2025-01-19 13:30:57,218 - INFO - Retrieved article length: 1102 characters
+2025-01-19 13:30:57,305 - INFO - DEI: 1h change of -6.71%
+2025-01-19 13:30:57,405 - INFO - DEI: 1wk change of 5.72%
+2025-01-19 13:30:57,516 - INFO - DEI: 1mo change of 16.35%
+2025-01-19 13:30:57,652 - INFO - Processing DELL - 2025-01-16 11:35:40 UTC
+2025-01-19 13:30:58,017 - INFO - Processing DEI - 2024-11-06 13:50:12 UTC
+2025-01-19 13:30:58,843 - INFO - Retrieved article length: 6446 characters
+2025-01-19 13:30:58,910 - INFO - DELL: 1wk change of -12.05%
+2025-01-19 13:30:58,962 - INFO - DELL: 1mo change of -8.00%
+2025-01-19 13:30:59,225 - INFO - Retrieved article length: 33147 characters
+2025-01-19 13:30:59,309 - INFO - DEI: 1h change of 6.90%
+2025-01-19 13:30:59,412 - INFO - DEI: 1wk change of 1.49%
+2025-01-19 13:30:59,463 - INFO - Processing DELL - 2025-01-16 02:28:00 UTC
+2025-01-19 13:30:59,516 - INFO - DEI: 1mo change of 11.08%
+2025-01-19 13:31:00,644 - INFO - Retrieved article length: 8265 characters
+2025-01-19 13:31:00,711 - INFO - DELL: 1wk change of -12.05%
+2025-01-19 13:31:00,763 - INFO - DELL: 1mo change of -8.00%
+2025-01-19 13:31:01,168 - INFO - Processing DENN - 2025-01-16 18:47:18 UTC
+2025-01-19 13:31:01,265 - INFO - Processing DELL - 2025-01-15 17:30:12 UTC
+2025-01-19 13:31:02,298 - INFO - Retrieved article length: 3923 characters
+2025-01-19 13:31:02,399 - INFO - DENN: 1h change of 4.49%
+2025-01-19 13:31:02,484 - INFO - DENN: 1wk change of -7.34%
+2025-01-19 13:31:02,512 - INFO - Retrieved article length: 5304 characters
+2025-01-19 13:31:02,566 - INFO - DENN: 1mo change of -5.12%
+2025-01-19 13:31:02,600 - INFO - DELL: 1h change of 1.72%
+2025-01-19 13:31:02,685 - INFO - DELL: 1wk change of -12.05%
+2025-01-19 13:31:02,771 - INFO - DELL: 1mo change of -7.62%
+2025-01-19 13:31:03,067 - INFO - Processing DENN - 2025-01-14 17:04:00 UTC
+2025-01-19 13:31:04,270 - INFO - Retrieved article length: 7650 characters
+2025-01-19 13:31:04,358 - INFO - DENN: 1h change of 6.31%
+2025-01-19 13:31:04,394 - INFO - Processing DERM - 2024-11-15 14:17:12 UTC
+2025-01-19 13:31:04,447 - INFO - DENN: 1wk change of -7.34%
+2025-01-19 13:31:04,530 - INFO - DENN: 1mo change of -6.91%
+2025-01-19 13:31:05,031 - INFO - Processing DENN - 2025-01-13 17:54:08 UTC
+2025-01-19 13:31:05,610 - INFO - Retrieved article length: 4359 characters
+2025-01-19 13:31:05,731 - INFO - DERM: 1h change of -2.35%
+2025-01-19 13:31:05,815 - INFO - DERM: 1wk change of 1.70%
+2025-01-19 13:31:05,901 - INFO - DERM: 1mo change of -20.24%
+2025-01-19 13:31:06,245 - INFO - Retrieved article length: 1810 characters
+2025-01-19 13:31:06,329 - INFO - DENN: 1h change of 1.08%
+2025-01-19 13:31:06,402 - INFO - Processing DERM - 2024-11-13 01:25:04 UTC
+2025-01-19 13:31:06,423 - INFO - DENN: 1wk change of -7.49%
+2025-01-19 13:31:06,512 - INFO - DENN: 1mo change of -2.31%
+2025-01-19 13:31:07,012 - INFO - Processing DENN - 2025-01-13 15:00:00 UTC
+2025-01-19 13:31:07,606 - INFO - Retrieved article length: 4227 characters
+2025-01-19 13:31:07,696 - INFO - DERM: 1h change of -9.14%
+2025-01-19 13:31:07,864 - INFO - DERM: 1mo change of -18.82%
+2025-01-19 13:31:08,263 - INFO - Retrieved article length: 10555 characters
+2025-01-19 13:31:08,271 - INFO - DENN: 1h change of 1.08%
+2025-01-19 13:31:08,325 - INFO - DENN: 1wk change of -7.49%
+2025-01-19 13:31:08,365 - INFO - Processing DERM - 2024-11-13 00:01:00 UTC
+2025-01-19 13:31:08,377 - INFO - DENN: 1mo change of -2.31%
+2025-01-19 13:31:08,877 - INFO - Processing DENN - 2025-01-11 02:23:00 UTC
+2025-01-19 13:31:09,779 - INFO - Retrieved article length: 19254 characters
+2025-01-19 13:31:09,790 - INFO - DERM: 1h change of -9.14%
+2025-01-19 13:31:09,805 - INFO - DERM: 1mo change of -18.82%
+2025-01-19 13:31:10,108 - INFO - Retrieved article length: 1349 characters
+2025-01-19 13:31:10,193 - INFO - DENN: 1h change of -1.40%
+2025-01-19 13:31:10,277 - INFO - DENN: 1wk change of -5.42%
+2025-01-19 13:31:10,307 - INFO - Processing DERM - 2024-11-05 19:29:41 UTC
+2025-01-19 13:31:10,360 - INFO - DENN: 1mo change of -2.31%
+2025-01-19 13:31:10,860 - INFO - Processing DENN - 2025-01-06 16:00:00 UTC
+2025-01-19 13:31:11,679 - INFO - Retrieved article length: 3170 characters
+2025-01-19 13:31:11,862 - INFO - DERM: 1wk change of -15.33%
+2025-01-19 13:31:11,949 - INFO - DERM: 1mo change of -11.19%
+2025-01-19 13:31:12,097 - INFO - Retrieved article length: 2050 characters
+2025-01-19 13:31:12,185 - INFO - DENN: 1h change of -5.46%
+2025-01-19 13:31:12,264 - INFO - DENN: 1wk change of -3.12%
+2025-01-19 13:31:12,348 - INFO - DENN: 1mo change of -9.05%
+2025-01-19 13:31:12,450 - INFO - Processing DERM - 2024-11-04 19:12:22 UTC
+2025-01-19 13:31:12,849 - INFO - Processing DENN - 2024-12-31 15:47:17 UTC
+2025-01-19 13:31:13,747 - INFO - Retrieved article length: 447 characters
+2025-01-19 13:31:13,837 - INFO - DERM: 1h change of -4.17%
+2025-01-19 13:31:13,921 - INFO - DERM: 1wk change of -11.11%
+2025-01-19 13:31:14,006 - INFO - DERM: 1mo change of -5.31%
+2025-01-19 13:31:14,050 - INFO - Retrieved article length: 7828 characters
+2025-01-19 13:31:14,136 - INFO - DENN: 1h change of 2.37%
+2025-01-19 13:31:14,305 - INFO - DENN: 1mo change of -6.32%
+2025-01-19 13:31:14,507 - INFO - Processing DERM - 2024-11-04 15:18:00 UTC
+2025-01-19 13:31:14,806 - INFO - Processing DENN - 2024-12-20 12:03:29 UTC
+2025-01-19 13:31:15,885 - INFO - Retrieved article length: 2798 characters
+2025-01-19 13:31:15,899 - INFO - DERM: 1h change of -4.17%
+2025-01-19 13:31:15,911 - INFO - DERM: 1wk change of -11.11%
+2025-01-19 13:31:15,921 - INFO - DERM: 1mo change of -5.31%
+2025-01-19 13:31:16,140 - INFO - Retrieved article length: 4228 characters
+2025-01-19 13:31:16,225 - INFO - DENN: 1h change of -5.31%
+2025-01-19 13:31:16,308 - INFO - DENN: 1wk change of -4.40%
+2025-01-19 13:31:16,391 - INFO - DENN: 1mo change of -9.33%
+2025-01-19 13:31:16,423 - INFO - Processing DERM - 2024-11-04 15:00:00 UTC
+2025-01-19 13:31:17,753 - INFO - Retrieved article length: 13058 characters
+2025-01-19 13:31:17,763 - INFO - DERM: 1h change of -4.17%
+2025-01-19 13:31:17,772 - INFO - DERM: 1wk change of -11.11%
+2025-01-19 13:31:17,782 - INFO - DERM: 1mo change of -5.31%
+2025-01-19 13:31:18,044 - INFO - Processing DEVS - 2024-12-19 15:30:00 UTC
+2025-01-19 13:31:18,283 - INFO - Processing DERM - 2024-10-25 15:30:00 UTC
+2025-01-19 13:31:19,332 - INFO - Retrieved article length: 9881 characters
+2025-01-19 13:31:19,423 - INFO - DEVS: 1h change of 25.81%
+2025-01-19 13:31:19,507 - INFO - DEVS: 1wk change of 35.09%
+2025-01-19 13:31:19,562 - INFO - Retrieved article length: 9806 characters
+2025-01-19 13:31:19,590 - INFO - DEVS: 1mo change of -25.73%
+2025-01-19 13:31:19,649 - INFO - DERM: 1h change of -1.53%
+2025-01-19 13:31:19,732 - INFO - DERM: 1wk change of 7.12%
+2025-01-19 13:31:19,816 - INFO - DERM: 1mo change of 9.90%
+2025-01-19 13:31:20,091 - INFO - Processing DEVS - 2024-12-18 15:30:00 UTC
+2025-01-19 13:31:21,378 - INFO - Retrieved article length: 8898 characters
+2025-01-19 13:31:21,465 - INFO - DEVS: 1h change of 45.76%
+2025-01-19 13:31:21,466 - INFO - Processing DFAC - 2024-12-19 23:34:28 UTC
+2025-01-19 13:31:21,548 - INFO - DEVS: 1wk change of 35.09%
+2025-01-19 13:31:21,634 - INFO - DEVS: 1mo change of -37.05%
+2025-01-19 13:31:22,135 - INFO - Processing DEVS - 2024-12-12 17:30:00 UTC
+2025-01-19 13:31:22,739 - INFO - Retrieved article length: 3691 characters
+2025-01-19 13:31:22,827 - INFO - DFAC: 1h change of -1.93%
+2025-01-19 13:31:22,915 - INFO - DFAC: 1wk change of -3.13%
+2025-01-19 13:31:23,800 - INFO - Retrieved article length: 8597 characters
+2025-01-19 13:31:23,888 - INFO - DEVS: 1h change of 9.47%
+2025-01-19 13:31:23,967 - INFO - DEVS: 1wk change of -4.29%
+2025-01-19 13:31:24,053 - INFO - DEVS: 1mo change of -54.00%
+2025-01-19 13:31:24,554 - INFO - Processing DEVS - 2024-12-12 15:30:00 UTC
+2025-01-19 13:31:25,824 - INFO - Retrieved article length: 10879 characters
+2025-01-19 13:31:25,836 - INFO - DEVS: 1h change of 9.47%
+2025-01-19 13:31:25,844 - INFO - DEVS: 1wk change of -4.29%
+2025-01-19 13:31:25,853 - INFO - DEVS: 1mo change of -54.00%
+2025-01-19 13:31:26,354 - INFO - Processing DEVS - 2024-11-29 15:30:00 UTC
+2025-01-19 13:31:26,927 - INFO - Processing DFAX - 2024-12-19 23:34:28 UTC
+2025-01-19 13:31:27,739 - INFO - Retrieved article length: 10611 characters
+2025-01-19 13:31:27,828 - INFO - DEVS: 1h change of 24.23%
+2025-01-19 13:31:27,995 - INFO - DEVS: 1mo change of -45.56%
+2025-01-19 13:31:28,140 - INFO - Retrieved article length: 3691 characters
+2025-01-19 13:31:28,230 - INFO - DFAX: 1h change of -1.87%
+2025-01-19 13:31:28,332 - INFO - DFAX: 1wk change of -3.55%
+2025-01-19 13:31:28,496 - INFO - Processing DEVS - 2024-11-19 15:30:00 UTC
+2025-01-19 13:31:30,032 - INFO - Retrieved article length: 11219 characters
+2025-01-19 13:31:30,176 - INFO - DEVS: 1h change of -24.80%
+2025-01-19 13:31:30,263 - INFO - DEVS: 1wk change of -35.63%
+2025-01-19 13:31:30,349 - INFO - DEVS: 1mo change of -23.70%
+2025-01-19 13:31:30,850 - INFO - Processing DEVS - 2024-11-15 15:30:00 UTC
+2025-01-19 13:31:32,037 - INFO - Retrieved article length: 6539 characters
+2025-01-19 13:31:32,127 - INFO - DEVS: 1h change of -17.31%
+2025-01-19 13:31:32,216 - INFO - DEVS: 1wk change of -59.33%
+2025-01-19 13:31:32,296 - INFO - DEVS: 1mo change of -34.59%
+2025-01-19 13:31:32,363 - INFO - Processing DFH - 2024-12-14 17:20:00 UTC
+2025-01-19 13:31:32,797 - INFO - Processing DEVS - 2024-11-08 15:30:00 UTC
+2025-01-19 13:31:33,663 - INFO - Retrieved article length: 1447 characters
+2025-01-19 13:31:33,758 - INFO - DFH: 1h change of -4.25%
+2025-01-19 13:31:33,846 - INFO - DFH: 1wk change of -25.73%
+2025-01-19 13:31:33,928 - INFO - DFH: 1mo change of -22.56%
+2025-01-19 13:31:34,040 - INFO - Retrieved article length: 7380 characters
+2025-01-19 13:31:34,127 - INFO - DEVS: 1h change of 5.47%
+2025-01-19 13:31:34,210 - INFO - DEVS: 1wk change of -34.89%
+2025-01-19 13:31:34,298 - INFO - DEVS: 1mo change of -51.78%
+2025-01-19 13:31:34,430 - INFO - Processing DFH - 2024-12-12 20:39:42 UTC
+2025-01-19 13:31:35,781 - INFO - Retrieved article length: 4740 characters
+2025-01-19 13:31:35,868 - INFO - DFH: 1h change of -4.52%
+2025-01-19 13:31:35,951 - INFO - DFH: 1wk change of -28.38%
+2025-01-19 13:31:36,056 - INFO - DFH: 1mo change of -25.50%
+2025-01-19 13:31:36,557 - INFO - Processing DFH - 2024-12-05 19:40:08 UTC
+2025-01-19 13:31:37,877 - INFO - Retrieved article length: 2814 characters
+2025-01-19 13:31:37,967 - INFO - DFH: 1h change of -8.69%
+2025-01-19 13:31:38,055 - INFO - DFH: 1wk change of -15.22%
+2025-01-19 13:31:38,137 - INFO - DFH: 1mo change of -25.39%
+2025-01-19 13:31:38,638 - INFO - Processing DFH - 2024-12-02 21:23:52 UTC
+2025-01-19 13:31:39,922 - INFO - Retrieved article length: 4545 characters
+2025-01-19 13:31:40,094 - INFO - DFH: 1wk change of -5.21%
+2025-01-19 13:31:40,182 - INFO - DFH: 1mo change of -28.03%
+2025-01-19 13:31:40,683 - INFO - Processing DFH - 2024-11-26 17:30:03 UTC
+2025-01-19 13:31:41,862 - INFO - Retrieved article length: 1642 characters
+2025-01-19 13:31:41,981 - INFO - DFH: 1h change of -1.51%
+2025-01-19 13:31:42,066 - INFO - DFH: 1wk change of 14.42%
+2025-01-19 13:31:42,150 - INFO - DFH: 1mo change of -27.17%
+2025-01-19 13:31:42,659 - INFO - Processing DFH - 2024-11-26 17:30:02 UTC
+2025-01-19 13:31:43,857 - INFO - Retrieved article length: 1656 characters
+2025-01-19 13:31:43,870 - INFO - DFH: 1h change of -1.51%
+2025-01-19 13:31:43,878 - INFO - DFH: 1wk change of 14.42%
+2025-01-19 13:31:43,887 - INFO - DFH: 1mo change of -27.17%
+2025-01-19 13:31:44,388 - INFO - Processing DFH - 2024-11-26 10:57:00 UTC
+2025-01-19 13:31:45,621 - INFO - Retrieved article length: 2880 characters
+2025-01-19 13:31:45,633 - INFO - DFH: 1h change of -1.51%
+2025-01-19 13:31:45,641 - INFO - DFH: 1wk change of 14.42%
+2025-01-19 13:31:45,649 - INFO - DFH: 1mo change of -27.17%
+2025-01-19 13:31:46,150 - INFO - Processing DFH - 2024-11-22 13:46:54 UTC
+2025-01-19 13:31:47,410 - INFO - Retrieved article length: 3841 characters
+2025-01-19 13:31:47,508 - INFO - DFH: 1h change of 13.32%
+2025-01-19 13:31:47,590 - INFO - DFH: 1wk change of 11.57%
+2025-01-19 13:31:47,677 - INFO - DFH: 1mo change of -31.65%

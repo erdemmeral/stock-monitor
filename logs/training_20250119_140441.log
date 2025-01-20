@@ -1,0 +1,932 @@
+2025-01-19 14:04:41,906 - INFO - Starting new training session. Logging to: logs/training_20250119_140441.log
+2025-01-19 14:04:41,906 - INFO - Starting new training session. Logging to: logs/training_20250119_140441.log
+2025-01-19 14:04:43,572 - INFO - Processing FBIN - 2025-01-15 13:55:14 UTC
+2025-01-19 14:04:44,685 - INFO - Processing FBIO - 2025-01-14 16:00:00 UTC
+2025-01-19 14:04:44,926 - INFO - Retrieved article length: 3767 characters
+2025-01-19 14:04:45,059 - INFO - FBIN: 1h change of 6.87%
+2025-01-19 14:04:45,163 - INFO - FBIN: 1wk change of 9.15%
+2025-01-19 14:04:45,281 - INFO - FBIN: 1mo change of -4.74%
+2025-01-19 14:04:45,782 - INFO - Processing FBIN - 2025-01-15 00:05:00 UTC
+2025-01-19 14:04:46,052 - INFO - Retrieved article length: 6814 characters
+2025-01-19 14:04:46,185 - INFO - FBIO: 1h change of -4.57%
+2025-01-19 14:04:46,275 - INFO - FBIO: 1wk change of -17.26%
+2025-01-19 14:04:46,363 - INFO - FBIO: 1mo change of -11.79%
+2025-01-19 14:04:46,864 - INFO - Processing FBIO - 2025-01-07 14:59:14 UTC
+2025-01-19 14:04:47,190 - INFO - Retrieved article length: 2159 characters
+2025-01-19 14:04:47,208 - INFO - FBIN: 1h change of 6.87%
+2025-01-19 14:04:47,268 - INFO - FBIN: 1wk change of 9.15%
+2025-01-19 14:04:47,327 - INFO - FBIN: 1mo change of -4.74%
+2025-01-19 14:04:47,828 - INFO - Processing FBIN - 2025-01-10 15:43:16 UTC
+2025-01-19 14:04:48,292 - INFO - Retrieved article length: 2733 characters
+2025-01-19 14:04:48,391 - INFO - FBIO: 1h change of -7.16%
+2025-01-19 14:04:48,533 - INFO - FBIO: 1wk change of -12.39%
+2025-01-19 14:04:48,624 - INFO - FBIO: 1mo change of -14.61%
+2025-01-19 14:04:49,125 - INFO - Processing FBIO - 2025-01-06 16:00:00 UTC
+2025-01-19 14:04:49,183 - INFO - Retrieved article length: 534 characters
+2025-01-19 14:04:49,390 - INFO - FBIN: 1wk change of 9.13%
+2025-01-19 14:04:49,495 - INFO - FBIN: 1mo change of -5.45%
+2025-01-19 14:04:49,996 - INFO - Processing FBIN - 2025-01-08 17:21:13 UTC
+2025-01-19 14:04:50,349 - INFO - Retrieved article length: 13232 characters
+2025-01-19 14:04:50,450 - INFO - FBIO: 1h change of -4.03%
+2025-01-19 14:04:50,536 - INFO - FBIO: 1wk change of -20.34%
+2025-01-19 14:04:50,676 - INFO - FBIO: 1mo change of -18.70%
+2025-01-19 14:04:51,177 - INFO - Processing FBIO - 2025-01-06 16:00:00 UTC
+2025-01-19 14:04:51,232 - INFO - Retrieved article length: 529 characters
+2025-01-19 14:04:51,461 - INFO - FBIN: 1wk change of 9.18%
+2025-01-19 14:04:51,568 - INFO - FBIN: 1mo change of -5.91%
+2025-01-19 14:04:52,070 - INFO - Processing FBIN - 2025-01-04 15:41:27 UTC
+2025-01-19 14:04:52,475 - INFO - Retrieved article length: 9515 characters
+2025-01-19 14:04:52,493 - INFO - FBIO: 1h change of -4.03%
+2025-01-19 14:04:52,506 - INFO - FBIO: 1wk change of -20.34%
+2025-01-19 14:04:52,559 - INFO - FBIO: 1mo change of -18.70%
+2025-01-19 14:04:53,061 - INFO - Processing FBIO - 2024-12-14 02:15:00 UTC
+2025-01-19 14:04:53,325 - INFO - Retrieved article length: 4320 characters
+2025-01-19 14:04:53,559 - INFO - FBIN: 1wk change of 1.36%
+2025-01-19 14:04:53,669 - INFO - FBIN: 1mo change of -4.54%
+2025-01-19 14:04:54,171 - INFO - Processing FBIN - 2025-01-03 12:02:38 UTC
+2025-01-19 14:04:54,328 - INFO - Retrieved article length: 19286 characters
+2025-01-19 14:04:54,428 - INFO - FBIO: 1h change of -5.37%
+2025-01-19 14:04:54,517 - INFO - FBIO: 1wk change of -20.18%
+2025-01-19 14:04:54,616 - INFO - FBIO: 1mo change of 6.25%
+2025-01-19 14:04:55,117 - INFO - Processing FBIO - 2024-11-17 15:25:30 UTC
+2025-01-19 14:04:55,480 - INFO - Retrieved article length: 6303 characters
+2025-01-19 14:04:55,683 - INFO - FBIN: 1wk change of -1.20%
+2025-01-19 14:04:55,838 - INFO - FBIN: 1mo change of -4.76%
+2025-01-19 14:04:56,339 - INFO - Processing FBIN - 2025-01-02 12:09:04 UTC
+2025-01-19 14:04:56,449 - INFO - Retrieved article length: 2033 characters
+2025-01-19 14:04:56,703 - INFO - FBIO: 1wk change of 6.98%
+2025-01-19 14:04:56,795 - INFO - FBIO: 1mo change of 2.38%
+2025-01-19 14:04:57,296 - INFO - Processing FBIO - 2024-11-15 01:04:03 UTC
+2025-01-19 14:04:57,592 - INFO - Retrieved article length: 5905 characters
+2025-01-19 14:04:57,686 - INFO - FBIN: 1h change of -1.15%
+2025-01-19 14:04:57,904 - INFO - FBIN: 1mo change of -4.76%
+2025-01-19 14:04:58,406 - INFO - Processing FBIN - 2024-12-30 21:04:40 UTC
+2025-01-19 14:04:58,519 - INFO - Retrieved article length: 729 characters
+2025-01-19 14:04:58,616 - INFO - FBIO: 1h change of -16.22%
+2025-01-19 14:04:58,764 - INFO - FBIO: 1wk change of -9.04%
+2025-01-19 14:04:58,853 - INFO - FBIO: 1mo change of 6.75%
+2025-01-19 14:04:59,355 - INFO - Processing FBIO - 2024-11-15 00:10:00 UTC
+2025-01-19 14:04:59,816 - INFO - Retrieved article length: 7200 characters
+2025-01-19 14:05:00,128 - INFO - FBIN: 1mo change of -7.89%
+2025-01-19 14:05:00,786 - INFO - Retrieved article length: 18398 characters
+2025-01-19 14:05:00,808 - INFO - FBIO: 1h change of -16.22%
+2025-01-19 14:05:00,821 - INFO - FBIO: 1wk change of -9.04%
+2025-01-19 14:05:00,836 - INFO - FBIO: 1mo change of 6.75%
+2025-01-19 14:05:01,780 - INFO - Processing FBIOP - 2025-01-14 16:00:00 UTC
+2025-01-19 14:05:02,491 - INFO - Processing FBL - 2025-01-17 00:57:40 UTC
+2025-01-19 14:05:02,901 - INFO - Retrieved article length: 6814 characters
+2025-01-19 14:05:03,204 - INFO - FBIOP: 1mo change of -3.46%
+2025-01-19 14:05:03,704 - INFO - Processing FBIOP - 2025-01-07 14:59:14 UTC
+2025-01-19 14:05:03,819 - INFO - Retrieved article length: 2894 characters
+2025-01-19 14:05:03,930 - INFO - FBL: 1h change of -1.35%
+2025-01-19 14:05:04,025 - INFO - FBL: 1wk change of -2.24%
+2025-01-19 14:05:04,128 - INFO - FBL: 1mo change of -3.92%
+2025-01-19 14:05:04,961 - INFO - Retrieved article length: 2733 characters
+2025-01-19 14:05:05,059 - INFO - FBIOP: 1h change of -1.96%
+2025-01-19 14:05:05,255 - INFO - FBIOP: 1mo change of 3.71%
+2025-01-19 14:05:05,756 - INFO - Processing FBIOP - 2025-01-06 16:00:00 UTC
+2025-01-19 14:05:06,919 - INFO - Retrieved article length: 13232 characters
+2025-01-19 14:05:06,934 - INFO - Processing FBND - 2024-11-18 17:00:00 UTC
+2025-01-19 14:05:07,029 - INFO - FBIOP: 1h change of -3.35%
+2025-01-19 14:05:07,249 - INFO - FBIOP: 1mo change of 6.03%
+2025-01-19 14:05:07,750 - INFO - Processing FBIOP - 2025-01-06 16:00:00 UTC
+2025-01-19 14:05:08,161 - INFO - Retrieved article length: 2104 characters
+2025-01-19 14:05:08,483 - INFO - FBND: 1mo change of -1.23%
+2025-01-19 14:05:08,876 - INFO - Retrieved article length: 9515 characters
+2025-01-19 14:05:08,890 - INFO - FBIOP: 1h change of -3.35%
+2025-01-19 14:05:08,956 - INFO - FBIOP: 1mo change of 6.03%
+2025-01-19 14:05:08,984 - INFO - Processing FBND - 2024-11-12 13:01:00 UTC
+2025-01-19 14:05:09,457 - INFO - Processing FBIOP - 2024-12-14 02:15:00 UTC
+2025-01-19 14:05:10,254 - INFO - Retrieved article length: 2638 characters
+2025-01-19 14:05:10,619 - INFO - Retrieved article length: 19286 characters
+2025-01-19 14:05:10,721 - INFO - FBIOP: 1h change of 3.37%
+2025-01-19 14:05:10,814 - INFO - FBIOP: 1wk change of -7.62%
+2025-01-19 14:05:10,944 - INFO - FBIOP: 1mo change of 33.21%
+2025-01-19 14:05:11,070 - INFO - Processing FBND - 2024-10-30 23:03:00 UTC
+2025-01-19 14:05:11,445 - INFO - Processing FBIOP - 2024-11-17 15:25:30 UTC
+2025-01-19 14:05:12,274 - INFO - Retrieved article length: 3184 characters
+2025-01-19 14:05:12,589 - INFO - FBND: 1mo change of -1.16%
+2025-01-19 14:05:12,638 - INFO - Retrieved article length: 2033 characters
+2025-01-19 14:05:12,953 - INFO - FBIOP: 1mo change of 31.31%
+2025-01-19 14:05:13,454 - INFO - Processing FBIOP - 2024-11-15 01:04:03 UTC
+2025-01-19 14:05:14,294 - INFO - Processing FBP - 2025-01-10 17:40:09 UTC
+2025-01-19 14:05:14,588 - INFO - Retrieved article length: 729 characters
+2025-01-19 14:05:14,685 - INFO - FBIOP: 1h change of -2.41%
+2025-01-19 14:05:14,797 - INFO - FBIOP: 1wk change of -5.01%
+2025-01-19 14:05:14,911 - INFO - FBIOP: 1mo change of 31.32%
+2025-01-19 14:05:15,412 - INFO - Processing FBIOP - 2024-11-15 00:10:00 UTC
+2025-01-19 14:05:15,633 - INFO - Retrieved article length: 3219 characters
+2025-01-19 14:05:15,872 - INFO - FBP: 1wk change of 5.81%
+2025-01-19 14:05:16,063 - INFO - FBP: 1mo change of -4.42%
+2025-01-19 14:05:16,564 - INFO - Processing FBP - 2025-01-08 22:37:00 UTC
+2025-01-19 14:05:16,757 - INFO - Retrieved article length: 18398 characters
+2025-01-19 14:05:16,777 - INFO - FBIOP: 1h change of -2.41%
+2025-01-19 14:05:16,789 - INFO - FBIOP: 1wk change of -5.01%
+2025-01-19 14:05:16,801 - INFO - FBIOP: 1mo change of 31.32%
+2025-01-19 14:05:17,917 - INFO - Retrieved article length: 2036 characters
+2025-01-19 14:05:18,138 - INFO - FBP: 1wk change of 6.04%
+2025-01-19 14:05:18,266 - INFO - FBP: 1mo change of -4.28%
+2025-01-19 14:05:18,449 - INFO - Processing FBRX - 2024-11-25 17:00:00 UTC
+2025-01-19 14:05:18,767 - INFO - Processing FBP - 2024-11-24 15:36:07 UTC
+2025-01-19 14:05:19,716 - INFO - Retrieved article length: 1557 characters
+2025-01-19 14:05:19,816 - INFO - FBRX: 1h change of 18.17%
+2025-01-19 14:05:19,913 - INFO - FBRX: 1wk change of 285.27%
+2025-01-19 14:05:20,010 - INFO - FBRX: 1mo change of 393.97%
+2025-01-19 14:05:20,152 - INFO - Retrieved article length: 4517 characters
+2025-01-19 14:05:20,255 - INFO - FBP: 1h change of 2.47%
+2025-01-19 14:05:20,395 - INFO - FBP: 1wk change of -1.91%
+2025-01-19 14:05:20,511 - INFO - Processing FBRX - 2024-11-20 17:00:00 UTC
+2025-01-19 14:05:20,525 - INFO - FBP: 1mo change of -7.11%
+2025-01-19 14:05:21,027 - INFO - Processing FBP - 2024-10-30 23:30:00 UTC
+2025-01-19 14:05:21,730 - INFO - Retrieved article length: 6818 characters
+2025-01-19 14:05:21,825 - INFO - FBRX: 1h change of 151.75%
+2025-01-19 14:05:21,921 - INFO - FBRX: 1wk change of 302.04%
+2025-01-19 14:05:22,012 - INFO - FBRX: 1mo change of 321.84%
+2025-01-19 14:05:22,202 - INFO - Retrieved article length: 2741 characters
+2025-01-19 14:05:22,414 - INFO - FBP: 1wk change of 4.72%
+2025-01-19 14:05:22,513 - INFO - Processing FBRX - 2024-11-15 00:01:00 UTC
+2025-01-19 14:05:23,050 - INFO - Processing FBP - 2024-10-24 13:30:15 UTC
+2025-01-19 14:05:23,659 - INFO - Retrieved article length: 10170 characters
+2025-01-19 14:05:23,866 - INFO - FBRX: 1wk change of 236.84%
+2025-01-19 14:05:23,954 - INFO - FBRX: 1mo change of 310.11%
+2025-01-19 14:05:24,254 - INFO - Retrieved article length: 2020 characters
+2025-01-19 14:05:24,358 - INFO - FBP: 1h change of -6.40%
+2025-01-19 14:05:24,481 - INFO - FBP: 1wk change of -8.75%
+2025-01-19 14:05:25,116 - INFO - Processing FBP - 2024-10-24 10:06:50 UTC
+2025-01-19 14:05:25,615 - INFO - Processing FBTC - 2025-01-13 20:34:57 UTC
+2025-01-19 14:05:26,371 - INFO - Retrieved article length: 4245 characters
+2025-01-19 14:05:26,392 - INFO - FBP: 1h change of -6.40%
+2025-01-19 14:05:26,404 - INFO - FBP: 1wk change of -8.75%
+2025-01-19 14:05:26,915 - INFO - Processing FBP - 2024-10-23 14:00:00 UTC
+2025-01-19 14:05:26,917 - INFO - Retrieved article length: 1132 characters
+2025-01-19 14:05:27,018 - INFO - FBTC: 1h change of 4.75%
+2025-01-19 14:05:27,150 - INFO - FBTC: 1wk change of 6.57%
+2025-01-19 14:05:27,310 - INFO - FBTC: 1mo change of 9.09%
+2025-01-19 14:05:28,926 - INFO - Processing FCAP - 2024-12-31 14:06:26 UTC
+2025-01-19 14:05:30,181 - INFO - Retrieved article length: 6436 characters
+2025-01-19 14:05:30,188 - INFO - Retrieved article length: 91617 characters
+2025-01-19 14:05:30,304 - INFO - FBP: 1h change of -6.01%
+2025-01-19 14:05:30,413 - INFO - FCAP: 1wk change of 3.87%
+2025-01-19 14:05:30,433 - INFO - FBP: 1wk change of -8.75%
+2025-01-19 14:05:30,553 - INFO - FBP: 1mo change of 2.90%
+2025-01-19 14:05:30,556 - INFO - FCAP: 1mo change of -4.14%
+2025-01-19 14:05:31,055 - INFO - Processing FBP - 2024-10-22 16:04:47 UTC
+2025-01-19 14:05:31,058 - INFO - Processing FCAP - 2024-12-16 18:04:13 UTC
+2025-01-19 14:05:32,320 - INFO - Retrieved article length: 3186 characters
+2025-01-19 14:05:32,434 - INFO - FBP: 1h change of -6.10%
+2025-01-19 14:05:32,615 - INFO - FBP: 1wk change of -8.84%
+2025-01-19 14:05:32,646 - INFO - Retrieved article length: 486 characters
+2025-01-19 14:05:32,743 - INFO - FCAP: 1h change of 1.42%
+2025-01-19 14:05:32,748 - INFO - FBP: 1mo change of 5.06%
+2025-01-19 14:05:32,872 - INFO - FCAP: 1wk change of 3.11%
+2025-01-19 14:05:32,995 - INFO - FCAP: 1mo change of -10.99%
+2025-01-19 14:05:33,496 - INFO - Processing FCAP - 2024-12-08 17:12:34 UTC
+2025-01-19 14:05:34,399 - INFO - Processing FCBD - 2024-12-20 16:00:00 UTC
+2025-01-19 14:05:34,708 - INFO - Retrieved article length: 4396 characters
+2025-01-19 14:05:34,806 - INFO - FCAP: 1h change of -2.43%
+2025-01-19 14:05:34,924 - INFO - FCAP: 1wk change of -8.80%
+2025-01-19 14:05:35,044 - INFO - FCAP: 1mo change of -8.48%
+2025-01-19 14:05:35,547 - INFO - Processing FCAP - 2024-12-02 14:07:51 UTC
+2025-01-19 14:05:35,827 - INFO - Retrieved article length: 6494 characters
+2025-01-19 14:05:36,893 - INFO - Retrieved article length: 6926 characters
+2025-01-19 14:05:37,124 - INFO - FCAP: 1wk change of -6.04%
+2025-01-19 14:05:37,241 - INFO - FCAP: 1mo change of -8.79%
+2025-01-19 14:05:37,743 - INFO - Processing FCAP - 2024-11-26 00:45:00 UTC
+2025-01-19 14:05:37,760 - INFO - Processing FCCO - 2025-01-03 22:52:00 UTC
+2025-01-19 14:05:39,022 - INFO - Retrieved article length: 3018 characters
+2025-01-19 14:05:39,129 - INFO - Retrieved article length: 1355 characters
+2025-01-19 14:05:39,135 - INFO - FCCO: 1h change of -1.17%
+2025-01-19 14:05:39,229 - INFO - FCAP: 1h change of -1.66%
+2025-01-19 14:05:39,248 - INFO - FCCO: 1wk change of -8.42%
+2025-01-19 14:05:39,350 - INFO - FCAP: 1wk change of -5.30%
+2025-01-19 14:05:39,357 - INFO - FCCO: 1mo change of -6.73%
+2025-01-19 14:05:39,477 - INFO - FCAP: 1mo change of -7.12%
+2025-01-19 14:05:39,859 - INFO - Processing FCCO - 2024-12-18 17:00:00 UTC
+2025-01-19 14:05:39,978 - INFO - Processing FCAP - 2024-10-31 14:09:48 UTC
+2025-01-19 14:05:41,053 - INFO - Retrieved article length: 1672 characters
+2025-01-19 14:05:41,148 - INFO - FCCO: 1h change of -7.44%
+2025-01-19 14:05:41,252 - INFO - Retrieved article length: 6184 characters
+2025-01-19 14:05:41,257 - INFO - FCCO: 1wk change of -6.20%
+2025-01-19 14:05:41,588 - INFO - FCAP: 1mo change of -11.90%
+2025-01-19 14:05:42,089 - INFO - Processing FCAP - 2024-10-29 13:01:26 UTC
+2025-01-19 14:05:43,036 - INFO - Processing FCEL - 2025-01-08 12:01:29 UTC
+2025-01-19 14:05:43,785 - INFO - Retrieved article length: 508 characters
+2025-01-19 14:05:43,889 - INFO - FCAP: 1h change of 4.49%
+2025-01-19 14:05:44,070 - INFO - FCAP: 1wk change of -1.58%
+2025-01-19 14:05:44,214 - INFO - FCAP: 1mo change of -9.26%
+2025-01-19 14:05:44,518 - INFO - Retrieved article length: 6299 characters
+2025-01-19 14:05:44,623 - INFO - FCEL: 1h change of -6.48%
+2025-01-19 14:05:44,711 - INFO - FCEL: 1wk change of 2.90%
+2025-01-19 14:05:44,715 - INFO - Processing FCAP - 2024-10-27 15:13:15 UTC
+2025-01-19 14:05:44,814 - INFO - FCEL: 1mo change of -9.61%
+2025-01-19 14:05:45,315 - INFO - Processing FCEL - 2025-01-06 12:05:59 UTC
+2025-01-19 14:05:46,006 - INFO - Retrieved article length: 1825 characters
+2025-01-19 14:05:46,108 - INFO - FCAP: 1h change of 2.59%
+2025-01-19 14:05:46,227 - INFO - FCAP: 1wk change of -1.66%
+2025-01-19 14:05:46,349 - INFO - FCAP: 1mo change of -9.66%
+2025-01-19 14:05:46,505 - INFO - Retrieved article length: 4656 characters
+2025-01-19 14:05:46,601 - INFO - FCEL: 1h change of 5.67%
+2025-01-19 14:05:46,697 - INFO - FCEL: 1wk change of -2.49%
+2025-01-19 14:05:46,789 - INFO - FCEL: 1mo change of -15.51%
+2025-01-19 14:05:47,290 - INFO - Processing FCEL - 2025-01-03 22:44:21 UTC
+2025-01-19 14:05:48,046 - INFO - Processing FCF - 2025-01-15 01:00:00 UTC
+2025-01-19 14:05:48,815 - INFO - Retrieved article length: 2667 characters
+2025-01-19 14:05:48,917 - INFO - FCEL: 1h change of 17.69%
+2025-01-19 14:05:49,013 - INFO - FCEL: 1wk change of 4.53%
+2025-01-19 14:05:49,109 - INFO - FCEL: 1mo change of -19.21%
+2025-01-19 14:05:49,304 - INFO - Retrieved article length: 3810 characters
+2025-01-19 14:05:49,404 - INFO - FCF: 1h change of 2.96%
+2025-01-19 14:05:49,610 - INFO - Processing FCEL - 2025-01-03 21:19:54 UTC
+2025-01-19 14:05:49,779 - INFO - FCF: 1mo change of -10.88%
+2025-01-19 14:05:50,281 - INFO - Processing FCF - 2025-01-14 16:08:00 UTC
+2025-01-19 14:05:50,897 - INFO - Retrieved article length: 2679 characters
+2025-01-19 14:05:50,913 - INFO - FCEL: 1h change of 17.69%
+2025-01-19 14:05:50,922 - INFO - FCEL: 1wk change of 4.53%
+2025-01-19 14:05:50,979 - INFO - FCEL: 1mo change of -19.21%
+2025-01-19 14:05:51,482 - INFO - Processing FCEL - 2024-12-30 16:54:00 UTC
+2025-01-19 14:05:51,578 - INFO - Retrieved article length: 4495 characters
+2025-01-19 14:05:51,677 - INFO - FCF: 1h change of 4.03%
+2025-01-19 14:05:51,951 - INFO - FCF: 1mo change of -9.91%
+2025-01-19 14:05:52,453 - INFO - Processing FCF - 2025-01-09 16:27:52 UTC
+2025-01-19 14:05:52,698 - INFO - Retrieved article length: 4208 characters
+2025-01-19 14:05:52,790 - INFO - FCEL: 1h change of -5.34%
+2025-01-19 14:05:52,879 - INFO - FCEL: 1wk change of 10.65%
+2025-01-19 14:05:52,969 - INFO - FCEL: 1mo change of -8.14%
+2025-01-19 14:05:53,471 - INFO - Processing FCEL - 2024-12-30 09:00:10 UTC
+2025-01-19 14:05:53,888 - INFO - Retrieved article length: 1782 characters
+2025-01-19 14:05:53,988 - INFO - FCF: 1h change of -3.76%
+2025-01-19 14:05:54,133 - INFO - FCF: 1wk change of -2.07%
+2025-01-19 14:05:54,267 - INFO - FCF: 1mo change of -11.16%
+2025-01-19 14:05:54,745 - INFO - Retrieved article length: 1748 characters
+2025-01-19 14:05:54,761 - INFO - FCEL: 1h change of -5.34%
+2025-01-19 14:05:54,769 - INFO - Processing FCF - 2024-12-26 18:03:48 UTC
+2025-01-19 14:05:54,775 - INFO - FCEL: 1wk change of 10.65%
+2025-01-19 14:05:54,829 - INFO - FCEL: 1mo change of -8.14%
+2025-01-19 14:05:55,330 - INFO - Processing FCEL - 2024-12-27 14:15:27 UTC
+2025-01-19 14:05:56,046 - INFO - Retrieved article length: 6698 characters
+2025-01-19 14:05:56,334 - INFO - FCF: 1wk change of -8.87%
+2025-01-19 14:05:56,488 - INFO - FCF: 1mo change of -11.69%
+2025-01-19 14:05:56,706 - INFO - Retrieved article length: 6899 characters
+2025-01-19 14:05:56,809 - INFO - FCEL: 1h change of -2.30%
+2025-01-19 14:05:56,916 - INFO - FCEL: 1wk change of 12.05%
+2025-01-19 14:05:56,989 - INFO - Processing FCF - 2024-12-19 16:14:00 UTC
+2025-01-19 14:05:57,009 - INFO - FCEL: 1mo change of 15.82%
+2025-01-19 14:05:57,511 - INFO - Processing FCEL - 2024-12-23 21:44:00 UTC
+2025-01-19 14:05:58,182 - INFO - Retrieved article length: 4295 characters
+2025-01-19 14:05:58,285 - INFO - FCF: 1h change of -6.86%
+2025-01-19 14:05:58,425 - INFO - FCF: 1wk change of -7.56%
+2025-01-19 14:05:58,586 - INFO - FCF: 1mo change of -11.59%
+2025-01-19 14:05:58,732 - INFO - Retrieved article length: 3843 characters
+2025-01-19 14:05:58,828 - INFO - FCEL: 1h change of -3.59%
+2025-01-19 14:05:58,926 - INFO - FCEL: 1wk change of -20.63%
+2025-01-19 14:05:59,019 - INFO - FCEL: 1mo change of 18.25%
+2025-01-19 14:05:59,088 - INFO - Processing FCF - 2024-12-19 13:58:30 UTC
+2025-01-19 14:06:00,384 - INFO - Retrieved article length: 534 characters
+2025-01-19 14:06:00,397 - INFO - FCF: 1h change of -6.86%
+2025-01-19 14:06:00,409 - INFO - FCF: 1wk change of -7.56%
+2025-01-19 14:06:00,465 - INFO - FCF: 1mo change of -11.59%
+2025-01-19 14:06:00,648 - INFO - Processing FCPT - 2025-01-15 00:05:00 UTC
+2025-01-19 14:06:00,966 - INFO - Processing FCF - 2024-12-19 00:45:00 UTC
+2025-01-19 14:06:01,880 - INFO - Retrieved article length: 2443 characters
+2025-01-19 14:06:01,979 - INFO - FCPT: 1h change of 5.87%
+2025-01-19 14:06:02,081 - INFO - FCPT: 1wk change of 1.73%
+2025-01-19 14:06:02,189 - INFO - FCPT: 1mo change of -3.49%
+2025-01-19 14:06:02,279 - INFO - Retrieved article length: 8582 characters
+2025-01-19 14:06:02,295 - INFO - FCF: 1h change of -6.86%
+2025-01-19 14:06:02,304 - INFO - FCF: 1wk change of -7.56%
+2025-01-19 14:06:02,358 - INFO - FCF: 1mo change of -11.59%
+2025-01-19 14:06:02,690 - INFO - Processing FCPT - 2025-01-06 18:12:08 UTC
+2025-01-19 14:06:02,860 - INFO - Processing FCF - 2024-12-06 00:05:00 UTC
+2025-01-19 14:06:04,013 - INFO - Retrieved article length: 530 characters
+2025-01-19 14:06:04,117 - INFO - FCPT: 1h change of -1.04%
+2025-01-19 14:06:04,262 - INFO - Retrieved article length: 3569 characters
+2025-01-19 14:06:04,384 - INFO - FCPT: 1mo change of -3.52%
+2025-01-19 14:06:04,491 - INFO - FCF: 1wk change of -4.44%
+2025-01-19 14:06:04,885 - INFO - Processing FCPT - 2024-12-28 01:52:00 UTC
+2025-01-19 14:06:06,149 - INFO - Retrieved article length: 3707 characters
+2025-01-19 14:06:06,270 - INFO - Processing FCUV - 2024-12-09 15:00:00 UTC
+2025-01-19 14:06:06,354 - INFO - FCPT: 1wk change of 1.23%
+2025-01-19 14:06:06,461 - INFO - FCPT: 1mo change of -5.03%
+2025-01-19 14:06:06,962 - INFO - Processing FCPT - 2024-12-26 18:14:00 UTC
+2025-01-19 14:06:07,682 - INFO - Retrieved article length: 5688 characters
+2025-01-19 14:06:07,793 - INFO - FCUV: 1h change of 2.24%
+2025-01-19 14:06:07,892 - INFO - FCUV: 1wk change of -14.62%
+2025-01-19 14:06:08,009 - INFO - FCUV: 1mo change of 148.76%
+2025-01-19 14:06:08,315 - INFO - Retrieved article length: 3372 characters
+2025-01-19 14:06:08,510 - INFO - Processing FCUV - 2024-12-02 17:30:00 UTC
+2025-01-19 14:06:08,523 - INFO - FCPT: 1wk change of -3.45%
+2025-01-19 14:06:08,628 - INFO - FCPT: 1mo change of -4.28%
+2025-01-19 14:06:09,130 - INFO - Processing FCPT - 2024-12-25 21:35:06 UTC
+2025-01-19 14:06:09,945 - INFO - Retrieved article length: 5373 characters
+2025-01-19 14:06:10,053 - INFO - FCUV: 1h change of 3.70%
+2025-01-19 14:06:10,154 - INFO - FCUV: 1wk change of -5.75%
+2025-01-19 14:06:10,243 - INFO - FCUV: 1mo change of 276.08%
+2025-01-19 14:06:10,357 - INFO - Retrieved article length: 1510 characters
+2025-01-19 14:06:10,453 - INFO - FCPT: 1h change of 3.43%
+2025-01-19 14:06:10,558 - INFO - FCPT: 1wk change of -3.45%
+2025-01-19 14:06:10,658 - INFO - FCPT: 1mo change of -3.59%
+2025-01-19 14:06:11,160 - INFO - Processing FCPT - 2024-12-24 21:28:00 UTC
+2025-01-19 14:06:11,916 - INFO - Processing FCX - 2025-01-18 01:45:20 UTC
+2025-01-19 14:06:12,465 - INFO - Retrieved article length: 1620 characters
+2025-01-19 14:06:12,579 - INFO - FCPT: 1h change of 3.02%
+2025-01-19 14:06:12,684 - INFO - FCPT: 1wk change of -4.70%
+2025-01-19 14:06:12,793 - INFO - FCPT: 1mo change of -4.05%
+2025-01-19 14:06:13,160 - INFO - Retrieved article length: 3484 characters
+2025-01-19 14:06:13,294 - INFO - Processing FCPT - 2024-12-24 17:28:00 UTC
+2025-01-19 14:06:13,397 - INFO - FCX: 1wk change of 1.59%
+2025-01-19 14:06:14,028 - INFO - Processing FCX - 2025-01-17 17:15:27 UTC
+2025-01-19 14:06:14,601 - INFO - Retrieved article length: 3486 characters
+2025-01-19 14:06:14,624 - INFO - FCPT: 1h change of 3.02%
+2025-01-19 14:06:14,639 - INFO - FCPT: 1wk change of -4.70%
+2025-01-19 14:06:14,695 - INFO - FCPT: 1mo change of -4.05%
+2025-01-19 14:06:15,196 - INFO - Processing FCPT - 2024-12-24 01:47:32 UTC
+2025-01-19 14:06:15,251 - INFO - Retrieved article length: 4386 characters
+2025-01-19 14:06:15,367 - INFO - FCX: 1h change of 1.13%
+2025-01-19 14:06:15,509 - INFO - FCX: 1wk change of 4.22%
+2025-01-19 14:06:15,630 - INFO - FCX: 1mo change of -2.93%
+2025-01-19 14:06:16,132 - INFO - Processing FCX - 2025-01-17 01:50:21 UTC
+2025-01-19 14:06:16,702 - INFO - Retrieved article length: 535 characters
+2025-01-19 14:06:16,725 - INFO - FCPT: 1h change of 3.02%
+2025-01-19 14:06:16,742 - INFO - FCPT: 1wk change of -4.70%
+2025-01-19 14:06:16,799 - INFO - FCPT: 1mo change of -4.05%
+2025-01-19 14:06:17,425 - INFO - Retrieved article length: 3467 characters
+2025-01-19 14:06:17,447 - INFO - FCX: 1h change of 1.13%
+2025-01-19 14:06:17,503 - INFO - FCX: 1wk change of 4.22%
+2025-01-19 14:06:17,562 - INFO - FCX: 1mo change of -2.93%
+2025-01-19 14:06:18,064 - INFO - Processing FCX - 2025-01-16 18:48:57 UTC
+2025-01-19 14:06:18,420 - INFO - Processing FDMT - 2025-01-13 15:23:36 UTC
+2025-01-19 14:06:19,298 - INFO - Retrieved article length: 533 characters
+2025-01-19 14:06:19,654 - INFO - FCX: 1h change of 2.42%
+2025-01-19 14:06:19,661 - INFO - Retrieved article length: 558 characters
+2025-01-19 14:06:19,757 - INFO - FDMT: 1h change of -2.69%
+2025-01-19 14:06:19,787 - INFO - FCX: 1wk change of 4.68%
+2025-01-19 14:06:19,846 - INFO - FDMT: 1wk change of -22.77%
+2025-01-19 14:06:19,914 - INFO - FCX: 1mo change of -4.06%
+2025-01-19 14:06:19,943 - INFO - FDMT: 1mo change of -36.21%
+2025-01-19 14:06:20,415 - INFO - Processing FCX - 2025-01-16 18:10:14 UTC
+2025-01-19 14:06:20,444 - INFO - Processing FDMT - 2025-01-10 16:53:56 UTC
+2025-01-19 14:06:21,729 - INFO - Retrieved article length: 521 characters
+2025-01-19 14:06:21,756 - INFO - FCX: 1h change of 2.42%
+2025-01-19 14:06:21,762 - INFO - Retrieved article length: 525 characters
+2025-01-19 14:06:21,857 - INFO - FDMT: 1h change of -9.52%
+2025-01-19 14:06:21,957 - INFO - FDMT: 1wk change of -17.77%
+2025-01-19 14:06:22,049 - INFO - FDMT: 1mo change of -37.69%
+2025-01-19 14:06:22,052 - INFO - FCX: 1wk change of 4.68%
+2025-01-19 14:06:22,120 - INFO - FCX: 1mo change of -4.06%
+2025-01-19 14:06:22,550 - INFO - Processing FDMT - 2025-01-10 16:00:00 UTC
+2025-01-19 14:06:22,621 - INFO - Processing FCX - 2025-01-16 18:00:32 UTC
+2025-01-19 14:06:23,785 - INFO - Retrieved article length: 11669 characters
+2025-01-19 14:06:23,802 - INFO - FDMT: 1h change of -9.52%
+2025-01-19 14:06:23,859 - INFO - FDMT: 1wk change of -17.77%
+2025-01-19 14:06:23,911 - INFO - FDMT: 1mo change of -37.69%
+2025-01-19 14:06:23,935 - INFO - Retrieved article length: 5603 characters
+2025-01-19 14:06:23,950 - INFO - FCX: 1h change of 2.42%
+2025-01-19 14:06:24,412 - INFO - Processing FDMT - 2025-01-10 16:00:00 UTC
+2025-01-19 14:06:24,425 - INFO - FCX: 1wk change of 4.68%
+2025-01-19 14:06:24,776 - INFO - FCX: 1mo change of -4.06%
+2025-01-19 14:06:25,278 - INFO - Processing FCX - 2025-01-16 17:00:18 UTC
+2025-01-19 14:06:25,654 - INFO - Retrieved article length: 10965 characters
+2025-01-19 14:06:25,668 - INFO - FDMT: 1h change of -9.52%
+2025-01-19 14:06:25,728 - INFO - FDMT: 1wk change of -17.77%
+2025-01-19 14:06:25,789 - INFO - FDMT: 1mo change of -37.69%
+2025-01-19 14:06:26,290 - INFO - Processing FDMT - 2024-12-16 16:00:00 UTC
+2025-01-19 14:06:26,471 - INFO - Retrieved article length: 5931 characters
+2025-01-19 14:06:26,491 - INFO - FCX: 1h change of 2.42%
+2025-01-19 14:06:26,559 - INFO - FCX: 1wk change of 4.68%
+2025-01-19 14:06:26,616 - INFO - FCX: 1mo change of -4.06%
+2025-01-19 14:06:27,118 - INFO - Processing FCX - 2025-01-16 14:01:38 UTC
+2025-01-19 14:06:27,661 - INFO - Retrieved article length: 10761 characters
+2025-01-19 14:06:27,782 - INFO - FDMT: 1h change of -5.82%
+2025-01-19 14:06:27,890 - INFO - FDMT: 1wk change of -20.95%
+2025-01-19 14:06:27,983 - INFO - FDMT: 1mo change of -43.25%
+2025-01-19 14:06:28,303 - INFO - Retrieved article length: 3967 characters
+2025-01-19 14:06:28,323 - INFO - FCX: 1h change of 2.42%
+2025-01-19 14:06:28,484 - INFO - Processing FDMT - 2024-11-26 14:51:57 UTC
+2025-01-19 14:06:28,542 - INFO - FCX: 1wk change of 4.68%
+2025-01-19 14:06:28,596 - INFO - FCX: 1mo change of -4.06%
+2025-01-19 14:06:29,764 - INFO - Retrieved article length: 7023 characters
+2025-01-19 14:06:29,863 - INFO - FDMT: 1h change of -2.36%
+2025-01-19 14:06:29,954 - INFO - FDMT: 1wk change of -18.03%
+2025-01-19 14:06:30,045 - INFO - FDMT: 1mo change of -35.84%
+2025-01-19 14:06:30,547 - INFO - Processing FDMT - 2024-11-14 16:00:00 UTC
+2025-01-19 14:06:31,386 - INFO - Processing FDX - 2025-01-17 20:56:00 UTC
+2025-01-19 14:06:31,770 - INFO - Retrieved article length: 3288 characters
+2025-01-19 14:06:31,870 - INFO - FDMT: 1h change of 9.85%
+2025-01-19 14:06:31,973 - INFO - FDMT: 1wk change of -4.71%
+2025-01-19 14:06:32,065 - INFO - FDMT: 1mo change of -31.62%
+2025-01-19 14:06:32,567 - INFO - Processing FDMT - 2024-11-14 14:59:39 UTC
+2025-01-19 14:06:32,672 - INFO - Retrieved article length: 2388 characters
+2025-01-19 14:06:32,771 - INFO - FDX: 1h change of -1.56%
+2025-01-19 14:06:33,020 - INFO - FDX: 1mo change of -2.94%
+2025-01-19 14:06:33,522 - INFO - Processing FDX - 2025-01-17 20:09:40 UTC
+2025-01-19 14:06:33,862 - INFO - Retrieved article length: 544 characters
+2025-01-19 14:06:33,876 - INFO - FDMT: 1h change of 9.85%
+2025-01-19 14:06:33,884 - INFO - FDMT: 1wk change of -4.71%
+2025-01-19 14:06:33,894 - INFO - FDMT: 1mo change of -31.62%
+2025-01-19 14:06:34,712 - INFO - Retrieved article length: 5728 characters
+2025-01-19 14:06:34,732 - INFO - FDX: 1h change of -1.56%
+2025-01-19 14:06:34,838 - INFO - FDX: 1mo change of -2.94%
+2025-01-19 14:06:35,340 - INFO - Processing FDX - 2025-01-17 17:01:00 UTC
+2025-01-19 14:06:35,908 - INFO - Processing FE - 2025-01-18 17:30:07 UTC
+2025-01-19 14:06:36,638 - INFO - Retrieved article length: 133 characters
+2025-01-19 14:06:36,657 - INFO - FDX: 1h change of -1.56%
+2025-01-19 14:06:36,766 - INFO - FDX: 1mo change of -2.94%
+2025-01-19 14:06:37,150 - INFO - Retrieved article length: 4928 characters
+2025-01-19 14:06:37,254 - INFO - FE: 1h change of 1.54%
+2025-01-19 14:06:37,268 - INFO - Processing FDX - 2025-01-16 22:10:45 UTC
+2025-01-19 14:06:38,007 - INFO - Processing FE - 2025-01-17 23:54:06 UTC
+2025-01-19 14:06:38,575 - INFO - Retrieved article length: 494 characters
+2025-01-19 14:06:38,920 - INFO - FDX: 1mo change of -3.03%
+2025-01-19 14:06:39,145 - INFO - Retrieved article length: 1085 characters
+2025-01-19 14:06:39,262 - INFO - FE: 1h change of 1.50%
+2025-01-19 14:06:39,395 - INFO - FE: 1wk change of 1.48%
+2025-01-19 14:06:39,421 - INFO - Processing FDX - 2025-01-16 01:23:20 UTC
+2025-01-19 14:06:40,018 - INFO - Processing FE - 2025-01-17 03:20:00 UTC
+2025-01-19 14:06:40,834 - INFO - Retrieved article length: 4986 characters
+2025-01-19 14:06:40,974 - INFO - FDX: 1mo change of -3.03%
+2025-01-19 14:06:41,273 - INFO - Retrieved article length: 2079 characters
+2025-01-19 14:06:41,294 - INFO - FE: 1h change of 1.50%
+2025-01-19 14:06:41,346 - INFO - FE: 1wk change of 1.48%
+2025-01-19 14:06:41,475 - INFO - Processing FDX - 2025-01-15 21:04:10 UTC
+2025-01-19 14:06:41,908 - INFO - Processing FE - 2025-01-15 20:19:29 UTC
+2025-01-19 14:06:42,720 - INFO - Retrieved article length: 6765 characters
+2025-01-19 14:06:42,824 - INFO - FDX: 1h change of 1.52%
+2025-01-19 14:06:43,219 - INFO - Retrieved article length: 2230 characters
+2025-01-19 14:06:43,915 - INFO - FDX: 1mo change of -2.16%
+2025-01-19 14:06:44,075 - INFO - FE: 1h change of 3.49%
+2025-01-19 14:06:44,417 - INFO - Processing FDX - 2025-01-15 19:40:00 UTC
+2025-01-19 14:06:45,102 - INFO - FE: 1wk change of 1.58%
+2025-01-19 14:06:45,709 - INFO - Retrieved article length: 4704 characters
+2025-01-19 14:06:45,719 - INFO - FDX: 1h change of 1.52%
+2025-01-19 14:06:46,033 - INFO - FDX: 1mo change of -2.16%
+2025-01-19 14:06:46,414 - INFO - Processing FE - 2025-01-15 19:24:35 UTC
+2025-01-19 14:06:46,535 - INFO - Processing FDX - 2025-01-15 16:00:25 UTC
+2025-01-19 14:06:47,721 - INFO - Retrieved article length: 2938 characters
+2025-01-19 14:06:47,737 - INFO - FE: 1h change of 3.49%
+2025-01-19 14:06:47,762 - INFO - Retrieved article length: 4562 characters
+2025-01-19 14:06:47,778 - INFO - FDX: 1h change of 1.52%
+2025-01-19 14:06:48,017 - INFO - FE: 1wk change of 1.58%
+2025-01-19 14:06:48,238 - INFO - FDX: 1mo change of -2.16%
+2025-01-19 14:06:48,878 - INFO - Processing FE - 2025-01-15 17:47:14 UTC
+2025-01-19 14:06:51,075 - INFO - Retrieved article length: 1388 characters
+2025-01-19 14:06:51,087 - INFO - FE: 1h change of 3.49%
+2025-01-19 14:06:51,423 - INFO - FE: 1wk change of 1.58%
+2025-01-19 14:06:52,124 - INFO - Processing FE - 2025-01-15 01:24:49 UTC
+2025-01-19 14:06:53,238 - INFO - Retrieved article length: 1891 characters
+2025-01-19 14:06:53,257 - INFO - FE: 1h change of 3.49%
+2025-01-19 14:06:53,314 - INFO - FE: 1wk change of 1.58%
+2025-01-19 14:06:53,874 - INFO - Processing FE - 2025-01-14 20:30:00 UTC
+2025-01-19 14:06:53,894 - INFO - Processing FEMY - 2025-01-16 19:08:18 UTC
+2025-01-19 14:06:55,203 - INFO - Retrieved article length: 1853 characters
+2025-01-19 14:06:55,295 - INFO - Retrieved article length: 496 characters
+2025-01-19 14:06:55,300 - INFO - FE: 1h change of 1.21%
+2025-01-19 14:06:55,401 - INFO - FEMY: 1h change of 4.56%
+2025-01-19 14:06:55,432 - INFO - FE: 1wk change of 1.58%
+2025-01-19 14:06:55,553 - INFO - FE: 1mo change of -1.48%
+2025-01-19 14:06:55,588 - INFO - FEMY: 1mo change of -6.72%
+2025-01-19 14:06:56,089 - INFO - Processing FEMY - 2025-01-16 16:30:00 UTC
+2025-01-19 14:06:57,253 - INFO - Processing FENC - 2024-12-20 18:57:31 UTC
+2025-01-19 14:06:57,489 - INFO - Retrieved article length: 7121 characters
+2025-01-19 14:06:57,508 - INFO - FEMY: 1h change of 4.56%
+2025-01-19 14:06:57,618 - INFO - FEMY: 1mo change of -6.72%
+2025-01-19 14:06:58,119 - INFO - Processing FEMY - 2024-12-03 17:00:00 UTC
+2025-01-19 14:06:59,721 - INFO - Retrieved article length: 531 characters
+2025-01-19 14:06:59,822 - INFO - FENC: 1h change of -1.16%
+2025-01-19 14:06:59,919 - INFO - FENC: 1wk change of 1.30%
+2025-01-19 14:07:00,013 - INFO - FENC: 1mo change of 38.85%
+2025-01-19 14:07:00,423 - INFO - Retrieved article length: 8219 characters
+2025-01-19 14:07:00,513 - INFO - Processing FENC - 2024-12-20 15:07:13 UTC
+2025-01-19 14:07:00,583 - INFO - FEMY: 1h change of -4.35%
+2025-01-19 14:07:00,676 - INFO - FEMY: 1wk change of 8.18%
+2025-01-19 14:07:00,780 - INFO - FEMY: 1mo change of -18.84%
+2025-01-19 14:07:01,282 - INFO - Processing FEMY - 2024-11-26 16:30:00 UTC
+2025-01-19 14:07:01,908 - INFO - Retrieved article length: 525 characters
+2025-01-19 14:07:01,929 - INFO - FENC: 1h change of -1.16%
+2025-01-19 14:07:01,938 - INFO - FENC: 1wk change of 1.30%
+2025-01-19 14:07:01,991 - INFO - FENC: 1mo change of 38.85%
+2025-01-19 14:07:02,492 - INFO - Processing FENC - 2024-12-20 14:16:00 UTC
+2025-01-19 14:07:02,741 - INFO - Retrieved article length: 7890 characters
+2025-01-19 14:07:02,834 - INFO - FEMY: 1h change of -10.34%
+2025-01-19 14:07:02,928 - INFO - FEMY: 1wk change of 18.03%
+2025-01-19 14:07:03,020 - INFO - FEMY: 1mo change of -14.73%
+2025-01-19 14:07:03,522 - INFO - Processing FEMY - 2024-11-15 14:19:49 UTC
+2025-01-19 14:07:03,710 - INFO - Retrieved article length: 12484 characters
+2025-01-19 14:07:03,723 - INFO - FENC: 1h change of -1.16%
+2025-01-19 14:07:03,735 - INFO - FENC: 1wk change of 1.30%
+2025-01-19 14:07:03,793 - INFO - FENC: 1mo change of 38.85%
+2025-01-19 14:07:04,294 - INFO - Processing FENC - 2024-12-19 18:31:02 UTC
+2025-01-19 14:07:05,601 - INFO - Retrieved article length: 534 characters
+2025-01-19 14:07:05,699 - INFO - FENC: 1h change of 1.01%
+2025-01-19 14:07:05,787 - INFO - Retrieved article length: 1926 characters
+2025-01-19 14:07:05,789 - INFO - FENC: 1wk change of 2.64%
+2025-01-19 14:07:05,879 - INFO - FENC: 1mo change of 25.91%
+2025-01-19 14:07:05,884 - INFO - FEMY: 1h change of -7.73%
+2025-01-19 14:07:06,141 - INFO - FEMY: 1wk change of -12.50%
+2025-01-19 14:07:06,380 - INFO - Processing FENC - 2024-12-19 15:05:26 UTC
+2025-01-19 14:07:07,346 - INFO - Processing FEMY - 2024-11-12 17:45:03 UTC
+2025-01-19 14:07:07,943 - INFO - Retrieved article length: 514 characters
+2025-01-19 14:07:07,958 - INFO - FENC: 1h change of 1.01%
+2025-01-19 14:07:07,968 - INFO - FENC: 1wk change of 2.64%
+2025-01-19 14:07:08,026 - INFO - FENC: 1mo change of 25.91%
+2025-01-19 14:07:08,527 - INFO - Processing FENC - 2024-12-19 14:13:00 UTC
+2025-01-19 14:07:09,833 - INFO - Retrieved article length: 10959 characters
+2025-01-19 14:07:09,848 - INFO - FENC: 1h change of 1.01%
+2025-01-19 14:07:09,859 - INFO - FENC: 1wk change of 2.64%
+2025-01-19 14:07:09,895 - INFO - Retrieved article length: 4183 characters
+2025-01-19 14:07:09,914 - INFO - FENC: 1mo change of 25.91%
+2025-01-19 14:07:10,416 - INFO - Processing FENC - 2024-12-12 15:01:00 UTC
+2025-01-19 14:07:10,461 - INFO - FEMY: 1h change of -6.38%
+2025-01-19 14:07:10,972 - INFO - FEMY: 1wk change of -14.04%
+2025-01-19 14:07:11,065 - INFO - FEMY: 1mo change of 1.77%
+2025-01-19 14:07:11,566 - INFO - Processing FEMY - 2024-11-12 16:30:00 UTC
+2025-01-19 14:07:11,671 - INFO - Retrieved article length: 1727 characters
+2025-01-19 14:07:11,859 - INFO - FENC: 1wk change of -4.01%
+2025-01-19 14:07:11,945 - INFO - FENC: 1mo change of 31.19%
+2025-01-19 14:07:12,446 - INFO - Processing FENC - 2024-11-12 13:31:02 UTC
+2025-01-19 14:07:12,904 - INFO - Retrieved article length: 11286 characters
+2025-01-19 14:07:12,922 - INFO - FEMY: 1h change of -6.38%
+2025-01-19 14:07:12,936 - INFO - FEMY: 1wk change of -14.04%
+2025-01-19 14:07:12,948 - INFO - FEMY: 1mo change of 1.77%
+2025-01-19 14:07:13,449 - INFO - Processing FEMY - 2024-11-07 16:30:00 UTC
+2025-01-19 14:07:13,726 - INFO - Retrieved article length: 2019 characters
+2025-01-19 14:07:13,839 - INFO - FENC: 1h change of 7.67%
+2025-01-19 14:07:13,937 - INFO - FENC: 1wk change of 1.51%
+2025-01-19 14:07:14,029 - INFO - FENC: 1mo change of 31.93%
+2025-01-19 14:07:15,174 - INFO - Retrieved article length: 5720 characters
+2025-01-19 14:07:15,269 - INFO - FEMY: 1h change of -5.83%
+2025-01-19 14:07:15,357 - INFO - FEMY: 1wk change of -28.35%
+2025-01-19 14:07:15,455 - INFO - FEMY: 1mo change of 11.21%
+2025-01-19 14:07:15,656 - INFO - Processing FENY - 2024-10-28 20:18:08 UTC
+2025-01-19 14:07:16,920 - INFO - Retrieved article length: 2173 characters
+2025-01-19 14:07:17,109 - INFO - Processing FERG - 2025-01-16 14:45:00 UTC
+2025-01-19 14:07:17,196 - INFO - FENY: 1wk change of 4.04%
+2025-01-19 14:07:17,303 - INFO - FENY: 1mo change of 7.76%
+2025-01-19 14:07:18,334 - INFO - Retrieved article length: 1476 characters
+2025-01-19 14:07:18,447 - INFO - FERG: 1h change of 1.81%
+2025-01-19 14:07:18,551 - INFO - FERG: 1wk change of 1.93%
+2025-01-19 14:07:18,658 - INFO - FERG: 1mo change of -6.28%
+2025-01-19 14:07:19,159 - INFO - Processing FERG - 2025-01-14 17:00:00 UTC
+2025-01-19 14:07:20,095 - INFO - Processing FEXD - 2025-01-19 14:00:33 UTC
+2025-01-19 14:07:20,356 - INFO - Retrieved article length: 5841 characters
+2025-01-19 14:07:20,488 - INFO - FERG: 1h change of 3.31%
+2025-01-19 14:07:20,595 - INFO - FERG: 1wk change of 1.93%
+2025-01-19 14:07:20,763 - INFO - FERG: 1mo change of -8.49%
+2025-01-19 14:07:21,154 - INFO - Retrieved article length: 233 characters
+2025-01-19 14:07:21,264 - INFO - Processing FERG - 2025-01-13 14:45:00 UTC
+2025-01-19 14:07:22,551 - INFO - Retrieved article length: 1617 characters
+2025-01-19 14:07:22,653 - INFO - FERG: 1h change of 3.75%
+2025-01-19 14:07:22,808 - INFO - FERG: 1wk change of 1.89%
+2025-01-19 14:07:22,834 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:22,835 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:22,837 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:22,923 - INFO - FERG: 1mo change of -18.07%
+2025-01-19 14:07:23,338 - INFO - Processing FEXD - 2025-01-19 14:00:23 UTC
+2025-01-19 14:07:23,425 - INFO - Processing FERG - 2025-01-08 14:45:00 UTC
+2025-01-19 14:07:24,449 - INFO - Retrieved article length: 197 characters
+2025-01-19 14:07:24,450 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:24,452 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:24,452 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:24,686 - INFO - Retrieved article length: 2144 characters
+2025-01-19 14:07:24,795 - INFO - FERG: 1h change of -2.34%
+2025-01-19 14:07:24,906 - INFO - FERG: 1wk change of 2.29%
+2025-01-19 14:07:24,954 - INFO - Processing FEXD - 2025-01-19 14:00:21 UTC
+2025-01-19 14:07:25,009 - INFO - FERG: 1mo change of -19.94%
+2025-01-19 14:07:25,511 - INFO - Processing FERG - 2025-01-07 15:56:10 UTC
+2025-01-19 14:07:26,275 - INFO - Retrieved article length: 1586 characters
+2025-01-19 14:07:26,277 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:26,278 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:26,279 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:26,755 - INFO - Retrieved article length: 1679 characters
+2025-01-19 14:07:26,780 - INFO - Processing FEXD - 2025-01-19 14:00:15 UTC
+2025-01-19 14:07:26,846 - INFO - FERG: 1h change of -2.34%
+2025-01-19 14:07:26,949 - INFO - FERG: 1wk change of 1.65%
+2025-01-19 14:07:27,056 - INFO - FERG: 1mo change of -19.28%
+2025-01-19 14:07:27,558 - INFO - Processing FERG - 2024-12-13 13:50:01 UTC
+2025-01-19 14:07:27,972 - INFO - Retrieved article length: 244 characters
+2025-01-19 14:07:27,974 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:27,975 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:27,977 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:28,478 - INFO - Processing FEXD - 2025-01-19 14:00:13 UTC
+2025-01-19 14:07:28,813 - INFO - Retrieved article length: 3906 characters
+2025-01-19 14:07:28,908 - INFO - FERG: 1h change of -3.05%
+2025-01-19 14:07:29,014 - INFO - FERG: 1wk change of -19.00%
+2025-01-19 14:07:29,116 - INFO - FERG: 1mo change of -14.54%
+2025-01-19 14:07:29,557 - INFO - Retrieved article length: 233 characters
+2025-01-19 14:07:29,560 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:29,563 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:29,564 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:29,617 - INFO - Processing FERG - 2024-12-11 22:17:00 UTC
+2025-01-19 14:07:30,066 - INFO - Processing FEXD - 2025-01-19 13:54:00 UTC
+2025-01-19 14:07:30,932 - INFO - Retrieved article length: 5735 characters
+2025-01-19 14:07:31,033 - INFO - FERG: 1h change of -12.77%
+2025-01-19 14:07:31,160 - INFO - FERG: 1wk change of -16.38%
+2025-01-19 14:07:31,270 - INFO - Retrieved article length: 4987 characters
+2025-01-19 14:07:31,272 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:31,274 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:31,275 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:31,287 - INFO - FERG: 1mo change of -16.09%
+2025-01-19 14:07:31,777 - INFO - Processing FEXD - 2025-01-19 13:53:53 UTC
+2025-01-19 14:07:31,788 - INFO - Processing FERG - 2024-12-11 16:00:00 UTC
+2025-01-19 14:07:33,138 - INFO - Retrieved article length: 5704 characters
+2025-01-19 14:07:33,142 - INFO - Retrieved article length: 5099 characters
+2025-01-19 14:07:33,143 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:33,144 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:33,145 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:33,151 - INFO - FERG: 1h change of -12.77%
+2025-01-19 14:07:33,163 - INFO - FERG: 1wk change of -16.38%
+2025-01-19 14:07:33,174 - INFO - FERG: 1mo change of -16.09%
+2025-01-19 14:07:33,647 - INFO - Processing FEXD - 2025-01-19 13:53:00 UTC
+2025-01-19 14:07:34,785 - INFO - Processing FEXDR - 2025-01-19 14:03:20 UTC
+2025-01-19 14:07:34,898 - INFO - Retrieved article length: 4716 characters
+2025-01-19 14:07:34,899 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:34,902 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:34,903 - ERROR - FEXD: No timezone found, symbol may be delisted
+2025-01-19 14:07:36,134 - INFO - Retrieved article length: 4589 characters
+2025-01-19 14:07:36,516 - INFO - Processing FEXDU - 2025-01-19 14:03:20 UTC
+2025-01-19 14:07:37,588 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:37,589 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:37,590 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:37,763 - INFO - Retrieved article length: 4589 characters
+2025-01-19 14:07:38,092 - INFO - Processing FEXDR - 2025-01-19 14:02:00 UTC
+2025-01-19 14:07:38,753 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:38,754 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:38,754 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:39,256 - INFO - Processing FEXDU - 2025-01-19 14:02:00 UTC
+2025-01-19 14:07:39,360 - INFO - Retrieved article length: 5008 characters
+2025-01-19 14:07:39,362 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:39,363 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:39,364 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:39,866 - INFO - Processing FEXDR - 2025-01-19 14:01:00 UTC
+2025-01-19 14:07:40,466 - INFO - Retrieved article length: 5008 characters
+2025-01-19 14:07:40,467 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:40,468 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:40,470 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:40,971 - INFO - Processing FEXDU - 2025-01-19 14:01:00 UTC
+2025-01-19 14:07:41,187 - INFO - Retrieved article length: 2741 characters
+2025-01-19 14:07:41,189 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:41,190 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:41,191 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:41,693 - INFO - Processing FEXDR - 2025-01-19 14:00:33 UTC
+2025-01-19 14:07:42,160 - INFO - Retrieved article length: 2741 characters
+2025-01-19 14:07:42,161 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:42,163 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:42,164 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:42,666 - INFO - Processing FEXDU - 2025-01-19 14:00:33 UTC
+2025-01-19 14:07:42,795 - INFO - Retrieved article length: 233 characters
+2025-01-19 14:07:42,796 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:42,798 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:42,799 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:43,301 - INFO - Processing FEXDR - 2025-01-19 14:00:23 UTC
+2025-01-19 14:07:43,922 - INFO - Retrieved article length: 233 characters
+2025-01-19 14:07:43,923 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:43,925 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:43,926 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:44,427 - INFO - Processing FEXDU - 2025-01-19 14:00:23 UTC
+2025-01-19 14:07:44,462 - INFO - Retrieved article length: 197 characters
+2025-01-19 14:07:44,464 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:44,465 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:44,465 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:44,967 - INFO - Processing FEXDR - 2025-01-19 14:00:21 UTC
+2025-01-19 14:07:45,484 - INFO - Retrieved article length: 197 characters
+2025-01-19 14:07:45,490 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:45,491 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:45,493 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:45,994 - INFO - Processing FEXDU - 2025-01-19 14:00:21 UTC
+2025-01-19 14:07:46,206 - INFO - Retrieved article length: 1586 characters
+2025-01-19 14:07:46,207 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:46,209 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:46,210 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:46,711 - INFO - Processing FEXDR - 2025-01-19 14:00:15 UTC
+2025-01-19 14:07:47,146 - INFO - Retrieved article length: 1586 characters
+2025-01-19 14:07:47,147 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:47,148 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:47,150 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:47,651 - INFO - Processing FEXDU - 2025-01-19 14:00:15 UTC
+2025-01-19 14:07:47,816 - INFO - Retrieved article length: 244 characters
+2025-01-19 14:07:47,818 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:47,819 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:47,820 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:48,322 - INFO - Processing FEXDR - 2025-01-19 14:00:13 UTC
+2025-01-19 14:07:48,766 - INFO - Retrieved article length: 244 characters
+2025-01-19 14:07:48,767 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:48,769 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:48,771 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:49,272 - INFO - Processing FEXDU - 2025-01-19 14:00:13 UTC
+2025-01-19 14:07:49,422 - INFO - Retrieved article length: 233 characters
+2025-01-19 14:07:49,423 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:49,424 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:49,425 - ERROR - FEXDR: No timezone found, symbol may be delisted
+2025-01-19 14:07:50,417 - INFO - Retrieved article length: 233 characters
+2025-01-19 14:07:50,418 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:50,419 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:50,420 - ERROR - FEXDU: No timezone found, symbol may be delisted
+2025-01-19 14:07:52,077 - INFO - Processing FFIE - 2025-01-14 04:39:00 UTC
+2025-01-19 14:07:52,228 - INFO - Processing FFIV - 2025-01-18 16:20:31 UTC
+2025-01-19 14:07:53,396 - INFO - Retrieved article length: 1618 characters
+2025-01-19 14:07:53,417 - INFO - Retrieved article length: 3026 characters
+2025-01-19 14:07:53,584 - INFO - FFIV: 1wk change of 1.97%
+2025-01-19 14:07:53,608 - INFO - FFIE: 1wk change of -37.34%
+2025-01-19 14:07:53,703 - INFO - FFIE: 1mo change of 22.76%
+2025-01-19 14:07:54,183 - INFO - Processing FFIV - 2025-01-14 12:01:08 UTC
+2025-01-19 14:07:54,204 - INFO - Processing FFIE - 2025-01-10 07:06:00 UTC
+2025-01-19 14:07:55,401 - INFO - Retrieved article length: 6316 characters
+2025-01-19 14:07:55,495 - INFO - Retrieved article length: 3498 characters
+2025-01-19 14:07:55,499 - INFO - FFIV: 1h change of 3.58%
+2025-01-19 14:07:55,592 - INFO - FFIV: 1wk change of 1.64%
+2025-01-19 14:07:55,595 - INFO - FFIE: 1h change of -16.62%
+2025-01-19 14:07:55,686 - INFO - FFIE: 1wk change of -37.86%
+2025-01-19 14:07:55,774 - INFO - FFIE: 1mo change of 27.97%
+2025-01-19 14:07:56,187 - INFO - Processing FFIV - 2025-01-08 12:01:01 UTC
+2025-01-19 14:07:56,275 - INFO - Processing FFIE - 2025-01-09 04:00:00 UTC
+2025-01-19 14:07:57,508 - INFO - Retrieved article length: 6588 characters
+2025-01-19 14:07:57,648 - INFO - Retrieved article length: 16300 characters
+2025-01-19 14:07:57,701 - INFO - FFIV: 1wk change of 4.54%
+2025-01-19 14:07:57,745 - INFO - FFIE: 1h change of -32.39%
+2025-01-19 14:07:57,788 - INFO - FFIV: 1mo change of 3.86%
+2025-01-19 14:07:57,839 - INFO - FFIE: 1wk change of -51.91%
+2025-01-19 14:07:57,934 - INFO - FFIE: 1mo change of 23.77%
+2025-01-19 14:07:58,289 - INFO - Processing FFIV - 2025-01-07 17:15:00 UTC
+2025-01-19 14:07:58,435 - INFO - Processing FFIE - 2025-01-06 07:16:00 UTC
+2025-01-19 14:07:59,583 - INFO - Retrieved article length: 2208 characters
+2025-01-19 14:07:59,643 - INFO - Retrieved article length: 3091 characters
+2025-01-19 14:07:59,736 - INFO - FFIE: 1h change of -17.50%
+2025-01-19 14:07:59,790 - INFO - FFIV: 1wk change of 4.51%
+2025-01-19 14:07:59,826 - INFO - FFIE: 1wk change of -11.93%
+2025-01-19 14:07:59,882 - INFO - FFIV: 1mo change of 5.10%
+2025-01-19 14:07:59,921 - INFO - FFIE: 1mo change of 33.63%
+2025-01-19 14:08:00,383 - INFO - Processing FFIV - 2025-01-04 15:22:17 UTC
+2025-01-19 14:08:00,421 - INFO - Processing FFIE - 2025-01-03 07:25:00 UTC
+2025-01-19 14:08:01,647 - INFO - Retrieved article length: 7236 characters
+2025-01-19 14:08:01,699 - INFO - Retrieved article length: 1976 characters
+2025-01-19 14:08:01,747 - INFO - FFIE: 1h change of 6.53%
+2025-01-19 14:08:01,842 - INFO - FFIE: 1wk change of 25.81%
+2025-01-19 14:08:01,943 - INFO - FFIE: 1mo change of 37.27%
+2025-01-19 14:08:01,991 - INFO - FFIV: 1mo change of 4.68%
+2025-01-19 14:08:02,444 - INFO - Processing FFIE - 2024-12-30 06:39:00 UTC
+2025-01-19 14:08:02,492 - INFO - Processing FFIV - 2025-01-03 12:03:40 UTC
+2025-01-19 14:08:03,693 - INFO - Retrieved article length: 6213 characters
+2025-01-19 14:08:03,752 - INFO - Retrieved article length: 3481 characters
+2025-01-19 14:08:03,850 - INFO - FFIE: 1h change of -6.74%
+2025-01-19 14:08:03,936 - INFO - FFIE: 1wk change of 79.31%
+2025-01-19 14:08:03,971 - INFO - FFIV: 1mo change of 5.43%
+2025-01-19 14:08:04,034 - INFO - FFIE: 1mo change of 6.34%
+2025-01-19 14:08:04,472 - INFO - Processing FFIV - 2025-01-01 19:55:34 UTC
+2025-01-19 14:08:04,534 - INFO - Processing FFIE - 2024-12-24 14:30:20 UTC
+2025-01-19 14:08:05,645 - INFO - Retrieved article length: 4421 characters
+2025-01-19 14:08:05,776 - INFO - Retrieved article length: 2113 characters
+2025-01-19 14:08:05,868 - INFO - FFIE: 1h change of 3.27%
+2025-01-19 14:08:05,948 - INFO - FFIV: 1mo change of 5.55%
+2025-01-19 14:08:05,962 - INFO - FFIE: 1wk change of 207.50%
+2025-01-19 14:08:06,070 - INFO - FFIE: 1mo change of 18.90%
+2025-01-19 14:08:06,449 - INFO - Processing FFIV - 2024-12-31 20:00:09 UTC
+2025-01-19 14:08:06,573 - INFO - Processing FFIE - 2024-12-23 01:11:00 UTC
+2025-01-19 14:08:07,795 - INFO - Retrieved article length: 9637 characters
+2025-01-19 14:08:07,874 - INFO - Retrieved article length: 4527 characters
+2025-01-19 14:08:07,899 - INFO - FFIE: 1h change of 3.27%
+2025-01-19 14:08:08,014 - INFO - FFIE: 1wk change of 95.97%
+2025-01-19 14:08:08,105 - INFO - FFIE: 1mo change of 17.97%
+2025-01-19 14:08:08,134 - INFO - FFIV: 1wk change of 1.74%
+2025-01-19 14:08:08,234 - INFO - FFIV: 1mo change of 4.78%
+2025-01-19 14:08:09,769 - INFO - Processing FFWM - 2025-01-06 14:55:00 UTC
+2025-01-19 14:08:09,911 - INFO - Processing FGEN - 2024-12-16 16:21:35 UTC
+2025-01-19 14:08:10,995 - INFO - Retrieved article length: 3082 characters
+2025-01-19 14:08:11,147 - INFO - FFWM: 1h change of -2.42%
+2025-01-19 14:08:11,214 - INFO - Retrieved article length: 470 characters
+2025-01-19 14:08:11,253 - INFO - FFWM: 1wk change of 3.85%
+2025-01-19 14:08:11,328 - INFO - FGEN: 1h change of 1.57%
+2025-01-19 14:08:11,352 - INFO - FFWM: 1mo change of -21.47%
+2025-01-19 14:08:11,421 - INFO - FGEN: 1wk change of 45.91%
+2025-01-19 14:08:11,516 - INFO - FGEN: 1mo change of 69.03%
+2025-01-19 14:08:11,854 - INFO - Processing FFWM - 2024-12-31 17:35:05 UTC
+2025-01-19 14:08:12,018 - INFO - Processing FGEN - 2024-12-16 16:05:00 UTC
+2025-01-19 14:08:13,253 - INFO - Retrieved article length: 5277 characters
+2025-01-19 14:08:13,270 - INFO - FGEN: 1h change of 1.57%
+2025-01-19 14:08:13,278 - INFO - FGEN: 1wk change of 45.91%
+2025-01-19 14:08:13,332 - INFO - FGEN: 1mo change of 69.03%
+2025-01-19 14:08:13,373 - INFO - Retrieved article length: 3011 characters
+2025-01-19 14:08:13,475 - INFO - FFWM: 1h change of 3.98%
+2025-01-19 14:08:13,686 - INFO - FFWM: 1mo change of -21.28%
+2025-01-19 14:08:13,833 - INFO - Processing FGEN - 2024-11-15 13:04:03 UTC
+2025-01-19 14:08:14,187 - INFO - Processing FFWM - 2024-11-22 14:55:00 UTC
+2025-01-19 14:08:15,199 - INFO - Retrieved article length: 1980 characters
+2025-01-19 14:08:15,295 - INFO - FGEN: 1h change of -12.66%
+2025-01-19 14:08:15,387 - INFO - FGEN: 1wk change of 28.66%
+2025-01-19 14:08:15,655 - INFO - Retrieved article length: 9840 characters
+2025-01-19 14:08:15,754 - INFO - FFWM: 1h change of 6.22%
+2025-01-19 14:08:15,852 - INFO - FFWM: 1wk change of -2.09%
+2025-01-19 14:08:15,948 - INFO - FFWM: 1mo change of -21.25%
+2025-01-19 14:08:15,983 - INFO - Processing FGEN - 2024-11-13 18:22:11 UTC
+2025-01-19 14:08:16,449 - INFO - Processing FFWM - 2024-11-20 13:57:58 UTC
+2025-01-19 14:08:17,368 - INFO - Retrieved article length: 31533 characters
+2025-01-19 14:08:17,463 - INFO - FGEN: 1h change of 8.12%
+2025-01-19 14:08:17,554 - INFO - FGEN: 1wk change of 21.54%
+2025-01-19 14:08:17,655 - INFO - FGEN: 1mo change of 6.10%
+2025-01-19 14:08:17,688 - INFO - Retrieved article length: 4118 characters
+2025-01-19 14:08:17,899 - INFO - FFWM: 1wk change of -3.52%
+2025-01-19 14:08:17,999 - INFO - FFWM: 1mo change of -22.50%
+2025-01-19 14:08:18,156 - INFO - Processing FGEN - 2024-11-13 10:21:16 UTC
+2025-01-19 14:08:18,500 - INFO - Processing FFWM - 2024-11-01 15:50:06 UTC
+2025-01-19 14:08:19,488 - INFO - Retrieved article length: 4892 characters
+2025-01-19 14:08:19,505 - INFO - FGEN: 1h change of 8.12%
+2025-01-19 14:08:19,516 - INFO - FGEN: 1wk change of 21.54%
+2025-01-19 14:08:19,529 - INFO - FGEN: 1mo change of 6.10%
+2025-01-19 14:08:19,879 - INFO - Retrieved article length: 4486 characters
+2025-01-19 14:08:19,975 - INFO - FFWM: 1h change of -6.42%
+2025-01-19 14:08:20,030 - INFO - Processing FGEN - 2024-11-13 02:10:12 UTC
+2025-01-19 14:08:20,080 - INFO - FFWM: 1wk change of 5.14%
+2025-01-19 14:08:20,183 - INFO - FFWM: 1mo change of 27.63%
+2025-01-19 14:08:20,683 - INFO - Processing FFWM - 2024-10-30 14:29:17 UTC
+2025-01-19 14:08:21,526 - INFO - Retrieved article length: 4116 characters
+2025-01-19 14:08:21,546 - INFO - FGEN: 1h change of 8.12%
+2025-01-19 14:08:21,555 - INFO - FGEN: 1wk change of 21.54%
+2025-01-19 14:08:21,564 - INFO - FGEN: 1mo change of 6.10%
+2025-01-19 14:08:21,934 - INFO - Retrieved article length: 1120 characters
+2025-01-19 14:08:22,066 - INFO - Processing FGEN - 2024-11-13 01:06:38 UTC
+2025-01-19 14:08:22,076 - INFO - FFWM: 1h change of -9.35%
+2025-01-19 14:08:22,169 - INFO - FFWM: 1wk change of 5.85%
+2025-01-19 14:08:22,282 - INFO - FFWM: 1mo change of 28.06%
+2025-01-19 14:08:22,783 - INFO - Processing FFWM - 2024-10-29 13:55:00 UTC
+2025-01-19 14:08:23,450 - INFO - Retrieved article length: 676 characters
+2025-01-19 14:08:23,467 - INFO - FGEN: 1h change of 8.12%
+2025-01-19 14:08:23,478 - INFO - FGEN: 1wk change of 21.54%
+2025-01-19 14:08:23,489 - INFO - FGEN: 1mo change of 6.10%
+2025-01-19 14:08:23,990 - INFO - Processing FGEN - 2024-11-13 00:05:00 UTC
+2025-01-19 14:08:24,133 - INFO - Retrieved article length: 2474 characters
+2025-01-19 14:08:24,230 - INFO - FFWM: 1h change of -6.46%
+2025-01-19 14:08:24,327 - INFO - FFWM: 1wk change of 2.18%
+2025-01-19 14:08:24,426 - INFO - FFWM: 1mo change of 27.34%
+2025-01-19 14:08:24,928 - INFO - Processing FFWM - 2024-10-22 17:01:11 UTC
+2025-01-19 14:08:25,546 - INFO - Retrieved article length: 12889 characters
+2025-01-19 14:08:25,557 - INFO - FGEN: 1h change of 8.12%
+2025-01-19 14:08:25,569 - INFO - FGEN: 1wk change of 21.54%
+2025-01-19 14:08:25,583 - INFO - FGEN: 1mo change of 6.10%
+2025-01-19 14:08:26,195 - INFO - Retrieved article length: 5645 characters
+2025-01-19 14:08:26,296 - INFO - FFWM: 1h change of 1.36%
+2025-01-19 14:08:26,390 - INFO - FFWM: 1wk change of -7.30%
+2025-01-19 14:08:26,487 - INFO - FFWM: 1mo change of 22.77%
+2025-01-19 14:08:27,339 - INFO - Processing FGI - 2024-12-04 00:30:00 UTC
+2025-01-19 14:08:28,172 - INFO - Processing FGL - 2025-01-07 16:30:00 UTC
+2025-01-19 14:08:28,634 - INFO - Retrieved article length: 1923 characters
+2025-01-19 14:08:28,728 - INFO - FGI: 1h change of -1.34%
+2025-01-19 14:08:28,823 - INFO - FGI: 1wk change of 4.81%
+2025-01-19 14:08:28,915 - INFO - FGI: 1mo change of -17.28%
+2025-01-19 14:08:29,416 - INFO - Processing FGI - 2024-11-17 15:56:01 UTC
+2025-01-19 14:08:29,572 - INFO - Retrieved article length: 4301 characters
+2025-01-19 14:08:29,665 - INFO - FGL: 1h change of -23.86%
+2025-01-19 14:08:29,757 - INFO - FGL: 1wk change of 12.58%
+2025-01-19 14:08:29,847 - INFO - FGL: 1mo change of -54.17%
+2025-01-19 14:08:30,348 - INFO - Processing FGL - 2024-12-11 17:23:00 UTC
+2025-01-19 14:08:30,668 - INFO - Retrieved article length: 2004 characters
+2025-01-19 14:08:30,868 - INFO - FGI: 1wk change of -11.83%
+2025-01-19 14:08:30,964 - INFO - FGI: 1mo change of -9.09%
+2025-01-19 14:08:31,464 - INFO - Processing FGI - 2024-11-14 10:00:35 UTC
+2025-01-19 14:08:31,619 - INFO - Retrieved article length: 5195 characters
+2025-01-19 14:08:31,730 - INFO - FGL: 1h change of -16.79%
+2025-01-19 14:08:31,846 - INFO - FGL: 1wk change of -60.23%
+2025-01-19 14:08:31,939 - INFO - FGL: 1mo change of -32.69%
+2025-01-19 14:08:32,440 - INFO - Processing FGL - 2024-12-04 17:22:01 UTC
+2025-01-19 14:08:32,685 - INFO - Retrieved article length: 4181 characters
+2025-01-19 14:08:32,874 - INFO - FGI: 1wk change of -22.47%
+2025-01-19 14:08:32,982 - INFO - FGI: 1mo change of -5.76%
+2025-01-19 14:08:33,483 - INFO - Processing FGI - 2024-11-12 01:40:02 UTC
+2025-01-19 14:08:33,817 - INFO - Retrieved article length: 524 characters
+2025-01-19 14:08:33,913 - INFO - FGL: 1h change of -29.27%
+2025-01-19 14:08:34,007 - INFO - FGL: 1wk change of -19.18%
+2025-01-19 14:08:34,099 - INFO - FGL: 1mo change of -52.94%
+2025-01-19 14:08:34,600 - INFO - Processing FGL - 2024-12-04 16:33:00 UTC
+2025-01-19 14:08:34,739 - INFO - Retrieved article length: 4244 characters
+2025-01-19 14:08:34,830 - INFO - FGI: 1h change of -7.45%
+2025-01-19 14:08:34,922 - INFO - FGI: 1wk change of -21.50%
+2025-01-19 14:08:35,023 - INFO - FGI: 1mo change of 5.13%
+2025-01-19 14:08:35,524 - INFO - Processing FGI - 2024-11-12 00:30:00 UTC
+2025-01-19 14:08:35,866 - INFO - Retrieved article length: 6164 characters
+2025-01-19 14:08:35,882 - INFO - FGL: 1h change of -29.27%
+2025-01-19 14:08:35,900 - INFO - FGL: 1wk change of -19.18%
+2025-01-19 14:08:35,908 - INFO - FGL: 1mo change of -52.94%
+2025-01-19 14:08:36,409 - INFO - Processing FGL - 2024-11-11 18:05:00 UTC
+2025-01-19 14:08:37,014 - INFO - Retrieved article length: 21295 characters
+2025-01-19 14:08:37,027 - INFO - FGI: 1h change of -7.45%
+2025-01-19 14:08:37,037 - INFO - FGI: 1wk change of -21.50%
+2025-01-19 14:08:37,048 - INFO - FGI: 1mo change of 5.13%
+2025-01-19 14:08:37,550 - INFO - Processing FGI - 2024-10-31 00:30:00 UTC
+2025-01-19 14:08:37,674 - INFO - Retrieved article length: 477 characters
+2025-01-19 14:08:37,775 - INFO - FGL: 1h change of 46.11%
+2025-01-19 14:08:37,871 - INFO - FGL: 1wk change of -43.00%
+2025-01-19 14:08:38,013 - INFO - FGL: 1mo change of -37.34%
+2025-01-19 14:08:38,514 - INFO - Processing FGL - 2024-11-01 15:56:46 UTC
+2025-01-19 14:08:38,840 - INFO - Retrieved article length: 4281 characters
+2025-01-19 14:08:38,938 - INFO - FGI: 1h change of 29.98%
+2025-01-19 14:08:39,035 - INFO - FGI: 1wk change of 6.48%
+2025-01-19 14:08:39,128 - INFO - FGI: 1mo change of 8.82%
+2025-01-19 14:08:39,774 - INFO - Retrieved article length: 502 characters
+2025-01-19 14:08:39,890 - INFO - FGL: 1h change of 12.57%
+2025-01-19 14:08:39,979 - INFO - FGL: 1wk change of -43.51%
+2025-01-19 14:08:40,071 - INFO - FGL: 1mo change of -16.46%
+2025-01-19 14:08:40,572 - INFO - Processing FGL - 2024-10-24 14:33:00 UTC
+2025-01-19 14:08:40,772 - INFO - Processing FGSM - 2024-12-20 16:00:00 UTC
+2025-01-19 14:08:41,939 - INFO - Retrieved article length: 6827 characters
+2025-01-19 14:08:41,954 - INFO - Retrieved article length: 6494 characters
+2025-01-19 14:08:42,034 - INFO - FGL: 1h change of -19.51%
+2025-01-19 14:08:42,125 - INFO - FGL: 1wk change of 26.58%
+2025-01-19 14:08:42,213 - INFO - FGL: 1mo change of -24.37%
+2025-01-19 14:08:42,246 - INFO - FGSM: 1mo change of 1.88%

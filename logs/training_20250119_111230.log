@@ -1,0 +1,42 @@
+2025-01-19 11:12:30,012 - INFO - Starting new training session. Logging to: logs/training_20250119_111230.log
+2025-01-19 11:12:30,012 - INFO -  Starting Market ML Training...
+2025-01-19 11:12:30,012 - INFO - Loaded 3826 symbols
+2025-01-19 11:12:30,012 - INFO -  Starting training process...
+2025-01-19 11:12:30,012 - INFO - 
+Processing chunk 1/154
+2025-01-19 11:15:14,294 - INFO - Total samples collected so far: 137
+2025-01-19 11:15:14,310 - INFO - Taking a break between chunks...
+2025-01-19 11:15:24,314 - INFO - 
+Processing chunk 2/154
+2025-01-19 11:18:37,441 - INFO - Total samples collected so far: 315
+2025-01-19 11:18:37,468 - INFO - Taking a break between chunks...
+2025-01-19 11:18:47,469 - INFO - 
+Processing chunk 3/154
+2025-01-19 11:21:47,781 - INFO - Total samples collected so far: 473
+2025-01-19 11:21:47,810 - INFO - Taking a break between chunks...
+2025-01-19 11:21:57,815 - INFO - 
+Processing chunk 4/154
+2025-01-19 11:24:49,842 - INFO - Total samples collected so far: 628
+2025-01-19 11:24:49,871 - INFO - Taking a break between chunks...
+2025-01-19 11:24:59,872 - INFO - 
+Processing chunk 5/154
+2025-01-19 11:27:36,794 - INFO - Total samples collected so far: 766
+2025-01-19 11:27:36,827 - INFO - Taking a break between chunks...
+2025-01-19 11:27:46,828 - INFO - 
+Processing chunk 6/154
+2025-01-19 11:30:45,789 - INFO - Total samples collected so far: 920
+2025-01-19 11:30:45,821 - INFO - Taking a break between chunks...
+2025-01-19 11:30:55,822 - INFO - 
+Processing chunk 7/154
+2025-01-19 11:33:55,937 - INFO - Total samples collected so far: 1086
+2025-01-19 11:33:55,966 - INFO - Taking a break between chunks...
+2025-01-19 11:34:05,968 - INFO - 
+Processing chunk 8/154
+2025-01-19 11:37:19,897 - INFO - Total samples collected so far: 1265
+2025-01-19 11:37:19,916 - INFO - Taking a break between chunks...
+2025-01-19 11:37:29,920 - INFO - 
+Processing chunk 9/154
+2025-01-19 11:40:33,349 - INFO - Total samples collected so far: 1433
+2025-01-19 11:40:33,372 - INFO - Taking a break between chunks...
+2025-01-19 11:40:43,375 - INFO - 
+Processing chunk 10/154
