@@ -297,7 +297,7 @@ class MarketMLTrainer:
     def collect_and_train(self, symbols):
         logger.info(" Starting training process...")
         training_data = []
-        failed_stocks = []
+        failed_stocks = set()
          # Configure yfinance cache
         cache_dir = Path("./cache/yfinance")
         cache_dir.mkdir(parents=True, exist_ok=True)
@@ -312,11 +312,14 @@ class MarketMLTrainer:
             
             with Pool(processes=num_processes) as pool:
                 results = []
-                for result in pool.imap_unordered(self.process_symbol, chunk):
-                    if result:
+                for symbol, result in zip(chunk, pool.imap_unordered(self.process_symbol, chunk)):
+                    if result and len(result) > 0:  # Check if we got actual data
                         results.extend(result)
-                    else:
-                        failed_stocks.extend([symbol for symbol in chunk if not result])
+                        logger.info(f"Successfully processed {symbol} with {len(result)} samples")
+
+                    else:  # If no data was returned
+                        failed_stocks.add(symbol)
+                        logger.info(f"Failed to process {symbol}")
 
                 training_data.extend(results)
                 logger.info(f"Total samples collected so far: {len(training_data)}")
@@ -324,13 +327,19 @@ class MarketMLTrainer:
             # Add delay between chunks
             logger.info("Taking a break between chunks...")
             time.sleep(10)  # 10 second break between chunks
+
+
         if failed_stocks:
-            logger.info(f"Retrying failed stocks: {failed_stocks}")
-            for symbol in failed_stocks:
+            logger.info(f"Retrying {len(failed_stocks)} failed stocks")
+            for symbol in list(failed_stocks):  # Convert to list for iteration
                 result = self.process_symbol(symbol)
-                if result:
+                if result and len(result) > 0:
                     training_data.extend(result)
-        
+                    failed_stocks.remove(symbol)
+                    logger.info(f"Successfully processed {symbol} on retry")
+                else:
+                    logger.info(f"Failed to process {symbol} on retry")
+            
         
         
         # Combine all results
