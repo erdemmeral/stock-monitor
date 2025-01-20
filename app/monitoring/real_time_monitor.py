@@ -485,7 +485,6 @@ class RealTimeMonitor:
                 parse_mode='HTML'
             )
     async def send_portfolio_status(self, chat_id):
-
         if not self.portfolio.positions:
             message = "📊 <b>Portfolio Status</b>\n\nNo active positions."
         else:
@@ -499,18 +498,22 @@ class RealTimeMonitor:
                 total_pl_dollar += pl_dollar
                 total_pl_percent += pl_percent
 
-                days_held = (datetime.now(tz=pytz.UTC) - position.entry_date).days
-                time_to_target = (position.target_date - datetime.now(tz=pytz.UTC)).days
+                # Calculate position duration
+                duration = position.get_position_duration()
+                
+                # Format entry date
+                entry_date_formatted = position.entry_date.strftime('%Y-%m-%d %H:%M:%S UTC')
 
                 message += (
                     f"🎯 <b>{symbol}</b>\n"
-                    f"Entry: ${position.entry_price:.2f}\n"
-                    f"Current: ${position.current_price:.2f}\n"
+                    f"Started: {entry_date_formatted}\n"
+                    f"Entry Price: ${position.entry_price:.2f}\n"
+                    f"Current Price: ${position.current_price:.2f}\n"
                     f"Target: ${position.target_price:.2f}\n"
                     f"P/L: ${pl_dollar:.2f} ({pl_percent:+.2f}%)\n"
-                    f"Held for: {days_held} days\n"
+                    f"Held for: {duration['days']} days, {duration['hours']} hours\n"
                     f"Target date: {position.target_date.strftime('%Y-%m-%d')} "
-                    f"({time_to_target} days remaining)\n"
+                    f"({(position.target_date - datetime.now(tz=pytz.UTC)).days} days remaining)\n"
                     f"Timeframe: {position.timeframe}\n\n"
                 )
 
@@ -533,6 +536,7 @@ class RealTimeMonitor:
             )
         except Exception as e:
             logger.error(f"Error sending portfolio status: {e}")
+
     async def periodic_model_check(self):
             """Periodically check and reload models"""
             while True:
