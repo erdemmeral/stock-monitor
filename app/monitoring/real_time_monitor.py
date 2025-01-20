@@ -38,6 +38,46 @@ from app.utils.telegram_notifier import TelegramNotifier
 from app.models.position import Position
 
 from app.models.portfolio import Portfolio
+
+class ModelManager:
+    def __init__(self):
+        self.model_paths = {
+            'vectorizer': 'app/models/vectorizer.joblib',
+            '1h': 'app/models/market_model_1h.joblib',
+            '1wk': 'app/models/market_model_1wk.joblib',
+            '1mo': 'app/models/market_model_1mo.joblib'
+        }
+        self.last_modified_times = {}
+        self.models = {}
+        self.load_initial_models()
+
+    def load_initial_models(self):
+        for name, path in self.model_paths.items():
+            try:
+                self.models[name] = joblib.load(path)
+                self.last_modified_times[name] = os.path.getmtime(path)
+                logger.info(f"Loaded initial {name} model")
+            except Exception as e:
+                logger.error(f"Error loading initial {name} model: {e}")
+
+    def check_and_reload_models(self):
+        """Check if models have been updated and reload if necessary"""
+        try:
+            for name, path in self.model_paths.items():
+                current_mod_time = os.path.getmtime(path)
+                
+                if current_mod_time > self.last_modified_times.get(name, 0):
+                    try:
+                        new_model = joblib.load(path)
+                        self.models[name] = new_model
+                        self.last_modified_times[name] = current_mod_time
+                        
+                        logger.info(f"🔄 Reloaded {name} model")
+                        logger.info(f"Model last modified: {datetime.fromtimestamp(current_mod_time)}")
+                    except Exception as e:
+                        logger.error(f"Error reloading {name} model: {e}")
+        except Exception as e:
+            logger.error(f"Error in model check: {e}")
 class NewsAggregator:
     def __init__(self):
         self.stock_predictions = {}  # Store predictions by stock and timeframe
@@ -81,11 +121,15 @@ class RealTimeMonitor:
 
         self.first_cycle_complete = False
         self.stop_loss_percentage = 5.0
-        self.vectorizer = joblib.load('app/models/vectorizer.joblib')
+
+        self.model_manager = ModelManager()
+        
+        # Use models from model manager
+        self.vectorizer = self.model_manager.models['vectorizer']
         self.models = {
-            '1h': joblib.load('app/models/market_model_1h.joblib'),
-            '1wk': joblib.load('app/models/market_model_1wk.joblib'),
-            '1mo': joblib.load('app/models/market_model_1mo.joblib')
+            '1h': self.model_manager.models['1h'],
+            '1wk': self.model_manager.models['1wk'],
+            '1mo': self.model_manager.models['1mo']
         }
         for timeframe, model in self.models.items():
             logger.info(f"Model loaded for {timeframe}: {type(model)}")
@@ -489,7 +533,27 @@ class RealTimeMonitor:
             )
         except Exception as e:
             logger.error(f"Error sending portfolio status: {e}")
-
+    async def periodic_model_check(self):
+            """Periodically check and reload models"""
+            while True:
+                try:
+                    # Check for model updates
+                    self.model_manager.check_and_reload_models()
+                    
+                    # Update local references to models
+                    self.vectorizer = self.model_manager.models['vectorizer']
+                    self.models = {
+                        '1h': self.model_manager.models['1h'],
+                        '1wk': self.model_manager.models['1wk'],
+                        '1mo': self.model_manager.models['1mo']
+                    }
+                    
+                    # Wait before next check
+                    await asyncio.sleep(300)  # Check every 5 minutes
+                
+                except Exception as e:
+                    logger.error(f"Error in periodic model check: {e}")
+                    await asyncio.sleep(300)  # Wait before retrying
     async def start(self, symbols: list[str]):
         """Start monitoring"""
         logger.info(f"Starting monitoring for {len(symbols)} symbols...")
@@ -503,6 +567,9 @@ class RealTimeMonitor:
         # Start polling in background
         polling_task = asyncio.create_task(self.poll_telegram_updates())
         logger.info("Telegram polling started")
+
+        model_check_task = asyncio.create_task(self.periodic_model_check())
+   
         try:
 
             while True:  # Add continuous loop
@@ -573,7 +640,7 @@ class RealTimeMonitor:
 
     async def monitor_stock(self, symbol: str):
         try:
-            thirty_days_ago = datetime.now(tz=pytz.UTC) - timedelta(days=30)
+            one_week_ago = datetime.now(tz=pytz.UTC) - timedelta(days=7)
 
             logger.info(f"🔄 Processing stock: {symbol}")
             stock = yf.Ticker(symbol)
@@ -590,7 +657,7 @@ class RealTimeMonitor:
             # Filter news when fetching
             news = [
                 article for article in stock.news 
-                if datetime.fromtimestamp(article['providerPublishTime'], tz=pytz.UTC) >= thirty_days_ago
+                if datetime.fromtimestamp(article['providerPublishTime'], tz=pytz.UTC) >= one_week_ago
             ]
 
             if not news:

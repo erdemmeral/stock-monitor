@@ -1,0 +1,6 @@
+# .renderignore
+
+# Ignore model file updates from triggering full redeployment
+#app/models/*.joblib
+#app/models/vectorizer.joblib
+#*.pkl
