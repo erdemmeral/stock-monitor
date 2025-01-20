@@ -1,0 +1,1375 @@
+2025-01-19 15:14:45,006 - INFO - Starting new training session. Logging to: logs/training_20250119_151445.log
+2025-01-19 15:14:45,014 - INFO - Starting new training session. Logging to: logs/training_20250119_151445.log
+2025-01-19 15:14:45,047 - INFO - Starting new training session. Logging to: logs/training_20250119_151445.log
+2025-01-19 15:14:45,048 - INFO - Starting new training session. Logging to: logs/training_20250119_151445.log
+2025-01-19 15:14:45,628 - INFO - Processing AREB - 2025-01-17 16:00:00 UTC
+2025-01-19 15:14:45,636 - INFO - Processing AREC - 2025-01-15 21:30:00 UTC
+2025-01-19 15:14:45,655 - INFO - Processing ARES - 2025-01-16 17:00:14 UTC
+2025-01-19 15:14:45,718 - INFO - Processing AREN - 2025-01-17 15:00:00 UTC
+2025-01-19 15:14:46,969 - INFO - Retrieved article length: 2952 characters
+2025-01-19 15:14:46,975 - INFO - Retrieved article length: 3086 characters
+2025-01-19 15:14:47,040 - INFO - Retrieved article length: 7317 characters
+2025-01-19 15:14:47,055 - INFO - Retrieved article length: 10017 characters
+2025-01-19 15:14:47,092 - INFO - ARES: 1h change of 7.46%
+2025-01-19 15:14:47,097 - INFO - AREC: 1h change of 5.87%
+2025-01-19 15:14:47,161 - INFO - AREB: 1h change of -14.73%
+2025-01-19 15:14:47,183 - INFO - AREC: 1wk change of -7.26%
+2025-01-19 15:14:47,186 - INFO - ARES: 1wk change of 6.11%
+2025-01-19 15:14:47,192 - INFO - AREN: 1h change of 15.70%
+2025-01-19 15:14:47,247 - INFO - AREB: 1wk change of -31.54%
+2025-01-19 15:14:47,268 - INFO - AREC: 1mo change of -40.81%
+2025-01-19 15:14:47,269 - INFO - Processing AREC - 2025-01-14 16:00:00 UTC
+2025-01-19 15:14:47,280 - INFO - ARES: 1mo change of 5.23%
+2025-01-19 15:14:47,280 - INFO - Processing ARES - 2025-01-14 20:10:16 UTC
+2025-01-19 15:14:47,287 - INFO - AREN: 1wk change of 2.94%
+2025-01-19 15:14:47,332 - INFO - AREB: 1mo change of 13.02%
+2025-01-19 15:14:47,332 - INFO - Processing AREB - 2025-01-16 16:55:00 UTC
+2025-01-19 15:14:47,383 - INFO - AREN: 1mo change of -16.17%
+2025-01-19 15:14:47,384 - INFO - Processing AREN - 2025-01-03 18:39:00 UTC
+2025-01-19 15:14:48,108 - INFO - ARES: 1h change of 5.65%
+2025-01-19 15:14:48,204 - INFO - ARES: 1wk change of 6.11%
+2025-01-19 15:14:48,306 - INFO - ARES: 1mo change of 9.19%
+2025-01-19 15:14:48,306 - INFO - Processing ARES - 2025-01-14 19:40:12 UTC
+2025-01-19 15:14:48,559 - INFO - Retrieved article length: 8678 characters
+2025-01-19 15:14:48,568 - INFO - Retrieved article length: 5327 characters
+2025-01-19 15:14:48,572 - INFO - Retrieved article length: 5198 characters
+2025-01-19 15:14:48,658 - INFO - AREB: 1h change of -18.00%
+2025-01-19 15:14:48,658 - INFO - AREC: 1h change of 6.95%
+2025-01-19 15:14:48,665 - INFO - AREN: 1h change of -4.78%
+2025-01-19 15:14:48,743 - INFO - AREC: 1wk change of -7.26%
+2025-01-19 15:14:48,743 - INFO - AREB: 1wk change of -3.05%
+2025-01-19 15:14:48,760 - INFO - AREN: 1wk change of 2.38%
+2025-01-19 15:14:48,830 - INFO - AREB: 1mo change of 10.40%
+2025-01-19 15:14:48,830 - INFO - Processing AREB - 2025-01-15 16:00:00 UTC
+2025-01-19 15:14:48,830 - INFO - AREC: 1mo change of -39.83%
+2025-01-19 15:14:48,830 - INFO - Processing AREC - 2025-01-13 16:00:00 UTC
+2025-01-19 15:14:48,857 - INFO - AREN: 1mo change of -6.67%
+2025-01-19 15:14:48,858 - INFO - Processing AREN - 2024-12-30 19:07:00 UTC
+2025-01-19 15:14:49,062 - INFO - ARES: 1h change of 5.65%
+2025-01-19 15:14:49,117 - INFO - ARES: 1wk change of 6.11%
+2025-01-19 15:14:49,172 - INFO - ARES: 1mo change of 9.19%
+2025-01-19 15:14:49,172 - INFO - Processing ARES - 2025-01-14 17:15:04 UTC
+2025-01-19 15:14:50,105 - INFO - Retrieved article length: 6658 characters
+2025-01-19 15:14:50,107 - INFO - Retrieved article length: 9031 characters
+2025-01-19 15:14:50,107 - INFO - Retrieved article length: 3498 characters
+2025-01-19 15:14:50,193 - INFO - AREC: 1h change of 6.10%
+2025-01-19 15:14:50,193 - INFO - AREB: 1h change of -1.41%
+2025-01-19 15:14:50,203 - INFO - AREN: 1h change of 1.13%
+2025-01-19 15:14:50,281 - INFO - AREC: 1wk change of 5.97%
+2025-01-19 15:14:50,282 - INFO - AREB: 1wk change of -3.05%
+2025-01-19 15:14:50,298 - INFO - AREN: 1wk change of -8.51%
+2025-01-19 15:14:50,366 - INFO - AREC: 1mo change of -40.81%
+2025-01-19 15:14:50,366 - INFO - Processing AREC - 2025-01-08 16:00:00 UTC
+2025-01-19 15:14:50,366 - INFO - AREB: 1mo change of 4.37%
+2025-01-19 15:14:50,367 - INFO - Processing AREB - 2025-01-13 16:00:00 UTC
+2025-01-19 15:14:50,394 - INFO - AREN: 1mo change of -8.50%
+2025-01-19 15:14:50,394 - INFO - Processing AREN - 2024-12-27 00:05:00 UTC
+2025-01-19 15:14:50,579 - INFO - Retrieved article length: 505 characters
+2025-01-19 15:14:50,587 - INFO - ARES: 1h change of 5.65%
+2025-01-19 15:14:50,642 - INFO - ARES: 1wk change of 6.11%
+2025-01-19 15:14:50,699 - INFO - ARES: 1mo change of 9.19%
+2025-01-19 15:14:50,699 - INFO - Processing ARES - 2025-01-14 16:50:08 UTC
+2025-01-19 15:14:51,592 - INFO - Retrieved article length: 6277 characters
+2025-01-19 15:14:51,630 - INFO - Retrieved article length: 9385 characters
+2025-01-19 15:14:51,690 - INFO - AREN: 1h change of 6.82%
+2025-01-19 15:14:51,715 - INFO - Retrieved article length: 8722 characters
+2025-01-19 15:14:51,716 - INFO - AREC: 1h change of -3.74%
+2025-01-19 15:14:51,790 - INFO - AREN: 1wk change of -19.16%
+2025-01-19 15:14:51,797 - INFO - AREB: 1h change of 10.79%
+2025-01-19 15:14:51,803 - INFO - AREC: 1wk change of -33.82%
+2025-01-19 15:14:51,886 - INFO - AREB: 1wk change of 4.37%
+2025-01-19 15:14:51,886 - INFO - AREC: 1mo change of -41.29%
+2025-01-19 15:14:51,886 - INFO - Processing AREC - 2025-01-07 16:30:00 UTC
+2025-01-19 15:14:51,886 - INFO - AREN: 1mo change of -9.68%
+2025-01-19 15:14:51,886 - INFO - Processing AREN - 2024-12-26 19:51:00 UTC
+2025-01-19 15:14:51,947 - INFO - Retrieved article length: 493 characters
+2025-01-19 15:14:51,956 - INFO - ARES: 1h change of 5.65%
+2025-01-19 15:14:51,966 - INFO - AREB: 1mo change of 7.30%
+2025-01-19 15:14:51,967 - INFO - Processing AREB - 2025-01-10 16:30:00 UTC
+2025-01-19 15:14:52,009 - INFO - ARES: 1wk change of 6.11%
+2025-01-19 15:14:52,072 - INFO - ARES: 1mo change of 9.19%
+2025-01-19 15:14:52,072 - INFO - Processing ARES - 2025-01-14 16:15:00 UTC
+2025-01-19 15:14:53,091 - INFO - Retrieved article length: 9567 characters
+2025-01-19 15:14:53,176 - INFO - AREC: 1h change of -3.74%
+2025-01-19 15:14:53,188 - INFO - Retrieved article length: 3354 characters
+2025-01-19 15:14:53,257 - INFO - AREC: 1wk change of -35.45%
+2025-01-19 15:14:53,286 - INFO - AREN: 1h change of 3.30%
+2025-01-19 15:14:53,288 - INFO - Retrieved article length: 6893 characters
+2025-01-19 15:14:53,306 - INFO - Retrieved article length: 4578 characters
+2025-01-19 15:14:53,315 - INFO - ARES: 1h change of 5.65%
+2025-01-19 15:14:53,341 - INFO - AREC: 1mo change of -44.85%
+2025-01-19 15:14:53,341 - INFO - Processing AREC - 2025-01-06 16:00:00 UTC
+2025-01-19 15:14:53,367 - INFO - ARES: 1wk change of 6.11%
+2025-01-19 15:14:53,378 - INFO - AREB: 1h change of 5.75%
+2025-01-19 15:14:53,379 - INFO - AREN: 1wk change of -13.46%
+2025-01-19 15:14:53,421 - INFO - ARES: 1mo change of 9.19%
+2025-01-19 15:14:53,421 - INFO - Processing ARES - 2025-01-14 16:00:29 UTC
+2025-01-19 15:14:53,463 - INFO - AREB: 1wk change of 5.52%
+2025-01-19 15:14:53,474 - INFO - AREN: 1mo change of -7.28%
+2025-01-19 15:14:53,475 - INFO - Processing AREN - 2024-12-20 17:46:00 UTC
+2025-01-19 15:14:53,548 - INFO - AREB: 1mo change of 6.11%
+2025-01-19 15:14:53,549 - INFO - Processing AREB - 2025-01-07 16:00:00 UTC
+2025-01-19 15:14:54,532 - INFO - Retrieved article length: 8505 characters
+2025-01-19 15:14:54,610 - INFO - Retrieved article length: 2870 characters
+2025-01-19 15:14:54,618 - INFO - ARES: 1h change of 5.65%
+2025-01-19 15:14:54,670 - INFO - ARES: 1wk change of 6.11%
+2025-01-19 15:14:54,704 - INFO - AREC: 1wk change of -29.61%
+2025-01-19 15:14:54,724 - INFO - ARES: 1mo change of 9.19%
+2025-01-19 15:14:54,725 - INFO - Processing ARES - 2025-01-13 18:48:00 UTC
+2025-01-19 15:14:54,756 - INFO - Retrieved article length: 6309 characters
+2025-01-19 15:14:54,773 - INFO - Retrieved article length: 4742 characters
+2025-01-19 15:14:54,787 - INFO - AREC: 1mo change of -38.82%
+2025-01-19 15:14:54,788 - INFO - Processing AREC - 2025-01-02 17:53:00 UTC
+2025-01-19 15:14:54,843 - INFO - AREB: 1h change of 20.74%
+2025-01-19 15:14:54,875 - INFO - AREN: 1h change of -15.73%
+2025-01-19 15:14:54,926 - INFO - AREB: 1wk change of 15.93%
+2025-01-19 15:14:54,978 - INFO - AREN: 1wk change of -21.59%
+2025-01-19 15:14:55,014 - INFO - AREB: 1mo change of 3.80%
+2025-01-19 15:14:55,014 - INFO - Processing AREB - 2024-12-16 16:00:00 UTC
+2025-01-19 15:14:55,076 - INFO - AREN: 1mo change of -20.00%
+2025-01-19 15:14:55,076 - INFO - Processing AREN - 2024-12-06 18:25:00 UTC
+2025-01-19 15:14:55,547 - INFO - ARES: 1h change of 2.66%
+2025-01-19 15:14:55,657 - INFO - ARES: 1wk change of 5.64%
+2025-01-19 15:14:55,762 - INFO - ARES: 1mo change of 9.70%
+2025-01-19 15:14:55,804 - INFO - AREB: 1h change of 7.23%
+2025-01-19 15:14:55,856 - INFO - AREN: 1h change of 12.68%
+2025-01-19 15:14:55,881 - INFO - Processing ARHS - 2025-01-15 18:34:00 UTC
+2025-01-19 15:14:55,893 - INFO - AREB: 1wk change of -3.89%
+2025-01-19 15:14:55,959 - INFO - AREN: 1wk change of 12.08%
+2025-01-19 15:14:55,977 - INFO - AREB: 1mo change of -40.50%
+2025-01-19 15:14:55,977 - INFO - Processing AREB - 2024-12-11 17:06:00 UTC
+2025-01-19 15:14:56,024 - INFO - Retrieved article length: 3549 characters
+2025-01-19 15:14:56,052 - INFO - AREN: 1mo change of 84.29%
+2025-01-19 15:14:56,053 - INFO - Processing AREN - 2024-11-15 18:07:00 UTC
+2025-01-19 15:14:56,110 - INFO - AREC: 1h change of -36.54%
+2025-01-19 15:14:56,198 - INFO - AREC: 1wk change of -35.77%
+2025-01-19 15:14:56,285 - INFO - AREC: 1mo change of -38.82%
+2025-01-19 15:14:56,285 - INFO - Processing AREC - 2024-12-23 16:30:00 UTC
+2025-01-19 15:14:56,736 - INFO - AREB: 1h change of -5.11%
+2025-01-19 15:14:56,825 - INFO - AREB: 1wk change of -11.17%
+2025-01-19 15:14:56,886 - INFO - AREN: 1h change of 184.48%
+2025-01-19 15:14:56,911 - INFO - AREB: 1mo change of -22.92%
+2025-01-19 15:14:56,990 - INFO - AREN: 1wk change of 150.00%
+2025-01-19 15:14:57,029 - INFO - Processing ARI - 2025-01-13 16:15:00 UTC
+2025-01-19 15:14:57,086 - INFO - AREN: 1mo change of 110.53%
+2025-01-19 15:14:57,111 - INFO - Retrieved article length: 5372 characters
+2025-01-19 15:14:57,201 - INFO - ARHS: 1h change of 8.81%
+2025-01-19 15:14:57,251 - INFO - Processing ARKB - 2025-01-15 20:38:04 UTC
+2025-01-19 15:14:57,289 - INFO - ARHS: 1wk change of 19.38%
+2025-01-19 15:14:57,382 - INFO - ARHS: 1mo change of 3.28%
+2025-01-19 15:14:57,382 - INFO - Processing ARHS - 2025-01-14 20:20:02 UTC
+2025-01-19 15:14:57,487 - INFO - Retrieved article length: 13074 characters
+2025-01-19 15:14:57,584 - INFO - AREC: 1h change of -2.83%
+2025-01-19 15:14:57,669 - INFO - AREC: 1wk change of -15.13%
+2025-01-19 15:14:57,757 - INFO - AREC: 1mo change of -25.18%
+2025-01-19 15:14:58,000 - INFO - Processing ARKK - 2024-11-09 02:07:06 UTC
+2025-01-19 15:14:58,229 - INFO - Retrieved article length: 8431 characters
+2025-01-19 15:14:58,319 - INFO - ARI: 1h change of 4.13%
+2025-01-19 15:14:58,440 - INFO - Retrieved article length: 2364 characters
+2025-01-19 15:14:58,516 - INFO - Processing ARI - 2025-01-10 17:15:47 UTC
+2025-01-19 15:14:58,539 - INFO - ARKB: 1h change of 9.01%
+2025-01-19 15:14:58,625 - INFO - Retrieved article length: 3118 characters
+2025-01-19 15:14:58,636 - INFO - ARKB: 1wk change of 2.49%
+2025-01-19 15:14:58,715 - INFO - ARHS: 1h change of 6.90%
+2025-01-19 15:14:58,735 - INFO - ARKB: 1mo change of 3.07%
+2025-01-19 15:14:58,735 - INFO - Processing ARKB - 2025-01-14 19:24:00 UTC
+2025-01-19 15:14:58,805 - INFO - ARHS: 1wk change of 19.38%
+2025-01-19 15:14:58,891 - INFO - ARHS: 1mo change of 4.58%
+2025-01-19 15:14:58,891 - INFO - Processing ARHS - 2025-01-11 15:40:52 UTC
+2025-01-19 15:14:59,303 - INFO - Retrieved article length: 2297 characters
+2025-01-19 15:14:59,394 - INFO - ARKK: 1h change of 2.81%
+2025-01-19 15:14:59,500 - INFO - ARKK: 1wk change of 14.26%
+2025-01-19 15:14:59,620 - INFO - ARKK: 1mo change of 33.59%
+2025-01-19 15:14:59,620 - INFO - Processing ARKK - 2024-11-09 01:20:42 UTC
+2025-01-19 15:14:59,727 - INFO - Retrieved article length: 627 characters
+2025-01-19 15:14:59,759 - INFO - ARHS: 1wk change of 23.57%
+2025-01-19 15:14:59,816 - INFO - ARI: 1h change of -1.95%
+2025-01-19 15:14:59,840 - INFO - ARHS: 1mo change of 5.63%
+2025-01-19 15:14:59,840 - INFO - Processing ARHS - 2025-01-11 15:35:33 UTC
+2025-01-19 15:14:59,914 - INFO - ARI: 1wk change of 4.16%
+2025-01-19 15:15:00,016 - INFO - ARI: 1mo change of 2.26%
+2025-01-19 15:15:00,016 - INFO - Processing ARI - 2025-01-02 17:46:38 UTC
+2025-01-19 15:15:00,059 - INFO - Retrieved article length: 935 characters
+2025-01-19 15:15:00,156 - INFO - ARKB: 1h change of 8.19%
+2025-01-19 15:15:00,252 - INFO - ARKB: 1wk change of 2.49%
+2025-01-19 15:15:00,346 - INFO - ARKB: 1mo change of 8.56%
+2025-01-19 15:15:00,347 - INFO - Processing ARKB - 2025-01-11 01:49:26 UTC
+2025-01-19 15:15:00,352 - INFO - ARKK: 1h change of 2.81%
+2025-01-19 15:15:00,358 - INFO - ARKK: 1wk change of 14.26%
+2025-01-19 15:15:00,366 - INFO - ARKK: 1mo change of 33.59%
+2025-01-19 15:15:00,366 - INFO - Processing ARKK - 2024-11-05 21:33:22 UTC
+2025-01-19 15:15:01,139 - INFO - ARKK: 1h change of 11.16%
+2025-01-19 15:15:01,168 - INFO - Retrieved article length: 1489 characters
+2025-01-19 15:15:01,230 - INFO - ARHS: 1wk change of 23.57%
+2025-01-19 15:15:01,231 - INFO - ARKK: 1wk change of 11.26%
+2025-01-19 15:15:01,240 - INFO - Retrieved article length: 4730 characters
+2025-01-19 15:15:01,283 - INFO - ARHS: 1mo change of 5.63%
+2025-01-19 15:15:01,284 - INFO - Processing ARHS - 2025-01-10 18:35:00 UTC
+2025-01-19 15:15:01,320 - INFO - ARKK: 1mo change of 32.76%
+2025-01-19 15:15:01,332 - INFO - ARI: 1h change of 3.46%
+2025-01-19 15:15:01,433 - INFO - ARI: 1wk change of -1.76%
+2025-01-19 15:15:01,474 - INFO - Processing ARKO - 2025-01-07 14:58:14 UTC
+2025-01-19 15:15:01,537 - INFO - Processing ARI - 2024-12-11 00:15:00 UTC
+2025-01-19 15:15:01,652 - INFO - Retrieved article length: 1851 characters
+2025-01-19 15:15:01,756 - INFO - ARKB: 1h change of 1.58%
+2025-01-19 15:15:01,859 - INFO - ARKB: 1wk change of 7.56%
+2025-01-19 15:15:01,959 - INFO - ARKB: 1mo change of 8.89%
+2025-01-19 15:15:01,959 - INFO - Processing ARKB - 2024-11-29 17:18:53 UTC
+2025-01-19 15:15:02,417 - INFO - ARI: 1wk change of -2.80%
+2025-01-19 15:15:02,529 - INFO - Processing ARI - 2024-11-01 10:09:43 UTC
+2025-01-19 15:15:02,562 - INFO - Retrieved article length: 7947 characters
+2025-01-19 15:15:02,651 - INFO - ARHS: 1h change of 18.73%
+2025-01-19 15:15:02,694 - INFO - Retrieved article length: 4787 characters
+2025-01-19 15:15:02,737 - INFO - ARHS: 1wk change of 23.83%
+2025-01-19 15:15:02,749 - INFO - ARKB: 1h change of 2.99%
+2025-01-19 15:15:02,780 - INFO - ARKO: 1h change of 1.02%
+2025-01-19 15:15:02,824 - INFO - ARHS: 1mo change of 10.65%
+2025-01-19 15:15:02,824 - INFO - Processing ARHS - 2025-01-09 02:02:53 UTC
+2025-01-19 15:15:02,847 - INFO - ARKB: 1wk change of 9.77%
+2025-01-19 15:15:02,861 - INFO - ARKO: 1wk change of -2.25%
+2025-01-19 15:15:02,949 - INFO - ARKO: 1mo change of -7.78%
+2025-01-19 15:15:02,949 - INFO - Processing ARKO - 2024-12-11 14:31:03 UTC
+2025-01-19 15:15:02,950 - INFO - ARKB: 1mo change of 45.90%
+2025-01-19 15:15:03,147 - INFO - Processing ARLO - 2025-01-09 16:48:20 UTC
+2025-01-19 15:15:03,314 - INFO - ARI: 1h change of -2.61%
+2025-01-19 15:15:03,416 - INFO - ARI: 1wk change of 6.57%
+2025-01-19 15:15:03,534 - INFO - ARI: 1mo change of -1.42%
+2025-01-19 15:15:03,535 - INFO - Processing ARI - 2024-11-01 10:08:04 UTC
+2025-01-19 15:15:03,800 - INFO - ARKO: 1h change of 2.54%
+2025-01-19 15:15:03,891 - INFO - ARKO: 1wk change of -5.18%
+2025-01-19 15:15:03,988 - INFO - ARKO: 1mo change of -6.67%
+2025-01-19 15:15:03,989 - INFO - Processing ARKO - 2024-12-01 17:00:00 UTC
+2025-01-19 15:15:04,106 - INFO - Retrieved article length: 501 characters
+2025-01-19 15:15:04,197 - INFO - ARHS: 1h change of 13.38%
+2025-01-19 15:15:04,286 - INFO - ARHS: 1wk change of 25.43%
+2025-01-19 15:15:04,359 - INFO - ARI: 1h change of -2.61%
+2025-01-19 15:15:04,364 - INFO - ARI: 1wk change of 6.57%
+2025-01-19 15:15:04,371 - INFO - ARHS: 1mo change of 8.79%
+2025-01-19 15:15:04,371 - INFO - ARI: 1mo change of -1.42%
+2025-01-19 15:15:04,372 - INFO - Processing ARHS - 2025-01-09 01:21:00 UTC
+2025-01-19 15:15:04,372 - INFO - Processing ARI - 2024-10-31 00:47:08 UTC
+2025-01-19 15:15:04,396 - INFO - Retrieved article length: 3133 characters
+2025-01-19 15:15:04,606 - INFO - ARLO: 1wk change of 5.16%
+2025-01-19 15:15:04,706 - INFO - ARLO: 1mo change of -7.14%
+2025-01-19 15:15:04,706 - INFO - Processing ARLO - 2025-01-07 19:47:00 UTC
+2025-01-19 15:15:04,875 - INFO - ARKO: 1h change of -1.38%
+2025-01-19 15:15:04,982 - INFO - ARKO: 1wk change of 6.15%
+2025-01-19 15:15:05,073 - INFO - ARKO: 1mo change of -9.21%
+2025-01-19 15:15:05,073 - INFO - Processing ARKO - 2024-11-14 14:09:48 UTC
+2025-01-19 15:15:05,576 - INFO - Retrieved article length: 7726 characters
+2025-01-19 15:15:05,580 - INFO - Retrieved article length: 1256 characters
+2025-01-19 15:15:05,584 - INFO - ARHS: 1h change of 13.38%
+2025-01-19 15:15:05,591 - INFO - ARHS: 1wk change of 25.43%
+2025-01-19 15:15:05,646 - INFO - ARHS: 1mo change of 8.79%
+2025-01-19 15:15:05,646 - INFO - Processing ARHS - 2025-01-06 18:10:23 UTC
+2025-01-19 15:15:05,781 - INFO - ARI: 1wk change of 6.32%
+2025-01-19 15:15:05,883 - INFO - ARKO: 1h change of -2.38%
+2025-01-19 15:15:05,898 - INFO - Processing ARI - 2024-10-30 23:15:00 UTC
+2025-01-19 15:15:05,930 - INFO - Retrieved article length: 4194 characters
+2025-01-19 15:15:05,971 - INFO - ARKO: 1wk change of 7.03%
+2025-01-19 15:15:06,031 - INFO - ARLO: 1h change of 1.72%
+2025-01-19 15:15:06,068 - INFO - ARKO: 1mo change of -1.30%
+2025-01-19 15:15:06,068 - INFO - Processing ARKO - 2024-11-12 13:20:30 UTC
+2025-01-19 15:15:06,133 - INFO - ARLO: 1wk change of 6.22%
+2025-01-19 15:15:06,232 - INFO - ARLO: 1mo change of -7.36%
+2025-01-19 15:15:06,233 - INFO - Processing ARLO - 2025-01-07 16:01:00 UTC
+2025-01-19 15:15:06,832 - INFO - ARI: 1wk change of 6.32%
+2025-01-19 15:15:06,920 - INFO - Retrieved article length: 7353 characters
+2025-01-19 15:15:07,007 - INFO - ARKO: 1wk change of 4.28%
+2025-01-19 15:15:07,009 - INFO - ARHS: 1h change of 1.50%
+2025-01-19 15:15:07,086 - INFO - Processing ARMK - 2025-01-14 21:53:59 UTC
+2025-01-19 15:15:07,093 - INFO - ARKO: 1mo change of 5.36%
+2025-01-19 15:15:07,093 - INFO - ARHS: 1wk change of 20.95%
+ 15:55:12 UTC
+2025-01-19 15:15:07,182 - INFO - ARHS: 1mo change of 12.03%
+2025-01-19 15:15:07,342 - INFO - Processing AROC - 2025-01-17 17:30:14 UTC
+2025-01-19 15:15:07,495 - INFO - Retrieved article length: 8717 characters
+2025-01-19 15:15:07,503 - INFO - ARLO: 1h change of 1.72%
+2025-01-19 15:15:07,509 - INFO - ARLO: 1wk change of 6.22%
+2025-01-19 15:15:07,578 - INFO - ARLO: 1mo change of -7.36%
+2025-01-19 15:15:07,578 - INFO - Processing ARLO - 2025-01-02 10:15:00 UTC
+2025-01-19 15:15:08,063 - INFO - ARKO: 1h change of -3.65%
+2025-01-19 15:15:08,157 - INFO - ARKO: 1wk change of -4.96%
+2025-01-19 15:15:08,248 - INFO - ARKO: 1mo change of 5.23%
+2025-01-19 15:15:08,249 - INFO - Processing ARKO - 2024-11-09 09:24:30 UTC
+2025-01-19 15:15:08,479 - INFO - Retrieved article length: 4094 characters
+2025-01-19 15:15:08,566 - INFO - ARMK: 1h change of 6.65%
+2025-01-19 15:15:08,596 - INFO - Retrieved article length: 5340 characters
+2025-01-19 15:15:08,661 - INFO - ARMK: 1wk change of 6.70%
+2025-01-19 15:15:08,687 - INFO - AROC: 1h change of 2.34%
+2025-01-19 15:15:08,763 - INFO - ARMK: 1mo change of -2.44%
+2025-01-19 15:15:08,763 - INFO - Processing ARMK - 2025-01-14 15:30:00 UTC
+2025-01-19 15:15:08,783 - INFO - AROC: 1wk change of 17.23%
+2025-01-19 15:15:08,890 - INFO - Retrieved article length: 8043 characters
+2025-01-19 15:15:08,928 - INFO - AROC: 1mo change of 14.39%
+2025-01-19 15:15:08,928 - INFO - Processing AROC - 2025-01-17 17:29:00 UTC
+2025-01-19 15:15:08,977 - INFO - ARKO: 1h change of -3.65%
+2025-01-19 15:15:08,983 - INFO - ARKO: 1wk change of -4.96%
+2025-01-19 15:15:08,987 - INFO - ARLO: 1h change of -2.03%
+2025-01-19 15:15:08,990 - INFO - ARKO: 1mo change of 5.23%
+2025-01-19 15:15:08,990 - INFO - Processing ARKO - 2024-11-08 22:03:05 UTC
+2025-01-19 15:15:09,191 - INFO - ARLO: 1mo change of 5.44%
+2025-01-19 15:15:09,192 - INFO - Processing ARLO - 2024-12-31 14:51:00 UTC
+2025-01-19 15:15:09,760 - INFO - ARKO: 1h change of -8.46%
+2025-01-19 15:15:09,847 - INFO - ARKO: 1wk change of -5.07%
+2025-01-19 15:15:09,937 - INFO - ARKO: 1mo change of 2.15%
+2025-01-19 15:15:10,049 - INFO - Retrieved article length: 2135 characters
+2025-01-19 15:15:10,057 - INFO - ARMK: 1h change of 6.65%
+2025-01-19 15:15:10,080 - INFO - Processing ARQQ - 2024-12-06 10:03:05 UTC
+2025-01-19 15:15:10,109 - INFO - ARMK: 1wk change of 6.70%
+2025-01-19 15:15:10,160 - INFO - ARMK: 1mo change of -2.44%
+2025-01-19 15:15:10,161 - INFO - Processing ARMK - 2025-01-06 16:52:00 UTC
+2025-01-19 15:15:10,167 - INFO - Retrieved article length: 6798 characters
+2025-01-19 15:15:10,178 - INFO - AROC: 1h change of 2.34%
+2025-01-19 15:15:10,230 - INFO - AROC: 1wk change of 17.23%
+2025-01-19 15:15:10,286 - INFO - AROC: 1mo change of 14.39%
+2025-01-19 15:15:10,286 - INFO - Processing AROC - 2025-01-16 02:00:23 UTC
+2025-01-19 15:15:10,417 - INFO - Retrieved article length: 5915 characters
+2025-01-19 15:15:10,626 - INFO - ARLO: 1wk change of 4.21%
+2025-01-19 15:15:10,726 - INFO - ARLO: 1mo change of -1.74%
+2025-01-19 15:15:10,726 - INFO - Processing ARLO - 2024-12-22 16:20:47 UTC
+2025-01-19 15:15:10,871 - INFO - ARQQ: 1h change of -19.12%
+2025-01-19 15:15:10,959 - INFO - ARQQ: 1wk change of 38.43%
+2025-01-19 15:15:11,047 - INFO - ARQQ: 1mo change of 353.22%
+2025-01-19 15:15:11,049 - INFO - Processing ARQQ - 2024-12-05 16:00:00 UTC
+2025-01-19 15:15:11,326 - INFO - Retrieved article length: 5842 characters
+2025-01-19 15:15:11,416 - INFO - ARMK: 1h change of -2.64%
+2025-01-19 15:15:11,500 - INFO - Retrieved article length: 3368 characters
+2025-01-19 15:15:11,518 - INFO - ARMK: 1wk change of 4.92%
+2025-01-19 15:15:11,596 - INFO - AROC: 1h change of 6.77%
+2025-01-19 15:15:11,618 - INFO - ARMK: 1mo change of -2.88%
+2025-01-19 15:15:11,618 - INFO - Processing ARMK - 2024-12-25 15:16:39 UTC
+2025-01-19 15:15:11,695 - INFO - AROC: 1wk change of 14.97%
+2025-01-19 15:15:11,799 - INFO - AROC: 1mo change of 15.01%
+2025-01-19 15:15:11,800 - INFO - Processing AROC - 2025-01-10 13:44:00 UTC
+2025-01-19 15:15:11,818 - INFO - ARQQ: 1h change of 4.05%
+2025-01-19 15:15:11,897 - INFO - ARQQ: 1wk change of 33.67%
+2025-01-19 15:15:11,928 - INFO - Retrieved article length: 3989 characters
+2025-01-19 15:15:11,979 - INFO - ARQQ: 1mo change of 354.90%
+2025-01-19 15:15:11,979 - INFO - Processing ARQQ - 2024-11-26 21:00:00 UTC
+2025-01-19 15:15:12,030 - INFO - ARLO: 1h change of -1.13%
+2025-01-19 15:15:12,131 - INFO - ARLO: 1wk change of -14.58%
+2025-01-19 15:15:12,233 - INFO - ARLO: 1mo change of 5.34%
+2025-01-19 15:15:12,233 - INFO - Processing ARLO - 2024-12-18 00:42:33 UTC
+2025-01-19 15:15:12,784 - INFO - ARQQ: 1h change of -8.07%
+2025-01-19 15:15:12,870 - INFO - ARQQ: 1wk change of 194.99%
+2025-01-19 15:15:12,922 - INFO - Retrieved article length: 4254 characters
+2025-01-19 15:15:12,951 - INFO - ARQQ: 1mo change of 490.19%
+2025-01-19 15:15:12,951 - INFO - Processing ARQQ - 2024-11-22 23:29:00 UTC
+2025-01-19 15:15:13,005 - INFO - Retrieved article length: 1249 characters
+2025-01-19 15:15:13,069 - INFO - ARLO: 1h change of -10.69%
+2025-01-19 15:15:13,098 - INFO - ARMK: 1wk change of -6.33%
+2025-01-19 15:15:13,105 - INFO - AROC: 1h change of 4.31%
+2025-01-19 15:15:13,176 - INFO - ARLO: 1wk change of -12.71%
+2025-01-19 15:15:13,189 - INFO - Processing ARMK - 2024-12-20 21:18:47 UTC
+2025-01-19 15:15:13,199 - INFO - AROC: 1wk change of 19.45%
+2025-01-19 15:15:13,286 - INFO - ARLO: 1mo change of 3.23%
+2025-01-19 15:15:13,286 - INFO - Processing ARLO - 2024-12-06 17:55:05 UTC
+2025-01-19 15:15:13,291 - INFO - AROC: 1mo change of 16.82%
+2025-01-19 15:15:13,292 - INFO - Processing AROC - 2025-01-09 17:00:14 UTC
+2025-01-19 15:15:13,739 - INFO - ARQQ: 1h change of 67.27%
+2025-01-19 15:15:13,826 - INFO - ARQQ: 1wk change of 141.01%
+2025-01-19 15:15:13,922 - INFO - ARQQ: 1mo change of 637.88%
+2025-01-19 15:15:13,922 - INFO - Processing ARQQ - 2024-11-10 17:39:05 UTC
+2025-01-19 15:15:14,082 - INFO - ARLO: 1h change of -1.70%
+2025-01-19 15:15:14,186 - INFO - ARLO: 1wk change of 2.91%
+2025-01-19 15:15:14,289 - INFO - ARLO: 1mo change of 15.47%
+2025-01-19 15:15:14,448 - INFO - Retrieved article length: 2568 characters
+2025-01-19 15:15:14,487 - INFO - Retrieved article length: 6010 characters
+2025-01-19 15:15:14,495 - INFO - Processing ARQT - 2025-01-16 17:55:14 UTC
+2025-01-19 15:15:14,548 - INFO - ARMK: 1h change of -3.44%
+2025-01-19 15:15:14,579 - INFO - AROC: 1h change of 2.08%
+2025-01-19 15:15:14,648 - INFO - ARMK: 1wk change of -6.75%
+2025-01-19 15:15:14,674 - INFO - AROC: 1wk change of 19.45%
+2025-01-19 15:15:14,739 - INFO - ARQQ: 1h change of 2.66%
+2025-01-19 15:15:14,757 - INFO - ARMK: 1mo change of 5.09%
+2025-01-19 15:15:14,757 - INFO - Processing ARMK - 2024-12-19 22:59:15 UTC
+2025-01-19 15:15:14,770 - INFO - AROC: 1mo change of 13.43%
+2025-01-19 15:15:14,770 - INFO - Processing AROC - 2025-01-08 11:26:00 UTC
+2025-01-19 15:15:14,866 - INFO - ARQQ: 1wk change of 36.60%
+2025-01-19 15:15:14,955 - INFO - ARQQ: 1mo change of 525.33%
+2025-01-19 15:15:15,079 - INFO - Processing ARR - 2025-01-15 16:06:59 UTC
+2025-01-19 15:15:15,708 - INFO - Retrieved article length: 4847 characters
+2025-01-19 15:15:15,813 - INFO - ARQT: 1h change of -7.04%
+2025-01-19 15:15:15,910 - INFO - ARQT: 1wk change of -13.80%
+2025-01-19 15:15:16,011 - INFO - ARQT: 1mo change of 3.51%
+2025-01-19 15:15:16,012 - INFO - Processing ARQT - 2025-01-13 12:07:05 UTC
+2025-01-19 15:15:16,060 - INFO - Retrieved article length: 1251 characters
+2025-01-19 15:15:16,063 - INFO - Retrieved article length: 513 characters
+2025-01-19 15:15:16,148 - INFO - AROC: 1h change of -4.08%
+2025-01-19 15:15:16,157 - INFO - ARMK: 1h change of -4.32%
+2025-01-19 15:15:16,250 - INFO - AROC: 1wk change of 19.45%
+2025-01-19 15:15:16,255 - INFO - ARMK: 1wk change of -6.33%
+2025-01-19 15:15:16,322 - INFO - Retrieved article length: 7228 characters
+2025-01-19 15:15:16,342 - INFO - AROC: 1mo change of 15.14%
+2025-01-19 15:15:16,343 - INFO - Processing AROC - 2025-01-08 02:00:22 UTC
+2025-01-19 15:15:16,349 - INFO - ARMK: 1mo change of 1.50%
+2025-01-19 15:15:16,349 - INFO - Processing ARMK - 2024-12-19 21:40:00 UTC
+2025-01-19 15:15:16,413 - INFO - ARR: 1h change of 2.67%
+2025-01-19 15:15:16,620 - INFO - ARR: 1mo change of -1.60%
+2025-01-19 15:15:16,621 - INFO - Processing ARR - 2025-01-10 17:16:00 UTC
+2025-01-19 15:15:17,208 - INFO - Retrieved article length: 519 characters
+2025-01-19 15:15:17,310 - INFO - ARQT: 1h change of -2.39%
+2025-01-19 15:15:17,411 - INFO - ARQT: 1wk change of -13.27%
+2025-01-19 15:15:17,516 - INFO - Processing ARQT - 2025-01-12 16:30:00 UTC
+2025-01-19 15:15:17,605 - INFO - Retrieved article length: 3514 characters
+2025-01-19 15:15:17,613 - INFO - AROC: 1h change of -4.08%
+2025-01-19 15:15:17,620 - INFO - AROC: 1wk change of 19.45%
+2025-01-19 15:15:17,623 - INFO - Retrieved article length: 4713 characters
+2025-01-19 15:15:17,631 - INFO - ARMK: 1h change of -4.32%
+2025-01-19 15:15:17,637 - INFO - ARMK: 1wk change of -6.33%
+2025-01-19 15:15:17,673 - INFO - AROC: 1mo change of 15.14%
+2025-01-19 15:15:17,673 - INFO - Processing AROC - 2025-01-07 14:01:05 UTC
+2025-01-19 15:15:17,689 - INFO - ARMK: 1mo change of 1.50%
+2025-01-19 15:15:17,689 - INFO - Processing ARMK - 2024-12-12 16:42:00 UTC
+2025-01-19 15:15:17,895 - INFO - Retrieved article length: 614 characters
+2025-01-19 15:15:17,981 - INFO - ARR: 1h change of -1.82%
+2025-01-19 15:15:18,184 - INFO - Processing ARR - 2025-01-03 00:15:00 UTC
+2025-01-19 15:15:18,634 - INFO - ARMK: 1wk change of -6.70%
+2025-01-19 15:15:18,728 - INFO - ARMK: 1mo change of 1.03%
+2025-01-19 15:15:18,744 - INFO - Retrieved article length: 7583 characters
+2025-01-19 15:15:18,848 - INFO - ARQT: 1h change of -4.02%
+8 02:15:22 UTC
+2025-01-19 15:15:18,959 - INFO - ARQT: 1wk change of -12.91%
+2025-01-19 15:15:19,006 - INFO - Retrieved article length: 4604 characters
+2025-01-19 15:15:19,055 - INFO - Processing ARQT - 2025-01-09 21:04:54 UTC
+2025-01-19 15:15:19,094 - INFO - AROC: 1h change of -4.08%
+2025-01-19 15:15:19,186 - INFO - AROC: 1wk change of 18.76%
+2025-01-19 15:15:19,285 - INFO - AROC: 1mo change of 14.70%
+2025-01-19 15:15:19,377 - INFO - Retrieved article length: 3898 characters
+2025-01-19 15:15:20,134 - INFO - Retrieved article length: 3417 characters
+2025-01-19 15:15:20,317 - INFO - Retrieved article length: 10838 characters
+2025-01-19 15:15:20,680 - INFO - Processing ARTL - 2025-01-13 17:00:00 UTC
+2025-01-19 15:15:20,714 - INFO - ARR: 1h change of 1.58%
+2025-01-19 15:15:20,822 - INFO - ARR: 1wk change of -2.81%
+2025-01-19 15:15:20,931 - INFO - ARR: 1mo change of 1.21%
+2025-01-19 15:15:20,931 - INFO - Processing ARR - 2024-12-27 17:40:16 UTC
+2025-01-19 15:15:21,294 - INFO - ARRY: 1h change of 4.46%
+2025-01-19 15:15:21,385 - INFO - ARRY: 1wk change of 9.49%
+2025-01-19 15:15:21,474 - INFO - ARRY: 1mo change of 38.57%
+2025-01-19 15:15:21,474 - INFO - Processing ARRY - 2025-01-15 12:07:46 UTC
+2025-01-19 15:15:21,879 - INFO - ARQT: 1h change of -11.03%
+2025-01-19 15:15:21,892 - INFO - Retrieved article length: 7489 characters
+2025-01-19 15:15:21,968 - INFO - ARQT: 1wk change of -10.70%
+2025-01-19 15:15:21,984 - INFO - ARTL: 1h change of -3.39%
+2025-01-19 15:15:22,058 - INFO - ARQT: 1mo change of 3.01%
+2025-01-19 15:15:22,058 - INFO - Processing ARQT - 2025-01-07 00:00:00 UTC
+2025-01-19 15:15:22,069 - INFO - ARTL: 1wk change of 5.50%
+2025-01-19 15:15:22,154 - INFO - Processing ARTL - 2024-12-10 17:43:26 UTC
+2025-01-19 15:15:22,159 - INFO - Retrieved article length: 3243 characters
+2025-01-19 15:15:22,365 - INFO - ARR: 1wk change of 1.26%
+2025-01-19 15:15:22,476 - INFO - ARR: 1mo change of 2.45%
+2025-01-19 15:15:22,476 - INFO - Processing ARR - 2024-12-27 00:15:00 UTC
+2025-01-19 15:15:22,756 - INFO - Retrieved article length: 3975 characters
+2025-01-19 15:15:22,848 - INFO - ARRY: 1h change of 17.64%
+2025-01-19 15:15:22,929 - INFO - ARTL: 1h change of 3.64%
+2025-01-19 15:15:22,930 - INFO - ARRY: 1wk change of 7.68%
+2025-01-19 15:15:23,017 - INFO - ARTL: 1wk change of -11.59%
+2025-01-19 15:15:23,018 - INFO - ARRY: 1mo change of 25.44%
+2025-01-19 15:15:23,018 - INFO - Processing ARRY - 2025-01-11 02:15:19 UTC
+2025-01-19 15:15:23,106 - INFO - ARTL: 1mo change of -8.00%
+2025-01-19 15:15:23,106 - INFO - Processing ARTL - 2024-12-09 17:15:00 UTC
+2025-01-19 15:15:23,257 - INFO - Retrieved article length: 4018 characters
+2025-01-19 15:15:23,366 - INFO - ARQT: 1h change of 2.66%
+2025-01-19 15:15:23,458 - INFO - ARQT: 1wk change of -3.17%
+2025-01-19 15:15:23,565 - INFO - ARQT: 1mo change of 3.34%
+2025-01-19 15:15:23,566 - INFO - Processing ARQT - 2025-01-03 21:28:00 UTC
+2025-01-19 15:15:23,808 - INFO - Retrieved article length: 6904 characters
+2025-01-19 15:15:23,821 - INFO - ARR: 1wk change of 1.26%
+2025-01-19 15:15:23,875 - INFO - ARR: 1mo change of 2.45%
+2025-01-19 15:15:23,875 - INFO - Processing ARR - 2024-12-23 20:46:00 UTC
+2025-01-19 15:15:24,012 - INFO - ARTL: 1wk change of -8.57%
+2025-01-19 15:15:24,105 - INFO - ARTL: 1mo change of 1.75%
+2025-01-19 15:15:24,106 - INFO - Processing ARTL - 2024-11-18 16:30:00 UTC
+2025-01-19 15:15:24,222 - INFO - Retrieved article length: 3382 characters
+2025-01-19 15:15:24,412 - INFO - ARRY: 1wk change of 6.08%
+2025-01-19 15:15:24,499 - INFO - ARRY: 1mo change of 17.21%
+2025-01-19 15:15:24,499 - INFO - Processing ARRY - 2025-01-10 16:55:41 UTC
+2025-01-19 15:15:24,844 - INFO - Retrieved article length: 8506 characters
+2025-01-19 15:15:24,886 - INFO - ARTL: 1h change of -14.06%
+2025-01-19 15:15:24,936 - INFO - ARQT: 1h change of -2.21%
+2025-01-19 15:15:24,973 - INFO - ARTL: 1wk change of -10.43%
+2025-01-19 15:15:25,028 - INFO - ARQT: 1wk change of -7.87%
+2025-01-19 15:15:25,058 - INFO - ARTL: 1mo change of -12.22%
+2025-01-19 15:15:25,059 - INFO - Processing ARTL - 2024-11-13 16:30:00 UTC
+2025-01-19 15:15:25,184 - INFO - ARQT: 1mo change of -2.76%
+2025-01-19 15:15:25,184 - INFO - Processing ARQT - 2024-12-30 15:21:55 UTC
+2025-01-19 15:15:25,786 - INFO - Retrieved article length: 626 characters
+2025-01-19 15:15:25,869 - INFO - ARTL: 1h change of -4.42%
+2025-01-19 15:15:25,874 - INFO - ARRY: 1h change of -1.45%
+2025-01-19 15:15:25,960 - INFO - ARTL: 1wk change of -2.63%
+2025-01-19 15:15:25,961 - INFO - ARRY: 1wk change of 18.38%
+2025-01-19 15:15:26,047 - INFO - ARTL: 1mo change of -8.52%
+2025-01-19 15:15:26,047 - INFO - ARRY: 1mo change of 27.22%
+2025-01-19 15:15:26,049 - INFO - Processing ARTL - 2024-11-12 16:00:00 UTC
+2025-01-19 15:15:26,049 - INFO - Processing ARRY - 2025-01-09 22:51:17 UTC
+2025-01-19 15:15:26,442 - INFO - Retrieved article length: 514 characters
+2025-01-19 15:15:26,636 - INFO - ARQT: 1wk change of 1.87%
+2025-01-19 15:15:26,729 - INFO - ARQT: 1mo change of 17.73%
+2025-01-19 15:15:26,730 - INFO - Processing ARQT - 2024-12-26 18:29:00 UTC
+2025-01-19 15:15:26,843 - INFO - ARTL: 1h change of -2.65%
+2025-01-19 15:15:27,075 - INFO - ARTL: 1mo change of -5.36%
+2025-01-19 15:15:27,075 - INFO - Processing ARTL - 2024-11-05 16:30:00 UTC
+2025-01-19 15:15:27,350 - INFO - Retrieved article length: 7158 characters
+2025-01-19 15:15:27,441 - INFO - ARRY: 1h change of -7.73%
+2025-01-19 15:15:27,528 - INFO - ARRY: 1wk change of 16.07%
+2025-01-19 15:15:27,630 - INFO - ARRY: 1mo change of 19.77%
+2025-01-19 15:15:27,630 - INFO - Processing ARRY - 2025-01-09 12:02:24 UTC
+2025-01-19 15:15:27,860 - INFO - ARTL: 1h change of 8.63%
+2025-01-19 15:15:27,947 - INFO - ARTL: 1wk change of -5.26%
+2025-01-19 15:15:28,030 - INFO - ARTL: 1mo change of 5.45%
+2025-01-19 15:15:28,038 - INFO - Retrieved article length: 9168 characters
+2025-01-19 15:15:28,121 - INFO - Retrieved article length: 6588 characters
+2025-01-19 15:15:28,128 - INFO - ARQT: 1h change of -4.67%
+2025-01-19 15:15:28,129 - INFO - ARRY: 1h change of -7.73%
+2025-01-19 15:15:28,136 - INFO - ARRY: 1wk change of 16.07%
+2025-01-19 15:15:28,165 - INFO - Retrieved article length: 7438 characters
+2025-01-19 15:15:28,183 - INFO - ARRY: 1mo change of 19.77%
+2025-01-19 15:15:28,183 - INFO - Processing ARRY - 2025-01-06 17:00:00 UTC
+2025-01-19 15:15:28,204 - INFO - Processing ARVN - 2025-01-10 22:37:03 UTC
+2025-01-19 15:15:28,214 - INFO - ARQT: 1wk change of 7.74%
+2025-01-19 15:15:28,305 - INFO - ARQT: 1mo change of 23.83%
+2025-01-19 15:15:28,396 - INFO - ARR: 1wk change of -1.46%
+2025-01-19 15:15:28,480 - INFO - Processing ARWR - 2025-01-18 01:02:02 UTC
+2025-01-19 15:15:28,509 - INFO - ARR: 1mo change of 1.85%
+2025-01-19 15:15:28,509 - INFO - Processing ARR - 2024-12-12 16:44:00 UTC
+2025-01-19 15:15:29,444 - INFO - Retrieved article length: 5303 characters
+2025-01-19 15:15:29,515 - INFO - Retrieved article length: 532 characters
+2025-01-19 15:15:29,539 - INFO - ARR: 1mo change of -1.05%
+2025-01-19 15:15:29,539 - INFO - Processing ARR - 2024-12-11 14:42:54 UTC
+2025-01-19 15:15:29,603 - INFO - ARVN: 1h change of -6.08%
+2025-01-19 15:15:29,614 - INFO - ARRY: 1wk change of 10.95%
+2025-01-19 15:15:29,684 - INFO - Retrieved article length: 527 characters
+2025-01-19 15:15:29,690 - INFO - ARVN: 1wk change of -5.84%
+2025-01-19 15:15:29,696 - INFO - ARRY: 1mo change of 7.04%
+2025-01-19 15:15:29,696 - INFO - Processing ARRY - 2024-12-31 20:52:13 UTC
+2025-01-19 15:15:29,778 - INFO - ARVN: 1mo change of -30.36%
+2025-01-19 15:15:29,778 - INFO - Processing ARVN - 2025-01-10 15:00:00 UTC
+2025-01-19 15:15:29,838 - INFO - ARWR: 1h change of 5.62%
+2025-01-19 15:15:30,040 - INFO - ARWR: 1mo change of -12.56%
+2025-01-19 15:15:30,041 - INFO - Processing ARWR - 2025-01-18 00:30:00 UTC
+2025-01-19 15:15:30,624 - INFO - ARR: 1mo change of -1.17%
+2025-01-19 15:15:30,793 - INFO - ARWR: 1h change of 5.62%
+2025-01-19 15:15:30,893 - INFO - ARWR: 1mo change of -12.56%
+2025-01-19 15:15:30,894 - INFO - Processing ASAN - 2025-01-15 21:55:17 UTC
+2025-01-19 15:15:30,894 - INFO - Processing ARWR - 2024-12-24 16:20:03 UTC
+2025-01-19 15:15:30,897 - INFO - Retrieved article length: 7745 characters
+2025-01-19 15:15:31,040 - INFO - ARRY: 1h change of 1.77%
+2025-01-19 15:15:31,100 - INFO - Retrieved article length: 10940 characters
+2025-01-19 15:15:31,108 - INFO - ARVN: 1h change of -6.08%
+2025-01-19 15:15:31,122 - INFO - ARRY: 1wk change of 7.05%
+2025-01-19 15:15:31,157 - INFO - ARVN: 1wk change of -5.84%
+2025-01-19 15:15:31,206 - INFO - ARVN: 1mo change of -30.36%
+2025-01-19 15:15:31,206 - INFO - ARRY: 1mo change of 7.36%
+2025-01-19 15:15:31,206 - INFO - Processing ARVN - 2024-12-11 13:38:25 UTC
+2025-01-19 15:15:31,361 - INFO - Processing ASB - 2025-01-17 17:15:30 UTC
+2025-01-19 15:15:31,696 - INFO - ARWR: 1h change of 1.00%
+2025-01-19 15:15:31,786 - INFO - ARWR: 1wk change of -12.16%
+2025-01-19 15:15:31,882 - INFO - ARWR: 1mo change of 5.16%
+2025-01-19 15:15:31,883 - INFO - Processing ARWR - 2024-12-23 16:36:21 UTC
+2025-01-19 15:15:31,986 - INFO - ARVN: 1h change of -24.59%
+2025-01-19 15:15:32,076 - INFO - ARVN: 1wk change of -28.15%
+2025-01-19 15:15:32,170 - INFO - ARVN: 1mo change of -38.48%
+2025-01-19 15:15:32,171 - INFO - Processing ARVN - 2024-12-10 21:23:07 UTC
+2025-01-19 15:15:32,238 - INFO - Retrieved article length: 2962 characters
+2025-01-19 15:15:32,334 - INFO - ASAN: 1h change of 5.65%
+2025-01-19 15:15:32,433 - INFO - ASAN: 1wk change of -11.28%
+2025-01-19 15:15:32,519 - INFO - ASAN: 1mo change of -20.48%
+2025-01-19 15:15:32,519 - INFO - Processing ASAN - 2025-01-13 12:01:04 UTC
+2025-01-19 15:15:32,614 - INFO - Retrieved article length: 4101 characters
+2025-01-19 15:15:32,700 - INFO - ARWR: 1h change of 1.00%
+2025-01-19 15:15:32,704 - INFO - ASB: 1h change of -1.24%
+2025-01-19 15:15:32,795 - INFO - ARWR: 1wk change of -13.96%
+2025-01-19 15:15:32,831 - INFO - ASB: 1wk change of 5.76%
+2025-01-19 15:15:32,885 - INFO - ARWR: 1mo change of 2.84%
+2025-01-19 15:15:32,885 - INFO - Processing ARWR - 2024-12-23 15:30:00 UTC
+2025-01-19 15:15:32,962 - INFO - ASB: 1mo change of -1.49%
+2025-01-19 15:15:32,962 - INFO - Processing ASB - 2025-01-16 18:00:29 UTC
+2025-01-19 15:15:32,964 - INFO - ARVN: 1h change of -14.07%
+2025-01-19 15:15:33,051 - INFO - ARVN: 1wk change of -30.68%
+2025-01-19 15:15:33,141 - INFO - ARVN: 1mo change of -33.05%
+2025-01-19 15:15:33,141 - INFO - Processing ARVN - 2024-12-10 18:05:08 UTC
+2025-01-19 15:15:33,776 - INFO - Retrieved article length: 5523 characters
+2025-01-19 15:15:33,831 - INFO - ARVN: 1h change of -14.07%
+2025-01-19 15:15:33,837 - INFO - ARVN: 1wk change of -30.68%
+2025-01-19 15:15:33,844 - INFO - ARVN: 1mo change of -33.05%
+2025-01-19 15:15:33,844 - INFO - Processing ARVN - 2024-12-10 17:05:00 UTC
+2025-01-19 15:15:33,959 - INFO - ASAN: 1wk change of -6.16%
+2025-01-19 15:15:34,047 - INFO - ASAN: 1mo change of -22.24%
+2025-01-19 15:15:34,047 - INFO - Processing ASAN - 2025-01-09 17:11:34 UTC
+2025-01-19 15:15:34,089 - INFO - Retrieved article length: 10946 characters
+2025-01-19 15:15:34,097 - INFO - ARWR: 1h change of 1.00%
+2025-01-19 15:15:34,103 - INFO - ARWR: 1wk change of -13.96%
+2025-01-19 15:15:34,153 - INFO - ARWR: 1mo change of 2.84%
+2025-01-19 15:15:34,153 - INFO - Processing ARWR - 2024-12-23 12:03:10 UTC
+2025-01-19 15:15:34,221 - INFO - Retrieved article length: 6542 characters
+2025-01-19 15:15:34,318 - INFO - ASB: 1h change of 3.71%
+2025-01-19 15:15:34,453 - INFO - ASB: 1wk change of 4.27%
+2025-01-19 15:15:34,543 - INFO - ARVN: 1h change of -14.07%
+2025-01-19 15:15:34,549 - INFO - ARVN: 1wk change of -30.68%
+2025-01-19 15:15:34,555 - INFO - ARVN: 1mo change of -33.05%
+2025-01-19 15:15:34,555 - INFO - Processing ARVN - 2024-12-04 21:19:17 UTC
+2025-01-19 15:15:34,578 - INFO - ASB: 1mo change of -2.67%
+2025-01-19 15:15:34,579 - INFO - Processing ASB - 2025-01-09 16:29:04 UTC
+2025-01-19 15:15:34,865 - INFO - ASAN: 1h change of -8.36%
+2025-01-19 15:15:34,966 - INFO - ASAN: 1wk change of -6.25%
+2025-01-19 15:15:35,060 - INFO - ASAN: 1mo change of 25.10%
+2025-01-19 15:15:35,060 - INFO - Processing ASAN - 2025-01-07 22:34:47 UTC
+2025-01-19 15:15:35,394 - INFO - ARVN: 1h change of -7.56%
+2025-01-19 15:15:35,414 - INFO - Retrieved article length: 4321 characters
+2025-01-19 15:15:35,422 - INFO - ARWR: 1h change of 1.00%
+2025-01-19 15:15:35,427 - INFO - ARWR: 1wk change of -13.96%
+2025-01-19 15:15:35,477 - INFO - ARWR: 1mo change of 2.84%
+2025-01-19 15:15:35,478 - INFO - Processing ARWR - 2024-12-20 00:59:00 UTC
+2025-01-19 15:15:35,478 - INFO - ARVN: 1wk change of -22.47%
+2025-01-19 15:15:35,569 - INFO - ARVN: 1mo change of -29.75%
+2025-01-19 15:15:35,569 - INFO - Processing ARVN - 2024-11-27 15:00:00 UTC
+2025-01-19 15:15:35,916 - INFO - Retrieved article length: 1891 characters
+2025-01-19 15:15:36,004 - INFO - ASB: 1h change of -2.98%
+2025-01-19 15:15:36,138 - INFO - ASB: 1wk change of 5.23%
+2025-01-19 15:15:36,240 - INFO - Retrieved article length: 4882 characters
+2025-01-19 15:15:36,261 - INFO - ASB: 1mo change of -3.42%
+2025-01-19 15:15:36,261 - INFO - Processing ASB - 2025-01-08 16:17:00 UTC
+2025-01-19 15:15:36,331 - INFO - ASAN: 1h change of -11.76%
+2025-01-19 15:15:36,338 - INFO - ARVN: 1h change of -1.58%
+2025-01-19 15:15:36,422 - INFO - ASAN: 1wk change of -3.88%
+2025-01-19 15:15:36,429 - INFO - ARVN: 1wk change of 11.77%
+2025-01-19 15:15:36,515 - INFO - ASAN: 1mo change of 27.40%
+2025-01-19 15:15:36,516 - INFO - Processing ASAN - 2025-01-06 23:54:01 UTC
+2025-01-19 15:15:36,518 - INFO - ARVN: 1mo change of -27.71%
+2025-01-19 15:15:36,662 - INFO - Processing ASHR - 2025-01-01 00:12:53 UTC
+2025-01-19 15:15:36,684 - INFO - Retrieved article length: 5203 characters
+2025-01-19 15:15:36,780 - INFO - ARWR: 1h change of -11.67%
+2025-01-19 15:15:36,870 - INFO - ARWR: 1wk change of -20.74%
+2025-01-19 15:15:36,962 - INFO - ARWR: 1mo change of 5.33%
+2025-01-19 15:15:36,963 - INFO - Processing ARWR - 2024-12-12 15:54:38 UTC
+2025-01-19 15:15:37,510 - INFO - Retrieved article length: 5819 characters
+2025-01-19 15:15:37,601 - INFO - ASB: 1h change of -1.34%
+2025-01-19 15:15:37,746 - INFO - ASB: 1wk change of 5.23%
+2025-01-19 15:15:37,774 - INFO - Retrieved article length: 3118 characters
+2025-01-19 15:15:37,775 - INFO - ARWR: 1h change of -5.08%
+2025-01-19 15:15:37,863 - INFO - ARWR: 1wk change of -26.16%
+2025-01-19 15:15:37,864 - INFO - ASAN: 1h change of -8.62%
+2025-01-19 15:15:37,894 - INFO - ASB: 1mo change of -3.60%
+2025-01-19 15:15:37,895 - INFO - Processing ASB - 2025-01-08 15:57:24 UTC
+2025-01-19 15:15:37,950 - INFO - ARWR: 1mo change of -11.50%
+2025-01-19 15:15:37,951 - INFO - ASAN: 1wk change of -8.89%
+2025-01-19 15:15:38,005 - INFO - Retrieved article length: 740 characters
+2025-01-19 15:15:38,039 - INFO - ASAN: 1mo change of 27.91%
+2025-01-19 15:15:38,039 - INFO - Processing ASAN - 2025-01-06 15:59:56 UTC
+2025-01-19 15:15:38,093 - INFO - ASHR: 1h change of -4.86%
+2025-01-19 15:15:38,113 - INFO - Processing ASLE - 2025-01-14 14:05:46 UTC
+2025-01-19 15:15:38,192 - INFO - ASHR: 1wk change of -6.27%
+2025-01-19 15:15:38,289 - INFO - ASHR: 1mo change of -3.28%
+2025-01-19 15:15:38,394 - INFO - Processing ASLN - 2025-01-19 15:11:00 UTC
+2025-01-19 15:15:38,610 - INFO - ASB: 1h change of -1.34%
+2025-01-19 15:15:38,615 - INFO - ASB: 1wk change of 5.23%
+2025-01-19 15:15:38,663 - INFO - ASB: 1mo change of -3.60%
+2025-01-19 15:15:38,663 - INFO - Processing ASB - 2025-01-01 02:28:00 UTC
+2025-01-19 15:15:39,394 - INFO - Retrieved article length: 7239 characters
+2025-01-19 15:15:39,432 - INFO - Retrieved article length: 5116 characters
+2025-01-19 15:15:39,442 - INFO - ASAN: 1h change of -8.62%
+2025-01-19 15:15:39,447 - INFO - ASAN: 1wk change of -8.89%
+2025-01-19 15:15:39,491 - INFO - ASLE: 1h change of 1.58%
+2025-01-19 15:15:39,495 - INFO - ASAN: 1mo change of 27.91%
+2025-01-19 15:15:39,495 - INFO - Processing ASAN - 2024-12-31 13:14:37 UTC
+2025-01-19 15:15:39,583 - INFO - ASLE: 1wk change of 7.03%
+2025-01-19 15:15:39,673 - INFO - ASLE: 1mo change of 4.13%
+2025-01-19 15:15:39,674 - INFO - Processing ASLE - 2025-01-13 13:03:16 UTC
+2025-01-19 15:15:39,918 - INFO - Retrieved article length: 3556 characters
+2025-01-19 15:15:40,130 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:40,134 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:40,135 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:40,136 - INFO - Processing ASLN - 2025-01-19 15:08:28 UTC
+2025-01-19 15:15:40,142 - INFO - ASB: 1wk change of -4.12%
+2025-01-19 15:15:40,283 - INFO - ASB: 1mo change of -4.98%
+2025-01-19 15:15:40,283 - INFO - Processing ASB - 2024-12-20 00:15:00 UTC
+2025-01-19 15:15:40,761 - INFO - Retrieved article length: 4136 characters
+2025-01-19 15:15:40,853 - INFO - ASAN: 1h change of -1.60%
+2025-01-19 15:15:40,876 - INFO - Retrieved article length: 3671 characters
+2025-01-19 15:15:40,945 - INFO - ASAN: 1wk change of -8.48%
+2025-01-19 15:15:41,038 - INFO - ASAN: 1mo change of 25.42%
+2025-01-19 15:15:41,039 - INFO - Processing ASAN - 2024-12-31 12:07:35 UTC
+2025-01-19 15:15:41,065 - INFO - ASLE: 1wk change of 5.14%
+2025-01-19 15:15:41,157 - INFO - ASLE: 1mo change of 8.44%
+2025-01-19 15:15:41,157 - INFO - Processing ASLE - 2024-12-16 18:06:42 UTC
+2025-01-19 15:15:41,348 - INFO - Retrieved article length: 5683 characters
+2025-01-19 15:15:41,350 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:41,351 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:41,352 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:41,352 - INFO - Processing ASLN - 2025-01-19 15:07:00 UTC
+2025-01-19 15:15:41,569 - INFO - Retrieved article length: 4795 characters
+2025-01-19 15:15:41,660 - INFO - ASB: 1h change of -4.80%
+2025-01-19 15:15:41,794 - INFO - ASB: 1wk change of -7.50%
+2025-01-19 15:15:41,929 - INFO - ASB: 1mo change of -4.55%
+2025-01-19 15:15:41,930 - INFO - Processing ASB - 2024-12-19 00:15:00 UTC
+2025-01-19 15:15:41,936 - INFO - ASLE: 1h change of 1.29%
+2025-01-19 15:15:42,034 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:42,036 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:42,037 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:42,038 - INFO - Processing ASLN - 2025-01-19 15:05:00 UTC
+2025-01-19 15:15:42,072 - INFO - ASLE: 1wk change of 1.61%
+2025-01-19 15:15:42,169 - INFO - ASLE: 1mo change of 15.32%
+2025-01-19 15:15:42,170 - INFO - Processing ASLE - 2024-12-02 13:06:47 UTC
+2025-01-19 15:15:42,216 - INFO - Retrieved article length: 5627 characters
+2025-01-19 15:15:42,225 - INFO - ASAN: 1h change of -1.60%
+2025-01-19 15:15:42,230 - INFO - ASAN: 1wk change of -8.48%
+2025-01-19 15:15:42,279 - INFO - ASAN: 1mo change of 25.42%
+2025-01-19 15:15:42,446 - INFO - Processing ASNS - 2025-01-16 00:15:00 UTC
+2025-01-19 15:15:42,749 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:42,750 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:42,751 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:42,752 - INFO - Processing ASLN - 2025-01-19 15:00:22 UTC
+2025-01-19 15:15:42,955 - INFO - ASLE: 1h change of -2.71%
+2025-01-19 15:15:43,046 - INFO - ASLE: 1wk change of -5.63%
+2025-01-19 15:15:43,131 - INFO - ASLE: 1mo change of 12.66%
+2025-01-19 15:15:43,131 - INFO - Processing ASLE - 2024-11-09 16:51:02 UTC
+2025-01-19 15:15:43,176 - INFO - Retrieved article length: 1395 characters
+2025-01-19 15:15:43,268 - INFO - ASB: 1h change of -5.40%
+2025-01-19 15:15:43,403 - INFO - ASB: 1wk change of -7.04%
+2025-01-19 15:15:43,554 - INFO - ASB: 1mo change of -4.80%
+2025-01-19 15:15:43,761 - INFO - Processing ASO - 2025-01-13 12:04:34 UTC
+2025-01-19 15:15:43,804 - INFO - Retrieved article length: 4069 characters
+2025-01-19 15:15:43,898 - INFO - ASLE: 1h change of -8.19%
+2025-01-19 15:15:43,903 - INFO - ASNS: 1h change of 13.47%
+2025-01-19 15:15:43,985 - INFO - ASLE: 1wk change of 11.30%
+2025-01-19 15:15:43,987 - INFO - ASNS: 1wk change of -9.04%
+2025-01-19 15:15:43,994 - INFO - Retrieved article length: 3842 characters
+2025-01-19 15:15:43,995 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:43,996 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:43,997 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:43,997 - INFO - Processing ASLN - 2025-01-19 15:00:21 UTC
+2025-01-19 15:15:44,076 - INFO - ASLE: 1mo change of 28.66%
+2025-01-19 15:15:44,076 - INFO - Processing ASLE - 2024-11-08 12:02:58 UTC
+2025-01-19 15:15:44,076 - INFO - ASNS: 1mo change of 26.89%
+2025-01-19 15:15:44,076 - INFO - Processing ASNS - 2024-12-23 18:51:00 UTC
+2025-01-19 15:15:44,675 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:44,677 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:44,678 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:44,679 - INFO - Processing ASLN - 2025-01-19 15:00:00 UTC
+2025-01-19 15:15:44,866 - INFO - ASLE: 1h change of -8.19%
+2025-01-19 15:15:44,957 - INFO - ASLE: 1wk change of 11.19%
+2025-01-19 15:15:45,045 - INFO - ASLE: 1mo change of 29.26%
+2025-01-19 15:15:45,046 - INFO - Processing ASLE - 2024-11-08 00:05:00 UTC
+2025-01-19 15:15:45,105 - INFO - Retrieved article length: 3673 characters
+2025-01-19 15:15:45,202 - INFO - ASO: 1h change of -5.75%
+2025-01-19 15:15:45,290 - INFO - ASO: 1wk change of -7.53%
+2025-01-19 15:15:45,316 - INFO - Retrieved article length: 1645 characters
+2025-01-19 15:15:45,414 - INFO - ASNS: 1h change of 4.06%
+2025-01-19 15:15:45,434 - INFO - ASO: 1mo change of 4.51%
+2025-01-19 15:15:45,436 - INFO - Processing ASO - 2025-01-10 19:17:10 UTC
+2025-01-19 15:15:45,506 - INFO - ASNS: 1wk change of 16.52%
+2025-01-19 15:15:45,594 - INFO - ASNS: 1mo change of 27.97%
+2025-01-19 15:15:45,595 - INFO - Processing ASNS - 2024-12-20 16:30:00 UTC
+2025-01-19 15:15:45,734 - INFO - ASLE: 1h change of -8.19%
+2025-01-19 15:15:45,739 - INFO - ASLE: 1wk change of 11.19%
+2025-01-19 15:15:45,743 - INFO - ASLE: 1mo change of 29.26%
+2025-01-19 15:15:45,744 - INFO - Processing ASLE - 2024-11-07 13:59:09 UTC
+2025-01-19 15:15:45,915 - INFO - Retrieved article length: 3489 characters
+2025-01-19 15:15:45,916 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:45,916 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:45,917 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:45,918 - INFO - Processing ASLN - 2025-01-19 15:00:00 UTC
+2025-01-19 15:15:46,612 - INFO - Retrieved article length: 4136 characters
+2025-01-19 15:15:46,612 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:46,613 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:46,613 - ERROR - ASLN: No timezone found, symbol may be delisted
+2025-01-19 15:15:46,622 - INFO - ASLE: 1wk change of 9.58%
+2025-01-19 15:15:46,707 - INFO - ASLE: 1mo change of 29.17%
+2025-01-19 15:15:46,804 - INFO - Retrieved article length: 6327 characters
+2025-01-19 15:15:46,851 - INFO - ASO: 1wk change of -8.60%
+2025-01-19 15:15:46,902 - INFO - ASNS: 1h change of -2.83%
+2025-01-19 15:15:46,953 - INFO - Processing ASPCU - 2024-11-13 02:00:00 UTC
+2025-01-19 15:15:46,980 - INFO - ASO: 1mo change of 4.53%
+2025-01-19 15:15:46,981 - INFO - Processing ASO - 2025-01-08 19:03:00 UTC
+2025-01-19 15:15:46,996 - INFO - Processing ASPI - 2025-01-14 18:10:55 UTC
+2025-01-19 15:15:47,000 - INFO - ASNS: 1wk change of -5.93%
+2025-01-19 15:15:47,092 - INFO - ASNS: 1mo change of 18.90%
+2025-01-19 15:15:47,092 - INFO - Processing ASNS - 2024-12-11 17:17:00 UTC
+2025-01-19 15:15:47,750 - INFO - ASO: 1h change of 4.56%
+2025-01-19 15:15:47,843 - INFO - ASO: 1wk change of -9.22%
+2025-01-19 15:15:47,928 - INFO - Processing ASPCU - 2024-11-08 17:20:00 UTC
+2025-01-19 15:15:47,931 - INFO - ASO: 1mo change of 6.54%
+2025-01-19 15:15:47,932 - INFO - Processing ASO - 2025-01-08 10:30:00 UTC
+2025-01-19 15:15:47,974 - INFO - ASNS: 1wk change of -18.90%
+2025-01-19 15:15:48,077 - INFO - ASNS: 1mo change of -4.41%
+2025-01-19 15:15:48,077 - INFO - Processing ASNS - 2024-12-10 17:20:00 UTC
+2025-01-19 15:15:48,242 - INFO - Retrieved article length: 6870 characters
+2025-01-19 15:15:48,331 - INFO - ASPI: 1h change of 12.31%
+2025-01-19 15:15:48,423 - INFO - ASPI: 1wk change of 12.52%
+2025-01-19 15:15:48,514 - INFO - ASPI: 1mo change of 25.78%
+2025-01-19 15:15:48,514 - INFO - Processing ASPI - 2025-01-13 18:30:00 UTC
+2025-01-19 15:15:48,614 - INFO - ASO: 1h change of 4.56%
+2025-01-19 15:15:48,619 - INFO - ASO: 1wk change of -9.22%
+2025-01-19 15:15:48,670 - INFO - ASO: 1mo change of 6.54%
+2025-01-19 15:15:48,670 - INFO - Processing ASO - 2025-01-07 12:02:24 UTC
+2025-01-19 15:15:48,848 - INFO - ASNS: 1h change of -2.02%
+2025-01-19 15:15:48,944 - INFO - ASNS: 1wk change of -19.69%
+2025-01-19 15:15:49,034 - INFO - Processing ASPN - 2025-01-16 19:27:10 UTC
+2025-01-19 15:15:49,089 - INFO - Processing ASNS - 2024-11-27 15:00:00 UTC
+2025-01-19 15:15:49,797 - INFO - Retrieved article length: 11254 characters
+2025-01-19 15:15:49,850 - INFO - ASNS: 1h change of 4.10%
+2025-01-19 15:15:49,888 - INFO - ASPI: 1h change of 5.72%
+2025-01-19 15:15:49,942 - INFO - Retrieved article length: 6532 characters
+2025-01-19 15:15:49,971 - INFO - ASPI: 1wk change of 5.40%
+2025-01-19 15:15:50,030 - INFO - Processing ASNS - 2024-11-25 16:55:00 UTC
+2025-01-19 15:15:50,030 - INFO - ASO: 1h change of 4.56%
+2025-01-19 15:15:50,056 - INFO - ASPI: 1mo change of 27.19%
+2025-01-19 15:15:50,056 - INFO - Processing ASPI - 2025-01-02 19:00:32 UTC
+2025-01-19 15:15:50,121 - INFO - ASO: 1wk change of -9.43%
+2025-01-19 15:15:50,206 - INFO - ASO: 1mo change of 5.45%
+2025-01-19 15:15:50,206 - INFO - Processing ASO - 2025-01-02 12:00:00 UTC
+2025-01-19 15:15:50,228 - INFO - Retrieved article length: 5381 characters
+2025-01-19 15:15:50,320 - INFO - ASPN: 1h change of -1.05%
+2025-01-19 15:15:50,407 - INFO - ASPN: 1wk change of -8.49%
+2025-01-19 15:15:50,512 - INFO - ASPN: 1mo change of -3.27%
+2025-01-19 15:15:50,512 - INFO - Processing ASPN - 2025-01-14 17:00:15 UTC
+2025-01-19 15:15:50,637 - INFO - ASO: 1h change of -2.65%
+2025-01-19 15:15:50,825 - INFO - ASO: 1mo change of 6.97%
+2025-01-19 15:15:50,825 - INFO - Processing ASO - 2024-12-30 19:22:59 UTC
+2025-01-19 15:15:50,908 - INFO - ASNS: 1wk change of -4.72%
+2025-01-19 15:15:50,997 - INFO - ASNS: 1mo change of -19.57%
+2025-01-19 15:15:50,998 - INFO - Processing ASNS - 2024-11-17 17:07:12 UTC
+2025-01-19 15:15:51,253 - INFO - Retrieved article length: 3027 characters
+2025-01-19 15:15:51,349 - INFO - ASPI: 1h change of 20.97%
+2025-01-19 15:15:51,438 - INFO - ASPI: 1wk change of -1.43%
+2025-01-19 15:15:51,529 - INFO - ASPI: 1mo change of 1.98%
+2025-01-19 15:15:51,530 - INFO - Processing ASPI - 2024-12-18 15:57:00 UTC
+2025-01-19 15:15:51,768 - INFO - ASNS: 1h change of -7.81%
+2025-01-19 15:15:51,769 - INFO - Retrieved article length: 2934 characters
+2025-01-19 15:15:51,863 - INFO - ASNS: 1wk change of -9.56%
+2025-01-19 15:15:51,869 - INFO - ASPN: 1h change of 6.52%
+2025-01-19 15:15:51,952 - INFO - ASNS: 1mo change of -24.82%
+2025-01-19 15:15:51,953 - INFO - ASPN: 1wk change of -8.49%
+2025-01-19 15:15:51,992 - INFO - Retrieved article length: 7620 characters
+2025-01-19 15:15:52,048 - INFO - ASPN: 1mo change of -7.15%
+2025-01-19 15:15:52,048 - INFO - Processing ASPN - 2025-01-13 17:00:14 UTC
+2025-01-19 15:15:52,113 - INFO - Processing ASRT - 2025-01-04 00:30:00 UTC
+2025-01-19 15:15:52,174 - INFO - ASO: 1wk change of 5.79%
+2025-01-19 15:15:52,271 - INFO - ASO: 1mo change of 6.56%
+2025-01-19 15:15:52,271 - INFO - Processing ASO - 2024-12-30 12:02:29 UTC
+2025-01-19 15:15:52,724 - INFO - Retrieved article length: 8211 characters
+2025-01-19 15:15:52,830 - INFO - ASPI: 1h change of -25.77%
+2025-01-19 15:15:52,919 - INFO - ASPI: 1wk change of 8.31%
+2025-01-19 15:15:53,021 - INFO - ASPI: 1mo change of -32.05%
+2025-01-19 15:15:53,021 - INFO - Processing ASPI - 2024-12-16 16:00:00 UTC
+2025-01-19 15:15:53,234 - INFO - Retrieved article length: 3103 characters
+2025-01-19 15:15:53,323 - INFO - ASPN: 1h change of 4.43%
+2025-01-19 15:15:53,404 - INFO - ASPN: 1wk change of -2.30%
+2025-01-19 15:15:53,426 - INFO - Retrieved article length: 4441 characters
+2025-01-19 15:15:53,454 - INFO - Retrieved article length: 6144 characters
+2025-01-19 15:15:53,468 - INFO - ASO: 1wk change of 5.79%
+2025-01-19 15:15:53,492 - INFO - ASPN: 1mo change of -11.05%
+2025-01-19 15:15:53,492 - INFO - Processing ASPN - 2025-01-10 17:55:04 UTC
+2025-01-19 15:15:53,513 - INFO - ASRT: 1h change of -1.76%
+2025-01-19 15:15:53,517 - INFO - ASO: 1mo change of 6.56%
+2025-01-19 15:15:53,614 - INFO - ASRT: 1wk change of -10.00%
+2025-01-19 15:15:53,708 - INFO - ASRT: 1mo change of -18.63%
+2025-01-19 15:15:53,709 - INFO - Processing ASRT - 2024-12-17 16:30:00 UTC
+2025-01-19 15:15:53,736 - INFO - Processing ASST - 2024-12-11 16:58:39 UTC
+2025-01-19 15:15:53,802 - INFO - ASPI: 1h change of -7.24%
+2025-01-19 15:15:53,891 - INFO - ASPI: 1wk change of -1.74%
+2025-01-19 15:15:53,986 - INFO - ASPI: 1mo change of -31.56%
+2025-01-19 15:15:53,986 - INFO - Processing ASPI - 2024-12-16 14:05:53 UTC
+2025-01-19 15:15:54,485 - INFO - ASRT: 1h change of -6.46%
+2025-01-19 15:15:54,563 - INFO - ASST: 1h change of -22.26%
+2025-01-19 15:15:54,570 - INFO - ASRT: 1wk change of -3.23%
+2025-01-19 15:15:54,655 - INFO - ASST: 1wk change of -13.13%
+2025-01-19 15:15:54,657 - INFO - ASRT: 1mo change of -2.35%
+2025-01-19 15:15:54,658 - INFO - Processing ASRT - 2024-12-13 16:00:00 UTC
+2025-01-19 15:15:54,661 - INFO - Retrieved article length: 4858 characters
+2025-01-19 15:15:54,686 - INFO - ASPI: 1h change of -7.24%
+2025-01-19 15:15:54,692 - INFO - ASPI: 1wk change of -1.74%
+2025-01-19 15:15:54,742 - INFO - ASPI: 1mo change of -31.56%
+2025-01-19 15:15:54,742 - INFO - Processing ASPI - 2024-12-13 17:07:14 UTC
+2025-01-19 15:15:54,744 - INFO - ASST: 1mo change of -33.54%
+2025-01-19 15:15:54,744 - INFO - Processing ASST - 2024-12-11 16:15:00 UTC
+2025-01-19 15:15:54,749 - INFO - ASPN: 1h change of -3.10%
+2025-01-19 15:15:54,838 - INFO - ASPN: 1wk change of 7.07%
+2025-01-19 15:15:54,977 - INFO - ASPN: 1mo change of -4.79%
+2025-01-19 15:15:54,985 - INFO - Processing ASPN - 2025-01-02 12:41:00 UTC
+2025-01-19 15:15:55,439 - INFO - ASRT: 1h change of -3.99%
+2025-01-19 15:15:55,449 - INFO - ASST: 1h change of -22.26%
+2025-01-19 15:15:55,455 - INFO - ASST: 1wk change of -13.13%
+2025-01-19 15:15:55,460 - INFO - ASST: 1mo change of -33.54%
+2025-01-19 15:15:55,461 - INFO - Processing ASST - 2024-11-26 16:00:00 UTC
+2025-01-19 15:15:55,531 - INFO - ASRT: 1wk change of -11.00%
+2025-01-19 15:15:55,552 - INFO - ASPI: 1h change of 16.07%
+2025-01-19 15:15:55,619 - INFO - ASRT: 1mo change of -5.88%
+2025-01-19 15:15:55,620 - INFO - Processing ASRT - 2024-12-12 16:00:00 UTC
+2025-01-19 15:15:55,730 - INFO - ASPI: 1mo change of -41.39%
+2025-01-19 15:15:55,730 - INFO - Processing ASPI - 2024-12-13 16:00:00 UTC
+2025-01-19 15:15:55,896 - INFO - ASPN: 1h change of 8.78%
+2025-01-19 15:15:55,988 - INFO - ASPN: 1wk change of 4.07%
+2025-01-19 15:15:56,081 - INFO - ASPN: 1mo change of -14.05%
+2025-01-19 15:15:56,082 - INFO - Processing ASPN - 2024-12-31 16:25:31 UTC
+2025-01-19 15:15:56,224 - INFO - ASST: 1h change of -20.63%
+2025-01-19 15:15:56,313 - INFO - ASST: 1wk change of -35.12%
+2025-01-19 15:15:56,383 - INFO - ASRT: 1h change of -5.09%
+2025-01-19 15:15:56,396 - INFO - ASST: 1mo change of -51.48%
+2025-01-19 15:15:56,396 - INFO - Processing ASST - 2024-11-25 16:00:00 UTC
+2025-01-19 15:15:56,405 - INFO - ASPI: 1h change of 16.07%
+2025-01-19 15:15:56,414 - INFO - ASPI: 1mo change of -41.39%
+2025-01-19 15:15:56,471 - INFO - ASRT: 1wk change of -12.75%
+2025-01-19 15:15:56,559 - INFO - Processing ASTC - 2025-01-14 16:30:00 UTC
+2025-01-19 15:15:56,569 - INFO - ASRT: 1mo change of -17.82%
+2025-01-19 15:15:56,569 - INFO - Processing ASRT - 2024-12-06 15:00:00 UTC
+2025-01-19 15:15:57,155 - INFO - ASST: 1h change of -13.35%
+2025-01-19 15:15:57,240 - INFO - ASST: 1wk change of -30.15%
+2025-01-19 15:15:57,306 - INFO - Retrieved article length: 4187 characters
+2025-01-19 15:15:57,321 - INFO - ASST: 1mo change of -54.76%
+2025-01-19 15:15:57,321 - INFO - Processing ASST - 2024-11-21 16:00:00 UTC
+2025-01-19 15:15:57,338 - INFO - ASRT: 1h change of -2.08%
+2025-01-19 15:15:57,434 - INFO - ASRT: 1wk change of -6.12%
+2025-01-19 15:15:57,485 - INFO - ASPN: 1wk change of 9.21%
+2025-01-19 15:15:57,522 - INFO - ASRT: 1mo change of -19.42%
+2025-01-19 15:15:57,522 - INFO - Processing ASRT - 2024-11-13 13:27:44 UTC
+2025-01-19 15:15:57,571 - INFO - ASPN: 1mo change of -11.30%
+2025-01-19 15:15:57,571 - INFO - Processing ASPN - 2024-12-09 17:18:31 UTC
+2025-01-19 15:15:57,773 - INFO - Retrieved article length: 5373 characters
+2025-01-19 15:15:57,965 - INFO - ASTC: 1wk change of -4.22%
+2025-01-19 15:15:58,058 - INFO - ASTC: 1mo change of -5.05%
+2025-01-19 15:15:58,058 - INFO - Processing ASTC - 2024-11-15 13:06:04 UTC
+2025-01-19 15:15:58,092 - INFO - ASST: 1h change of -3.82%
+2025-01-19 15:15:58,179 - INFO - ASST: 1wk change of -42.36%
+2025-01-19 15:15:58,268 - INFO - ASST: 1mo change of -61.55%
+2025-01-19 15:15:58,269 - INFO - Processing ASST - 2024-11-17 16:05:32 UTC
+2025-01-19 15:15:58,282 - INFO - ASRT: 1h change of -13.09%
+2025-01-19 15:15:58,373 - INFO - ASRT: 1wk change of -11.32%
+2025-01-19 15:15:58,376 - INFO - ASPN: 1h change of -1.86%
+2025-01-19 15:15:58,459 - INFO - ASRT: 1mo change of -14.68%
+2025-01-19 15:15:58,459 - INFO - Processing ASRT - 2024-11-12 17:41:20 UTC
+2025-01-19 15:15:58,460 - INFO - ASPN: 1wk change of -15.61%
+2025-01-19 15:15:58,556 - INFO - ASPN: 1mo change of -31.29%
+2025-01-19 15:15:58,556 - INFO - Processing ASPN - 2024-12-05 01:15:13 UTC
+2025-01-19 15:15:58,850 - INFO - ASTC: 1h change of 3.14%
+2025-01-19 15:15:58,945 - INFO - ASTC: 1wk change of 10.00%
+2025-01-19 15:15:59,036 - INFO - ASTC: 1mo change of -12.07%
+2025-01-19 15:15:59,036 - INFO - Processing ASTC - 2024-11-13 00:30:00 UTC
+2025-01-19 15:15:59,039 - INFO - ASST: 1h change of -6.15%
+2025-01-19 15:15:59,127 - INFO - ASST: 1wk change of -29.11%
+2025-01-19 15:15:59,214 - INFO - ASST: 1mo change of -65.33%
+2025-01-19 15:15:59,214 - INFO - Processing ASST - 2024-11-15 16:00:00 UTC
+2025-01-19 15:15:59,231 - INFO - ASRT: 1h change of -10.62%
+2025-01-19 15:15:59,331 - INFO - ASRT: 1wk change of -8.49%
+2025-01-19 15:15:59,427 - INFO - ASRT: 1mo change of -14.55%
+2025-01-19 15:15:59,428 - INFO - Processing ASRT - 2024-11-12 00:09:12 UTC
+2025-01-19 15:15:59,655 - INFO - ASPN: 1h change of -5.48%
+2025-01-19 15:15:59,740 - INFO - ASPN: 1wk change of -12.69%
+2025-01-19 15:15:59,822 - INFO - ASTC: 1h change of -1.13%
+2025-01-19 15:15:59,829 - INFO - ASPN: 1mo change of -26.23%
+2025-01-19 15:15:59,913 - INFO - ASTC: 1wk change of 11.76%
+2025-01-19 15:15:59,975 - INFO - ASST: 1h change of -14.40%
+2025-01-19 15:16:00,005 - INFO - ASTC: 1mo change of -7.74%
+2025-01-19 15:16:00,011 - INFO - Processing ASTH - 2025-01-15 22:41:59 UTC
+2025-01-19 15:16:00,058 - INFO - ASST: 1wk change of -21.11%
+2025-01-19 15:16:00,143 - INFO - ASST: 1mo change of -63.08%
+2025-01-19 15:16:00,144 - INFO - Processing ASST - 2024-10-22 15:00:00 UTC
+2025-01-19 15:16:00,152 - INFO - Processing ASTI - 2025-01-15 16:11:29 UTC
+2025-01-19 15:16:00,631 - INFO - Retrieved article length: 803 characters
+2025-01-19 15:16:00,639 - INFO - ASRT: 1h change of -10.62%
+2025-01-19 15:16:00,645 - INFO - ASRT: 1wk change of -8.49%
+2025-01-19 15:16:00,651 - INFO - ASRT: 1mo change of -14.55%
+2025-01-19 15:16:00,815 - INFO - Processing ASTR - 2025-01-18 20:31:11 UTC
+2025-01-19 15:16:00,927 - INFO - ASTI: 1h change of 5.75%
+2025-01-19 15:16:00,995 - INFO - ASST: 1h change of -15.28%
+2025-01-19 15:16:01,022 - INFO - ASTI: 1wk change of -16.93%
+2025-01-19 15:16:01,099 - INFO - ASST: 1wk change of -10.48%
+2025-01-19 15:16:01,110 - INFO - Processing ASTI - 2025-01-14 16:00:00 UTC
+2025-01-19 15:16:01,179 - INFO - Retrieved article length: 4359 characters
+2025-01-19 15:16:01,197 - INFO - ASST: 1mo change of -62.66%
+2025-01-19 15:16:01,266 - INFO - ASTH: 1h change of 14.00%
+2025-01-19 15:16:01,320 - INFO - Processing ASTS - 2025-01-07 16:16:15 UTC
+2025-01-19 15:16:01,354 - INFO - ASTH: 1wk change of 11.86%
+2025-01-19 15:16:01,447 - INFO - ASTH: 1mo change of -8.65%
+2025-01-19 15:16:01,447 - INFO - Processing ASTH - 2025-01-08 23:37:00 UTC
+2025-01-19 15:16:02,149 - INFO - Retrieved article length: 4761 characters
+2025-01-19 15:16:02,408 - INFO - Retrieved article length: 6934 characters
+2025-01-19 15:16:02,491 - INFO - Retrieved article length: 2438 characters
+2025-01-19 15:16:02,501 - INFO - ASTI: 1h change of 7.63%
+2025-01-19 15:16:02,584 - INFO - ASTS: 1h change of -8.17%
+2025-01-19 15:16:02,585 - INFO - ASTI: 1wk change of -16.93%
+2025-01-19 15:16:02,660 - INFO - Retrieved article length: 150 characters
+2025-01-19 15:16:02,669 - INFO - ASTS: 1wk change of -3.71%
+2025-01-19 15:16:02,677 - INFO - ASTI: 1mo change of -2.93%
+2025-01-19 15:16:02,751 - INFO - ASTS: 1mo change of -9.30%
+2025-01-19 15:16:02,752 - INFO - Processing ASTS - 2025-01-06 16:00:00 UTC
+2025-01-19 15:16:02,806 - INFO - Processing ASUR - 2025-01-16 11:55:00 UTC
+2025-01-19 15:16:02,838 - INFO - ASTH: 1wk change of 9.97%
+2025-01-19 15:16:02,924 - INFO - ASTH: 1mo change of -19.00%
+2025-01-19 15:16:02,924 - INFO - Processing ASTH - 2024-12-30 15:17:07 UTC
+2025-01-19 15:16:03,311 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:03,314 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:03,316 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:03,317 - INFO - Processing ASTR - 2025-01-18 16:20:48 UTC
+2025-01-19 15:16:03,943 - INFO - Retrieved article length: 11987 characters
+2025-01-19 15:16:04,009 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:04,012 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:04,015 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:04,016 - INFO - Processing ASTR - 2025-01-18 01:35:00 UTC
+2025-01-19 15:16:04,033 - INFO - ASTS: 1h change of -6.21%
+2025-01-19 15:16:04,078 - INFO - Retrieved article length: 11626 characters
+2025-01-19 15:16:04,120 - INFO - ASTS: 1wk change of -6.02%
+2025-01-19 15:16:04,162 - INFO - Retrieved article length: 6163 characters
+2025-01-19 15:16:04,172 - INFO - ASUR: 1h change of 5.02%
+2025-01-19 15:16:04,204 - INFO - ASTS: 1mo change of -10.51%
+2025-01-19 15:16:04,205 - INFO - Processing ASTS - 2024-12-22 17:41:46 UTC
+2025-01-19 15:16:04,261 - INFO - ASUR: 1wk change of 21.40%
+2025-01-19 15:16:04,265 - INFO - ASTH: 1h change of -1.04%
+2025-01-19 15:16:04,354 - INFO - ASUR: 1mo change of 28.33%
+2025-01-19 15:16:04,354 - INFO - ASTH: 1wk change of -6.05%
+2025-01-19 15:16:04,354 - INFO - Processing ASUR - 2025-01-15 17:16:00 UTC
+2025-01-19 15:16:04,452 - INFO - ASTH: 1mo change of -17.05%
+2025-01-19 15:16:04,452 - INFO - Processing ASTH - 2024-12-20 00:16:00 UTC
+2025-01-19 15:16:05,313 - INFO - Retrieved article length: 24183 characters
+2025-01-19 15:16:05,314 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:05,315 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:05,316 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:05,316 - INFO - Processing ASTR - 2025-01-18 00:13:52 UTC
+2025-01-19 15:16:05,405 - INFO - Retrieved article length: 6549 characters
+2025-01-19 15:16:05,588 - INFO - ASTS: 1wk change of -9.56%
+2025-01-19 15:16:05,613 - INFO - Retrieved article length: 9932 characters
+2025-01-19 15:16:05,651 - INFO - Retrieved article length: 2305 characters
+2025-01-19 15:16:05,678 - INFO - ASTS: 1mo change of -19.46%
+2025-01-19 15:16:05,679 - INFO - Processing ASTS - 2024-12-10 00:17:55 UTC
+2025-01-19 15:16:05,706 - INFO - ASUR: 1h change of 6.61%
+2025-01-19 15:16:05,745 - INFO - ASTH: 1h change of -6.61%
+2025-01-19 15:16:05,791 - INFO - ASUR: 1wk change of 21.40%
+2025-01-19 15:16:05,845 - INFO - ASTH: 1wk change of -17.10%
+2025-01-19 15:16:05,878 - INFO - ASUR: 1mo change of 27.25%
+2025-01-19 15:16:05,890 - INFO - Processing ASUR - 2025-01-13 13:01:00 UTC
+2025-01-19 15:16:05,951 - INFO - ASTH: 1mo change of -13.82%
+2025-01-19 15:16:05,952 - INFO - Processing ASTH - 2024-12-13 15:17:37 UTC
+2025-01-19 15:16:06,469 - INFO - ASTS: 1h change of -15.68%
+2025-01-19 15:16:06,510 - INFO - Retrieved article length: 1181 characters
+2025-01-19 15:16:06,510 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:06,511 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:06,511 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:06,512 - INFO - Processing ASTR - 2025-01-17 23:00:00 UTC
+2025-01-19 15:16:06,646 - INFO - ASTS: 1mo change of -12.68%
+2025-01-19 15:16:06,646 - INFO - Processing ASTS - 2024-12-09 15:30:00 UTC
+2025-01-19 15:16:07,011 - INFO - ASTH: 1h change of -4.41%
+2025-01-19 15:16:07,099 - INFO - Retrieved article length: 6231 characters
+2025-01-19 15:16:07,100 - INFO - ASTH: 1wk change of -22.01%
+2025-01-19 15:16:07,188 - INFO - ASTH: 1mo change of -28.96%
+2025-01-19 15:16:07,189 - INFO - Processing ASTH - 2024-11-26 18:03:55 UTC
+2025-01-19 15:16:07,191 - INFO - ASUR: 1h change of 4.51%
+2025-01-19 15:16:07,287 - INFO - ASUR: 1wk change of 25.80%
+2025-01-19 15:16:07,377 - INFO - ASUR: 1mo change of 34.59%
+2025-01-19 15:16:07,378 - INFO - Processing ASUR - 2025-01-08 17:54:00 UTC
+2025-01-19 15:16:07,425 - INFO - ASTS: 1h change of -12.81%
+2025-01-19 15:16:07,567 - INFO - ASTS: 1wk change of -1.89%
+2025-01-19 15:16:07,654 - INFO - ASTS: 1mo change of -6.56%
+2025-01-19 15:16:07,654 - INFO - Processing ASTS - 2024-12-03 17:20:00 UTC
+2025-01-19 15:16:07,709 - INFO - Retrieved article length: 8345 characters
+2025-01-19 15:16:07,709 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:07,710 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:07,711 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:07,711 - INFO - Processing ASTR - 2025-01-17 17:46:24 UTC
+2025-01-19 15:16:08,067 - INFO - ASTH: 1wk change of 5.90%
+2025-01-19 15:16:08,162 - INFO - ASTH: 1mo change of -44.77%
+2025-01-19 15:16:08,162 - INFO - Processing ASTH - 2024-11-21 16:00:00 UTC
+2025-01-19 15:16:08,169 - INFO - ASUR: 1h change of 17.40%
+2025-01-19 15:16:08,257 - INFO - ASUR: 1wk change of 29.01%
+2025-01-19 15:16:08,358 - INFO - ASUR: 1mo change of 28.87%
+2025-01-19 15:16:08,358 - INFO - Processing ASUR - 2025-01-07 22:46:00 UTC
+2025-01-19 15:16:08,492 - INFO - ASTS: 1h change of -5.71%
+2025-01-19 15:16:08,584 - INFO - ASTS: 1wk change of -3.63%
+2025-01-19 15:16:08,676 - INFO - ASTS: 1mo change of -10.53%
+2025-01-19 15:16:08,676 - INFO - Processing ASTS - 2024-11-28 15:20:57 UTC
+2025-01-19 15:16:08,926 - INFO - Retrieved article length: 3791 characters
+2025-01-19 15:16:08,927 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:08,927 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:08,928 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:08,928 - INFO - Processing ASTR - 2025-01-17 16:32:13 UTC
+2025-01-19 15:16:08,947 - INFO - ASTH: 1h change of 4.02%
+2025-01-19 15:16:09,037 - INFO - ASTH: 1wk change of -7.61%
+2025-01-19 15:16:09,191 - INFO - ASTH: 1mo change of -45.45%
+2025-01-19 15:16:09,191 - INFO - Processing ASTH - 2024-11-20 13:26:17 UTC
+2025-01-19 15:16:09,559 - INFO - Retrieved article length: 2643 characters
+2025-01-19 15:16:09,561 - INFO - ASTS: 1wk change of -1.86%
+2025-01-19 15:16:09,653 - INFO - ASUR: 1h change of 17.40%
+2025-01-19 15:16:09,695 - INFO - ASTS: 1mo change of -15.84%
+2025-01-19 15:16:09,695 - INFO - Processing ASTS - 2024-11-25 13:49:06 UTC
+2025-01-19 15:16:09,738 - INFO - ASUR: 1wk change of 27.10%
+2025-01-19 15:16:09,830 - INFO - ASUR: 1mo change of 26.06%
+2025-01-19 15:16:09,830 - INFO - Processing ASUR - 2025-01-03 16:00:00 UTC
+2025-01-19 15:16:09,981 - INFO - ASTH: 1h change of 3.75%
+2025-01-19 15:16:10,075 - INFO - ASTH: 1wk change of -7.61%
+2025-01-19 15:16:10,160 - INFO - Retrieved article length: 589 characters
+2025-01-19 15:16:10,161 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:10,162 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:10,162 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:10,163 - INFO - Processing ASTR - 2025-01-17 16:26:31 UTC
+2025-01-19 15:16:10,175 - INFO - ASTH: 1mo change of -46.47%
+2025-01-19 15:16:10,340 - INFO - Processing ATCH - 2025-01-13 17:38:00 UTC
+2025-01-19 15:16:10,456 - INFO - ASTS: 1h change of -3.82%
+2025-01-19 15:16:10,543 - INFO - ASTS: 1wk change of -6.56%
+2025-01-19 15:16:10,639 - INFO - ASTS: 1mo change of -17.08%
+2025-01-19 15:16:10,818 - INFO - Processing ATEC - 2025-01-18 15:27:52 UTC
+2025-01-19 15:16:11,028 - INFO - Retrieved article length: 1619 characters
+2025-01-19 15:16:11,221 - INFO - ASUR: 1wk change of 23.09%
+2025-01-19 15:16:11,370 - INFO - Retrieved article length: 529 characters
+2025-01-19 15:16:11,371 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:11,371 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:11,372 - ERROR - ASTR: No timezone found, symbol may be delisted
+2025-01-19 15:16:11,395 - INFO - ASUR: 1mo change of 24.00%
+2025-01-19 15:16:11,395 - INFO - Processing ASUR - 2024-12-13 15:55:42 UTC
+2025-01-19 15:16:11,535 - INFO - Retrieved article length: 4196 characters
+2025-01-19 15:16:11,537 - INFO - Processing ATEN - 2025-01-06 16:00:00 UTC
+2025-01-19 15:16:11,625 - INFO - ATCH: 1h change of -20.05%
+2025-01-19 15:16:11,720 - INFO - ATCH: 1wk change of -20.25%
+2025-01-19 15:16:11,811 - INFO - ATCH: 1mo change of -49.85%
+2025-01-19 15:16:11,811 - INFO - Processing ATCH - 2025-01-02 01:00:15 UTC
+2025-01-19 15:16:12,117 - INFO - Retrieved article length: 10509 characters
+2025-01-19 15:16:12,171 - INFO - ASUR: 1h change of 5.09%
+2025-01-19 15:16:12,213 - INFO - ATEC: 1h change of 4.80%
+2025-01-19 15:16:12,264 - INFO - ASUR: 1wk change of -5.30%
+2025-01-19 15:16:12,306 - INFO - ATEC: 1wk change of 19.77%
+2025-01-19 15:16:12,350 - INFO - ASUR: 1mo change of 27.37%
+2025-01-19 15:16:12,350 - INFO - Processing ASUR - 2024-11-13 13:38:40 UTC
+2025-01-19 15:16:12,408 - INFO - ATEC: 1mo change of 22.18%
+2025-01-19 15:16:12,408 - INFO - Processing ATEC - 2025-01-14 22:51:19 UTC
+2025-01-19 15:16:12,576 - INFO - ATCH: 1h change of -16.10%
+2025-01-19 15:16:12,665 - INFO - ATCH: 1wk change of -19.92%
+2025-01-19 15:16:12,750 - INFO - ATCH: 1mo change of -51.85%
+2025-01-19 15:16:12,750 - INFO - Processing ATCH - 2025-01-01 00:50:00 UTC
+2025-01-19 15:16:12,777 - INFO - Retrieved article length: 2276 characters
+2025-01-19 15:16:12,869 - INFO - ATEN: 1h change of 1.09%
+2025-01-19 15:16:12,966 - INFO - ATEN: 1wk change of 1.13%
+2025-01-19 15:16:13,062 - INFO - ATEN: 1mo change of 8.34%
+2025-01-19 15:16:13,062 - INFO - Processing ATEN - 2025-01-05 15:20:09 UTC
+2025-01-19 15:16:13,193 - INFO - ASUR: 1h change of -9.52%
+2025-01-19 15:16:13,299 - INFO - ASUR: 1wk change of 16.13%
+2025-01-19 15:16:13,390 - INFO - ASUR: 1mo change of 9.01%
+2025-01-19 15:16:13,540 - INFO - Processing ATER - 2025-01-08 21:31:13 UTC
+2025-01-19 15:16:13,616 - INFO - Retrieved article length: 524 characters
+2025-01-19 15:16:13,710 - INFO - ATEC: 1h change of 1.79%
+2025-01-19 15:16:13,804 - INFO - ATEC: 1wk change of 23.48%
+2025-01-19 15:16:13,896 - INFO - ATEC: 1mo change of 19.90%
+2025-01-19 15:16:13,897 - INFO - Processing ATEC - 2025-01-14 14:11:00 UTC
+2025-01-19 15:16:14,028 - INFO - Retrieved article length: 10783 characters
+2025-01-19 15:16:14,121 - INFO - ATCH: 1h change of 4.19%
+2025-01-19 15:16:14,208 - INFO - ATCH: 1wk change of -19.92%
+2025-01-19 15:16:14,236 - INFO - Retrieved article length: 3974 characters
+2025-01-19 15:16:14,348 - INFO - ATCH: 1mo change of -46.90%
+2025-01-19 15:16:14,348 - INFO - Processing ATCH - 2024-12-21 00:30:00 UTC
+2025-01-19 15:16:14,423 - INFO - ATEN: 1wk change of -3.19%
+2025-01-19 15:16:14,470 - INFO - ATER: 1h change of -10.28%
+2025-01-19 15:16:14,515 - INFO - ATEN: 1mo change of 8.34%
+2025-01-19 15:16:14,515 - INFO - Processing ATEN - 2024-12-04 11:02:07 UTC
+2025-01-19 15:16:14,557 - INFO - ATER: 1wk change of -9.02%
+2025-01-19 15:16:14,651 - INFO - ATER: 1mo change of -10.77%
+2025-01-19 15:16:14,651 - INFO - Processing ATER - 2024-12-09 15:30:00 UTC
+2025-01-19 15:16:15,168 - INFO - Retrieved article length: 7356 characters
+2025-01-19 15:16:15,176 - INFO - ATEC: 1h change of 1.79%
+2025-01-19 15:16:15,223 - INFO - ATEC: 1wk change of 23.48%
+2025-01-19 15:16:15,273 - INFO - ATEC: 1mo change of 19.90%
+2025-01-19 15:16:15,273 - INFO - Processing ATEC - 2025-01-13 17:00:00 UTC
+2025-01-19 15:16:15,295 - INFO - ATEN: 1h change of 6.78%
+2025-01-19 15:16:15,397 - INFO - ATEN: 1wk change of 13.22%
+2025-01-19 15:16:15,478 - INFO - ATER: 1h change of -2.78%
+2025-01-19 15:16:15,487 - INFO - ATEN: 1mo change of 26.38%
+2025-01-19 15:16:15,487 - INFO - Processing ATEN - 2024-12-01 16:34:22 UTC
+2025-01-19 15:16:15,568 - INFO - ATER: 1wk change of -20.15%
+2025-01-19 15:16:15,659 - INFO - ATER: 1mo change of -18.77%
+2025-01-19 15:16:15,660 - INFO - Processing ATER - 2024-11-27 15:06:02 UTC
+2025-01-19 15:16:15,928 - INFO - Retrieved article length: 7656 characters
+2025-01-19 15:16:16,032 - INFO - ATCH: 1h change of -4.79%
+2025-01-19 15:16:16,126 - INFO - ATCH: 1wk change of -28.19%
+2025-01-19 15:16:16,213 - INFO - ATCH: 1mo change of -50.76%
+2025-01-19 15:16:16,213 - INFO - Processing ATCH - 2024-12-17 01:18:00 UTC
+2025-01-19 15:16:16,285 - INFO - ATEN: 1h change of 3.18%
+2025-01-19 15:16:16,383 - INFO - ATEN: 1wk change of 11.84%
+2025-01-19 15:16:16,447 - INFO - ATER: 1h change of -1.82%
+2025-01-19 15:16:16,454 - INFO - Retrieved article length: 7965 characters
+2025-01-19 15:16:16,475 - INFO - ATEN: 1mo change of 26.08%
+2025-01-19 15:16:16,475 - INFO - Processing ATEN - 2024-11-26 16:00:00 UTC
+2025-01-19 15:16:16,532 - INFO - ATER: 1wk change of 6.28%
+2025-01-19 15:16:16,623 - INFO - ATER: 1mo change of -13.67%
+2025-01-19 15:16:16,623 - INFO - Processing ATER - 2024-11-15 15:57:57 UTC
+2025-01-19 15:16:16,636 - INFO - ATEC: 1wk change of 23.48%
+2025-01-19 15:16:16,728 - INFO - ATEC: 1mo change of 20.40%
+2025-01-19 15:16:16,728 - INFO - Processing ATEC - 2024-12-27 18:03:29 UTC
+2025-01-19 15:16:17,054 - INFO - ATCH: 1h change of -4.16%
+2025-01-19 15:16:17,147 - INFO - ATCH: 1wk change of -16.67%
+2025-01-19 15:16:17,237 - INFO - ATCH: 1mo change of -46.90%
+2025-01-19 15:16:17,237 - INFO - Processing ATCH - 2024-11-18 17:03:00 UTC
+2025-01-19 15:16:17,278 - INFO - ATEN: 1h change of 2.70%
+2025-01-19 15:16:17,417 - INFO - ATER: 1h change of -11.12%
+2025-01-19 15:16:17,425 - INFO - ATEN: 1wk change of 10.83%
+2025-01-19 15:16:17,509 - INFO - ATER: 1wk change of -12.24%
+2025-01-19 15:16:17,517 - INFO - ATEN: 1mo change of 24.93%
+2025-01-19 15:16:17,518 - INFO - Processing ATEN - 2024-11-22 21:55:25 UTC
+2025-01-19 15:16:17,594 - INFO - ATER: 1mo change of -24.17%
+2025-01-19 15:16:17,594 - INFO - Processing ATER - 2024-11-14 15:55:50 UTC
+2025-01-19 15:16:17,999 - INFO - ATCH: 1h change of -26.26%
+2025-01-19 15:16:18,025 - INFO - Retrieved article length: 6936 characters
+2025-01-19 15:16:18,096 - INFO - ATCH: 1wk change of -17.74%
+2025-01-19 15:16:18,183 - INFO - ATCH: 1mo change of 6.29%
+2025-01-19 15:16:18,199 - INFO - ATEC: 1wk change of -1.58%
+2025-01-19 15:16:18,286 - INFO - ATEC: 1mo change of 15.01%
+2025-01-19 15:16:18,287 - INFO - Processing ATEC - 2024-12-19 14:46:56 UTC
+2025-01-19 15:16:18,288 - INFO - ATEN: 1h change of 2.00%
+2025-01-19 15:16:18,377 - INFO - Processing ATEX - 2025-01-17 19:00:00 UTC
+2025-01-19 15:16:18,380 - INFO - ATER: 1h change of -14.42%
+2025-01-19 15:16:18,387 - INFO - ATEN: 1wk change of 2.59%
+2025-01-19 15:16:18,470 - INFO - ATER: 1wk change of -11.95%
+2025-01-19 15:16:18,487 - INFO - ATEN: 1mo change of 29.40%
+2025-01-19 15:16:18,488 - INFO - Processing ATEN - 2024-11-19 00:08:54 UTC
+2025-01-19 15:16:18,567 - INFO - ATER: 1mo change of -22.14%
+2025-01-19 15:16:18,567 - INFO - Processing ATER - 2024-11-12 20:49:57 UTC
+2025-01-19 15:16:19,361 - INFO - ATEN: 1wk change of 3.45%
+2025-01-19 15:16:19,362 - INFO - ATER: 1h change of -5.68%
+2025-01-19 15:16:19,455 - INFO - ATER: 1wk change of -18.09%
+2025-01-19 15:16:19,457 - INFO - ATEN: 1mo change of 27.07%
+2025-01-19 15:16:19,459 - INFO - Processing ATEN - 2024-11-18 16:00:00 UTC
+2025-01-19 15:16:19,548 - INFO - ATER: 1mo change of -19.72%
+2025-01-19 15:16:19,548 - INFO - Processing ATER - 2024-11-12 00:24:12 UTC
+2025-01-19 15:16:19,584 - INFO - Retrieved article length: 4083 characters
+2025-01-19 15:16:19,614 - INFO - Retrieved article length: 5744 characters
+2025-01-19 15:16:19,708 - INFO - ATEX: 1h change of 9.16%
+2025-01-19 15:16:19,756 - INFO - ATEC: 1wk change of -4.37%
+2025-01-19 15:16:19,800 - INFO - ATEX: 1wk change of 5.66%
+2025-01-19 15:16:19,842 - INFO - ATEC: 1mo change of 32.53%
+2025-01-19 15:16:19,842 - INFO - Processing ATEC - 2024-12-14 00:41:48 UTC
+2025-01-19 15:16:19,887 - INFO - ATEX: 1mo change of -7.52%
+2025-01-19 15:16:19,887 - INFO - Processing ATEX - 2025-01-13 15:30:00 UTC
+2025-01-19 15:16:20,339 - INFO - ATEN: 1wk change of 6.13%
+2025-01-19 15:16:20,438 - INFO - ATEN: 1mo change of 26.28%
+2025-01-19 15:16:20,588 - INFO - Processing ATGL - 2024-11-01 18:15:00 UTC
+2025-01-19 15:16:20,628 - INFO - ATEC: 1h change of 1.42%
+2025-01-19 15:16:20,716 - INFO - ATEC: 1wk change of -9.25%
+2025-01-19 15:16:20,772 - INFO - Retrieved article length: 911 characters
+2025-01-19 15:16:20,779 - INFO - ATER: 1h change of -5.68%
+2025-01-19 15:16:20,786 - INFO - ATER: 1wk change of -18.09%
+2025-01-19 15:16:20,791 - INFO - ATER: 1mo change of -19.72%
+2025-01-19 15:16:20,792 - INFO - Processing ATER - 2024-11-12 00:15:00 UTC
+2025-01-19 15:16:20,804 - INFO - ATEC: 1mo change of 19.28%
+2025-01-19 15:16:20,804 - INFO - Processing ATEC - 2024-12-09 17:00:00 UTC
+2025-01-19 15:16:21,203 - INFO - Retrieved article length: 7269 characters
+2025-01-19 15:16:21,293 - INFO - ATEX: 1h change of -4.24%
+2025-01-19 15:16:21,374 - INFO - ATGL: 1h change of 1.84%
+2025-01-19 15:16:21,375 - INFO - ATEX: 1wk change of 2.38%
+2025-01-19 15:16:21,466 - INFO - ATEX: 1mo change of -8.99%
+2025-01-19 15:16:21,466 - INFO - Processing ATEX - 2025-01-06 17:14:00 UTC
+2025-01-19 15:16:21,490 - INFO - ATER: 1h change of -5.68%
+2025-01-19 15:16:21,495 - INFO - ATER: 1wk change of -18.09%
+2025-01-19 15:16:21,500 - INFO - ATER: 1mo change of -19.72%
+2025-01-19 15:16:21,516 - INFO - ATGL: 1wk change of 52.39%
+2025-01-19 15:16:21,566 - INFO - ATEC: 1h change of 1.63%
+2025-01-19 15:16:21,617 - INFO - ATGL: 1mo change of 195.74%
+2025-01-19 15:16:21,650 - INFO - ATEC: 1wk change of -15.84%
+2025-01-19 15:16:21,657 - INFO - Processing ATHA - 2024-12-18 15:19:51 UTC
+2025-01-19 15:16:21,736 - INFO - ATEC: 1mo change of 19.26%
+2025-01-19 15:16:21,787 - INFO - Processing ATHE - 2025-01-10 15:35:35 UTC
+2025-01-19 15:16:21,904 - INFO - Processing ATI - 2025-01-16 02:15:20 UTC
+2025-01-19 15:16:22,438 - INFO - ATHA: 1h change of -6.74%
+2025-01-19 15:16:22,524 - INFO - ATHA: 1wk change of -11.72%
+2025-01-19 15:16:22,566 - INFO - ATHE: 1h change of 2.14%
+2025-01-19 15:16:22,611 - INFO - ATHA: 1mo change of -27.40%
+2025-01-19 15:16:22,611 - INFO - Processing ATHA - 2024-12-07 01:30:00 UTC
+2025-01-19 15:16:22,653 - INFO - ATHE: 1wk change of 3.32%
+2025-01-19 15:16:22,710 - INFO - Retrieved article length: 9859 characters
+2025-01-19 15:16:22,740 - INFO - ATHE: 1mo change of 59.07%
+2025-01-19 15:16:22,740 - INFO - Processing ATHE - 2025-01-09 15:25:00 UTC
+2025-01-19 15:16:22,803 - INFO - ATEX: 1h change of -2.27%
+2025-01-19 15:16:22,897 - INFO - ATEX: 1wk change of -9.79%
+2025-01-19 15:16:22,990 - INFO - ATEX: 1mo change of -8.80%
+2025-01-19 15:16:22,991 - INFO - Processing ATEX - 2025-01-03 16:19:00 UTC
+2025-01-19 15:16:23,100 - INFO - Retrieved article length: 3541 characters
+2025-01-19 15:16:23,198 - INFO - ATI: 1h change of 1.34%
+2025-01-19 15:16:23,304 - INFO - ATI: 1wk change of 1.53%
+2025-01-19 15:16:23,412 - INFO - ATI: 1mo change of 2.09%
+2025-01-19 15:16:23,412 - INFO - Processing ATI - 2025-01-10 02:15:21 UTC
+2025-01-19 15:16:23,414 - INFO - ATHA: 1h change of 4.71%
+2025-01-19 15:16:23,508 - INFO - ATHA: 1wk change of -11.64%
+2025-01-19 15:16:23,613 - INFO - ATHA: 1mo change of -11.72%
+2025-01-19 15:16:23,614 - INFO - Processing ATHA - 2024-11-08 12:50:03 UTC
+2025-01-19 15:16:23,994 - INFO - Retrieved article length: 6430 characters
+2025-01-19 15:16:24,089 - INFO - ATHE: 1h change of -13.81%
+2025-01-19 15:16:24,169 - INFO - Retrieved article length: 7840 characters
+2025-01-19 15:16:24,176 - INFO - ATHE: 1wk change of -2.29%
+2025-01-19 15:16:24,261 - INFO - ATEX: 1h change of -2.23%
+2025-01-19 15:16:24,273 - INFO - ATHE: 1mo change of 76.29%
+2025-01-19 15:16:24,273 - INFO - Processing ATHE - 2024-12-04 15:35:00 UTC
+2025-01-19 15:16:24,351 - INFO - ATEX: 1wk change of -7.57%
+2025-01-19 15:16:24,404 - INFO - ATHA: 1h change of -8.85%
+2025-01-19 15:16:24,437 - INFO - ATEX: 1mo change of -10.69%
+2025-01-19 15:16:24,437 - INFO - Processing ATEX - 2024-12-31 01:28:17 UTC
+2025-01-19 15:16:24,495 - INFO - ATHA: 1wk change of 38.43%
+2025-01-19 15:16:24,579 - INFO - ATHA: 1mo change of 36.94%
+2025-01-19 15:16:24,580 - INFO - Processing ATHA - 2024-11-08 00:05:00 UTC
+2025-01-19 15:16:24,608 - INFO - Retrieved article length: 3434 characters
+2025-01-19 15:16:24,822 - INFO - ATI: 1wk change of 3.89%
+2025-01-19 15:16:24,939 - INFO - Processing ATI - 2025-01-06 15:30:00 UTC
+2025-01-19 15:16:25,048 - INFO - ATHE: 1h change of 28.76%
+2025-01-19 15:16:25,140 - INFO - ATHE: 1wk change of 128.57%
+2025-01-19 15:16:25,240 - INFO - ATHE: 1mo change of 215.25%
+2025-01-19 15:16:25,240 - INFO - Processing ATHE - 2024-11-19 15:25:00 UTC
+2025-01-19 15:16:25,270 - INFO - ATHA: 1h change of -8.85%
+2025-01-19 15:16:25,276 - INFO - ATHA: 1wk change of 38.43%
+2025-01-19 15:16:25,281 - INFO - ATHA: 1mo change of 36.94%
+2025-01-19 15:16:25,282 - INFO - Processing ATHA - 2024-11-04 20:05:02 UTC
+2025-01-19 15:16:25,654 - INFO - Retrieved article length: 524 characters
+2025-01-19 15:16:25,751 - INFO - ATEX: 1h change of 1.36%
+2025-01-19 15:16:25,843 - INFO - ATEX: 1wk change of -4.47%
+2025-01-19 15:16:25,933 - INFO - ATEX: 1mo change of -5.98%
+2025-01-19 15:16:25,933 - INFO - Processing ATEX - 2024-12-31 01:00:00 UTC
+2025-01-19 15:16:26,024 - INFO - ATHE: 1h change of -5.41%
+2025-01-19 15:16:26,062 - INFO - ATHA: 1h change of 17.92%
+2025-01-19 15:16:26,113 - INFO - ATHE: 1wk change of -8.40%
+2025-01-19 15:16:26,148 - INFO - ATHA: 1wk change of 55.98%
+2025-01-19 15:16:26,159 - INFO - Retrieved article length: 1803 characters
+2025-01-19 15:16:26,205 - INFO - ATHE: 1mo change of 90.48%
+2025-01-19 15:16:26,205 - INFO - Processing ATHE - 2024-11-12 15:35:00 UTC
+2025-01-19 15:16:26,240 - INFO - ATHA: 1mo change of 42.38%
+2025-01-19 15:16:26,241 - INFO - Processing ATHA - 2024-10-22 14:00:00 UTC
+2025-01-19 15:16:26,251 - INFO - ATI: 1h change of -2.30%
+2025-01-19 15:16:26,367 - INFO - ATI: 1wk change of 2.98%
+2025-01-19 15:16:26,477 - INFO - ATI: 1mo change of -4.22%
+2025-01-19 15:16:26,479 - INFO - Processing ATI - 2025-01-04 02:15:20 UTC
+2025-01-19 15:16:27,027 - INFO - ATHA: 1h change of 3.69%
+2025-01-19 15:16:27,027 - INFO - ATHE: 1h change of 3.51%
+2025-01-19 15:16:27,116 - INFO - ATHE: 1wk change of -6.14%
+2025-01-19 15:16:27,117 - INFO - ATHA: 1wk change of -2.95%
+2025-01-19 15:16:27,208 - INFO - ATHA: 1mo change of 29.22%
+2025-01-19 15:16:27,209 - INFO - ATHE: 1mo change of 73.68%
+2025-01-19 15:16:27,209 - INFO - Processing ATHE - 2024-11-06 15:35:00 UTC
+2025-01-19 15:16:27,283 - INFO - Retrieved article length: 3630 characters
+2025-01-19 15:16:27,290 - INFO - ATEX: 1h change of 1.36%
+2025-01-19 15:16:27,296 - INFO - ATEX: 1wk change of -4.47%
+2025-01-19 15:16:27,349 - INFO - ATEX: 1mo change of -5.98%
+2025-01-19 15:16:27,350 - INFO - Processing ATEX - 2024-11-26 21:40:00 UTC
+2025-01-19 15:16:27,695 - INFO - Retrieved article length: 3472 characters
+2025-01-19 15:16:27,900 - INFO - ATI: 1wk change of -2.03%
+2025-01-19 15:16:27,983 - INFO - ATHE: 1h change of 3.51%
+2025-01-19 15:16:28,003 - INFO - ATI: 1mo change of -4.22%
+2025-01-19 15:16:28,003 - INFO - Processing ATI - 2025-01-03 15:25:48 UTC
+2025-01-19 15:16:28,081 - INFO - ATHE: 1wk change of -3.48%
+2025-01-19 15:16:28,171 - INFO - ATHE: 1mo change of 62.24%
+2025-01-19 15:16:28,172 - INFO - Processing ATHE - 2024-10-31 14:35:00 UTC
+2025-01-19 15:16:28,174 - INFO - ATEX: 1h change of 2.25%
+2025-01-19 15:16:28,270 - INFO - ATEX: 1wk change of 3.60%
+2025-01-19 15:16:28,355 - INFO - ATEX: 1mo change of -2.31%
+2025-01-19 15:16:28,356 - INFO - Processing ATEX - 2024-11-15 14:03:36 UTC
+2025-01-19 15:16:28,871 - INFO - ATI: 1wk change of -1.31%
+2025-01-19 15:16:28,967 - INFO - ATI: 1mo change of -4.97%
+2025-01-19 15:16:28,969 - INFO - Processing ATI - 2024-12-28 02:15:21 UTC
+2025-01-19 15:16:28,971 - INFO - ATHE: 1h change of -3.31%
+2025-01-19 15:16:29,060 - INFO - ATHE: 1wk change of -4.92%
+2025-01-19 15:16:29,154 - INFO - ATHE: 1mo change of 51.61%
+2025-01-19 15:16:29,432 - INFO - ATEX: 1mo change of -3.27%
+2025-01-19 15:16:30,206 - INFO - Retrieved article length: 3811 characters
+2025-01-19 15:16:30,406 - INFO - ATI: 1wk change of 3.89%
+2025-01-19 15:16:30,511 - INFO - ATI: 1mo change of -4.94%
+2025-01-19 15:16:30,512 - INFO - Processing ATI - 2024-12-20 02:00:20 UTC
+2025-01-19 15:16:31,724 - INFO - Retrieved article length: 3597 characters
+2025-01-19 15:16:31,813 - INFO - ATI: 1h change of -2.59%
+2025-01-19 15:16:31,983 - INFO - ATI: 1wk change of -2.87%
+2025-01-19 15:16:32,090 - INFO - ATI: 1mo change of 1.80%
+2025-01-19 15:16:32,091 - INFO - Processing ATI - 2024-12-18 19:25:51 UTC
+2025-01-19 15:16:33,410 - INFO - Retrieved article length: 3644 characters
+2025-01-19 15:16:33,503 - INFO - ATI: 1h change of -4.43%
+2025-01-19 15:16:33,615 - INFO - ATI: 1wk change of -2.19%
+2025-01-19 15:16:33,722 - INFO - ATI: 1mo change of -2.04%

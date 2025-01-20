@@ -1,0 +1,509 @@
+2025-01-19 16:21:06,660 - INFO - Starting new training session. Logging to: logs/training_20250119_162106.log
+2025-01-19 16:21:06,660 - INFO - Starting new training session. Logging to: logs/training_20250119_162106.log
+2025-01-19 16:21:06,680 - INFO - Starting new training session. Logging to: logs/training_20250119_162106.log
+2025-01-19 16:21:07,232 - INFO - Processing PFE - 2025-01-19 13:51:00 UTC
+2025-01-19 16:21:07,263 - INFO - Processing PEV - 2024-12-12 14:30:00 UTC
+2025-01-19 16:21:07,367 - INFO - Processing PFG - 2025-01-17 00:15:00 UTC
+2025-01-19 16:21:07,409 - INFO - Processing PFGC - 2025-01-14 20:45:05 UTC
+2025-01-19 16:21:08,026 - INFO - Retrieved article length: 5024 characters
+2025-01-19 16:21:08,038 - INFO - Retrieved article length: 4265 characters
+2025-01-19 16:21:08,075 - INFO - Retrieved article length: 1833 characters
+2025-01-19 16:21:08,188 - INFO - PEV: 1h change of -1.44%
+2025-01-19 16:21:08,196 - INFO - PFG: 1h change of 1.63%
+2025-01-19 16:21:08,283 - INFO - PEV: 1wk change of -9.84%
+2025-01-19 16:21:08,287 - INFO - Retrieved article length: 4065 characters
+2025-01-19 16:21:08,315 - INFO - PFG: 1wk change of 4.29%
+2025-01-19 16:21:08,332 - INFO - PFE: 1wk change of -1.57%
+2025-01-19 16:21:08,399 - INFO - PEV: 1mo change of -33.65%
+2025-01-19 16:21:08,399 - INFO - Processing PEV - 2024-11-22 00:15:00 UTC
+2025-01-19 16:21:08,399 - INFO - PFGC: 1h change of 2.59%
+2025-01-19 16:21:08,418 - INFO - PFG: 1mo change of 3.48%
+2025-01-19 16:21:08,418 - INFO - Processing PFG - 2025-01-15 16:30:29 UTC
+2025-01-19 16:21:08,471 - INFO - PFE: 1mo change of 4.16%
+2025-01-19 16:21:08,471 - INFO - Processing PFE - 2025-01-19 01:05:02 UTC
+2025-01-19 16:21:08,480 - INFO - PFGC: 1wk change of 4.80%
+2025-01-19 16:21:08,564 - INFO - PFGC: 1mo change of -1.53%
+2025-01-19 16:21:08,564 - INFO - Processing PFGC - 2025-01-09 19:40:06 UTC
+2025-01-19 16:21:09,019 - INFO - Retrieved article length: 519 characters
+2025-01-19 16:21:09,116 - INFO - PFG: 1h change of 5.15%
+2025-01-19 16:21:09,168 - INFO - Retrieved article length: 4405 characters
+2025-01-19 16:21:09,219 - INFO - PFG: 1wk change of 4.93%
+2025-01-19 16:21:09,266 - INFO - PEV: 1h change of -3.84%
+2025-01-19 16:21:09,292 - INFO - Retrieved article length: 2785 characters
+2025-01-19 16:21:09,294 - INFO - Retrieved article length: 7385 characters
+2025-01-19 16:21:09,322 - INFO - PFG: 1mo change of 2.28%
+2025-01-19 16:21:09,322 - INFO - Processing PFG - 2025-01-14 16:22:39 UTC
+2025-01-19 16:21:09,362 - INFO - PEV: 1wk change of -13.08%
+2025-01-19 16:21:09,401 - INFO - PFE: 1wk change of -1.57%
+2025-01-19 16:21:09,452 - INFO - PFE: 1mo change of 4.16%
+2025-01-19 16:21:09,453 - INFO - Processing PFE - 2025-01-18 16:20:48 UTC
+2025-01-19 16:21:09,458 - INFO - PEV: 1mo change of -53.90%
+2025-01-19 16:21:09,458 - INFO - Processing PEV - 2024-11-03 16:54:57 UTC
+2025-01-19 16:21:09,464 - INFO - PFGC: 1wk change of 4.20%
+2025-01-19 16:21:09,551 - INFO - PFGC: 1mo change of -3.14%
+2025-01-19 16:21:09,551 - INFO - Processing PFGC - 2025-01-08 17:40:15 UTC
+2025-01-19 16:21:10,081 - INFO - Retrieved article length: 2169 characters
+2025-01-19 16:21:10,159 - INFO - Retrieved article length: 541 characters
+2025-01-19 16:21:10,246 - INFO - PFG: 1h change of 3.78%
+2025-01-19 16:21:10,283 - INFO - Retrieved article length: 1649 characters
+2025-01-19 16:21:10,300 - INFO - Retrieved article length: 3701 characters
+2025-01-19 16:21:10,313 - INFO - PFE: 1wk change of -2.08%
+2025-01-19 16:21:10,353 - INFO - PFG: 1wk change of 4.93%
+2025-01-19 16:21:10,382 - INFO - PEV: 1h change of 3.16%
+2025-01-19 16:21:10,390 - INFO - PFGC: 1h change of 1.03%
+2025-01-19 16:21:10,458 - INFO - PFG: 1mo change of 1.14%
+2025-01-19 16:21:10,458 - INFO - PFE: 1mo change of 4.16%
+2025-01-19 16:21:10,458 - INFO - Processing PFG - 2025-01-14 00:15:00 UTC
+2025-01-19 16:21:10,458 - INFO - Processing PFE - 2025-01-18 13:42:00 UTC
+2025-01-19 16:21:10,471 - INFO - PFGC: 1wk change of 4.20%
+2025-01-19 16:21:10,477 - INFO - PEV: 1wk change of -23.38%
+2025-01-19 16:21:10,559 - INFO - PFGC: 1mo change of -2.08%
+2025-01-19 16:21:10,559 - INFO - Processing PFGC - 2024-12-17 13:00:00 UTC
+2025-01-19 16:21:10,577 - INFO - PEV: 1mo change of -15.16%
+2025-01-19 16:21:10,577 - INFO - Processing PEV - 2024-11-01 14:58:24 UTC
+2025-01-19 16:21:11,136 - INFO - Retrieved article length: 5247 characters
+2025-01-19 16:21:11,244 - INFO - PFE: 1wk change of -2.08%
+2025-01-19 16:21:11,296 - INFO - PFE: 1mo change of 4.16%
+2025-01-19 16:21:11,296 - INFO - Processing PFE - 2025-01-18 00:13:52 UTC
+2025-01-19 16:21:11,376 - INFO - Retrieved article length: 1825 characters
+2025-01-19 16:21:11,462 - INFO - PFGC: 1h change of -4.73%
+2025-01-19 16:21:11,466 - INFO - Retrieved article length: 390 characters
+2025-01-19 16:21:11,544 - INFO - PFGC: 1wk change of -3.45%
+2025-01-19 16:21:11,569 - INFO - PEV: 1h change of -13.57%
+2025-01-19 16:21:11,629 - INFO - PFGC: 1mo change of 1.90%
+2025-01-19 16:21:11,629 - INFO - Processing PFGC - 2024-12-17 12:45:42 UTC
+2025-01-19 16:21:11,692 - INFO - PEV: 1wk change of -32.79%
+2025-01-19 16:21:11,794 - INFO - PEV: 1mo change of -17.24%
+2025-01-19 16:21:11,795 - INFO - Processing PEV - 2024-10-31 23:30:00 UTC
+2025-01-19 16:21:12,024 - INFO - Retrieved article length: 1161 characters
+2025-01-19 16:21:12,104 - INFO - Retrieved article length: 2420 characters
+2025-01-19 16:21:12,112 - INFO - PFG: 1h change of 3.78%
+2025-01-19 16:21:12,129 - INFO - PFE: 1wk change of -2.08%
+2025-01-19 16:21:12,166 - INFO - PFG: 1wk change of 4.93%
+2025-01-19 16:21:12,179 - INFO - PFE: 1mo change of 4.16%
+2025-01-19 16:21:12,179 - INFO - Processing PFE - 2025-01-17 23:00:00 UTC
+2025-01-19 16:21:12,219 - INFO - PFG: 1mo change of 1.14%
+2025-01-19 16:21:12,219 - INFO - Processing PFG - 2025-01-13 18:08:00 UTC
+2025-01-19 16:21:12,390 - INFO - Retrieved article length: 2149 characters
+2025-01-19 16:21:12,399 - INFO - PFGC: 1h change of -4.73%
+2025-01-19 16:21:12,406 - INFO - PFGC: 1wk change of -3.45%
+2025-01-19 16:21:12,458 - INFO - PFGC: 1mo change of 1.90%
+2025-01-19 16:21:12,459 - INFO - Processing PFGC - 2024-12-16 18:23:02 UTC
+2025-01-19 16:21:12,648 - INFO - Retrieved article length: 5778 characters
+2025-01-19 16:21:12,751 - INFO - PEV: 1h change of -14.22%
+2025-01-19 16:21:12,843 - INFO - Retrieved article length: 8345 characters
+2025-01-19 16:21:12,846 - INFO - PEV: 1wk change of -34.82%
+2025-01-19 16:21:12,943 - INFO - PEV: 1mo change of -5.15%
+2025-01-19 16:21:12,943 - INFO - Processing PEV - 2024-10-29 13:30:00 UTC
+2025-01-19 16:21:13,096 - INFO - PFE: 1wk change of -3.06%
+2025-01-19 16:21:13,233 - INFO - PFE: 1mo change of 2.81%
+2025-01-19 16:21:13,234 - INFO - Processing PFE - 2025-01-17 21:55:46 UTC
+2025-01-19 16:21:13,325 - INFO - Retrieved article length: 492 characters
+2025-01-19 16:21:13,415 - INFO - PFGC: 1h change of -2.26%
+2025-01-19 16:21:13,503 - INFO - PFGC: 1wk change of -5.51%
+2025-01-19 16:21:13,590 - INFO - Processing PFGC - 2024-12-16 15:00:00 UTC
+2025-01-19 16:21:13,678 - INFO - Retrieved article length: 4400 characters
+2025-01-19 16:21:13,779 - INFO - PEV: 1h change of -8.89%
+2025-01-19 16:21:13,876 - INFO - PEV: 1wk change of -32.43%
+2025-01-19 16:21:13,929 - INFO - Retrieved article length: 6567 characters
+2025-01-19 16:21:13,970 - INFO - PEV: 1mo change of -25.18%
+2025-01-19 16:21:13,979 - INFO - Retrieved article length: 159 characters
+2025-01-19 16:21:14,012 - INFO - PFG: 1h change of 2.23%
+2025-01-19 16:21:14,039 - INFO - PFE: 1wk change of -3.06%
+2025-01-19 16:21:14,093 - INFO - PFE: 1mo change of 2.81%
+2025-01-19 16:21:14,094 - INFO - Processing PFE - 2025-01-17 20:15:20 UTC
+2025-01-19 16:21:14,126 - INFO - PFG: 1wk change of 4.81%
+2025-01-19 16:21:14,236 - INFO - PFG: 1mo change of -1.05%
+2025-01-19 16:21:14,237 - INFO - Processing PFG - 2025-01-09 17:39:00 UTC
+2025-01-19 16:21:14,285 - INFO - Processing PFLT - 2025-01-09 00:05:00 UTC
+2025-01-19 16:21:14,371 - INFO - Retrieved article length: 3307 characters
+2025-01-19 16:21:14,379 - INFO - PFGC: 1h change of -2.26%
+2025-01-19 16:21:14,383 - INFO - PFGC: 1wk change of -5.51%
+2025-01-19 16:21:14,437 - INFO - Processing PFGC - 2024-12-02 15:33:39 UTC
+2025-01-19 16:21:14,769 - INFO - Retrieved article length: 3638 characters
+2025-01-19 16:21:14,833 - INFO - PFE: 1wk change of -3.06%
+2025-01-19 16:21:14,888 - INFO - PFE: 1mo change of 2.81%
+2025-01-19 16:21:15,006 - INFO - Retrieved article length: 4949 characters
+2025-01-19 16:21:15,010 - INFO - Processing PFS - 2025-01-09 16:27:01 UTC
+2025-01-19 16:21:15,060 - INFO - Retrieved article length: 3279 characters
+2025-01-19 16:21:15,092 - INFO - PFG: 1h change of -3.22%
+2025-01-19 16:21:15,161 - INFO - PFLT: 1h change of -1.29%
+2025-01-19 16:21:15,201 - INFO - PFG: 1wk change of 5.74%
+2025-01-19 16:21:15,274 - INFO - Retrieved article length: 4911 characters
+2025-01-19 16:21:15,284 - INFO - PFLT: 1wk change of 3.82%
+2025-01-19 16:21:15,312 - INFO - PFG: 1mo change of -2.50%
+2025-01-19 16:21:15,312 - INFO - Processing PFG - 2025-01-09 13:39:10 UTC
+2025-01-19 16:21:15,397 - INFO - PFLT: 1mo change of 3.18%
+2025-01-19 16:21:15,398 - INFO - Processing PFLT - 2025-01-04 00:05:00 UTC
+2025-01-19 16:21:15,447 - INFO - PFGC: 1wk change of 1.52%
+2025-01-19 16:21:15,537 - INFO - PFGC: 1mo change of 2.86%
+2025-01-19 16:21:15,816 - INFO - Retrieved article length: 1818 characters
+2025-01-19 16:21:15,890 - INFO - Processing PG - 2025-01-18 18:58:26 UTC
+2025-01-19 16:21:15,909 - INFO - PFS: 1h change of -2.65%
+2025-01-19 16:21:16,016 - INFO - PFS: 1wk change of 2.55%
+2025-01-19 16:21:16,047 - INFO - Retrieved article length: 4305 characters
+2025-01-19 16:21:16,115 - INFO - PFS: 1mo change of -6.30%
+2025-01-19 16:21:16,115 - INFO - Processing PFS - 2025-01-08 16:53:24 UTC
+2025-01-19 16:21:16,125 - INFO - Retrieved article length: 4244 characters
+2025-01-19 16:21:16,135 - INFO - PFG: 1h change of -3.22%
+2025-01-19 16:21:16,140 - INFO - PFG: 1wk change of 5.74%
+2025-01-19 16:21:16,194 - INFO - PFG: 1mo change of -2.50%
+2025-01-19 16:21:16,194 - INFO - Processing PFG - 2025-01-08 22:19:18 UTC
+2025-01-19 16:21:16,273 - INFO - PFLT: 1wk change of 1.30%
+2025-01-19 16:21:16,404 - INFO - PFLT: 1mo change of 3.56%
+2025-01-19 16:21:16,404 - INFO - Processing PFLT - 2024-12-27 00:05:00 UTC
+2025-01-19 16:21:16,645 - INFO - Retrieved article length: 5595 characters
+2025-01-19 16:21:16,907 - INFO - Retrieved article length: 535 characters
+2025-01-19 16:21:16,996 - INFO - PFS: 1h change of -1.74%
+2025-01-19 16:21:17,069 - INFO - PG: 1mo change of -5.85%
+2025-01-19 16:21:17,069 - INFO - Processing PG - 2025-01-18 13:08:00 UTC
+2025-01-19 16:21:17,071 - INFO - Retrieved article length: 512 characters
+2025-01-19 16:21:17,104 - INFO - PFS: 1wk change of 2.55%
+2025-01-19 16:21:17,211 - INFO - PFS: 1mo change of -7.82%
+2025-01-19 16:21:17,211 - INFO - Processing PFS - 2025-01-07 16:00:00 UTC
+2025-01-19 16:21:17,267 - INFO - PFG: 1wk change of 5.74%
+2025-01-19 16:21:17,298 - INFO - Retrieved article length: 4145 characters
+2025-01-19 16:21:17,379 - INFO - PFG: 1mo change of -3.75%
+2025-01-19 16:21:17,520 - INFO - PFLT: 1wk change of 2.59%
+2025-01-19 16:21:17,533 - INFO - Processing PGEN - 2025-01-13 15:00:00 UTC
+2025-01-19 16:21:17,648 - INFO - PFLT: 1mo change of 2.81%
+2025-01-19 16:21:17,648 - INFO - Processing PFLT - 2024-12-12 16:30:00 UTC
+2025-01-19 16:21:17,738 - INFO - Retrieved article length: 6058 characters
+2025-01-19 16:21:17,869 - INFO - Retrieved article length: 4535 characters
+2025-01-19 16:21:17,893 - INFO - PG: 1mo change of -5.85%
+2025-01-19 16:21:17,894 - INFO - Processing PG - 2025-01-17 19:44:06 UTC
+2025-01-19 16:21:17,953 - INFO - PFS: 1h change of -1.74%
+2025-01-19 16:21:18,060 - INFO - PFS: 1wk change of 2.12%
+2025-01-19 16:21:18,169 - INFO - PFS: 1mo change of -6.49%
+2025-01-19 16:21:18,169 - INFO - Processing PFS - 2025-01-07 14:08:55 UTC
+2025-01-19 16:21:18,452 - INFO - Retrieved article length: 3981 characters
+2025-01-19 16:21:18,509 - INFO - Retrieved article length: 2690 characters
+2025-01-19 16:21:18,586 - INFO - Retrieved article length: 11974 characters
+2025-01-19 16:21:18,668 - INFO - PFLT: 1wk change of -1.90%
+2025-01-19 16:21:18,760 - INFO - PGEN: 1wk change of -7.50%
+2025-01-19 16:21:18,781 - INFO - Processing PFLT - 2024-11-26 00:05:00 UTC
+2025-01-19 16:21:18,843 - INFO - PGEN: 1mo change of 38.75%
+2025-01-19 16:21:18,843 - INFO - Processing PGEN - 2025-01-09 16:30:00 UTC
+2025-01-19 16:21:18,861 - INFO - Retrieved article length: 6629 characters
+2025-01-19 16:21:18,871 - INFO - PFS: 1h change of -1.74%
+2025-01-19 16:21:18,884 - INFO - PFS: 1wk change of 2.12%
+2025-01-19 16:21:18,911 - INFO - PG: 1mo change of -5.80%
+2025-01-19 16:21:18,911 - INFO - Processing PG - 2025-01-17 13:39:06 UTC
+2025-01-19 16:21:18,934 - INFO - PFS: 1mo change of -6.49%
+2025-01-19 16:21:18,934 - INFO - Processing PFS - 2025-01-02 16:00:00 UTC
+2025-01-19 16:21:19,583 - INFO - Retrieved article length: 3611 characters
+2025-01-19 16:21:19,673 - INFO - PGEN: 1h change of -16.39%
+2025-01-19 16:21:19,737 - INFO - Retrieved article length: 524 characters
+2025-01-19 16:21:19,760 - INFO - PGEN: 1wk change of 19.35%
+2025-01-19 16:21:19,780 - INFO - Retrieved article length: 25759 characters
+2025-01-19 16:21:19,843 - INFO - PGEN: 1mo change of 44.16%
+2025-01-19 16:21:19,843 - INFO - Processing PGEN - 2025-01-01 17:02:52 UTC
+2025-01-19 16:21:19,849 - INFO - PG: 1mo change of -5.80%
+2025-01-19 16:21:19,849 - INFO - Processing PG - 2025-01-17 05:24:43 UTC
+2025-01-19 16:21:19,952 - INFO - Retrieved article length: 2209 characters
+2025-01-19 16:21:20,116 - INFO - PFLT: 1mo change of -3.36%
+2025-01-19 16:21:20,509 - INFO - Retrieved article length: 7556 characters
+2025-01-19 16:21:20,638 - INFO - Retrieved article length: 7487 characters
+2025-01-19 16:21:21,403 - ERROR - Error getting news for PGHL: JSON decode error
+2025-01-19 16:21:21,403 - INFO - Retrying PGHL (Attempt 2/3)
+2025-01-19 16:21:21,509 - ERROR - PFS: No price data found, symbol may be delisted (1d 2024-12-23 -> 2025-01-12)
+2025-01-19 16:21:21,784 - ERROR - PGEN: No price data found, symbol may be delisted (1h 2024-12-30 -> 2025-01-03)
+2025-01-19 16:21:21,910 - ERROR - PG: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:21:22,589 - ERROR - PFS: No price data found, symbol may be delisted (1d 2024-11-28 -> 2025-02-06)
+2025-01-19 16:21:22,589 - INFO - Processing PFS - 2024-12-17 16:00:00 UTC
+2025-01-19 16:21:22,850 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-12-22 -> 2025-01-11)
+2025-01-19 16:21:22,950 - ERROR - PG: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:21:22,951 - INFO - Processing PG - 2025-01-16 17:15:26 UTC
+2025-01-19 16:21:23,387 - INFO - Retrieved article length: 3452 characters
+2025-01-19 16:21:23,778 - INFO - Retrieved article length: 4267 characters
+2025-01-19 16:21:23,914 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-11-27 -> 2025-02-05)
+2025-01-19 16:21:23,916 - INFO - Processing PGEN - 2024-12-30 15:00:00 UTC
+2025-01-19 16:21:24,754 - INFO - Retrieved article length: 10101 characters
+2025-01-19 16:21:24,829 - ERROR - PFS: No price data found, symbol may be delisted (1h 2024-12-15 -> 2024-12-19)
+2025-01-19 16:21:25,171 - ERROR - PG: No price data found, symbol may be delisted (1h 2025-01-14 -> 2025-01-18)
+2025-01-19 16:21:25,886 - ERROR - PGEN: No price data found, symbol may be delisted (1h 2024-12-28 -> 2025-01-01)
+2025-01-19 16:21:25,899 - ERROR - PFS: No price data found, symbol may be delisted (1d 2024-12-07 -> 2024-12-27)
+2025-01-19 16:21:26,263 - ERROR - PG: No price data found, symbol may be delisted (1d 2025-01-06 -> 2025-01-26)
+2025-01-19 16:21:26,404 - ERROR - Error getting news for PGHL: JSON decode error
+2025-01-19 16:21:26,406 - INFO - Retrying PGHL (Attempt 3/3)
+2025-01-19 16:21:27,012 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-12-20 -> 2025-01-09)
+2025-01-19 16:21:27,094 - ERROR - PFS: No price data found, symbol may be delisted (1d 2024-11-12 -> 2025-01-21)
+2025-01-19 16:21:27,096 - INFO - Processing PFS - 2024-12-09 14:07:11 UTC
+2025-01-19 16:21:27,401 - ERROR - PG: No price data found, symbol may be delisted (1d 2024-12-12 -> 2025-02-20)
+2025-01-19 16:21:27,402 - INFO - Processing PG - 2025-01-16 17:07:34 UTC
+2025-01-19 16:21:27,984 - INFO - Retrieved article length: 6663 characters
+2025-01-19 16:21:28,118 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-11-25 -> 2025-02-03)
+2025-01-19 16:21:28,119 - INFO - Processing PGEN - 2024-12-27 17:00:00 UTC
+2025-01-19 16:21:28,177 - INFO - Retrieved article length: 531 characters
+2025-01-19 16:21:28,178 - ERROR - PG: No price data found, symbol may be delisted (1h 2025-01-14 -> 2025-01-18)
+2025-01-19 16:21:28,934 - INFO - Retrieved article length: 6942 characters
+2025-01-19 16:21:29,125 - ERROR - PFS: No price data found, symbol may be delisted (1h 2024-12-07 -> 2024-12-11)
+2025-01-19 16:21:29,260 - ERROR - PG: No price data found, symbol may be delisted (1d 2025-01-06 -> 2025-01-26)
+2025-01-19 16:21:30,229 - ERROR - PFS: No price data found, symbol may be delisted (1d 2024-11-29 -> 2024-12-19)
+2025-01-19 16:21:30,299 - ERROR - PGEN: No price data found, symbol may be delisted (1h 2024-12-25 -> 2024-12-29)
+2025-01-19 16:21:30,496 - ERROR - PG: No price data found, symbol may be delisted (1d 2024-12-12 -> 2025-02-20)
+2025-01-19 16:21:30,498 - INFO - Processing PG - 2025-01-16 17:06:54 UTC
+2025-01-19 16:21:31,245 - INFO - Retrieved article length: 532 characters
+2025-01-19 16:21:31,246 - ERROR - PG: No price data found, symbol may be delisted (1h 2025-01-14 -> 2025-01-18)
+2025-01-19 16:21:31,348 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-12-17 -> 2025-01-06)
+2025-01-19 16:21:31,406 - ERROR - Error getting news for PGHL: JSON decode error
+2025-01-19 16:21:31,407 - ERROR - PFS: No price data found, symbol may be delisted (1d 2024-11-04 -> 2025-01-13)
+2025-01-19 16:21:31,407 - ERROR - Failed to get news for PGHL after 3 attempts
+2025-01-19 16:21:31,408 - INFO - Processing PFS - 2024-11-23 00:47:39 UTC
+2025-01-19 16:21:32,227 - INFO - Retrieved article length: 536 characters
+2025-01-19 16:21:32,338 - ERROR - PG: No price data found, symbol may be delisted (1d 2025-01-06 -> 2025-01-26)
+2025-01-19 16:21:32,422 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-11-22 -> 2025-01-31)
+2025-01-19 16:21:32,423 - INFO - Processing PGEN - 2024-11-20 18:01:43 UTC
+2025-01-19 16:21:32,588 - ERROR - Error getting news for PGNY: JSON decode error
+2025-01-19 16:21:32,588 - INFO - Retrying PGNY (Attempt 2/3)
+2025-01-19 16:21:33,304 - INFO - Retrieved article length: 4421 characters
+2025-01-19 16:21:33,345 - ERROR - PFS: No price data found, symbol may be delisted (1h 2024-11-21 -> 2024-11-25)
+2025-01-19 16:21:33,481 - ERROR - PG: No price data found, symbol may be delisted (1d 2024-12-12 -> 2025-02-20)
+2025-01-19 16:21:34,309 - ERROR - PFS: No price data found, symbol may be delisted (1d 2024-11-13 -> 2024-12-03)
+2025-01-19 16:21:34,412 - ERROR - PGEN: No price data found, symbol may be delisted (1h 2024-11-18 -> 2024-11-22)
+2025-01-19 16:21:34,702 - ERROR - Error getting news for PGR: JSON decode error
+2025-01-19 16:21:34,702 - INFO - Retrying PGR (Attempt 2/3)
+2025-01-19 16:21:35,515 - ERROR - PFS: No price data found, symbol may be delisted (1d 2024-10-19 -> 2024-12-28)
+2025-01-19 16:21:35,589 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-11-10 -> 2024-11-30)
+2025-01-19 16:21:36,563 - ERROR - Error getting news for PGRE: JSON decode error
+2025-01-19 16:21:36,564 - INFO - Retrying PGRE (Attempt 2/3)
+2025-01-19 16:21:36,889 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-10-16 -> 2024-12-25)
+2025-01-19 16:21:36,891 - INFO - Processing PGEN - 2024-11-15 00:30:00 UTC
+2025-01-19 16:21:37,589 - ERROR - Error getting news for PGNY: JSON decode error
+2025-01-19 16:21:37,591 - INFO - Retrying PGNY (Attempt 3/3)
+2025-01-19 16:21:37,784 - INFO - Retrieved article length: 19986 characters
+2025-01-19 16:21:38,924 - ERROR - PGEN: No price data found, symbol may be delisted (1h 2024-11-13 -> 2024-11-17)
+2025-01-19 16:21:39,704 - ERROR - Error getting news for PGR: JSON decode error
+2025-01-19 16:21:39,706 - INFO - Retrying PGR (Attempt 3/3)
+2025-01-19 16:21:40,360 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-11-05 -> 2024-11-25)
+2025-01-19 16:21:41,556 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-10-11 -> 2024-12-20)
+2025-01-19 16:21:41,557 - INFO - Processing PGEN - 2024-11-13 00:05:00 UTC
+2025-01-19 16:21:41,564 - ERROR - Error getting news for PGRE: JSON decode error
+2025-01-19 16:21:41,565 - INFO - Retrying PGRE (Attempt 3/3)
+2025-01-19 16:21:42,515 - INFO - Retrieved article length: 3597 characters
+2025-01-19 16:21:42,592 - ERROR - Error getting news for PGNY: JSON decode error
+2025-01-19 16:21:42,593 - ERROR - Failed to get news for PGNY after 3 attempts
+2025-01-19 16:21:43,557 - ERROR - PGEN: No price data found, symbol may be delisted (1h 2024-11-11 -> 2024-11-15)
+2025-01-19 16:21:43,756 - ERROR - Error getting news for PGX: JSON decode error
+2025-01-19 16:21:43,757 - INFO - Retrying PGX (Attempt 2/3)
+2025-01-19 16:21:44,708 - ERROR - Error getting news for PGR: JSON decode error
+2025-01-19 16:21:44,709 - ERROR - Failed to get news for PGR after 3 attempts
+2025-01-19 16:21:44,733 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-11-03 -> 2024-11-23)
+2025-01-19 16:21:45,923 - ERROR - PGEN: No price data found, symbol may be delisted (1d 2024-10-09 -> 2024-12-18)
+2025-01-19 16:21:45,964 - ERROR - Error getting news for PGY: JSON decode error
+2025-01-19 16:21:45,965 - INFO - Retrying PGY (Attempt 2/3)
+2025-01-19 16:21:46,567 - ERROR - Error getting news for PGRE: JSON decode error
+2025-01-19 16:21:46,567 - ERROR - Failed to get news for PGRE after 3 attempts
+2025-01-19 16:21:47,053 - ERROR - Error getting news for PH: JSON decode error
+2025-01-19 16:21:47,054 - INFO - Retrying PH (Attempt 2/3)
+2025-01-19 16:21:47,697 - ERROR - Error getting news for PHAT: JSON decode error
+2025-01-19 16:21:47,698 - INFO - Retrying PHAT (Attempt 2/3)
+2025-01-19 16:21:48,759 - ERROR - Error getting news for PGX: JSON decode error
+2025-01-19 16:21:48,761 - INFO - Retrying PGX (Attempt 3/3)
+2025-01-19 16:21:50,967 - ERROR - Error getting news for PGY: JSON decode error
+2025-01-19 16:21:50,968 - INFO - Retrying PGY (Attempt 3/3)
+2025-01-19 16:21:52,055 - ERROR - Error getting news for PH: JSON decode error
+2025-01-19 16:21:52,057 - INFO - Retrying PH (Attempt 3/3)
+2025-01-19 16:21:52,700 - ERROR - Error getting news for PHAT: JSON decode error
+2025-01-19 16:21:52,703 - INFO - Retrying PHAT (Attempt 3/3)
+2025-01-19 16:21:53,762 - ERROR - Error getting news for PGX: JSON decode error
+2025-01-19 16:21:53,762 - ERROR - Failed to get news for PGX after 3 attempts
+2025-01-19 16:21:54,809 - ERROR - Error getting news for PHH: JSON decode error
+2025-01-19 16:21:54,810 - INFO - Retrying PHH (Attempt 2/3)
+2025-01-19 16:21:55,970 - ERROR - Error getting news for PGY: JSON decode error
+2025-01-19 16:21:55,971 - ERROR - Failed to get news for PGY after 3 attempts
+2025-01-19 16:21:56,996 - ERROR - Error getting news for PHIO: JSON decode error
+2025-01-19 16:21:56,997 - INFO - Retrying PHIO (Attempt 2/3)
+2025-01-19 16:21:57,059 - ERROR - Error getting news for PH: JSON decode error
+2025-01-19 16:21:57,060 - ERROR - Failed to get news for PH after 3 attempts
+2025-01-19 16:21:57,704 - ERROR - Error getting news for PHAT: JSON decode error
+2025-01-19 16:21:57,704 - ERROR - Failed to get news for PHAT after 3 attempts
+2025-01-19 16:21:58,130 - ERROR - Error getting news for PHK: JSON decode error
+2025-01-19 16:21:58,131 - INFO - Retrying PHK (Attempt 2/3)
+2025-01-19 16:21:58,926 - ERROR - Error getting news for PHM: JSON decode error
+2025-01-19 16:21:58,926 - INFO - Retrying PHM (Attempt 2/3)
+2025-01-19 16:21:59,810 - ERROR - Error getting news for PHH: JSON decode error
+2025-01-19 16:21:59,810 - INFO - Retrying PHH (Attempt 3/3)
+2025-01-19 16:22:01,998 - ERROR - Error getting news for PHIO: JSON decode error
+2025-01-19 16:22:02,000 - INFO - Retrying PHIO (Attempt 3/3)
+2025-01-19 16:22:03,133 - ERROR - Error getting news for PHK: JSON decode error
+2025-01-19 16:22:03,135 - INFO - Retrying PHK (Attempt 3/3)
+2025-01-19 16:22:03,927 - ERROR - Error getting news for PHM: JSON decode error
+2025-01-19 16:22:03,928 - INFO - Retrying PHM (Attempt 3/3)
+2025-01-19 16:22:04,811 - ERROR - Error getting news for PHH: JSON decode error
+2025-01-19 16:22:04,812 - ERROR - Failed to get news for PHH after 3 attempts
+2025-01-19 16:22:05,830 - ERROR - Error getting news for PHUN: JSON decode error
+2025-01-19 16:22:05,830 - INFO - Retrying PHUN (Attempt 2/3)
+2025-01-19 16:22:07,017 - ERROR - Error getting news for PHIO: JSON decode error
+2025-01-19 16:22:07,019 - ERROR - Failed to get news for PHIO after 3 attempts
+2025-01-19 16:22:08,069 - ERROR - Error getting news for PI: JSON decode error
+2025-01-19 16:22:08,070 - INFO - Retrying PI (Attempt 2/3)
+2025-01-19 16:22:08,138 - ERROR - Error getting news for PHK: JSON decode error
+2025-01-19 16:22:08,138 - ERROR - Failed to get news for PHK after 3 attempts
+2025-01-19 16:22:08,934 - ERROR - Error getting news for PHM: JSON decode error
+2025-01-19 16:22:08,936 - ERROR - Failed to get news for PHM after 3 attempts
+2025-01-19 16:22:09,388 - ERROR - Error getting news for PII: JSON decode error
+2025-01-19 16:22:09,389 - INFO - Retrying PII (Attempt 2/3)
+2025-01-19 16:22:10,118 - ERROR - Error getting news for PIII: JSON decode error
+2025-01-19 16:22:10,118 - INFO - Retrying PIII (Attempt 2/3)
+2025-01-19 16:22:10,831 - ERROR - Error getting news for PHUN: JSON decode error
+2025-01-19 16:22:10,832 - INFO - Retrying PHUN (Attempt 3/3)
+2025-01-19 16:22:13,072 - ERROR - Error getting news for PI: JSON decode error
+2025-01-19 16:22:13,073 - INFO - Retrying PI (Attempt 3/3)
+2025-01-19 16:22:14,390 - ERROR - Error getting news for PII: JSON decode error
+2025-01-19 16:22:14,393 - INFO - Retrying PII (Attempt 3/3)
+2025-01-19 16:22:15,120 - ERROR - Error getting news for PIII: JSON decode error
+2025-01-19 16:22:15,121 - INFO - Retrying PIII (Attempt 3/3)
+2025-01-19 16:22:15,833 - ERROR - Error getting news for PHUN: JSON decode error
+2025-01-19 16:22:15,834 - ERROR - Failed to get news for PHUN after 3 attempts
+2025-01-19 16:22:16,894 - ERROR - Error getting news for PIK: JSON decode error
+2025-01-19 16:22:16,896 - INFO - Retrying PIK (Attempt 2/3)
+2025-01-19 16:22:18,075 - ERROR - Error getting news for PI: JSON decode error
+2025-01-19 16:22:18,076 - ERROR - Failed to get news for PI after 3 attempts
+2025-01-19 16:22:19,119 - ERROR - Error getting news for PINC: JSON decode error
+2025-01-19 16:22:19,120 - INFO - Retrying PINC (Attempt 2/3)
+2025-01-19 16:22:19,394 - ERROR - Error getting news for PII: JSON decode error
+2025-01-19 16:22:19,396 - ERROR - Failed to get news for PII after 3 attempts
+2025-01-19 16:22:20,123 - ERROR - Error getting news for PIII: JSON decode error
+2025-01-19 16:22:20,124 - ERROR - Failed to get news for PIII after 3 attempts
+2025-01-19 16:22:20,520 - ERROR - Error getting news for PINS: JSON decode error
+2025-01-19 16:22:20,520 - INFO - Retrying PINS (Attempt 2/3)
+2025-01-19 16:22:21,255 - ERROR - Error getting news for PITA: JSON decode error
+2025-01-19 16:22:21,256 - INFO - Retrying PITA (Attempt 2/3)
+2025-01-19 16:22:21,898 - ERROR - Error getting news for PIK: JSON decode error
+2025-01-19 16:22:21,900 - INFO - Retrying PIK (Attempt 3/3)
+2025-01-19 16:22:24,121 - ERROR - Error getting news for PINC: JSON decode error
+2025-01-19 16:22:24,123 - INFO - Retrying PINC (Attempt 3/3)
+2025-01-19 16:22:25,521 - ERROR - Error getting news for PINS: JSON decode error
+2025-01-19 16:22:25,523 - INFO - Retrying PINS (Attempt 3/3)
+2025-01-19 16:22:26,256 - ERROR - Error getting news for PITA: JSON decode error
+2025-01-19 16:22:26,258 - INFO - Retrying PITA (Attempt 3/3)
+2025-01-19 16:22:26,901 - ERROR - Error getting news for PIK: JSON decode error
+2025-01-19 16:22:26,903 - ERROR - Failed to get news for PIK after 3 attempts
+2025-01-19 16:22:28,318 - ERROR - Error getting news for PIXY: JSON decode error
+2025-01-19 16:22:28,319 - INFO - Retrying PIXY (Attempt 2/3)
+2025-01-19 16:22:29,124 - ERROR - Error getting news for PINC: JSON decode error
+2025-01-19 16:22:29,126 - ERROR - Failed to get news for PINC after 3 attempts
+2025-01-19 16:22:30,205 - ERROR - Error getting news for PK: JSON decode error
+2025-01-19 16:22:30,206 - INFO - Retrying PK (Attempt 2/3)
+2025-01-19 16:22:30,526 - ERROR - Error getting news for PINS: JSON decode error
+2025-01-19 16:22:30,527 - ERROR - Failed to get news for PINS after 3 attempts
+2025-01-19 16:22:31,260 - ERROR - Error getting news for PITA: JSON decode error
+2025-01-19 16:22:31,260 - ERROR - Failed to get news for PITA after 3 attempts
+2025-01-19 16:22:31,637 - ERROR - Error getting news for PKBK: JSON decode error
+2025-01-19 16:22:31,638 - INFO - Retrying PKBK (Attempt 2/3)
+2025-01-19 16:22:32,360 - ERROR - Error getting news for PKG: JSON decode error
+2025-01-19 16:22:32,361 - INFO - Retrying PKG (Attempt 2/3)
+2025-01-19 16:22:33,321 - ERROR - Error getting news for PIXY: JSON decode error
+2025-01-19 16:22:33,322 - INFO - Retrying PIXY (Attempt 3/3)
+2025-01-19 16:22:35,208 - ERROR - Error getting news for PK: JSON decode error
+2025-01-19 16:22:35,210 - INFO - Retrying PK (Attempt 3/3)
+2025-01-19 16:22:36,640 - ERROR - Error getting news for PKBK: JSON decode error
+2025-01-19 16:22:36,640 - INFO - Retrying PKBK (Attempt 3/3)
+2025-01-19 16:22:37,363 - ERROR - Error getting news for PKG: JSON decode error
+2025-01-19 16:22:37,366 - INFO - Retrying PKG (Attempt 3/3)
+2025-01-19 16:22:38,325 - ERROR - Error getting news for PIXY: JSON decode error
+2025-01-19 16:22:38,325 - ERROR - Failed to get news for PIXY after 3 attempts
+2025-01-19 16:22:39,360 - ERROR - Error getting news for PL: JSON decode error
+2025-01-19 16:22:39,361 - INFO - Retrying PL (Attempt 2/3)
+2025-01-19 16:22:40,212 - ERROR - Error getting news for PK: JSON decode error
+2025-01-19 16:22:40,212 - ERROR - Failed to get news for PK after 3 attempts
+2025-01-19 16:22:41,456 - ERROR - Error getting news for PLAY: JSON decode error
+2025-01-19 16:22:41,457 - INFO - Retrying PLAY (Attempt 2/3)
+2025-01-19 16:22:41,642 - ERROR - Error getting news for PKBK: JSON decode error
+2025-01-19 16:22:41,644 - ERROR - Failed to get news for PKBK after 3 attempts
+2025-01-19 16:22:42,367 - ERROR - Error getting news for PKG: JSON decode error
+2025-01-19 16:22:42,368 - ERROR - Failed to get news for PKG after 3 attempts
+2025-01-19 16:22:42,853 - ERROR - Error getting news for PLBC: JSON decode error
+2025-01-19 16:22:42,854 - INFO - Retrying PLBC (Attempt 2/3)
+2025-01-19 16:22:43,427 - ERROR - Error getting news for PLBY: JSON decode error
+2025-01-19 16:22:43,428 - INFO - Retrying PLBY (Attempt 2/3)
+2025-01-19 16:22:44,361 - ERROR - Error getting news for PL: JSON decode error
+2025-01-19 16:22:44,364 - INFO - Retrying PL (Attempt 3/3)
+2025-01-19 16:22:46,459 - ERROR - Error getting news for PLAY: JSON decode error
+2025-01-19 16:22:46,461 - INFO - Retrying PLAY (Attempt 3/3)
+2025-01-19 16:22:47,856 - ERROR - Error getting news for PLBC: JSON decode error
+2025-01-19 16:22:47,857 - INFO - Retrying PLBC (Attempt 3/3)
+2025-01-19 16:22:48,429 - ERROR - Error getting news for PLBY: JSON decode error
+2025-01-19 16:22:48,431 - INFO - Retrying PLBY (Attempt 3/3)
+2025-01-19 16:22:49,365 - ERROR - Error getting news for PL: JSON decode error
+2025-01-19 16:22:49,367 - ERROR - Failed to get news for PL after 3 attempts
+2025-01-19 16:22:50,386 - ERROR - Error getting news for PLCE: JSON decode error
+2025-01-19 16:22:50,387 - INFO - Retrying PLCE (Attempt 2/3)
+2025-01-19 16:22:51,463 - ERROR - Error getting news for PLAY: JSON decode error
+2025-01-19 16:22:51,465 - ERROR - Failed to get news for PLAY after 3 attempts
+2025-01-19 16:22:52,649 - ERROR - Error getting news for PLD: JSON decode error
+2025-01-19 16:22:52,649 - INFO - Retrying PLD (Attempt 2/3)
+2025-01-19 16:22:52,859 - ERROR - Error getting news for PLBC: JSON decode error
+2025-01-19 16:22:52,861 - ERROR - Failed to get news for PLBC after 3 attempts
+2025-01-19 16:22:53,433 - ERROR - Error getting news for PLBY: JSON decode error
+2025-01-19 16:22:53,435 - ERROR - Failed to get news for PLBY after 3 attempts
+2025-01-19 16:22:54,231 - ERROR - Error getting news for PLL: JSON decode error
+2025-01-19 16:22:54,233 - INFO - Retrying PLL (Attempt 2/3)
+2025-01-19 16:22:54,709 - ERROR - Error getting news for PLMI: JSON decode error
+2025-01-19 16:22:54,710 - INFO - Retrying PLMI (Attempt 2/3)
+2025-01-19 16:22:55,388 - ERROR - Error getting news for PLCE: JSON decode error
+2025-01-19 16:22:55,390 - INFO - Retrying PLCE (Attempt 3/3)
+2025-01-19 16:22:57,652 - ERROR - Error getting news for PLD: JSON decode error
+2025-01-19 16:22:57,654 - INFO - Retrying PLD (Attempt 3/3)
+2025-01-19 16:22:59,235 - ERROR - Error getting news for PLL: JSON decode error
+2025-01-19 16:22:59,236 - INFO - Retrying PLL (Attempt 3/3)
+2025-01-19 16:22:59,711 - ERROR - Error getting news for PLMI: JSON decode error
+2025-01-19 16:22:59,712 - INFO - Retrying PLMI (Attempt 3/3)
+2025-01-19 16:23:00,391 - ERROR - Error getting news for PLCE: JSON decode error
+2025-01-19 16:23:00,391 - ERROR - Failed to get news for PLCE after 3 attempts
+2025-01-19 16:23:01,647 - ERROR - Error getting news for PLMIU: JSON decode error
+2025-01-19 16:23:01,648 - INFO - Retrying PLMIU (Attempt 2/3)
+2025-01-19 16:23:02,656 - ERROR - Error getting news for PLD: JSON decode error
+2025-01-19 16:23:02,658 - ERROR - Failed to get news for PLD after 3 attempts
+2025-01-19 16:23:03,680 - ERROR - Error getting news for PLMJ: JSON decode error
+2025-01-19 16:23:03,681 - INFO - Retrying PLMJ (Attempt 2/3)
+2025-01-19 16:23:04,238 - ERROR - Error getting news for PLL: JSON decode error
+2025-01-19 16:23:04,240 - ERROR - Failed to get news for PLL after 3 attempts
+2025-01-19 16:23:04,714 - ERROR - Error getting news for PLMI: JSON decode error
+2025-01-19 16:23:04,715 - ERROR - Failed to get news for PLMI after 3 attempts
+2025-01-19 16:23:05,671 - ERROR - Error getting news for PLMJU: JSON decode error
+2025-01-19 16:23:05,671 - INFO - Retrying PLMJU (Attempt 2/3)
+2025-01-19 16:23:06,040 - ERROR - Error getting news for PLNT: JSON decode error
+2025-01-19 16:23:06,042 - INFO - Retrying PLNT (Attempt 2/3)
+2025-01-19 16:23:06,650 - ERROR - Error getting news for PLMIU: JSON decode error
+2025-01-19 16:23:06,651 - INFO - Retrying PLMIU (Attempt 3/3)
+2025-01-19 16:23:08,682 - ERROR - Error getting news for PLMJ: JSON decode error
+2025-01-19 16:23:08,684 - INFO - Retrying PLMJ (Attempt 3/3)
+2025-01-19 16:23:10,672 - ERROR - Error getting news for PLMJU: JSON decode error
+2025-01-19 16:23:10,673 - INFO - Retrying PLMJU (Attempt 3/3)
+2025-01-19 16:23:11,044 - ERROR - Error getting news for PLNT: JSON decode error
+2025-01-19 16:23:11,045 - INFO - Retrying PLNT (Attempt 3/3)
+2025-01-19 16:23:11,652 - ERROR - Error getting news for PLMIU: JSON decode error
+2025-01-19 16:23:11,653 - ERROR - Failed to get news for PLMIU after 3 attempts
+2025-01-19 16:23:12,996 - INFO - Processing PLRX - 2025-01-02 16:00:00 UTC
+2025-01-19 16:23:13,686 - ERROR - Error getting news for PLMJ: JSON decode error
+2025-01-19 16:23:13,687 - ERROR - Failed to get news for PLMJ after 3 attempts
+2025-01-19 16:23:13,792 - INFO - Retrieved article length: 2376 characters
+2025-01-19 16:23:13,898 - INFO - PLRX: 1h change of 5.28%
+2025-01-19 16:23:14,001 - INFO - PLRX: 1wk change of -9.97%
+2025-01-19 16:23:14,108 - INFO - PLRX: 1mo change of -18.77%
+2025-01-19 16:23:14,108 - INFO - Processing PLRX - 2024-11-21 16:00:00 UTC
+2025-01-19 16:23:14,812 - INFO - Retrieved article length: 3204 characters
+2025-01-19 16:23:14,915 - INFO - PLRX: 1h change of 2.37%
+2025-01-19 16:23:15,016 - INFO - PLRX: 1wk change of -4.89%
+2025-01-19 16:23:15,117 - INFO - PLRX: 1mo change of -8.04%
+2025-01-19 16:23:15,117 - INFO - Processing PLRX - 2024-11-19 02:00:00 UTC
+2025-01-19 16:23:15,675 - ERROR - Error getting news for PLMJU: JSON decode error
+2025-01-19 16:23:15,677 - ERROR - Failed to get news for PLMJU after 3 attempts
+2025-01-19 16:23:15,893 - INFO - Retrieved article length: 6263 characters
+2025-01-19 16:23:15,996 - INFO - PLRX: 1h change of 2.33%
+2025-01-19 16:23:16,046 - ERROR - Error getting news for PLNT: JSON decode error
+2025-01-19 16:23:16,047 - ERROR - Failed to get news for PLNT after 3 attempts
+2025-01-19 16:23:16,090 - INFO - PLRX: 1wk change of -6.75%
+2025-01-19 16:23:16,205 - INFO - PLRX: 1mo change of -4.71%
+2025-01-19 16:23:16,205 - INFO - Processing PLRX - 2024-11-08 00:05:00 UTC
+2025-01-19 16:23:17,022 - INFO - Retrieved article length: 10674 characters
+2025-01-19 16:23:17,127 - INFO - PLRX: 1h change of -5.48%
+2025-01-19 16:23:17,229 - INFO - PLRX: 1wk change of -15.56%
+2025-01-19 16:23:17,336 - INFO - PLRX: 1mo change of 20.12%
+2025-01-19 16:23:17,336 - INFO - Processing PLRX - 2024-11-06 16:00:00 UTC
+2025-01-19 16:23:18,135 - INFO - Retrieved article length: 2371 characters
+2025-01-19 16:23:18,233 - INFO - PLRX: 1h change of 4.36%
+2025-01-19 16:23:18,346 - INFO - PLRX: 1wk change of -16.35%
+2025-01-19 16:23:18,456 - INFO - PLRX: 1mo change of 33.09%

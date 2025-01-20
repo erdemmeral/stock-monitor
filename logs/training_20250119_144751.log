@@ -1,0 +1,386 @@
+2025-01-19 14:47:51,237 - INFO - Starting new training session. Logging to: logs/training_20250119_144751.log
+2025-01-19 14:47:51,241 - INFO - Starting new training session. Logging to: logs/training_20250119_144751.log
+2025-01-19 14:47:51,539 - INFO - Starting new training session. Logging to: logs/training_20250119_144751.log
+2025-01-19 14:47:51,665 - INFO - Starting new training session. Logging to: logs/training_20250119_144751.log
+2025-01-19 14:47:51,671 - INFO - Starting new training session. Logging to: logs/training_20250119_144751.log
+2025-01-19 14:47:51,689 - INFO - Starting new training session. Logging to: logs/training_20250119_144751.log
+2025-01-19 14:47:51,745 - INFO - Starting new training session. Logging to: logs/training_20250119_144751.log
+2025-01-19 14:47:51,745 - INFO - Starting new training session. Logging to: logs/training_20250119_144751.log
+2025-01-19 14:47:51,951 - INFO - Processing AA - 2025-01-17 19:59:00 UTC
+2025-01-19 14:47:51,977 - INFO - Processing A - 2025-01-16 20:56:00 UTC
+2025-01-19 14:47:52,099 - INFO - Processing AADI - 2024-12-23 03:09:51 UTC
+2025-01-19 14:47:52,127 - INFO - Processing AAPL - 2025-01-19 14:00:32 UTC
+2025-01-19 14:47:52,132 - INFO - Processing AAP - 2025-01-18 17:08:08 UTC
+2025-01-19 14:47:52,154 - INFO - Processing AAL - 2025-01-18 02:15:21 UTC
+2025-01-19 14:47:52,169 - INFO - Processing AAOI - 2025-01-15 21:16:35 UTC
+2025-01-19 14:47:52,402 - INFO - Processing ABAT - 2024-12-28 16:57:53 UTC
+2025-01-19 14:47:52,739 - INFO - Retrieved article length: 4196 characters
+2025-01-19 14:47:52,769 - INFO - Retrieved article length: 5408 characters
+2025-01-19 14:47:52,814 - INFO - Retrieved article length: 4364 characters
+2025-01-19 14:47:52,830 - INFO - Retrieved article length: 5688 characters
+2025-01-19 14:47:52,861 - INFO - Retrieved article length: 3468 characters
+2025-01-19 14:47:52,871 - INFO - Retrieved article length: 6984 characters
+2025-01-19 14:47:52,891 - INFO - AAP: 1h change of 4.47%
+2025-01-19 14:47:52,920 - INFO - Retrieved article length: 4148 characters
+2025-01-19 14:47:52,931 - INFO - AA: 1h change of 5.09%
+2025-01-19 14:47:52,959 - INFO - A: 1h change of 3.18%
+2025-01-19 14:47:52,998 - INFO - AAP: 1wk change of 1.39%
+2025-01-19 14:47:53,014 - INFO - AAL: 1h change of 2.38%
+2025-01-19 14:47:53,015 - INFO - AADI: 1h change of -5.59%
+2025-01-19 14:47:53,064 - INFO - A: 1wk change of 8.01%
+2025-01-19 14:47:53,065 - INFO - AAOI: 1h change of 7.00%
+2025-01-19 14:47:53,100 - INFO - AA: 1wk change of 9.08%
+2025-01-19 14:47:53,101 - INFO - AADI: 1wk change of 30.91%
+2025-01-19 14:47:53,106 - INFO - AAP: 1mo change of 4.96%
+2025-01-19 14:47:53,106 - INFO - Processing AAP - 2025-01-14 18:17:25 UTC
+2025-01-19 14:47:53,109 - INFO - AAPL: 1wk change of -2.90%
+2025-01-19 14:47:53,114 - INFO - AAL: 1wk change of 3.81%
+2025-01-19 14:47:53,162 - INFO - AAOI: 1wk change of -8.55%
+2025-01-19 14:47:53,164 - INFO - A: 1mo change of 4.77%
+2025-01-19 14:47:53,165 - INFO - Processing A - 2025-01-16 15:10:56 UTC
+2025-01-19 14:47:53,186 - INFO - AADI: 1mo change of 38.60%
+2025-01-19 14:47:53,186 - INFO - Processing AADI - 2024-12-21 14:31:33 UTC
+2025-01-19 14:47:53,227 - INFO - AAPL: 1mo change of -8.39%
+2025-01-19 14:47:53,227 - INFO - Processing AAPL - 2025-01-19 12:20:00 UTC
+2025-01-19 14:47:53,237 - INFO - Retrieved article length: 1828 characters
+2025-01-19 14:47:53,260 - INFO - AAL: 1mo change of 10.59%
+2025-01-19 14:47:53,260 - INFO - Processing AAL - 2025-01-18 00:31:00 UTC
+2025-01-19 14:47:53,261 - INFO - AAOI: 1mo change of -7.85%
+2025-01-19 14:47:53,262 - INFO - Processing AAOI - 2025-01-14 18:25:00 UTC
+2025-01-19 14:47:53,265 - INFO - AA: 1mo change of 1.05%
+2025-01-19 14:47:53,266 - INFO - Processing AA - 2025-01-16 17:15:26 UTC
+2025-01-19 14:47:53,368 - INFO - ABAT: 1h change of 18.95%
+2025-01-19 14:47:53,454 - INFO - ABAT: 1wk change of 200.00%
+2025-01-19 14:47:53,539 - INFO - ABAT: 1mo change of 111.64%
+2025-01-19 14:47:53,539 - INFO - Processing ABAT - 2024-12-26 23:40:42 UTC
+2025-01-19 14:47:53,886 - INFO - Retrieved article length: 2092 characters
+2025-01-19 14:47:53,918 - INFO - Retrieved article length: 4889 characters
+2025-01-19 14:47:53,934 - INFO - A: 1h change of 3.18%
+2025-01-19 14:47:53,948 - INFO - Retrieved article length: 1829 characters
+2025-01-19 14:47:53,949 - INFO - Retrieved article length: 5488 characters
+2025-01-19 14:47:53,974 - INFO - AAP: 1h change of -2.20%
+2025-01-19 14:47:53,988 - INFO - A: 1wk change of 8.01%
+2025-01-19 14:47:53,992 - INFO - Retrieved article length: 4815 characters
+2025-01-19 14:47:53,999 - INFO - Retrieved article length: 1107 characters
+2025-01-19 14:47:54,025 - INFO - Retrieved article length: 4267 characters
+2025-01-19 14:47:54,036 - INFO - AADI: 1h change of 49.57%
+2025-01-19 14:47:54,047 - INFO - A: 1mo change of 4.77%
+2025-01-19 14:47:54,047 - INFO - Processing A - 2025-01-15 04:00:00 UTC
+2025-01-19 14:47:54,062 - INFO - AAPL: 1wk change of -2.90%
+2025-01-19 14:47:54,072 - INFO - AAL: 1h change of 2.38%
+2025-01-19 14:47:54,080 - INFO - AAP: 1wk change of -3.38%
+2025-01-19 14:47:54,092 - INFO - AAOI: 1h change of 8.00%
+2025-01-19 14:47:54,114 - INFO - AAPL: 1mo change of -8.39%
+2025-01-19 14:47:54,114 - INFO - Processing AAPL - 2025-01-19 09:39:41 UTC
+2025-01-19 14:47:54,122 - INFO - AADI: 1wk change of 22.31%
+2025-01-19 14:47:54,134 - INFO - AA: 1h change of 9.47%
+2025-01-19 14:47:54,143 - INFO - AAL: 1wk change of 3.81%
+2025-01-19 14:47:54,187 - INFO - AAP: 1mo change of -1.91%
+2025-01-19 14:47:54,188 - INFO - Processing AAP - 2025-01-13 16:00:00 UTC
+2025-01-19 14:47:54,189 - INFO - AAOI: 1wk change of -8.55%
+2025-01-19 14:47:54,205 - INFO - AADI: 1mo change of 38.60%
+2025-01-19 14:47:54,205 - INFO - Processing AADI - 2024-12-20 02:30:00 UTC
+2025-01-19 14:47:54,208 - INFO - AAL: 1mo change of 10.59%
+2025-01-19 14:47:54,208 - INFO - Processing AAL - 2025-01-17 20:29:00 UTC
+2025-01-19 14:47:54,289 - INFO - AAOI: 1mo change of -6.23%
+2025-01-19 14:47:54,289 - INFO - Processing AAOI - 2025-01-02 20:00:10 UTC
+2025-01-19 14:47:54,297 - INFO - AA: 1wk change of 8.33%
+2025-01-19 14:47:54,491 - INFO - Processing AA - 2025-01-15 18:30:00 UTC
+2025-01-19 14:47:54,669 - INFO - Retrieved article length: 5831 characters
+2025-01-19 14:47:54,758 - INFO - A: 1h change of 2.29%
+2025-01-19 14:47:54,795 - INFO - Retrieved article length: 4898 characters
+2025-01-19 14:47:54,862 - INFO - A: 1wk change of 8.01%
+2025-01-19 14:47:54,907 - INFO - AAPL: 1wk change of -2.90%
+2025-01-19 14:47:54,929 - INFO - Retrieved article length: 5326 characters
+2025-01-19 14:47:54,960 - INFO - AAPL: 1mo change of -8.39%
+2025-01-19 14:47:54,961 - INFO - Processing AAPL - 2025-01-19 08:06:02 UTC
+2025-01-19 14:47:54,966 - INFO - A: 1mo change of 4.56%
+2025-01-19 14:47:54,966 - INFO - Processing A - 2025-01-13 16:00:00 UTC
+2025-01-19 14:47:54,984 - INFO - Retrieved article length: 175 characters
+2025-01-19 14:47:55,020 - INFO - AAP: 1h change of -1.43%
+2025-01-19 14:47:55,057 - INFO - Retrieved article length: 19657 characters
+2025-01-19 14:47:55,067 - INFO - Retrieved article length: 4649 characters
+2025-01-19 14:47:55,148 - INFO - AADI: 1h change of 46.11%
+2025-01-19 14:47:55,169 - INFO - AAOI: 1h change of 2.08%
+2025-01-19 14:47:55,198 - INFO - AAL: 1wk change of 3.28%
+2025-01-19 14:47:55,235 - INFO - AADI: 1wk change of 34.31%
+2025-01-19 14:47:55,235 - INFO - AAP: 1mo change of -2.69%
+2025-01-19 14:47:55,235 - INFO - Processing AAP - 2025-01-10 12:03:18 UTC
+2025-01-19 14:47:55,239 - INFO - Retrieved article length: 2238 characters
+2025-01-19 14:47:55,266 - INFO - AAOI: 1wk change of -13.94%
+2025-01-19 14:47:55,298 - INFO - AAL: 1mo change of 7.98%
+2025-01-19 14:47:55,298 - INFO - Processing AAL - 2025-01-17 18:12:00 UTC
+2025-01-19 14:47:55,326 - INFO - AADI: 1mo change of 41.23%
+2025-01-19 14:47:55,326 - INFO - Processing AADI - 2024-11-12 23:07:28 UTC
+2025-01-19 14:47:55,339 - INFO - AA: 1h change of 8.16%
+2025-01-19 14:47:55,364 - INFO - AAOI: 1mo change of -24.72%
+2025-01-19 14:47:55,364 - INFO - Processing AAOI - 2024-12-25 01:49:07 UTC
+2025-01-19 14:47:55,504 - INFO - AA: 1wk change of 8.33%
+2025-01-19 14:47:55,559 - INFO - Retrieved article length: 4790 characters
+2025-01-19 14:47:55,675 - INFO - AAPL: 1wk change of -2.90%
+2025-01-19 14:47:55,704 - INFO - Processing AA - 2025-01-08 17:00:12 UTC
+2025-01-19 14:47:55,733 - INFO - AAPL: 1mo change of -8.39%
+2025-01-19 14:47:55,733 - INFO - Processing AAPL - 2025-01-19 08:02:00 UTC
+2025-01-19 14:47:55,772 - INFO - Retrieved article length: 6163 characters
+2025-01-19 14:47:55,862 - INFO - A: 1h change of 1.31%
+2025-01-19 14:47:55,895 - INFO - Retrieved article length: 6311 characters
+2025-01-19 14:47:55,975 - INFO - A: 1wk change of 8.60%
+2025-01-19 14:47:55,989 - INFO - AAP: 1h change of 2.17%
+2025-01-19 14:47:56,012 - INFO - Retrieved article length: 4978 characters
+2025-01-19 14:47:56,083 - INFO - A: 1mo change of 2.52%
+2025-01-19 14:47:56,083 - INFO - Processing A - 2025-01-10 18:51:59 UTC
+2025-01-19 14:47:56,087 - INFO - Retrieved article length: 2127 characters
+2025-01-19 14:47:56,103 - INFO - AAP: 1wk change of -2.38%
+2025-01-19 14:47:56,109 - INFO - AAL: 1wk change of 3.28%
+2025-01-19 14:47:56,109 - INFO - Retrieved article length: 6942 characters
+2025-01-19 14:47:56,175 - INFO - AAL: 1mo change of 7.98%
+2025-01-19 14:47:56,176 - INFO - Processing AAL - 2025-01-17 17:15:30 UTC
+2025-01-19 14:47:56,192 - INFO - AAOI: 1h change of 10.26%
+2025-01-19 14:47:56,203 - INFO - AADI: 1h change of 4.07%
+2025-01-19 14:47:56,206 - INFO - AAP: 1mo change of 2.09%
+2025-01-19 14:47:56,206 - INFO - Processing AAP - 2025-01-04 15:31:27 UTC
+2025-01-19 14:47:56,290 - INFO - AADI: 1wk change of 16.33%
+2025-01-19 14:47:56,290 - INFO - AAOI: 1wk change of 8.01%
+2025-01-19 14:47:56,374 - INFO - Retrieved article length: 3057 characters
+2025-01-19 14:47:56,378 - INFO - AADI: 1mo change of 22.05%
+2025-01-19 14:47:56,378 - INFO - Processing AADI - 2024-11-06 16:00:00 UTC
+2025-01-19 14:47:56,387 - INFO - AAOI: 1mo change of -8.92%
+2025-01-19 14:47:56,388 - INFO - Processing AAOI - 2024-12-24 01:55:15 UTC
+2025-01-19 14:47:56,476 - INFO - AA: 1h change of -1.26%
+2025-01-19 14:47:56,582 - INFO - Retrieved article length: 682 characters
+2025-01-19 14:47:56,646 - INFO - AA: 1wk change of 6.41%
+2025-01-19 14:47:56,692 - INFO - AAPL: 1wk change of -2.90%
+2025-01-19 14:47:56,747 - INFO - AAPL: 1mo change of -8.39%
+2025-01-19 14:47:56,747 - INFO - Processing AAPL - 2025-01-19 07:48:00 UTC
+2025-01-19 14:47:56,817 - INFO - AA: 1mo change of -13.82%
+2025-01-19 14:47:56,818 - INFO - Processing AA - 2025-01-04 22:54:25 UTC
+2025-01-19 14:47:56,885 - INFO - Retrieved article length: 538 characters
+2025-01-19 14:47:56,938 - INFO - Retrieved article length: 4363 characters
+2025-01-19 14:47:56,972 - INFO - Retrieved article length: 4912 characters
+2025-01-19 14:47:57,015 - INFO - AAL: 1wk change of 3.28%
+2025-01-19 14:47:57,061 - INFO - AAP: 1h change of -3.09%
+2025-01-19 14:47:57,080 - INFO - AAL: 1mo change of 7.98%
+2025-01-19 14:47:57,081 - INFO - Processing AAL - 2025-01-17 15:11:28 UTC
+2025-01-19 14:47:57,135 - INFO - A: 1wk change of 9.69%
+2025-01-19 14:47:57,163 - INFO - AAP: 1wk change of 1.38%
+2025-01-19 14:47:57,165 - INFO - Retrieved article length: 515 characters
+2025-01-19 14:47:57,247 - INFO - A: 1mo change of 4.82%
+2025-01-19 14:47:57,247 - INFO - Processing A - 2025-01-02 16:47:45 UTC
+2025-01-19 14:47:57,270 - INFO - AAP: 1mo change of 7.77%
+2025-01-19 14:47:57,270 - INFO - Processing AAP - 2024-12-21 17:01:29 UTC
+2025-01-19 14:47:57,277 - INFO - AAOI: 1h change of 7.76%
+2025-01-19 14:47:57,316 - INFO - Retrieved article length: 8425 characters
+2025-01-19 14:47:57,324 - INFO - Retrieved article length: 537 characters
+2025-01-19 14:47:57,374 - INFO - AAOI: 1wk change of 1.45%
+2025-01-19 14:47:57,409 - INFO - AADI: 1h change of 8.12%
+2025-01-19 14:47:57,413 - INFO - ABAT: 1h change of 40.74%
+2025-01-19 14:47:57,473 - INFO - AAOI: 1mo change of 8.69%
+2025-01-19 14:47:57,473 - INFO - Processing AAOI - 2024-12-24 01:25:00 UTC
+2025-01-19 14:47:57,478 - INFO - Retrieved article length: 143 characters
+2025-01-19 14:47:57,495 - INFO - AADI: 1wk change of 3.94%
+2025-01-19 14:47:57,500 - INFO - ABAT: 1wk change of 188.21%
+2025-01-19 14:47:57,578 - INFO - AADI: 1mo change of 21.94%
+2025-01-19 14:47:57,579 - INFO - Processing AADI - 2024-10-30 23:05:00 UTC
+2025-01-19 14:47:57,585 - INFO - ABAT: 1mo change of 163.16%
+2025-01-19 14:47:57,585 - INFO - Processing ABAT - 2024-12-26 23:26:00 UTC
+2025-01-19 14:47:57,590 - INFO - Retrieved article length: 2479 characters
+2025-01-19 14:47:57,593 - INFO - AAPL: 1wk change of -2.90%
+2025-01-19 14:47:57,644 - INFO - AAPL: 1mo change of -8.39%
+2025-01-19 14:47:57,645 - INFO - Processing AAPL - 2025-01-19 06:14:12 UTC
+2025-01-19 14:47:57,689 - INFO - AA: 1h change of -7.66%
+2025-01-19 14:47:57,824 - INFO - Retrieved article length: 514 characters
+2025-01-19 14:47:57,862 - INFO - AA: 1wk change of -4.90%
+2025-01-19 14:47:57,904 - INFO - AAL: 1wk change of 3.28%
+2025-01-19 14:47:57,969 - INFO - AAL: 1mo change of 7.98%
+2025-01-19 14:47:57,969 - INFO - Processing AAL - 2025-01-16 18:00:25 UTC
+2025-01-19 14:47:58,034 - INFO - AA: 1mo change of -13.50%
+2025-01-19 14:47:58,034 - INFO - Processing AA - 2024-12-30 16:30:00 UTC
+2025-01-19 14:47:58,230 - INFO - Retrieved article length: 3686 characters
+2025-01-19 14:47:58,320 - INFO - Retrieved article length: 11792 characters
+2025-01-19 14:47:58,325 - INFO - Retrieved article length: 3346 characters
+2025-01-19 14:47:58,334 - INFO - AAOI: 1h change of 7.76%
+2025-01-19 14:47:58,340 - INFO - AAOI: 1wk change of 1.45%
+2025-01-19 14:47:58,377 - INFO - Retrieved article length: 196 characters
+2025-01-19 14:47:58,407 - INFO - AAOI: 1mo change of 8.69%
+2025-01-19 14:47:58,407 - INFO - Processing AAOI - 2024-12-19 21:04:05 UTC
+2025-01-19 14:47:58,418 - INFO - AAP: 1h change of 4.89%
+2025-01-19 14:47:58,430 - INFO - A: 1wk change of 2.13%
+2025-01-19 14:47:58,488 - INFO - AAPL: 1wk change of -2.90%
+2025-01-19 14:47:58,507 - INFO - Retrieved article length: 4835 characters
+2025-01-19 14:47:58,522 - INFO - ABAT: 1h change of 40.74%
+2025-01-19 14:47:58,528 - INFO - AAP: 1wk change of 1.12%
+2025-01-19 14:47:58,530 - INFO - ABAT: 1wk change of 188.21%
+2025-01-19 14:47:58,534 - INFO - A: 1mo change of 6.81%
+2025-01-19 14:47:58,536 - INFO - Processing A - 2024-12-29 00:10:46 UTC
+2025-01-19 14:47:58,544 - INFO - AAPL: 1mo change of -8.39%
+2025-01-19 14:47:58,544 - INFO - Processing AAPL - 2025-01-19 02:52:27 UTC
+2025-01-19 14:47:58,552 - INFO - Retrieved article length: 1199 characters
+2025-01-19 14:47:58,584 - INFO - ABAT: 1mo change of 163.16%
+2025-01-19 14:47:58,584 - INFO - Processing ABAT - 2024-12-20 19:31:05 UTC
+2025-01-19 14:47:58,638 - INFO - AAP: 1mo change of 14.52%
+2025-01-19 14:47:58,638 - INFO - Processing AAP - 2024-12-20 18:01:09 UTC
+2025-01-19 14:47:58,642 - INFO - AADI: 1h change of -1.93%
+2025-01-19 14:47:58,673 - INFO - Retrieved article length: 6458 characters
+2025-01-19 14:47:58,729 - INFO - AADI: 1wk change of 1.19%
+2025-01-19 14:47:58,787 - INFO - AAL: 1h change of 1.36%
+2025-01-19 14:47:58,819 - INFO - AADI: 1mo change of 30.53%
+2025-01-19 14:47:58,891 - INFO - AAL: 1wk change of 4.28%
+2025-01-19 14:47:58,986 - INFO - Retrieved article length: 3345 characters
+2025-01-19 14:47:58,997 - INFO - AAL: 1mo change of 5.97%
+2025-01-19 14:47:58,998 - INFO - Processing AAL - 2025-01-15 17:12:00 UTC
+2025-01-19 14:47:59,087 - INFO - AA: 1h change of 3.03%
+2025-01-19 14:47:59,179 - INFO - Retrieved article length: 7056 characters
+2025-01-19 14:47:59,189 - INFO - Retrieved article length: 8604 characters
+2025-01-19 14:47:59,267 - INFO - AA: 1wk change of -4.86%
+2025-01-19 14:47:59,287 - INFO - AAOI: 1h change of 17.40%
+2025-01-19 14:47:59,309 - INFO - AAPL: 1wk change of -2.90%
+2025-01-19 14:47:59,363 - INFO - AAPL: 1mo change of -8.39%
+2025-01-19 14:47:59,371 - INFO - Retrieved article length: 7808 characters
+2025-01-19 14:47:59,384 - INFO - AAOI: 1wk change of 4.37%
+2025-01-19 14:47:59,440 - INFO - AA: 1mo change of -16.29%
+2025-01-19 14:47:59,441 - INFO - Processing AA - 2024-12-23 23:30:00 UTC
+2025-01-19 14:47:59,487 - INFO - AAOI: 1mo change of 10.23%
+2025-01-19 14:47:59,487 - INFO - Processing AAOI - 2024-12-19 18:59:16 UTC
+2025-01-19 14:47:59,519 - INFO - Retrieved article length: 530 characters
+2025-01-19 14:47:59,539 - INFO - Retrieved article length: 4122 characters
+2025-01-19 14:47:59,572 - INFO - A: 1wk change of 3.17%
+2025-01-19 14:47:59,607 - INFO - ABAT: 1h change of 18.75%
+2025-01-19 14:47:59,626 - INFO - AAP: 1h change of -2.47%
+2025-01-19 14:47:59,693 - INFO - A: 1mo change of 9.57%
+2025-01-19 14:47:59,693 - INFO - Processing A - 2024-12-25 19:30:06 UTC
+2025-01-19 14:47:59,694 - INFO - ABAT: 1wk change of 261.29%
+2025-01-19 14:47:59,732 - INFO - AAP: 1wk change of -6.37%
+2025-01-19 14:47:59,779 - INFO - ABAT: 1mo change of 135.29%
+2025-01-19 14:47:59,780 - INFO - Processing ABAT - 2024-12-20 16:30:00 UTC
+2025-01-19 14:47:59,824 - INFO - Retrieved article length: 5903 characters
+2025-01-19 14:47:59,834 - INFO - AAP: 1mo change of 21.81%
+2025-01-19 14:47:59,836 - INFO - Processing AAP - 2024-12-20 17:00:00 UTC
+2025-01-19 14:47:59,924 - INFO - AAL: 1h change of 4.16%
+2025-01-19 14:48:00,030 - INFO - AAL: 1wk change of 4.28%
+2025-01-19 14:48:00,045 - ERROR - Error getting news for ABBV: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:00,134 - INFO - AAL: 1mo change of 3.92%
+2025-01-19 14:48:00,248 - INFO - Retrieved article length: 6689 characters
+2025-01-19 14:48:00,344 - INFO - Retrieved article length: 540 characters
+2025-01-19 14:48:00,351 - INFO - AA: 1h change of 1.42%
+2025-01-19 14:48:00,354 - INFO - AAOI: 1h change of 17.40%
+2025-01-19 14:48:00,363 - INFO - AAOI: 1wk change of 4.37%
+2025-01-19 14:48:00,432 - INFO - AAOI: 1mo change of 10.23%
+2025-01-19 14:48:00,485 - INFO - Retrieved article length: 6870 characters
+2025-01-19 14:48:00,526 - INFO - AA: 1wk change of -3.43%
+2025-01-19 14:48:00,534 - INFO - Retrieved article length: 4823 characters
+2025-01-19 14:48:00,546 - INFO - ABAT: 1h change of 18.75%
+2025-01-19 14:48:00,550 - ERROR - Error getting news for ABEO: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:00,556 - INFO - ABAT: 1wk change of 261.29%
+2025-01-19 14:48:00,572 - INFO - A: 1h change of 1.74%
+2025-01-19 14:48:00,611 - INFO - ABAT: 1mo change of 135.29%
+2025-01-19 14:48:00,611 - INFO - Processing ABAT - 2024-12-18 17:11:22 UTC
+2025-01-19 14:48:00,678 - INFO - A: 1wk change of -1.44%
+2025-01-19 14:48:00,723 - INFO - AA: 1mo change of -10.12%
+2025-01-19 14:48:00,723 - INFO - Processing AA - 2024-12-19 15:16:56 UTC
+2025-01-19 14:48:00,774 - INFO - Retrieved article length: 5476 characters
+2025-01-19 14:48:00,783 - INFO - AAP: 1h change of -2.47%
+2025-01-19 14:48:00,789 - INFO - AAP: 1wk change of -6.37%
+2025-01-19 14:48:00,791 - INFO - A: 1mo change of 14.61%
+2025-01-19 14:48:00,844 - INFO - AAP: 1mo change of 21.81%
+2025-01-19 14:48:00,993 - ERROR - Error getting news for ABL: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:01,299 - INFO - Retrieved article length: 539 characters
+2025-01-19 14:48:01,371 - ERROR - Error getting news for ABP: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:01,388 - INFO - ABAT: 1h change of 24.26%
+2025-01-19 14:48:01,403 - INFO - Retrieved article length: 6502 characters
+2025-01-19 14:48:01,475 - INFO - ABAT: 1wk change of 270.04%
+2025-01-19 14:48:01,521 - ERROR - Error getting news for ABLV: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:01,556 - ERROR - Error getting news for ABNB: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:01,563 - INFO - ABAT: 1mo change of 103.25%
+2025-01-19 14:48:01,563 - INFO - Processing ABAT - 2024-12-18 16:32:00 UTC
+2025-01-19 14:48:01,708 - INFO - AA: 1wk change of -10.26%
+2025-01-19 14:48:01,810 - ERROR - Error getting news for ABT: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:01,843 - ERROR - Error getting news for ABR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:01,911 - INFO - AA: 1mo change of -4.08%
+2025-01-19 14:48:01,950 - ERROR - Error getting news for ABSI: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:02,151 - ERROR - Error getting news for ACAD: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-01-19 14:48:02,243 - ERROR - Error getting news for ABTS: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:02,354 - ERROR - Error getting news for ABVC: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:02,462 - INFO - Retrieved article length: 7170 characters
+2025-01-19 14:48:02,476 - INFO - ABAT: 1h change of 24.26%
+2025-01-19 14:48:02,485 - INFO - ABAT: 1wk change of 270.04%
+2025-01-19 14:48:02,539 - INFO - ABAT: 1mo change of 103.25%
+2025-01-19 14:48:02,539 - INFO - Processing ABAT - 2024-12-16 19:51:00 UTC
+2025-01-19 14:48:02,618 - ERROR - Error getting news for ACAC: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:02,643 - ERROR - Error getting news for ACACU: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:02,708 - ERROR - Error getting news for ABUS: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:03,060 - ERROR - Error getting news for ACB: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:03,361 - ERROR - Error getting news for ACDC: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:03,370 - ERROR - Error getting news for ACCO: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:03,419 - INFO - Retrieved article length: 8942 characters
+2025-01-19 14:48:03,467 - ERROR - Error getting news for ACET: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:03,501 - ERROR - Error getting news for ACHC: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:03,509 - INFO - ABAT: 1h change of -4.01%
+2025-01-19 14:48:03,594 - INFO - ABAT: 1wk change of 192.79%
+2025-01-19 14:48:03,681 - INFO - ABAT: 1mo change of 109.64%
+2025-01-19 14:48:03,899 - ERROR - Error getting news for ACHR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:03,932 - ERROR - Error getting news for ACHL: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:04,141 - ERROR - Error getting news for ACI: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:04,151 - ERROR - Error getting news for ACHV: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:04,229 - ERROR - Error getting news for ACCD: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:04,280 - ERROR - Error getting news for ACIW: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:04,309 - ERROR - Error getting news for ACIC: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:04,681 - ERROR - Error getting news for ACLX: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:04,807 - ERROR - Error getting news for ACLS: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:05,118 - ERROR - Error getting news for ACM: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:05,234 - ERROR - Error getting news for ACON: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:05,251 - ERROR - Error getting news for ACMR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:05,270 - ERROR - Error getting news for ACP: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:05,362 - ERROR - Error getting news for ACOG: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:05,439 - ERROR - Error getting news for ACRE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:05,774 - ERROR - Error getting news for ACRS: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:05,990 - ERROR - Error getting news for ACNB: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:06,058 - ERROR - Error getting news for ACWX: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:06,183 - ERROR - Error getting news for ADBE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:06,272 - ERROR - Error getting news for ADC: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:06,318 - ERROR - Error getting news for ACWI: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:06,372 - ERROR - Error getting news for ACXP: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:06,377 - ERROR - Error getting news for ACVA: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:06,609 - ERROR - Error getting news for ADD: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:06,803 - ERROR - Error getting news for ADGM: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:06,987 - ERROR - Error getting news for ADI: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,035 - ERROR - Error getting news for ADIL: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,040 - ERROR - Error getting news for ADM: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,168 - ERROR - Error getting news for ADN: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,209 - ERROR - Error getting news for ADMA: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,395 - ERROR - Error getting news for ADP: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,452 - ERROR - Error getting news for ADNT: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,786 - ERROR - Error getting news for ADPT: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,843 - ERROR - Error getting news for ADSK: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,905 - ERROR - Error getting news for ADT: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,969 - ERROR - Error getting news for ADTX: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:07,986 - ERROR - Error getting news for ADTN: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:08,127 - ERROR - Error getting news for ADSE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:08,195 - ERROR - Error getting news for ADUR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:08,343 - ERROR - Error getting news for ADVM: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:08,637 - ERROR - Error getting news for ADXN: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:08,693 - ERROR - Error getting news for AEAEU: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:08,709 - ERROR - Error getting news for AEAE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:08,710 - ERROR - Error getting news for AEE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:08,928 - ERROR - Error getting news for AEHR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:08,990 - ERROR - Error getting news for AEHL: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:09,029 - ERROR - Error getting news for AEI: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:09,167 - ERROR - Error getting news for AEMD: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:09,461 - ERROR - Error getting news for AENT: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:09,553 - ERROR - Error getting news for AEO: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:09,813 - ERROR - Error getting news for AERT: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:09,828 - ERROR - Error getting news for AEP: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:09,879 - ERROR - Error getting news for AEYE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:09,900 - ERROR - Error getting news for AES: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:10,099 - ERROR - Error getting news for AFBI: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:10,415 - ERROR - Error getting news for AFL: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:10,544 - ERROR - Error getting news for AFRI: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:10,644 - ERROR - Error getting news for AFRM: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:10,665 - ERROR - Error getting news for AGCO: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:10,714 - ERROR - Error getting news for AGEN: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:10,794 - ERROR - Error getting news for AGAE: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:11,096 - ERROR - Error getting news for AGFY: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:11,362 - ERROR - Error getting news for AGIO: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:11,446 - ERROR - Error getting news for AGNC: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:11,466 - ERROR - Error getting news for AGL: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:11,585 - ERROR - Error getting news for AGMH: Expecting value: line 1 column 1 (char 0)
+2025-01-19 14:48:11,673 - ERROR - Error getting news for AGG: Expecting value: line 1 column 1 (char 0)

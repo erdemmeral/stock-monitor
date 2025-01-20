@@ -1,0 +1,10 @@
+2025-01-19 11:41:29,261 - INFO - Starting new training session. Logging to: logs/training_20250119_114129.log
+2025-01-19 11:41:29,261 - INFO -  Starting Market ML Training...
+2025-01-19 11:41:29,261 - INFO - Loaded 3826 symbols
+2025-01-19 11:41:29,261 - INFO -  Starting training process...
+2025-01-19 11:41:29,261 - INFO - 
+Processing chunk 1/154
+2025-01-19 11:43:06,838 - INFO - Total samples collected so far: 121
+2025-01-19 11:43:06,872 - INFO - Taking a break between chunks...
+2025-01-19 11:43:16,876 - INFO - 
+Processing chunk 2/154

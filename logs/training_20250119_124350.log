@@ -1,0 +1,990 @@
+2025-01-19 12:43:50,692 - INFO - Starting new training session. Logging to: logs/training_20250119_124350.log
+2025-01-19 12:43:50,692 - INFO - Starting new training session. Logging to: logs/training_20250119_124350.log
+2025-01-19 12:43:52,172 - INFO - Processing BSY - 2025-01-13 16:00:00 UTC
+2025-01-19 12:43:52,202 - INFO - Processing BTAI - 2024-12-23 20:00:12 UTC
+2025-01-19 12:43:53,337 - INFO - Retrieved article length: 4404 characters
+2025-01-19 12:43:53,457 - INFO - BSY: 1h change of 3.48%
+2025-01-19 12:43:53,499 - INFO - Retrieved article length: 4618 characters
+2025-01-19 12:43:53,544 - INFO - BSY: 1wk change of -3.46%
+2025-01-19 12:43:53,638 - INFO - BSY: 1mo change of -6.54%
+2025-01-19 12:43:53,691 - INFO - BTAI: 1h change of 6.07%
+2025-01-19 12:43:53,781 - INFO - BTAI: 1wk change of -9.22%
+2025-01-19 12:43:53,879 - INFO - BTAI: 1mo change of -40.69%
+2025-01-19 12:43:54,141 - INFO - Processing BSY - 2025-01-09 17:24:18 UTC
+2025-01-19 12:43:54,380 - INFO - Processing BTAI - 2024-11-22 16:16:00 UTC
+2025-01-19 12:43:55,344 - INFO - Retrieved article length: 4457 characters
+2025-01-19 12:43:55,426 - INFO - BSY: 1h change of -3.15%
+2025-01-19 12:43:55,531 - INFO - BSY: 1wk change of -4.50%
+2025-01-19 12:43:55,566 - INFO - Retrieved article length: 6601 characters
+2025-01-19 12:43:55,669 - INFO - BSY: 1mo change of -8.31%
+2025-01-19 12:43:55,669 - INFO - BTAI: 1h change of -15.24%
+2025-01-19 12:43:55,756 - INFO - BTAI: 1wk change of -38.50%
+2025-01-19 12:43:55,845 - INFO - BTAI: 1mo change of -34.28%
+2025-01-19 12:43:56,175 - INFO - Processing BSY - 2024-12-25 12:07:21 UTC
+2025-01-19 12:43:56,357 - INFO - Processing BTAI - 2024-11-22 00:47:00 UTC
+2025-01-19 12:43:57,450 - INFO - Retrieved article length: 3967 characters
+2025-01-19 12:43:57,506 - INFO - Retrieved article length: 5978 characters
+2025-01-19 12:43:57,522 - INFO - BTAI: 1h change of -15.24%
+2025-01-19 12:43:57,536 - INFO - BTAI: 1wk change of -38.50%
+2025-01-19 12:43:57,537 - INFO - BTAI: 1mo change of -34.28%
+2025-01-19 12:43:57,642 - INFO - BSY: 1wk change of -2.00%
+2025-01-19 12:43:57,730 - INFO - BSY: 1mo change of -2.56%
+2025-01-19 12:43:58,043 - INFO - Processing BTAI - 2024-11-15 10:07:20 UTC
+2025-01-19 12:43:58,236 - INFO - Processing BSY - 2024-12-10 13:05:46 UTC
+2025-01-19 12:43:59,218 - INFO - Retrieved article length: 5415 characters
+2025-01-19 12:43:59,318 - INFO - BTAI: 1h change of -13.35%
+2025-01-19 12:43:59,338 - INFO - Retrieved article length: 5957 characters
+2025-01-19 12:43:59,397 - INFO - BTAI: 1wk change of -24.82%
+2025-01-19 12:43:59,434 - INFO - BSY: 1h change of -3.51%
+2025-01-19 12:43:59,493 - INFO - BTAI: 1mo change of -40.23%
+2025-01-19 12:43:59,531 - INFO - BSY: 1wk change of -4.35%
+2025-01-19 12:43:59,632 - INFO - BSY: 1mo change of -8.36%
+2025-01-19 12:43:59,997 - INFO - Processing BTAI - 2024-11-15 07:13:57 UTC
+2025-01-19 12:44:00,133 - INFO - Processing BSY - 2024-12-09 15:54:51 UTC
+2025-01-19 12:44:01,236 - INFO - Retrieved article length: 16628 characters
+2025-01-19 12:44:01,252 - INFO - BTAI: 1h change of -13.35%
+2025-01-19 12:44:01,266 - INFO - BTAI: 1wk change of -24.82%
+2025-01-19 12:44:01,272 - INFO - BTAI: 1mo change of -40.23%
+2025-01-19 12:44:01,446 - INFO - Retrieved article length: 503 characters
+2025-01-19 12:44:01,558 - INFO - BSY: 1h change of -3.37%
+2025-01-19 12:44:01,652 - INFO - BSY: 1wk change of -4.57%
+2025-01-19 12:44:01,738 - INFO - BSY: 1mo change of -6.39%
+2025-01-19 12:44:01,773 - INFO - Processing BTAI - 2024-11-14 16:20:06 UTC
+2025-01-19 12:44:02,248 - INFO - Processing BSY - 2024-12-03 16:48:00 UTC
+2025-01-19 12:44:02,934 - INFO - Retrieved article length: 4257 characters
+2025-01-19 12:44:03,022 - INFO - BTAI: 1h change of -18.79%
+2025-01-19 12:44:03,125 - INFO - BTAI: 1wk change of -21.09%
+2025-01-19 12:44:03,224 - INFO - BTAI: 1mo change of -31.07%
+2025-01-19 12:44:03,408 - INFO - Retrieved article length: 2541 characters
+2025-01-19 12:44:03,513 - INFO - BSY: 1h change of 1.40%
+2025-01-19 12:44:03,604 - INFO - BSY: 1wk change of -2.64%
+2025-01-19 12:44:03,689 - INFO - BSY: 1mo change of -5.20%
+2025-01-19 12:44:03,727 - INFO - Processing BTAI - 2024-11-14 15:00:00 UTC
+2025-01-19 12:44:04,196 - INFO - Processing BSY - 2024-11-28 18:23:26 UTC
+2025-01-19 12:44:05,036 - INFO - Retrieved article length: 17765 characters
+2025-01-19 12:44:05,050 - INFO - BTAI: 1h change of -18.79%
+2025-01-19 12:44:05,057 - INFO - BTAI: 1wk change of -21.09%
+2025-01-19 12:44:05,061 - INFO - BTAI: 1mo change of -31.07%
+2025-01-19 12:44:05,389 - INFO - Retrieved article length: 4245 characters
+2025-01-19 12:44:05,502 - INFO - BSY: 1h change of -1.53%
+2025-01-19 12:44:05,563 - INFO - Processing BTAI - 2024-11-13 15:31:51 UTC
+2025-01-19 12:44:05,592 - INFO - BSY: 1wk change of 6.00%
+2025-01-19 12:44:05,689 - INFO - BSY: 1mo change of -4.05%
+2025-01-19 12:44:06,199 - INFO - Processing BSY - 2024-11-22 17:00:00 UTC
+2025-01-19 12:44:06,810 - INFO - Retrieved article length: 3286 characters
+2025-01-19 12:44:06,900 - INFO - BTAI: 1h change of -26.33%
+2025-01-19 12:44:07,001 - INFO - BTAI: 1wk change of -21.09%
+2025-01-19 12:44:07,084 - INFO - BTAI: 1mo change of -28.04%
+2025-01-19 12:44:07,397 - INFO - Retrieved article length: 3257 characters
+2025-01-19 12:44:07,478 - INFO - BSY: 1h change of 3.50%
+2025-01-19 12:44:07,683 - INFO - BSY: 1mo change of -4.71%
+2025-01-19 12:44:08,735 - INFO - Processing BTBD - 2024-11-16 15:21:08 UTC
+2025-01-19 12:44:09,389 - INFO - Processing BTBT - 2025-01-14 13:09:43 UTC
+2025-01-19 12:44:09,937 - INFO - Retrieved article length: 1648 characters
+2025-01-19 12:44:10,018 - INFO - BTBD: 1h change of 1.97%
+2025-01-19 12:44:10,121 - INFO - BTBD: 1wk change of -1.25%
+2025-01-19 12:44:10,216 - INFO - BTBD: 1mo change of -12.65%
+2025-01-19 12:44:10,664 - INFO - Retrieved article length: 5726 characters
+2025-01-19 12:44:10,717 - INFO - Processing BTBD - 2024-11-14 00:15:00 UTC
+2025-01-19 12:44:10,801 - INFO - BTBT: 1h change of 17.20%
+2025-01-19 12:44:10,899 - INFO - BTBT: 1wk change of -5.15%
+2025-01-19 12:44:10,978 - INFO - BTBT: 1mo change of -14.62%
+2025-01-19 12:44:11,492 - INFO - Processing BTBT - 2025-01-04 00:56:43 UTC
+2025-01-19 12:44:12,489 - INFO - Retrieved article length: 8594 characters
+2025-01-19 12:44:12,594 - INFO - BTBD: 1h change of 1.97%
+2025-01-19 12:44:12,679 - INFO - BTBD: 1wk change of -2.73%
+2025-01-19 12:44:12,774 - INFO - BTBD: 1mo change of -1.85%
+2025-01-19 12:44:12,823 - INFO - Retrieved article length: 1705 characters
+2025-01-19 12:44:12,910 - INFO - BTBT: 1h change of 16.95%
+2025-01-19 12:44:13,001 - INFO - BTBT: 1wk change of -3.60%
+2025-01-19 12:44:13,104 - INFO - BTBT: 1mo change of -19.83%
+2025-01-19 12:44:13,605 - INFO - Processing BTBT - 2024-12-31 16:16:12 UTC
+2025-01-19 12:44:14,398 - INFO - Processing BTC - 2025-01-15 14:00:25 UTC
+2025-01-19 12:44:15,026 - INFO - Retrieved article length: 1453 characters
+2025-01-19 12:44:15,210 - INFO - BTBT: 1wk change of 5.66%
+2025-01-19 12:44:15,297 - INFO - BTBT: 1mo change of -1.60%
+2025-01-19 12:44:15,590 - INFO - Retrieved article length: 3278 characters
+2025-01-19 12:44:15,690 - INFO - BTC: 1h change of 8.91%
+2025-01-19 12:44:15,797 - INFO - Processing BTBT - 2024-12-04 21:03:48 UTC
+2025-01-19 12:44:15,797 - INFO - BTC: 1wk change of 2.40%
+2025-01-19 12:44:15,886 - INFO - BTC: 1mo change of 3.32%
+2025-01-19 12:44:16,391 - INFO - Processing BTC - 2025-01-11 01:49:26 UTC
+2025-01-19 12:44:16,966 - INFO - Retrieved article length: 7398 characters
+2025-01-19 12:44:17,068 - INFO - BTBT: 1h change of -4.78%
+2025-01-19 12:44:17,169 - INFO - BTBT: 1wk change of -3.53%
+2025-01-19 12:44:17,256 - INFO - BTBT: 1mo change of -14.22%
+2025-01-19 12:44:17,452 - INFO - Retrieved article length: 1843 characters
+2025-01-19 12:44:17,569 - INFO - BTC: 1h change of 1.63%
+2025-01-19 12:44:17,657 - INFO - BTC: 1wk change of 7.58%
+2025-01-19 12:44:17,764 - INFO - Processing BTBT - 2024-11-21 17:03:15 UTC
+2025-01-19 12:44:17,764 - INFO - BTC: 1mo change of 8.91%
+2025-01-19 12:44:18,266 - INFO - Processing BTC - 2025-01-03 17:00:00 UTC
+2025-01-19 12:44:18,981 - INFO - Retrieved article length: 5628 characters
+2025-01-19 12:44:19,074 - INFO - BTBT: 1h change of 8.57%
+2025-01-19 12:44:19,159 - INFO - BTBT: 1wk change of -14.94%
+2025-01-19 12:44:19,244 - INFO - BTBT: 1mo change of -14.18%
+2025-01-19 12:44:19,478 - INFO - Retrieved article length: 2331 characters
+2025-01-19 12:44:19,570 - INFO - BTC: 1h change of 1.82%
+2025-01-19 12:44:19,663 - INFO - BTC: 1wk change of -4.24%
+2025-01-19 12:44:19,755 - INFO - Processing BTBT - 2024-11-20 13:22:25 UTC
+2025-01-19 12:44:19,758 - INFO - BTC: 1mo change of 7.75%
+2025-01-19 12:44:20,259 - INFO - Processing BTC - 2024-12-06 14:00:02 UTC
+2025-01-19 12:44:20,950 - INFO - Retrieved article length: 3860 characters
+2025-01-19 12:44:21,145 - INFO - BTBT: 1wk change of -14.94%
+2025-01-19 12:44:21,221 - INFO - BTBT: 1mo change of -14.40%
+2025-01-19 12:44:21,434 - INFO - Retrieved article length: 5184 characters
+2025-01-19 12:44:21,525 - INFO - BTC: 1h change of 5.49%
+2025-01-19 12:44:21,615 - INFO - BTC: 1wk change of 11.88%
+2025-01-19 12:44:21,706 - INFO - BTC: 1mo change of 35.54%
+2025-01-19 12:44:21,735 - INFO - Processing BTBT - 2024-11-19 10:02:23 UTC
+2025-01-19 12:44:22,208 - INFO - Processing BTC - 2024-11-29 17:18:53 UTC
+2025-01-19 12:44:23,113 - INFO - Retrieved article length: 5163 characters
+2025-01-19 12:44:23,207 - INFO - BTBT: 1h change of 1.25%
+2025-01-19 12:44:23,294 - INFO - BTBT: 1wk change of -18.27%
+2025-01-19 12:44:23,374 - INFO - BTBT: 1mo change of -10.67%
+2025-01-19 12:44:23,607 - INFO - Retrieved article length: 1320 characters
+2025-01-19 12:44:23,773 - INFO - BTC: 1h change of 2.84%
+2025-01-19 12:44:23,864 - INFO - BTC: 1wk change of 9.73%
+2025-01-19 12:44:23,881 - INFO - Processing BTBT - 2024-11-15 02:16:25 UTC
+2025-01-19 12:44:23,951 - INFO - BTC: 1mo change of 45.81%
+2025-01-19 12:44:24,460 - INFO - Processing BTC - 2024-11-22 14:00:32 UTC
+2025-01-19 12:44:25,098 - INFO - Retrieved article length: 1240 characters
+2025-01-19 12:44:25,185 - INFO - BTBT: 1h change of -18.27%
+2025-01-19 12:44:25,264 - INFO - BTBT: 1wk change of 26.86%
+2025-01-19 12:44:25,370 - INFO - BTBT: 1mo change of 7.28%
+2025-01-19 12:44:25,659 - INFO - Retrieved article length: 4009 characters
+2025-01-19 12:44:25,749 - INFO - BTC: 1h change of 4.81%
+2025-01-19 12:44:25,850 - INFO - BTC: 1wk change of 8.27%
+2025-01-19 12:44:25,937 - INFO - BTC: 1mo change of 39.24%
+2025-01-19 12:44:26,451 - INFO - Processing BTC - 2024-11-21 21:25:02 UTC
+2025-01-19 12:44:27,061 - INFO - Processing BTCS - 2024-12-27 17:32:37 UTC
+2025-01-19 12:44:27,659 - INFO - Retrieved article length: 3209 characters
+2025-01-19 12:44:27,754 - INFO - BTC: 1h change of 8.26%
+2025-01-19 12:44:27,840 - INFO - BTC: 1wk change of 11.49%
+2025-01-19 12:44:27,954 - INFO - BTC: 1mo change of 48.14%
+2025-01-19 12:44:28,286 - INFO - Retrieved article length: 475 characters
+2025-01-19 12:44:28,374 - INFO - BTCS: 1h change of -5.91%
+2025-01-19 12:44:28,455 - INFO - Processing BTC - 2024-11-11 19:04:59 UTC
+2025-01-19 12:44:28,478 - INFO - BTCS: 1wk change of -13.02%
+2025-01-19 12:44:29,071 - INFO - Processing BTCS - 2024-11-20 14:55:41 UTC
+2025-01-19 12:44:29,715 - INFO - Retrieved article length: 1895 characters
+2025-01-19 12:44:29,809 - INFO - BTC: 1h change of 6.57%
+2025-01-19 12:44:29,896 - INFO - BTC: 1wk change of 36.29%
+2025-01-19 12:44:29,993 - INFO - BTC: 1mo change of 60.53%
+2025-01-19 12:44:30,173 - INFO - Retrieved article length: 5475 characters
+2025-01-19 12:44:30,259 - INFO - BTCS: 1h change of -1.01%
+2025-01-19 12:44:30,360 - INFO - BTCS: 1wk change of 89.36%
+2025-01-19 12:44:30,450 - INFO - BTCS: 1mo change of 135.95%
+2025-01-19 12:44:30,952 - INFO - Processing BTCS - 2024-11-16 15:21:36 UTC
+2025-01-19 12:44:32,124 - INFO - Retrieved article length: 3663 characters
+2025-01-19 12:44:32,223 - INFO - BTCS: 1h change of -1.58%
+2025-01-19 12:44:32,309 - INFO - BTCS: 1wk change of 128.19%
+2025-01-19 12:44:32,402 - INFO - BTCS: 1mo change of 100.00%
+2025-01-19 12:44:32,818 - INFO - Processing BTCY - 2025-01-15 16:15:00 UTC
+2025-01-19 12:44:32,903 - INFO - Processing BTCS - 2024-11-14 22:15:34 UTC
+2025-01-19 12:44:34,106 - INFO - Retrieved article length: 6441 characters
+2025-01-19 12:44:34,188 - INFO - BTCY: 1h change of -15.66%
+2025-01-19 12:44:34,214 - INFO - Retrieved article length: 399 characters
+2025-01-19 12:44:34,287 - INFO - BTCY: 1wk change of -12.50%
+2025-01-19 12:44:34,299 - INFO - BTCS: 1h change of 112.20%
+2025-01-19 12:44:34,388 - INFO - BTCY: 1mo change of 21.96%
+2025-01-19 12:44:34,390 - INFO - BTCS: 1wk change of 186.29%
+2025-01-19 12:44:34,479 - INFO - BTCS: 1mo change of 129.82%
+2025-01-19 12:44:34,890 - INFO - Processing BTCY - 2024-12-27 16:15:00 UTC
+2025-01-19 12:44:34,980 - INFO - Processing BTCS - 2024-11-14 16:35:00 UTC
+2025-01-19 12:44:36,119 - INFO - Retrieved article length: 8149 characters
+2025-01-19 12:44:36,214 - INFO - BTCY: 1h change of 6.00%
+2025-01-19 12:44:36,303 - INFO - BTCY: 1wk change of 24.47%
+2025-01-19 12:44:36,340 - INFO - Retrieved article length: 11351 characters
+2025-01-19 12:44:36,356 - INFO - BTCS: 1h change of 112.20%
+2025-01-19 12:44:36,365 - INFO - BTCS: 1wk change of 186.29%
+2025-01-19 12:44:36,372 - INFO - BTCS: 1mo change of 129.82%
+2025-01-19 12:44:36,390 - INFO - BTCY: 1mo change of 11.11%
+2025-01-19 12:44:36,874 - INFO - Processing BTCS - 2024-11-14 02:25:03 UTC
+2025-01-19 12:44:36,892 - INFO - Processing BTCY - 2024-12-03 16:15:00 UTC
+2025-01-19 12:44:38,095 - INFO - Retrieved article length: 7902 characters
+2025-01-19 12:44:38,129 - INFO - Retrieved article length: 4162 characters
+2025-01-19 12:44:38,145 - INFO - BTCS: 1h change of 112.20%
+2025-01-19 12:44:38,157 - INFO - BTCS: 1wk change of 186.29%
+2025-01-19 12:44:38,160 - INFO - BTCS: 1mo change of 129.82%
+2025-01-19 12:44:38,184 - INFO - BTCY: 1h change of 11.82%
+2025-01-19 12:44:38,274 - INFO - BTCY: 1wk change of -7.89%
+2025-01-19 12:44:38,359 - INFO - BTCY: 1mo change of -11.11%
+2025-01-19 12:44:38,874 - INFO - Processing BTCY - 2024-11-15 16:15:00 UTC
+2025-01-19 12:44:39,826 - INFO - Processing BTDR - 2025-01-15 21:03:15 UTC
+2025-01-19 12:44:40,012 - INFO - Retrieved article length: 10031 characters
+2025-01-19 12:44:40,109 - INFO - BTCY: 1h change of 28.71%
+2025-01-19 12:44:40,202 - INFO - BTCY: 1wk change of -9.97%
+2025-01-19 12:44:40,294 - INFO - BTCY: 1mo change of 16.71%
+2025-01-19 12:44:40,799 - INFO - Processing BTCY - 2024-11-13 17:42:00 UTC
+2025-01-19 12:44:40,987 - INFO - Retrieved article length: 7600 characters
+2025-01-19 12:44:41,075 - INFO - BTDR: 1h change of 27.99%
+2025-01-19 12:44:41,166 - INFO - BTDR: 1wk change of -10.22%
+2025-01-19 12:44:41,246 - INFO - BTDR: 1mo change of 4.87%
+2025-01-19 12:44:41,756 - INFO - Processing BTDR - 2025-01-14 17:45:34 UTC
+2025-01-19 12:44:42,000 - INFO - Retrieved article length: 5435 characters
+2025-01-19 12:44:42,103 - INFO - BTCY: 1h change of 37.46%
+2025-01-19 12:44:42,190 - INFO - BTCY: 1wk change of -11.86%
+2025-01-19 12:44:42,275 - INFO - BTCY: 1mo change of 8.15%
+2025-01-19 12:44:43,024 - INFO - Retrieved article length: 1350 characters
+2025-01-19 12:44:43,111 - INFO - BTDR: 1h change of 23.77%
+2025-01-19 12:44:43,208 - INFO - BTDR: 1wk change of -10.22%
+2025-01-19 12:44:43,299 - INFO - BTDR: 1mo change of 10.58%
+2025-01-19 12:44:43,800 - INFO - Processing BTDR - 2025-01-09 16:27:57 UTC
+2025-01-19 12:44:43,919 - INFO - Processing BTM - 2024-11-16 16:39:40 UTC
+2025-01-19 12:44:45,043 - INFO - Retrieved article length: 1993 characters
+2025-01-19 12:44:45,129 - INFO - BTDR: 1h change of -10.66%
+2025-01-19 12:44:45,155 - INFO - Retrieved article length: 1994 characters
+2025-01-19 12:44:45,223 - INFO - BTDR: 1wk change of -6.24%
+2025-01-19 12:44:45,242 - INFO - BTM: 1h change of -22.97%
+2025-01-19 12:44:45,298 - INFO - BTDR: 1mo change of 23.09%
+2025-01-19 12:44:45,335 - INFO - BTM: 1wk change of 16.47%
+2025-01-19 12:44:45,427 - INFO - BTM: 1mo change of 13.82%
+2025-01-19 12:44:45,806 - INFO - Processing BTDR - 2024-12-25 23:57:05 UTC
+2025-01-19 12:44:45,928 - INFO - Processing BTM - 2024-11-12 03:04:56 UTC
+2025-01-19 12:44:47,118 - INFO - Retrieved article length: 2870 characters
+2025-01-19 12:44:47,193 - INFO - BTDR: 1h change of 24.56%
+2025-01-19 12:44:47,278 - INFO - BTDR: 1wk change of 12.79%
+2025-01-19 12:44:47,379 - INFO - BTDR: 1mo change of 75.78%
+2025-01-19 12:44:47,479 - INFO - Retrieved article length: 7194 characters
+2025-01-19 12:44:47,604 - INFO - BTM: 1h change of 18.87%
+2025-01-19 12:44:47,694 - INFO - BTM: 1wk change of 27.89%
+2025-01-19 12:44:47,786 - INFO - BTM: 1mo change of 33.33%
+2025-01-19 12:44:47,882 - INFO - Processing BTDR - 2024-12-13 00:58:16 UTC
+2025-01-19 12:44:49,084 - INFO - Retrieved article length: 150 characters
+2025-01-19 12:44:49,174 - INFO - BTDR: 1h change of -5.29%
+2025-01-19 12:44:49,258 - INFO - BTDR: 1wk change of 38.54%
+2025-01-19 12:44:49,343 - INFO - BTDR: 1mo change of 140.40%
+2025-01-19 12:44:49,428 - INFO - Processing BTOG - 2024-12-31 17:00:00 UTC
+2025-01-19 12:44:49,851 - INFO - Processing BTDR - 2024-12-12 19:35:51 UTC
+2025-01-19 12:44:50,707 - INFO - Retrieved article length: 3019 characters
+2025-01-19 12:44:50,810 - INFO - BTOG: 1h change of 11.83%
+2025-01-19 12:44:50,902 - INFO - BTOG: 1wk change of -10.63%
+2025-01-19 12:44:50,985 - INFO - BTOG: 1mo change of -47.37%
+2025-01-19 12:44:51,012 - INFO - Retrieved article length: 2183 characters
+2025-01-19 12:44:51,103 - INFO - BTDR: 1h change of 1.41%
+2025-01-19 12:44:51,182 - INFO - BTDR: 1wk change of 48.05%
+2025-01-19 12:44:51,277 - INFO - BTDR: 1mo change of 134.16%
+2025-01-19 12:44:51,494 - INFO - Processing BTOG - 2024-11-21 17:00:00 UTC
+2025-01-19 12:44:51,780 - INFO - Processing BTDR - 2024-11-24 05:00:00 UTC
+2025-01-19 12:44:52,693 - INFO - Retrieved article length: 3794 characters
+2025-01-19 12:44:52,798 - INFO - BTOG: 1h change of -3.11%
+2025-01-19 12:44:52,883 - INFO - BTOG: 1wk change of -35.71%
+2025-01-19 12:44:53,000 - INFO - BTOG: 1mo change of -53.02%
+2025-01-19 12:44:53,009 - INFO - Retrieved article length: 191 characters
+2025-01-19 12:44:53,092 - INFO - BTDR: 1h change of 12.03%
+2025-01-19 12:44:53,200 - INFO - BTDR: 1wk change of 37.71%
+2025-01-19 12:44:53,283 - INFO - BTDR: 1mo change of 184.25%
+2025-01-19 12:44:53,784 - INFO - Processing BTDR - 2024-11-20 13:06:44 UTC
+2025-01-19 12:44:54,630 - INFO - Processing BTSG - 2025-01-10 01:05:06 UTC
+2025-01-19 12:44:54,991 - INFO - Retrieved article length: 2009 characters
+2025-01-19 12:44:55,182 - INFO - BTDR: 1wk change of 25.84%
+2025-01-19 12:44:55,267 - INFO - BTDR: 1mo change of 182.16%
+2025-01-19 12:44:55,859 - INFO - Retrieved article length: 5465 characters
+2025-01-19 12:44:55,949 - INFO - BTSG: 1h change of 1.66%
+2025-01-19 12:44:56,036 - INFO - BTSG: 1wk change of 8.93%
+2025-01-19 12:44:56,140 - INFO - BTSG: 1mo change of 1.48%
+2025-01-19 12:44:56,641 - INFO - Processing BTSG - 2025-01-07 18:50:00 UTC
+2025-01-19 12:44:56,881 - INFO - Processing BTU - 2025-01-14 19:59:47 UTC
+2025-01-19 12:44:57,894 - INFO - Retrieved article length: 2891 characters
+2025-01-19 12:44:57,940 - INFO - Retrieved article length: 3254 characters
+2025-01-19 12:44:57,989 - INFO - BTSG: 1h change of -1.62%
+2025-01-19 12:44:58,031 - INFO - BTU: 1h change of 3.55%
+2025-01-19 12:44:58,090 - INFO - BTSG: 1wk change of 8.64%
+2025-01-19 12:44:58,128 - INFO - BTU: 1wk change of -1.03%
+2025-01-19 12:44:58,177 - INFO - BTSG: 1mo change of -2.27%
+2025-01-19 12:44:58,219 - INFO - BTU: 1mo change of -13.72%
+2025-01-19 12:44:58,680 - INFO - Processing BTSG - 2025-01-06 17:34:00 UTC
+2025-01-19 12:44:58,726 - INFO - Processing BTU - 2024-12-17 18:46:16 UTC
+2025-01-19 12:44:59,883 - INFO - Retrieved article length: 12295 characters
+2025-01-19 12:44:59,998 - INFO - Retrieved article length: 2593 characters
+2025-01-19 12:45:00,031 - INFO - BTSG: 1h change of -1.48%
+2025-01-19 12:45:00,089 - INFO - BTU: 1h change of -2.11%
+2025-01-19 12:45:00,126 - INFO - BTSG: 1wk change of 5.76%
+2025-01-19 12:45:00,165 - INFO - BTU: 1wk change of -11.72%
+2025-01-19 12:45:00,211 - INFO - BTSG: 1mo change of -2.78%
+2025-01-19 12:45:00,256 - INFO - BTU: 1mo change of -27.79%
+2025-01-19 12:45:00,712 - INFO - Processing BTSG - 2025-01-03 07:55:00 UTC
+2025-01-19 12:45:00,769 - INFO - Processing BTU - 2024-12-16 22:00:00 UTC
+2025-01-19 12:45:01,930 - INFO - Retrieved article length: 10399 characters
+2025-01-19 12:45:01,993 - INFO - Retrieved article length: 3018 characters
+2025-01-19 12:45:02,027 - INFO - BTSG: 1h change of 3.09%
+2025-01-19 12:45:02,080 - INFO - BTU: 1h change of -1.52%
+2025-01-19 12:45:02,112 - INFO - BTSG: 1wk change of -1.55%
+2025-01-19 12:45:02,185 - INFO - BTU: 1wk change of -10.41%
+2025-01-19 12:45:02,191 - INFO - BTSG: 1mo change of -3.89%
+2025-01-19 12:45:02,286 - INFO - BTU: 1mo change of -31.45%
+2025-01-19 12:45:02,697 - INFO - Processing BTSG - 2025-01-02 20:00:10 UTC
+2025-01-19 12:45:02,791 - INFO - Processing BTU - 2024-12-02 16:07:00 UTC
+2025-01-19 12:45:03,894 - INFO - Retrieved article length: 4716 characters
+2025-01-19 12:45:03,991 - INFO - BTSG: 1h change of 2.14%
+2025-01-19 12:45:04,023 - INFO - Retrieved article length: 5194 characters
+2025-01-19 12:45:04,069 - INFO - BTSG: 1wk change of -1.32%
+2025-01-19 12:45:04,172 - INFO - BTSG: 1mo change of -3.89%
+2025-01-19 12:45:04,217 - INFO - BTU: 1wk change of -19.04%
+2025-01-19 12:45:04,314 - INFO - BTU: 1mo change of -18.86%
+2025-01-19 12:45:04,679 - INFO - Processing BTSG - 2024-12-12 00:05:00 UTC
+2025-01-19 12:45:04,815 - INFO - Processing BTU - 2024-11-27 19:23:34 UTC
+2025-01-19 12:45:05,909 - INFO - Retrieved article length: 3668 characters
+2025-01-19 12:45:06,012 - INFO - BTSG: 1h change of 1.81%
+2025-01-19 12:45:06,099 - INFO - Retrieved article length: 2315 characters
+2025-01-19 12:45:06,099 - INFO - BTSG: 1wk change of -9.49%
+2025-01-19 12:45:06,189 - INFO - BTU: 1h change of -8.89%
+2025-01-19 12:45:06,189 - INFO - BTSG: 1mo change of -4.86%
+2025-01-19 12:45:06,287 - INFO - BTU: 1wk change of -15.45%
+2025-01-19 12:45:06,437 - INFO - BTU: 1mo change of -13.73%
+2025-01-19 12:45:06,694 - INFO - Processing BTSG - 2024-11-27 01:00:00 UTC
+2025-01-19 12:45:06,938 - INFO - Processing BTU - 2024-11-26 21:35:02 UTC
+2025-01-19 12:45:08,037 - INFO - Retrieved article length: 3979 characters
+2025-01-19 12:45:08,127 - INFO - Retrieved article length: 515 characters
+2025-01-19 12:45:08,211 - INFO - BTSG: 1wk change of -2.14%
+2025-01-19 12:45:08,227 - INFO - BTU: 1h change of -8.89%
+2025-01-19 12:45:08,296 - INFO - BTSG: 1mo change of 7.92%
+2025-01-19 12:45:08,312 - INFO - BTU: 1wk change of -12.88%
+2025-01-19 12:45:08,421 - INFO - BTU: 1mo change of -15.88%
+2025-01-19 12:45:08,810 - INFO - Processing BTSG - 2024-11-22 00:05:00 UTC
+2025-01-19 12:45:08,922 - INFO - Processing BTU - 2024-11-26 21:18:42 UTC
+2025-01-19 12:45:09,932 - INFO - Retrieved article length: 1606 characters
+2025-01-19 12:45:10,027 - INFO - BTSG: 1h change of 1.27%
+2025-01-19 12:45:10,122 - INFO - BTSG: 1wk change of -1.23%
+2025-01-19 12:45:10,148 - INFO - Retrieved article length: 460 characters
+2025-01-19 12:45:10,155 - INFO - BTU: 1h change of -8.89%
+2025-01-19 12:45:10,162 - INFO - BTU: 1wk change of -12.88%
+2025-01-19 12:45:10,168 - INFO - BTU: 1mo change of -15.88%
+2025-01-19 12:45:10,210 - INFO - BTSG: 1mo change of 8.24%
+2025-01-19 12:45:10,670 - INFO - Processing BTU - 2024-11-26 14:25:37 UTC
+2025-01-19 12:45:11,948 - INFO - Retrieved article length: 582 characters
+2025-01-19 12:45:11,959 - INFO - BTU: 1h change of -8.89%
+2025-01-19 12:45:11,962 - INFO - BTU: 1wk change of -12.88%
+2025-01-19 12:45:11,974 - INFO - BTU: 1mo change of -15.88%
+2025-01-19 12:45:14,773 - INFO - Processing BURL - 2025-01-13 23:06:10 UTC
+2025-01-19 12:45:15,312 - INFO - Processing BURU - 2024-12-12 02:10:00 UTC
+2025-01-19 12:45:16,108 - INFO - Retrieved article length: 146 characters
+2025-01-19 12:45:16,205 - INFO - BURL: 1h change of 1.95%
+2025-01-19 12:45:16,472 - INFO - Retrieved article length: 6233 characters
+2025-01-19 12:45:16,566 - INFO - BURU: 1h change of -23.24%
+2025-01-19 12:45:16,654 - INFO - BURU: 1wk change of 1.91%
+2025-01-19 12:45:16,757 - INFO - BURU: 1mo change of -4.44%
+2025-01-19 12:45:16,891 - INFO - Processing BURL - 2025-01-10 20:44:03 UTC
+2025-01-19 12:45:17,258 - INFO - Processing BURU - 2024-11-23 02:45:00 UTC
+2025-01-19 12:45:18,263 - INFO - Retrieved article length: 175 characters
+2025-01-19 12:45:18,350 - INFO - BURL: 1h change of 2.31%
+2025-01-19 12:45:18,453 - INFO - BURL: 1wk change of 1.93%
+2025-01-19 12:45:18,675 - INFO - Retrieved article length: 6359 characters
+2025-01-19 12:45:18,846 - INFO - BURU: 1wk change of 13.53%
+2025-01-19 12:45:18,950 - INFO - BURU: 1mo change of -8.64%
+2025-01-19 12:45:19,043 - INFO - Processing BURL - 2025-01-10 16:13:56 UTC
+2025-01-19 12:45:20,219 - INFO - Retrieved article length: 475 characters
+2025-01-19 12:45:20,228 - INFO - BURL: 1h change of 2.31%
+2025-01-19 12:45:20,267 - INFO - BURL: 1wk change of 1.93%
+2025-01-19 12:45:20,673 - INFO - Processing BVFL - 2025-01-15 14:00:47 UTC
+2025-01-19 12:45:20,831 - INFO - Processing BURL - 2025-01-06 22:59:00 UTC
+2025-01-19 12:45:21,826 - INFO - Retrieved article length: 5878 characters
+2025-01-19 12:45:22,059 - INFO - Retrieved article length: 132 characters
+2025-01-19 12:45:22,132 - INFO - BVFL: 1mo change of -3.00%
+2025-01-19 12:45:22,159 - INFO - BURL: 1h change of -3.09%
+2025-01-19 12:45:22,267 - INFO - BURL: 1wk change of -2.30%
+2025-01-19 12:45:22,635 - INFO - Processing BVFL - 2024-12-04 15:26:33 UTC
+2025-01-19 12:45:22,878 - INFO - Processing BURL - 2025-01-06 19:02:00 UTC
+2025-01-19 12:45:23,852 - INFO - Retrieved article length: 3579 characters
+2025-01-19 12:45:23,960 - INFO - BVFL: 1h change of 1.45%
+2025-01-19 12:45:24,061 - INFO - BVFL: 1wk change of 4.67%
+2025-01-19 12:45:24,080 - INFO - Retrieved article length: 8568 characters
+2025-01-19 12:45:24,089 - INFO - BURL: 1h change of -3.09%
+2025-01-19 12:45:24,093 - INFO - BURL: 1wk change of -2.30%
+2025-01-19 12:45:24,170 - INFO - BVFL: 1mo change of 10.04%
+2025-01-19 12:45:24,648 - INFO - Processing BURL - 2025-01-02 19:52:41 UTC
+2025-01-19 12:45:24,673 - INFO - Processing BVFL - 2024-10-24 15:04:44 UTC
+2025-01-19 12:45:25,731 - INFO - Retrieved article length: 2061 characters
+2025-01-19 12:45:25,867 - INFO - Retrieved article length: 1736 characters
+2025-01-19 12:45:25,905 - INFO - BURL: 1wk change of 1.18%
+2025-01-19 12:45:25,979 - INFO - BURL: 1mo change of 3.08%
+2025-01-19 12:45:26,054 - INFO - BVFL: 1wk change of 2.78%
+2025-01-19 12:45:26,156 - INFO - BVFL: 1mo change of 8.65%
+2025-01-19 12:45:26,496 - INFO - Processing BURL - 2024-12-31 00:47:17 UTC
+2025-01-19 12:45:26,667 - INFO - Processing BVFL - 2024-10-21 23:15:00 UTC
+2025-01-19 12:45:27,588 - INFO - Retrieved article length: 1269 characters
+2025-01-19 12:45:27,865 - INFO - BURL: 1mo change of 1.26%
+2025-01-19 12:45:28,372 - INFO - Processing BURL - 2024-12-30 13:41:43 UTC
+2025-01-19 12:45:28,406 - INFO - Retrieved article length: 20535 characters
+2025-01-19 12:45:28,654 - INFO - BVFL: 1wk change of 1.90%
+2025-01-19 12:45:28,767 - INFO - BVFL: 1mo change of 13.38%
+2025-01-19 12:45:29,502 - INFO - Retrieved article length: 4567 characters
+2025-01-19 12:45:30,443 - INFO - Processing BW - 2025-01-08 16:15:32 UTC
+2025-01-19 12:45:31,390 - INFO - Processing BWA - 2025-01-17 17:57:06 UTC
+2025-01-19 12:45:31,748 - INFO - Retrieved article length: 1842 characters
+2025-01-19 12:45:31,848 - INFO - BW: 1h change of -9.42%
+2025-01-19 12:45:32,054 - INFO - BW: 1mo change of -21.84%
+2025-01-19 12:45:32,551 - INFO - Retrieved article length: 516 characters
+2025-01-19 12:45:32,563 - INFO - Processing BW - 2025-01-07 19:14:40 UTC
+2025-01-19 12:45:32,960 - INFO - BWA: 1mo change of -5.17%
+2025-01-19 12:45:33,464 - INFO - Processing BWA - 2025-01-17 17:00:00 UTC
+2025-01-19 12:45:33,736 - INFO - Retrieved article length: 502 characters
+2025-01-19 12:45:33,839 - INFO - BW: 1h change of -9.42%
+2025-01-19 12:45:34,019 - INFO - BW: 1mo change of -15.26%
+2025-01-19 12:45:34,530 - INFO - Processing BW - 2025-01-07 14:30:00 UTC
+2025-01-19 12:45:34,848 - INFO - Retrieved article length: 4818 characters
+2025-01-19 12:45:34,968 - INFO - BWA: 1mo change of -5.17%
+2025-01-19 12:45:35,475 - INFO - Processing BWA - 2025-01-16 17:25:29 UTC
+2025-01-19 12:45:35,751 - INFO - Retrieved article length: 3540 characters
+2025-01-19 12:45:35,764 - INFO - BW: 1h change of -9.42%
+2025-01-19 12:45:35,810 - INFO - BW: 1mo change of -15.26%
+2025-01-19 12:45:36,325 - INFO - Processing BW - 2024-12-28 15:27:55 UTC
+2025-01-19 12:45:36,735 - INFO - Retrieved article length: 509 characters
+2025-01-19 12:45:36,834 - INFO - BWA: 1h change of 1.70%
+2025-01-19 12:45:37,086 - INFO - BWA: 1mo change of -7.87%
+2025-01-19 12:45:37,501 - INFO - Retrieved article length: 6274 characters
+2025-01-19 12:45:37,587 - INFO - Processing BWA - 2025-01-16 17:06:26 UTC
+2025-01-19 12:45:37,605 - INFO - BW: 1h change of 1.48%
+2025-01-19 12:45:37,699 - INFO - BW: 1wk change of 14.56%
+2025-01-19 12:45:37,780 - INFO - BW: 1mo change of -18.69%
+2025-01-19 12:45:38,294 - INFO - Processing BW - 2024-12-10 18:42:10 UTC
+2025-01-19 12:45:38,901 - INFO - Retrieved article length: 524 characters
+2025-01-19 12:45:38,912 - INFO - BWA: 1h change of 1.70%
+2025-01-19 12:45:39,004 - INFO - BWA: 1mo change of -7.87%
+2025-01-19 12:45:39,514 - INFO - Processing BWA - 2025-01-15 17:40:11 UTC
+2025-01-19 12:45:39,519 - INFO - Retrieved article length: 530 characters
+2025-01-19 12:45:39,617 - INFO - BW: 1h change of -6.98%
+2025-01-19 12:45:39,711 - INFO - BW: 1wk change of -18.27%
+2025-01-19 12:45:39,806 - INFO - BW: 1mo change of -36.28%
+2025-01-19 12:45:40,307 - INFO - Processing BW - 2024-12-10 14:30:00 UTC
+2025-01-19 12:45:40,726 - INFO - Retrieved article length: 2684 characters
+2025-01-19 12:45:40,827 - INFO - BWA: 1h change of 3.06%
+2025-01-19 12:45:41,101 - INFO - BWA: 1mo change of -7.98%
+2025-01-19 12:45:41,527 - INFO - Retrieved article length: 5168 characters
+2025-01-19 12:45:41,527 - INFO - BW: 1h change of -6.98%
+2025-01-19 12:45:41,540 - INFO - BW: 1wk change of -18.27%
+2025-01-19 12:45:41,549 - INFO - BW: 1mo change of -36.28%
+2025-01-19 12:45:41,604 - INFO - Processing BWA - 2025-01-09 16:58:00 UTC
+2025-01-19 12:45:42,050 - INFO - Processing BW - 2024-12-03 12:47:52 UTC
+2025-01-19 12:45:42,909 - INFO - Retrieved article length: 169 characters
+2025-01-19 12:45:43,005 - INFO - BWA: 1h change of -4.37%
+2025-01-19 12:45:43,122 - INFO - BWA: 1wk change of 2.05%
+2025-01-19 12:45:43,218 - INFO - Retrieved article length: 516 characters
+2025-01-19 12:45:43,237 - INFO - BWA: 1mo change of -5.00%
+2025-01-19 12:45:43,314 - INFO - BW: 1h change of 5.08%
+2025-01-19 12:45:43,389 - INFO - BW: 1wk change of -8.59%
+2025-01-19 12:45:43,490 - INFO - BW: 1mo change of -25.21%
+2025-01-19 12:45:43,743 - INFO - Processing BWA - 2025-01-09 00:15:00 UTC
+2025-01-19 12:45:44,000 - INFO - Processing BW - 2024-12-03 00:48:00 UTC
+2025-01-19 12:45:44,892 - INFO - Retrieved article length: 1274 characters
+2025-01-19 12:45:44,907 - INFO - BWA: 1h change of -4.37%
+2025-01-19 12:45:44,913 - INFO - BWA: 1wk change of 2.05%
+2025-01-19 12:45:44,959 - INFO - BWA: 1mo change of -5.00%
+2025-01-19 12:45:45,262 - INFO - Retrieved article length: 8052 characters
+2025-01-19 12:45:45,271 - INFO - BW: 1h change of 5.08%
+2025-01-19 12:45:45,277 - INFO - BW: 1wk change of -8.59%
+2025-01-19 12:45:45,282 - INFO - BW: 1mo change of -25.21%
+2025-01-19 12:45:45,464 - INFO - Processing BWA - 2024-12-30 17:40:12 UTC
+2025-01-19 12:45:46,758 - INFO - Retrieved article length: 2751 characters
+2025-01-19 12:45:46,865 - INFO - BWA: 1h change of 1.05%
+2025-01-19 12:45:46,904 - INFO - Processing BWB - 2025-01-08 00:15:00 UTC
+2025-01-19 12:45:46,977 - INFO - BWA: 1wk change of -1.07%
+2025-01-19 12:45:47,105 - INFO - BWA: 1mo change of -7.92%
+2025-01-19 12:45:48,150 - INFO - Retrieved article length: 2228 characters
+2025-01-19 12:45:48,245 - INFO - BWB: 1h change of -2.32%
+2025-01-19 12:45:48,446 - INFO - BWB: 1mo change of -12.17%
+2025-01-19 12:45:48,764 - INFO - Processing BWBBP - 2025-01-08 00:15:00 UTC
+2025-01-19 12:45:48,948 - INFO - Processing BWB - 2024-12-24 16:40:00 UTC
+2025-01-19 12:45:49,904 - INFO - Retrieved article length: 2228 characters
+2025-01-19 12:45:50,088 - INFO - BWBBP: 1wk change of -1.27%
+2025-01-19 12:45:50,123 - INFO - Retrieved article length: 2560 characters
+2025-01-19 12:45:50,178 - INFO - BWBBP: 1mo change of 2.15%
+2025-01-19 12:45:50,316 - INFO - BWB: 1wk change of -12.72%
+2025-01-19 12:45:50,417 - INFO - BWB: 1mo change of -10.33%
+2025-01-19 12:45:50,682 - INFO - Processing BWBBP - 2024-12-24 16:40:00 UTC
+2025-01-19 12:45:50,919 - INFO - Processing BWB - 2024-12-17 18:38:40 UTC
+2025-01-19 12:45:51,708 - INFO - Retrieved article length: 2560 characters
+2025-01-19 12:45:51,796 - INFO - BWBBP: 1h change of 1.69%
+2025-01-19 12:45:51,900 - INFO - BWBBP: 1wk change of 5.47%
+2025-01-19 12:45:52,184 - INFO - Retrieved article length: 2143 characters
+2025-01-19 12:45:52,278 - INFO - BWB: 1h change of -5.63%
+2025-01-19 12:45:52,365 - INFO - BWB: 1wk change of -9.18%
+2025-01-19 12:45:52,450 - INFO - BWB: 1mo change of -12.40%
+2025-01-19 12:45:52,491 - INFO - Processing BWBBP - 2024-12-17 18:38:40 UTC
+2025-01-19 12:45:52,964 - INFO - Processing BWB - 2024-12-16 15:00:00 UTC
+2025-01-19 12:45:53,687 - INFO - Retrieved article length: 2143 characters
+2025-01-19 12:45:53,780 - INFO - BWBBP: 1h change of -1.04%
+2025-01-19 12:45:53,968 - INFO - BWBBP: 1mo change of 2.15%
+2025-01-19 12:45:54,114 - INFO - Retrieved article length: 6136 characters
+2025-01-19 12:45:54,308 - INFO - BWB: 1wk change of -8.99%
+2025-01-19 12:45:54,468 - INFO - BWB: 1mo change of -12.92%
+2025-01-19 12:45:54,470 - INFO - Processing BWBBP - 2024-12-16 15:00:00 UTC
+2025-01-19 12:45:54,969 - INFO - Processing BWB - 2024-12-11 18:19:30 UTC
+2025-01-19 12:45:55,758 - INFO - Retrieved article length: 6136 characters
+2025-01-19 12:45:55,857 - INFO - BWBBP: 1h change of 1.01%
+2025-01-19 12:45:56,227 - INFO - Retrieved article length: 7276 characters
+2025-01-19 12:45:56,410 - INFO - BWB: 1wk change of -7.43%
+2025-01-19 12:45:56,488 - INFO - BWB: 1mo change of -15.14%
+2025-01-19 12:45:56,603 - INFO - Processing BWBBP - 2024-12-11 18:19:30 UTC
+2025-01-19 12:45:57,003 - INFO - Processing BWB - 2024-11-03 16:04:50 UTC
+2025-01-19 12:45:57,650 - INFO - Retrieved article length: 7276 characters
+2025-01-19 12:45:57,738 - INFO - BWBBP: 1h change of 1.20%
+2025-01-19 12:45:57,840 - INFO - BWBBP: 1wk change of -3.24%
+2025-01-19 12:45:57,989 - INFO - BWBBP: 1mo change of -1.49%
+2025-01-19 12:45:58,144 - INFO - Retrieved article length: 2052 characters
+2025-01-19 12:45:58,255 - INFO - BWB: 1h change of -2.90%
+2025-01-19 12:45:58,343 - INFO - BWB: 1wk change of 1.61%
+2025-01-19 12:45:58,444 - INFO - BWB: 1mo change of 6.77%
+2025-01-19 12:45:58,491 - INFO - Processing BWBBP - 2024-11-03 16:04:50 UTC
+2025-01-19 12:45:58,946 - INFO - Processing BWB - 2024-11-01 00:16:48 UTC
+2025-01-19 12:45:59,561 - INFO - Retrieved article length: 2052 characters
+2025-01-19 12:45:59,652 - INFO - BWBBP: 1h change of -2.47%
+2025-01-19 12:45:59,731 - INFO - BWBBP: 1wk change of -4.14%
+2025-01-19 12:45:59,836 - INFO - BWBBP: 1mo change of -3.83%
+2025-01-19 12:46:00,108 - INFO - Retrieved article length: 519 characters
+2025-01-19 12:46:00,200 - INFO - BWB: 1h change of -4.66%
+2025-01-19 12:46:00,339 - INFO - Processing BWBBP - 2024-10-27 16:42:28 UTC
+2025-01-19 12:46:00,371 - INFO - BWB: 1mo change of 8.23%
+2025-01-19 12:46:00,872 - INFO - Processing BWB - 2024-10-27 16:42:28 UTC
+2025-01-19 12:46:01,634 - INFO - Retrieved article length: 4351 characters
+2025-01-19 12:46:01,809 - INFO - BWBBP: 1wk change of -1.18%
+2025-01-19 12:46:01,907 - INFO - BWBBP: 1mo change of -3.58%
+2025-01-19 12:46:01,946 - INFO - Retrieved article length: 4351 characters
+2025-01-19 12:46:02,134 - INFO - BWB: 1wk change of -7.94%
+2025-01-19 12:46:02,217 - INFO - BWB: 1mo change of 4.93%
+2025-01-19 12:46:02,409 - INFO - Processing BWBBP - 2024-10-25 14:03:59 UTC
+2025-01-19 12:46:03,577 - INFO - Retrieved article length: 7156 characters
+2025-01-19 12:46:03,859 - INFO - Processing BWEN - 2025-01-10 17:30:12 UTC
+2025-01-19 12:46:03,995 - INFO - BWBBP: 1mo change of -1.93%
+2025-01-19 12:46:05,049 - INFO - Retrieved article length: 5267 characters
+2025-01-19 12:46:05,155 - INFO - BWEN: 1h change of -2.60%
+2025-01-19 12:46:05,241 - INFO - BWEN: 1wk change of 7.98%
+2025-01-19 12:46:05,373 - INFO - BWEN: 1mo change of 13.41%
+2025-01-19 12:46:05,670 - INFO - Processing BWIN - 2025-01-15 00:46:00 UTC
+2025-01-19 12:46:05,887 - INFO - Processing BWEN - 2024-12-30 16:57:18 UTC
+2025-01-19 12:46:06,854 - INFO - Retrieved article length: 2364 characters
+2025-01-19 12:46:06,949 - INFO - BWIN: 1h change of 16.32%
+2025-01-19 12:46:07,035 - INFO - BWIN: 1wk change of 10.68%
+2025-01-19 12:46:07,079 - INFO - Retrieved article length: 4129 characters
+2025-01-19 12:46:07,116 - INFO - BWIN: 1mo change of -3.80%
+2025-01-19 12:46:07,269 - INFO - BWEN: 1wk change of 3.78%
+2025-01-19 12:46:07,372 - INFO - BWEN: 1mo change of 14.69%
+2025-01-19 12:46:07,620 - INFO - Processing BWIN - 2024-12-13 16:30:00 UTC
+2025-01-19 12:46:07,875 - INFO - Processing BWEN - 2024-12-25 17:30:12 UTC
+2025-01-19 12:46:08,840 - INFO - Retrieved article length: 6538 characters
+2025-01-19 12:46:08,935 - INFO - BWIN: 1h change of -2.87%
+2025-01-19 12:46:08,996 - INFO - Retrieved article length: 5199 characters
+2025-01-19 12:46:09,033 - INFO - BWIN: 1wk change of -18.71%
+2025-01-19 12:46:09,085 - INFO - BWEN: 1h change of 4.69%
+2025-01-19 12:46:09,123 - INFO - BWIN: 1mo change of -11.29%
+2025-01-19 12:46:09,177 - INFO - BWEN: 1wk change of 24.16%
+2025-01-19 12:46:09,265 - INFO - BWEN: 1mo change of 30.97%
+2025-01-19 12:46:09,624 - INFO - Processing BWIN - 2024-11-06 15:28:27 UTC
+2025-01-19 12:46:09,766 - INFO - Processing BWEN - 2024-12-09 17:30:11 UTC
+2025-01-19 12:46:10,817 - INFO - Retrieved article length: 1981 characters
+2025-01-19 12:46:10,935 - INFO - Retrieved article length: 5273 characters
+2025-01-19 12:46:10,999 - INFO - BWIN: 1wk change of -12.98%
+2025-01-19 12:46:11,025 - INFO - BWEN: 1h change of -3.24%
+2025-01-19 12:46:11,084 - INFO - BWIN: 1mo change of -14.27%
+2025-01-19 12:46:11,118 - INFO - BWEN: 1wk change of -7.41%
+2025-01-19 12:46:11,202 - INFO - BWEN: 1mo change of -10.14%
+2025-01-19 12:46:11,588 - INFO - Processing BWIN - 2024-11-06 14:36:29 UTC
+2025-01-19 12:46:11,710 - INFO - Processing BWEN - 2024-12-03 16:04:54 UTC
+2025-01-19 12:46:12,859 - INFO - Retrieved article length: 7065 characters
+2025-01-19 12:46:12,930 - INFO - Retrieved article length: 1185 characters
+2025-01-19 12:46:12,958 - INFO - BWEN: 1h change of -6.46%
+
+2025-01-19 12:46:12,966 - INFO - BWIN: 1mo change of -14.27%
+2025-01-19 12:46:13,051 - INFO - BWEN: 1wk change of -1.13%
+2025-01-19 12:46:13,136 - INFO - BWEN: 1mo change of 7.00%
+2025-01-19 12:46:13,467 - INFO - Processing BWIN - 2024-11-05 00:05:00 UTC
+2025-01-19 12:46:13,644 - INFO - Processing BWEN - 2024-11-21 17:30:11 UTC
+2025-01-19 12:46:15,038 - INFO - Retrieved article length: 5209 characters
+2025-01-19 12:46:15,039 - INFO - Retrieved article length: 34514 characters
+2025-01-19 12:46:15,130 - INFO - BWEN: 1h change of 11.36%
+2025-01-19 12:46:15,130 - INFO - BWIN: 1h change of -1.75%
+2025-01-19 12:46:15,210 - INFO - BWEN: 1wk change of 2.72%
+2025-01-19 12:46:15,236 - INFO - BWIN: 1wk change of -12.06%
+2025-01-19 12:46:15,307 - INFO - BWEN: 1mo change of -14.42%
+2025-01-19 12:46:15,323 - INFO - BWIN: 1mo change of -8.70%
+2025-01-19 12:46:15,809 - INFO - Processing BWEN - 2024-11-16 15:57:19 UTC
+2025-01-19 12:46:15,823 - INFO - Processing BWIN - 2024-11-01 21:27:03 UTC
+2025-01-19 12:46:16,967 - INFO - Retrieved article length: 5052 characters
+2025-01-19 12:46:17,015 - INFO - Retrieved article length: 160 characters
+2025-01-19 12:46:17,061 - INFO - BWEN: 1h change of -6.07%
+2025-01-19 12:46:17,118 - INFO - BWIN: 1h change of -10.07%
+2025-01-19 12:46:17,148 - INFO - BWEN: 1wk change of -3.28%
+2025-01-19 12:46:17,208 - INFO - BWIN: 1wk change of -11.64%
+2025-01-19 12:46:17,251 - INFO - BWEN: 1mo change of -11.48%
+2025-01-19 12:46:17,299 - INFO - BWIN: 1mo change of -8.02%
+2025-01-19 12:46:17,753 - INFO - Processing BWEN - 2024-11-15 14:01:55 UTC
+2025-01-19 12:46:17,809 - INFO - Processing BWIN - 2024-11-01 16:03:11 UTC
+2025-01-19 12:46:18,992 - INFO - Retrieved article length: 1900 characters
+2025-01-19 12:46:19,086 - INFO - BWEN: 1h change of 1.32%
+2025-01-19 12:46:19,088 - INFO - Retrieved article length: 3491 characters
+2025-01-19 12:46:19,101 - INFO - BWIN: 1h change of -10.07%
+2025-01-19 12:46:19,109 - INFO - BWIN: 1wk change of -11.64%
+2025-01-19 12:46:19,113 - INFO - BWIN: 1mo change of -8.02%
+2025-01-19 12:46:19,167 - INFO - BWEN: 1wk change of -16.50%
+2025-01-19 12:46:19,265 - INFO - BWEN: 1mo change of -17.51%
+2025-01-19 12:46:20,738 - INFO - Processing BWXT - 2025-01-17 00:15:00 UTC
+2025-01-19 12:46:20,923 - INFO - Processing BX - 2025-01-18 20:21:34 UTC
+2025-01-19 12:46:21,939 - INFO - Retrieved article length: 1844 characters
+2025-01-19 12:46:22,036 - INFO - BWXT: 1h change of 3.34%
+2025-01-19 12:46:22,103 - INFO - Retrieved article length: 8335 characters
+2025-01-19 12:46:22,128 - INFO - BWXT: 1wk change of 6.34%
+2025-01-19 12:46:22,223 - INFO - BX: 1h change of 2.78%
+2025-01-19 12:46:22,253 - INFO - BWXT: 1mo change of 1.26%
+2025-01-19 12:46:22,323 - INFO - BX: 1wk change of 3.44%
+2025-01-19 12:46:22,425 - INFO - BX: 1mo change of -4.52%
+2025-01-19 12:46:22,755 - INFO - Processing BWXT - 2025-01-14 17:11:36 UTC
+2025-01-19 12:46:22,942 - INFO - Processing BX - 2025-01-17 03:00:38 UTC
+2025-01-19 12:46:23,913 - INFO - Retrieved article length: 533 characters
+2025-01-19 12:46:24,003 - INFO - BWXT: 1h change of 4.40%
+2025-01-19 12:46:24,104 - INFO - BWXT: 1wk change of 6.66%
+2025-01-19 12:46:24,104 - INFO - Retrieved article length: 2244 characters
+2025-01-19 12:46:24,204 - INFO - BX: 1h change of 2.17%
+2025-01-19 12:46:24,304 - INFO - BX: 1wk change of 5.03%
+2025-01-19 12:46:24,416 - INFO - BX: 1mo change of -4.50%
+2025-01-19 12:46:24,707 - INFO - Processing BWXT - 2025-01-14 12:01:46 UTC
+2025-01-19 12:46:24,930 - INFO - Processing BX - 2025-01-16 19:27:26 UTC
+2025-01-19 12:46:25,833 - INFO - Retrieved article length: 3855 characters
+2025-01-19 12:46:25,849 - INFO - BWXT: 1h change of 4.40%
+2025-01-19 12:46:25,890 - INFO - BWXT: 1wk change of 6.66%
+2025-01-19 12:46:26,186 - INFO - Retrieved article length: 8699 characters
+2025-01-19 12:46:26,277 - INFO - BX: 1h change of 7.27%
+2025-01-19 12:46:26,393 - INFO - BX: 1wk change of 2.95%
+2025-01-19 12:46:26,450 - INFO - Processing BWXT - 2025-01-11 17:55:26 UTC
+2025-01-19 12:46:26,558 - INFO - BX: 1mo change of -5.44%
+2025-01-19 12:46:27,066 - INFO - Processing BX - 2025-01-16 12:51:56 UTC
+2025-01-19 12:46:27,635 - INFO - Retrieved article length: 1902 characters
+2025-01-19 12:46:27,847 - INFO - BWXT: 1wk change of 9.82%
+2025-01-19 12:46:28,368 - INFO - Retrieved article length: 534 characters
+2025-01-19 12:46:28,387 - INFO - BX: 1h change of 7.27%
+2025-01-19 12:46:28,424 - INFO - BX: 1wk change of 2.95%
+2025-01-19 12:46:28,460 - INFO - Processing BWXT - 2025-01-07 20:00:13 UTC
+2025-01-19 12:46:28,489 - INFO - BX: 1mo change of -5.44%
+2025-01-19 12:46:28,991 - INFO - Processing BX - 2025-01-16 01:51:36 UTC
+2025-01-19 12:46:29,829 - INFO - Retrieved article length: 4549 characters
+2025-01-19 12:46:30,021 - INFO - BWXT: 1wk change of 8.00%
+2025-01-19 12:46:30,107 - INFO - BWXT: 1mo change of -5.24%
+2025-01-19 12:46:30,179 - INFO - Retrieved article length: 4141 characters
+2025-01-19 12:46:30,195 - INFO - BX: 1h change of 7.27%
+2025-01-19 12:46:30,252 - INFO - BX: 1wk change of 2.95%
+2025-01-19 12:46:30,307 - INFO - BX: 1mo change of -5.44%
+2025-01-19 12:46:30,624 - INFO - Processing BWXT - 2025-01-07 14:52:44 UTC
+2025-01-19 12:46:30,808 - INFO - Processing BX - 2025-01-14 19:40:12 UTC
+2025-01-19 12:46:31,760 - INFO - Retrieved article length: 492 characters
+2025-01-19 12:46:31,771 - INFO - BWXT: 1wk change of 8.00%
+2025-01-19 12:46:31,924 - INFO - BWXT: 1mo change of -5.24%
+2025-01-19 12:46:31,952 - INFO - Retrieved article length: 2949 characters
+2025-01-19 12:46:32,037 - INFO - BX: 1h change of 6.63%
+2025-01-19 12:46:32,148 - INFO - BX: 1wk change of 2.95%
+2025-01-19 12:46:32,249 - INFO - BX: 1mo change of -5.07%
+2025-01-19 12:46:32,427 - INFO - Processing BWXT - 2025-01-07 14:00:00 UTC
+2025-01-19 12:46:32,751 - INFO - Processing BX - 2025-01-14 19:00:00 UTC
+2025-01-19 12:46:33,805 - INFO - Retrieved article length: 7436 characters
+2025-01-19 12:46:33,826 - INFO - BWXT: 1wk change of 8.00%
+2025-01-19 12:46:33,867 - INFO - BWXT: 1mo change of -5.24%
+2025-01-19 12:46:33,983 - INFO - Retrieved article length: 1907 characters
+2025-01-19 12:46:33,983 - INFO - BX: 1h change of 6.63%
+2025-01-19 12:46:34,044 - INFO - BX: 1wk change of 2.95%
+2025-01-19 12:46:34,099 - INFO - BX: 1mo change of -5.07%
+2025-01-19 12:46:34,378 - INFO - Processing BWXT - 2025-01-06 15:32:25 UTC
+2025-01-19 12:46:34,600 - INFO - Processing BX - 2025-01-14 02:04:20 UTC
+2025-01-19 12:46:35,605 - INFO - Retrieved article length: 547 characters
+2025-01-19 12:46:35,703 - INFO - BWXT: 1h change of 1.15%
+2025-01-19 12:46:35,747 - INFO - Retrieved article length: 3870 characters
+2025-01-19 12:46:35,747 - INFO - BX: 1h change of 6.63%
+2025-01-19 12:46:35,801 - INFO - BWXT: 1wk change of 5.32%
+2025-01-19 12:46:35,801 - INFO - BX: 1wk change of 2.95%
+2025-01-19 12:46:35,851 - INFO - BX: 1mo change of -5.07%
+2025-01-19 12:46:35,894 - INFO - BWXT: 1mo change of -5.19%
+2025-01-19 12:46:37,554 - INFO - Processing BXMT - 2025-01-15 14:34:17 UTC
+2025-01-19 12:46:37,555 - INFO - Processing BXP - 2025-01-13 15:15:00 UTC
+2025-01-19 12:46:38,700 - INFO - Retrieved article length: 4455 characters
+2025-01-19 12:46:38,747 - INFO - Retrieved article length: 3103 characters
+2025-01-19 12:46:38,797 - INFO - BXMT: 1h change of 7.58%
+2025-01-19 12:46:38,849 - INFO - BXP: 1h change of 3.49%
+2025-01-19 12:46:38,915 - INFO - BXMT: 1wk change of 3.02%
+2025-01-19 12:46:38,956 - INFO - BXP: 1wk change of -2.30%
+2025-01-19 12:46:39,064 - INFO - BXMT: 1mo change of -1.55%
+2025-01-19 12:46:39,076 - INFO - BXP: 1mo change of -10.65%
+2025-01-19 12:46:39,567 - INFO - Processing BXMT - 2025-01-10 17:32:37 UTC
+2025-01-19 12:46:39,577 - INFO - Processing BXP - 2025-01-07 21:46:00 UTC
+2025-01-19 12:46:40,760 - INFO - Retrieved article length: 381 characters
+2025-01-19 12:46:40,849 - INFO - Retrieved article length: 530 characters
+2025-01-19 12:46:40,863 - INFO - BXP: 1h change of -4.59%
+2025-01-19 12:46:40,939 - INFO - BXMT: 1h change of -2.11%
+2025-01-19 12:46:41,020 - INFO - BXP: 1wk change of -1.02%
+2025-01-19 12:46:41,084 - INFO - BXMT: 1wk change of 5.86%
+2025-01-19 12:46:41,124 - INFO - BXP: 1mo change of -7.46%
+2025-01-19 12:46:41,226 - INFO - BXMT: 1mo change of 1.03%
+2025-01-19 12:46:41,640 - INFO - Processing BXP - 2025-01-07 15:15:00 UTC
+2025-01-19 12:46:41,738 - INFO - Processing BXMT - 2025-01-08 16:30:00 UTC
+2025-01-19 12:46:42,821 - INFO - Retrieved article length: 5648 characters
+2025-01-19 12:46:42,821 - INFO - BXP: 1h change of -4.59%
+2025-01-19 12:46:42,840 - INFO - BXP: 1wk change of -1.02%
+2025-01-19 12:46:42,883 - INFO - BXP: 1mo change of -7.46%
+2025-01-19 12:46:42,930 - INFO - Retrieved article length: 2711 characters
+2025-01-19 12:46:43,034 - INFO - BXMT: 1h change of -2.18%
+2025-01-19 12:46:43,179 - INFO - BXMT: 1wk change of 6.90%
+2025-01-19 12:46:43,393 - INFO - Processing BXP - 2025-01-03 01:36:00 UTC
+2025-01-19 12:46:43,818 - INFO - Processing BXMT - 2024-12-14 00:15:00 UTC
+2025-01-19 12:46:44,557 - INFO - Retrieved article length: 2048 characters
+2025-01-19 12:46:44,864 - INFO - BXP: 1wk change of -9.28%
+2025-01-19 12:46:44,983 - INFO - BXP: 1mo change of -9.54%
+2025-01-19 12:46:45,066 - INFO - Retrieved article length: 3968 characters
+2025-01-19 12:46:45,293 - INFO - BXMT: 1wk change of -4.15%
+2025-01-19 12:46:45,488 - INFO - Processing BXP - 2024-12-20 00:15:00 UTC
+2025-01-19 12:46:45,929 - INFO - Processing BXMT - 2024-12-12 15:32:00 UTC
+2025-01-19 12:46:46,854 - INFO - Retrieved article length: 2707 characters
+2025-01-19 12:46:46,946 - INFO - BXP: 1h change of -7.08%
+2025-01-19 12:46:47,066 - INFO - BXP: 1wk change of -8.10%
+2025-01-19 12:46:47,066 - INFO - Retrieved article length: 2559 characters
+2025-01-19 12:46:47,157 - INFO - BXMT: 1h change of 2.88%
+2025-01-19 12:46:47,186 - INFO - BXP: 1mo change of -5.55%
+2025-01-19 12:46:47,286 - INFO - BXMT: 1wk change of -4.92%
+2025-01-19 12:46:47,421 - INFO - BXMT: 1mo change of -1.56%
+2025-01-19 12:46:47,688 - INFO - Processing BXP - 2024-12-19 00:15:00 UTC
+2025-01-19 12:46:47,931 - INFO - Processing BXMT - 2024-12-11 15:39:16 UTC
+2025-01-19 12:46:48,851 - INFO - Retrieved article length: 1664 characters
+2025-01-19 12:46:48,956 - INFO - BXP: 1h change of -6.68%
+2025-01-19 12:46:49,128 - INFO - BXP: 1wk change of -10.12%
+2025-01-19 12:46:49,234 - INFO - Retrieved article length: 540 characters
+2025-01-19 12:46:49,246 - INFO - BXP: 1mo change of -6.67%
+2025-01-19 12:46:49,321 - INFO - BXMT: 1h change of 1.45%
+2025-01-19 12:46:49,457 - INFO - BXMT: 1wk change of -4.92%
+2025-01-19 12:46:49,747 - INFO - Processing BXP - 2024-10-31 10:11:42 UTC
+2025-01-19 12:46:50,097 - INFO - Processing BXMT - 2024-12-04 13:13:22 UTC
+2025-01-19 12:46:50,919 - INFO - Retrieved article length: 4766 characters
+2025-01-19 12:46:51,020 - INFO - BXP: 1h change of -9.03%
+2025-01-19 12:46:51,139 - INFO - BXP: 1wk change of -4.64%
+2025-01-19 12:46:51,237 - INFO - Retrieved article length: 6149 characters
+2025-01-19 12:46:51,326 - INFO - BXMT: 1h change of -2.18%
+2025-01-19 12:46:51,443 - INFO - BXMT: 1wk change of 1.79%
+2025-01-19 12:46:51,607 - INFO - BXMT: 1mo change of -2.23%
+2025-01-19 12:46:51,753 - INFO - Processing BXP - 2024-10-30 01:30:15 UTC
+2025-01-19 12:46:52,109 - INFO - Processing BXMT - 2024-11-26 00:47:51 UTC
+2025-01-19 12:46:52,987 - INFO - Retrieved article length: 2817 characters
+2025-01-19 12:46:53,080 - INFO - BXP: 1h change of -8.71%
+2025-01-19 12:46:53,201 - INFO - BXP: 1wk change of -4.64%
+2025-01-19 12:46:53,343 - INFO - Retrieved article length: 494 characters
+2025-01-19 12:46:53,441 - INFO - BXMT: 1h change of 1.75%
+2025-01-19 12:46:53,581 - INFO - BXMT: 1wk change of 3.44%
+2025-01-19 12:46:53,732 - INFO - BXMT: 1mo change of -4.84%
+2025-01-19 12:46:54,996 - INFO - Processing BXSL - 2024-12-12 01:26:16 UTC
+2025-01-19 12:46:55,376 - INFO - Processing BYD - 2025-01-17 20:10:12 UTC
+2025-01-19 12:46:56,215 - INFO - Retrieved article length: 507 characters
+2025-01-19 12:46:56,404 - INFO - BXSL: 1wk change of 1.03%
+2025-01-19 12:46:56,491 - INFO - BXSL: 1mo change of 5.09%
+2025-01-19 12:46:56,577 - INFO - Retrieved article length: 3455 characters
+2025-01-19 12:46:56,667 - INFO - BYD: 1h change of 1.60%
+2025-01-19 12:46:56,786 - INFO - BYD: 1wk change of 3.50%
+2025-01-19 12:46:56,999 - INFO - Processing BXSL - 2024-12-12 00:52:00 UTC
+2025-01-19 12:46:57,462 - INFO - Processing BYD - 2025-01-14 14:46:17 UTC
+2025-01-19 12:46:58,156 - INFO - Retrieved article length: 6967 characters
+2025-01-19 12:46:58,173 - INFO - BXSL: 1wk change of 1.03%
+2025-01-19 12:46:58,177 - INFO - BXSL: 1mo change of 5.09%
+2025-01-19 12:46:58,666 - INFO - Retrieved article length: 511 characters
+2025-01-19 12:46:58,682 - INFO - Processing BXSL - 2024-12-02 17:02:13 UTC
+2025-01-19 12:46:58,760 - INFO - BYD: 1h change of 4.04%
+2025-01-19 12:46:58,935 - INFO - BYD: 1wk change of 1.92%
+2025-01-19 12:46:59,578 - INFO - Processing BYD - 2025-01-14 12:02:30 UTC
+2025-01-19 12:46:59,954 - INFO - Retrieved article length: 505 characters
+2025-01-19 12:47:00,048 - INFO - BXSL: 1h change of 1.36%
+2025-01-19 12:47:00,242 - INFO - BXSL: 1mo change of 4.66%
+2025-01-19 12:47:00,743 - INFO - Processing BXSL - 2024-11-27 16:58:00 UTC
+2025-01-19 12:47:00,784 - INFO - Retrieved article length: 6117 characters
+2025-01-19 12:47:00,803 - INFO - BYD: 1h change of 4.04%
+2025-01-19 12:47:00,851 - INFO - BYD: 1wk change of 1.92%
+2025-01-19 12:47:01,404 - INFO - Processing BYD - 2025-01-11 00:28:17 UTC
+2025-01-19 12:47:01,879 - INFO - Retrieved article length: 2632 characters
+2025-01-19 12:47:02,188 - INFO - BXSL: 1wk change of 3.22%
+2025-01-19 12:47:02,322 - INFO - BXSL: 1mo change of 6.26%
+2025-01-19 12:47:02,710 - INFO - Retrieved article length: 159 characters
+2025-01-19 12:47:02,828 - INFO - Processing BXSL - 2024-11-13 10:13:05 UTC
+2025-01-19 12:47:02,918 - INFO - BYD: 1wk change of 4.26%
+2025-01-19 12:47:03,553 - INFO - Processing BYD - 2025-01-06 18:52:00 UTC
+2025-01-19 12:47:03,976 - INFO - Retrieved article length: 5109 characters
+2025-01-19 12:47:04,163 - INFO - BXSL: 1wk change of 4.54%
+2025-01-19 12:47:04,244 - INFO - BXSL: 1mo change of 8.16%
+2025-01-19 12:47:04,757 - INFO - Processing BXSL - 2024-11-13 08:54:52 UTC
+2025-01-19 12:47:04,760 - INFO - Retrieved article length: 5946 characters
+2025-01-19 12:47:04,850 - INFO - BYD: 1h change of -2.40%
+2025-01-19 12:47:04,986 - INFO - BYD: 1wk change of 1.60%
+2025-01-19 12:47:05,597 - INFO - Processing BYD - 2025-01-03 15:26:26 UTC
+2025-01-19 12:47:06,465 - INFO - Retrieved article length: 36686 characters
+2025-01-19 12:47:06,481 - INFO - BXSL: 1wk change of 4.54%
+2025-01-19 12:47:06,498 - INFO - BXSL: 1mo change of 8.16%
+2025-01-19 12:47:06,879 - INFO - Retrieved article length: 519 characters
+2025-01-19 12:47:06,999 - INFO - Processing BXSL - 2024-11-12 19:00:03 UTC
+2025-01-19 12:47:07,186 - INFO - BYD: 1mo change of 1.64%
+2025-01-19 12:47:07,687 - INFO - Processing BYD - 2024-12-28 15:51:04 UTC
+2025-01-19 12:47:08,167 - INFO - Retrieved article length: 2291 characters
+2025-01-19 12:47:08,336 - INFO - BXSL: 1wk change of 3.03%
+2025-01-19 12:47:08,437 - INFO - BXSL: 1mo change of 7.89%
+2025-01-19 12:47:08,951 - INFO - Processing BXSL - 2024-11-12 17:55:02 UTC
+2025-01-19 12:47:09,017 - INFO - Retrieved article length: 4017 characters
+2025-01-19 12:47:09,112 - INFO - BYD: 1h change of 1.10%
+2025-01-19 12:47:09,225 - INFO - BYD: 1wk change of 3.77%
+2025-01-19 12:47:09,324 - INFO - BYD: 1mo change of 2.84%
+2025-01-19 12:47:09,829 - INFO - Processing BYD - 2024-12-23 12:06:08 UTC
+2025-01-19 12:47:10,237 - INFO - Retrieved article length: 4448 characters
+2025-01-19 12:47:10,254 - INFO - BXSL: 1wk change of 3.03%
+2025-01-19 12:47:10,261 - INFO - BXSL: 1mo change of 7.89%
+2025-01-19 12:47:11,095 - INFO - Retrieved article length: 6368 characters
+2025-01-19 12:47:11,202 - INFO - BYD: 1h change of 1.73%
+2025-01-19 12:47:11,304 - INFO - BYD: 1wk change of -3.00%
+2025-01-19 12:47:11,416 - INFO - BYD: 1mo change of 4.32%
+2025-01-19 12:47:11,918 - INFO - Processing BYFC - 2025-01-16 01:59:00 UTC
+2025-01-19 12:47:13,093 - INFO - Processing BYND - 2025-01-16 03:19:04 UTC
+2025-01-19 12:47:13,132 - INFO - Retrieved article length: 8805 characters
+2025-01-19 12:47:13,234 - INFO - BYFC: 1h change of 3.52%
+2025-01-19 12:47:13,319 - INFO - BYFC: 1wk change of 8.30%
+2025-01-19 12:47:13,438 - INFO - BYFC: 1mo change of 13.23%
+2025-01-19 12:47:13,942 - INFO - Processing BYFC - 2024-10-29 23:15:00 UTC
+2025-01-19 12:47:14,379 - INFO - Retrieved article length: 195 characters
+2025-01-19 12:47:14,491 - INFO - BYND: 1h change of 12.55%
+2025-01-19 12:47:14,632 - INFO - BYND: 1wk change of 4.35%
+2025-01-19 12:47:14,736 - INFO - BYND: 1mo change of 4.35%
+2025-01-19 12:47:15,237 - INFO - Processing BYND - 2025-01-07 08:01:37 UTC
+2025-01-19 12:47:15,358 - INFO - Retrieved article length: 29254 characters
+2025-01-19 12:47:15,453 - INFO - BYFC: 1h change of 6.82%
+2025-01-19 12:47:15,571 - INFO - BYFC: 1wk change of -5.63%
+2025-01-19 12:47:16,455 - INFO - Retrieved article length: 3535 characters
+2025-01-19 12:47:16,545 - INFO - BYND: 1h change of -11.00%
+2025-01-19 12:47:16,667 - INFO - BYND: 1wk change of 8.29%
+2025-01-19 12:47:16,760 - INFO - BYND: 1mo change of -16.05%
+2025-01-19 12:47:17,271 - INFO - Processing BYND - 2025-01-02 12:01:57 UTC
+2025-01-19 12:47:17,334 - INFO - Processing BYNO - 2025-01-11 00:30:00 UTC
+2025-01-19 12:47:18,449 - INFO - Retrieved article length: 6376 characters
+2025-01-19 12:47:18,514 - INFO - Retrieved article length: 3691 characters
+2025-01-19 12:47:18,545 - INFO - BYND: 1h change of 3.21%
+2025-01-19 12:47:18,634 - INFO - BYND: 1wk change of 1.69%
+2025-01-19 12:47:18,721 - INFO - BYND: 1mo change of -18.07%
+2025-01-19 12:47:19,228 - INFO - Processing BYND - 2024-12-26 17:28:00 UTC
+2025-01-19 12:47:20,420 - INFO - Processing BYNOU - 2025-01-11 00:30:00 UTC
+2025-01-19 12:47:20,436 - INFO - Retrieved article length: 10773 characters
+2025-01-19 12:47:20,539 - INFO - BYND: 1h change of 14.60%
+2025-01-19 12:47:20,641 - INFO - BYND: 1wk change of 8.09%
+2025-01-19 12:47:20,730 - INFO - BYND: 1mo change of -18.56%
+2025-01-19 12:47:21,232 - INFO - Processing BYND - 2024-12-21 00:45:00 UTC
+2025-01-19 12:47:21,535 - INFO - Retrieved article length: 3691 characters
+2025-01-19 12:47:21,625 - ERROR - BYNOU: No price data found, symbol may be delisted (1h 2025-01-09 -> 2025-01-13)
+2025-01-19 12:47:22,401 - INFO - Retrieved article length: 5256 characters
+2025-01-19 12:47:22,545 - INFO - BYND: 1h change of 2.47%
+2025-01-19 12:47:22,644 - INFO - BYND: 1wk change of -3.50%
+2025-01-19 12:47:22,732 - INFO - BYND: 1mo change of -17.41%
+2025-01-19 12:47:23,234 - INFO - Processing BYND - 2024-12-19 20:13:51 UTC
+2025-01-19 12:47:23,533 - INFO - Processing BYON - 2024-12-23 14:23:03 UTC
+2025-01-19 12:47:24,383 - INFO - Retrieved article length: 3661 characters
+2025-01-19 12:47:24,491 - INFO - BYND: 1h change of -3.68%
+2025-01-19 12:47:24,580 - INFO - BYND: 1wk change of -8.93%
+2025-01-19 12:47:24,670 - INFO - BYND: 1mo change of -23.02%
+2025-01-19 12:47:24,727 - INFO - Retrieved article length: 2872 characters
+2025-01-19 12:47:24,940 - INFO - BYON: 1wk change of -6.10%
+2025-01-19 12:47:25,040 - INFO - BYON: 1mo change of -3.29%
+2025-01-19 12:47:25,171 - INFO - Processing BYND - 2024-12-13 15:55:34 UTC
+2025-01-19 12:47:25,541 - INFO - Processing BYON - 2024-12-23 07:06:12 UTC
+2025-01-19 12:47:26,439 - INFO - Retrieved article length: 6911 characters
+2025-01-19 12:47:26,539 - INFO - BYND: 1h change of -3.69%
+2025-01-19 12:47:26,650 - INFO - BYND: 1wk change of -26.95%
+2025-01-19 12:47:26,737 - INFO - BYND: 1mo change of -22.16%
+2025-01-19 12:47:26,778 - INFO - Retrieved article length: 6321 characters
+2025-01-19 12:47:26,797 - INFO - BYON: 1wk change of -6.10%
+2025-01-19 12:47:26,845 - INFO - BYON: 1mo change of -3.29%
+2025-01-19 12:47:27,244 - INFO - Processing BYND - 2024-12-11 14:42:03 UTC
+2025-01-19 12:47:27,357 - INFO - Processing BYON - 2024-12-20 21:20:00 UTC
+2025-01-19 12:47:28,353 - INFO - Retrieved article length: 4599 characters
+2025-01-19 12:47:28,456 - INFO - BYND: 1h change of -15.62%
+2025-01-19 12:47:28,550 - INFO - BYND: 1wk change of -28.43%
+2025-01-19 12:47:28,639 - INFO - BYND: 1mo change of -44.83%
+2025-01-19 12:47:28,886 - INFO - Retrieved article length: 3606 characters
+2025-01-19 12:47:29,081 - INFO - BYON: 1wk change of -18.66%
+2025-01-19 12:47:29,167 - INFO - BYON: 1mo change of -3.45%
+2025-01-19 12:47:29,670 - INFO - Processing BYON - 2024-11-21 02:32:00 UTC
+2025-01-19 12:47:30,289 - INFO - Processing BYRN - 2025-01-16 16:30:00 UTC
+2025-01-19 12:47:30,926 - INFO - Retrieved article length: 186 characters
+2025-01-19 12:47:31,023 - INFO - BYON: 1h change of -10.96%
+2025-01-19 12:47:31,111 - INFO - BYON: 1wk change of -3.23%
+2025-01-19 12:47:31,198 - INFO - BYON: 1mo change of -52.13%
+2025-01-19 12:47:31,456 - INFO - Retrieved article length: 7519 characters
+2025-01-19 12:47:31,574 - INFO - BYRN: 1h change of 4.79%
+2025-01-19 12:47:31,664 - INFO - BYRN: 1wk change of 6.52%
+2025-01-19 12:47:31,701 - INFO - Processing BYON - 2024-11-21 01:10:00 UTC
+2025-01-19 12:47:31,770 - INFO - BYRN: 1mo change of 18.50%
+2025-01-19 12:47:32,277 - INFO - Processing BYRN - 2025-01-16 00:05:00 UTC
+2025-01-19 12:47:32,924 - INFO - Retrieved article length: 4197 characters
+2025-01-19 12:47:32,924 - INFO - BYON: 1h change of -10.96%
+2025-01-19 12:47:32,938 - INFO - BYON: 1wk change of -3.23%
+2025-01-19 12:47:32,944 - INFO - BYON: 1mo change of -52.13%
+2025-01-19 12:47:33,447 - INFO - Processing BYON - 2024-10-31 22:45:00 UTC
+2025-01-19 12:47:33,540 - INFO - Retrieved article length: 7159 characters
+2025-01-19 12:47:33,540 - INFO - BYRN: 1h change of 4.79%
+2025-01-19 12:47:33,593 - INFO - BYRN: 1wk change of 6.52%
+2025-01-19 12:47:33,655 - INFO - BYRN: 1mo change of 18.50%
+2025-01-19 12:47:34,157 - INFO - Processing BYRN - 2024-12-20 14:02:23 UTC
+2025-01-19 12:47:34,700 - INFO - Retrieved article length: 7673 characters
+2025-01-19 12:47:34,804 - INFO - BYON: 1h change of -9.52%
+2025-01-19 12:47:34,889 - INFO - BYON: 1wk change of -38.42%
+2025-01-19 12:47:35,007 - INFO - BYON: 1mo change of -36.67%
+2025-01-19 12:47:35,405 - INFO - Retrieved article length: 7078 characters
+2025-01-19 12:47:35,509 - INFO - Processing BYON - 2024-10-30 00:55:00 UTC
+2025-01-19 12:47:35,513 - INFO - BYRN: 1h change of 6.75%
+2025-01-19 12:47:35,604 - INFO - BYRN: 1wk change of 38.27%
+2025-01-19 12:47:35,695 - INFO - BYRN: 1mo change of 60.48%
+2025-01-19 12:47:36,198 - INFO - Processing BYRN - 2024-12-19 16:30:00 UTC
+2025-01-19 12:47:36,693 - INFO - Retrieved article length: 151 characters
+2025-01-19 12:47:36,786 - INFO - BYON: 1h change of -10.47%
+2025-01-19 12:47:36,866 - INFO - BYON: 1wk change of -38.42%
+2025-01-19 12:47:36,968 - INFO - BYON: 1mo change of -35.63%
+2025-01-19 12:47:37,350 - INFO - Retrieved article length: 9502 characters
+2025-01-19 12:47:37,470 - INFO - Processing BYON - 2024-10-28 09:00:48 UTC
+2025-01-19 12:47:37,470 - INFO - BYRN: 1h change of 13.17%
+2025-01-19 12:47:37,564 - INFO - BYRN: 1wk change of 58.88%
+2025-01-19 12:47:37,643 - INFO - BYRN: 1mo change of 56.72%
+2025-01-19 12:47:38,155 - INFO - Processing BYRN - 2024-12-18 18:55:35 UTC
+2025-01-19 12:47:38,725 - INFO - Retrieved article length: 1287 characters
+2025-01-19 12:47:38,811 - INFO - BYON: 1h change of -5.94%
+2025-01-19 12:47:38,912 - INFO - BYON: 1wk change of -39.73%
+2025-01-19 12:47:39,065 - INFO - BYON: 1mo change of -36.78%
+2025-01-19 12:47:39,420 - INFO - Retrieved article length: 4198 characters
+2025-01-19 12:47:39,527 - INFO - BYRN: 1h change of 11.30%
+2025-01-19 12:47:39,623 - INFO - BYRN: 1wk change of 58.88%
+2025-01-19 12:47:39,721 - INFO - BYRN: 1mo change of 54.33%
+2025-01-19 12:47:40,221 - INFO - Processing BYRN - 2024-12-17 16:30:00 UTC
+2025-01-19 12:47:40,698 - INFO - Processing BYSI - 2024-11-11 16:00:00 UTC
+2025-01-19 12:47:41,391 - INFO - Retrieved article length: 8692 characters
+2025-01-19 12:47:41,487 - INFO - BYRN: 1h change of 2.99%
+2025-01-19 12:47:41,563 - INFO - BYRN: 1wk change of 64.59%
+2025-01-19 12:47:41,666 - INFO - BYRN: 1mo change of 59.96%
+2025-01-19 12:47:42,167 - INFO - Processing BYRN - 2024-12-12 16:30:00 UTC
+2025-01-19 12:47:43,108 - INFO - Retrieved article length: 7155 characters
+2025-01-19 12:47:43,205 - INFO - BYSI: 1h change of -11.42%
+2025-01-19 12:47:43,287 - INFO - BYSI: 1wk change of -23.32%
+2025-01-19 12:47:43,370 - INFO - BYSI: 1mo change of -29.91%
+2025-01-19 12:47:43,407 - INFO - Retrieved article length: 6938 characters
+2025-01-19 12:47:43,501 - INFO - BYRN: 1h change of 16.78%
+2025-01-19 12:47:43,587 - INFO - BYRN: 1wk change of 61.27%
+2025-01-19 12:47:43,679 - INFO - BYRN: 1mo change of 63.20%
+2025-01-19 12:47:44,181 - INFO - Processing BYRN - 2024-12-12 15:46:09 UTC
+2025-01-19 12:47:45,012 - INFO - Processing BYU - 2025-01-19 12:40:00 UTC
+2025-01-19 12:47:45,378 - INFO - Retrieved article length: 1586 characters
+2025-01-19 12:47:45,395 - INFO - BYRN: 1h change of 16.78%
+2025-01-19 12:47:45,396 - INFO - BYRN: 1wk change of 61.27%
+2025-01-19 12:47:45,402 - INFO - BYRN: 1mo change of 63.20%
+2025-01-19 12:47:46,150 - INFO - Retrieved article length: 6409 characters
+2025-01-19 12:47:46,236 - ERROR - BYU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 12:47:46,923 - INFO - Processing BYU - 2025-01-19 12:39:20 UTC
+2025-01-19 12:47:48,576 - INFO - Retrieved article length: 5183 characters
+2025-01-19 12:47:48,622 - ERROR - BYU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 12:47:49,234 - INFO - Processing BYU - 2025-01-19 12:37:00 UTC
+2025-01-19 12:47:50,419 - INFO - Retrieved article length: 5502 characters
+2025-01-19 12:47:50,475 - ERROR - BYU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 12:47:51,076 - INFO - Processing BYU - 2025-01-19 12:33:00 UTC
+2025-01-19 12:47:52,258 - INFO - Retrieved article length: 6605 characters
+2025-01-19 12:47:52,300 - ERROR - BYU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 12:47:52,902 - INFO - Processing BYU - 2025-01-19 12:30:00 UTC
+2025-01-19 12:47:54,040 - INFO - Retrieved article length: 5271 characters
+2025-01-19 12:47:54,095 - ERROR - BYU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 12:47:54,697 - INFO - Processing BYU - 2025-01-19 12:30:00 UTC
+2025-01-19 12:47:55,923 - INFO - Retrieved article length: 8375 characters
+2025-01-19 12:47:55,961 - ERROR - BYU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 12:47:56,610 - INFO - Processing BYU - 2025-01-19 12:30:00 UTC
+2025-01-19 12:47:57,763 - INFO - Retrieved article length: 5607 characters
+2025-01-19 12:47:57,867 - ERROR - BYU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 12:47:58,516 - INFO - Processing BYU - 2025-01-19 12:30:00 UTC
+2025-01-19 12:47:59,687 - INFO - Retrieved article length: 5691 characters
+2025-01-19 12:47:59,726 - ERROR - BYU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)

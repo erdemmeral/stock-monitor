@@ -194,8 +194,13 @@ class RealTimeMonitor:
                 predictions = article_data['predictions']
                 publish_time = datetime.fromtimestamp(article_data['article']['providerPublishTime'], tz=pytz.UTC)
                 time_passed = current_time - publish_time
-                
-                if timeframe in predictions and time_passed < deadlines[timeframe]:
+
+                # Check if at least 70% of the timeframe is still available
+                time_remaining_ratio = (deadline - time_passed) / deadline
+
+                if (timeframe in predictions and 
+                time_passed < deadline and 
+                time_remaining_ratio >= 0.7):
                     valid_preds.append(predictions[timeframe])
 
             if valid_preds:

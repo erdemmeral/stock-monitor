@@ -1,0 +1,745 @@
+2025-01-19 17:05:06,887 - INFO - Starting new training session. Logging to: logs/training_20250119_170506.log
+2025-01-19 17:05:06,888 - INFO - Starting new training session. Logging to: logs/training_20250119_170506.log
+2025-01-19 17:05:06,889 - INFO - Starting new training session. Logging to: logs/training_20250119_170506.log
+2025-01-19 17:05:06,889 - INFO - Starting new training session. Logging to: logs/training_20250119_170506.log
+2025-01-19 17:05:07,467 - INFO - Processing ZEO - 2024-11-06 16:30:00 UTC
+2025-01-19 17:05:07,493 - INFO - Processing ZETA - 2025-01-18 20:28:30 UTC
+2025-01-19 17:05:07,503 - INFO - Processing ZENV - 2025-01-14 15:00:00 UTC
+2025-01-19 17:05:07,554 - INFO - Processing ZENA - 2025-01-16 15:30:00 UTC
+2025-01-19 17:05:08,280 - INFO - Retrieved article length: 6410 characters
+2025-01-19 17:05:08,322 - INFO - Retrieved article length: 1798 characters
+2025-01-19 17:05:08,373 - INFO - Retrieved article length: 11245 characters
+2025-01-19 17:05:08,409 - INFO - Retrieved article length: 7356 characters
+2025-01-19 17:05:08,442 - INFO - ZENV: 1h change of -1.55%
+2025-01-19 17:05:08,514 - INFO - ZENA: 1h change of 10.68%
+2025-01-19 17:05:08,525 - INFO - ZENV: 1wk change of -17.38%
+2025-01-19 17:05:08,526 - INFO - ZEO: 1h change of -14.44%
+2025-01-19 17:05:08,593 - INFO - ZETA: 1mo change of -13.70%
+2025-01-19 17:05:08,593 - INFO - Processing ZETA - 2025-01-16 22:29:31 UTC
+2025-01-19 17:05:08,606 - INFO - ZEO: 1wk change of -12.32%
+2025-01-19 17:05:08,610 - INFO - ZENA: 1wk change of -13.19%
+2025-01-19 17:05:08,618 - INFO - ZENV: 1mo change of 40.36%
+2025-01-19 17:05:08,618 - INFO - Processing ZENV - 2025-01-14 00:15:00 UTC
+2025-01-19 17:05:08,686 - INFO - ZEO: 1mo change of 65.66%
+2025-01-19 17:05:08,707 - INFO - ZENA: 1mo change of -16.05%
+2025-01-19 17:05:08,708 - INFO - Processing ZENA - 2025-01-14 15:30:00 UTC
+2025-01-19 17:05:08,850 - INFO - Processing ZI - 2025-01-17 00:05:00 UTC
+2025-01-19 17:05:09,356 - INFO - Retrieved article length: 6708 characters
+2025-01-19 17:05:09,357 - INFO - Retrieved article length: 6789 characters
+2025-01-19 17:05:09,364 - INFO - ZENV: 1h change of -1.55%
+2025-01-19 17:05:09,417 - INFO - ZENV: 1wk change of -17.38%
+2025-01-19 17:05:09,431 - INFO - Retrieved article length: 10730 characters
+2025-01-19 17:05:09,456 - INFO - ZETA: 1h change of 7.15%
+2025-01-19 17:05:09,470 - INFO - ZENV: 1mo change of 40.36%
+2025-01-19 17:05:09,470 - INFO - Processing ZENV - 2024-12-25 14:19:03 UTC
+2025-01-19 17:05:09,533 - INFO - ZENA: 1h change of 14.99%
+2025-01-19 17:05:09,537 - INFO - ZETA: 1wk change of -2.11%
+2025-01-19 17:05:09,603 - INFO - Retrieved article length: 4173 characters
+2025-01-19 17:05:09,619 - INFO - ZETA: 1mo change of -14.50%
+2025-01-19 17:05:09,619 - INFO - Processing ZETA - 2025-01-16 17:14:27 UTC
+2025-01-19 17:05:09,631 - INFO - ZENA: 1wk change of -13.19%
+2025-01-19 17:05:09,731 - INFO - ZENA: 1mo change of -8.25%
+2025-01-19 17:05:09,731 - INFO - Processing ZENA - 2025-01-10 15:30:00 UTC
+2025-01-19 17:05:09,853 - INFO - ZI: 1mo change of -2.88%
+2025-01-19 17:05:09,854 - INFO - Processing ZI - 2025-01-15 17:00:00 UTC
+2025-01-19 17:05:10,133 - INFO - Retrieved article length: 3795 characters
+2025-01-19 17:05:10,225 - INFO - ZENV: 1h change of 11.63%
+2025-01-19 17:05:10,308 - INFO - ZENV: 1wk change of 31.95%
+2025-01-19 17:05:10,340 - INFO - Retrieved article length: 527 characters
+2025-01-19 17:05:10,349 - INFO - ZETA: 1h change of 7.15%
+2025-01-19 17:05:10,392 - INFO - ZENV: 1mo change of 73.88%
+2025-01-19 17:05:10,393 - INFO - Processing ZENV - 2024-11-22 16:06:42 UTC
+2025-01-19 17:05:10,401 - INFO - ZETA: 1wk change of -2.11%
+2025-01-19 17:05:10,453 - INFO - ZETA: 1mo change of -14.50%
+2025-01-19 17:05:10,454 - INFO - Processing ZETA - 2025-01-15 19:15:16 UTC
+2025-01-19 17:05:10,466 - INFO - Retrieved article length: 10539 characters
+2025-01-19 17:05:10,567 - INFO - ZENA: 1h change of 3.74%
+2025-01-19 17:05:10,609 - INFO - Retrieved article length: 6052 characters
+2025-01-19 17:05:10,669 - INFO - ZENA: 1wk change of -20.42%
+2025-01-19 17:05:10,711 - INFO - ZI: 1h change of 7.55%
+2025-01-19 17:05:10,771 - INFO - ZENA: 1mo change of -1.61%
+2025-01-19 17:05:10,772 - INFO - Processing ZENA - 2025-01-07 15:30:00 UTC
+2025-01-19 17:05:10,791 - INFO - ZI: 1wk change of -3.63%
+2025-01-19 17:05:10,873 - INFO - ZI: 1mo change of -6.22%
+2025-01-19 17:05:10,873 - INFO - Processing ZI - 2025-01-15 17:00:00 UTC
+2025-01-19 17:05:11,070 - INFO - Retrieved article length: 1958 characters
+2025-01-19 17:05:11,157 - INFO - ZENV: 1h change of 8.91%
+2025-01-19 17:05:11,241 - INFO - ZENV: 1wk change of 37.82%
+2025-01-19 17:05:11,310 - INFO - Retrieved article length: 5810 characters
+2025-01-19 17:05:11,329 - INFO - ZENV: 1mo change of 25.49%
+2025-01-19 17:05:11,329 - INFO - Processing ZENV - 2024-11-20 13:29:30 UTC
+2025-01-19 17:05:11,395 - INFO - ZETA: 1h change of 11.56%
+2025-01-19 17:05:11,475 - INFO - ZETA: 1wk change of -2.11%
+2025-01-19 17:05:11,492 - INFO - Retrieved article length: 9999 characters
+2025-01-19 17:05:11,560 - INFO - ZETA: 1mo change of -13.70%
+2025-01-19 17:05:11,560 - INFO - Processing ZETA - 2025-01-15 12:06:42 UTC
+2025-01-19 17:05:11,591 - INFO - ZENA: 1h change of -13.10%
+2025-01-19 17:05:11,690 - INFO - ZENA: 1wk change of -29.90%
+2025-01-19 17:05:11,758 - INFO - Retrieved article length: 2363 characters
+2025-01-19 17:05:11,766 - INFO - ZI: 1h change of 7.55%
+2025-01-19 17:05:11,785 - INFO - ZENA: 1mo change of -12.57%
+2025-01-19 17:05:11,785 - INFO - Processing ZENA - 2025-01-02 15:30:00 UTC
+2025-01-19 17:05:11,817 - INFO - ZI: 1wk change of -3.63%
+2025-01-19 17:05:11,871 - INFO - ZI: 1mo change of -6.22%
+2025-01-19 17:05:11,871 - INFO - Processing ZI - 2025-01-13 15:06:00 UTC
+2025-01-19 17:05:12,130 - INFO - Retrieved article length: 4087 characters
+2025-01-19 17:05:12,217 - INFO - ZENV: 1h change of 17.09%
+2025-01-19 17:05:12,249 - INFO - Retrieved article length: 6329 characters
+2025-01-19 17:05:12,257 - INFO - ZETA: 1h change of 11.56%
+2025-01-19 17:05:12,307 - INFO - ZENV: 1wk change of 34.43%
+2025-01-19 17:05:12,309 - INFO - ZETA: 1wk change of -2.11%
+2025-01-19 17:05:12,367 - INFO - ZETA: 1mo change of -13.70%
+2025-01-19 17:05:12,367 - INFO - Processing ZETA - 2025-01-14 12:05:52 UTC
+2025-01-19 17:05:12,402 - INFO - ZENV: 1mo change of 25.81%
+2025-01-19 17:05:12,402 - INFO - Processing ZENV - 2024-11-19 06:25:06 UTC
+2025-01-19 17:05:12,463 - INFO - Retrieved article length: 10867 characters
+2025-01-19 17:05:12,569 - INFO - ZENA: 1h change of -9.21%
+2025-01-19 17:05:12,617 - INFO - Retrieved article length: 2466 characters
+2025-01-19 17:05:12,672 - INFO - ZENA: 1wk change of -27.21%
+2025-01-19 17:05:12,707 - INFO - ZI: 1h change of 3.06%
+2025-01-19 17:05:12,774 - INFO - ZENA: 1mo change of -30.85%
+2025-01-19 17:05:12,774 - INFO - Processing ZENA - 2024-12-31 13:40:51 UTC
+2025-01-19 17:05:12,794 - INFO - ZI: 1wk change of -5.03%
+2025-01-19 17:05:12,882 - INFO - ZI: 1mo change of -7.85%
+2025-01-19 17:05:12,882 - INFO - Processing ZI - 2025-01-07 16:00:36 UTC
+2025-01-19 17:05:13,041 - INFO - Retrieved article length: 4546 characters
+2025-01-19 17:05:13,128 - INFO - ZETA: 1h change of 6.33%
+2025-01-19 17:05:13,159 - INFO - Retrieved article length: 3170 characters
+2025-01-19 17:05:13,213 - INFO - ZETA: 1wk change of -2.11%
+2025-01-19 17:05:13,248 - INFO - ZENV: 1h change of 14.53%
+2025-01-19 17:05:13,299 - INFO - ZETA: 1mo change of -13.42%
+2025-01-19 17:05:13,299 - INFO - Processing ZETA - 2025-01-07 16:30:00 UTC
+2025-01-19 17:05:13,338 - INFO - ZENV: 1wk change of 40.98%
+2025-01-19 17:05:13,425 - INFO - ZENV: 1mo change of 23.75%
+2025-01-19 17:05:13,426 - INFO - Processing ZENV - 2024-11-19 03:40:00 UTC
+2025-01-19 17:05:13,663 - INFO - Retrieved article length: 6279 characters
+2025-01-19 17:05:13,739 - INFO - Retrieved article length: 548 characters
+2025-01-19 17:05:13,760 - INFO - ZENA: 1h change of -10.19%
+2025-01-19 17:05:13,832 - INFO - ZI: 1h change of -10.49%
+2025-01-19 17:05:13,857 - INFO - ZENA: 1wk change of -26.13%
+2025-01-19 17:05:13,912 - INFO - ZI: 1wk change of -2.12%
+2025-01-19 17:05:13,955 - INFO - ZENA: 1mo change of -40.58%
+2025-01-19 17:05:13,955 - INFO - Processing ZENA - 2024-12-30 15:30:00 UTC
+2025-01-19 17:05:13,997 - INFO - ZI: 1mo change of -8.18%
+2025-01-19 17:05:13,997 - INFO - Processing ZI - 2025-01-06 16:15:23 UTC
+2025-01-19 17:05:14,025 - INFO - Retrieved article length: 7957 characters
+2025-01-19 17:05:14,119 - INFO - ZETA: 1h change of -2.01%
+2025-01-19 17:05:14,201 - INFO - ZETA: 1wk change of 4.15%
+2025-01-19 17:05:14,288 - INFO - ZETA: 1mo change of -22.36%
+2025-01-19 17:05:14,288 - INFO - Processing ZETA - 2025-01-07 00:05:00 UTC
+2025-01-19 17:05:14,501 - INFO - Retrieved article length: 27760 characters
+2025-01-19 17:05:14,509 - INFO - ZENV: 1h change of 14.53%
+2025-01-19 17:05:14,516 - INFO - ZENV: 1wk change of 40.98%
+2025-01-19 17:05:14,522 - INFO - ZENV: 1mo change of 23.75%
+2025-01-19 17:05:14,522 - INFO - Processing ZENV - 2024-11-16 06:45:54 UTC
+2025-01-19 17:05:14,818 - INFO - Retrieved article length: 8508 characters
+2025-01-19 17:05:14,924 - INFO - ZENA: 1h change of -10.19%
+2025-01-19 17:05:14,973 - INFO - Retrieved article length: 4399 characters
+2025-01-19 17:05:14,981 - INFO - ZETA: 1h change of -2.01%
+2025-01-19 17:05:14,988 - INFO - ZETA: 1wk change of 4.15%
+2025-01-19 17:05:15,025 - INFO - ZENA: 1wk change of -19.82%
+2025-01-19 17:05:15,031 - INFO - Retrieved article length: 530 characters
+2025-01-19 17:05:15,040 - INFO - ZETA: 1mo change of -22.36%
+2025-01-19 17:05:15,120 - INFO - ZI: 1h change of -5.45%
+2025-01-19 17:05:15,123 - INFO - ZENA: 1mo change of -4.67%
+2025-01-19 17:05:15,123 - INFO - Processing ZENA - 2024-12-19 15:30:00 UTC
+2025-01-19 17:05:15,200 - INFO - ZI: 1wk change of -7.04%
+2025-01-19 17:05:15,219 - INFO - Processing ZION - 2025-01-17 14:03:53 UTC
+2025-01-19 17:05:15,248 - INFO - Retrieved article length: 3062 characters
+2025-01-19 17:05:15,282 - INFO - ZI: 1mo change of -11.09%
+2025-01-19 17:05:15,282 - INFO - Processing ZI - 2025-01-01 13:53:07 UTC
+2025-01-19 17:05:15,335 - INFO - ZENV: 1h change of 1.38%
+2025-01-19 17:05:15,422 - INFO - ZENV: 1wk change of 28.57%
+2025-01-19 17:05:15,507 - INFO - ZENV: 1mo change of 14.89%
+2025-01-19 17:05:15,660 - INFO - Processing ZJK - 2024-12-26 13:04:04 UTC
+2025-01-19 17:05:15,882 - INFO - Retrieved article length: 10875 characters
+2025-01-19 17:05:15,925 - INFO - Retrieved article length: 7072 characters
+2025-01-19 17:05:15,981 - INFO - ZENA: 1h change of 13.18%
+2025-01-19 17:05:15,998 - INFO - Retrieved article length: 4506 characters
+2025-01-19 17:05:16,087 - INFO - ZENA: 1wk change of 44.46%
+2025-01-19 17:05:16,105 - INFO - ZI: 1h change of 1.80%
+2025-01-19 17:05:16,152 - INFO - ZION: 1wk change of 4.77%
+2025-01-19 17:05:16,185 - INFO - ZENA: 1mo change of 255.81%
+2025-01-19 17:05:16,186 - INFO - ZI: 1wk change of -12.85%
+2025-01-19 17:05:16,271 - INFO - ZI: 1mo change of -8.18%
+2025-01-19 17:05:16,271 - INFO - Processing ZI - 2024-12-24 12:04:33 UTC
+2025-01-19 17:05:16,292 - INFO - Retrieved article length: 6739 characters
+2025-01-19 17:05:16,296 - INFO - Processing ZION - 2025-01-14 20:21:00 UTC
+2025-01-19 17:05:16,351 - INFO - Processing ZJYL - 2024-11-19 14:06:00 UTC
+2025-01-19 17:05:16,385 - INFO - ZJK: 1h change of 7.44%
+2025-01-19 17:05:16,474 - INFO - ZJK: 1wk change of -17.41%
+2025-01-19 17:05:16,571 - INFO - ZJK: 1mo change of 74.95%
+2025-01-19 17:05:16,572 - INFO - Processing ZJK - 2024-12-17 16:00:00 UTC
+2025-01-19 17:05:16,994 - INFO - Retrieved article length: 4732 characters
+2025-01-19 17:05:17,040 - INFO - Retrieved article length: 5952 characters
+2025-01-19 17:05:17,079 - INFO - ZION: 1h change of 9.57%
+2025-01-19 17:05:17,124 - INFO - ZI: 1h change of -1.22%
+2025-01-19 17:05:17,192 - INFO - Retrieved article length: 4941 characters
+2025-01-19 17:05:17,206 - INFO - ZI: 1wk change of -3.95%
+2025-01-19 17:05:17,252 - INFO - ZION: 1wk change of 5.49%
+2025-01-19 17:05:17,289 - INFO - ZI: 1mo change of 2.02%
+2025-01-19 17:05:17,292 - INFO - ZJYL: 1h change of -21.71%
+2025-01-19 17:05:17,367 - INFO - Processing ZION - 2025-01-09 16:25:29 UTC
+2025-01-19 17:05:17,390 - INFO - ZJYL: 1wk change of -39.32%
+2025-01-19 17:05:17,486 - INFO - ZJYL: 1mo change of -64.00%
+2025-01-19 17:05:17,567 - INFO - Processing ZLS - 2024-12-23 15:00:00 UTC
+2025-01-19 17:05:17,583 - INFO - Retrieved article length: 20916 characters
+2025-01-19 17:05:17,602 - INFO - Processing ZLSWU - 2025-01-19 17:00:21 UTC
+2025-01-19 17:05:17,670 - INFO - ZJK: 1h change of -22.85%
+2025-01-19 17:05:17,762 - INFO - ZJK: 1wk change of -28.83%
+2025-01-19 17:05:17,854 - INFO - ZJK: 1mo change of 80.31%
+2025-01-19 17:05:17,855 - INFO - Processing ZJK - 2024-12-03 16:00:00 UTC
+2025-01-19 17:05:18,133 - INFO - Retrieved article length: 1846 characters
+2025-01-19 17:05:18,218 - INFO - ZION: 1h change of -3.21%
+2025-01-19 17:05:18,223 - INFO - Retrieved article length: 4622 characters
+2025-01-19 17:05:18,299 - INFO - Retrieved article length: 6804 characters
+2025-01-19 17:05:18,353 - INFO - ZION: 1wk change of 6.85%
+2025-01-19 17:05:18,535 - INFO - ZION: 1mo change of -1.84%
+2025-01-19 17:05:18,535 - INFO - Processing ZION - 2025-01-08 17:03:59 UTC
+2025-01-19 17:05:18,638 - INFO - Retrieved article length: 5616 characters
+2025-01-19 17:05:18,728 - INFO - ZJK: 1h change of 110.00%
+2025-01-19 17:05:18,816 - INFO - ZJK: 1wk change of 91.95%
+2025-01-19 17:05:18,908 - INFO - ZJK: 1mo change of 138.77%
+2025-01-19 17:05:18,909 - INFO - Processing ZJK - 2024-10-30 20:25:00 UTC
+2025-01-19 17:05:19,396 - INFO - Retrieved article length: 529 characters
+2025-01-19 17:05:19,489 - INFO - ZION: 1h change of -1.16%
+2025-01-19 17:05:19,612 - INFO - ZION: 1wk change of 6.85%
+2025-01-19 17:05:19,621 - INFO - Retrieved article length: 6090 characters
+2025-01-19 17:05:19,708 - INFO - ZJK: 1h change of -5.84%
+2025-01-19 17:05:19,733 - INFO - ZION: 1mo change of -1.91%
+2025-01-19 17:05:19,734 - INFO - Processing ZION - 2025-01-07 18:19:49 UTC
+2025-01-19 17:05:19,793 - INFO - ZJK: 1wk change of -3.51%
+2025-01-19 17:05:19,862 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:19,864 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:19,866 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:19,867 - INFO - Processing ZLSWU - 2025-01-19 17:00:06 UTC
+2025-01-19 17:05:19,878 - INFO - ZJK: 1mo change of 245.20%
+2025-01-19 17:05:19,989 - ERROR - ZLS: No timezone found, symbol may be delisted
+2025-01-19 17:05:19,993 - ERROR - ZLS: No timezone found, symbol may be delisted
+2025-01-19 17:05:19,996 - ERROR - ZLS: No timezone found, symbol may be delisted
+2025-01-19 17:05:19,998 - INFO - Processing ZLS - 2024-11-30 15:25:09 UTC
+2025-01-19 17:05:19,999 - INFO - Processing ZM - 2025-01-18 21:20:00 UTC
+2025-01-19 17:05:20,512 - INFO - Retrieved article length: 537 characters
+2025-01-19 17:05:20,600 - INFO - ZION: 1h change of -1.16%
+2025-01-19 17:05:20,641 - INFO - Retrieved article length: 6151 characters
+2025-01-19 17:05:20,643 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:20,644 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:20,644 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:20,644 - INFO - Processing ZLSWU - 2025-01-19 17:00:00 UTC
+2025-01-19 17:05:20,731 - INFO - ZION: 1wk change of 5.45%
+2025-01-19 17:05:20,784 - INFO - Retrieved article length: 1852 characters
+2025-01-19 17:05:20,785 - ERROR - ZLS: No timezone found, symbol may be delisted
+2025-01-19 17:05:20,786 - ERROR - ZLS: No timezone found, symbol may be delisted
+2025-01-19 17:05:20,786 - ERROR - ZLS: No timezone found, symbol may be delisted
+2025-01-19 17:05:20,787 - INFO - Processing ZLS - 2024-11-04 15:00:00 UTC
+2025-01-19 17:05:20,866 - INFO - ZION: 1mo change of -2.09%
+2025-01-19 17:05:20,866 - INFO - Processing ZION - 2024-12-18 18:03:59 UTC
+2025-01-19 17:05:21,299 - INFO - Retrieved article length: 780 characters
+2025-01-19 17:05:21,300 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:21,301 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:21,301 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:21,302 - INFO - Processing ZLSWU - 2025-01-19 17:00:00 UTC
+2025-01-19 17:05:21,535 - INFO - Retrieved article length: 148 characters
+2025-01-19 17:05:21,609 - INFO - Retrieved article length: 6028 characters
+2025-01-19 17:05:21,610 - ERROR - ZLS: No timezone found, symbol may be delisted
+2025-01-19 17:05:21,611 - ERROR - ZLS: No timezone found, symbol may be delisted
+2025-01-19 17:05:21,611 - ERROR - ZLS: No timezone found, symbol may be delisted
+2025-01-19 17:05:21,632 - INFO - ZM: 1h change of -1.63%
+2025-01-19 17:05:21,664 - INFO - Retrieved article length: 7020 characters
+2025-01-19 17:05:21,714 - INFO - ZM: 1wk change of -2.29%
+2025-01-19 17:05:21,754 - INFO - ZION: 1h change of -8.45%
+2025-01-19 17:05:21,784 - INFO - Processing ZNTL - 2025-01-09 20:40:17 UTC
+2025-01-19 17:05:21,802 - INFO - ZM: 1mo change of -6.84%
+2025-01-19 17:05:21,802 - INFO - Processing ZM - 2025-01-16 17:00:00 UTC
+2025-01-19 17:05:21,885 - INFO - ZION: 1wk change of -5.84%
+2025-01-19 17:05:21,983 - INFO - Retrieved article length: 10141 characters
+2025-01-19 17:05:21,984 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:21,985 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:21,985 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:21,985 - INFO - Processing ZLSWU - 2025-01-19 17:00:00 UTC
+2025-01-19 17:05:22,009 - INFO - ZION: 1mo change of -2.91%
+2025-01-19 17:05:22,009 - INFO - Processing ZION - 2024-12-17 17:44:03 UTC
+2025-01-19 17:05:22,490 - INFO - Retrieved article length: 5452 characters
+2025-01-19 17:05:22,598 - INFO - ZM: 1h change of -1.75%
+2025-01-19 17:05:22,602 - INFO - Retrieved article length: 534 characters
+2025-01-19 17:05:22,660 - INFO - Retrieved article length: 7765 characters
+2025-01-19 17:05:22,661 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:22,661 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:22,662 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:22,662 - INFO - Processing ZLSWU - 2025-01-19 16:59:20 UTC
+2025-01-19 17:05:22,681 - INFO - ZM: 1wk change of -5.19%
+2025-01-19 17:05:22,685 - INFO - ZNTL: 1h change of -9.12%
+2025-01-19 17:05:22,767 - INFO - ZNTL: 1wk change of -23.29%
+2025-01-19 17:05:22,767 - INFO - ZM: 1mo change of -10.32%
+2025-01-19 17:05:22,767 - INFO - Processing ZM - 2025-01-09 14:45:00 UTC
+2025-01-19 17:05:22,829 - INFO - Retrieved article length: 524 characters
+2025-01-19 17:05:22,847 - INFO - ZNTL: 1mo change of -32.93%
+2025-01-19 17:05:22,847 - INFO - Processing ZNTL - 2025-01-09 20:00:13 UTC
+2025-01-19 17:05:22,918 - INFO - ZION: 1h change of -7.05%
+2025-01-19 17:05:23,046 - INFO - ZION: 1wk change of -4.68%
+2025-01-19 17:05:23,174 - INFO - ZION: 1mo change of -2.06%
+2025-01-19 17:05:23,175 - INFO - Processing ZION - 2024-12-10 00:03:00 UTC
+2025-01-19 17:05:23,286 - INFO - Retrieved article length: 3970 characters
+2025-01-19 17:05:23,287 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:23,288 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:23,289 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:23,289 - INFO - Processing ZLSWU - 2025-01-19 16:59:09 UTC
+2025-01-19 17:05:23,499 - INFO - Retrieved article length: 5712 characters
+2025-01-19 17:05:23,562 - INFO - Retrieved article length: 4621 characters
+2025-01-19 17:05:23,569 - INFO - ZNTL: 1h change of -9.12%
+2025-01-19 17:05:23,576 - INFO - ZNTL: 1wk change of -23.29%
+2025-01-19 17:05:23,588 - INFO - ZM: 1h change of -3.36%
+2025-01-19 17:05:23,627 - INFO - ZNTL: 1mo change of -32.93%
+2025-01-19 17:05:23,627 - INFO - Processing ZNTL - 2025-01-09 15:00:00 UTC
+2025-01-19 17:05:23,674 - INFO - ZM: 1wk change of -5.63%
+2025-01-19 17:05:23,764 - INFO - ZM: 1mo change of -6.35%
+2025-01-19 17:05:23,764 - INFO - Processing ZM - 2025-01-08 14:00:00 UTC
+2025-01-19 17:05:23,904 - INFO - Retrieved article length: 8275 characters
+2025-01-19 17:05:23,905 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:23,906 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:23,906 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:23,907 - INFO - Processing ZLSWU - 2025-01-19 16:57:10 UTC
+2025-01-19 17:05:23,924 - INFO - Retrieved article length: 2337 characters
+2025-01-19 17:05:24,141 - INFO - ZION: 1wk change of -12.62%
+2025-01-19 17:05:24,335 - INFO - ZION: 1mo change of 5.23%
+2025-01-19 17:05:24,458 - INFO - Processing ZOM - 2025-01-07 14:30:00 UTC
+2025-01-19 17:05:24,472 - INFO - Retrieved article length: 155 characters
+2025-01-19 17:05:24,497 - INFO - Retrieved article length: 10088 characters
+2025-01-19 17:05:24,506 - INFO - ZNTL: 1h change of -9.12%
+2025-01-19 17:05:24,512 - INFO - ZNTL: 1wk change of -23.29%
+2025-01-19 17:05:24,560 - INFO - ZM: 1h change of -4.20%
+2025-01-19 17:05:24,562 - INFO - ZNTL: 1mo change of -32.93%
+2025-01-19 17:05:24,563 - INFO - Processing ZNTL - 2025-01-03 00:53:00 UTC
+2025-01-19 17:05:24,643 - INFO - ZM: 1wk change of -5.63%
+2025-01-19 17:05:24,651 - INFO - Retrieved article length: 8379 characters
+2025-01-19 17:05:24,652 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:24,653 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:24,654 - ERROR - ZLSWU: No timezone found, symbol may be delisted
+2025-01-19 17:05:24,730 - INFO - ZM: 1mo change of -6.67%
+2025-01-19 17:05:24,730 - INFO - Processing ZM - 2025-01-07 18:23:28 UTC
+2025-01-19 17:05:24,826 - INFO - Processing ZOOZ - 2024-11-26 16:05:00 UTC
+2025-01-19 17:05:25,201 - INFO - Retrieved article length: 10754 characters
+2025-01-19 17:05:25,217 - INFO - Retrieved article length: 3706 characters
+2025-01-19 17:05:25,292 - INFO - ZOM: 1h change of -5.69%
+2025-01-19 17:05:25,301 - INFO - ZNTL: 1h change of 7.41%
+2025-01-19 17:05:25,376 - INFO - ZOM: 1wk change of 4.96%
+2025-01-19 17:05:25,381 - INFO - ZNTL: 1wk change of -14.60%
+2025-01-19 17:05:25,461 - INFO - ZNTL: 1mo change of -37.95%
+2025-01-19 17:05:25,461 - INFO - Processing ZNTL - 2024-12-24 23:06:07 UTC
+2025-01-19 17:05:25,464 - INFO - Processing ZOM - 2024-12-23 14:30:00 UTC
+2025-01-19 17:05:25,489 - INFO - Retrieved article length: 512 characters
+2025-01-19 17:05:25,575 - INFO - ZM: 1h change of -4.20%
+2025-01-19 17:05:25,662 - INFO - Retrieved article length: 5154 characters
+2025-01-19 17:05:25,668 - INFO - ZM: 1wk change of -3.98%
+2025-01-19 17:05:25,769 - INFO - ZOOZ: 1h change of 3.20%
+2025-01-19 17:05:25,777 - INFO - ZM: 1mo change of -5.52%
+2025-01-19 17:05:25,778 - INFO - Processing ZM - 2025-01-01 00:02:40 UTC
+2025-01-19 17:05:25,875 - INFO - ZOOZ: 1wk change of 9.19%
+2025-01-19 17:05:25,978 - INFO - ZOOZ: 1mo change of 1.90%
+2025-01-19 17:05:25,978 - INFO - Processing ZOOZ - 2024-11-14 17:20:00 UTC
+2025-01-19 17:05:26,199 - INFO - Retrieved article length: 7140 characters
+2025-01-19 17:05:26,288 - INFO - ZNTL: 1h change of 4.67%
+2025-01-19 17:05:26,379 - INFO - ZNTL: 1wk change of -3.23%
+2025-01-19 17:05:26,477 - INFO - ZNTL: 1mo change of -25.08%
+2025-01-19 17:05:26,477 - INFO - Processing ZNTL - 2024-12-19 18:41:07 UTC
+2025-01-19 17:05:26,767 - INFO - Retrieved article length: 7836 characters
+2025-01-19 17:05:26,869 - INFO - ZOOZ: 1h change of -5.88%
+2025-01-19 17:05:26,913 - INFO - Retrieved article length: 151 characters
+2025-01-19 17:05:26,966 - INFO - ZOOZ: 1wk change of 13.52%
+2025-01-19 17:05:27,061 - INFO - ZOOZ: 1mo change of 2.59%
+2025-01-19 17:05:27,077 - INFO - Retrieved article length: 9967 characters
+2025-01-19 17:05:27,116 - INFO - ZM: 1wk change of -6.81%
+2025-01-19 17:05:27,198 - INFO - ZM: 1mo change of -8.54%
+2025-01-19 17:05:27,199 - INFO - Processing ZM - 2024-12-30 18:43:00 UTC
+2025-01-19 17:05:27,251 - INFO - Processing ZROZ - 2024-11-18 17:00:00 UTC
+2025-01-19 17:05:27,256 - INFO - ZOM: 1wk change of -2.44%
+2025-01-19 17:05:27,325 - INFO - Retrieved article length: 494 characters
+2025-01-19 17:05:27,338 - INFO - ZOM: 1mo change of 2.36%
+2025-01-19 17:05:27,338 - INFO - Processing ZOM - 2024-12-19 14:30:00 UTC
+2025-01-19 17:05:27,413 - INFO - ZNTL: 1h change of -1.95%
+2025-01-19 17:05:27,505 - INFO - ZNTL: 1wk change of -21.34%
+2025-01-19 17:05:27,591 - INFO - ZNTL: 1mo change of -43.29%
+2025-01-19 17:05:27,592 - INFO - Processing ZNTL - 2024-12-12 15:00:00 UTC
+2025-01-19 17:05:27,869 - INFO - Retrieved article length: 2274 characters
+2025-01-19 17:05:27,879 - INFO - Retrieved article length: 6018 characters
+2025-01-19 17:05:27,971 - INFO - ZROZ: 1h change of 2.00%
+2025-01-19 17:05:28,055 - INFO - ZM: 1wk change of -6.66%
+2025-01-19 17:05:28,143 - INFO - ZM: 1mo change of -12.31%
+2025-01-19 17:05:28,143 - INFO - Processing ZM - 2024-12-30 12:01:16 UTC
+2025-01-19 17:05:28,198 - INFO - ZROZ: 1mo change of -7.22%
+2025-01-19 17:05:28,276 - INFO - Retrieved article length: 9634 characters
+2025-01-19 17:05:28,324 - INFO - Processing ZS - 2025-01-19 12:40:00 UTC
+2025-01-19 17:05:28,331 - INFO - Retrieved article length: 8146 characters
+2025-01-19 17:05:28,420 - INFO - ZNTL: 1h change of -16.26%
+2025-01-19 17:05:28,447 - INFO - ZOM: 1wk change of -4.72%
+2025-01-19 17:05:28,513 - INFO - ZNTL: 1wk change of -18.03%
+2025-01-19 17:05:28,538 - INFO - ZOM: 1mo change of -5.80%
+2025-01-19 17:05:28,538 - INFO - Processing ZOM - 2024-11-27 14:30:00 UTC
+2025-01-19 17:05:28,593 - INFO - ZNTL: 1mo change of -25.20%
+2025-01-19 17:05:28,593 - INFO - Processing ZNTL - 2024-11-25 23:04:51 UTC
+2025-01-19 17:05:28,972 - INFO - Retrieved article length: 5544 characters
+2025-01-19 17:05:28,985 - INFO - ZM: 1wk change of -6.66%
+2025-01-19 17:05:29,039 - INFO - ZM: 1mo change of -12.31%
+2025-01-19 17:05:29,181 - INFO - Processing ZTEK - 2025-01-17 16:00:00 UTC
+2025-01-19 17:05:29,235 - INFO - Retrieved article length: 6409 characters
+2025-01-19 17:05:29,308 - INFO - Retrieved article length: 4027 characters
+2025-01-19 17:05:29,309 - INFO - Retrieved article length: 7077 characters
+2025-01-19 17:05:29,398 - INFO - ZOM: 1h change of -2.28%
+2025-01-19 17:05:29,436 - INFO - ZS: 1wk change of -1.26%
+2025-01-19 17:05:29,477 - INFO - ZNTL: 1wk change of -2.31%
+2025-01-19 17:05:29,534 - INFO - ZS: 1mo change of -8.23%
+2025-01-19 17:05:29,534 - INFO - Processing ZS - 2025-01-17 17:30:12 UTC
+2025-01-19 17:05:29,560 - INFO - ZNTL: 1mo change of -4.38%
+2025-01-19 17:05:29,571 - INFO - Processing ZOM - 2024-11-14 14:30:00 UTC
+2025-01-19 17:05:29,679 - INFO - Processing ZTS - 2025-01-17 15:30:00 UTC
+2025-01-19 17:05:29,944 - INFO - Retrieved article length: 6108 characters
+2025-01-19 17:05:30,041 - INFO - ZTEK: 1h change of 14.55%
+2025-01-19 17:05:30,128 - INFO - ZTEK: 1wk change of 9.26%
+2025-01-19 17:05:30,221 - INFO - ZTEK: 1mo change of 4.42%
+2025-01-19 17:05:30,221 - INFO - Processing ZTEK - 2025-01-08 17:10:00 UTC
+2025-01-19 17:05:30,270 - INFO - Retrieved article length: 9126 characters
+2025-01-19 17:05:30,335 - INFO - Retrieved article length: 5192 characters
+2025-01-19 17:05:30,437 - INFO - ZOM: 1wk change of 8.33%
+2025-01-19 17:05:30,440 - INFO - ZS: 1h change of -1.22%
+2025-01-19 17:05:30,479 - INFO - Retrieved article length: 5088 characters
+2025-01-19 17:05:30,523 - INFO - ZOM: 1mo change of -9.23%
+2025-01-19 17:05:30,524 - INFO - Processing ZOM - 2024-11-12 14:30:00 UTC
+2025-01-19 17:05:30,535 - INFO - ZS: 1wk change of 2.00%
+2025-01-19 17:05:30,638 - INFO - ZS: 1mo change of -5.52%
+2025-01-19 17:05:30,638 - INFO - Processing ZS - 2025-01-17 14:34:32 UTC
+2025-01-19 17:05:30,668 - INFO - ZTS: 1wk change of 1.47%
+2025-01-19 17:05:30,767 - INFO - ZTS: 1mo change of -6.90%
+2025-01-19 17:05:30,767 - INFO - Processing ZTS - 2025-01-16 18:56:46 UTC
+2025-01-19 17:05:31,039 - INFO - Retrieved article length: 7957 characters
+2025-01-19 17:05:31,138 - INFO - ZTEK: 1h change of 2.91%
+2025-01-19 17:05:31,225 - INFO - ZTEK: 1wk change of 21.65%
+2025-01-19 17:05:31,296 - INFO - Retrieved article length: 3586 characters
+2025-01-19 17:05:31,310 - INFO - ZTEK: 1mo change of 8.26%
+2025-01-19 17:05:31,310 - INFO - Processing ZTEK - 2024-12-12 16:30:00 UTC
+2025-01-19 17:05:31,357 - INFO - Retrieved article length: 3073 characters
+2025-01-19 17:05:31,366 - INFO - ZS: 1h change of -1.22%
+2025-01-19 17:05:31,380 - INFO - ZOM: 1h change of 22.06%
+2025-01-19 17:05:31,432 - INFO - ZS: 1wk change of 2.00%
+2025-01-19 17:05:31,465 - INFO - ZOM: 1wk change of 9.17%
+2025-01-19 17:05:31,498 - INFO - ZS: 1mo change of -5.52%
+2025-01-19 17:05:31,498 - INFO - Processing ZS - 2025-01-17 01:45:20 UTC
+2025-01-19 17:05:31,519 - INFO - Retrieved article length: 528 characters
+2025-01-19 17:05:31,546 - INFO - ZOM: 1mo change of -8.40%
+2025-01-19 17:05:31,547 - INFO - Processing ZOM - 2024-11-08 22:02:56 UTC
+2025-01-19 17:05:31,848 - INFO - ZTS: 1mo change of -7.24%
+2025-01-19 17:05:31,849 - INFO - Processing ZTS - 2025-01-14 22:54:20 UTC
+2025-01-19 17:05:32,007 - INFO - Retrieved article length: 5960 characters
+2025-01-19 17:05:32,199 - INFO - ZTEK: 1wk change of -22.52%
+2025-01-19 17:05:32,228 - INFO - Retrieved article length: 3371 characters
+2025-01-19 17:05:32,237 - INFO - ZS: 1h change of -1.22%
+2025-01-19 17:05:32,282 - INFO - ZTEK: 1mo change of 25.64%
+2025-01-19 17:05:32,282 - INFO - Processing ZTEK - 2024-12-09 19:30:00 UTC
+2025-01-19 17:05:32,285 - INFO - Retrieved article length: 4387 characters
+2025-01-19 17:05:32,303 - INFO - ZS: 1wk change of 2.00%
+2025-01-19 17:05:32,369 - INFO - ZS: 1mo change of -5.52%
+2025-01-19 17:05:32,369 - INFO - ZOM: 1h change of -1.72%
+2025-01-19 17:05:32,370 - INFO - Processing ZS - 2025-01-16 03:19:04 UTC
+2025-01-19 17:05:32,458 - INFO - ZOM: 1wk change of 11.57%
+2025-01-19 17:05:32,544 - INFO - ZOM: 1mo change of -10.87%
+2025-01-19 17:05:32,544 - INFO - Processing ZOM - 2024-11-08 14:30:00 UTC
+2025-01-19 17:05:32,618 - INFO - Retrieved article length: 446 characters
+2025-01-19 17:05:32,706 - INFO - ZTS: 1h change of 1.47%
+2025-01-19 17:05:32,919 - INFO - ZTS: 1mo change of -6.12%
+2025-01-19 17:05:32,919 - INFO - Processing ZTS - 2025-01-10 17:00:31 UTC
+2025-01-19 17:05:33,059 - INFO - Retrieved article length: 3203 characters
+2025-01-19 17:05:33,143 - INFO - Retrieved article length: 195 characters
+2025-01-19 17:05:33,144 - INFO - ZTEK: 1h change of -3.51%
+2025-01-19 17:05:33,229 - INFO - ZTEK: 1wk change of -17.65%
+2025-01-19 17:05:33,251 - INFO - Retrieved article length: 2989 characters
+2025-01-19 17:05:33,260 - INFO - ZOM: 1h change of -1.72%
+2025-01-19 17:05:33,265 - INFO - ZOM: 1wk change of 11.57%
+2025-01-19 17:05:33,270 - INFO - ZOM: 1mo change of -10.87%
+2025-01-19 17:05:33,312 - INFO - ZTEK: 1mo change of 32.91%
+2025-01-19 17:05:33,313 - INFO - Processing ZTEK - 2024-11-27 16:45:00 UTC
+2025-01-19 17:05:33,445 - INFO - ZS: 1mo change of -9.10%
+2025-01-19 17:05:33,446 - INFO - Processing ZS - 2025-01-14 17:00:18 UTC
+2025-01-19 17:05:33,452 - INFO - Processing ZUO - 2025-01-14 17:00:00 UTC
+2025-01-19 17:05:33,831 - INFO - Retrieved article length: 4966 characters
+2025-01-19 17:05:34,011 - INFO - ZTS: 1wk change of 1.82%
+2025-01-19 17:05:34,035 - INFO - Retrieved article length: 5534 characters
+2025-01-19 17:05:34,106 - INFO - ZTS: 1mo change of -5.99%
+2025-01-19 17:05:34,107 - INFO - Processing ZTS - 2025-01-10 17:00:14 UTC
+2025-01-19 17:05:34,138 - INFO - ZTEK: 1h change of 4.76%
+2025-01-19 17:05:34,163 - INFO - Retrieved article length: 5353 characters
+2025-01-19 17:05:34,225 - INFO - ZTEK: 1wk change of -14.17%
+2025-01-19 17:05:34,314 - INFO - ZTEK: 1mo change of 17.50%
+2025-01-19 17:05:34,314 - INFO - Processing ZTEK - 2024-11-16 16:06:57 UTC
+2025-01-19 17:05:34,414 - INFO - Processing ZUO - 2025-01-04 00:36:21 UTC
+2025-01-19 17:05:34,797 - INFO - Retrieved article length: 5862 characters
+2025-01-19 17:05:34,841 - INFO - Retrieved article length: 2969 characters
+2025-01-19 17:05:34,899 - INFO - ZTS: 1wk change of 1.82%
+2025-01-19 17:05:34,900 - INFO - ZS: 1h change of 1.16%
+2025-01-19 17:05:34,950 - INFO - ZTS: 1mo change of -5.99%
+2025-01-19 17:05:34,950 - INFO - Processing ZTS - 2025-01-09 02:15:20 UTC
+2025-01-19 17:05:34,976 - INFO - Retrieved article length: 1541 characters
+2025-01-19 17:05:35,063 - INFO - ZTEK: 1h change of 33.06%
+2025-01-19 17:05:35,094 - INFO - ZS: 1mo change of -6.86%
+2025-01-19 17:05:35,094 - INFO - Processing ZS - 2025-01-11 01:45:23 UTC
+2025-01-19 17:05:35,146 - INFO - ZTEK: 1wk change of 38.55%
+2025-01-19 17:05:35,230 - INFO - ZTEK: 1mo change of 50.88%
+2025-01-19 17:05:35,231 - INFO - Processing ZTEK - 2024-11-06 15:15:00 UTC
+2025-01-19 17:05:35,279 - INFO - Retrieved article length: 510 characters
+2025-01-19 17:05:35,550 - INFO - Processing ZUO - 2025-01-04 00:36:04 UTC
+2025-01-19 17:05:35,673 - INFO - Retrieved article length: 3406 characters
+2025-01-19 17:05:35,853 - INFO - ZTS: 1wk change of 2.25%
+2025-01-19 17:05:35,861 - INFO - Retrieved article length: 3551 characters
+2025-01-19 17:05:35,956 - INFO - ZTS: 1mo change of -5.08%
+2025-01-19 17:05:35,956 - INFO - Processing ZTS - 2025-01-08 00:15:00 UTC
+2025-01-19 17:05:36,058 - INFO - ZS: 1wk change of 3.26%
+2025-01-19 17:05:36,154 - INFO - ZS: 1mo change of -9.00%
+2025-01-19 17:05:36,154 - INFO - Processing ZS - 2025-01-10 20:16:56 UTC
+2025-01-19 17:05:36,184 - INFO - Retrieved article length: 6806 characters
+2025-01-19 17:05:36,260 - INFO - Retrieved article length: 509 characters
+2025-01-19 17:05:36,272 - INFO - ZTEK: 1h change of -2.39%
+2025-01-19 17:05:36,327 - INFO - Processing ZUO - 2025-01-04 00:35:46 UTC
+2025-01-19 17:05:36,401 - INFO - ZTEK: 1wk change of 57.50%
+2025-01-19 17:05:36,494 - INFO - ZTEK: 1mo change of 59.42%
+2025-01-19 17:05:36,494 - INFO - Processing ZTEK - 2024-10-31 14:15:00 UTC
+2025-01-19 17:05:36,658 - INFO - Retrieved article length: 2755 characters
+2025-01-19 17:05:36,838 - INFO - ZTS: 1wk change of 2.25%
+2025-01-19 17:05:36,938 - INFO - ZTS: 1mo change of -5.38%
+2025-01-19 17:05:36,939 - INFO - Processing ZTS - 2025-01-07 18:55:20 UTC
+2025-01-19 17:05:36,954 - INFO - Retrieved article length: 524 characters
+2025-01-19 17:05:37,052 - INFO - ZS: 1h change of 3.06%
+2025-01-19 17:05:37,076 - INFO - Retrieved article length: 509 characters
+2025-01-19 17:05:37,144 - INFO - Processing ZUO - 2025-01-04 00:31:33 UTC
+2025-01-19 17:05:37,148 - INFO - ZS: 1wk change of 3.97%
+2025-01-19 17:05:37,242 - INFO - ZS: 1mo change of -11.51%
+2025-01-19 17:05:37,257 - INFO - Retrieved article length: 4024 characters
+2025-01-19 17:05:37,352 - INFO - ZTEK: 1h change of -11.68%
+2025-01-19 17:05:37,411 - INFO - Processing ZURA - 2024-12-23 14:30:00 UTC
+2025-01-19 17:05:37,442 - INFO - ZTEK: 1wk change of 1.20%
+2025-01-19 17:05:37,535 - INFO - ZTEK: 1mo change of 51.39%
+2025-01-19 17:05:37,691 - INFO - Processing ZVIA - 2025-01-14 12:07:13 UTC
+2025-01-19 17:05:37,734 - INFO - Retrieved article length: 507 characters
+2025-01-19 17:05:37,867 - INFO - Retrieved article length: 510 characters
+2025-01-19 17:05:37,914 - INFO - ZTS: 1wk change of 4.39%
+2025-01-19 17:05:37,935 - INFO - Processing ZUO - 2024-12-18 12:02:33 UTC
+2025-01-19 17:05:38,010 - INFO - ZTS: 1mo change of -6.25%
+2025-01-19 17:05:38,177 - INFO - Processing ZVRA - 2025-01-16 19:46:25 UTC
+2025-01-19 17:05:38,186 - INFO - Retrieved article length: 10594 characters
+2025-01-19 17:05:38,286 - INFO - ZURA: 1h change of 4.98%
+2025-01-19 17:05:38,296 - INFO - Retrieved article length: 6530 characters
+2025-01-19 17:05:38,386 - INFO - ZURA: 1wk change of 9.65%
+2025-01-19 17:05:38,391 - INFO - ZVIA: 1h change of 14.25%
+2025-01-19 17:05:38,481 - INFO - ZVIA: 1wk change of 3.45%
+2025-01-19 17:05:38,484 - INFO - ZURA: 1mo change of -44.86%
+2025-01-19 17:05:38,484 - INFO - Processing ZURA - 2024-11-25 14:30:00 UTC
+2025-01-19 17:05:38,567 - INFO - ZVIA: 1mo change of 50.00%
+2025-01-19 17:05:38,567 - INFO - Processing ZVIA - 2025-01-13 20:51:40 UTC
+2025-01-19 17:05:38,763 - INFO - Retrieved article length: 6133 characters
+2025-01-19 17:05:38,937 - INFO - Retrieved article length: 4125 characters
+2025-01-19 17:05:39,022 - INFO - Processing ZUO - 2024-12-12 09:00:27 UTC
+2025-01-19 17:05:39,027 - INFO - ZVRA: 1h change of 1.90%
+2025-01-19 17:05:39,114 - INFO - ZVRA: 1wk change of -4.62%
+2025-01-19 17:05:39,151 - INFO - Retrieved article length: 1714 characters
+2025-01-19 17:05:39,194 - INFO - ZVRA: 1mo change of -4.62%
+2025-01-19 17:05:39,194 - INFO - Processing ZVRA - 2024-12-27 13:26:26 UTC
+2025-01-19 17:05:39,252 - INFO - ZURA: 1h change of -3.22%
+2025-01-19 17:05:39,271 - INFO - Retrieved article length: 2794 characters
+2025-01-19 17:05:39,353 - INFO - ZURA: 1wk change of -13.29%
+2025-01-19 17:05:39,356 - INFO - ZVIA: 1h change of 5.96%
+2025-01-19 17:05:39,445 - INFO - ZVIA: 1wk change of 7.38%
+2025-01-19 17:05:39,447 - INFO - ZURA: 1mo change of -48.24%
+2025-01-19 17:05:39,448 - INFO - Processing ZURA - 2024-11-15 00:30:00 UTC
+2025-01-19 17:05:39,537 - INFO - ZVIA: 1mo change of 53.35%
+2025-01-19 17:05:39,537 - INFO - Processing ZVIA - 2025-01-13 16:00:00 UTC
+2025-01-19 17:05:39,712 - INFO - Retrieved article length: 1717 characters
+2025-01-19 17:05:39,942 - INFO - Retrieved article length: 4081 characters
+2025-01-19 17:05:39,976 - INFO - Processing ZUO - 2024-12-10 00:45:33 UTC
+2025-01-19 17:05:40,028 - INFO - ZVRA: 1h change of -2.33%
+2025-01-19 17:05:40,108 - INFO - ZVRA: 1wk change of 1.30%
+2025-01-19 17:05:40,186 - INFO - Retrieved article length: 9464 characters
+2025-01-19 17:05:40,187 - INFO - ZVRA: 1mo change of -16.01%
+2025-01-19 17:05:40,187 - INFO - Processing ZVRA - 2024-12-17 17:03:16 UTC
+2025-01-19 17:05:40,256 - INFO - Retrieved article length: 11964 characters
+2025-01-19 17:05:40,264 - INFO - ZVIA: 1h change of 5.96%
+2025-01-19 17:05:40,283 - INFO - ZURA: 1h change of -30.29%
+2025-01-19 17:05:40,317 - INFO - ZVIA: 1wk change of 7.38%
+2025-01-19 17:05:40,374 - INFO - ZVIA: 1mo change of 53.35%
+2025-01-19 17:05:40,374 - INFO - Processing ZVIA - 2025-01-10 17:40:06 UTC
+2025-01-19 17:05:40,378 - INFO - ZURA: 1wk change of -33.58%
+2025-01-19 17:05:40,476 - INFO - ZURA: 1mo change of -42.36%
+2025-01-19 17:05:40,476 - INFO - Processing ZURA - 2024-11-07 14:30:00 UTC
+2025-01-19 17:05:40,856 - INFO - Retrieved article length: 482 characters
+2025-01-19 17:05:41,093 - INFO - Retrieved article length: 491 characters
+2025-01-19 17:05:41,173 - INFO - ZVRA: 1h change of -4.77%
+2025-01-19 17:05:41,193 - INFO - Retrieved article length: 3010 characters
+2025-01-19 17:05:41,252 - INFO - ZVRA: 1wk change of -3.39%
+2025-01-19 17:05:41,281 - INFO - ZVIA: 1h change of 6.76%
+2025-01-19 17:05:41,298 - INFO - Processing ZVSA - 2024-12-18 15:55:00 UTC
+2025-01-19 17:05:41,301 - INFO - Retrieved article length: 13102 characters
+2025-01-19 17:05:41,334 - INFO - ZVRA: 1mo change of -6.07%
+2025-01-19 17:05:41,334 - INFO - Processing ZVRA - 2024-12-17 15:30:00 UTC
+2025-01-19 17:05:41,374 - INFO - ZVIA: 1wk change of 14.56%
+2025-01-19 17:05:41,405 - INFO - ZURA: 1h change of 7.51%
+2025-01-19 17:05:41,461 - INFO - ZVIA: 1mo change of 68.42%
+2025-01-19 17:05:41,462 - INFO - Processing ZVIA - 2025-01-07 00:05:00 UTC
+2025-01-19 17:05:41,503 - INFO - ZURA: 1wk change of -31.45%
+2025-01-19 17:05:41,604 - INFO - ZURA: 1mo change of -39.52%
+2025-01-19 17:05:41,605 - INFO - Processing ZURA - 2024-10-30 13:30:00 UTC
+2025-01-19 17:05:42,013 - INFO - Retrieved article length: 4263 characters
+2025-01-19 17:05:42,015 - INFO - Retrieved article length: 5532 characters
+2025-01-19 17:05:42,020 - INFO - ZVRA: 1h change of -4.77%
+2025-01-19 17:05:42,026 - INFO - ZVRA: 1wk change of -3.39%
+2025-01-19 17:05:42,078 - INFO - ZVRA: 1mo change of -6.07%
+2025-01-19 17:05:42,078 - INFO - Processing ZVRA - 2024-12-09 10:48:01 UTC
+2025-01-19 17:05:42,099 - INFO - ZVSA: 1h change of 15.09%
+2025-01-19 17:05:42,179 - INFO - ZVSA: 1wk change of 8.49%
+2025-01-19 17:05:42,210 - INFO - Retrieved article length: 1914 characters
+2025-01-19 17:05:42,264 - INFO - ZVSA: 1mo change of 13.60%
+2025-01-19 17:05:42,264 - INFO - Processing ZVSA - 2024-11-21 15:32:00 UTC
+2025-01-19 17:05:42,302 - INFO - ZVIA: 1h change of -8.04%
+2025-01-19 17:05:42,397 - INFO - ZVIA: 1wk change of 25.45%
+2025-01-19 17:05:42,487 - INFO - ZVIA: 1mo change of 77.12%
+2025-01-19 17:05:42,487 - INFO - Processing ZVIA - 2025-01-02 12:01:57 UTC
+2025-01-19 17:05:42,518 - INFO - Retrieved article length: 7013 characters
+2025-01-19 17:05:42,621 - INFO - ZURA: 1h change of -8.88%
+2025-01-19 17:05:42,719 - INFO - ZURA: 1wk change of -5.18%
+2025-01-19 17:05:42,815 - INFO - ZURA: 1mo change of -30.95%
+2025-01-19 17:05:42,833 - INFO - Retrieved article length: 5880 characters
+2025-01-19 17:05:42,920 - INFO - ZVRA: 1h change of 1.25%
+2025-01-19 17:05:43,003 - INFO - ZVRA: 1wk change of -11.15%
+2025-01-19 17:05:43,028 - INFO - Processing ZWS - 2024-12-24 14:56:53 UTC
+2025-01-19 17:05:43,084 - INFO - ZVRA: 1mo change of -5.15%
+2025-01-19 17:05:43,085 - INFO - Processing ZVRA - 2024-12-07 01:00:00 UTC
+2025-01-19 17:05:43,087 - INFO - Retrieved article length: 26126 characters
+2025-01-19 17:05:43,175 - INFO - ZVSA: 1h change of -13.36%
+2025-01-19 17:05:43,214 - INFO - Retrieved article length: 6223 characters
+2025-01-19 17:05:43,259 - INFO - ZVSA: 1wk change of -17.38%
+2025-01-19 17:05:43,306 - INFO - ZVIA: 1h change of 11.75%
+2025-01-19 17:05:43,341 - INFO - ZVSA: 1mo change of -49.12%
+2025-01-19 17:05:43,341 - INFO - Processing ZVSA - 2024-11-20 15:55:00 UTC
+2025-01-19 17:05:43,396 - INFO - ZVIA: 1wk change of 33.94%
+2025-01-19 17:05:43,484 - INFO - ZVIA: 1mo change of 127.49%
+2025-01-19 17:05:43,484 - INFO - Processing ZVIA - 2024-12-27 16:04:46 UTC
+2025-01-19 17:05:43,740 - INFO - Retrieved article length: 4743 characters
+2025-01-19 17:05:43,841 - INFO - ZWS: 1h change of 1.58%
+2025-01-19 17:05:43,851 - INFO - Retrieved article length: 5306 characters
+2025-01-19 17:05:43,944 - INFO - ZVRA: 1h change of -1.08%
+2025-01-19 17:05:43,948 - INFO - ZWS: 1wk change of -6.77%
+2025-01-19 17:05:44,028 - INFO - ZVRA: 1wk change of -11.16%
+2025-01-19 17:05:44,055 - INFO - ZWS: 1mo change of -1.90%
+2025-01-19 17:05:44,056 - INFO - Processing ZWS - 2024-12-12 15:45:43 UTC
+2025-01-19 17:05:44,114 - INFO - ZVRA: 1mo change of -5.15%
+2025-01-19 17:05:44,115 - INFO - Processing ZVRA - 2024-12-06 21:48:22 UTC
+2025-01-19 17:05:44,125 - INFO - Retrieved article length: 9191 characters
+2025-01-19 17:05:44,218 - INFO - ZVSA: 1h change of 2.70%
+2025-01-19 17:05:44,298 - INFO - ZVSA: 1wk change of -17.38%
+2025-01-19 17:05:44,322 - INFO - Retrieved article length: 6994 characters
+2025-01-19 17:05:44,385 - INFO - ZVSA: 1mo change of -49.12%
+2025-01-19 17:05:44,385 - INFO - Processing ZVSA - 2024-11-15 16:35:00 UTC
+2025-01-19 17:05:44,413 - INFO - ZVIA: 1h change of -1.71%
+2025-01-19 17:05:44,502 - INFO - ZVIA: 1wk change of 39.25%
+2025-01-19 17:05:44,585 - INFO - ZVIA: 1mo change of 119.18%
+2025-01-19 17:05:44,586 - INFO - Processing ZVIA - 2024-12-09 09:43:40 UTC
+2025-01-19 17:05:44,769 - INFO - Retrieved article length: 1477 characters
+2025-01-19 17:05:44,854 - INFO - Retrieved article length: 5778 characters
+2025-01-19 17:05:44,869 - INFO - ZWS: 1h change of -2.00%
+2025-01-19 17:05:44,941 - INFO - ZVRA: 1h change of -2.76%
+2025-01-19 17:05:44,974 - INFO - ZWS: 1wk change of -6.95%
+2025-01-19 17:05:45,022 - INFO - ZVRA: 1wk change of -10.07%
+2025-01-19 17:05:45,054 - INFO - Retrieved article length: 2419 characters
+2025-01-19 17:05:45,077 - INFO - ZWS: 1mo change of -4.04%
+2025-01-19 17:05:45,078 - INFO - Processing ZWS - 2024-12-04 18:32:00 UTC
+2025-01-19 17:05:45,107 - INFO - ZVRA: 1mo change of 1.55%
+2025-01-19 17:05:45,107 - INFO - Processing ZVRA - 2024-11-26 15:30:00 UTC
+2025-01-19 17:05:45,138 - INFO - ZVSA: 1h change of -11.48%
+2025-01-19 17:05:45,223 - INFO - ZVSA: 1wk change of -55.51%
+2025-01-19 17:05:45,309 - INFO - ZVSA: 1mo change of -46.55%
+2025-01-19 17:05:45,310 - INFO - Processing ZVSA - 2024-11-14 16:10:00 UTC
+2025-01-19 17:05:45,378 - INFO - Retrieved article length: 6914 characters
+2025-01-19 17:05:45,566 - INFO - ZVIA: 1wk change of 42.18%
+2025-01-19 17:05:45,658 - INFO - ZVIA: 1mo change of 305.50%
+2025-01-19 17:05:45,775 - INFO - Processing ZYME - 2025-01-09 00:05:00 UTC
+2025-01-19 17:05:45,847 - INFO - Retrieved article length: 3649 characters
+2025-01-19 17:05:45,921 - INFO - Retrieved article length: 3524 characters
+2025-01-19 17:05:46,011 - INFO - ZVRA: 1wk change of 4.59%
+2025-01-19 17:05:46,091 - INFO - ZVRA: 1mo change of -1.56%
+2025-01-19 17:05:46,119 - INFO - ZWS: 1wk change of -1.19%
+2025-01-19 17:05:46,162 - INFO - Retrieved article length: 13572 characters
+2025-01-19 17:05:46,224 - INFO - ZWS: 1mo change of 1.35%
+2025-01-19 17:05:46,225 - INFO - Processing ZWS - 2024-12-04 17:15:04 UTC
+2025-01-19 17:05:46,248 - INFO - ZVSA: 1h change of -14.96%
+2025-01-19 17:05:46,335 - INFO - ZVSA: 1wk change of -37.91%
+2025-01-19 17:05:46,416 - INFO - ZVSA: 1mo change of -53.19%
+2025-01-19 17:05:46,417 - INFO - Processing ZVSA - 2024-11-12 16:35:00 UTC
+2025-01-19 17:05:46,501 - INFO - Retrieved article length: 15496 characters
+2025-01-19 17:05:46,593 - INFO - ZYME: 1h change of -7.29%
+2025-01-19 17:05:46,688 - INFO - ZYME: 1wk change of -4.34%
+2025-01-19 17:05:46,778 - INFO - ZYME: 1mo change of -2.25%
+2025-01-19 17:05:46,778 - INFO - Processing ZYME - 2024-12-13 15:12:49 UTC
+2025-01-19 17:05:47,052 - INFO - Retrieved article length: 3427 characters
+2025-01-19 17:05:47,064 - INFO - ZWS: 1wk change of -1.19%
+2025-01-19 17:05:47,072 - INFO - ZWS: 1mo change of 1.35%
+2025-01-19 17:05:47,072 - INFO - Processing ZWS - 2024-12-02 18:50:00 UTC
+2025-01-19 17:05:47,239 - INFO - Retrieved article length: 2835 characters
+2025-01-19 17:05:47,415 - INFO - ZVSA: 1wk change of -37.36%
+2025-01-19 17:05:47,501 - INFO - ZVSA: 1mo change of -55.98%
+2025-01-19 17:05:47,501 - INFO - Processing ZVSA - 2024-11-05 18:40:56 UTC
+2025-01-19 17:05:47,580 - INFO - Retrieved article length: 4930 characters
+2025-01-19 17:05:47,670 - INFO - ZYME: 1h change of -3.64%
+2025-01-19 17:05:47,778 - INFO - ZYME: 1wk change of 1.36%
+2025-01-19 17:05:47,836 - INFO - Retrieved article length: 3236 characters
+2025-01-19 17:05:47,861 - INFO - ZYME: 1mo change of -15.87%
+2025-01-19 17:05:47,861 - INFO - Processing ZYME - 2024-12-12 16:30:00 UTC
+2025-01-19 17:05:47,937 - INFO - ZWS: 1h change of 1.33%
+2025-01-19 17:05:48,043 - INFO - ZWS: 1wk change of 1.08%
+2025-01-19 17:05:48,151 - INFO - ZWS: 1mo change of 3.01%
+2025-01-19 17:05:48,151 - INFO - Processing ZWS - 2024-11-04 20:00:11 UTC
+2025-01-19 17:05:48,427 - INFO - Retrieved article length: 532 characters
+2025-01-19 17:05:48,518 - INFO - ZVSA: 1h change of -19.35%
+2025-01-19 17:05:48,564 - INFO - Retrieved article length: 18429 characters
+2025-01-19 17:05:48,601 - INFO - ZVSA: 1wk change of -45.93%
+2025-01-19 17:05:48,654 - INFO - ZYME: 1h change of -2.82%
+2025-01-19 17:05:48,684 - INFO - ZVSA: 1mo change of -54.51%
+2025-01-19 17:05:48,685 - INFO - Processing ZVSA - 2024-11-05 15:46:42 UTC
+2025-01-19 17:05:48,741 - INFO - ZYME: 1wk change of -2.48%
+2025-01-19 17:05:48,825 - INFO - ZYME: 1mo change of -16.28%
+2025-01-19 17:05:48,826 - INFO - Processing ZYME - 2024-11-21 14:05:00 UTC
+2025-01-19 17:05:48,912 - INFO - Retrieved article length: 4566 characters
+2025-01-19 17:05:49,038 - INFO - ZWS: 1h change of 2.49%
+2025-01-19 17:05:49,147 - INFO - ZWS: 1wk change of 9.56%
+2025-01-19 17:05:49,250 - INFO - ZWS: 1mo change of 12.70%
+2025-01-19 17:05:49,251 - INFO - Processing ZWS - 2024-11-03 03:39:39 UTC
+2025-01-19 17:05:49,660 - INFO - Retrieved article length: 4899 characters
+2025-01-19 17:05:49,755 - INFO - ZYME: 1h change of -2.73%
+2025-01-19 17:05:49,842 - INFO - ZYME: 1wk change of -18.70%
+2025-01-19 17:05:49,928 - INFO - ZYME: 1mo change of 4.97%
+2025-01-19 17:05:49,928 - INFO - Processing ZYME - 2024-11-21 14:00:00 UTC
+2025-01-19 17:05:49,942 - INFO - Retrieved article length: 403 characters
+2025-01-19 17:05:49,952 - INFO - ZVSA: 1h change of -19.35%
+2025-01-19 17:05:49,957 - INFO - ZVSA: 1wk change of -45.93%
+2025-01-19 17:05:49,962 - INFO - ZVSA: 1mo change of -54.51%
+2025-01-19 17:05:50,092 - INFO - Retrieved article length: 6233 characters
+2025-01-19 17:05:50,297 - INFO - ZWS: 1wk change of 8.35%
+2025-01-19 17:05:50,402 - INFO - ZWS: 1mo change of 12.70%
+2025-01-19 17:05:50,403 - INFO - Processing ZWS - 2024-10-29 23:10:00 UTC
+2025-01-19 17:05:50,737 - INFO - Retrieved article length: 24082 characters
+2025-01-19 17:05:50,745 - INFO - ZYME: 1h change of -2.73%
+2025-01-19 17:05:50,751 - INFO - ZYME: 1wk change of -18.70%
+2025-01-19 17:05:50,756 - INFO - ZYME: 1mo change of 4.97%
+2025-01-19 17:05:50,757 - INFO - Processing ZYME - 2024-11-05 14:00:00 UTC
+2025-01-19 17:05:51,491 - INFO - Retrieved article length: 9699 characters
+2025-01-19 17:05:51,591 - INFO - ZYME: 1h change of 13.23%
+2025-01-19 17:05:51,672 - INFO - ZYME: 1wk change of 22.81%
+2025-01-19 17:05:51,755 - INFO - ZYME: 1mo change of 6.40%
+2025-01-19 17:05:51,755 - INFO - Processing ZYME - 2024-11-02 16:53:42 UTC
+2025-01-19 17:05:51,782 - INFO - Retrieved article length: 30496 characters
+2025-01-19 17:05:51,890 - INFO - ZWS: 1h change of -1.48%
+2025-01-19 17:05:52,001 - INFO - ZWS: 1wk change of 6.29%
+2025-01-19 17:05:52,114 - INFO - ZWS: 1mo change of 16.45%
+2025-01-19 17:05:52,485 - INFO - Retrieved article length: 1859 characters
+2025-01-19 17:05:52,576 - INFO - ZYME: 1h change of -3.70%
+2025-01-19 17:05:52,667 - INFO - ZYME: 1wk change of 32.19%
+2025-01-19 17:05:52,757 - INFO - ZYME: 1mo change of 13.55%
+2025-01-19 17:05:52,757 - INFO - Processing ZYME - 2024-11-01 15:54:26 UTC
+2025-01-19 17:05:53,507 - INFO - Retrieved article length: 3941 characters
+2025-01-19 17:05:53,596 - INFO - ZYME: 1h change of -3.97%
+2025-01-19 17:05:53,685 - INFO - ZYME: 1wk change of 26.56%
+2025-01-19 17:05:53,776 - INFO - ZYME: 1mo change of 14.33%

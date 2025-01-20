@@ -1,0 +1,6 @@
+2025-01-19 11:43:29,993 - INFO - Starting new training session. Logging to: logs/training_20250119_114329.log
+2025-01-19 11:43:29,993 - INFO - Starting new training session. Logging to: logs/training_20250119_114329.log
+2025-01-19 11:43:29,993 - INFO - Starting new training session. Logging to: logs/training_20250119_114329.log
+2025-01-19 11:43:32,300 - ERROR - Error getting news for ACHR: Expecting value: line 1 column 1 (char 0)
+2025-01-19 11:43:32,414 - ERROR - Error getting news for ACHC: Expecting value: line 1 column 1 (char 0)
+2025-01-19 11:43:32,513 - ERROR - Error getting news for ACHL: Expecting value: line 1 column 1 (char 0)

@@ -1,0 +1,1154 @@
+2025-01-19 16:09:04,442 - INFO - Starting new training session. Logging to: logs/training_20250119_160904.log
+2025-01-19 16:09:04,449 - INFO - Starting new training session. Logging to: logs/training_20250119_160904.log
+2025-01-19 16:09:04,454 - INFO - Starting new training session. Logging to: logs/training_20250119_160904.log
+2025-01-19 16:09:04,455 - INFO - Starting new training session. Logging to: logs/training_20250119_160904.log
+2025-01-19 16:09:05,095 - INFO - Processing NECB - 2025-01-09 17:35:06 UTC
+2025-01-19 16:09:05,102 - INFO - Processing NDRA - 2024-11-22 16:00:00 UTC
+2025-01-19 16:09:05,172 - INFO - Processing NE - 2025-01-14 17:07:53 UTC
+2025-01-19 16:09:05,317 - INFO - Processing NEE - 2025-01-19 14:46:00 UTC
+2025-01-19 16:09:06,048 - INFO - NDRA: 1h change of 10.32%
+2025-01-19 16:09:06,134 - INFO - NDRA: 1wk change of -5.64%
+2025-01-19 16:09:06,163 - INFO - NEE: 1h change of -1.41%
+2025-01-19 16:09:06,219 - INFO - NDRA: 1mo change of -22.03%
+2025-01-19 16:09:06,219 - INFO - Processing NDRA - 2024-11-15 17:24:00 UTC
+2025-01-19 16:09:06,364 - INFO - NEE: 1wk change of 5.02%
+2025-01-19 16:09:06,421 - INFO - Retrieved article length: 3448 characters
+2025-01-19 16:09:06,481 - INFO - Retrieved article length: 3059 characters
+2025-01-19 16:09:06,562 - INFO - NE: 1h change of 4.69%
+2025-01-19 16:09:06,593 - INFO - NECB: 1h change of -3.13%
+2025-01-19 16:09:06,598 - INFO - NEE: 1mo change of -2.79%
+2025-01-19 16:09:06,598 - INFO - Processing NEE - 2025-01-17 18:00:11 UTC
+2025-01-19 16:09:06,662 - INFO - NE: 1wk change of 1.30%
+2025-01-19 16:09:06,693 - INFO - NECB: 1wk change of 3.01%
+2025-01-19 16:09:06,766 - INFO - NE: 1mo change of 3.01%
+2025-01-19 16:09:06,766 - INFO - Processing NE - 2025-01-03 21:29:00 UTC
+2025-01-19 16:09:06,799 - INFO - NECB: 1mo change of -12.58%
+2025-01-19 16:09:06,799 - INFO - Processing NECB - 2025-01-02 17:55:09 UTC
+2025-01-19 16:09:06,996 - INFO - NDRA: 1h change of -21.32%
+2025-01-19 16:09:07,087 - INFO - NDRA: 1wk change of -43.41%
+2025-01-19 16:09:07,176 - INFO - NDRA: 1mo change of -26.94%
+2025-01-19 16:09:07,177 - INFO - Processing NDRA - 2024-11-12 16:00:00 UTC
+2025-01-19 16:09:07,813 - INFO - Retrieved article length: 5587 characters
+2025-01-19 16:09:07,920 - INFO - NEE: 1h change of 1.51%
+2025-01-19 16:09:07,974 - INFO - Retrieved article length: 3514 characters
+2025-01-19 16:09:07,977 - INFO - NDRA: 1h change of -8.60%
+2025-01-19 16:09:07,986 - INFO - Retrieved article length: 4048 characters
+2025-01-19 16:09:08,063 - INFO - NDRA: 1wk change of -41.41%
+2025-01-19 16:09:08,153 - INFO - NDRA: 1mo change of -35.01%
+2025-01-19 16:09:08,154 - INFO - Processing NDRA - 2024-11-06 16:00:00 UTC
+2025-01-19 16:09:08,173 - INFO - NECB: 1wk change of -4.29%
+2025-01-19 16:09:08,175 - INFO - NE: 1wk change of 10.65%
+2025-01-19 16:09:08,269 - INFO - NEE: 1mo change of -3.88%
+2025-01-19 16:09:08,269 - INFO - Processing NEE - 2025-01-17 02:00:20 UTC
+2025-01-19 16:09:08,273 - INFO - NECB: 1mo change of -16.26%
+2025-01-19 16:09:08,273 - INFO - NE: 1mo change of 1.74%
+2025-01-19 16:09:08,274 - INFO - Processing NECB - 2025-01-02 17:40:15 UTC
+2025-01-19 16:09:08,274 - INFO - Processing NE - 2025-01-02 19:16:00 UTC
+2025-01-19 16:09:08,989 - INFO - NEE: 1h change of 1.51%
+2025-01-19 16:09:08,991 - INFO - NDRA: 1h change of -35.83%
+2025-01-19 16:09:09,081 - INFO - NDRA: 1wk change of -53.34%
+2025-01-19 16:09:09,122 - INFO - NEE: 1mo change of -3.88%
+2025-01-19 16:09:09,122 - INFO - Processing NEE - 2025-01-16 18:00:33 UTC
+2025-01-19 16:09:09,169 - INFO - NDRA: 1mo change of -29.50%
+2025-01-19 16:09:09,169 - INFO - Processing NDRA - 2024-10-22 22:55:15 UTC
+2025-01-19 16:09:09,468 - INFO - Retrieved article length: 3244 characters
+2025-01-19 16:09:09,508 - INFO - Retrieved article length: 2955 characters
+2025-01-19 16:09:09,523 - INFO - NECB: 1wk change of -4.29%
+2025-01-19 16:09:09,578 - INFO - NECB: 1mo change of -16.26%
+2025-01-19 16:09:09,578 - INFO - Processing NECB - 2025-01-01 13:07:22 UTC
+2025-01-19 16:09:09,600 - INFO - NE: 1h change of 5.68%
+2025-01-19 16:09:09,706 - INFO - NE: 1wk change of 12.14%
+2025-01-19 16:09:09,807 - INFO - NE: 1mo change of 1.74%
+2025-01-19 16:09:09,807 - INFO - Processing NE - 2024-12-26 21:07:00 UTC
+2025-01-19 16:09:09,950 - INFO - NDRA: 1h change of 57.49%
+2025-01-19 16:09:09,960 - INFO - NEE: 1h change of 5.24%
+2025-01-19 16:09:10,038 - INFO - NDRA: 1wk change of 20.57%
+2025-01-19 16:09:10,122 - INFO - NDRA: 1mo change of -31.43%
+2025-01-19 16:09:10,122 - INFO - Processing NDRA - 2024-10-22 22:32:04 UTC
+2025-01-19 16:09:10,283 - INFO - NEE: 1mo change of -3.36%
+2025-01-19 16:09:10,283 - INFO - Processing NEE - 2025-01-16 17:00:13 UTC
+2025-01-19 16:09:10,821 - INFO - NDRA: 1h change of 57.49%
+2025-01-19 16:09:10,826 - INFO - NDRA: 1wk change of 20.57%
+2025-01-19 16:09:10,834 - INFO - NDRA: 1mo change of -31.43%
+2025-01-19 16:09:10,834 - INFO - Processing NDRA - 2024-10-22 20:23:47 UTC
+2025-01-19 16:09:10,877 - INFO - Retrieved article length: 7217 characters
+2025-01-19 16:09:10,963 - INFO - NECB: 1h change of -1.55%
+2025-01-19 16:09:11,000 - INFO - Retrieved article length: 8989 characters
+2025-01-19 16:09:11,031 - INFO - NEE: 1h change of 5.24%
+2025-01-19 16:09:11,067 - INFO - NECB: 1wk change of -4.29%
+2025-01-19 16:09:11,100 - INFO - NE: 1h change of 1.09%
+2025-01-19 16:09:11,166 - INFO - NEE: 1mo change of -3.36%
+2025-01-19 16:09:11,167 - INFO - Processing NEE - 2025-01-16 01:45:22 UTC
+2025-01-19 16:09:11,169 - INFO - NECB: 1mo change of -16.07%
+2025-01-19 16:09:11,169 - INFO - Processing NECB - 2024-12-24 14:18:31 UTC
+2025-01-19 16:09:11,198 - INFO - NE: 1wk change of 6.67%
+2025-01-19 16:09:11,302 - INFO - NE: 1mo change of -1.87%
+2025-01-19 16:09:11,302 - INFO - Processing NE - 2024-12-03 17:00:00 UTC
+2025-01-19 16:09:11,681 - INFO - NDRA: 1h change of 57.49%
+2025-01-19 16:09:11,685 - INFO - NDRA: 1wk change of 20.57%
+2025-01-19 16:09:11,692 - INFO - NDRA: 1mo change of -31.43%
+2025-01-19 16:09:11,692 - INFO - Processing NDRA - 2024-10-22 15:00:00 UTC
+2025-01-19 16:09:12,172 - INFO - NE: 1wk change of -6.55%
+2025-01-19 16:09:12,283 - INFO - NE: 1mo change of 7.67%
+2025-01-19 16:09:12,284 - INFO - Processing NE - 2024-11-28 15:07:04 UTC
+2025-01-19 16:09:12,338 - INFO - Retrieved article length: 3522 characters
+2025-01-19 16:09:12,347 - INFO - NEE: 1h change of 5.24%
+2025-01-19 16:09:12,352 - INFO - Retrieved article length: 5846 characters
+2025-01-19 16:09:12,381 - INFO - NDRA: 1h change of 57.49%
+2025-01-19 16:09:12,386 - INFO - NDRA: 1wk change of 20.57%
+2025-01-19 16:09:12,393 - INFO - NDRA: 1mo change of -31.43%
+2025-01-19 16:09:12,478 - INFO - NEE: 1mo change of -3.36%
+2025-01-19 16:09:12,478 - INFO - Processing NEE - 2025-01-15 22:59:29 UTC
+2025-01-19 16:09:12,509 - INFO - Processing NEGG - 2025-01-07 03:08:38 UTC
+2025-01-19 16:09:12,542 - INFO - NECB: 1wk change of -11.47%
+2025-01-19 16:09:12,650 - INFO - NECB: 1mo change of -14.82%
+2025-01-19 16:09:12,650 - INFO - Processing NECB - 2024-12-19 23:00:00 UTC
+2025-01-19 16:09:13,188 - INFO - NE: 1wk change of -4.10%
+2025-01-19 16:09:13,297 - INFO - Processing NE - 2024-11-07 11:16:24 UTC
+2025-01-19 16:09:13,689 - INFO - Retrieved article length: 7144 characters
+2025-01-19 16:09:13,753 - INFO - Retrieved article length: 499 characters
+2025-01-19 16:09:13,776 - INFO - NEGG: 1h change of -3.36%
+2025-01-19 16:09:13,855 - INFO - NEE: 1h change of 7.78%
+2025-01-19 16:09:13,858 - INFO - NEGG: 1wk change of 2.38%
+2025-01-19 16:09:13,917 - INFO - Retrieved article length: 3946 characters
+2025-01-19 16:09:13,943 - INFO - NEGG: 1mo change of -25.86%
+2025-01-19 16:09:13,943 - INFO - Processing NEGG - 2024-12-09 16:07:24 UTC
+2025-01-19 16:09:14,006 - INFO - NECB: 1h change of -6.27%
+2025-01-19 16:09:14,089 - INFO - NE: 1h change of 10.66%
+2025-01-19 16:09:14,113 - INFO - NECB: 1wk change of -10.16%
+2025-01-19 16:09:14,186 - INFO - NEE: 1mo change of -4.35%
+2025-01-19 16:09:14,186 - INFO - NE: 1wk change of 5.76%
+2025-01-19 16:09:14,186 - INFO - Processing NEE - 2025-01-15 22:07:56 UTC
+2025-01-19 16:09:14,230 - INFO - NECB: 1mo change of -13.09%
+2025-01-19 16:09:14,230 - INFO - Processing NECB - 2024-12-17 17:40:10 UTC
+2025-01-19 16:09:14,286 - INFO - NE: 1mo change of -11.49%
+2025-01-19 16:09:14,287 - INFO - Processing NE - 2024-11-07 10:15:05 UTC
+2025-01-19 16:09:14,738 - INFO - NEGG: 1h change of -8.10%
+2025-01-19 16:09:14,825 - INFO - NEGG: 1wk change of -18.64%
+2025-01-19 16:09:14,912 - INFO - NEGG: 1mo change of -28.57%
+2025-01-19 16:09:14,913 - INFO - Processing NEGG - 2024-11-19 16:31:00 UTC
+2025-01-19 16:09:14,989 - INFO - NE: 1h change of 10.66%
+2025-01-19 16:09:14,994 - INFO - NE: 1wk change of 5.76%
+2025-01-19 16:09:15,001 - INFO - NE: 1mo change of -11.49%
+2025-01-19 16:09:15,038 - INFO - NECB: 1h change of -6.97%
+2025-01-19 16:09:15,143 - INFO - Processing NEM - 2025-01-17 15:00:31 UTC
+2025-01-19 16:09:15,185 - INFO - NECB: 1wk change of -8.02%
+2025-01-19 16:09:15,363 - INFO - Retrieved article length: 3197 characters
+2025-01-19 16:09:15,371 - INFO - NEE: 1h change of 7.78%
+2025-01-19 16:09:15,427 - INFO - NECB: 1mo change of -18.85%
+2025-01-19 16:09:15,428 - INFO - Processing NECB - 2024-11-27 13:02:51 UTC
+2025-01-19 16:09:15,504 - INFO - NEE: 1mo change of -4.35%
+2025-01-19 16:09:15,696 - INFO - Processing NEO - 2025-01-16 00:24:08 UTC
+2025-01-19 16:09:15,728 - INFO - NEGG: 1h change of -5.47%
+2025-01-19 16:09:15,816 - INFO - NEGG: 1wk change of -14.29%
+2025-01-19 16:09:15,919 - INFO - NEGG: 1mo change of -32.35%
+2025-01-19 16:09:15,919 - INFO - Processing NEGG - 2024-10-28 20:08:08 UTC
+2025-01-19 16:09:16,212 - INFO - NECB: 1h change of -4.24%
+2025-01-19 16:09:16,354 - INFO - Retrieved article length: 7492 characters
+2025-01-19 16:09:16,423 - INFO - NECB: 1mo change of -13.51%
+2025-01-19 16:09:16,467 - INFO - NEM: 1h change of 2.84%
+2025-01-19 16:09:16,497 - INFO - NEO: 1h change of 11.80%
+2025-01-19 16:09:16,597 - INFO - NEO: 1wk change of -19.67%
+2025-01-19 16:09:16,601 - INFO - Processing NEOG - 2025-01-17 16:06:00 UTC
+2025-01-19 16:09:16,610 - INFO - NEM: 1wk change of 9.20%
+2025-01-19 16:09:16,695 - INFO - NEO: 1mo change of -20.61%
+2025-01-19 16:09:16,695 - INFO - Processing NEO - 2025-01-15 15:43:26 UTC
+2025-01-19 16:09:16,748 - INFO - NEM: 1mo change of 3.61%
+2025-01-19 16:09:16,748 - INFO - Processing NEM - 2025-01-17 01:50:21 UTC
+2025-01-19 16:09:16,887 - INFO - NEGG: 1mo change of -21.33%
+2025-01-19 16:09:17,013 - INFO - Processing NEON - 2025-01-06 15:57:16 UTC
+2025-01-19 16:09:17,384 - INFO - NEOG: 1h change of -2.49%
+2025-01-19 16:09:17,477 - INFO - NEOG: 1wk change of -10.94%
+2025-01-19 16:09:17,571 - INFO - NEOG: 1mo change of -4.86%
+2025-01-19 16:09:17,571 - INFO - Processing NEOG - 2025-01-16 16:45:00 UTC
+2025-01-19 16:09:17,944 - INFO - Retrieved article length: 478 characters
+2025-01-19 16:09:17,994 - INFO - Retrieved article length: 3417 characters
+2025-01-19 16:09:18,003 - INFO - NEM: 1h change of 2.84%
+2025-01-19 16:09:18,049 - INFO - NEO: 1h change of 6.47%
+2025-01-19 16:09:18,069 - INFO - NEM: 1wk change of 9.20%
+2025-01-19 16:09:18,136 - INFO - NEM: 1mo change of 3.61%
+2025-01-19 16:09:18,136 - INFO - Processing NEM - 2025-01-15 00:46:05 UTC
+2025-01-19 16:09:18,144 - INFO - NEO: 1wk change of -19.67%
+2025-01-19 16:09:18,239 - INFO - NEO: 1mo change of -21.79%
+2025-01-19 16:09:18,240 - INFO - Processing NEO - 2025-01-15 15:05:00 UTC
+2025-01-19 16:09:18,250 - INFO - Retrieved article length: 3980 characters
+2025-01-19 16:09:18,343 - INFO - NEON: 1h change of -4.97%
+2025-01-19 16:09:18,431 - INFO - NEON: 1wk change of -4.48%
+2025-01-19 16:09:18,520 - INFO - NEON: 1mo change of 5.56%
+2025-01-19 16:09:18,520 - INFO - Processing NEON - 2024-11-13 18:46:44 UTC
+2025-01-19 16:09:18,790 - INFO - Retrieved article length: 3348 characters
+2025-01-19 16:09:18,882 - INFO - NEOG: 1h change of -2.61%
+2025-01-19 16:09:18,971 - INFO - NEOG: 1wk change of -9.19%
+2025-01-19 16:09:19,057 - INFO - NEOG: 1mo change of -7.45%
+2025-01-19 16:09:19,057 - INFO - Processing NEOG - 2025-01-15 15:57:00 UTC
+2025-01-19 16:09:19,303 - INFO - NEON: 1h change of -6.26%
+2025-01-19 16:09:19,381 - INFO - Retrieved article length: 512 characters
+2025-01-19 16:09:19,389 - INFO - NEON: 1wk change of 19.30%
+2025-01-19 16:09:19,471 - INFO - Retrieved article length: 5723 characters
+2025-01-19 16:09:19,474 - INFO - NEON: 1mo change of -11.41%
+2025-01-19 16:09:19,474 - INFO - Processing NEON - 2024-11-08 15:39:52 UTC
+2025-01-19 16:09:19,478 - INFO - NEO: 1h change of 6.47%
+2025-01-19 16:09:19,489 - INFO - NEM: 1h change of 7.29%
+2025-01-19 16:09:19,544 - INFO - NEO: 1wk change of -19.67%
+2025-01-19 16:09:19,613 - INFO - NEO: 1mo change of -21.79%
+2025-01-19 16:09:19,613 - INFO - Processing NEO - 2025-01-15 12:53:00 UTC
+2025-01-19 16:09:19,630 - INFO - NEM: 1wk change of 10.27%
+2025-01-19 16:09:19,774 - INFO - NEM: 1mo change of -1.44%
+2025-01-19 16:09:19,774 - INFO - Processing NEM - 2025-01-14 00:30:00 UTC
+2025-01-19 16:09:20,263 - INFO - Retrieved article length: 6219 characters
+2025-01-19 16:09:20,301 - INFO - NEON: 1h change of -5.26%
+2025-01-19 16:09:20,352 - INFO - NEOG: 1h change of -6.52%
+2025-01-19 16:09:20,385 - INFO - NEON: 1wk change of -24.60%
+2025-01-19 16:09:20,435 - INFO - NEOG: 1wk change of -9.19%
+2025-01-19 16:09:20,470 - INFO - NEON: 1mo change of 1.46%
+2025-01-19 16:09:20,470 - INFO - Processing NEON - 2024-11-06 17:27:11 UTC
+2025-01-19 16:09:20,522 - INFO - NEOG: 1mo change of -8.98%
+2025-01-19 16:09:20,522 - INFO - Processing NEOG - 2025-01-11 10:00:24 UTC
+2025-01-19 16:09:20,811 - INFO - Retrieved article length: 3125 characters
+2025-01-19 16:09:20,819 - INFO - NEO: 1h change of 6.47%
+2025-01-19 16:09:20,887 - INFO - NEO: 1wk change of -19.67%
+2025-01-19 16:09:20,952 - INFO - NEO: 1mo change of -21.79%
+2025-01-19 16:09:20,952 - INFO - Processing NEO - 2025-01-14 16:59:44 UTC
+2025-01-19 16:09:20,982 - INFO - Retrieved article length: 2788 characters
+2025-01-19 16:09:21,093 - INFO - NEM: 1h change of 6.55%
+2025-01-19 16:09:21,238 - INFO - NEM: 1wk change of 10.27%
+2025-01-19 16:09:21,326 - INFO - NEOG: 1h change of 1.81%
+2025-01-19 16:09:21,378 - INFO - Processing NEM - 2025-01-11 01:50:21 UTC
+2025-01-19 16:09:21,410 - INFO - NEOG: 1wk change of -3.18%
+2025-01-19 16:09:21,499 - INFO - NEOG: 1mo change of -11.82%
+2025-01-19 16:09:21,499 - INFO - Processing NEOG - 2025-01-11 07:00:11 UTC
+2025-01-19 16:09:21,713 - INFO - Retrieved article length: 671 characters
+2025-01-19 16:09:21,803 - INFO - NEON: 1h change of 11.11%
+2025-01-19 16:09:21,888 - INFO - NEON: 1wk change of -26.67%
+2025-01-19 16:09:21,974 - INFO - NEON: 1mo change of -4.99%
+2025-01-19 16:09:21,974 - INFO - Processing NEON - 2024-11-06 17:20:00 UTC
+2025-01-19 16:09:22,162 - INFO - Retrieved article length: 567 characters
+2025-01-19 16:09:22,270 - INFO - NEO: 1h change of 12.03%
+2025-01-19 16:09:22,377 - INFO - NEO: 1wk change of -19.67%
+2025-01-19 16:09:22,485 - INFO - NEO: 1mo change of -22.90%
+2025-01-19 16:09:22,486 - INFO - Processing NEO - 2025-01-14 15:30:00 UTC
+2025-01-19 16:09:22,621 - INFO - Retrieved article length: 3392 characters
+2025-01-19 16:09:22,664 - INFO - NEON: 1h change of 11.11%
+2025-01-19 16:09:22,670 - INFO - NEON: 1wk change of -26.67%
+2025-01-19 16:09:22,675 - INFO - NEON: 1mo change of -4.99%
+2025-01-19 16:09:22,720 - INFO - NEM: 1h change of -1.66%
+2025-01-19 16:09:22,742 - INFO - Retrieved article length: 41231 characters
+2025-01-19 16:09:22,750 - INFO - NEOG: 1h change of 1.81%
+2025-01-19 16:09:22,806 - INFO - NEOG: 1wk change of -3.18%
+2025-01-19 16:09:22,827 - INFO - Processing NEOV - 2025-01-07 16:00:00 UTC
+2025-01-19 16:09:22,856 - INFO - NEM: 1wk change of 8.60%
+2025-01-19 16:09:22,858 - INFO - NEOG: 1mo change of -11.82%
+2025-01-19 16:09:22,858 - INFO - Processing NEOG - 2025-01-10 17:12:42 UTC
+2025-01-19 16:09:22,996 - INFO - Processing NEM - 2025-01-10 15:00:18 UTC
+2025-01-19 16:09:23,807 - INFO - Retrieved article length: 10436 characters
+2025-01-19 16:09:23,815 - INFO - NEO: 1h change of 12.03%
+2025-01-19 16:09:23,882 - INFO - NEO: 1wk change of -19.67%
+2025-01-19 16:09:23,954 - INFO - NEO: 1mo change of -22.90%
+2025-01-19 16:09:23,954 - INFO - Processing NEO - 2025-01-13 15:48:03 UTC
+2025-01-19 16:09:24,045 - INFO - Retrieved article length: 3241 characters
+2025-01-19 16:09:24,053 - INFO - Retrieved article length: 604 characters
+2025-01-19 16:09:24,130 - INFO - NEOV: 1h change of -16.99%
+2025-01-19 16:09:24,142 - INFO - NEOG: 1h change of -2.41%
+2025-01-19 16:09:24,186 - INFO - Retrieved article length: 5526 characters
+2025-01-19 16:09:24,214 - INFO - NEOV: 1wk change of -14.07%
+2025-01-19 16:09:24,227 - INFO - NEOG: 1wk change of -4.78%
+2025-01-19 16:09:24,285 - INFO - NEM: 1h change of 1.41%
+2025-01-19 16:09:24,294 - INFO - NEOV: 1mo change of -10.71%
+2025-01-19 16:09:24,294 - INFO - Processing NEOV - 2024-12-20 16:09:00 UTC
+2025-01-19 16:09:24,312 - INFO - NEOG: 1mo change of -9.83%
+2025-01-19 16:09:24,312 - INFO - Processing NEOG - 2025-01-10 16:15:03 UTC
+2025-01-19 16:09:24,439 - INFO - NEM: 1wk change of 11.96%
+2025-01-19 16:09:24,590 - INFO - NEM: 1mo change of 1.36%
+2025-01-19 16:09:24,591 - INFO - Processing NEM - 2025-01-09 17:00:00 UTC
+2025-01-19 16:09:25,122 - INFO - Retrieved article length: 486 characters
+2025-01-19 16:09:25,229 - INFO - NEO: 1h change of 4.95%
+2025-01-19 16:09:25,330 - INFO - NEO: 1wk change of -16.31%
+2025-01-19 16:09:25,426 - INFO - NEO: 1mo change of -20.66%
+2025-01-19 16:09:25,426 - INFO - Processing NEO - 2025-01-10 15:34:44 UTC
+2025-01-19 16:09:25,471 - INFO - Retrieved article length: 6906 characters
+2025-01-19 16:09:25,543 - INFO - Retrieved article length: 4171 characters
+2025-01-19 16:09:25,551 - INFO - NEOG: 1h change of -2.41%
+2025-01-19 16:09:25,558 - INFO - NEOV: 1h change of -4.10%
+2025-01-19 16:09:25,603 - INFO - NEOG: 1wk change of -4.78%
+2025-01-19 16:09:25,647 - INFO - NEOV: 1wk change of 8.35%
+2025-01-19 16:09:25,655 - INFO - NEOG: 1mo change of -9.83%
+2025-01-19 16:09:25,655 - INFO - Processing NEOG - 2025-01-10 15:25:42 UTC
+2025-01-19 16:09:25,731 - INFO - NEOV: 1mo change of -22.63%
+2025-01-19 16:09:25,731 - INFO - Processing NEOV - 2024-12-11 16:45:00 UTC
+2025-01-19 16:09:25,792 - INFO - Retrieved article length: 7792 characters
+2025-01-19 16:09:26,038 - INFO - NEM: 1wk change of 12.62%
+2025-01-19 16:09:26,178 - INFO - NEM: 1mo change of 1.46%
+2025-01-19 16:09:26,180 - INFO - Processing NEM - 2025-01-07 17:52:39 UTC
+2025-01-19 16:09:26,499 - INFO - NEOV: 1h change of -9.06%
+2025-01-19 16:09:26,586 - INFO - NEOV: 1wk change of -3.88%
+2025-01-19 16:09:26,669 - INFO - NEOV: 1mo change of 7.12%
+2025-01-19 16:09:26,669 - INFO - Processing NEOV - 2024-11-13 18:53:00 UTC
+2025-01-19 16:09:26,673 - INFO - Retrieved article length: 473 characters
+2025-01-19 16:09:26,773 - INFO - NEO: 1h change of -20.58%
+2025-01-19 16:09:26,850 - INFO - Retrieved article length: 560 characters
+2025-01-19 16:09:26,859 - INFO - NEOG: 1h change of -2.41%
+2025-01-19 16:09:26,879 - INFO - NEO: 1wk change of -13.77%
+2025-01-19 16:09:26,913 - INFO - NEOG: 1wk change of -4.78%
+2025-01-19 16:09:26,971 - INFO - NEOG: 1mo change of -9.83%
+2025-01-19 16:09:26,983 - INFO - NEO: 1mo change of -19.99%
+2025-01-19 16:09:27,141 - INFO - Processing NEP - 2025-01-19 14:46:00 UTC
+2025-01-19 16:09:27,221 - INFO - Processing NEPH - 2025-01-16 14:08:55 UTC
+2025-01-19 16:09:27,346 - INFO - Retrieved article length: 521 characters
+2025-01-19 16:09:27,428 - INFO - NEOV: 1h change of 15.22%
+2025-01-19 16:09:27,448 - INFO - NEM: 1h change of 2.69%
+2025-01-19 16:09:27,495 - INFO - NEP: 1wk change of -5.59%
+2025-01-19 16:09:27,520 - INFO - NEOV: 1wk change of 56.33%
+2025-01-19 16:09:27,586 - INFO - NEP: 1mo change of -4.54%
+2025-01-19 16:09:27,587 - INFO - Processing NEP - 2025-01-17 18:00:11 UTC
+2025-01-19 16:09:27,601 - INFO - NEOV: 1mo change of 78.97%
+2025-01-19 16:09:27,601 - INFO - Processing NEOV - 2024-10-31 20:04:44 UTC
+2025-01-19 16:09:27,610 - INFO - NEM: 1wk change of 12.57%
+2025-01-19 16:09:27,918 - INFO - Processing NERV - 2024-11-05 15:40:35 UTC
+2025-01-19 16:09:27,957 - INFO - Retrieved article length: 5587 characters
+2025-01-19 16:09:28,211 - INFO - NEP: 1wk change of -9.64%
+2025-01-19 16:09:28,329 - INFO - NEP: 1mo change of -4.80%
+2025-01-19 16:09:28,342 - INFO - Processing NEP - 2025-01-17 02:00:20 UTC
+2025-01-19 16:09:28,375 - INFO - NEOV: 1h change of 8.15%
+2025-01-19 16:09:28,417 - INFO - Retrieved article length: 3989 characters
+2025-01-19 16:09:28,459 - INFO - NEOV: 1wk change of 46.73%
+2025-01-19 16:09:28,543 - INFO - NEOV: 1mo change of 46.06%
+2025-01-19 16:09:28,544 - INFO - Processing NEOV - 2024-10-29 15:45:00 UTC
+2025-01-19 16:09:28,583 - INFO - NEP: 1wk change of -9.64%
+2025-01-19 16:09:28,636 - INFO - NEP: 1mo change of -4.80%
+2025-01-19 16:09:28,636 - INFO - Processing NEP - 2025-01-16 18:00:33 UTC
+2025-01-19 16:09:28,714 - INFO - NEPH: 1mo change of 3.23%
+2025-01-19 16:09:28,715 - INFO - Processing NEPH - 2024-12-06 23:07:53 UTC
+2025-01-19 16:09:28,906 - INFO - NEP: 1h change of -2.24%
+2025-01-19 16:09:29,003 - INFO - NEP: 1wk change of -8.92%
+2025-01-19 16:09:29,099 - INFO - NEP: 1mo change of -3.34%
+2025-01-19 16:09:29,099 - INFO - Processing NEP - 2025-01-16 17:00:13 UTC
+2025-01-19 16:09:29,146 - INFO - Retrieved article length: 632 characters
+2025-01-19 16:09:29,251 - INFO - NERV: 1h change of -6.85%
+2025-01-19 16:09:29,267 - INFO - NEP: 1h change of -2.24%
+2025-01-19 16:09:29,324 - INFO - NEP: 1wk change of -8.92%
+2025-01-19 16:09:29,331 - INFO - NEOV: 1h change of 7.89%
+2025-01-19 16:09:29,348 - INFO - NERV: 1wk change of -5.69%
+2025-01-19 16:09:29,377 - INFO - NEP: 1mo change of -3.34%
+2025-01-19 16:09:29,377 - INFO - Processing NEP - 2025-01-16 01:45:22 UTC
+2025-01-19 16:09:29,412 - INFO - NEOV: 1wk change of 36.60%
+2025-01-19 16:09:29,442 - INFO - NERV: 1mo change of -10.49%
+2025-01-19 16:09:29,442 - INFO - Processing NERV - 2024-11-05 15:30:00 UTC
+2025-01-19 16:09:29,499 - INFO - NEOV: 1mo change of 52.17%
+2025-01-19 16:09:29,651 - INFO - Processing NESR - 2024-12-24 13:07:11 UTC
+2025-01-19 16:09:29,690 - INFO - NEPH: 1mo change of 4.11%
+2025-01-19 16:09:29,691 - INFO - Processing NEPH - 2024-12-04 17:00:00 UTC
+2025-01-19 16:09:29,775 - INFO - Retrieved article length: 3522 characters
+2025-01-19 16:09:29,784 - INFO - NEP: 1h change of -2.24%
+2025-01-19 16:09:29,839 - INFO - NEP: 1wk change of -8.92%
+2025-01-19 16:09:29,896 - INFO - NEP: 1mo change of -3.34%
+2025-01-19 16:09:29,897 - INFO - Processing NEP - 2025-01-15 22:59:29 UTC
+2025-01-19 16:09:30,134 - INFO - NERV: 1h change of -6.85%
+2025-01-19 16:09:30,139 - INFO - NERV: 1wk change of -5.69%
+2025-01-19 16:09:30,143 - INFO - NERV: 1mo change of -10.49%
+2025-01-19 16:09:30,315 - INFO - Processing NET - 2025-01-18 16:00:27 UTC
+2025-01-19 16:09:30,356 - INFO - Retrieved article length: 499 characters
+2025-01-19 16:09:30,459 - INFO - NEP: 1h change of -1.11%
+2025-01-19 16:09:30,462 - INFO - NEPH: 1h change of 2.52%
+2025-01-19 16:09:30,558 - INFO - NEP: 1wk change of -8.92%
+2025-01-19 16:09:30,660 - INFO - NEP: 1mo change of -4.91%
+2025-01-19 16:09:30,661 - INFO - Processing NEP - 2025-01-15 22:07:56 UTC
+2025-01-19 16:09:30,668 - INFO - NEPH: 1mo change of 11.89%
+2025-01-19 16:09:30,668 - INFO - Processing NEPH - 2024-11-10 15:36:23 UTC
+2025-01-19 16:09:30,865 - INFO - Retrieved article length: 7201 characters
+2025-01-19 16:09:30,959 - INFO - NESR: 1h change of 5.03%
+2025-01-19 16:09:31,029 - INFO - Retrieved article length: 3197 characters
+2025-01-19 16:09:31,037 - INFO - NEP: 1h change of -1.11%
+2025-01-19 16:09:31,047 - INFO - NESR: 1wk change of -1.02%
+2025-01-19 16:09:31,093 - INFO - NEP: 1wk change of -8.92%
+2025-01-19 16:09:31,134 - INFO - NESR: 1mo change of 5.81%
+2025-01-19 16:09:31,134 - INFO - Processing NESR - 2024-12-10 13:56:11 UTC
+2025-01-19 16:09:31,150 - INFO - NEP: 1mo change of -4.91%
+2025-01-19 16:09:31,579 - INFO - Retrieved article length: 3945 characters
+2025-01-19 16:09:31,965 - ERROR - NET: No price data found, symbol may be delisted (1h 2025-01-16 -> 2025-01-20)
+2025-01-19 16:09:32,676 - ERROR - NEPH: No price data found, symbol may be delisted (1h 2024-11-08 -> 2024-11-12)
+2025-01-19 16:09:32,719 - ERROR - Error getting news for NEUP: JSON decode error
+2025-01-19 16:09:32,720 - INFO - Retrying NEUP (Attempt 2/3)
+2025-01-19 16:09:32,964 - ERROR - NESR: No price data found, symbol may be delisted (1h 2024-12-08 -> 2024-12-12)
+2025-01-19 16:09:33,936 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-10-31 -> 2024-11-20)
+2025-01-19 16:09:34,018 - ERROR - NET: No price data found, symbol may be delisted (1d 2025-01-08 -> 2025-01-28)
+2025-01-19 16:09:34,064 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-11-30 -> 2024-12-20)
+2025-01-19 16:09:35,049 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-10-06 -> 2024-12-15)
+2025-01-19 16:09:35,050 - INFO - Processing NEPH - 2024-11-09 00:03:00 UTC
+2025-01-19 16:09:35,071 - ERROR - NET: No price data found, symbol may be delisted (1d 2024-12-14 -> 2025-02-22)
+2025-01-19 16:09:35,072 - INFO - Processing NET - 2025-01-18 00:06:05 UTC
+2025-01-19 16:09:35,268 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-11-05 -> 2025-01-14)
+2025-01-19 16:09:35,269 - INFO - Processing NESR - 2024-12-04 00:05:00 UTC
+2025-01-19 16:09:36,781 - ERROR - NEPH: No price data found, symbol may be delisted (1h 2024-11-07 -> 2024-11-11)
+2025-01-19 16:09:36,801 - ERROR - NET: No price data found, symbol may be delisted (1h 2025-01-16 -> 2025-01-20)
+2025-01-19 16:09:37,197 - ERROR - NESR: No price data found, symbol may be delisted (1h 2024-12-02 -> 2024-12-06)
+2025-01-19 16:09:37,721 - ERROR - Error getting news for NEUP: JSON decode error
+2025-01-19 16:09:37,721 - INFO - Retrying NEUP (Attempt 3/3)
+2025-01-19 16:09:37,856 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-10-30 -> 2024-11-19)
+2025-01-19 16:09:38,025 - ERROR - NET: No price data found, symbol may be delisted (1d 2025-01-08 -> 2025-01-28)
+2025-01-19 16:09:38,215 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-11-24 -> 2024-12-14)
+2025-01-19 16:09:39,111 - ERROR - NET: No price data found, symbol may be delisted (1d 2024-12-14 -> 2025-02-22)
+2025-01-19 16:09:39,113 - INFO - Processing NET - 2025-01-17 22:45:05 UTC
+2025-01-19 16:09:39,242 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-10-05 -> 2024-12-14)
+2025-01-19 16:09:39,253 - INFO - Processing NEPH - 2024-11-08 00:01:00 UTC
+2025-01-19 16:09:39,657 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-10-30 -> 2025-01-08)
+2025-01-19 16:09:39,659 - INFO - Processing NESR - 2024-11-20 13:04:26 UTC
+2025-01-19 16:09:40,356 - INFO - Retrieved article length: 575 characters
+2025-01-19 16:09:41,054 - ERROR - NEPH: No price data found, symbol may be delisted (1h 2024-11-06 -> 2024-11-10)
+2025-01-19 16:09:41,385 - ERROR - NESR: No price data found, symbol may be delisted (1h 2024-11-18 -> 2024-11-22)
+2025-01-19 16:09:41,445 - ERROR - NET: No price data found, symbol may be delisted (1h 2025-01-15 -> 2025-01-19)
+2025-01-19 16:09:42,296 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-10-29 -> 2024-11-18)
+2025-01-19 16:09:42,453 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-11-10 -> 2024-11-30)
+2025-01-19 16:09:42,681 - ERROR - NET: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:09:42,722 - ERROR - Error getting news for NEUP: JSON decode error
+2025-01-19 16:09:42,722 - ERROR - Failed to get news for NEUP after 3 attempts
+2025-01-19 16:09:43,484 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-10-04 -> 2024-12-13)
+2025-01-19 16:09:43,485 - INFO - Processing NEPH - 2024-11-06 15:56:23 UTC
+2025-01-19 16:09:43,526 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-10-16 -> 2024-12-25)
+2025-01-19 16:09:43,526 - INFO - Processing NESR - 2024-11-19 14:00:00 UTC
+2025-01-19 16:09:43,830 - ERROR - NET: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:09:43,830 - INFO - Processing NET - 2025-01-17 21:20:40 UTC
+2025-01-19 16:09:43,965 - ERROR - Error getting news for NEXI: JSON decode error
+2025-01-19 16:09:43,966 - INFO - Retrying NEXI (Attempt 2/3)
+2025-01-19 16:09:44,554 - ERROR - NET: No price data found, symbol may be delisted (1h 2025-01-15 -> 2025-01-19)
+2025-01-19 16:09:45,353 - ERROR - NESR: No price data found, symbol may be delisted (1h 2024-11-17 -> 2024-11-21)
+2025-01-19 16:09:45,572 - ERROR - NEPH: No price data found, symbol may be delisted (1h 2024-11-04 -> 2024-11-08)
+2025-01-19 16:09:45,675 - ERROR - NET: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:09:46,685 - ERROR - NET: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:09:46,686 - INFO - Processing NET - 2025-01-17 19:41:10 UTC
+2025-01-19 16:09:46,812 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-11-09 -> 2024-11-29)
+2025-01-19 16:09:47,108 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-10-27 -> 2024-11-16)
+2025-01-19 16:09:47,861 - INFO - Retrieved article length: 2368 characters
+2025-01-19 16:09:47,862 - ERROR - NET: No price data found, symbol may be delisted (1h 2025-01-15 -> 2025-01-19)
+2025-01-19 16:09:47,926 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-10-15 -> 2024-12-24)
+2025-01-19 16:09:47,927 - INFO - Processing NESR - 2024-11-11 14:00:00 UTC
+2025-01-19 16:09:48,183 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-10-02 -> 2024-12-11)
+2025-01-19 16:09:48,184 - INFO - Processing NEPH - 2024-10-31 14:30:00 UTC
+2025-01-19 16:09:48,917 - ERROR - NET: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:09:48,967 - ERROR - Error getting news for NEXI: JSON decode error
+2025-01-19 16:09:48,968 - INFO - Retrying NEXI (Attempt 3/3)
+2025-01-19 16:09:49,683 - ERROR - NESR: No price data found, symbol may be delisted (1h 2024-11-09 -> 2024-11-13)
+2025-01-19 16:09:49,929 - ERROR - NEPH: No price data found, symbol may be delisted (1h 2024-10-29 -> 2024-11-02)
+2025-01-19 16:09:50,145 - ERROR - NET: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:09:50,150 - INFO - Processing NET - 2025-01-17 17:45:11 UTC
+2025-01-19 16:09:50,834 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-11-01 -> 2024-11-21)
+2025-01-19 16:09:50,949 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-10-21 -> 2024-11-10)
+2025-01-19 16:09:51,380 - INFO - Retrieved article length: 2297 characters
+2025-01-19 16:09:51,381 - ERROR - NET: No price data found, symbol may be delisted (1h 2025-01-15 -> 2025-01-19)
+2025-01-19 16:09:51,974 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-10-07 -> 2024-12-16)
+2025-01-19 16:09:51,975 - INFO - Processing NESR - 2024-11-04 02:00:00 UTC
+2025-01-19 16:09:52,160 - ERROR - NEPH: No price data found, symbol may be delisted (1d 2024-09-26 -> 2024-12-05)
+2025-01-19 16:09:52,372 - ERROR - NET: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:09:53,167 - ERROR - Error getting news for NEXT: JSON decode error
+2025-01-19 16:09:53,167 - INFO - Retrying NEXT (Attempt 2/3)
+2025-01-19 16:09:53,564 - ERROR - NET: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:09:53,565 - INFO - Processing NET - 2025-01-17 16:45:00 UTC
+2025-01-19 16:09:53,805 - ERROR - NESR: No price data found, symbol may be delisted (1h 2024-11-02 -> 2024-11-06)
+2025-01-19 16:09:53,969 - ERROR - Error getting news for NEXI: JSON decode error
+2025-01-19 16:09:53,969 - ERROR - Failed to get news for NEXI after 3 attempts
+2025-01-19 16:09:54,745 - INFO - Retrieved article length: 4240 characters
+2025-01-19 16:09:54,745 - ERROR - NET: No price data found, symbol may be delisted (1h 2025-01-15 -> 2025-01-19)
+2025-01-19 16:09:54,899 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-10-25 -> 2024-11-14)
+2025-01-19 16:09:54,977 - ERROR - Error getting news for NFE: JSON decode error
+2025-01-19 16:09:54,977 - INFO - Retrying NFE (Attempt 2/3)
+2025-01-19 16:09:55,895 - ERROR - NET: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:09:55,976 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-09-30 -> 2024-12-09)
+2025-01-19 16:09:55,978 - INFO - Processing NESR - 2024-10-29 16:05:00 UTC
+2025-01-19 16:09:56,936 - INFO - Retrieved article length: 5150 characters
+2025-01-19 16:09:57,166 - ERROR - NET: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:09:57,166 - INFO - Processing NET - 2025-01-17 15:17:05 UTC
+2025-01-19 16:09:58,002 - INFO - Retrieved article length: 503 characters
+2025-01-19 16:09:58,003 - ERROR - NET: No price data found, symbol may be delisted (1h 2025-01-15 -> 2025-01-19)
+2025-01-19 16:09:58,043 - ERROR - NESR: No price data found, symbol may be delisted (1h 2024-10-27 -> 2024-10-31)
+2025-01-19 16:09:58,168 - ERROR - Error getting news for NEXT: JSON decode error
+2025-01-19 16:09:58,168 - INFO - Retrying NEXT (Attempt 3/3)
+2025-01-19 16:09:59,089 - ERROR - NET: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:09:59,238 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-10-19 -> 2024-11-08)
+2025-01-19 16:09:59,979 - ERROR - Error getting news for NFE: JSON decode error
+2025-01-19 16:09:59,979 - INFO - Retrying NFE (Attempt 3/3)
+2025-01-19 16:10:00,397 - ERROR - NET: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:10:00,422 - ERROR - NESR: No price data found, symbol may be delisted (1d 2024-09-24 -> 2024-12-03)
+2025-01-19 16:10:01,508 - ERROR - Error getting news for NG: JSON decode error
+2025-01-19 16:10:01,508 - INFO - Retrying NG (Attempt 2/3)
+2025-01-19 16:10:01,902 - ERROR - Error getting news for NFLX: JSON decode error
+2025-01-19 16:10:01,904 - INFO - Retrying NFLX (Attempt 2/3)
+2025-01-19 16:10:03,169 - ERROR - Error getting news for NEXT: JSON decode error
+2025-01-19 16:10:03,169 - ERROR - Failed to get news for NEXT after 3 attempts
+2025-01-19 16:10:04,607 - ERROR - Error getting news for NHTC: JSON decode error
+2025-01-19 16:10:04,607 - INFO - Retrying NHTC (Attempt 2/3)
+2025-01-19 16:10:04,980 - ERROR - Error getting news for NFE: JSON decode error
+2025-01-19 16:10:04,980 - ERROR - Failed to get news for NFE after 3 attempts
+2025-01-19 16:10:06,105 - ERROR - Error getting news for NI: JSON decode error
+2025-01-19 16:10:06,105 - INFO - Retrying NI (Attempt 2/3)
+2025-01-19 16:10:06,509 - ERROR - Error getting news for NG: JSON decode error
+2025-01-19 16:10:06,509 - INFO - Retrying NG (Attempt 3/3)
+2025-01-19 16:10:06,906 - ERROR - Error getting news for NFLX: JSON decode error
+2025-01-19 16:10:06,907 - INFO - Retrying NFLX (Attempt 3/3)
+2025-01-19 16:10:09,608 - ERROR - Error getting news for NHTC: JSON decode error
+2025-01-19 16:10:09,608 - INFO - Retrying NHTC (Attempt 3/3)
+2025-01-19 16:10:11,106 - ERROR - Error getting news for NI: JSON decode error
+2025-01-19 16:10:11,106 - INFO - Retrying NI (Attempt 3/3)
+2025-01-19 16:10:11,510 - ERROR - Error getting news for NG: JSON decode error
+2025-01-19 16:10:11,510 - ERROR - Failed to get news for NG after 3 attempts
+2025-01-19 16:10:11,908 - ERROR - Error getting news for NFLX: JSON decode error
+2025-01-19 16:10:11,908 - ERROR - Failed to get news for NFLX after 3 attempts
+2025-01-19 16:10:12,817 - ERROR - Error getting news for NINE: JSON decode error
+2025-01-19 16:10:12,820 - INFO - Retrying NINE (Attempt 2/3)
+2025-01-19 16:10:13,040 - ERROR - Error getting news for NISN: JSON decode error
+2025-01-19 16:10:13,040 - INFO - Retrying NISN (Attempt 2/3)
+2025-01-19 16:10:14,609 - ERROR - Error getting news for NHTC: JSON decode error
+2025-01-19 16:10:14,609 - ERROR - Failed to get news for NHTC after 3 attempts
+2025-01-19 16:10:15,856 - ERROR - Error getting news for NITO: JSON decode error
+2025-01-19 16:10:15,856 - INFO - Retrying NITO (Attempt 2/3)
+2025-01-19 16:10:16,108 - ERROR - Error getting news for NI: JSON decode error
+2025-01-19 16:10:16,108 - ERROR - Failed to get news for NI after 3 attempts
+2025-01-19 16:10:17,258 - ERROR - Error getting news for NIXX: JSON decode error
+2025-01-19 16:10:17,258 - INFO - Retrying NIXX (Attempt 2/3)
+2025-01-19 16:10:17,821 - ERROR - Error getting news for NINE: JSON decode error
+2025-01-19 16:10:17,823 - INFO - Retrying NINE (Attempt 3/3)
+2025-01-19 16:10:18,041 - ERROR - Error getting news for NISN: JSON decode error
+2025-01-19 16:10:18,044 - INFO - Retrying NISN (Attempt 3/3)
+2025-01-19 16:10:20,858 - ERROR - Error getting news for NITO: JSON decode error
+2025-01-19 16:10:20,859 - INFO - Retrying NITO (Attempt 3/3)
+2025-01-19 16:10:22,259 - ERROR - Error getting news for NIXX: JSON decode error
+2025-01-19 16:10:22,260 - INFO - Retrying NIXX (Attempt 3/3)
+2025-01-19 16:10:22,824 - ERROR - Error getting news for NINE: JSON decode error
+2025-01-19 16:10:22,824 - ERROR - Failed to get news for NINE after 3 attempts
+2025-01-19 16:10:23,047 - ERROR - Error getting news for NISN: JSON decode error
+2025-01-19 16:10:23,047 - ERROR - Failed to get news for NISN after 3 attempts
+2025-01-19 16:10:24,210 - ERROR - Error getting news for NKE: JSON decode error
+2025-01-19 16:10:24,210 - INFO - Retrying NKE (Attempt 2/3)
+2025-01-19 16:10:24,444 - INFO - Processing NKGN - 2024-12-03 00:05:00 UTC
+2025-01-19 16:10:25,443 - INFO - Retrieved article length: 8757 characters
+2025-01-19 16:10:25,542 - INFO - NKGN: 1h change of 24.96%
+2025-01-19 16:10:25,634 - INFO - NKGN: 1wk change of 36.36%
+2025-01-19 16:10:25,722 - INFO - NKGN: 1mo change of 120.26%
+2025-01-19 16:10:25,723 - INFO - Processing NKGN - 2024-11-27 00:15:00 UTC
+2025-01-19 16:10:25,861 - ERROR - Error getting news for NITO: JSON decode error
+2025-01-19 16:10:25,863 - ERROR - Failed to get news for NITO after 3 attempts
+2025-01-19 16:10:26,083 - INFO - Processing NKLA - 2025-01-16 15:22:16 UTC
+2025-01-19 16:10:26,525 - INFO - Retrieved article length: 6285 characters
+2025-01-19 16:10:26,621 - INFO - NKGN: 1h change of -1.89%
+2025-01-19 16:10:26,713 - INFO - NKGN: 1wk change of 46.98%
+2025-01-19 16:10:26,803 - INFO - NKGN: 1mo change of 70.13%
+2025-01-19 16:10:26,803 - INFO - Processing NKGN - 2024-10-29 15:05:00 UTC
+2025-01-19 16:10:26,954 - INFO - Retrieved article length: 1941 characters
+2025-01-19 16:10:27,130 - INFO - NKLA: 1h change of 16.52%
+2025-01-19 16:10:27,228 - INFO - NKLA: 1wk change of -16.25%
+2025-01-19 16:10:27,262 - ERROR - Error getting news for NIXX: JSON decode error
+2025-01-19 16:10:27,262 - ERROR - Failed to get news for NIXX after 3 attempts
+2025-01-19 16:10:27,368 - INFO - NKLA: 1mo change of -14.65%
+2025-01-19 16:10:27,368 - INFO - Processing NKLA - 2025-01-16 01:16:08 UTC
+2025-01-19 16:10:27,460 - INFO - Processing NKSH - 2024-11-19 13:48:21 UTC
+2025-01-19 16:10:27,585 - INFO - Retrieved article length: 11693 characters
+2025-01-19 16:10:27,676 - INFO - NKGN: 1h change of -28.50%
+2025-01-19 16:10:27,764 - INFO - NKGN: 1wk change of -40.13%
+2025-01-19 16:10:27,859 - INFO - NKGN: 1mo change of 10.00%
+2025-01-19 16:10:28,039 - INFO - Processing NKTR - 2025-01-10 15:00:00 UTC
+2025-01-19 16:10:28,122 - INFO - Retrieved article length: 2847 characters
+2025-01-19 16:10:28,131 - INFO - NKLA: 1h change of 16.52%
+2025-01-19 16:10:28,180 - INFO - NKLA: 1wk change of -16.25%
+2025-01-19 16:10:28,181 - INFO - Retrieved article length: 4060 characters
+2025-01-19 16:10:28,230 - INFO - NKLA: 1mo change of -14.65%
+2025-01-19 16:10:28,231 - INFO - Processing NKLA - 2025-01-16 00:27:00 UTC
+2025-01-19 16:10:28,384 - INFO - NKSH: 1wk change of 1.95%
+2025-01-19 16:10:28,560 - INFO - Processing NKSH - 2024-10-26 16:46:28 UTC
+2025-01-19 16:10:28,912 - INFO - Retrieved article length: 10548 characters
+2025-01-19 16:10:28,997 - INFO - NKTR: 1h change of -10.13%
+2025-01-19 16:10:29,002 - INFO - Retrieved article length: 170 characters
+2025-01-19 16:10:29,011 - INFO - NKLA: 1h change of 16.52%
+2025-01-19 16:10:29,059 - INFO - NKLA: 1wk change of -16.25%
+2025-01-19 16:10:29,087 - INFO - NKTR: 1wk change of -4.30%
+2025-01-19 16:10:29,110 - INFO - NKLA: 1mo change of -14.65%
+2025-01-19 16:10:29,110 - INFO - Processing NKLA - 2024-12-23 12:10:17 UTC
+2025-01-19 16:10:29,178 - INFO - NKTR: 1mo change of -12.75%
+2025-01-19 16:10:29,178 - INFO - Processing NKTR - 2025-01-08 16:34:12 UTC
+2025-01-19 16:10:29,211 - ERROR - Error getting news for NKE: JSON decode error
+2025-01-19 16:10:29,211 - INFO - Retrying NKE (Attempt 3/3)
+2025-01-19 16:10:29,402 - INFO - Retrieved article length: 1592 characters
+2025-01-19 16:10:29,500 - INFO - NKSH: 1h change of -2.43%
+2025-01-19 16:10:29,611 - INFO - NKSH: 1wk change of -5.81%
+2025-01-19 16:10:29,736 - INFO - NKSH: 1mo change of 9.67%
+2025-01-19 16:10:29,820 - INFO - Retrieved article length: 4728 characters
+2025-01-19 16:10:29,850 - INFO - Retrieved article length: 505 characters
+2025-01-19 16:10:29,901 - INFO - Processing NKTX - 2024-12-05 15:17:28 UTC
+2025-01-19 16:10:29,911 - INFO - NKLA: 1h change of -1.67%
+2025-01-19 16:10:29,943 - INFO - NKTR: 1h change of -2.59%
+2025-01-19 16:10:29,998 - INFO - NKLA: 1wk change of -16.78%
+2025-01-19 16:10:30,033 - INFO - NKTR: 1wk change of -5.32%
+2025-01-19 16:10:30,084 - INFO - NKLA: 1mo change of -33.66%
+2025-01-19 16:10:30,084 - INFO - Processing NKLA - 2024-12-18 16:30:00 UTC
+2025-01-19 16:10:30,122 - INFO - NKTR: 1mo change of -12.75%
+2025-01-19 16:10:30,123 - INFO - Processing NKTR - 2025-01-07 17:24:26 UTC
+2025-01-19 16:10:30,745 - INFO - Retrieved article length: 529 characters
+2025-01-19 16:10:30,834 - INFO - NKTX: 1h change of -4.61%
+2025-01-19 16:10:30,919 - INFO - NKTX: 1wk change of -9.65%
+2025-01-19 16:10:30,931 - INFO - Retrieved article length: 5787 characters
+2025-01-19 16:10:30,954 - INFO - Retrieved article length: 6695 characters
+2025-01-19 16:10:31,012 - INFO - NKTX: 1mo change of -22.40%
+2025-01-19 16:10:31,012 - INFO - Processing NKTX - 2024-12-05 14:01:00 UTC
+2025-01-19 16:10:31,043 - INFO - NKLA: 1h change of -10.04%
+2025-01-19 16:10:31,067 - INFO - NKTR: 1h change of -2.59%
+2025-01-19 16:10:31,134 - INFO - NKLA: 1wk change of -23.84%
+2025-01-19 16:10:31,150 - INFO - NKTR: 1wk change of -5.32%
+2025-01-19 16:10:31,223 - INFO - NKLA: 1mo change of -57.05%
+2025-01-19 16:10:31,224 - INFO - Processing NKLA - 2024-12-18 01:40:43 UTC
+2025-01-19 16:10:31,238 - INFO - NKTR: 1mo change of -16.82%
+2025-01-19 16:10:31,239 - INFO - Processing NKTR - 2025-01-04 15:48:05 UTC
+2025-01-19 16:10:31,833 - INFO - Retrieved article length: 14730 characters
+2025-01-19 16:10:31,842 - INFO - NKTX: 1h change of -4.61%
+2025-01-19 16:10:31,847 - INFO - NKTX: 1wk change of -9.65%
+2025-01-19 16:10:31,852 - INFO - NKTX: 1mo change of -22.40%
+2025-01-19 16:10:31,853 - INFO - Processing NKTX - 2024-11-26 15:02:00 UTC
+2025-01-19 16:10:32,002 - INFO - Retrieved article length: 6235 characters
+2025-01-19 16:10:32,093 - INFO - NKTR: 1h change of 14.23%
+2025-01-19 16:10:32,180 - INFO - NKTR: 1wk change of 1.05%
+2025-01-19 16:10:32,199 - INFO - Retrieved article length: 1723 characters
+2025-01-19 16:10:32,207 - INFO - NKLA: 1h change of -10.04%
+2025-01-19 16:10:32,213 - INFO - NKLA: 1wk change of -23.84%
+2025-01-19 16:10:32,263 - INFO - NKTR: 1mo change of -24.58%
+2025-01-19 16:10:32,264 - INFO - NKLA: 1mo change of -57.05%
+15:26:53 UTC
+2025-01-19 16:10:32,264 - INFO - Processing NKLA - 2024-12-03 11:08:25 UTC
+2025-01-19 16:10:32,831 - INFO - Retrieved article length: 1383 characters
+2025-01-19 16:10:32,925 - INFO - NKTX: 1h change of 16.60%
+2025-01-19 16:10:32,986 - INFO - Retrieved article length: 5986 characters
+2025-01-19 16:10:33,011 - INFO - NKTX: 1wk change of 6.02%
+2025-01-19 16:10:33,067 - INFO - Retrieved article length: 512 characters
+2025-01-19 16:10:33,077 - INFO - NKLA: 1h change of -7.11%
+2025-01-19 16:10:33,094 - INFO - NKTX: 1mo change of -44.23%
+2025-01-19 16:10:33,094 - INFO - Processing NKTX - 2024-11-22 14:50:46 UTC
+2025-01-19 16:10:33,158 - INFO - NKTR: 1h change of -1.43%
+2025-01-19 16:10:33,163 - INFO - NKLA: 1wk change of -25.24%
+2025-01-19 16:10:33,247 - INFO - NKTR: 1wk change of -20.34%
+2025-01-19 16:10:33,248 - INFO - NKLA: 1mo change of -63.47%
+2025-01-19 16:10:33,249 - INFO - Processing NKLA - 2024-11-21 12:09:02 UTC
+2025-01-19 16:10:33,330 - INFO - NKTR: 1mo change of -31.43%
+2025-01-19 16:10:33,330 - INFO - Processing NKTR - 2024-12-07 20:00:00 UTC
+2025-01-19 16:10:33,853 - INFO - Retrieved article length: 1199 characters
+2025-01-19 16:10:34,035 - INFO - NKTX: 1wk change of -5.90%
+2025-01-19 16:10:34,077 - INFO - Retrieved article length: 6337 characters
+2025-01-19 16:10:34,126 - INFO - Retrieved article length: 10390 characters
+2025-01-19 16:10:34,171 - INFO - NKLA: 1h change of -2.43%
+2025-01-19 16:10:34,174 - INFO - NKTX: 1mo change of -43.19%
+2025-01-19 16:10:34,174 - INFO - Processing NKTX - 2024-11-08 00:02:00 UTC
+2025-01-19 16:10:34,212 - ERROR - Error getting news for NKE: JSON decode error
+2025-01-19 16:10:34,212 - ERROR - Failed to get news for NKE after 3 attempts
+2025-01-19 16:10:34,214 - INFO - NKTR: 1h change of 2.17%
+2025-01-19 16:10:34,260 - INFO - NKLA: 1wk change of -38.15%
+2025-01-19 16:10:34,297 - INFO - NKTR: 1wk change of -11.50%
+2025-01-19 16:10:34,365 - INFO - NKLA: 1mo change of -70.05%
+2025-01-19 16:10:34,380 - INFO - NKTR: 1mo change of -22.56%
+2025-01-19 16:10:34,381 - INFO - Processing NKTR - 2024-11-18 23:30:00 UTC
+2025-01-19 16:10:34,468 - INFO - Processing NLSP - 2025-01-16 17:32:00 UTC
+2025-01-19 16:10:34,558 - INFO - Processing NLY - 2025-01-17 13:02:16 UTC
+2025-01-19 16:10:35,115 - INFO - Retrieved article length: 12961 characters
+2025-01-19 16:10:35,117 - INFO - Retrieved article length: 7419 characters
+2025-01-19 16:10:35,202 - INFO - NKTR: 1h change of -2.84%
+2025-01-19 16:10:35,206 - INFO - NKTX: 1h change of -7.67%
+2025-01-19 16:10:35,285 - INFO - NKTR: 1wk change of -19.29%
+2025-01-19 16:10:35,286 - INFO - Retrieved article length: 11842 characters
+2025-01-19 16:10:35,289 - INFO - NKTX: 1wk change of -25.81%
+2025-01-19 16:10:35,375 - INFO - NKTR: 1mo change of -29.55%
+2025-01-19 16:10:35,375 - INFO - Processing NKTR - 2024-11-10 17:43:50 UTC
+2025-01-19 16:10:35,375 - INFO - NKTX: 1mo change of -41.58%
+2025-01-19 16:10:35,384 - INFO - NLSP: 1h change of -4.50%
+2025-01-19 16:10:35,447 - INFO - Retrieved article length: 6721 characters
+2025-01-19 16:10:35,471 - INFO - NLSP: 1wk change of -8.61%
+2025-01-19 16:10:35,549 - INFO - NLY: 1h change of 3.48%
+2025-01-19 16:10:35,557 - INFO - NLSP: 1mo change of -2.55%
+2025-01-19 16:10:35,557 - INFO - Processing NLSP - 2025-01-09 16:28:46 UTC
+2025-01-19 16:10:35,570 - INFO - Processing NMFC - 2024-11-21 00:52:23 UTC
+2025-01-19 16:10:35,662 - INFO - NLY: 1wk change of 3.65%
+2025-01-19 16:10:35,782 - INFO - NLY: 1mo change of 1.19%
+2025-01-19 16:10:35,783 - INFO - Processing NLY - 2025-01-16 00:15:00 UTC
+2025-01-19 16:10:36,104 - INFO - Retrieved article length: 4888 characters
+2025-01-19 16:10:36,192 - INFO - NKTR: 1h change of -1.79%
+2025-01-19 16:10:36,276 - INFO - NKTR: 1wk change of -13.45%
+2025-01-19 16:10:36,360 - INFO - NKTR: 1mo change of -21.09%
+2025-01-19 16:10:36,367 - INFO - Retrieved article length: 525 characters
+2025-01-19 16:10:36,456 - INFO - NMFC: 1h change of 1.73%
+2025-01-19 16:10:36,485 - INFO - Retrieved article length: 2592 characters
+2025-01-19 16:10:36,499 - INFO - Retrieved article length: 1796 characters
+2025-01-19 16:10:36,501 - INFO - Processing NMHI - 2025-01-18 00:10:00 UTC
+2025-01-19 16:10:36,552 - INFO - NMFC: 1wk change of 5.01%
+2025-01-19 16:10:36,580 - INFO - NLY: 1h change of 5.72%
+2025-01-19 16:10:36,590 - INFO - NLSP: 1h change of 10.05%
+2025-01-19 16:10:36,678 - INFO - NLSP: 1wk change of -29.78%
+2025-01-19 16:10:36,680 - INFO - Processing NMFC - 2024-11-15 00:38:15 UTC
+2025-01-19 16:10:36,706 - INFO - NLY: 1wk change of 2.77%
+2025-01-19 16:10:36,766 - INFO - NLSP: 1mo change of -15.11%
+2025-01-19 16:10:36,766 - INFO - Processing NLSP - 2025-01-08 15:42:00 UTC
+2025-01-19 16:10:36,823 - INFO - NLY: 1mo change of 1.29%
+2025-01-19 16:10:36,824 - INFO - Processing NLY - 2025-01-11 02:15:23 UTC
+2025-01-19 16:10:37,172 - INFO - Retrieved article length: 7608 characters
+2025-01-19 16:10:37,253 - ERROR - NMHI: No price data found, symbol may be delisted (1h 2025-01-16 -> 2025-01-20)
+2025-01-19 16:10:37,335 - INFO - NMHI: 1wk change of -71.68%
+2025-01-19 16:10:37,407 - INFO - Retrieved article length: 525 characters
+2025-01-19 16:10:37,420 - INFO - NMHI: 1mo change of -78.03%
+2025-01-19 16:10:37,420 - INFO - Processing NMHI - 2025-01-15 01:50:00 UTC
+2025-01-19 16:10:37,631 - INFO - Retrieved article length: 12608 characters
+2025-01-19 16:10:37,657 - INFO - NMFC: 1wk change of 10.11%
+2025-01-19 16:10:37,719 - INFO - NLSP: 1h change of 10.75%
+2025-01-19 16:10:37,729 - INFO - Retrieved article length: 3208 characters
+2025-01-19 16:10:37,771 - INFO - NMFC: 1mo change of -1.68%
+2025-01-19 16:10:37,771 - INFO - Processing NMFC - 2024-11-07 01:02:06 UTC
+2025-01-19 16:10:37,803 - INFO - NLSP: 1wk change of -29.78%
+2025-01-19 16:10:37,891 - INFO - NLSP: 1mo change of -29.52%
+2025-01-19 16:10:37,891 - INFO - Processing NLSP - 2024-12-30 15:30:00 UTC
+2025-01-19 16:10:37,949 - INFO - NLY: 1wk change of 5.11%
+2025-01-19 16:10:38,075 - INFO - Processing NLY - 2025-01-10 19:39:00 UTC
+2025-01-19 16:10:38,235 - INFO - Retrieved article length: 6593 characters
+2025-01-19 16:10:38,325 - INFO - NMHI: 1h change of 12.21%
+2025-01-19 16:10:38,410 - INFO - NMHI: 1wk change of -74.74%
+2025-01-19 16:10:38,493 - INFO - NMHI: 1mo change of -79.24%
+2025-01-19 16:10:38,494 - INFO - Processing NMHI - 2025-01-14 16:00:00 UTC
+2025-01-19 16:10:38,623 - INFO - Retrieved article length: 519 characters
+2025-01-19 16:10:38,697 - INFO - Retrieved article length: 13180 characters
+2025-01-19 16:10:38,716 - INFO - NMFC: 1h change of 5.74%
+2025-01-19 16:10:38,783 - INFO - NLSP: 1h change of -14.57%
+2025-01-19 16:10:38,870 - INFO - NLSP: 1wk change of 23.59%
+2025-01-19 16:10:38,917 - INFO - Processing NMFC - 2024-11-01 15:21:20 UTC
+2025-01-19 16:10:38,953 - INFO - NLSP: 1mo change of -46.35%
+2025-01-19 16:10:38,954 - INFO - Processing NLSP - 2024-12-19 15:30:00 UTC
+2025-01-19 16:10:39,139 - INFO - Retrieved article length: 526 characters
+2025-01-19 16:10:39,140 - INFO - Retrieved article length: 8783 characters
+2025-01-19 16:10:39,228 - INFO - NMHI: 1h change of 10.79%
+2025-01-19 16:10:39,234 - INFO - NLY: 1h change of -1.28%
+2025-01-19 16:10:39,314 - INFO - NMHI: 1wk change of -74.74%
+2025-01-19 16:10:39,351 - INFO - NLY: 1wk change of 5.57%
+2025-01-19 16:10:39,402 - INFO - NMHI: 1mo change of -80.08%
+2025-01-19 16:10:39,402 - INFO - Processing NMHI - 2025-01-13 16:30:00 UTC
+2025-01-19 16:10:39,472 - INFO - Processing NLY - 2025-01-07 13:21:00 UTC
+2025-01-19 16:10:39,708 - INFO - Retrieved article length: 527 characters
+2025-01-19 16:10:39,795 - INFO - NMFC: 1h change of -2.76%
+2025-01-19 16:10:39,824 - INFO - Retrieved article length: 14859 characters
+2025-01-19 16:10:39,908 - INFO - NMFC: 1wk change of -2.16%
+2025-01-19 16:10:39,914 - INFO - NLSP: 1h change of 2.05%
+2025-01-19 16:10:40,003 - INFO - NLSP: 1wk change of -9.00%
+2025-01-19 16:10:40,007 - INFO - NMFC: 1mo change of -2.25%
+2025-01-19 16:10:40,008 - INFO - Processing NMFC - 2024-11-01 10:13:25 UTC
+2025-01-19 16:10:40,072 - INFO - Retrieved article length: 8951 characters
+2025-01-19 16:10:40,085 - INFO - NLSP: 1mo change of -42.81%
+2025-01-19 16:10:40,085 - INFO - Processing NLSP - 2024-12-12 15:45:36 UTC
+2025-01-19 16:10:40,166 - INFO - NMHI: 1h change of 10.79%
+2025-01-19 16:10:40,226 - INFO - Retrieved article length: 9054 characters
+2025-01-19 16:10:40,252 - INFO - NMHI: 1wk change of -75.98%
+2025-01-19 16:10:40,337 - INFO - NMHI: 1mo change of -81.78%
+2025-01-19 16:10:40,338 - INFO - Processing NMHI - 2024-12-03 16:00:00 UTC
+2025-01-19 16:10:40,338 - INFO - NLY: 1h change of -1.80%
+2025-01-19 16:10:40,458 - INFO - NLY: 1wk change of 6.09%
+2025-01-19 16:10:40,575 - INFO - NLY: 1mo change of 1.39%
+2025-01-19 16:10:40,583 - INFO - Processing NLY - 2025-01-03 01:33:18 UTC
+2025-01-19 16:10:40,823 - INFO - Retrieved article length: 4344 characters
+2025-01-19 16:10:40,831 - INFO - NMFC: 1h change of -2.76%
+2025-01-19 16:10:40,838 - INFO - NMFC: 1wk change of -2.16%
+2025-01-19 16:10:40,844 - INFO - NMFC: 1mo change of -2.25%
+2025-01-19 16:10:40,844 - INFO - Processing NMFC - 2024-10-31 01:40:09 UTC
+2025-01-19 16:10:40,907 - INFO - Retrieved article length: 5676 characters
+2025-01-19 16:10:41,006 - INFO - NLSP: 1h change of 4.37%
+2025-01-19 16:10:41,093 - INFO - NLSP: 1wk change of -35.64%
+2025-01-19 16:10:41,148 - INFO - Retrieved article length: 10583 characters
+2025-01-19 16:10:41,180 - INFO - NLSP: 1mo change of -51.81%
+2025-01-19 16:10:41,180 - INFO - Processing NLSP - 2024-12-11 15:30:00 UTC
+2025-01-19 16:10:41,233 - INFO - NMHI: 1h change of -12.39%
+2025-01-19 16:10:41,322 - INFO - NMHI: 1wk change of -12.40%
+2025-01-19 16:10:41,381 - INFO - Retrieved article length: 486 characters
+2025-01-19 16:10:41,473 - INFO - NLY: 1h change of 3.21%
+2025-01-19 16:10:41,556 - INFO - Retrieved article length: 4310 characters
+2025-01-19 16:10:41,601 - INFO - NLY: 1wk change of -1.81%
+2025-01-19 16:10:41,644 - INFO - NMFC: 1h change of -2.54%
+2025-01-19 16:10:41,718 - INFO - NMHI: 1mo change of -51.01%
+2025-01-19 16:10:41,718 - INFO - Processing NMHI - 2024-11-20 16:30:00 UTC
+2025-01-19 16:10:41,744 - INFO - NMFC: 1wk change of -2.58%
+2025-01-19 16:10:41,752 - INFO - Processing NLY - 2024-12-20 16:48:00 UTC
+2025-01-19 16:10:41,846 - INFO - Processing NMFC - 2024-10-31 00:37:22 UTC
+2025-01-19 16:10:41,912 - INFO - Retrieved article length: 13925 characters
+2025-01-19 16:10:42,006 - INFO - NLSP: 1h change of -12.16%
+2025-01-19 16:10:42,094 - INFO - NLSP: 1wk change of -35.64%
+2025-01-19 16:10:42,178 - INFO - NLSP: 1mo change of -50.37%
+2025-01-19 16:10:42,178 - INFO - Processing NLSP - 2024-12-04 21:42:22 UTC
+2025-01-19 16:10:42,575 - INFO - Retrieved article length: 1016 characters
+2025-01-19 16:10:42,583 - INFO - NMFC: 1h change of -2.54%
+2025-01-19 16:10:42,591 - INFO - NMFC: 1wk change of -2.58%
+2025-01-19 16:10:42,594 - INFO - Retrieved article length: 6749 characters
+2025-01-19 16:10:42,598 - INFO - Processing NMFC - 2024-10-30 23:10:00 UTC
+2025-01-19 16:10:42,645 - INFO - Retrieved article length: 2516 characters
+2025-01-19 16:10:42,687 - INFO - NMHI: 1h change of -29.87%
+2025-01-19 16:10:42,738 - INFO - NLY: 1h change of -3.23%
+2025-01-19 16:10:42,775 - INFO - NMHI: 1wk change of -10.76%
+2025-01-19 16:10:42,870 - INFO - NMHI: 1mo change of -62.67%
+2025-01-19 16:10:42,871 - INFO - Processing NMHI - 2024-11-20 16:00:00 UTC
+2025-01-19 16:10:42,881 - INFO - NLY: 1wk change of -4.39%
+2025-01-19 16:10:43,005 - INFO - NLY: 1mo change of 1.65%
+2025-01-19 16:10:43,005 - INFO - Processing NLY - 2024-12-20 02:15:11 UTC
+2025-01-19 16:10:43,057 - INFO - Retrieved article length: 509 characters
+2025-01-19 16:10:43,210 - INFO - NLSP: 1h change of -31.31%
+2025-01-19 16:10:43,301 - INFO - NLSP: 1wk change of -46.35%
+2025-01-19 16:10:43,401 - INFO - NLSP: 1mo change of -46.63%
+2025-01-19 16:10:43,533 - INFO - Processing NMRA - 2025-01-10 16:13:27 UTC
+2025-01-19 16:10:43,652 - INFO - Retrieved article length: 18799 characters
+2025-01-19 16:10:43,673 - INFO - Retrieved article length: 8095 characters
+2025-01-19 16:10:43,685 - INFO - NMHI: 1h change of -29.87%
+2025-01-19 16:10:43,692 - INFO - NMHI: 1wk change of -10.76%
+2025-01-19 16:10:43,699 - INFO - NMHI: 1mo change of -62.67%
+2025-01-19 16:10:43,699 - INFO - Processing NMHI - 2024-11-19 16:30:00 UTC
+2025-01-19 16:10:43,774 - INFO - Retrieved article length: 3492 characters
+2025-01-19 16:10:43,782 - INFO - NLY: 1h change of -3.23%
+2025-01-19 16:10:43,788 - INFO - NLY: 1wk change of -4.39%
+2025-01-19 16:10:43,840 - INFO - NLY: 1mo change of 1.65%
+2025-01-19 16:10:43,855 - INFO - NMFC: 1wk change of -2.58%
+2025-01-19 16:10:44,032 - INFO - Processing NMRK - 2025-01-16 21:52:39 UTC
+2025-01-19 16:10:44,083 - INFO - Processing NMTC - 2025-01-11 17:30:36 UTC
+2025-01-19 16:10:44,350 - INFO - Retrieved article length: 6829 characters
+2025-01-19 16:10:44,435 - INFO - NMRA: 1h change of -7.11%
+2025-01-19 16:10:44,452 - INFO - Retrieved article length: 7614 characters
+2025-01-19 16:10:44,526 - INFO - NMRA: 1wk change of -80.66%
+2025-01-19 16:10:44,614 - INFO - NMHI: 1h change of -32.48%
+2025-01-19 16:10:44,615 - INFO - NMRA: 1mo change of -80.08%
+2025-01-19 16:10:44,616 - INFO - Processing NMRA - 2025-01-09 21:48:00 UTC
+2025-01-19 16:10:44,698 - INFO - NMHI: 1wk change of -2.43%
+2025-01-19 16:10:44,784 - INFO - NMHI: 1mo change of -60.12%
+2025-01-19 16:10:44,796 - INFO - Retrieved article length: 2038 characters
+2025-01-19 16:10:44,871 - INFO - Retrieved article length: 3604 characters
+2025-01-19 16:10:44,924 - INFO - Processing NN - 2025-01-11 15:08:12 UTC
+2025-01-19 16:10:44,970 - INFO - NMRK: 1h change of 10.70%
+2025-01-19 16:10:45,002 - INFO - NMTC: 1wk change of 27.27%
+2025-01-19 16:10:45,067 - INFO - NMRK: 1wk change of 3.42%
+2025-01-19 16:10:45,096 - INFO - NMTC: 1mo change of 56.95%
+2025-01-19 16:10:45,096 - INFO - Processing NMTC - 2025-01-10 16:30:00 UTC
+2025-01-19 16:10:45,215 - INFO - NMRK: 1mo change of -10.57%
+2025-01-19 16:10:45,216 - INFO - Processing NMRK - 2025-01-10 00:15:00 UTC
+2025-01-19 16:10:45,429 - INFO - Retrieved article length: 6040 characters
+2025-01-19 16:10:45,518 - INFO - NMRA: 1h change of -18.85%
+2025-01-19 16:10:45,602 - INFO - NMRA: 1wk change of -81.46%
+2025-01-19 16:10:45,651 - INFO - Retrieved article length: 4653 characters
+2025-01-19 16:10:45,694 - INFO - NMRA: 1mo change of -78.78%
+2025-01-19 16:10:45,695 - INFO - Processing NMRA - 2025-01-04 16:00:45 UTC
+2025-01-19 16:10:45,740 - INFO - NN: 1h change of 1.56%
+2025-01-19 16:10:45,826 - INFO - NN: 1wk change of -18.30%
+2025-01-19 16:10:45,880 - INFO - Retrieved article length: 8667 characters
+2025-01-19 16:10:45,911 - INFO - NN: 1mo change of -23.54%
+2025-01-19 16:10:45,911 - INFO - Processing NN - 2025-01-07 19:20:58 UTC
+2025-01-19 16:10:45,970 - INFO - NMTC: 1h change of 15.42%
+2025-01-19 16:10:45,973 - INFO - Retrieved article length: 4555 characters
+2025-01-19 16:10:46,067 - INFO - NMRK: 1h change of -1.81%
+2025-01-19 16:10:46,110 - INFO - NMTC: 1wk change of 27.12%
+2025-01-19 16:10:46,160 - INFO - NMRK: 1wk change of 3.75%
+2025-01-19 16:10:46,209 - INFO - NMTC: 1mo change of 77.97%
+2025-01-19 16:10:46,210 - INFO - Processing NMTC - 2025-01-06 16:30:00 UTC
+2025-01-19 16:10:46,256 - INFO - NMRK: 1mo change of -15.73%
+2025-01-19 16:10:46,257 - INFO - Processing NMRK - 2025-01-09 18:00:00 UTC
+2025-01-19 16:10:46,429 - INFO - Retrieved article length: 1716 characters
+2025-01-19 16:10:46,523 - INFO - NMRA: 1h change of 7.43%
+2025-01-19 16:10:46,610 - INFO - NMRA: 1wk change of -78.66%
+2025-01-19 16:10:46,662 - INFO - Retrieved article length: 2502 characters
+2025-01-19 16:10:46,709 - INFO - NMRA: 1mo change of -79.08%
+2025-01-19 16:10:46,709 - INFO - Processing NMRA - 2025-01-03 23:58:03 UTC
+2025-01-19 16:10:46,751 - INFO - NN: 1h change of -5.38%
+2025-01-19 16:10:46,835 - INFO - NN: 1wk change of -23.04%
+2025-01-19 16:10:46,920 - INFO - NN: 1mo change of -20.50%
+2025-01-19 16:10:46,921 - INFO - Processing NN - 2024-11-27 00:05:00 UTC
+2025-01-19 16:10:46,948 - INFO - Retrieved article length: 6236 characters
+2025-01-19 16:10:47,037 - INFO - NMTC: 1h change of 16.34%
+2025-01-19 16:10:47,084 - INFO - Retrieved article length: 4471 characters
+2025-01-19 16:10:47,177 - INFO - NMTC: 1wk change of 30.68%
+2025-01-19 16:10:47,178 - INFO - NMRK: 1h change of -4.71%
+2025-01-19 16:10:47,259 - INFO - NMTC: 1mo change of 61.54%
+2025-01-19 16:10:47,260 - INFO - Processing NMTC - 2025-01-03 16:30:00 UTC
+2025-01-19 16:10:47,329 - INFO - NMRK: 1wk change of 3.91%
+2025-01-19 16:10:47,436 - INFO - NMRK: 1mo change of -13.81%
+2025-01-19 16:10:47,436 - INFO - Processing NMRK - 2025-01-07 17:40:18 UTC
+2025-01-19 16:10:47,607 - INFO - Retrieved article length: 513 characters
+2025-01-19 16:10:47,697 - INFO - NMRA: 1h change of 7.43%
+2025-01-19 16:10:47,788 - INFO - NMRA: 1wk change of -79.21%
+2025-01-19 16:10:47,809 - INFO - Retrieved article length: 3410 characters
+2025-01-19 16:10:47,874 - INFO - NMRA: 1mo change of -79.38%
+2025-01-19 16:10:47,874 - INFO - Processing NMRA - 2025-01-03 21:57:52 UTC
+2025-01-19 16:10:47,899 - INFO - NN: 1h change of 6.49%
+2025-01-19 16:10:47,984 - INFO - NN: 1wk change of 12.65%
+2025-01-19 16:10:48,068 - INFO - NN: 1mo change of 52.85%
+2025-01-19 16:10:48,068 - INFO - Processing NN - 2024-11-15 14:27:56 UTC
+2025-01-19 16:10:48,118 - INFO - Retrieved article length: 6143 characters
+2025-01-19 16:10:48,208 - INFO - NMTC: 1h change of 9.64%
+2025-01-19 16:10:48,307 - INFO - NMTC: 1wk change of 46.88%
+2025-01-19 16:10:48,388 - INFO - NMTC: 1mo change of 68.54%
+2025-01-19 16:10:48,389 - INFO - Processing NMTC - 2024-12-17 16:30:00 UTC
+2025-01-19 16:10:48,394 - INFO - Retrieved article length: 2793 characters
+2025-01-19 16:10:48,487 - INFO - NMRK: 1h change of -3.76%
+2025-01-19 16:10:48,560 - INFO - Retrieved article length: 505 characters
+2025-01-19 16:10:48,568 - INFO - NMRA: 1h change of 7.43%
+2025-01-19 16:10:48,574 - INFO - NMRA: 1wk change of -79.21%
+2025-01-19 16:10:48,582 - INFO - NMRK: 1wk change of 3.60%
+2025-01-19 16:10:48,620 - INFO - NMRA: 1mo change of -79.38%
+2025-01-19 16:10:48,620 - INFO - Processing NMRA - 2025-01-03 18:47:24 UTC
+2025-01-19 16:10:48,686 - INFO - NMRK: 1mo change of -13.14%
+2025-01-19 16:10:48,686 - INFO - Processing NMRK - 2024-12-27 14:16:34 UTC
+2025-01-19 16:10:48,972 - INFO - Retrieved article length: 1890 characters
+2025-01-19 16:10:49,149 - INFO - NN: 1wk change of 23.41%
+2025-01-19 16:10:49,206 - INFO - Retrieved article length: 16606 characters
+2025-01-19 16:10:49,232 - INFO - NN: 1mo change of 111.88%
+2025-01-19 16:10:49,232 - INFO - Processing NN - 2024-11-14 00:05:00 UTC
+2025-01-19 16:10:49,306 - INFO - Retrieved article length: 523 characters
+2025-01-19 16:10:49,314 - INFO - NMRA: 1h change of 7.43%
+2025-01-19 16:10:49,320 - INFO - NMRA: 1wk change of -79.21%
+2025-01-19 16:10:49,371 - INFO - NMRA: 1mo change of -79.38%
+2025-01-19 16:10:49,371 - INFO - Processing NMRA - 2025-01-03 17:14:00 UTC
+2025-01-19 16:10:49,383 - INFO - NMTC: 1wk change of 28.70%
+2025-01-19 16:10:49,433 - INFO - Retrieved article length: 4445 characters
+2025-01-19 16:10:49,471 - INFO - NMTC: 1mo change of 17.98%
+2025-01-19 16:10:49,471 - INFO - Processing NMTC - 2024-12-04 16:30:00 UTC
+2025-01-19 16:10:49,523 - INFO - NMRK: 1h change of -1.72%
+2025-01-19 16:10:49,619 - INFO - NMRK: 1wk change of -9.92%
+2025-01-19 16:10:49,719 - INFO - NMRK: 1mo change of -13.02%
+2025-01-19 16:10:49,719 - INFO - Processing NMRK - 2024-12-19 12:02:13 UTC
+2025-01-19 16:10:50,114 - INFO - Retrieved article length: 5476 characters
+2025-01-19 16:10:50,121 - INFO - NMRA: 1h change of 7.43%
+2025-01-19 16:10:50,136 - INFO - NMRA: 1wk change of -79.21%
+2025-01-19 16:10:50,178 - INFO - Retrieved article length: 14804 characters
+2025-01-19 16:10:50,182 - INFO - NMRA: 1mo change of -79.38%
+2025-01-19 16:10:50,182 - INFO - Processing NMRA - 2025-01-03 15:20:26 UTC
+2025-01-19 16:10:50,204 - INFO - Retrieved article length: 2494 characters
+2025-01-19 16:10:50,269 - INFO - NN: 1h change of -4.12%
+2025-01-19 16:10:50,303 - INFO - NMTC: 1h change of -9.09%
+2025-01-19 16:10:50,354 - INFO - NN: 1wk change of 23.31%
+2025-01-19 16:10:50,388 - INFO - NMTC: 1wk change of 23.98%
+2025-01-19 16:10:50,438 - INFO - NN: 1mo change of 114.04%
+2025-01-19 16:10:50,439 - INFO - Processing NN - 2024-10-21 16:15:00 UTC
+2025-01-19 16:10:50,480 - INFO - NMTC: 1mo change of 15.74%
+2025-01-19 16:10:50,481 - INFO - Processing NMTC - 2024-12-03 23:45:00 UTC
+2025-01-19 16:10:50,489 - INFO - Retrieved article length: 3742 characters
+2025-01-19 16:10:50,579 - INFO - NMRK: 1h change of -9.31%
+2025-01-19 16:10:50,680 - INFO - NMRK: 1wk change of -15.59%
+2025-01-19 16:10:50,782 - INFO - NMRK: 1mo change of -12.73%
+2025-01-19 16:10:50,782 - INFO - Processing NMRK - 2024-12-13 17:56:22 UTC
+2025-01-19 16:10:51,039 - INFO - Retrieved article length: 1964 characters
+2025-01-19 16:10:51,047 - INFO - NMRA: 1h change of 7.43%
+2025-01-19 16:10:51,054 - INFO - NMRA: 1wk change of -79.21%
+2025-01-19 16:10:51,101 - INFO - NMRA: 1mo change of -79.38%
+2025-01-19 16:10:51,218 - INFO - Processing NNDM - 2025-01-14 23:15:35 UTC
+2025-01-19 16:10:51,276 - INFO - Retrieved article length: 3762 characters
+2025-01-19 16:10:51,287 - INFO - Retrieved article length: 9218 characters
+2025-01-19 16:10:51,374 - INFO - NMTC: 1h change of -3.03%
+2025-01-19 16:10:51,375 - INFO - NN: 1h change of 13.62%
+2025-01-19 16:10:51,464 - INFO - NMTC: 1wk change of 24.63%
+2025-01-19 16:10:51,515 - INFO - NN: 1wk change of 49.30%
+2025-01-19 16:10:51,549 - INFO - NMTC: 1mo change of 7.22%
+2025-01-19 16:10:51,549 - INFO - Processing NMTC - 2024-11-13 17:30:00 UTC
+2025-01-19 16:10:51,604 - INFO - NN: 1mo change of 105.04%
+2025-01-19 16:10:51,760 - ERROR - Error getting news for NNE: ('Connection broken: IncompleteRead(1 bytes read, 1 more expected)', IncompleteRead(1 bytes read, 1 more expected))
+2025-01-19 16:10:51,901 - INFO - Retrieved article length: 522 characters
+2025-01-19 16:10:51,991 - INFO - NMRK: 1h change of -3.24%
+2025-01-19 16:10:52,000 - INFO - Processing NNN - 2025-01-15 00:30:00 UTC
+2025-01-19 16:10:52,007 - INFO - Retrieved article length: 8026 characters
+2025-01-19 16:10:52,084 - INFO - NMRK: 1wk change of -14.90%
+2025-01-19 16:10:52,187 - INFO - NMRK: 1mo change of -14.67%
+2025-01-19 16:10:52,187 - INFO - NNDM: 1wk change of -11.07%
+2025-01-19 16:10:52,189 - INFO - Processing NMRK - 2024-12-13 17:00:00 UTC
+2025-01-19 16:10:52,273 - INFO - NNDM: 1mo change of -4.51%
+2025-01-19 16:10:52,273 - INFO - Processing NNDM - 2025-01-03 21:40:37 UTC
+2025-01-19 16:10:52,288 - INFO - Retrieved article length: 2330 characters
+2025-01-19 16:10:52,380 - INFO - NMTC: 1h change of -11.12%
+2025-01-19 16:10:52,469 - INFO - NMTC: 1wk change of -26.62%
+2025-01-19 16:10:52,555 - INFO - NMTC: 1mo change of -15.85%
+2025-01-19 16:10:52,736 - INFO - Processing NOBL - 2024-12-01 16:11:00 UTC
+2025-01-19 16:10:52,936 - INFO - Retrieved article length: 1827 characters
+2025-01-19 16:10:52,987 - INFO - Retrieved article length: 6578 characters
+2025-01-19 16:10:52,995 - INFO - NMRK: 1h change of -3.24%
+2025-01-19 16:10:53,001 - INFO - NMRK: 1wk change of -14.90%
+2025-01-19 16:10:53,009 - INFO - NMRK: 1mo change of -14.67%
+2025-01-19 16:10:53,027 - INFO - Retrieved article length: 456 characters
+2025-01-19 16:10:53,029 - INFO - NNN: 1h change of 6.17%
+2025-01-19 16:10:53,123 - INFO - NNDM: 1h change of -2.80%
+2025-01-19 16:10:53,157 - INFO - NNN: 1wk change of 1.26%
+2025-01-19 16:10:53,168 - INFO - Processing NOC - 2025-01-17 17:50:12 UTC
+2025-01-19 16:10:53,209 - INFO - NNDM: 1wk change of -5.56%
+2025-01-19 16:10:53,283 - INFO - NNN: 1mo change of -5.63%
+2025-01-19 16:10:53,283 - INFO - Processing NNN - 2025-01-14 16:30:00 UTC
+2025-01-19 16:10:53,294 - INFO - NNDM: 1mo change of 7.87%
+2025-01-19 16:10:53,295 - INFO - Processing NNDM - 2025-01-03 17:41:42 UTC
+2025-01-19 16:10:53,629 - INFO - Retrieved article length: 4885 characters
+2025-01-19 16:10:53,931 - INFO - NOBL: 1mo change of -5.18%
+2025-01-19 16:10:53,986 - INFO - Retrieved article length: 2815 characters
+2025-01-19 16:10:54,064 - INFO - Retrieved article length: 1186 characters
+2025-01-19 16:10:54,073 - INFO - Processing NODK - 2024-11-23 00:15:00 UTC
+2025-01-19 16:10:54,087 - INFO - NOC: 1h change of 2.09%
+2025-01-19 16:10:54,144 - INFO - Retrieved article length: 549 characters
+2025-01-19 16:10:54,153 - INFO - NNDM: 1h change of -2.80%
+2025-01-19 16:10:54,158 - INFO - NNN: 1h change of 4.87%
+2025-01-19 16:10:54,159 - INFO - NNDM: 1wk change of -5.56%
+2025-01-19 16:10:54,205 - INFO - NNDM: 1mo change of 7.87%
+2025-01-19 16:10:54,213 - INFO - Processing NNDM - 2025-01-02 17:40:06 UTC
+2025-01-19 16:10:54,220 - INFO - NOC: 1wk change of 6.63%
+2025-01-19 16:10:54,270 - INFO - NNN: 1wk change of 1.26%
+2025-01-19 16:10:54,380 - INFO - Processing NOC - 2025-01-17 15:18:00 UTC
+2025-01-19 16:10:54,400 - INFO - NNN: 1mo change of -5.50%
+2025-01-19 16:10:54,401 - INFO - Processing NNN - 2025-01-07 00:30:00 UTC
+2025-01-19 16:10:54,925 - INFO - Retrieved article length: 522 characters
+2025-01-19 16:10:54,938 - INFO - Retrieved article length: 5673 characters
+2025-01-19 16:10:55,013 - INFO - NNDM: 1h change of -1.30%
+2025-01-19 16:10:55,026 - INFO - NODK: 1h change of 4.25%
+2025-01-19 16:10:55,050 - INFO - Retrieved article length: 4616 characters
+2025-01-19 16:10:55,060 - INFO - NOC: 1h change of 2.09%
+2025-01-19 16:10:55,098 - INFO - NNDM: 1wk change of -4.42%
+2025-01-19 16:10:55,108 - INFO - NOC: 1wk change of 6.63%
+2025-01-19 16:10:55,109 - INFO - NODK: 1wk change of 1.87%
+2025-01-19 16:10:55,143 - INFO - Retrieved article length: 3781 characters
+2025-01-19 16:10:55,157 - INFO - Processing NOC - 2025-01-17 14:34:00 UTC
+2025-01-19 16:10:55,186 - INFO - NNDM: 1mo change of 7.87%
+2025-01-19 16:10:55,187 - INFO - Processing NNDM - 2024-12-26 17:20:03 UTC
+2025-01-19 16:10:55,196 - INFO - NODK: 1mo change of 2.28%
+2025-01-19 16:10:55,196 - INFO - Processing NODK - 2024-11-08 13:07:23 UTC
+2025-01-19 16:10:55,234 - INFO - NNN: 1h change of -3.37%
+2025-01-19 16:10:55,385 - INFO - NNN: 1wk change of -1.07%
+2025-01-19 16:10:55,512 - INFO - NNN: 1mo change of -7.48%
+2025-01-19 16:10:55,512 - INFO - Processing NNN - 2024-12-26 14:38:00 UTC
+2025-01-19 16:10:55,917 - INFO - Retrieved article length: 4492 characters
+2025-01-19 16:10:55,926 - INFO - NOC: 1h change of 2.09%
+2025-01-19 16:10:55,975 - INFO - NOC: 1wk change of 6.63%
+2025-01-19 16:10:56,023 - INFO - Processing NOC - 2025-01-17 14:03:20 UTC
+2025-01-19 16:10:56,031 - INFO - Retrieved article length: 1618 characters
+2025-01-19 16:10:56,061 - INFO - Retrieved article length: 513 characters
+2025-01-19 16:10:56,151 - INFO - NNDM: 1h change of 2.80%
+2025-01-19 16:10:56,208 - INFO - NODK: 1wk change of -1.01%
+2025-01-19 16:10:56,236 - INFO - NNDM: 1wk change of 13.12%
+2025-01-19 16:10:56,259 - INFO - Retrieved article length: 6080 characters
+2025-01-19 16:10:56,294 - INFO - NODK: 1mo change of 10.17%
+2025-01-19 16:10:56,294 - INFO - Processing NODK - 2024-11-08 00:15:00 UTC
+2025-01-19 16:10:56,327 - INFO - NNDM: 1mo change of 7.87%
+2025-01-19 16:10:56,327 - INFO - Processing NNDM - 2024-12-26 16:45:00 UTC
+2025-01-19 16:10:56,525 - INFO - NNN: 1wk change of -4.36%
+2025-01-19 16:10:56,649 - INFO - NNN: 1mo change of -8.29%
+2025-01-19 16:10:56,649 - INFO - Processing NNN - 2024-12-25 16:33:30 UTC
+2025-01-19 16:10:56,679 - INFO - Retrieved article length: 9580 characters
+2025-01-19 16:10:56,689 - INFO - NOC: 1h change of 2.09%
+2025-01-19 16:10:56,739 - INFO - NOC: 1wk change of 6.63%
+2025-01-19 16:10:56,791 - INFO - Processing NOC - 2025-01-16 15:59:16 UTC
+2025-01-19 16:10:57,086 - INFO - Retrieved article length: 6384 characters
+2025-01-19 16:10:57,101 - INFO - NODK: 1wk change of -1.01%
+2025-01-19 16:10:57,109 - INFO - NODK: 1mo change of 10.17%
+2025-01-19 16:10:57,109 - INFO - Processing NODK - 2024-10-30 17:43:23 UTC
+2025-01-19 16:10:57,127 - INFO - Retrieved article length: 5269 characters
+2025-01-19 16:10:57,136 - INFO - NNDM: 1h change of 2.80%
+2025-01-19 16:10:57,142 - INFO - NNDM: 1wk change of 13.12%
+2025-01-19 16:10:57,190 - INFO - NNDM: 1mo change of 7.87%
+2025-01-19 16:10:57,191 - INFO - Processing NNDM - 2024-12-24 03:05:44 UTC
+2025-01-19 16:10:57,323 - INFO - Retrieved article length: 7521 characters
+2025-01-19 16:10:57,548 - INFO - NNN: 1wk change of -4.36%
+2025-01-19 16:10:57,610 - INFO - Retrieved article length: 529 characters
+2025-01-19 16:10:57,668 - INFO - NNN: 1mo change of -8.77%
+2025-01-19 16:10:57,668 - INFO - Processing NNN - 2024-12-18 21:07:45 UTC
+2025-01-19 16:10:57,721 - INFO - NOC: 1h change of 1.59%
+2025-01-19 16:10:57,917 - INFO - NOC: 1wk change of 5.98%
+2025-01-19 16:10:57,970 - INFO - Retrieved article length: 3706 characters
+2025-01-19 16:10:57,998 - INFO - Retrieved article length: 7207 characters
+2025-01-19 16:10:58,064 - INFO - NODK: 1h change of -1.75%
+2025-01-19 16:10:58,086 - INFO - NNDM: 1h change of 1.80%
+2025-01-19 16:10:58,151 - INFO - NODK: 1wk change of 3.39%
+2025-01-19 16:10:58,176 - INFO - NNDM: 1wk change of 13.57%
+2025-01-19 16:10:58,205 - INFO - Processing NOC - 2025-01-16 15:23:00 UTC
+2025-01-19 16:10:58,237 - INFO - NODK: 1mo change of 4.81%
+2025-01-19 16:10:58,265 - INFO - NNDM: 1mo change of 11.48%
+2025-01-19 16:10:58,265 - INFO - Processing NNDM - 2024-12-24 01:05:37 UTC
+2025-01-19 16:10:58,360 - INFO - Processing NOG - 2025-01-02 17:01:37 UTC
+2025-01-19 16:10:58,432 - INFO - Retrieved article length: 7717 characters
+2025-01-19 16:10:58,538 - INFO - NNN: 1h change of -6.57%
+2025-01-19 16:10:58,667 - INFO - NNN: 1wk change of -5.15%
+2025-01-19 16:10:58,788 - INFO - NNN: 1mo change of -5.41%
+2025-01-19 16:10:58,789 - INFO - Processing NNN - 2024-12-14 14:12:00 UTC
+2025-01-19 16:10:58,977 - INFO - Retrieved article length: 528 characters
+2025-01-19 16:10:58,986 - INFO - NNDM: 1h change of 1.80%
+2025-01-19 16:10:58,991 - INFO - NNDM: 1wk change of 13.57%
+2025-01-19 16:10:59,039 - INFO - NNDM: 1mo change of 11.48%
+2025-01-19 16:10:59,074 - INFO - Retrieved article length: 4724 characters
+2025-01-19 16:10:59,083 - INFO - NOC: 1h change of 1.59%
+2025-01-19 16:10:59,133 - INFO - NOC: 1wk change of 5.98%
+2025-01-19 16:10:59,141 - INFO - Retrieved article length: 3948 characters
+2025-01-19 16:10:59,160 - INFO - Processing NOTE - 2025-01-15 15:01:00 UTC
+2025-01-19 16:10:59,181 - INFO - Processing NOC - 2025-01-16 14:07:00 UTC
+2025-01-19 16:10:59,228 - INFO - NOG: 1h change of 2.88%
+2025-01-19 16:10:59,323 - INFO - NOG: 1wk change of 13.48%
+2025-01-19 16:10:59,420 - INFO - NOG: 1mo change of -2.22%
+2025-01-19 16:10:59,420 - INFO - Processing NOG - 2024-12-26 13:42:12 UTC
+2025-01-19 16:10:59,566 - INFO - Retrieved article length: 5865 characters
+2025-01-19 16:10:59,796 - INFO - NNN: 1wk change of -6.26%
+2025-01-19 16:10:59,882 - INFO - Retrieved article length: 3951 characters
+2025-01-19 16:10:59,891 - INFO - NOC: 1h change of 1.59%
+2025-01-19 16:10:59,920 - INFO - NNN: 1mo change of -6.68%
+2025-01-19 16:10:59,920 - INFO - Processing NNN - 2024-12-13 06:00:40 UTC
+2025-01-19 16:10:59,941 - INFO - NOC: 1wk change of 5.98%
+2025-01-19 16:10:59,990 - INFO - Processing NOC - 2025-01-15 15:42:00 UTC
+2025-01-19 16:11:00,027 - INFO - Retrieved article length: 10663 characters
+2025-01-19 16:11:00,115 - INFO - Retrieved article length: 5627 characters
+2025-01-19 16:11:00,134 - INFO - NOTE: 1h change of 5.19%
+2025-01-19 16:11:00,217 - INFO - NOTE: 1wk change of -7.30%
+2025-01-19 16:11:00,295 - INFO - NOG: 1wk change of -1.32%
+2025-01-19 16:11:00,300 - INFO - NOTE: 1mo change of 56.79%
+2025-01-19 16:11:00,300 - INFO - Processing NOTE - 2024-12-20 00:05:00 UTC
+2025-01-19 16:11:00,397 - INFO - Processing NOG - 2024-12-23 13:01:24 UTC
+2025-01-19 16:11:00,702 - INFO - Retrieved article length: 4459 characters
+2025-01-19 16:11:00,803 - INFO - NOC: 1h change of 1.20%
+2025-01-19 16:11:00,810 - INFO - Retrieved article length: 8221 characters
+2025-01-19 16:11:00,961 - INFO - NOC: 1wk change of 5.98%
+2025-01-19 16:11:00,989 - INFO - Retrieved article length: 3656 characters
+2025-01-19 16:11:01,036 - INFO - NNN: 1wk change of -6.83%
+2025-01-19 16:11:01,080 - INFO - NOTE: 1h change of -17.74%
+2025-01-19 16:11:01,093 - INFO - NOC: 1mo change of 1.42%
+2025-01-19 16:11:01,145 - INFO - Retrieved article length: 2764 characters
+2025-01-19 16:11:01,167 - INFO - NOTE: 1wk change of 37.68%
+2025-01-19 16:11:01,220 - INFO - NNN: 1mo change of -6.81%
+2025-01-19 16:11:01,260 - INFO - NOTE: 1mo change of 58.75%
+2025-01-19 16:11:01,260 - INFO - Processing NOTE - 2024-12-17 15:01:00 UTC
+2025-01-19 16:11:01,324 - INFO - NOG: 1wk change of -7.64%
+2025-01-19 16:11:01,425 - INFO - NOG: 1mo change of 3.09%
+2025-01-19 16:11:01,425 - INFO - Processing NOG - 2024-12-21 02:08:00 UTC
+2025-01-19 16:11:02,068 - INFO - Retrieved article length: 6017 characters
+2025-01-19 16:11:02,160 - INFO - NOTE: 1h change of 8.56%
+2025-01-19 16:11:02,174 - INFO - Retrieved article length: 5354 characters
+2025-01-19 16:11:02,251 - INFO - NOTE: 1wk change of 43.71%
+2025-01-19 16:11:02,261 - INFO - NOG: 1h change of -2.47%
+2025-01-19 16:11:02,339 - INFO - NOTE: 1mo change of 44.48%
+2025-01-19 16:11:02,339 - INFO - Processing NOTE - 2024-12-12 00:05:00 UTC
+2025-01-19 16:11:02,358 - INFO - NOG: 1wk change of -10.32%
+2025-01-19 16:11:02,455 - INFO - NOG: 1mo change of 3.09%
+2025-01-19 16:11:02,455 - INFO - Processing NOG - 2024-12-20 22:09:04 UTC
+2025-01-19 16:11:03,031 - INFO - Retrieved article length: 2053 characters
+2025-01-19 16:11:03,123 - INFO - NOTE: 1h change of 35.39%
+2025-01-19 16:11:03,171 - INFO - Retrieved article length: 525 characters
+2025-01-19 16:11:03,214 - INFO - NOTE: 1wk change of 5.71%
+2025-01-19 16:11:03,283 - INFO - NOG: 1h change of -5.85%
+2025-01-19 16:11:03,295 - INFO - NOTE: 1mo change of 42.11%
+2025-01-19 16:11:03,296 - INFO - Processing NOTE - 2024-12-03 15:01:00 UTC
+2025-01-19 16:11:03,378 - INFO - NOG: 1wk change of -10.79%
+2025-01-19 16:11:03,471 - INFO - NOG: 1mo change of 5.00%
+2025-01-19 16:11:03,472 - INFO - Processing NOG - 2024-12-20 21:53:14 UTC
+2025-01-19 16:11:04,110 - INFO - Retrieved article length: 6056 characters
+2025-01-19 16:11:04,209 - INFO - NOTE: 1h change of 1.24%
+2025-01-19 16:11:04,295 - INFO - NOTE: 1wk change of -2.91%
+2025-01-19 16:11:04,313 - INFO - Retrieved article length: 506 characters
+2025-01-19 16:11:04,323 - INFO - NOG: 1h change of -5.85%
+2025-01-19 16:11:04,328 - INFO - NOG: 1wk change of -10.79%
+2025-01-19 16:11:04,376 - INFO - NOG: 1mo change of 5.00%
+2025-01-19 16:11:04,377 - INFO - Processing NOG - 2024-12-18 23:07:23 UTC
+2025-01-19 16:11:04,379 - INFO - NOTE: 1mo change of 38.66%
+2025-01-19 16:11:04,379 - INFO - Processing NOTE - 2024-12-02 15:01:00 UTC
+2025-01-19 16:11:05,157 - INFO - Retrieved article length: 6017 characters
+2025-01-19 16:11:05,191 - INFO - Retrieved article length: 7972 characters
+2025-01-19 16:11:05,281 - INFO - NOG: 1h change of -9.59%
+2025-01-19 16:11:05,328 - INFO - NOTE: 1wk change of -12.90%
+2025-01-19 16:11:05,376 - INFO - NOG: 1wk change of -11.80%
+2025-01-19 16:11:05,411 - INFO - NOTE: 1mo change of 22.55%
+2025-01-19 16:11:05,412 - INFO - Processing NOTE - 2024-11-29 21:05:00 UTC
+2025-01-19 16:11:05,472 - INFO - NOG: 1mo change of 4.79%
+2025-01-19 16:11:05,472 - INFO - Processing NOG - 2024-12-16 15:48:39 UTC
+2025-01-19 16:11:06,165 - INFO - Retrieved article length: 5312 characters
+2025-01-19 16:11:06,209 - INFO - Retrieved article length: 502 characters
+2025-01-19 16:11:06,294 - INFO - NOG: 1h change of -3.34%
+2025-01-19 16:11:06,343 - INFO - NOTE: 1wk change of 14.10%
+2025-01-19 16:11:06,393 - INFO - NOG: 1wk change of -10.27%
+2025-01-19 16:11:06,433 - INFO - NOTE: 1mo change of -2.80%
+2025-01-19 16:11:06,434 - INFO - Processing NOTE - 2024-11-18 15:01:00 UTC
+2025-01-19 16:11:06,484 - INFO - NOG: 1mo change of 3.47%
+2025-01-19 16:11:07,198 - INFO - Retrieved article length: 3349 characters
+2025-01-19 16:11:07,287 - INFO - NOTE: 1h change of -1.46%
+2025-01-19 16:11:07,372 - INFO - NOTE: 1wk change of -4.18%
+2025-01-19 16:11:07,455 - INFO - NOTE: 1mo change of -4.31%

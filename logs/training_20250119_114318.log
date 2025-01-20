@@ -1,0 +1,8 @@
+2025-01-19 11:43:18,151 - INFO - Starting new training session. Logging to: logs/training_20250119_114318.log
+2025-01-19 11:43:18,151 - INFO - Starting new training session. Logging to: logs/training_20250119_114318.log
+2025-01-19 11:43:20,612 - ERROR - Error getting news for ACCD: Expecting value: line 1 column 1 (char 0)
+2025-01-19 11:43:20,659 - ERROR - Error getting news for ACB: Expecting value: line 1 column 1 (char 0)
+2025-01-19 11:43:20,775 - ERROR - Error getting news for ACAD: Expecting value: line 1 column 1 (char 0)
+2025-01-19 11:43:27,463 - ERROR - Error getting news for ACDC: Expecting value: line 1 column 1 (char 0)
+2025-01-19 11:43:27,544 - ERROR - Error getting news for ACET: Expecting value: line 1 column 1 (char 0)
+2025-01-19 11:43:27,658 - ERROR - Error getting news for ACCO: Expecting value: line 1 column 1 (char 0)

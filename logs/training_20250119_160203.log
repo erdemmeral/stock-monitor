@@ -1,0 +1,901 @@
+2025-01-19 16:02:03,985 - INFO - Starting new training session. Logging to: logs/training_20250119_160203.log
+2025-01-19 16:02:03,992 - INFO - Starting new training session. Logging to: logs/training_20250119_160203.log
+2025-01-19 16:02:03,992 - INFO - Starting new training session. Logging to: logs/training_20250119_160203.log
+2025-01-19 16:02:03,993 - INFO - Starting new training session. Logging to: logs/training_20250119_160203.log
+2025-01-19 16:02:04,531 - INFO - Processing MBIN - 2024-12-24 17:06:35 UTC
+2025-01-19 16:02:04,534 - INFO - Processing MBCN - 2024-11-19 00:30:00 UTC
+2025-01-19 16:02:04,588 - INFO - Processing MBINM - 2024-12-24 17:06:35 UTC
+2025-01-19 16:02:04,611 - INFO - Processing MBINL - 2024-12-24 17:06:35 UTC
+2025-01-19 16:02:05,417 - INFO - MBCN: 1h change of 3.93%
+2025-01-19 16:02:05,528 - INFO - MBCN: 1wk change of -4.25%
+2025-01-19 16:02:05,635 - INFO - MBCN: 1mo change of -1.23%
+2025-01-19 16:02:05,774 - INFO - Retrieved article length: 7292 characters
+2025-01-19 16:02:05,799 - INFO - Retrieved article length: 7292 characters
+2025-01-19 16:02:05,805 - INFO - Processing MBINN - 2024-12-24 17:06:35 UTC
+2025-01-19 16:02:05,913 - INFO - MBIN: 1h change of 1.06%
+2025-01-19 16:02:05,970 - INFO - Retrieved article length: 7292 characters
+2025-01-19 16:02:06,001 - INFO - MBIN: 1wk change of -4.64%
+2025-01-19 16:02:06,093 - INFO - Processing MBIN - 2024-12-03 16:05:58 UTC
+2025-01-19 16:02:06,103 - INFO - MBINL: 1mo change of 1.56%
+2025-01-19 16:02:06,103 - INFO - Processing MBINL - 2024-12-03 16:05:58 UTC
+2025-01-19 16:02:06,177 - INFO - MBINM: 1wk change of 1.20%
+2025-01-19 16:02:06,202 - INFO - Retrieved article length: 7292 characters
+2025-01-19 16:02:06,268 - INFO - MBINM: 1mo change of 4.15%
+2025-01-19 16:02:06,268 - INFO - Processing MBINM - 2024-12-03 16:05:58 UTC
+2025-01-19 16:02:06,288 - INFO - MBINN: 1h change of -1.70%
+2025-01-19 16:02:06,377 - INFO - MBINN: 1wk change of -3.08%
+2025-01-19 16:02:06,472 - INFO - MBINN: 1mo change of 1.53%
+2025-01-19 16:02:06,473 - INFO - Processing MBINN - 2024-12-03 16:05:58 UTC
+2025-01-19 16:02:06,883 - INFO - MBINM: 1h change of 1.42%
+2025-01-19 16:02:06,911 - INFO - MBIN: 1h change of -1.42%
+2025-01-19 16:02:07,007 - INFO - MBIN: 1wk change of -7.41%
+2025-01-19 16:02:07,008 - INFO - MBINL: 1wk change of 1.34%
+2025-01-19 16:02:07,041 - INFO - MBINN: 1wk change of -2.25%
+2025-01-19 16:02:07,049 - INFO - MBINM: 1mo change of 2.81%
+2025-01-19 16:02:07,049 - INFO - Processing MBINM - 2024-11-27 15:15:20 UTC
+2025-01-19 16:02:07,103 - INFO - Processing MBIN - 2024-11-27 15:15:20 UTC
+2025-01-19 16:02:07,106 - INFO - MBINL: 1mo change of 1.88%
+2025-01-19 16:02:07,106 - INFO - Processing MBINL - 2024-11-27 15:15:20 UTC
+2025-01-19 16:02:07,132 - INFO - MBINN: 1mo change of -3.02%
+2025-01-19 16:02:07,132 - INFO - Processing MBINN - 2024-11-27 15:15:20 UTC
+2025-01-19 16:02:07,864 - INFO - MBINN: 1h change of 1.90%
+2025-01-19 16:02:07,864 - INFO - MBIN: 1h change of -1.22%
+2025-01-19 16:02:07,869 - INFO - MBINM: 1h change of -1.22%
+2025-01-19 16:02:07,954 - INFO - MBINN: 1wk change of 3.45%
+2025-01-19 16:02:07,955 - INFO - MBINM: 1wk change of 2.48%
+2025-01-19 16:02:07,955 - INFO - MBIN: 1wk change of -1.29%
+2025-01-19 16:02:08,049 - INFO - Processing MBINM - 2024-11-27 00:05:00 UTC
+2025-01-19 16:02:08,049 - INFO - Processing MBINN - 2024-11-27 00:05:00 UTC
+2025-01-19 16:02:08,051 - INFO - MBIN: 1mo change of -18.22%
+2025-01-19 16:02:08,052 - INFO - Processing MBIN - 2024-11-27 00:05:00 UTC
+2025-01-19 16:02:08,057 - INFO - MBINL: 1wk change of 3.44%
+2025-01-19 16:02:08,156 - INFO - MBINL: 1mo change of 1.16%
+2025-01-19 16:02:08,157 - INFO - Processing MBINL - 2024-11-27 00:05:00 UTC
+2025-01-19 16:02:08,739 - INFO - MBIN: 1h change of -1.22%
+2025-01-19 16:02:08,739 - INFO - MBINM: 1h change of -1.22%
+2025-01-19 16:02:08,744 - INFO - MBINM: 1wk change of 2.48%
+2025-01-19 16:02:08,745 - INFO - MBIN: 1wk change of -1.29%
+2025-01-19 16:02:08,748 - INFO - MBINN: 1h change of 1.90%
+2025-01-19 16:02:08,751 - INFO - Processing MBINM - 2024-11-26 00:05:00 UTC
+2025-01-19 16:02:08,752 - INFO - MBIN: 1mo change of -18.22%
+2025-01-19 16:02:08,753 - INFO - Processing MBIN - 2024-11-26 00:05:00 UTC
+2025-01-19 16:02:08,753 - INFO - MBINN: 1wk change of 3.45%
+2025-01-19 16:02:08,760 - INFO - MBINN: 1mo change of -12.08%
+2025-01-19 16:02:08,761 - INFO - Processing MBINN - 2024-11-26 00:05:00 UTC
+2025-01-19 16:02:08,779 - INFO - MBINL: 1wk change of 3.44%
+2025-01-19 16:02:08,784 - INFO - MBINL: 1mo change of 1.16%
+2025-01-19 16:02:08,979 - INFO - Processing MBINO - 2024-12-24 17:06:35 UTC
+2025-01-19 16:02:09,387 - INFO - Retrieved article length: 7292 characters
+2025-01-19 16:02:09,529 - INFO - MBINN: 1h change of 1.90%
+2025-01-19 16:02:09,537 - INFO - MBIN: 1h change of -1.22%
+2025-01-19 16:02:09,538 - INFO - MBINM: 1h change of -1.22%
+2025-01-19 16:02:09,611 - INFO - MBINN: 1wk change of 3.60%
+2025-01-19 16:02:09,622 - INFO - MBINM: 1wk change of 2.56%
+2025-01-19 16:02:09,706 - INFO - MBINN: 1mo change of -12.55%
+2025-01-19 16:02:09,706 - INFO - Processing MBINN - 2024-11-21 00:05:00 UTC
+2025-01-19 16:02:09,706 - INFO - Processing MBINO - 2024-12-03 16:05:58 UTC
+2025-01-19 16:02:09,709 - INFO - MBINM: 1mo change of 2.88%
+2025-01-19 16:02:09,709 - INFO - Processing MBINM - 2024-11-21 00:05:00 UTC
+2025-01-19 16:02:09,713 - INFO - MBIN: 1mo change of -17.13%
+2025-01-19 16:02:09,714 - INFO - Processing MBIN - 2024-11-21 00:05:00 UTC
+2025-01-19 16:02:10,204 - INFO - MBINO: 1mo change of 1.80%
+2025-01-19 16:02:10,204 - INFO - Processing MBINO - 2024-11-27 15:15:20 UTC
+2025-01-19 16:02:10,489 - INFO - MBINN: 1h change of 3.01%
+2025-01-19 16:02:10,489 - INFO - MBIN: 1h change of 3.71%
+2025-01-19 16:02:10,582 - INFO - MBINN: 1wk change of 2.29%
+2025-01-19 16:02:10,619 - INFO - MBINM: 1wk change of -1.92%
+2025-01-19 16:02:10,672 - INFO - MBINN: 1mo change of -9.75%
+2025-01-19 16:02:10,672 - INFO - Processing MBINN - 2024-11-19 00:37:36 UTC
+2025-01-19 16:02:10,673 - INFO - MBIN: 1mo change of -19.18%
+2025-01-19 16:02:10,673 - INFO - Processing MBIN - 2024-11-19 00:37:36 UTC
+2025-01-19 16:02:10,708 - INFO - MBINM: 1mo change of 2.71%
+2025-01-19 16:02:10,709 - INFO - Processing MBINM - 2024-11-19 00:37:36 UTC
+2025-01-19 16:02:10,719 - INFO - MBINO: 1mo change of 1.80%
+2025-01-19 16:02:10,719 - INFO - Processing MBINO - 2024-11-27 00:05:00 UTC
+2025-01-19 16:02:10,960 - INFO - MBINO: 1mo change of 1.80%
+2025-01-19 16:02:10,961 - INFO - Processing MBINO - 2024-11-26 00:05:00 UTC
+2025-01-19 16:02:11,444 - INFO - MBINO: 1mo change of 1.61%
+2025-01-19 16:02:11,444 - INFO - Processing MBINO - 2024-11-21 00:05:00 UTC
+2025-01-19 16:02:11,444 - INFO - MBIN: 1h change of -3.91%
+2025-01-19 16:02:11,445 - INFO - MBINN: 1h change of -3.32%
+2025-01-19 16:02:11,446 - INFO - MBINM: 1h change of -1.12%
+2025-01-19 16:02:11,534 - INFO - MBINM: 1wk change of -1.85%
+2025-01-19 16:02:11,535 - INFO - MBINN: 1wk change of 1.56%
+2025-01-19 16:02:11,626 - INFO - MBINN: 1mo change of -12.10%
+2025-01-19 16:02:11,627 - INFO - Processing MBINN - 2024-11-19 00:05:00 UTC
+2025-01-19 16:02:11,628 - INFO - Processing MBINM - 2024-11-19 00:05:00 UTC
+2025-01-19 16:02:11,634 - INFO - MBIN: 1mo change of -20.90%
+2025-01-19 16:02:11,634 - INFO - Processing MBIN - 2024-11-19 00:05:00 UTC
+2025-01-19 16:02:12,014 - INFO - MBINO: 1mo change of 1.68%
+2025-01-19 16:02:12,014 - INFO - Processing MBINO - 2024-11-19 00:37:36 UTC
+2025-01-19 16:02:12,309 - INFO - MBIN: 1h change of -3.91%
+2025-01-19 16:02:12,311 - INFO - MBINM: 1h change of -1.12%
+2025-01-19 16:02:12,311 - INFO - MBINN: 1h change of -3.32%
+2025-01-19 16:02:12,316 - INFO - MBINM: 1wk change of -1.85%
+2025-01-19 16:02:12,316 - INFO - MBINN: 1wk change of 1.56%
+2025-01-19 16:02:12,320 - INFO - MBIN: 1mo change of -20.90%
+2025-01-19 16:02:12,323 - INFO - MBINN: 1mo change of -12.10%
+2025-01-19 16:02:12,443 - INFO - Processing MBIO - 2025-01-14 16:00:00 UTC
+2025-01-19 16:02:12,465 - INFO - Processing MBNKP - 2024-10-29 23:01:00 UTC
+2025-01-19 16:02:12,480 - INFO - Processing MBOT - 2025-01-13 16:30:00 UTC
+2025-01-19 16:02:12,494 - INFO - MBINO: 1mo change of 1.39%
+2025-01-19 16:02:12,494 - INFO - Processing MBINO - 2024-11-19 00:05:00 UTC
+2025-01-19 16:02:12,684 - INFO - MBINO: 1mo change of 1.39%
+2025-01-19 16:02:12,804 - INFO - Processing MBRX - 2025-01-08 16:30:00 UTC
+2025-01-19 16:02:13,260 - INFO - MBOT: 1h change of -10.74%
+2025-01-19 16:02:13,388 - INFO - MBOT: 1wk change of -23.36%
+2025-01-19 16:02:13,475 - INFO - MBOT: 1mo change of 62.38%
+2025-01-19 16:02:13,476 - INFO - Processing MBOT - 2025-01-10 19:27:23 UTC
+2025-01-19 16:02:13,476 - INFO - MBNKP: 1mo change of 5.70%
+2025-01-19 16:02:13,600 - INFO - Processing MC - 2025-01-16 00:15:00 UTC
+2025-01-19 16:02:13,706 - INFO - MBRX: 1wk change of 5.03%
+2025-01-19 16:02:13,709 - INFO - Retrieved article length: 6815 characters
+2025-01-19 16:02:13,799 - INFO - MBIO: 1h change of -44.75%
+2025-01-19 16:02:13,801 - INFO - MBRX: 1mo change of -25.10%
+2025-01-19 16:02:13,802 - INFO - Processing MBRX - 2024-12-11 21:33:25 UTC
+2025-01-19 16:02:13,889 - INFO - MBIO: 1wk change of -48.13%
+2025-01-19 16:02:13,986 - INFO - MBIO: 1mo change of -40.32%
+2025-01-19 16:02:13,986 - INFO - Processing MBIO - 2024-11-12 16:30:00 UTC
+2025-01-19 16:02:14,608 - INFO - MBRX: 1h change of -6.11%
+2025-01-19 16:02:14,705 - INFO - MBRX: 1wk change of -37.92%
+2025-01-19 16:02:14,715 - INFO - Retrieved article length: 515 characters
+2025-01-19 16:02:14,800 - INFO - MBOT: 1h change of 1.93%
+2025-01-19 16:02:14,801 - INFO - MBRX: 1mo change of -18.70%
+2025-01-19 16:02:14,801 - INFO - Retrieved article length: 2627 characters
+2025-01-19 16:02:14,801 - INFO - Processing MBRX - 2024-12-11 16:00:00 UTC
+2025-01-19 16:02:14,809 - INFO - MBIO: 1h change of -6.38%
+2025-01-19 16:02:14,884 - INFO - MBOT: 1wk change of 46.43%
+2025-01-19 16:02:14,890 - INFO - MC: 1h change of 8.09%
+2025-01-19 16:02:14,895 - INFO - MBIO: 1wk change of -18.75%
+2025-01-19 16:02:14,972 - INFO - MBOT: 1mo change of 67.35%
+2025-01-19 16:02:14,972 - INFO - Processing MBOT - 2025-01-10 18:25:00 UTC
+2025-01-19 16:02:14,977 - INFO - MBIO: 1mo change of -12.26%
+2025-01-19 16:02:14,977 - INFO - Processing MBIO - 2024-11-08 14:36:51 UTC
+2025-01-19 16:02:14,980 - INFO - MC: 1wk change of 2.49%
+2025-01-19 16:02:15,075 - INFO - MC: 1mo change of 2.98%
+2025-01-19 16:02:15,075 - INFO - Processing MC - 2025-01-10 20:10:17 UTC
+2025-01-19 16:02:15,552 - INFO - MBRX: 1h change of -6.11%
+2025-01-19 16:02:15,557 - INFO - MBRX: 1wk change of -37.92%
+2025-01-19 16:02:15,563 - INFO - MBRX: 1mo change of -18.70%
+2025-01-19 16:02:15,563 - INFO - Processing MBRX - 2024-11-18 16:15:00 UTC
+2025-01-19 16:02:15,761 - INFO - MBIO: 1h change of 3.80%
+2025-01-19 16:02:15,845 - INFO - MBIO: 1wk change of -22.45%
+2025-01-19 16:02:15,937 - INFO - MBIO: 1mo change of -5.96%
+2025-01-19 16:02:15,937 - INFO - Processing MBIO - 2024-11-07 19:34:21 UTC
+2025-01-19 16:02:16,263 - INFO - Retrieved article length: 6366 characters
+2025-01-19 16:02:16,272 - INFO - MBOT: 1h change of 1.93%
+2025-01-19 16:02:16,325 - INFO - MBOT: 1wk change of 46.43%
+2025-01-19 16:02:16,348 - INFO - MBRX: 1h change of -4.93%
+2025-01-19 16:02:16,378 - INFO - MBOT: 1mo change of 67.35%
+2025-01-19 16:02:16,379 - INFO - Processing MBOT - 2025-01-09 16:22:09 UTC
+2025-01-19 16:02:16,445 - INFO - MBRX: 1wk change of 5.49%
+2025-01-19 16:02:16,493 - INFO - Retrieved article length: 3286 characters
+2025-01-19 16:02:16,547 - INFO - MBRX: 1mo change of -29.54%
+2025-01-19 16:02:16,548 - INFO - Processing MBRX - 2024-11-14 16:15:00 UTC
+2025-01-19 16:02:16,577 - INFO - MC: 1h change of -4.82%
+2025-01-19 16:02:16,677 - INFO - MC: 1wk change of 4.68%
+2025-01-19 16:02:16,777 - INFO - MC: 1mo change of 2.18%
+2025-01-19 16:02:16,777 - INFO - Processing MC - 2025-01-05 16:13:25 UTC
+2025-01-19 16:02:16,787 - INFO - MBIO: 1wk change of -24.50%
+2025-01-19 16:02:16,877 - INFO - MBIO: 1mo change of -10.76%
+2025-01-19 16:02:16,878 - INFO - Processing MBIO - 2024-11-07 16:30:00 UTC
+2025-01-19 16:02:17,171 - INFO - MBOT: 1h change of -23.45%
+2025-01-19 16:02:17,257 - INFO - MBOT: 1wk change of 38.98%
+2025-01-19 16:02:17,347 - INFO - MBOT: 1mo change of 72.63%
+2025-01-19 16:02:17,347 - INFO - Processing MBOT - 2025-01-08 16:00:00 UTC
+2025-01-19 16:02:17,348 - INFO - MBRX: 1h change of 1.92%
+2025-01-19 16:02:17,448 - INFO - MBRX: 1wk change of 11.43%
+2025-01-19 16:02:17,550 - INFO - MBRX: 1mo change of -22.63%
+2025-01-19 16:02:17,550 - INFO - Processing MBRX - 2024-11-13 06:59:08 UTC
+2025-01-19 16:02:17,561 - INFO - MBIO: 1wk change of -24.50%
+2025-01-19 16:02:17,567 - INFO - MBIO: 1mo change of -10.76%
+2025-01-19 16:02:17,567 - INFO - Processing MBIO - 2024-10-27 00:20:56 UTC
+2025-01-19 16:02:18,080 - INFO - Retrieved article length: 4505 characters
+2025-01-19 16:02:18,168 - INFO - MBOT: 1h change of -23.67%
+2025-01-19 16:02:18,256 - INFO - MBOT: 1wk change of 38.98%
+2025-01-19 16:02:18,262 - INFO - MC: 1wk change of -3.45%
+2025-01-19 16:02:18,343 - INFO - MBOT: 1mo change of 65.66%
+2025-01-19 16:02:18,343 - INFO - Processing MBOT - 2025-01-08 00:15:00 UTC
+2025-01-19 16:02:18,349 - INFO - MBRX: 1h change of 22.55%
+2025-01-19 16:02:18,352 - INFO - MC: 1mo change of 2.02%
+2025-01-19 16:02:18,352 - INFO - Processing MC - 2025-01-05 13:30:00 UTC
+2025-01-19 16:02:18,443 - INFO - MBIO: 1h change of 4.48%
+2025-01-19 16:02:18,444 - INFO - MBRX: 1wk change of 11.43%
+2025-01-19 16:02:18,532 - INFO - MBIO: 1wk change of 12.90%
+2025-01-19 16:02:18,540 - INFO - MBRX: 1mo change of -27.06%
+2025-01-19 16:02:18,541 - INFO - Processing MBRX - 2024-11-12 16:00:00 UTC
+2025-01-19 16:02:18,626 - INFO - MBIO: 1mo change of -6.10%
+2025-01-19 16:02:18,627 - INFO - Processing MBIO - 2024-10-24 21:10:00 UTC
+2025-01-19 16:02:19,051 - INFO - MC: 1wk change of -3.45%
+2025-01-19 16:02:19,104 - INFO - MC: 1mo change of 2.02%
+2025-01-19 16:02:19,105 - INFO - Processing MC - 2024-12-23 18:31:45 UTC
+2025-01-19 16:02:19,434 - INFO - MBIO: 1h change of -8.18%
+2025-01-19 16:02:19,434 - INFO - MBRX: 1wk change of 15.51%
+2025-01-19 16:02:19,527 - INFO - MBIO: 1wk change of 24.19%
+2025-01-19 16:02:19,531 - INFO - MBRX: 1mo change of -12.40%
+2025-01-19 16:02:19,531 - INFO - Processing MBRX - 2024-11-12 07:19:58 UTC
+2025-01-19 16:02:19,581 - INFO - Retrieved article length: 6800 characters
+2025-01-19 16:02:19,589 - INFO - MBOT: 1h change of -23.67%
+2025-01-19 16:02:19,595 - INFO - MBOT: 1wk change of 38.98%
+2025-01-19 16:02:19,611 - INFO - MBIO: 1mo change of -14.80%
+2025-01-19 16:02:19,647 - INFO - MBOT: 1mo change of 65.66%
+2025-01-19 16:02:19,648 - INFO - Processing MBOT - 2025-01-06 16:00:00 UTC
+2025-01-19 16:02:19,713 - INFO - Processing MCAA - 2025-01-19 16:00:22 UTC
+2025-01-19 16:02:20,304 - INFO - Retrieved article length: 14918 characters
+2025-01-19 16:02:20,322 - INFO - MBRX: 1wk change of 15.51%
+2025-01-19 16:02:20,327 - INFO - MBRX: 1mo change of -12.40%
+2025-01-19 16:02:20,441 - INFO - Processing MCAAU - 2025-01-19 16:00:22 UTC
+2025-01-19 16:02:20,548 - ERROR - MCAA: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:20,591 - INFO - MC: 1mo change of 5.01%
+2025-01-19 16:02:20,591 - INFO - Processing MC - 2024-12-20 15:41:47 UTC
+2025-01-19 16:02:20,706 - ERROR - MCAAU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:20,721 - INFO - Processing MCAA - 2025-01-19 15:54:05 UTC
+2025-01-19 16:02:20,873 - INFO - Retrieved article length: 6689 characters
+2025-01-19 16:02:20,910 - INFO - Processing MCAAU - 2025-01-19 15:54:05 UTC
+2025-01-19 16:02:20,963 - INFO - MBOT: 1h change of 15.11%
+2025-01-19 16:02:21,046 - INFO - MBOT: 1wk change of 61.26%
+2025-01-19 16:02:21,135 - INFO - MBOT: 1mo change of 64.00%
+2025-01-19 16:02:21,136 - INFO - Processing MBOT - 2024-12-30 16:30:00 UTC
+2025-01-19 16:02:21,497 - ERROR - MCAA: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:21,503 - ERROR - MCAAU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:21,608 - INFO - Processing MCAA - 2025-01-19 15:53:12 UTC
+2025-01-19 16:02:21,635 - INFO - Processing MCAAU - 2025-01-19 15:53:12 UTC
+2025-01-19 16:02:21,872 - INFO - Retrieved article length: 544 characters
+2025-01-19 16:02:21,959 - INFO - MC: 1h change of -2.46%
+2025-01-19 16:02:22,056 - INFO - MC: 1wk change of 1.13%
+2025-01-19 16:02:22,157 - INFO - MC: 1mo change of 3.55%
+2025-01-19 16:02:22,157 - INFO - Processing MC - 2024-12-09 16:08:35 UTC
+2025-01-19 16:02:22,336 - ERROR - MCAA: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:22,346 - ERROR - MCAAU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:22,395 - INFO - Retrieved article length: 5823 characters
+2025-01-19 16:02:22,444 - INFO - Processing MCAA - 2025-01-19 15:51:33 UTC
+2025-01-19 16:02:22,476 - INFO - Processing MCAAU - 2025-01-19 15:51:33 UTC
+2025-01-19 16:02:22,512 - INFO - MBOT: 1h change of -3.18%
+2025-01-19 16:02:22,600 - INFO - MBOT: 1wk change of 92.78%
+2025-01-19 16:02:22,696 - INFO - MBOT: 1mo change of 65.66%
+2025-01-19 16:02:22,928 - INFO - MC: 1h change of -4.91%
+2025-01-19 16:02:23,021 - INFO - MC: 1wk change of -7.78%
+2025-01-19 16:02:23,134 - INFO - MC: 1mo change of 8.67%
+2025-01-19 16:02:23,134 - INFO - Processing MC - 2024-12-06 17:02:40 UTC
+2025-01-19 16:02:23,179 - ERROR - MCAA: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:23,192 - ERROR - MCAAU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:23,206 - INFO - Processing MCD - 2025-01-17 19:04:27 UTC
+2025-01-19 16:02:23,290 - INFO - Processing MCAA - 2025-01-19 15:50:49 UTC
+2025-01-19 16:02:23,325 - INFO - Processing MCAAU - 2025-01-19 15:50:49 UTC
+2025-01-19 16:02:24,059 - ERROR - MCAAU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:24,061 - ERROR - MCAA: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:24,067 - INFO - MC: 1wk change of -3.86%
+2025-01-19 16:02:24,164 - INFO - MC: 1mo change of 12.66%
+2025-01-19 16:02:24,169 - INFO - Processing MCAA - 2025-01-19 15:50:32 UTC
+2025-01-19 16:02:24,194 - INFO - Processing MCAAU - 2025-01-19 15:50:32 UTC
+2025-01-19 16:02:24,319 - INFO - Processing MCHI - 2024-12-31 14:30:00 UTC
+2025-01-19 16:02:24,423 - INFO - Retrieved article length: 500 characters
+2025-01-19 16:02:24,677 - INFO - MCD: 1wk change of -2.90%
+2025-01-19 16:02:24,840 - INFO - MCD: 1mo change of -5.28%
+2025-01-19 16:02:24,840 - INFO - Processing MCD - 2025-01-17 17:00:17 UTC
+2025-01-19 16:02:24,911 - ERROR - MCAA: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:24,924 - ERROR - MCAAU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:25,019 - INFO - Processing MCAA - 2025-01-19 15:45:00 UTC
+2025-01-19 16:02:25,059 - INFO - Processing MCAAU - 2025-01-19 15:45:00 UTC
+2025-01-19 16:02:25,191 - INFO - MCHI: 1wk change of -4.99%
+2025-01-19 16:02:25,302 - INFO - MCHI: 1mo change of 2.16%
+2025-01-19 16:02:25,303 - INFO - Processing MCHI - 2024-11-11 17:00:00 UTC
+2025-01-19 16:02:26,044 - INFO - Retrieved article length: 8549 characters
+2025-01-19 16:02:27,414 - ERROR - MCD: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:02:27,425 - ERROR - MCAA: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:27,491 - ERROR - MCHI: No price data found, symbol may be delisted (1h 2024-11-09 -> 2024-11-13)
+2025-01-19 16:02:27,500 - ERROR - MCAAU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:28,495 - ERROR - MCAA: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 16:02:28,511 - ERROR - MCD: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:02:28,512 - INFO - Processing MCD - 2025-01-17 16:45:00 UTC
+2025-01-19 16:02:28,646 - ERROR - MCAAU: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 16:02:28,668 - ERROR - MCHI: No price data found, symbol may be delisted (1d 2024-11-01 -> 2024-11-21)
+2025-01-19 16:02:29,721 - ERROR - MCAAU: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 16:02:29,722 - INFO - Processing MCAAU - 2025-01-19 15:45:00 UTC
+2025-01-19 16:02:29,751 - INFO - Retrieved article length: 188 characters
+2025-01-19 16:02:29,956 - ERROR - MCAA: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 16:02:29,957 - INFO - Processing MCAA - 2025-01-19 15:45:00 UTC
+2025-01-19 16:02:30,101 - ERROR - MCHI: No price data found, symbol may be delisted (1d 2024-10-07 -> 2024-12-16)
+2025-01-19 16:02:30,950 - ERROR - MCD: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:02:31,250 - ERROR - Error getting news for MCHP: JSON decode error
+2025-01-19 16:02:31,250 - INFO - Retrying MCHP (Attempt 2/3)
+2025-01-19 16:02:31,433 - ERROR - MCAA: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:31,611 - ERROR - MCAAU: No price data found, symbol may be delisted (1h 2025-01-17 -> 2025-01-21)
+2025-01-19 16:02:32,029 - ERROR - MCD: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:02:32,029 - INFO - Processing MCD - 2025-01-17 16:24:00 UTC
+2025-01-19 16:02:32,490 - ERROR - MCAA: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 16:02:32,629 - ERROR - MCAAU: No price data found, symbol may be delisted (1d 2025-01-09 -> 2025-01-29)
+2025-01-19 16:02:33,220 - INFO - Retrieved article length: 7495 characters
+2025-01-19 16:02:33,544 - ERROR - MCAA: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 16:02:33,772 - ERROR - MCAAU: No price data found, symbol may be delisted (1d 2024-12-15 -> 2025-02-23)
+2025-01-19 16:02:34,277 - ERROR - MCD: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:02:34,592 - ERROR - Error getting news for MCK: JSON decode error
+2025-01-19 16:02:34,592 - INFO - Retrying MCK (Attempt 2/3)
+2025-01-19 16:02:34,851 - ERROR - Error getting news for MCO: JSON decode error
+2025-01-19 16:02:34,851 - INFO - Retrying MCO (Attempt 2/3)
+2025-01-19 16:02:35,396 - ERROR - MCD: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:02:35,398 - INFO - Processing MCD - 2025-01-17 05:28:33 UTC
+2025-01-19 16:02:36,251 - ERROR - Error getting news for MCHP: JSON decode error
+2025-01-19 16:02:36,251 - INFO - Retrying MCHP (Attempt 3/3)
+2025-01-19 16:02:36,664 - INFO - Retrieved article length: 7219 characters
+2025-01-19 16:02:37,798 - ERROR - MCD: No price data found, symbol may be delisted (1d 2025-01-07 -> 2025-01-27)
+2025-01-19 16:02:38,963 - ERROR - MCD: No price data found, symbol may be delisted (1d 2024-12-13 -> 2025-02-21)
+2025-01-19 16:02:38,963 - INFO - Processing MCD - 2025-01-16 15:00:23 UTC
+2025-01-19 16:02:39,594 - ERROR - Error getting news for MCK: JSON decode error
+2025-01-19 16:02:39,594 - INFO - Retrying MCK (Attempt 3/3)
+2025-01-19 16:02:39,852 - ERROR - Error getting news for MCO: JSON decode error
+2025-01-19 16:02:39,854 - INFO - Retrying MCO (Attempt 3/3)
+2025-01-19 16:02:40,249 - INFO - Retrieved article length: 7583 characters
+2025-01-19 16:02:41,252 - ERROR - Error getting news for MCHP: JSON decode error
+2025-01-19 16:02:41,252 - ERROR - Failed to get news for MCHP after 3 attempts
+2025-01-19 16:02:41,301 - ERROR - MCD: No price data found, symbol may be delisted (1h 2025-01-14 -> 2025-01-18)
+2025-01-19 16:02:42,300 - ERROR - MCD: No price data found, symbol may be delisted (1d 2025-01-06 -> 2025-01-26)
+2025-01-19 16:02:42,591 - ERROR - Error getting news for MCRB: JSON decode error
+2025-01-19 16:02:42,592 - INFO - Retrying MCRB (Attempt 2/3)
+2025-01-19 16:02:43,482 - ERROR - MCD: No price data found, symbol may be delisted (1d 2024-12-12 -> 2025-02-20)
+2025-01-19 16:02:43,484 - INFO - Processing MCD - 2025-01-15 19:18:33 UTC
+2025-01-19 16:02:44,595 - ERROR - Error getting news for MCK: JSON decode error
+2025-01-19 16:02:44,598 - ERROR - Failed to get news for MCK after 3 attempts
+2025-01-19 16:02:44,834 - INFO - Retrieved article length: 2494 characters
+2025-01-19 16:02:44,855 - ERROR - Error getting news for MCO: JSON decode error
+2025-01-19 16:02:44,855 - ERROR - Failed to get news for MCO after 3 attempts
+2025-01-19 16:02:45,588 - ERROR - Error getting news for MCVT: JSON decode error
+2025-01-19 16:02:45,589 - INFO - Retrying MCVT (Attempt 2/3)
+2025-01-19 16:02:45,858 - ERROR - MCD: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 16:02:45,963 - ERROR - Error getting news for MCW: JSON decode error
+2025-01-19 16:02:45,964 - INFO - Retrying MCW (Attempt 2/3)
+2025-01-19 16:02:46,928 - ERROR - MCD: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 16:02:47,593 - ERROR - Error getting news for MCRB: JSON decode error
+2025-01-19 16:02:47,594 - INFO - Retrying MCRB (Attempt 3/3)
+2025-01-19 16:02:48,431 - ERROR - MCD: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 16:02:48,432 - INFO - Processing MCD - 2025-01-15 14:12:00 UTC
+2025-01-19 16:02:49,124 - ERROR - MCD: No price data found, symbol may be delisted (1h 2025-01-13 -> 2025-01-17)
+2025-01-19 16:02:50,501 - ERROR - MCD: No price data found, symbol may be delisted (1d 2025-01-05 -> 2025-01-25)
+2025-01-19 16:02:50,590 - ERROR - Error getting news for MCVT: JSON decode error
+2025-01-19 16:02:50,591 - INFO - Retrying MCVT (Attempt 3/3)
+2025-01-19 16:02:50,965 - ERROR - Error getting news for MCW: JSON decode error
+2025-01-19 16:02:50,966 - INFO - Retrying MCW (Attempt 3/3)
+2025-01-19 16:02:51,592 - ERROR - MCD: No price data found, symbol may be delisted (1d 2024-12-11 -> 2025-02-19)
+2025-01-19 16:02:52,596 - ERROR - Error getting news for MCRB: JSON decode error
+2025-01-19 16:02:52,596 - ERROR - Failed to get news for MCRB after 3 attempts
+2025-01-19 16:02:52,942 - ERROR - Error getting news for MD: JSON decode error
+2025-01-19 16:02:52,943 - INFO - Retrying MD (Attempt 2/3)
+2025-01-19 16:02:53,671 - ERROR - Error getting news for MDAI: JSON decode error
+2025-01-19 16:02:53,672 - INFO - Retrying MDAI (Attempt 2/3)
+2025-01-19 16:02:55,593 - ERROR - Error getting news for MCVT: JSON decode error
+2025-01-19 16:02:55,594 - ERROR - Failed to get news for MCVT after 3 attempts
+2025-01-19 16:02:55,968 - ERROR - Error getting news for MCW: JSON decode error
+2025-01-19 16:02:55,969 - ERROR - Failed to get news for MCW after 3 attempts
+2025-01-19 16:02:56,827 - ERROR - Error getting news for MDB: JSON decode error
+2025-01-19 16:02:56,827 - INFO - Retrying MDB (Attempt 2/3)
+2025-01-19 16:02:57,215 - ERROR - Error getting news for MDBH: JSON decode error
+2025-01-19 16:02:57,216 - INFO - Retrying MDBH (Attempt 2/3)
+2025-01-19 16:02:57,945 - ERROR - Error getting news for MD: JSON decode error
+2025-01-19 16:02:57,947 - INFO - Retrying MD (Attempt 3/3)
+2025-01-19 16:02:58,674 - ERROR - Error getting news for MDAI: JSON decode error
+2025-01-19 16:02:58,676 - INFO - Retrying MDAI (Attempt 3/3)
+2025-01-19 16:03:01,828 - ERROR - Error getting news for MDB: JSON decode error
+2025-01-19 16:03:01,830 - INFO - Retrying MDB (Attempt 3/3)
+2025-01-19 16:03:02,218 - ERROR - Error getting news for MDBH: JSON decode error
+2025-01-19 16:03:02,219 - INFO - Retrying MDBH (Attempt 3/3)
+2025-01-19 16:03:02,949 - ERROR - Error getting news for MD: JSON decode error
+2025-01-19 16:03:02,950 - ERROR - Failed to get news for MD after 3 attempts
+2025-01-19 16:03:03,678 - ERROR - Error getting news for MDAI: JSON decode error
+2025-01-19 16:03:03,679 - ERROR - Failed to get news for MDAI after 3 attempts
+2025-01-19 16:03:03,898 - INFO - Processing MDIA - 2024-11-26 17:41:00 UTC
+2025-01-19 16:03:04,259 - INFO - Processing MDCX - 2024-12-12 16:18:56 UTC
+2025-01-19 16:03:05,038 - INFO - MDIA: 1h change of 1.88%
+2025-01-19 16:03:05,084 - INFO - Retrieved article length: 537 characters
+2025-01-19 16:03:05,129 - INFO - MDIA: 1wk change of 4.07%
+2025-01-19 16:03:05,223 - INFO - MDIA: 1mo change of -35.12%
+2025-01-19 16:03:05,224 - INFO - Processing MDIA - 2024-11-17 16:06:30 UTC
+2025-01-19 16:03:05,231 - INFO - MDCX: 1h change of -9.24%
+2025-01-19 16:03:05,318 - INFO - MDCX: 1wk change of 4.84%
+2025-01-19 16:03:05,409 - INFO - MDCX: 1mo change of -2.64%
+2025-01-19 16:03:05,409 - INFO - Processing MDCX - 2024-12-12 15:30:00 UTC
+2025-01-19 16:03:06,039 - INFO - Retrieved article length: 1610 characters
+2025-01-19 16:03:06,130 - INFO - MDIA: 1h change of 6.96%
+2025-01-19 16:03:06,222 - INFO - MDIA: 1wk change of 23.48%
+2025-01-19 16:03:06,267 - INFO - Retrieved article length: 7348 characters
+2025-01-19 16:03:06,276 - INFO - MDCX: 1h change of -9.24%
+2025-01-19 16:03:06,281 - INFO - MDCX: 1wk change of 4.84%
+2025-01-19 16:03:06,287 - INFO - MDCX: 1mo change of -2.64%
+2025-01-19 16:03:06,287 - INFO - Processing MDCX - 2024-12-03 13:43:42 UTC
+2025-01-19 16:03:06,466 - INFO - Processing MDLZ - 2025-01-19 13:30:00 UTC
+2025-01-19 16:03:06,831 - ERROR - Error getting news for MDB: JSON decode error
+2025-01-19 16:03:06,833 - ERROR - Failed to get news for MDB after 3 attempts
+2025-01-19 16:03:07,158 - INFO - Retrieved article length: 2556 characters
+2025-01-19 16:03:07,168 - INFO - Retrieved article length: 150 characters
+2025-01-19 16:03:07,182 - INFO - Processing MDRR - 2025-01-08 00:05:00 UTC
+2025-01-19 16:03:07,220 - ERROR - Error getting news for MDBH: JSON decode error
+2025-01-19 16:03:07,220 - ERROR - Failed to get news for MDBH after 3 attempts
+2025-01-19 16:03:07,246 - INFO - MDCX: 1h change of 17.65%
+2025-01-19 16:03:07,273 - INFO - MDLZ: 1h change of -1.28%
+2025-01-19 16:03:07,329 - INFO - MDCX: 1wk change of 32.85%
+2025-01-19 16:03:07,384 - INFO - MDLZ: 1wk change of 2.86%
+2025-01-19 16:03:07,416 - INFO - MDCX: 1mo change of 8.68%
+2025-01-19 16:03:07,416 - INFO - Processing MDCX - 2024-12-02 15:30:00 UTC
+2025-01-19 16:03:07,460 - INFO - Processing MDRRP - 2025-01-08 00:05:00 UTC
+2025-01-19 16:03:07,493 - INFO - MDLZ: 1mo change of -5.15%
+2025-01-19 16:03:07,493 - INFO - Processing MDLZ - 2025-01-16 19:06:27 UTC
+2025-01-19 16:03:08,000 - INFO - Retrieved article length: 4043 characters
+2025-01-19 16:03:08,046 - INFO - Retrieved article length: 4043 characters
+2025-01-19 16:03:08,090 - INFO - MDRR: 1h change of 3.31%
+2025-01-19 16:03:08,181 - INFO - MDRR: 1wk change of -9.40%
+2025-01-19 16:03:08,231 - INFO - MDRRP: 1wk change of -7.51%
+2025-01-19 16:03:08,232 - INFO - Retrieved article length: 8566 characters
+2025-01-19 16:03:08,273 - INFO - MDRR: 1mo change of -1.51%
+2025-01-19 16:03:08,273 - INFO - Processing MDRR - 2024-12-11 00:15:00 UTC
+2025-01-19 16:03:08,299 - INFO - Retrieved article length: 543 characters
+2025-01-19 16:03:08,320 - INFO - MDCX: 1h change of 21.43%
+2025-01-19 16:03:08,329 - INFO - MDRRP: 1mo change of -1.14%
+2025-01-19 16:03:08,329 - INFO - Processing MDRRP - 2024-12-11 00:15:00 UTC
+2025-01-19 16:03:08,394 - INFO - MDLZ: 1h change of 2.53%
+2025-01-19 16:03:08,404 - INFO - MDCX: 1wk change of 45.83%
+2025-01-19 16:03:08,496 - INFO - MDCX: 1mo change of -5.28%
+2025-01-19 16:03:08,496 - INFO - Processing MDCX - 2024-11-27 13:37:00 UTC
+2025-01-19 16:03:08,633 - INFO - MDLZ: 1mo change of -6.88%
+2025-01-19 16:03:08,634 - INFO - Processing MDLZ - 2025-01-16 16:51:25 UTC
+2025-01-19 16:03:08,980 - INFO - Retrieved article length: 3603 characters
+2025-01-19 16:03:09,100 - INFO - Retrieved article length: 3603 characters
+2025-01-19 16:03:09,164 - INFO - MDRR: 1wk change of 14.59%
+2025-01-19 16:03:09,180 - ERROR - MDRRP: No price data found, symbol may be delisted (1h 2024-12-09 -> 2024-12-13)
+2025-01-19 16:03:09,252 - INFO - MDRR: 1mo change of 1.63%
+2025-01-19 16:03:09,252 - INFO - Processing MDRR - 2024-11-20 14:47:07 UTC
+2025-01-19 16:03:09,274 - INFO - MDRRP: 1wk change of 1.50%
+2025-01-19 16:03:09,365 - INFO - Processing MDRRP - 2024-11-20 14:47:07 UTC
+2025-01-19 16:03:09,378 - INFO - Retrieved article length: 7572 characters
+2025-01-19 16:03:09,469 - INFO - MDCX: 1h change of 20.95%
+2025-01-19 16:03:09,485 - INFO - Retrieved article length: 526 characters
+2025-01-19 16:03:09,494 - INFO - MDLZ: 1h change of 2.53%
+2025-01-19 16:03:09,554 - INFO - MDCX: 1wk change of 43.06%
+2025-01-19 16:03:09,590 - INFO - MDLZ: 1mo change of -6.88%
+2025-01-19 16:03:09,590 - INFO - Processing MDLZ - 2025-01-16 00:05:00 UTC
+2025-01-19 16:03:09,638 - INFO - MDCX: 1mo change of -8.30%
+2025-01-19 16:03:09,638 - INFO - Processing MDCX - 2024-11-25 12:17:00 UTC
+2025-01-19 16:03:09,957 - INFO - Retrieved article length: 4333 characters
+2025-01-19 16:03:09,995 - INFO - Retrieved article length: 4333 characters
+2025-01-19 16:03:10,048 - INFO - MDRR: 1h change of 1.22%
+2025-01-19 16:03:10,255 - INFO - Retrieved article length: 1885 characters
+2025-01-19 16:03:10,265 - INFO - MDLZ: 1h change of 2.53%
+2025-01-19 16:03:10,268 - INFO - MDRRP: 1mo change of 7.95%
+2025-01-19 16:03:10,268 - INFO - Processing MDRRP - 2024-11-18 20:47:24 UTC
+2025-01-19 16:03:10,289 - INFO - MDRR: 1mo change of 6.12%
+2025-01-19 16:03:10,290 - INFO - Processing MDRR - 2024-11-18 20:47:24 UTC
+2025-01-19 16:03:10,364 - INFO - MDLZ: 1mo change of -6.88%
+2025-01-19 16:03:10,364 - INFO - Processing MDLZ - 2025-01-15 21:50:20 UTC
+2025-01-19 16:03:10,587 - INFO - Retrieved article length: 5577 characters
+2025-01-19 16:03:10,771 - INFO - MDCX: 1wk change of 25.00%
+2025-01-19 16:03:10,865 - INFO - MDCX: 1mo change of -1.89%
+2025-01-19 16:03:10,986 - INFO - Processing MDU - 2025-01-17 00:20:00 UTC
+2025-01-19 16:03:11,107 - INFO - Retrieved article length: 5273 characters
+2025-01-19 16:03:11,109 - INFO - Retrieved article length: 530 characters
+2025-01-19 16:03:11,148 - INFO - Retrieved article length: 530 characters
+2025-01-19 16:03:11,191 - ERROR - MDRRP: No price data found, symbol may be delisted (1h 2024-11-16 -> 2024-11-20)
+2025-01-19 16:03:11,196 - INFO - MDLZ: 1h change of 3.21%
+2025-01-19 16:03:11,285 - INFO - MDRRP: 1wk change of -2.95%
+2025-01-19 16:03:11,328 - INFO - MDRR: 1wk change of 2.82%
+2025-01-19 16:03:11,382 - INFO - MDRRP: 1mo change of 9.47%
+2025-01-19 16:03:11,383 - INFO - Processing MDRRP - 2024-11-15 15:20:55 UTC
+2025-01-19 16:03:11,417 - INFO - MDLZ: 1mo change of -7.60%
+2025-01-19 16:03:11,417 - INFO - Processing MDLZ - 2025-01-15 16:00:00 UTC
+2025-01-19 16:03:11,421 - INFO - MDRR: 1mo change of 14.54%
+2025-01-19 16:03:11,421 - INFO - Processing MDRR - 2024-11-15 15:20:55 UTC
+2025-01-19 16:03:11,711 - INFO - Retrieved article length: 1830 characters
+2025-01-19 16:03:11,809 - INFO - MDU: 1h change of 1.32%
+2025-01-19 16:03:11,945 - INFO - MDU: 1wk change of 2.22%
+2025-01-19 16:03:12,075 - INFO - MDU: 1mo change of -2.33%
+2025-01-19 16:03:12,075 - INFO - Processing MDU - 2025-01-14 19:40:13 UTC
+2025-01-19 16:03:12,137 - INFO - Retrieved article length: 1684 characters
+2025-01-19 16:03:12,261 - INFO - Retrieved article length: 5370 characters
+2025-01-19 16:03:12,269 - ERROR -  Error processing MDRRP for 1h: index 0 is out of bounds for axis 0 with size 0
+2025-01-19 16:03:12,270 - INFO - MDLZ: 1h change of 3.21%
+2025-01-19 16:03:12,283 - INFO - Retrieved article length: 1684 characters
+2025-01-19 16:03:12,366 - INFO - MDRRP: 1wk change of 1.20%
+2025-01-19 16:03:12,368 - INFO - MDLZ: 1mo change of -7.60%
+2025-01-19 16:03:12,368 - INFO - Processing MDLZ - 2025-01-14 15:49:17 UTC
+2025-01-19 16:03:12,370 - INFO - MDRR: 1h change of 2.41%
+2025-01-19 16:03:12,465 - INFO - MDRRP: 1mo change of 3.17%
+2025-01-19 16:03:12,564 - INFO - MDRR: 1mo change of 14.86%
+2025-01-19 16:03:12,582 - INFO - Processing MDXG - 2024-12-17 18:48:53 UTC
+2025-01-19 16:03:12,683 - INFO - Processing MDXH - 2025-01-13 14:02:19 UTC
+2025-01-19 16:03:12,746 - INFO - Retrieved article length: 2771 characters
+2025-01-19 16:03:12,835 - INFO - MDU: 1h change of 2.94%
+2025-01-19 16:03:12,977 - INFO - MDU: 1wk change of 2.68%
+2025-01-19 16:03:13,115 - INFO - MDU: 1mo change of -2.34%
+2025-01-19 16:03:13,115 - INFO - Processing MDU - 2025-01-10 16:40:00 UTC
+2025-01-19 16:03:13,161 - INFO - Retrieved article length: 10499 characters
+2025-01-19 16:03:13,311 - INFO - Retrieved article length: 495 characters
+2025-01-19 16:03:13,332 - INFO - Retrieved article length: 481 characters
+2025-01-19 16:03:13,410 - INFO - MDXG: 1h change of -1.67%
+2025-01-19 16:03:13,417 - INFO - MDXH: 1h change of -7.01%
+2025-01-19 16:03:13,471 - INFO - MDLZ: 1mo change of -5.55%
+2025-01-19 16:03:13,471 - INFO - Processing MDLZ - 2025-01-13 21:02:59 UTC
+2025-01-19 16:03:13,497 - INFO - MDXG: 1wk change of -1.88%
+2025-01-19 16:03:13,502 - INFO - MDXH: 1wk change of -15.52%
+2025-01-19 16:03:13,586 - INFO - MDXG: 1mo change of 22.25%
+2025-01-19 16:03:13,586 - INFO - Processing MDXG - 2024-12-13 17:15:03 UTC
+2025-01-19 16:03:13,587 - INFO - MDXH: 1mo change of -10.91%
+2025-01-19 16:03:13,588 - INFO - Processing MDXH - 2025-01-13 13:00:00 UTC
+2025-01-19 16:03:13,779 - INFO - Retrieved article length: 10960 characters
+2025-01-19 16:03:13,997 - INFO - MDU: 1wk change of 2.16%
+2025-01-19 16:03:14,127 - INFO - MDU: 1mo change of -4.79%
+2025-01-19 16:03:14,128 - INFO - Processing MDU - 2025-01-09 18:03:00 UTC
+2025-01-19 16:03:14,249 - INFO - Retrieved article length: 9636 characters
+2025-01-19 16:03:14,286 - INFO - Retrieved article length: 4051 characters
+2025-01-19 16:03:14,293 - INFO - Retrieved article length: 9396 characters
+2025-01-19 16:03:14,301 - INFO - MDXH: 1h change of -7.01%
+2025-01-19 16:03:14,335 - INFO - MDLZ: 1h change of 1.61%
+2025-01-19 16:03:14,347 - INFO - MDXH: 1wk change of -15.52%
+2025-01-19 16:03:14,373 - INFO - MDXG: 1h change of -4.28%
+2025-01-19 16:03:14,394 - INFO - MDXH: 1mo change of -10.91%
+2025-01-19 16:03:14,394 - INFO - Processing MDXH - 2024-11-25 16:30:00 UTC
+2025-01-19 16:03:14,442 - INFO - MDLZ: 1wk change of -3.34%
+2025-01-19 16:03:14,457 - INFO - MDXG: 1wk change of -4.71%
+2025-01-19 16:03:14,549 - INFO - MDXG: 1mo change of 20.58%
+2025-01-19 16:03:14,549 - INFO - Processing MDXG - 2024-12-04 16:00:00 UTC
+2025-01-19 16:03:14,554 - INFO - MDLZ: 1mo change of -5.08%
+2025-01-19 16:03:14,887 - INFO - Retrieved article length: 8911 characters
+2025-01-19 16:03:14,957 - INFO - Processing ME - 2025-01-08 15:30:00 UTC
+2025-01-19 16:03:15,060 - INFO - Retrieved article length: 2150 characters
+2025-01-19 16:03:15,121 - INFO - MDU: 1wk change of 2.28%
+2025-01-19 16:03:15,145 - INFO - MDXH: 1h change of 1.04%
+2025-01-19 16:03:15,236 - INFO - MDXH: 1wk change of 21.95%
+2025-01-19 16:03:15,248 - INFO - MDU: 1mo change of -4.79%
+2025-01-19 16:03:15,249 - INFO - Processing MDU - 2025-01-09 16:51:14 UTC
+2025-01-19 16:03:15,304 - INFO - Retrieved article length: 1450 characters
+2025-01-19 16:03:15,320 - INFO - MDXH: 1mo change of 15.50%
+2025-01-19 16:03:15,320 - INFO - Processing MDXH - 2024-11-07 10:29:16 UTC
+2025-01-19 16:03:15,395 - INFO - MDXG: 1h change of 2.27%
+2025-01-19 16:03:15,566 - INFO - MDXG: 1mo change of 54.66%
+2025-01-19 16:03:15,567 - INFO - Processing MDXG - 2024-12-02 14:15:07 UTC
+2025-01-19 16:03:15,640 - INFO - Retrieved article length: 6983 characters
+2025-01-19 16:03:15,733 - INFO - ME: 1h change of 10.03%
+2025-01-19 16:03:15,819 - INFO - ME: 1wk change of 10.06%
+2025-01-19 16:03:15,904 - INFO - ME: 1mo change of 5.87%
+2025-01-19 16:03:15,904 - INFO - Processing ME - 2025-01-03 20:09:04 UTC
+2025-01-19 16:03:16,031 - INFO - Retrieved article length: 4757 characters
+2025-01-19 16:03:16,115 - INFO - MDXH: 1h change of -2.17%
+2025-01-19 16:03:16,151 - INFO - Retrieved article length: 3110 characters
+2025-01-19 16:03:16,164 - INFO - MDU: 1wk change of 2.28%
+2025-01-19 16:03:16,202 - INFO - MDXH: 1wk change of -21.15%
+2025-01-19 16:03:16,212 - INFO - MDU: 1mo change of -4.79%
+2025-01-19 16:03:16,212 - INFO - Processing MDU - 2024-12-18 01:24:51 UTC
+2025-01-19 16:03:16,293 - INFO - Retrieved article length: 6399 characters
+2025-01-19 16:03:16,297 - INFO - MDXH: 1mo change of 20.00%
+2025-01-19 16:03:16,298 - INFO - Processing MDXH - 2024-11-07 00:00:00 UTC
+2025-01-19 16:03:16,385 - INFO - MDXG: 1h change of 3.24%
+2025-01-19 16:03:16,481 - INFO - MDXG: 1wk change of 2.83%
+2025-01-19 16:03:16,566 - INFO - MDXG: 1mo change of 56.83%
+2025-01-19 16:03:16,566 - INFO - Processing MDXG - 2024-11-27 17:15:07 UTC
+2025-01-19 16:03:16,625 - INFO - Retrieved article length: 6971 characters
+2025-01-19 16:03:16,715 - INFO - ME: 1h change of 12.26%
+2025-01-19 16:03:16,805 - INFO - ME: 1wk change of 21.14%
+2025-01-19 16:03:16,886 - INFO - ME: 1mo change of 1.69%
+2025-01-19 16:03:16,887 - INFO - Processing ME - 2024-12-10 10:47:17 UTC
+2025-01-19 16:03:16,889 - INFO - Retrieved article length: 6872 characters
+2025-01-19 16:03:16,982 - INFO - MDU: 1h change of -5.77%
+2025-01-19 16:03:17,133 - INFO - MDU: 1wk change of -4.01%
+2025-01-19 16:03:17,199 - INFO - Retrieved article length: 15208 characters
+2025-01-19 16:03:17,207 - INFO - MDXH: 1h change of -2.17%
+2025-01-19 16:03:17,214 - INFO - MDXH: 1wk change of -21.15%
+2025-01-19 16:03:17,220 - INFO - MDXH: 1mo change of 20.00%
+2025-01-19 16:03:17,220 - INFO - Processing MDXH - 2024-11-05 16:08:14 UTC
+2025-01-19 16:03:17,266 - INFO - MDU: 1mo change of 1.51%
+2025-01-19 16:03:17,266 - INFO - Processing MDU - 2024-11-26 12:20:34 UTC
+2025-01-19 16:03:17,311 - INFO - Retrieved article length: 4102 characters
+2025-01-19 16:03:17,407 - INFO - MDXG: 1h change of 2.11%
+2025-01-19 16:03:17,501 - INFO - MDXG: 1wk change of 5.91%
+2025-01-19 16:03:17,595 - INFO - MDXG: 1mo change of 71.17%
+2025-01-19 16:03:17,595 - INFO - Processing MDXG - 2024-11-20 17:55:10 UTC
+2025-01-19 16:03:17,814 - INFO - Retrieved article length: 5228 characters
+2025-01-19 16:03:17,905 - INFO - ME: 1h change of -6.92%
+2025-01-19 16:03:17,966 - INFO - Retrieved article length: 6311 characters
+2025-01-19 16:03:18,031 - INFO - Retrieved article length: 3131 characters
+2025-01-19 16:03:18,050 - INFO - ME: 1wk change of -15.12%
+2025-01-19 16:03:18,052 - INFO - MDU: 1h change of -1.40%
+2025-01-19 16:03:18,116 - INFO - MDXH: 1h change of -1.88%
+2025-01-19 16:03:18,134 - INFO - ME: 1mo change of -23.37%
+2025-01-19 16:03:18,135 - INFO - Processing ME - 2024-12-03 03:07:00 UTC
+2025-01-19 16:03:18,181 - INFO - MDU: 1wk change of 4.68%
+2025-01-19 16:03:18,201 - INFO - MDXH: 1wk change of -15.87%
+2025-01-19 16:03:18,287 - INFO - MDXH: 1mo change of 8.37%
+2025-01-19 16:03:18,287 - INFO - Processing MDXH - 2024-10-29 00:01:00 UTC
+2025-01-19 16:03:18,305 - INFO - MDU: 1mo change of 13.39%
+2025-01-19 16:03:18,305 - INFO - Processing MDU - 2024-11-22 17:24:00 UTC
+2025-01-19 16:03:18,381 - INFO - Retrieved article length: 4755 characters
+2025-01-19 16:03:18,473 - INFO - MDXG: 1h change of -2.28%
+2025-01-19 16:03:18,565 - INFO - MDXG: 1wk change of 21.07%
+2025-01-19 16:03:18,659 - INFO - MDXG: 1mo change of 56.07%
+2025-01-19 16:03:18,659 - INFO - Processing MDXG - 2024-11-14 17:15:00 UTC
+2025-01-19 16:03:18,806 - INFO - Retrieved article length: 6998 characters
+2025-01-19 16:03:18,899 - INFO - ME: 1h change of -9.77%
+2025-01-19 16:03:18,986 - INFO - ME: 1wk change of 1.22%
+2025-01-19 16:03:19,004 - INFO - Retrieved article length: 3559 characters
+2025-01-19 16:03:19,068 - INFO - ME: 1mo change of -23.48%
+2025-01-19 16:03:19,068 - INFO - Processing ME - 2024-11-22 00:23:03 UTC
+2025-01-19 16:03:19,071 - INFO - Retrieved article length: 4409 characters
+2025-01-19 16:03:19,091 - INFO - MDU: 1h change of 6.35%
+2025-01-19 16:03:19,167 - INFO - MDXH: 1h change of -4.25%
+2025-01-19 16:03:19,220 - INFO - MDU: 1wk change of 11.27%
+2025-01-19 16:03:19,248 - INFO - MDXH: 1wk change of 4.50%
+2025-01-19 16:03:19,335 - INFO - MDXH: 1mo change of -21.43%
+2025-01-19 16:03:19,345 - INFO - MDU: 1mo change of 10.02%
+2025-01-19 16:03:19,455 - INFO - Processing MEG - 2025-01-14 00:15:00 UTC
+2025-01-19 16:03:19,487 - INFO - Processing MEGL - 2024-10-30 23:15:00 UTC
+2025-01-19 16:03:19,533 - INFO - Retrieved article length: 3598 characters
+2025-01-19 16:03:19,627 - INFO - MDXG: 1h change of 22.16%
+2025-01-19 16:03:19,713 - INFO - MDXG: 1wk change of 29.03%
+2025-01-19 16:03:19,804 - INFO - MDXG: 1mo change of 65.70%
+2025-01-19 16:03:19,804 - INFO - Processing MDXG - 2024-11-07 14:49:10 UTC
+2025-01-19 16:03:19,936 - INFO - Retrieved article length: 6179 characters
+2025-01-19 16:03:20,025 - INFO - ME: 1h change of -8.01%
+2025-01-19 16:03:20,108 - INFO - ME: 1wk change of -24.63%
+2025-01-19 16:03:20,152 - INFO - Retrieved article length: 2420 characters
+2025-01-19 16:03:20,197 - INFO - ME: 1mo change of -33.60%
+2025-01-19 16:03:20,197 - INFO - Processing ME - 2024-11-20 18:25:35 UTC
+2025-01-19 16:03:20,239 - INFO - MEG: 1h change of 8.52%
+2025-01-19 16:03:20,320 - INFO - MEG: 1wk change of 11.20%
+2025-01-19 16:03:20,324 - INFO - Retrieved article length: 8822 characters
+2025-01-19 16:03:20,406 - INFO - MEG: 1mo change of 37.40%
+2025-01-19 16:03:20,407 - INFO - Processing MEG - 2025-01-09 00:15:00 UTC
+2025-01-19 16:03:20,414 - INFO - MEGL: 1h change of 7.87%
+2025-01-19 16:03:20,506 - INFO - MEGL: 1wk change of 5.66%
+2025-01-19 16:03:20,551 - INFO - Retrieved article length: 5372 characters
+2025-01-19 16:03:20,604 - INFO - MEGL: 1mo change of 4.37%
+2025-01-19 16:03:20,640 - INFO - MDXG: 1h change of 5.39%
+2025-01-19 16:03:20,728 - INFO - Processing MEIP - 2024-11-13 00:05:00 UTC
+2025-01-19 16:03:20,730 - INFO - MDXG: 1wk change of 58.36%
+2025-01-19 16:03:20,822 - INFO - MDXG: 1mo change of 65.38%
+2025-01-19 16:03:20,962 - INFO - Retrieved article length: 499 characters
+2025-01-19 16:03:20,977 - INFO - Processing MESA - 2025-01-07 17:50:38 UTC
+2025-01-19 16:03:21,051 - INFO - ME: 1h change of 7.34%
+2025-01-19 16:03:21,102 - INFO - Retrieved article length: 2389 characters
+2025-01-19 16:03:21,134 - INFO - ME: 1wk change of -22.99%
+2025-01-19 16:03:21,197 - INFO - MEG: 1h change of 5.40%
+2025-01-19 16:03:21,226 - INFO - ME: 1mo change of -40.64%
+2025-01-19 16:03:21,227 - INFO - Processing ME - 2024-11-20 15:30:00 UTC
+2025-01-19 16:03:21,279 - INFO - MEG: 1wk change of 19.11%
+2025-01-19 16:03:21,376 - INFO - MEG: 1mo change of 36.33%
+2025-01-19 16:03:21,376 - INFO - Processing MEG - 2024-12-30 15:04:23 UTC
+2025-01-19 16:03:21,511 - INFO - Retrieved article length: 5773 characters
+2025-01-19 16:03:21,603 - INFO - MEIP: 1h change of -2.08%
+2025-01-19 16:03:21,689 - INFO - MEIP: 1wk change of -9.15%
+2025-01-19 16:03:21,708 - INFO - Retrieved article length: 529 characters
+2025-01-19 16:03:21,775 - INFO - MEIP: 1mo change of -2.99%
+2025-01-19 16:03:21,775 - INFO - Processing MEIP - 2024-10-28 19:43:56 UTC
+2025-01-19 16:03:21,795 - INFO - MESA: 1h change of 8.17%
+2025-01-19 16:03:21,955 - INFO - MESA: 1wk change of 6.40%
+2025-01-19 16:03:22,047 - INFO - MESA: 1mo change of 30.39%
+2025-01-19 16:03:22,048 - INFO - Processing MESA - 2025-01-07 16:30:42 UTC
+2025-01-19 16:03:22,113 - INFO - Retrieved article length: 6451 characters
+2025-01-19 16:03:22,121 - INFO - ME: 1h change of 7.34%
+2025-01-19 16:03:22,127 - INFO - ME: 1wk change of -22.99%
+2025-01-19 16:03:22,133 - INFO - ME: 1mo change of -40.64%
+2025-01-19 16:03:22,134 - INFO - Processing ME - 2024-11-13 15:14:00 UTC
+2025-01-19 16:03:22,137 - INFO - Retrieved article length: 6446 characters
+2025-01-19 16:03:22,226 - INFO - MEG: 1h change of 5.88%
+2025-01-19 16:03:22,309 - INFO - MEG: 1wk change of 22.14%
+2025-01-19 16:03:22,398 - INFO - MEG: 1mo change of 17.56%
+2025-01-19 16:03:22,398 - INFO - Processing MEG - 2024-12-19 06:56:00 UTC
+2025-01-19 16:03:22,536 - INFO - Retrieved article length: 451 characters
+2025-01-19 16:03:22,628 - INFO - MEIP: 1h change of 5.33%
+2025-01-19 16:03:22,715 - INFO - MEIP: 1wk change of 9.75%
+2025-01-19 16:03:22,741 - INFO - Retrieved article length: 1423 characters
+2025-01-19 16:03:22,749 - INFO - MESA: 1h change of 8.17%
+2025-01-19 16:03:22,756 - INFO - MESA: 1wk change of 6.40%
+2025-01-19 16:03:22,804 - INFO - MEIP: 1mo change of -3.75%
+2025-01-19 16:03:22,805 - INFO - MESA: 1mo change of 30.39%
+2025-01-19 16:03:22,805 - INFO - Processing MESA - 2024-12-05 17:00:00 UTC
+2025-01-19 16:03:22,929 - INFO - Processing MET - 2025-01-16 14:01:14 UTC
+2025-01-19 16:03:23,016 - INFO - Retrieved article length: 3636 characters
+2025-01-19 16:03:23,160 - INFO - ME: 1h change of -16.96%
+2025-01-19 16:03:23,223 - INFO - Retrieved article length: 2704 characters
+2025-01-19 16:03:23,245 - INFO - ME: 1wk change of -33.83%
+2025-01-19 16:03:23,316 - INFO - MEG: 1h change of -4.67%
+2025-01-19 16:03:23,329 - INFO - ME: 1mo change of -46.89%
+2025-01-19 16:03:23,406 - INFO - MEG: 1wk change of 1.51%
+2025-01-19 16:03:23,497 - INFO - MEG: 1mo change of 11.48%
+2025-01-19 16:03:23,497 - INFO - Processing MEG - 2024-12-12 14:01:44 UTC
+2025-01-19 16:03:23,508 - INFO - Processing META - 2025-01-19 15:53:12 UTC
+2025-01-19 16:03:23,560 - INFO - Retrieved article length: 4581 characters
+2025-01-19 16:03:23,632 - INFO - Retrieved article length: 4245 characters
+2025-01-19 16:03:23,735 - INFO - MESA: 1wk change of 9.18%
+2025-01-19 16:03:23,737 - INFO - MET: 1h change of 4.93%
+2025-01-19 16:03:23,824 - INFO - MESA: 1mo change of 46.74%
+2025-01-19 16:03:23,855 - INFO - MET: 1wk change of 5.84%
+2025-01-19 16:03:23,981 - INFO - Processing METC - 2025-01-14 18:09:38 UTC
+2025-01-19 16:03:24,019 - INFO - MET: 1mo change of 4.28%
+2025-01-19 16:03:24,019 - INFO - Processing MET - 2025-01-14 16:54:38 UTC
+2025-01-19 16:03:24,217 - INFO - Retrieved article length: 7819 characters
+2025-01-19 16:03:24,256 - INFO - Retrieved article length: 154 characters
+2025-01-19 16:03:24,391 - INFO - MEG: 1wk change of -5.23%
+2025-01-19 16:03:24,483 - INFO - MEG: 1mo change of -4.44%
+2025-01-19 16:03:24,483 - INFO - Processing MEG - 2024-12-03 15:58:58 UTC
+2025-01-19 16:03:24,527 - INFO - META: 1mo change of -1.84%
+2025-01-19 16:03:24,527 - INFO - Processing META - 2025-01-19 15:13:00 UTC
+2025-01-19 16:03:24,641 - INFO - Retrieved article length: 6591 characters
+2025-01-19 16:03:24,717 - INFO - Retrieved article length: 522 characters
+2025-01-19 16:03:24,727 - INFO - METC: 1h change of 1.08%
+2025-01-19 16:03:24,818 - INFO - METC: 1wk change of -1.24%
+2025-01-19 16:03:24,858 - INFO - MET: 1h change of 4.78%
+2025-01-19 16:03:24,906 - INFO - METC: 1mo change of -24.86%
+2025-01-19 16:03:24,906 - INFO - Processing METC - 2025-01-09 18:40:45 UTC
+2025-01-19 16:03:24,966 - INFO - MET: 1wk change of 5.84%
+2025-01-19 16:03:25,081 - INFO - MET: 1mo change of 6.17%
+2025-01-19 16:03:25,081 - INFO - Processing MET - 2025-01-10 17:00:14 UTC
+2025-01-19 16:03:25,185 - INFO - Retrieved article length: 3980 characters
+2025-01-19 16:03:25,266 - INFO - Retrieved article length: 8533 characters
+2025-01-19 16:03:25,270 - INFO - MEG: 1h change of 1.33%
+2025-01-19 16:03:25,356 - INFO - MEG: 1wk change of -16.21%
+2025-01-19 16:03:25,415 - INFO - META: 1mo change of -1.84%
+2025-01-19 16:03:25,415 - INFO - Processing META - 2025-01-19 15:12:44 UTC
+2025-01-19 16:03:25,439 - INFO - MEG: 1mo change of -24.63%
+2025-01-19 16:03:25,439 - INFO - Processing MEG - 2024-11-22 18:21:26 UTC
+2025-01-19 16:03:25,618 - INFO - Retrieved article length: 6433 characters
+2025-01-19 16:03:25,704 - INFO - METC: 1h change of -6.74%
+2025-01-19 16:03:25,788 - INFO - METC: 1wk change of -5.62%
+2025-01-19 16:03:25,823 - INFO - Retrieved article length: 2847 characters
+2025-01-19 16:03:25,880 - INFO - METC: 1mo change of -25.33%
+2025-01-19 16:03:25,880 - INFO - Processing METC - 2025-01-02 20:45:08 UTC
+2025-01-19 16:03:26,042 - INFO - MET: 1wk change of 5.98%
+2025-01-19 16:03:26,157 - INFO - MET: 1mo change of 1.83%
+2025-01-19 16:03:26,157 - INFO - Processing MET - 2025-01-10 14:33:35 UTC
+2025-01-19 16:03:26,217 - INFO - Retrieved article length: 7875 characters
+2025-01-19 16:03:26,306 - INFO - MEG: 1h change of 8.82%
+2025-01-19 16:03:26,356 - INFO - Retrieved article length: 5683 characters
+2025-01-19 16:03:26,391 - INFO - MEG: 1wk change of -14.30%
+2025-01-19 16:03:26,477 - INFO - MEG: 1mo change of -35.91%
+2025-01-19 16:03:26,477 - INFO - Processing MEG - 2024-11-19 00:04:54 UTC
+2025-01-19 16:03:26,504 - INFO - META: 1mo change of -1.84%
+2025-01-19 16:03:26,505 - INFO - Processing META - 2025-01-19 14:15:00 UTC
+2025-01-19 16:03:26,837 - INFO - Retrieved article length: 4023 characters
+2025-01-19 16:03:26,976 - INFO - Retrieved article length: 518 characters
+2025-01-19 16:03:27,015 - INFO - METC: 1wk change of -11.60%
+2025-01-19 16:03:27,031 - INFO - MET: 1wk change of 5.98%
+2025-01-19 16:03:27,080 - INFO - MET: 1mo change of 1.83%
+2025-01-19 16:03:27,080 - INFO - Processing MET - 2025-01-10 00:15:00 UTC
+2025-01-19 16:03:27,108 - INFO - METC: 1mo change of -24.11%
+2025-01-19 16:03:27,110 - INFO - Processing METC - 2025-01-02 17:40:15 UTC
+2025-01-19 16:03:27,253 - INFO - Retrieved article length: 5278 characters
+2025-01-19 16:03:27,269 - INFO - Retrieved article length: 6438 characters
+2025-01-19 16:03:27,365 - INFO - MEG: 1h change of -5.15%
+2025-01-19 16:03:27,400 - INFO - META: 1mo change of -1.84%
+2025-01-19 16:03:27,400 - INFO - Processing META - 2025-01-19 13:15:00 UTC
+2025-01-19 16:03:27,453 - INFO - MEG: 1wk change of -13.97%
+2025-01-19 16:03:27,547 - INFO - MEG: 1mo change of -38.64%
+2025-01-19 16:03:27,731 - INFO - Processing MFA - 2025-01-10 19:34:50 UTC
+2025-01-19 16:03:27,743 - INFO - Retrieved article length: 2552 characters
+2025-01-19 16:03:27,799 - INFO - MET: 1wk change of 5.98%
+2025-01-19 16:03:27,837 - INFO - Retrieved article length: 2473 characters
+2025-01-19 16:03:27,846 - INFO - MET: 1mo change of 1.83%
+2025-01-19 16:03:27,846 - INFO - Processing MET - 2025-01-09 18:00:00 UTC
+2025-01-19 16:03:27,850 - INFO - METC: 1wk change of -11.60%
+2025-01-19 16:03:27,901 - INFO - METC: 1mo change of -24.11%
+2025-01-19 16:03:27,901 - INFO - Processing METC - 2024-12-12 00:05:00 UTC
+2025-01-19 16:03:28,056 - INFO - Retrieved article length: 7053 characters
+2025-01-19 16:03:28,209 - INFO - META: 1mo change of -1.84%
+2025-01-19 16:03:28,209 - INFO - Processing META - 2025-01-19 12:10:00 UTC
+2025-01-19 16:03:28,499 - INFO - Retrieved article length: 4279 characters
+2025-01-19 16:03:28,585 - INFO - MET: 1h change of -2.83%
+2025-01-19 16:03:28,591 - INFO - Retrieved article length: 519 characters
+2025-01-19 16:03:28,649 - INFO - Retrieved article length: 7764 characters
+2025-01-19 16:03:28,679 - INFO - MFA: 1h change of -3.83%
+2025-01-19 16:03:28,701 - INFO - MET: 1wk change of 6.47%
+2025-01-19 16:03:28,793 - INFO - METC: 1h change of -2.79%
+2025-01-19 16:03:28,815 - INFO - MET: 1mo change of 1.05%
+2025-01-19 16:03:28,815 - INFO - Processing MET - 2025-01-08 22:18:26 UTC
+2025-01-19 16:03:28,864 - INFO - Retrieved article length: 4898 characters
+2025-01-19 16:03:28,884 - INFO - METC: 1wk change of -15.85%
+2025-01-19 16:03:28,902 - INFO - MFA: 1mo change of -4.84%
+2025-01-19 16:03:28,902 - INFO - Processing MFA - 2025-01-09 10:15:00 UTC
+2025-01-19 16:03:28,974 - INFO - METC: 1mo change of -22.06%
+2025-01-19 16:03:28,974 - INFO - Processing METC - 2024-12-11 18:19:30 UTC
+2025-01-19 16:03:29,011 - INFO - META: 1mo change of -1.84%
+2025-01-19 16:03:29,011 - INFO - Processing META - 2025-01-19 08:06:02 UTC
+2025-01-19 16:03:29,612 - INFO - Retrieved article length: 16414 characters
+2025-01-19 16:03:29,636 - INFO - Retrieved article length: 498 characters
+2025-01-19 16:03:29,665 - INFO - Retrieved article length: 7276 characters
+2025-01-19 16:03:29,701 - INFO - MFA: 1h change of -5.92%
+2025-01-19 16:03:29,715 - INFO - Retrieved article length: 4790 characters
+2025-01-19 16:03:29,753 - INFO - METC: 1h change of -5.58%
+2025-01-19 16:03:29,815 - INFO - MFA: 1wk change of 2.33%
+2025-01-19 16:03:29,834 - INFO - MET: 1wk change of 6.47%
+2025-01-19 16:03:29,841 - INFO - METC: 1wk change of -15.85%
+2025-01-19 16:03:29,859 - INFO - META: 1mo change of -1.84%
+2025-01-19 16:03:29,859 - INFO - Processing META - 2025-01-19 08:02:00 UTC
+2025-01-19 16:03:29,944 - INFO - MET: 1mo change of 1.64%
+2025-01-19 16:03:29,944 - INFO - Processing MET - 2025-01-08 17:20:30 UTC
+2025-01-19 16:03:29,946 - INFO - MFA: 1mo change of -4.32%
+2025-01-19 16:03:29,946 - INFO - Processing MFA - 2025-01-06 20:03:47 UTC
+2025-01-19 16:03:29,947 - INFO - METC: 1mo change of -21.85%
+2025-01-19 16:03:29,949 - INFO - Processing METC - 2024-12-10 14:04:18 UTC
+2025-01-19 16:03:30,679 - INFO - Retrieved article length: 6375 characters
+2025-01-19 16:03:30,734 - INFO - Retrieved article length: 519 characters
+2025-01-19 16:03:30,734 - INFO - Retrieved article length: 5946 characters
+2025-01-19 16:03:30,747 - INFO - Retrieved article length: 682 characters
+2025-01-19 16:03:30,747 - INFO - MET: 1wk change of 6.47%
+2025-01-19 16:03:30,770 - INFO - METC: 1h change of -6.37%
+2025-01-19 16:03:30,795 - INFO - MET: 1mo change of 1.64%
+2025-01-19 16:03:30,828 - INFO - MFA: 1h change of -2.13%
+2025-01-19 16:03:30,861 - INFO - METC: 1wk change of -14.37%
+2025-01-19 16:03:30,892 - INFO - META: 1mo change of -1.84%
+2025-01-19 16:03:30,948 - INFO - Processing MFH - 2025-01-15 16:00:00 UTC
+2025-01-19 16:03:30,953 - INFO - METC: 1mo change of -12.25%
+2025-01-19 16:03:30,953 - INFO - Processing METC - 2024-12-10 13:38:12 UTC
+2025-01-19 16:03:31,053 - INFO - Processing MFI - 2025-01-15 14:00:00 UTC
+2025-01-19 16:03:31,072 - INFO - MFA: 1mo change of -5.70%
+2025-01-19 16:03:31,073 - INFO - Processing MFA - 2025-01-02 17:35:06 UTC
+2025-01-19 16:03:31,711 - INFO - Retrieved article length: 5263 characters
+2025-01-19 16:03:31,729 - INFO - Retrieved article length: 4144 characters
+2025-01-19 16:03:31,737 - INFO - METC: 1h change of -6.37%
+2025-01-19 16:03:31,744 - INFO - METC: 1wk change of -14.37%
+2025-01-19 16:03:31,751 - INFO - METC: 1mo change of -12.25%
+2025-01-19 16:03:31,802 - INFO - MFH: 1h change of 29.50%
+2025-01-19 16:03:31,824 - INFO - Retrieved article length: 3013 characters
+2025-01-19 16:03:31,857 - INFO - Retrieved article length: 4991 characters
+2025-01-19 16:03:31,868 - INFO - Processing MGIH - 2024-12-26 15:44:16 UTC
+2025-01-19 16:03:31,889 - INFO - MFH: 1wk change of 12.16%
+2025-01-19 16:03:31,910 - INFO - MFA: 1h change of 2.49%
+2025-01-19 16:03:31,942 - INFO - MFI: 1h change of -1.54%
+2025-01-19 16:03:31,975 - INFO - MFH: 1mo change of 18.95%
+2025-01-19 16:03:31,975 - INFO - Processing MFH - 2024-12-26 16:00:00 UTC
+2025-01-19 16:03:32,028 - INFO - MFA: 1wk change of -5.01%
+2025-01-19 16:03:32,041 - INFO - MFI: 1wk change of -25.28%
+2025-01-19 16:03:32,136 - INFO - MFI: 1mo change of -6.41%
+2025-01-19 16:03:32,142 - INFO - MFA: 1mo change of -5.87%
+2025-01-19 16:03:32,143 - INFO - Processing MFA - 2025-01-02 15:51:09 UTC
+2025-01-19 16:03:32,588 - INFO - Retrieved article length: 459 characters
+2025-01-19 16:03:32,662 - INFO - Retrieved article length: 5618 characters
+2025-01-19 16:03:32,679 - INFO - MGIH: 1h change of 51.58%
+2025-01-19 16:03:32,750 - INFO - MFH: 1h change of 15.34%
+2025-01-19 16:03:32,762 - INFO - MGIH: 1wk change of 16.28%
+2025-01-19 16:03:32,834 - INFO - MFH: 1wk change of -6.42%
+2025-01-19 16:03:32,845 - INFO - MGIH: 1mo change of 13.89%
+2025-01-19 16:03:32,845 - INFO - Processing MGIH - 2024-11-01 18:34:26 UTC
+2025-01-19 16:03:32,854 - INFO - Retrieved article length: 495 characters
+2025-01-19 16:03:32,863 - INFO - MFA: 1h change of 2.49%
+2025-01-19 16:03:32,869 - INFO - MFA: 1wk change of -5.01%
+2025-01-19 16:03:32,919 - INFO - MFH: 1mo change of 82.20%
+2025-01-19 16:03:32,919 - INFO - Processing MFH - 2024-12-23 15:59:10 UTC
+2025-01-19 16:03:32,919 - INFO - MFA: 1mo change of -5.87%
+2025-01-19 16:03:32,919 - INFO - Processing MFA - 2024-12-13 17:15:00 UTC
+2025-01-19 16:03:33,603 - INFO - Retrieved article length: 6066 characters
+2025-01-19 16:03:33,620 - INFO - Retrieved article length: 1826 characters
+2025-01-19 16:03:33,687 - INFO - Retrieved article length: 2849 characters
+2025-01-19 16:03:33,697 - INFO - MFH: 1h change of 3.09%
+2025-01-19 16:03:33,710 - INFO - MGIH: 1h change of -5.63%
+2025-01-19 16:03:33,781 - INFO - MFH: 1wk change of 5.08%
+2025-01-19 16:03:33,809 - INFO - MGIH: 1wk change of -8.77%
+2025-01-19 16:03:33,878 - INFO - MFH: 1mo change of 113.43%
+2025-01-19 16:03:33,879 - INFO - Processing MFH - 2024-12-16 16:00:00 UTC
+2025-01-19 16:03:33,887 - INFO - MFA: 1wk change of -5.55%
+2025-01-19 16:03:33,891 - INFO - MGIH: 1mo change of -16.11%
+2025-01-19 16:03:34,007 - INFO - MFA: 1mo change of -9.32%
+2025-01-19 16:03:34,007 - INFO - Processing MFA - 2024-12-12 00:30:00 UTC
+2025-01-19 16:03:34,594 - INFO - Retrieved article length: 6388 characters
+2025-01-19 16:03:34,683 - INFO - MFH: 1h change of 5.86%
+2025-01-19 16:03:34,736 - INFO - Retrieved article length: 1215 characters
+2025-01-19 16:03:34,767 - INFO - MFH: 1wk change of -12.30%
+2025-01-19 16:03:34,858 - INFO - MFH: 1mo change of 219.23%
+2025-01-19 16:03:34,860 - INFO - Processing MFH - 2024-12-06 01:15:00 UTC
+2025-01-19 16:03:34,913 - INFO - MFA: 1h change of -1.23%
+2025-01-19 16:03:35,047 - INFO - MFA: 1wk change of -6.31%
+2025-01-19 16:03:35,173 - INFO - MFA: 1mo change of -9.72%
+2025-01-19 16:03:35,173 - INFO - Processing MFA - 2024-11-20 17:00:00 UTC
+2025-01-19 16:03:35,581 - INFO - Retrieved article length: 5174 characters
+2025-01-19 16:03:35,766 - INFO - MFH: 1wk change of -10.84%
+2025-01-19 16:03:35,849 - INFO - MFH: 1mo change of 385.12%
+2025-01-19 16:03:35,850 - INFO - Processing MFH - 2024-11-22 17:05:00 UTC
+2025-01-19 16:03:35,878 - INFO - Retrieved article length: 1992 characters
+2025-01-19 16:03:36,090 - INFO - MFA: 1wk change of -3.98%
+2025-01-19 16:03:36,217 - INFO - MFA: 1mo change of -16.59%
+2025-01-19 16:03:36,622 - INFO - Retrieved article length: 5890 characters
+2025-01-19 16:03:36,714 - INFO - MFH: 1h change of 21.62%
+2025-01-19 16:03:36,808 - INFO - MFH: 1wk change of 109.47%
+2025-01-19 16:03:36,897 - INFO - MFH: 1mo change of 225.14%
+2025-01-19 16:03:36,898 - INFO - Processing MFH - 2024-11-14 17:05:00 UTC
+2025-01-19 16:03:37,706 - INFO - Retrieved article length: 4585 characters
+2025-01-19 16:03:37,809 - INFO - MFH: 1h change of 47.70%
+2025-01-19 16:03:37,897 - INFO - MFH: 1wk change of 315.83%
+2025-01-19 16:03:38,040 - INFO - MFH: 1mo change of 307.78%
