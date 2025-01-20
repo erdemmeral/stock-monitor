@@ -1,0 +1,2 @@
+app/training/app/models/pattern_vectorizer.joblib filter=lfs diff=lfs merge=lfs -text
+*.joblib filter=lfs diff=lfs merge=lfs -text
