@@ -33,8 +33,8 @@ class SentimentAnalyzer:
             # Load timeframe-specific models
             self.models = {
                 '1h': joblib.load('app/models/market_model_1h.joblib'),
-                '1w': joblib.load('app/models/market_model_1w.joblib'),
-                '1m': joblib.load('app/models/market_model_1m.joblib')
+                '1w': joblib.load('app/models/market_model_1wk.joblib'),
+                '1m': joblib.load('app/models/market_model_1mo.joblib')
             }
             logger.info("✨ All timeframe models loaded successfully!")
             
