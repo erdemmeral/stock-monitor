@@ -421,11 +421,15 @@ class RealTimeMonitor:
                     self.portfolio.add_position(
                         symbol=symbol,
                         entry_price=current_price,
+                        current_price=current_price,  # Add current price
                         target_price=target_price,
-                        target_date=target_date,
-                        timeframe=timeframe
+                        entry_date=datetime.now(tz=pytz.UTC),  # Add entry date
+                        target_date=target_date,  # Add target date
+                        timeframe=timeframe  # Add timeframe
                     )
                     logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
+                    logger.info(f"Target Price: ${target_price:.2f}")
+                    logger.info(f"Target Date: {target_date}")
                 else:
                     logger.info(f"Already tracking position for {symbol}")
 
