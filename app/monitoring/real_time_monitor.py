@@ -38,7 +38,7 @@ from app.utils.telegram_notifier import TelegramNotifier
 from app.models.position import Position
 
 from app.models.portfolio import Portfolio
-
+from app.training.market_ml_trainer import FinBERTSentimentAnalyzer
 class ModelManager:
     def __init__(self):
         self.model_paths = {
@@ -50,7 +50,7 @@ class ModelManager:
         self.last_modified_times = {}
         self.models = {}
         self.load_initial_models()
-
+        
     def load_initial_models(self):
         for name, path in self.model_paths.items():
             try:
@@ -120,6 +120,8 @@ class RealTimeMonitor:
         self.trade_history = TradeHistory()
 
         self.stop_loss_percentage = 5.0
+        self.finbert_analyzer = FinBERTSentimentAnalyzer()
+        self.sentiment_weight = 0.3  # Configurable weight for sentiment impact
 
         self.model_manager = ModelManager()
         
@@ -162,7 +164,54 @@ class RealTimeMonitor:
 
         self._polling_lock = asyncio.Lock()  # Add this line
         self._is_polling = False  # Add this line
+
+    def predict_with_sentiment(self, text, timeframe):
+        """
+        Make a prediction integrating FinBERT sentiment
+        """
+        try:
+            # Vectorize text
+            X_tfidf = self.vectorizer.transform([text])
+            
+            # Base prediction from model
+            base_pred = self.models[timeframe].predict(X_tfidf)[0]
+            
+            # Analyze sentiment
+            sentiment = self.finbert_analyzer.analyze_sentiment(text)
+            
+            # If sentiment available, adjust prediction
+            if sentiment:
+                # Sentiment multiplier logic
+                multiplier_map = {
+                    'negative': 0.7,   # Reduce prediction
+                    'neutral': 1.0,    # No change
+                    'positive': 1.3    # Increase prediction
+                }
+                
+                # Confidence-based adjustment
+                confidence = max(sentiment['probabilities'].values())
+                base_multiplier = multiplier_map.get(sentiment['label'], 1.0)
+                
+                # Adjusted prediction
+                adjusted_pred = base_pred * (
+                    1 + (base_multiplier - 1) * self.sentiment_weight * confidence
+                )
+                
+                # Logging for transparency
+                logger.info(f"Prediction for {timeframe}:")
+                logger.info(f"Base Prediction: {base_pred:.2f}%")
+                logger.info(f"Sentiment: {sentiment['label']}")
+                logger.info(f"Sentiment Multiplier: {base_multiplier:.2f}")
+                logger.info(f"Adjusted Prediction: {adjusted_pred:.2f}%")
+                
+                return adjusted_pred
+            
+            return base_pred
         
+        except Exception as e:
+            logger.error(f"Error in sentiment-integrated prediction: {e}")
+            return base_pred
+    
     def get_full_article_text(self,url):
         try:
             # Add headers to mimic browser request
@@ -776,47 +825,71 @@ class RealTimeMonitor:
                     content = article.get('title', '')
                     if full_text:
                         content = f"{content}\n\n{full_text}"
-                    
+                     # Analyze sentiment
+                    sentiment = self.finbert_analyzer.analyze_sentiment(content)
+                
                     # Make predictions for this specific article
                     article_predictions = {}
                     X = self.vectorizer.transform([content])
                     
                     for timeframe, model in self.models.items():
                         try:
-                            pred = model.predict(X)[0]
+                        # Base prediction
+                            base_pred = model.predict(X)[0]
+                            
+                            # Adjust prediction with sentiment if available
+                            if sentiment:
+                                # Sentiment multiplier
+                                multiplier_map = {
+                                    'negative': 0.7,   # Reduce prediction
+                                    'neutral': 1.0,    # No change
+                                    'positive': 1.3    # Increase prediction
+                                }
+                                
+                                # Confidence-based adjustment
+                                confidence = max(sentiment['probabilities'].values())
+                                base_multiplier = multiplier_map.get(sentiment['label'], 1.0)
+                                
+                                # Adjusted prediction
+                                pred = base_pred * (1 + (base_multiplier - 1) * 0.3 * confidence)
+                            else:
+                                pred = base_pred
+                            
                             article_predictions[timeframe] = pred
                             logger.info(f"{timeframe} prediction: {pred:.2f}")
+                        
                         except Exception as e:
                             logger.error(f"Error in prediction for {timeframe}: {e}")
+                    
+                    # Store predictions
                     all_predictions.append({
                         'article': article,
-                        'predictions': article_predictions
+                        'predictions': article_predictions,
+                        'sentiment': sentiment
                     })
+                    
                     self.processed_news.add(news_id)
                     processed_urls.add(url)
 
-
-                    # Process this article's predictions before moving to next
-                    
-                    # Mark as processed only after complete
-                    
                     # Add small delay before next article
                     await asyncio.sleep(1)
                     
                 except Exception as e:
                     logger.error(f"Error processing article for {symbol}: {str(e)}")
                     continue
+            
+            # Analyze and notify if predictions exist
             if all_predictions:
-
                 await self.analyze_and_notify(
-                        symbol=symbol,
-                        articles=all_predictions,  # Changed from 'article' to 'articles'
-                        prices=prices
+                    symbol=symbol,
+                    articles=all_predictions,
+                    prices=prices
                 )
         
         except Exception as e:
             logger.error(f"Error monitoring {symbol}: {str(e)}")
             return
+
     async def update_positions(self):
         logger.info("Updating portfolio positions...")
         current_time = datetime.now(tz=pytz.UTC)
