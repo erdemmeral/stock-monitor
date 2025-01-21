@@ -36,7 +36,7 @@ from app.models.stock import StockAnalysis
 from app.models.news import NewsArticle
 from app.utils.telegram_notifier import TelegramNotifier
 from app.models.position import Position
-
+import torch
 from app.models.portfolio import Portfolio
 from app.training.market_ml_trainer import FinBERTSentimentAnalyzer
 class ModelManager:
