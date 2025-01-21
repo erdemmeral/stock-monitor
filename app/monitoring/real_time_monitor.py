@@ -352,14 +352,7 @@ class RealTimeMonitor:
                
                 # Add to portfolio if first cycle is complete
                 
-                self.portfolio.add_position(
-                    symbol=symbol,
-                    entry_price=current_price,
-                    target_price=target_price,
-                    target_date=target_date,
-                    timeframe=timeframe
-                )
-                logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
+                
 
 
                 timeframe_text = {'1h': '1 hour', '1wk': '1 week', '1mo': '1 month'}[best_timeframe[0]]
@@ -425,16 +418,29 @@ class RealTimeMonitor:
                 timeframe = best_timeframe[0]
                 expected_change = best_timeframe[1]
                 target_price = current_price * (1 + expected_change/100)
-                
+                best_article = max(
+                    [
+                        article for article in articles 
+                        if timeframe in article['predictions'] and 
+                        article['predictions'][timeframe] > 0
+                    ],
+                    key=lambda x: abs(x['predictions'][timeframe]),
+                    default=None
+                )
                 target_dates = {
                     '1h': timedelta(hours=1),
                     '1wk': timedelta(days=7),
                     '1mo': timedelta(days=30)
                 }
-                current_time = datetime.now(tz=pytz.UTC)
 
-                target_date = datetime.now(tz=pytz.UTC) + target_dates[timeframe]
-
+                if best_article:
+                    publish_time = datetime.fromtimestamp(best_article['article']['providerPublishTime'], tz=pytz.UTC)
+                    target_date = publish_time + target_dates[timeframe]
+                    logger.info(f"Target date based on news article published at {publish_time}")
+                else:
+                    current_time = datetime.now(tz=pytz.UTC)
+                    target_date = current_time + target_dates[timeframe]
+                    logger.info("No specific news article found, using current time for target date")
                 # Add to portfolio only if we're not already tracking this stock
                 if not self.portfolio.has_position(symbol):
                     self.portfolio.add_position(
@@ -446,6 +452,8 @@ class RealTimeMonitor:
                         current_price=current_price,
                         entry_date=current_time
                     )
+                    await self.send_telegram_alert(message)
+
                     logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
                     logger.info(f"Target Price: ${target_price:.2f}")
                     logger.info(f"Target Date: {target_date}")
@@ -456,7 +464,6 @@ class RealTimeMonitor:
         if opportunity_messages:
             message += "\n" + "\n".join(opportunity_messages)
 
-        await self.send_telegram_alert(message)
 
         return analysis_summary
        
