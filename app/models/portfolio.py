@@ -29,7 +29,11 @@ class Portfolio:
             logger.info(f"✅ Position added for {symbol}")
         except Exception as e:
             logger.error(f"❌ Error adding position for {symbol}: {str(e)}")  
-
+    def has_position(self, symbol):
+        """Check if symbol is in portfolio with detailed logging"""
+        has_pos = symbol in self.positions
+        logger.info(f"📋 Checking position for {symbol}: {'Found' if has_pos else 'Not Found'}")
+        return has_pos
     def remove_position(self, symbol):
         if symbol in self.positions:
             del self.positions[symbol]
