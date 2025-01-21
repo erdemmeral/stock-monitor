@@ -331,13 +331,13 @@ class RealTimeMonitor:
                 # Ensure all required arguments are passed
                 if not self.portfolio.has_position(symbol):
                     self.portfolio.add_position(
-                        symbol=symbol,
-                        entry_price=current_price,
-                        current_price=current_price,  # Important: pass current price
-                        target_price=target_price,
-                        entry_date=current_time,  # Pass current time as entry date
-                        target_date=target_date,  # Pass calculated target date
-                        timeframe=timeframe  # Pass timeframe
+                    symbol=symbol,
+                    entry_price=current_price,
+                    target_price=target_price,
+                    target_date=target_date,
+                    timeframe=timeframe,
+                    current_price=current_price,  # Explicitly pass current price
+                    entry_date=current_time  # Explicitly pass entry date
                     )
                     logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
                     logger.info(f"Target Price: ${target_price:.2f}")
@@ -431,6 +431,8 @@ class RealTimeMonitor:
                     '1wk': timedelta(days=7),
                     '1mo': timedelta(days=30)
                 }
+                current_time = datetime.now(tz=pytz.UTC)
+
                 target_date = datetime.now(tz=pytz.UTC) + target_dates[timeframe]
 
                 # Add to portfolio only if we're not already tracking this stock
@@ -438,11 +440,11 @@ class RealTimeMonitor:
                     self.portfolio.add_position(
                         symbol=symbol,
                         entry_price=current_price,
-                        current_price=current_price,  # Add current price
                         target_price=target_price,
-                        entry_date=datetime.now(tz=pytz.UTC),  # Add entry date
-                        target_date=target_date,  # Add target date
-                        timeframe=timeframe  # Add timeframe
+                        target_date=target_date,
+                        timeframe=timeframe,
+                        current_price=current_price,
+                        entry_date=current_time
                     )
                     logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
                     logger.info(f"Target Price: ${target_price:.2f}")
