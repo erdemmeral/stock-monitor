@@ -119,7 +119,6 @@ class RealTimeMonitor:
         self.portfolio = Portfolio()
         self.trade_history = TradeHistory()
 
-        self.first_cycle_complete = False
         self.stop_loss_percentage = 5.0
 
         self.model_manager = ModelManager()
@@ -401,7 +400,7 @@ class RealTimeMonitor:
         # 1. First cycle is complete
         # 2. It's not a missed opportunity
         # 3. We have valid signals
-        if self.first_cycle_complete and not is_missed_opportunity and valid_timeframes:
+        if not is_missed_opportunity and valid_timeframes:
             best_timeframe = max(valid_timeframes.items(), 
                             key=lambda x: abs(x[1]/self.thresholds[x[0]]))
             if abs(best_timeframe[1]/self.thresholds[best_timeframe[0]]) >= 1.0:
@@ -664,11 +663,7 @@ class RealTimeMonitor:
                 # Small delay between batches to prevent overwhelming resources
                         await asyncio.sleep(1)
                     
-                    if not self.first_cycle_complete:
-                        self.first_cycle_complete = True
-                        logger.info("First cycle complete, enabling portfolio management")
-                    else:
-                        await self.update_positions()
+                    
                     
                     logger.info("Completed full monitoring cycle. Waiting 5 minutes before next cycle...")
                     await asyncio.sleep(300)  # 5-minute break between cycles
