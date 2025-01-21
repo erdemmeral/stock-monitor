@@ -4,7 +4,7 @@ class Portfolio:
     def __init__(self):
         self.positions = {}  # symbol -> Position
 
-    def add_position(self, symbol, entry_price, target_price, target_date, timeframe):
+    def add_position(self, symbol, entry_price, current_price, target_price, entry_date, target_date, timeframe):
         try:
             logger.info(f"🔔 Attempting to add position for {symbol}")
             logger.info(f"💰 Entry Price: ${entry_price:.2f}")
