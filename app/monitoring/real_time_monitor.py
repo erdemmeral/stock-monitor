@@ -312,6 +312,36 @@ class RealTimeMonitor:
             best_timeframe = max(valid_timeframes.items(), 
                             key=lambda x: abs(x[1]/self.thresholds[x[0]]))
             if abs(best_timeframe[1]/self.thresholds[best_timeframe[0]]) >= 1.0:
+                current_price = prices['Close'].iloc[-1]
+                timeframe = best_timeframe[0]
+                expected_change = best_timeframe[1]
+                target_price = current_price * (1 + expected_change/100)
+                
+                # Define target dates
+                target_dates = {
+                    '1h': timedelta(hours=1),
+                    '1wk': timedelta(days=7),
+                    '1mo': timedelta(days=30)
+                }
+                
+                # Calculate target date
+                current_time = datetime.now(tz=pytz.UTC)
+                target_date = current_time + target_dates[timeframe]
+
+                # Ensure all required arguments are passed
+                if not self.portfolio.has_position(symbol):
+                    self.portfolio.add_position(
+                        symbol=symbol,
+                        entry_price=current_price,
+                        current_price=current_price,  # Important: pass current price
+                        target_price=target_price,
+                        entry_date=current_time,  # Pass current time as entry date
+                        target_date=target_date,  # Pass calculated target date
+                        timeframe=timeframe  # Pass timeframe
+                    )
+                    logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
+                    logger.info(f"Target Price: ${target_price:.2f}")
+                    logger.info(f"Target Date: {target_date}")
                 analysis_summary['decision'] = f"BUY - {best_timeframe[0]} Signal"
             
                 # Log decision details
@@ -319,20 +349,7 @@ class RealTimeMonitor:
                 logger.info(f"Best Timeframe: {best_timeframe[0]}")
                 logger.info(f"Prediction Strength: {best_timeframe[1]:.2f}%")
                 
-                # Get current price
-                current_price = prices['Close'].iloc[-1]
-                timeframe = best_timeframe[0]
-                expected_change = best_timeframe[1]
-                target_price = current_price * (1 + expected_change/100)
-                
-                # Calculate target date based on timeframe
-                target_dates = {
-                    '1h': timedelta(hours=1),
-                    '1wk': timedelta(days=7),
-                    '1mo': timedelta(days=30)
-                }
-                target_date = datetime.now(tz=pytz.UTC) + target_dates[timeframe]
-
+               
                 # Add to portfolio if first cycle is complete
                 
                 self.portfolio.add_position(
