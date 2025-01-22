@@ -169,32 +169,38 @@ class RealTimeMonitor:
         self._is_polling = False  # Add this line
 
     def _pad_features(self, X):
-            """
-            Pad or truncate features to match expected dimensions
-            """
-            try:
-                # Expected number of features during training
-                expected_features = 95717
-                
-                # Current number of features
-                current_features = X.shape[1]
-                
-                if current_features == expected_features:
-                    return X
-                
-                # If fewer features, pad with zeros
-                if current_features < expected_features:
-                    padding = scipy.sparse.csr_matrix(
-                        np.zeros((X.shape[0], expected_features - current_features))
-                    )
-                    return scipy.sparse.hstack([X, padding])
-                
-                # If more features, truncate
-                return X[:, :expected_features]
+        """
+        Pad or truncate features to match expected dimensions
+        """
+        try:
+            # Expected number of features during training
+            expected_features = 95721
             
-            except Exception as e:
-                logger.error(f"Feature padding error: {e}")
-                return X    
+            # Ensure X is a sparse matrix
+            if not scipy.sparse.issparse(X):
+                X = scipy.sparse.csr_matrix(X)
+            
+            # Current number of features
+            current_features = X.shape[1]
+            
+            if current_features == expected_features:
+                return X
+            
+            # If fewer features, pad with zeros
+            if current_features < expected_features:
+                padding_size = expected_features - current_features
+                padding = scipy.sparse.csr_matrix(
+                    np.zeros((X.shape[0], padding_size))
+                )
+                return scipy.sparse.hstack([X, padding])
+            
+            # If more features, truncate
+            return X[:, :expected_features]
+        
+        except Exception as e:
+            logger.error(f"Feature padding error: {e}")
+            logger.error(f"Input matrix shape: {X.shape}")
+            return X
     def predict_with_sentiment(self, text, timeframe):
         """
         Make a prediction integrating FinBERT sentiment
@@ -878,7 +884,10 @@ class RealTimeMonitor:
                 
                     # Make predictions for this specific article
                     article_predictions = {}
+                       # Vectorize text
                     X = self.vectorizer.transform([content])
+                
+                    # Pad features BEFORE prediction
                     X_padded = self._pad_features(X)
                     
                     for timeframe, model in self.models.items():
@@ -908,7 +917,11 @@ class RealTimeMonitor:
                             logger.info(f"{timeframe} prediction: {pred:.2f}")
                         
                         except Exception as e:
+                            # Log detailed error information
                             logger.error(f"Error in prediction for {timeframe}: {e}")
+                            logger.error(f"Input matrix shape: {X_padded.shape}")
+                            logger.error(f"Model expected features: {model.coef_.shape[1]}")
+                            continue
                     
                     # Store predictions
                     all_predictions.append({
