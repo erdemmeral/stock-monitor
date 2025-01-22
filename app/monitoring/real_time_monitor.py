@@ -52,33 +52,7 @@ class ModelManager:
         self.last_modified_times = {}
         self.models = {}
         self.load_initial_models()
-    def _pad_features(self, X):
-        """
-        Pad or truncate features to match expected dimensions
-        """
-        try:
-            # Expected number of features during training
-            expected_features = 95717
-            
-            # Current number of features
-            current_features = X.shape[1]
-            
-            if current_features == expected_features:
-                return X
-            
-            # If fewer features, pad with zeros
-            if current_features < expected_features:
-                padding = scipy.sparse.csr_matrix(
-                    np.zeros((X.shape[0], expected_features - current_features))
-                )
-                return scipy.sparse.hstack([X, padding])
-            
-            # If more features, truncate
-            return X[:, :expected_features]
-        
-        except Exception as e:
-            logger.error(f"Feature padding error: {e}")
-            return X    
+    
     def load_initial_models(self):
         for name, path in self.model_paths.items():
             try:
@@ -192,7 +166,34 @@ class RealTimeMonitor:
 
         self._polling_lock = asyncio.Lock()  # Add this line
         self._is_polling = False  # Add this line
-
+        
+    def _pad_features(self, X):
+            """
+            Pad or truncate features to match expected dimensions
+            """
+            try:
+                # Expected number of features during training
+                expected_features = 95717
+                
+                # Current number of features
+                current_features = X.shape[1]
+                
+                if current_features == expected_features:
+                    return X
+                
+                # If fewer features, pad with zeros
+                if current_features < expected_features:
+                    padding = scipy.sparse.csr_matrix(
+                        np.zeros((X.shape[0], expected_features - current_features))
+                    )
+                    return scipy.sparse.hstack([X, padding])
+                
+                # If more features, truncate
+                return X[:, :expected_features]
+            
+            except Exception as e:
+                logger.error(f"Feature padding error: {e}")
+                return X    
     def predict_with_sentiment(self, text, timeframe):
         """
         Make a prediction integrating FinBERT sentiment
