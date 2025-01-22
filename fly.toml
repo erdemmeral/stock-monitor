@@ -1,14 +1,21 @@
-app = "stock-monitor"
-primary_region = "iad"
+# fly.toml app configuration file generated for stock-monitor-solitary-lake-5718 on 2025-01-22T10:48:40+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'stock-monitor-solitary-lake-5718'
+primary_region = 'fra'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [env]
-  PYTHONUNBUFFERED = "1"
+  PYTHONUNBUFFERED = '1'
 
 [processes]
-  app = "python -m app.monitoring.real_time_monitor"
+  app = 'python -m app.monitoring.real_time_monitor'
 
-[memory]
-  size = "1gb"  # Increase from 512MB
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
