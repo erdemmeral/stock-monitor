@@ -16,6 +16,6 @@ primary_region = 'fra'
   app = 'python -m app.monitoring.real_time_monitor'
 
 [[vm]]
-  memory = '1gb'
+  memory = '2gb'
   cpu_kind = 'shared'
-  cpus = 1
+  cpus = 4
