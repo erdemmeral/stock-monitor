@@ -1,6 +1,7 @@
 from urllib.parse import urlparse
 import warnings
 from bs4 import BeautifulSoup
+import scipy.sparse
 
 import requests
 import telegram
@@ -50,7 +51,33 @@ class ModelManager:
         self.last_modified_times = {}
         self.models = {}
         self.load_initial_models()
+    def _pad_features(self, X):
+        """
+        Pad or truncate features to match expected dimensions
+        """
+        try:
+            # Expected number of features during training
+            expected_features = 95717
+            
+            # Current number of features
+            current_features = X.shape[1]
+            
+            if current_features == expected_features:
+                return X
+            
+            # If fewer features, pad with zeros
+            if current_features < expected_features:
+                padding = scipy.sparse.csr_matrix(
+                    np.zeros((X.shape[0], expected_features - current_features))
+                )
+                return scipy.sparse.hstack([X, padding])
+            
+            # If more features, truncate
+            return X[:, :expected_features]
         
+        except Exception as e:
+            logger.error(f"Feature padding error: {e}")
+            return X    
     def load_initial_models(self):
         for name, path in self.model_paths.items():
             try:
@@ -890,33 +917,7 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error monitoring {symbol}: {str(e)}")
             return
-    def _pad_features(self, X):
-        """
-        Pad or truncate features to match expected dimensions
-        """
-        try:
-            # Expected number of features during training
-            expected_features = 95721
-            
-            # Current number of features
-            current_features = X.shape[1]
-            
-            if current_features == expected_features:
-                return X
-            
-            # If fewer features, pad with zeros
-            if current_features < expected_features:
-                padding = scipy.sparse.csr_matrix(
-                    np.zeros((X.shape[0], expected_features - current_features))
-                )
-                return scipy.sparse.hstack([X, padding])
-            
-            # If more features, truncate
-            return X[:, :expected_features]
-        
-        except Exception as e:
-            logger.error(f"Feature padding error: {e}")
-            return X
+
     async def update_positions(self):
         logger.info("Updating portfolio positions...")
         current_time = datetime.now(tz=pytz.UTC)
