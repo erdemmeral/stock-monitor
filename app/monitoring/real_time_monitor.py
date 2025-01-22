@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import numpy as np
 import scipy.sparse
 
+
 import requests
 import telegram
 from telegram.error import NetworkError, Unauthorized
@@ -166,7 +167,7 @@ class RealTimeMonitor:
 
         self._polling_lock = asyncio.Lock()  # Add this line
         self._is_polling = False  # Add this line
-        
+
     def _pad_features(self, X):
             """
             Pad or truncate features to match expected dimensions
@@ -716,6 +717,24 @@ class RealTimeMonitor:
                     logger.error(f"Error in periodic model check: {e}")
                     await asyncio.sleep(300)  # Wait before retrying
     async def start(self, symbols: list[str]):
+        try:
+        # Send startup message to Telegram
+            startup_message = (
+                "🚀 <b>Stock Monitor Activated</b>\n\n"
+                f"📊 Monitoring {len(symbols)} stocks\n"
+                f"🕒 Started at: {datetime.now(tz=pytz.UTC).strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
+                "🔍 Initializing market monitoring process..."
+            )
+        
+            # Send startup alert
+            await self.send_telegram_alert(startup_message)
+        except Exception as alert_error:
+            logger.error(f"Failed to send startup Telegram alert: {alert_error}")
+
+        logger.info(f"Starting monitoring for {len(symbols)} symbols...")
+        
+        
+        
         """Start monitoring"""
         logger.info(f"Starting monitoring for {len(symbols)} symbols...")
         
