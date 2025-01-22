@@ -1,6 +1,7 @@
 from urllib.parse import urlparse
 import warnings
 from bs4 import BeautifulSoup
+import numpy as np
 import scipy.sparse
 
 import requests
