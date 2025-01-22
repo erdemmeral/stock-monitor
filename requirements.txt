@@ -9,7 +9,7 @@ aiohttp==3.9.1
 beautifulsoup4>=4.12.2
 vaderSentiment==3.3.2 
 python-telegram-bot==13.7
-
+pytz==2023.3
 requests-ratelimiter>=0.7.0
 scipy==1.10.1
 numpy==1.23.5
