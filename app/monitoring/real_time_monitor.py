@@ -831,11 +831,12 @@ class RealTimeMonitor:
                     # Make predictions for this specific article
                     article_predictions = {}
                     X = self.vectorizer.transform([content])
+                    X_padded = self._pad_features(X)
                     
                     for timeframe, model in self.models.items():
                         try:
                         # Base prediction
-                            base_pred = model.predict(X)[0]
+                            base_pred = model.predict(X_padded)[0]
                             
                             # Adjust prediction with sentiment if available
                             if sentiment:
@@ -889,7 +890,33 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error monitoring {symbol}: {str(e)}")
             return
-
+    def _pad_features(self, X):
+        """
+        Pad or truncate features to match expected dimensions
+        """
+        try:
+            # Expected number of features during training
+            expected_features = 95721
+            
+            # Current number of features
+            current_features = X.shape[1]
+            
+            if current_features == expected_features:
+                return X
+            
+            # If fewer features, pad with zeros
+            if current_features < expected_features:
+                padding = scipy.sparse.csr_matrix(
+                    np.zeros((X.shape[0], expected_features - current_features))
+                )
+                return scipy.sparse.hstack([X, padding])
+            
+            # If more features, truncate
+            return X[:, :expected_features]
+        
+        except Exception as e:
+            logger.error(f"Feature padding error: {e}")
+            return X
     async def update_positions(self):
         logger.info("Updating portfolio positions...")
         current_time = datetime.now(tz=pytz.UTC)
