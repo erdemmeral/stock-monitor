@@ -1,23 +1,21 @@
-# Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Set working directory
 WORKDIR /app
 
-# Copy requirements first to leverage Docker cache
-COPY requirements.txt .
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies
+# Copy requirements and install dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application
-COPY . .
+# Copy project files
+COPY . /app
 
 # Set environment variables
-ENV EMAIL_ADDRESS=newstracker502@gmail.com
-ENV EMAIL_PASSWORD=Uaa24412
-ENV RECIPIENT_EMAIL=erdem_meral@hotmail.com
+ENV PYTHONPATH=/app
 
-# Run the application
+# Command to run the application
 CMD ["python", "-m", "app.monitoring.real_time_monitor"]
-

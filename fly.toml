@@ -1,0 +1,14 @@
+app = "stock-monitor"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PYTHONUNBUFFERED = "1"
+
+[processes]
+  app = "python -m app.monitoring.real_time_monitor"
+
+[memory]
+  size = "1gb"  # Increase from 512MB
