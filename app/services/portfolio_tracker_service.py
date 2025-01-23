@@ -47,12 +47,14 @@ class PortfolioTrackerService:
     async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float, entry_date: str, target_date: str):
         """Send buy signal to portfolio tracker"""
         try:
+            logger.info(f"=== Starting buy signal process for {symbol} ===")
             logger.info(f"Ensuring session is active for {symbol}")
             await self._ensure_session()
             
             # Format dates to match server expectations
             entry_date_formatted = datetime.fromisoformat(entry_date.replace('Z', '+00:00')).strftime("%Y-%m-%dT%H:%M:%S.000Z")
             target_date_formatted = datetime.fromisoformat(target_date.replace('Z', '+00:00')).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+            logger.info(f"Formatted dates - Entry: {entry_date_formatted}, Target: {target_date_formatted}")
             
             data = {
                 "symbol": symbol.upper(),
@@ -63,35 +65,64 @@ class PortfolioTrackerService:
             }
             
             url = f"{self.base_url}/api/positions"
-            logger.info(f"Preparing to send POST request to {url}")
-            logger.info(f"Request payload: {data}")
+            logger.info(f"=== Making POST request ===")
+            logger.info(f"URL: {url}")
+            logger.info(f"Data: {data}")
             
             try:
                 headers = {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 }
+                logger.info(f"Headers: {headers}")
                 
-                async with self.session.post(url, json=data, headers=headers, ssl=False) as response:
-                    response_text = await response.text()
-                    logger.info(f"Raw response from portfolio tracker: {response_text}")
-                    logger.info(f"Response status: {response.status}")
-                    logger.info(f"Response headers: {dict(response.headers)}")
-                    
-                    if response.status == 201:
-                        logger.info(f"Buy signal successfully sent for {symbol}")
-                        return True
-                    else:
-                        logger.error(f"Failed to send buy signal for {symbol}. Status: {response.status}")
-                        logger.error(f"Error response: {response_text}")
-                        return False
+                # First try with SSL
+                try:
+                    async with self.session.post(url, json=data, headers=headers) as response:
+                        response_text = await response.text()
+                        logger.info(f"Response status: {response.status}")
+                        logger.info(f"Response headers: {dict(response.headers)}")
+                        logger.info(f"Response body: {response_text}")
+                        
+                        if response.status == 201:
+                            logger.info(f"Buy signal successfully sent for {symbol}")
+                            return True
+                        else:
+                            logger.error(f"Failed to send buy signal for {symbol}")
+                            logger.error(f"Status: {response.status}")
+                            logger.error(f"Response: {response_text}")
+                            return False
+                            
+                except aiohttp.ClientSSLError as ssl_error:
+                    logger.warning(f"SSL Error occurred, retrying without SSL: {ssl_error}")
+                    # Retry without SSL
+                    async with self.session.post(url, json=data, headers=headers, ssl=False) as response:
+                        response_text = await response.text()
+                        logger.info(f"(No SSL) Response status: {response.status}")
+                        logger.info(f"(No SSL) Response headers: {dict(response.headers)}")
+                        logger.info(f"(No SSL) Response body: {response_text}")
+                        
+                        if response.status == 201:
+                            logger.info(f"Buy signal successfully sent for {symbol} (without SSL)")
+                            return True
+                        else:
+                            logger.error(f"Failed to send buy signal for {symbol} (without SSL)")
+                            logger.error(f"Status: {response.status}")
+                            logger.error(f"Response: {response_text}")
+                            return False
                         
             except aiohttp.ClientError as e:
-                logger.error(f"HTTP error while sending buy signal for {symbol}: {str(e)}", exc_info=True)
+                logger.error(f"HTTP error while sending buy signal for {symbol}")
+                logger.error(f"Error type: {type(e).__name__}")
+                logger.error(f"Error message: {str(e)}")
+                logger.error("Stack trace:", exc_info=True)
                 return False
                 
         except Exception as e:
-            logger.error(f"Unexpected error in send_buy_signal for {symbol}: {str(e)}", exc_info=True)
+            logger.error(f"Unexpected error in send_buy_signal for {symbol}")
+            logger.error(f"Error type: {type(e).__name__}")
+            logger.error(f"Error message: {str(e)}")
+            logger.error("Stack trace:", exc_info=True)
             return False
             
     async def send_sell_signal(self, symbol: str, selling_price: float):
