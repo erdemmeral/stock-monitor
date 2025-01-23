@@ -24,6 +24,8 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import time
 import scipy.sparse
+import aiohttp
+import uuid
 
 from requests import Session
 from requests_cache import CacheMixin, SQLiteCache
@@ -671,6 +673,79 @@ class MarketMLTrainer:
         joblib.dump(self.vectorizer, vectorizer_path)
         logger.info(f"Saved vectorizer to {vectorizer_path}")
         
+class PortfolioTrackerService:
+    def __init__(self):
+        self.base_url = "https://portfolio-tracker-rough-dawn-5271.fly.dev"
+        self.session = None
+        self.active_transactions = {}  # Store active transaction IDs by symbol
+        
+    async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float):
+        """Send buy signal to portfolio tracker with a transaction ID"""
+        await self._ensure_session()
+        
+        # Generate a unique transaction ID
+        transaction_id = str(uuid.uuid4())
+        self.active_transactions[symbol] = transaction_id
+        
+        entry_date = datetime.now()
+        target_date = entry_date + timedelta(days=30)
+        
+        data = {
+            "transactionId": transaction_id,  # Add transaction ID
+            "symbol": symbol,
+            "entryPrice": entry_price,
+            "targetPrice": target_price,
+            "entryDate": entry_date.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+            "targetDate": target_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+        }
+        
+        try:
+            async with self.session.post(f"{self.base_url}/api/signals/buy", json=data) as response:
+                if response.status == 200:
+                    logger.info(f"Buy signal sent for {symbol} (Transaction ID: {transaction_id})")
+                    return await response.json()
+                else:
+                    logger.error(f"Failed to send buy signal for {symbol}")
+                    self.active_transactions.pop(symbol, None)  # Remove on failure
+                    return None
+        except Exception as e:
+            logger.error(f"Error sending buy signal for {symbol}: {str(e)}")
+            self.active_transactions.pop(symbol, None)  # Remove on error
+            return None
+            
+    async def send_sell_signal(self, symbol: str, selling_price: float):
+        """Send sell signal to portfolio tracker with matching transaction ID"""
+        await self._ensure_session()
+        
+        # Get the transaction ID for this symbol
+        transaction_id = self.active_transactions.get(symbol)
+        if not transaction_id:
+            logger.error(f"No active transaction found for {symbol}")
+            return None
+            
+        selling_date = datetime.now()
+        
+        data = {
+            "transactionId": transaction_id,  # Include the same transaction ID
+            "symbol": symbol,
+            "sellingPrice": selling_price,
+            "sellingDate": selling_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+        }
+        
+        try:
+            async with self.session.post(f"{self.base_url}/api/signals/sell", json=data) as response:
+                if response.status == 200:
+                    logger.info(f"Sell signal sent for {symbol} (Transaction ID: {transaction_id})")
+                    # Remove the completed transaction
+                    self.active_transactions.pop(symbol, None)
+                    return await response.json()
+                else:
+                    logger.error(f"Failed to send sell signal for {symbol}")
+                    return None
+        except Exception as e:
+            logger.error(f"Error sending sell signal for {symbol}: {str(e)}")
+            return None
+
 def main():
     trainer = MarketMLTrainer()
     trainer.collect_and_train(trainer.symbols)

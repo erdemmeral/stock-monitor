@@ -42,6 +42,8 @@ from app.models.position import Position
 import torch
 from app.models.portfolio import Portfolio
 from app.training.market_ml_trainer import FinBERTSentimentAnalyzer
+from app.services.portfolio_tracker_service import PortfolioTrackerService
+
 class ModelManager:
     def __init__(self):
         self.model_paths = {
@@ -121,6 +123,7 @@ class RealTimeMonitor:
         self.news_aggregator = NewsAggregator()
         self.portfolio = Portfolio()
         self.trade_history = TradeHistory()
+        self.portfolio_tracker = PortfolioTrackerService()  # Initialize portfolio tracker
 
         self.stop_loss_percentage = 5.0
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
@@ -537,7 +540,6 @@ class RealTimeMonitor:
                         current_price=current_price,
                         entry_date=current_time
                     )
-                    await self.send_telegram_alert(message)
 
                     logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
                     logger.info(f"Target Price: ${target_price:.2f}")
@@ -549,6 +551,7 @@ class RealTimeMonitor:
         if opportunity_messages:
             message += "\n" + "\n".join(opportunity_messages)
 
+        asyncio.create_task(self.send_telegram_alert(message))
 
         return analysis_summary
        
@@ -700,6 +703,83 @@ class RealTimeMonitor:
             )
         except Exception as e:
             logger.error(f"Error sending portfolio status: {e}")
+
+    async def send_signal_to_localhost(self, signal_data: dict):
+        """
+        Send signal to local host
+        """
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.post('http://localhost:5000/api/signals', json=signal_data) as response:
+                    if response.status == 200:
+                        logger.info(f"Signal sent to localhost successfully: {signal_data}")
+                    else:
+                        logger.error(f"Failed to send signal to localhost. Status: {response.status}")
+        except Exception as e:
+            logger.error(f"Error sending signal to localhost: {e}")
+
+    async def send_buy_signal(self, symbol: str, sentiment_score: float, price_data: Dict) -> None:
+        current_price = price_data['current_price']
+        price_targets = self.calculate_price_targets(current_price, price_data['price_movements'])
+        trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
+
+        # Send buy signal to portfolio tracker
+        await self.portfolio_tracker.send_buy_signal(
+            symbol=symbol,
+            entry_price=current_price,
+            target_price=price_targets['1mo']  # Using monthly target price
+        )
+
+        buy_message = (
+            f"🔔 <b>BUY Signal Generated!</b>\n\n"
+            f"Symbol: {symbol}\n"
+            f"Entry Price: ${current_price:.2f}\n"
+            f"Target Price: ${price_targets['1mo']:.2f}\n"
+            f"Sentiment Score: {sentiment_score:.2f}\n\n"
+            f"Expected Movement:\n"
+            f"• 1 Hour: {trading_targets['short_term']:.2f}%\n"
+            f"• 1 Week: {trading_targets['mid_term']:.2f}%\n"
+            f"• 1 Month: {trading_targets['long_term']:.2f}%\n\n"
+            f"🛡 Trailing Stop: {trailing_stop}%"
+        )
+        await self.send_telegram_alert(buy_message)
+
+    async def send_sell_signal(self, symbol: str, reason: str, position: Position) -> None:
+        # Send sell signal to portfolio tracker
+        await self.portfolio_tracker.send_sell_signal(
+            symbol=symbol,
+            selling_price=position.current_price
+        )
+
+        profit_loss = position.current_price - position.entry_price
+        profit_loss_pct = (profit_loss / position.entry_price) * 100
+        
+        # Add to trade history
+        trade = self.trade_history.add_trade(
+            symbol=symbol,
+            entry_price=position.entry_price,
+            exit_price=position.current_price,
+            entry_date=position.entry_date,
+            exit_date=datetime.now(tz=pytz.UTC),
+            timeframe=position.timeframe,
+            target_price=position.target_price,
+            reason=reason,
+            profit_loss=profit_loss
+        )
+
+        sell_message = (
+            f"🔴 <b>SELL Signal Generated!</b>\n\n"
+            f"Symbol: {symbol}\n"
+            f"Reason: {reason}\n"
+            f"Entry Price: ${position.entry_price:.2f}\n"
+            f"Exit Price: ${position.current_price:.2f}\n"
+            f"P/L: ${profit_loss:.2f} ({profit_loss_pct:.2f}%)\n"
+            f"Hold Duration: {(datetime.now(tz=pytz.UTC) - position.entry_date).days} days\n"
+            f"Original Target: ${position.target_price:.2f}\n\n"
+            f"🏦 Total Account P/L: ${self.trade_history.get_total_profit_loss():.2f}\n"
+            f"📊 Win Rate: {self.trade_history.get_win_rate():.1f}%"
+        )
+        await self.send_telegram_alert(sell_message)
 
     async def periodic_model_check(self):
             """Periodically check and reload models"""
@@ -1178,65 +1258,6 @@ class RealTimeMonitor:
                 return True
                 
         return False
-    async def send_buy_signal(self, symbol: str, sentiment_score: float, price_data: Dict) -> None:
-        current_price = price_data['current_price']
-        price_targets = self.calculate_price_targets(current_price, price_data['price_movements'])
-        trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
-
-        # New timeframe-specific predictions
-        timeframe_predictions = {
-            '1h': {'threshold': 5.0, 'change': trading_targets['short_term']},
-            '1wk': {'threshold': 10.0, 'change': trading_targets['mid_term']},
-            '1mo': {'threshold': 20.0, 'change': trading_targets['long_term']}
-        }
-
-        # Determine best timeframe based on predicted changes
-        best_timeframe = None
-        best_change = 0
-        for timeframe, data in timeframe_predictions.items():
-            if abs(data['change']) >= data['threshold'] and abs(data['change']) > abs(best_change):
-                best_timeframe = timeframe
-                best_change = data['change']
-
-        # Format timeframe message
-        timeframe_text = {
-            '1h': '1 hour',
-            '1wk': '1 week',
-            '1mo': '1 month'
-        }.get(best_timeframe, '')
-
-        buy_message = (
-            f"🔔 *BUY SIGNAL DETECTED*\n\n"
-            f"🎯 *{symbol}*\n"
-            f"💰 Current Price: ${current_price:.2f}\n"
-            f"📊 Sentiment Score: {sentiment_score:.2f}\n\n"
-            
-            f"⏱ *Expected Movement:*\n"
-            f"• 1 Hour: {trading_targets['short_term']:.2f}% (Threshold: 5%)\n"
-            f"• 1 Week: {trading_targets['mid_term']:.2f}% (Threshold: 10%)\n"
-            f"• 1 Month: {trading_targets['long_term']:.2f}% (Threshold: 20%)\n\n"
-        )
-
-        # Add best timeframe prediction if available
-        if best_timeframe:
-            buy_message += (
-                f"🎯 *STRONGEST SIGNAL:*\n"
-                f"Timeframe: {timeframe_text}\n"
-                f"Expected Change: {best_change:.2f}%\n"
-                f"Threshold: {timeframe_predictions[best_timeframe]['threshold']}%\n\n"
-            )
-
-        buy_message += (
-            f"📈 *Price Targets:*\n"
-            f"• Short-term: ${price_targets['1h']:.2f}\n"
-            f"• Mid-term: ${price_targets['1w']:.2f}\n"
-            f"• Long-term: ${price_targets['1m']:.2f}\n\n"
-            f"🛡 Trailing Stop: {trailing_stop}%\n\n"
-            f"[Read Full Article]({price_data.get('link')})"
-        )
-
-        logger.info(f"Sending buy signal for {symbol}")
-        await self.send_telegram_alert(buy_message)
     async def handle_health_check(self, request):
         return web.Response(text="Bot is running!")
     async def poll_telegram_updates(self):
@@ -1321,8 +1342,19 @@ class RealTimeMonitor:
             f"📊 Win Rate: {self.trade_history.get_win_rate():.1f}%"
         )
         await self.send_telegram_alert(sell_message)
-def __del__(self):
-    self._is_polling = False  # Stop polling when object is deleted
+
+    async def cleanup(self):
+        """Cleanup resources before shutdown"""
+        try:
+            await self.portfolio_tracker.close()
+            logger.info("Portfolio tracker session closed")
+        except Exception as e:
+            logger.error(f"Error during cleanup: {e}")
+
+    def __del__(self):
+        self._is_polling = False  # Stop polling when object is deleted
+        if hasattr(self, 'portfolio_tracker'):
+            asyncio.create_task(self.cleanup())
 
 # Set up logging
 logging.basicConfig(
