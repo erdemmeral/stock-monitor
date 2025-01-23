@@ -125,8 +125,9 @@ class RealTimeMonitor:
         self.portfolio = Portfolio()
         self.trade_history = TradeHistory()
         
-        # Initialize portfolio tracker at startup
+        # Initialize portfolio tracker
         self.portfolio_tracker = PortfolioTrackerService()
+        logger.info("Portfolio tracker service initialized")
         
         self.stop_loss_percentage = 5.0
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
@@ -427,13 +428,18 @@ class RealTimeMonitor:
                     
                     try:
                         # Send the buy signal
-                        success = await self.portfolio_tracker.send_buy_signal(
+                        await self.portfolio_tracker.send_buy_signal(
                             symbol=symbol,
                             entry_price=float(current_price),
                             target_price=float(target_price),
                             entry_date=entry_date.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
                             target_date=target_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
                         )
+                        
+                        # Sleep for 30 seconds after sending buy signal
+                        logger.info("Sleeping for 30 seconds after sending buy signal...")
+                        await asyncio.sleep(30)
+                        logger.info("Resuming after 30 second sleep")
                         
                         if success:
                             logger.info(f"Buy signal sent successfully to portfolio tracker for {symbol}")
@@ -755,9 +761,7 @@ class RealTimeMonitor:
             target_date = entry_date + timedelta(days=30)
             
             try:
-                # Ensure session is active before sending
-                await self.portfolio_tracker._ensure_session()
-                
+                # Send the buy signal
                 await self.portfolio_tracker.send_buy_signal(
                     symbol=symbol,
                     entry_price=float(current_price),
@@ -766,17 +770,15 @@ class RealTimeMonitor:
                     target_date=target_date.isoformat()
                 )
                 logger.info(f"Buy signal sent to database for {symbol} at ${current_price:.2f}")
+                
+                # Sleep for 30 seconds after sending buy signal
+                logger.info("Sleeping for 30 seconds after sending buy signal...")
+                await asyncio.sleep(30)
+                logger.info("Resuming after 30 second sleep")
+                
             except Exception as tracker_error:
                 logger.error(f"Failed to send buy signal to portfolio tracker: {str(tracker_error)}")
-                # Try to reinitialize session and retry once
-                await self.portfolio_tracker._ensure_session()
-                await self.portfolio_tracker.send_buy_signal(
-                    symbol=symbol,
-                    entry_price=float(current_price),
-                    target_price=float(price_targets['1mo']),
-                    entry_date=entry_date.isoformat(),
-                    target_date=target_date.isoformat()
-                )
+                raise
             
             # 3. Then send Telegram alert
             buy_message = (
