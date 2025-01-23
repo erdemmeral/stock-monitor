@@ -310,12 +310,34 @@ class RealTimeMonitor:
                 logger.info(f"Best Timeframe: {prediction_result['best_timeframe']}")
                 logger.info(f"Prediction Strength: {prediction_result['prediction_strength']:.2f}%")
                 
+                # Find the article with the highest prediction for the best timeframe
+                best_article = max(
+                    [article for article in articles if prediction_result['best_timeframe'] in article['predictions']],
+                    key=lambda x: x['predictions'][prediction_result['best_timeframe']]
+                )
+                
+                # Get the publish time of the best article
+                entry_date = datetime.fromtimestamp(best_article['article']['providerPublishTime'], tz=pytz.UTC)
+                
+                # Set target date based on best timeframe
+                timeframe_deltas = {
+                    '1h': timedelta(hours=1),
+                    '1wk': timedelta(weeks=1),
+                    '1mo': timedelta(days=30)
+                }
+                target_date = entry_date + timeframe_deltas[prediction_result['best_timeframe']]
+                
+                logger.info(f"Using article published at {entry_date} as entry date")
+                logger.info(f"Target date set to {target_date} based on {prediction_result['best_timeframe']} timeframe")
+                
                 # Send buy signal and store result
                 success = await self.send_buy_signal(
                     symbol=symbol,
                     entry_price=price_data["current_price"],
                     target_price=prediction_result["target_price"],
-                    sentiment_score=prediction_result["sentiment_score"]
+                    sentiment_score=prediction_result["sentiment_score"],
+                    entry_date=entry_date,
+                    target_date=target_date
                 )
                 
                 if success:
@@ -323,7 +345,9 @@ class RealTimeMonitor:
                     self.portfolio.add_position(
                         symbol=symbol,
                         entry_price=price_data["current_price"],
-                        target_price=prediction_result["target_price"]
+                        target_price=prediction_result["target_price"],
+                        entry_date=entry_date,
+                        target_date=target_date
                     )
                 else:
                     logger.error(f"Failed to send buy signal for {symbol}")
@@ -494,7 +518,7 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error sending signal to localhost: {e}")
 
-    async def send_buy_signal(self, symbol: str, sentiment_score: float, price_data: Dict) -> None:
+    async def send_buy_signal(self, symbol: str, sentiment_score: float, price_data: Dict, entry_date: datetime, target_date: datetime) -> None:
         """Send buy signal to portfolio tracker first, then Telegram"""
         try:
             # 1. Calculate prices and targets
@@ -503,9 +527,6 @@ class RealTimeMonitor:
             trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
             
             # 2. Send buy signal to portfolio tracker first
-            entry_date = datetime.now(tz=pytz.UTC)
-            target_date = entry_date + timedelta(days=30)
-            
             try:
                 # Send the buy signal
                 await self.portfolio_tracker.send_buy_signal(
@@ -516,15 +537,20 @@ class RealTimeMonitor:
                     target_date=target_date.isoformat()
                 )
                 logger.info(f"Buy signal sent to database for {symbol} at ${current_price:.2f}")
+                logger.info(f"Entry date: {entry_date.isoformat()}")
+                logger.info(f"Target date: {target_date.isoformat()}")
                 
                 # Sleep for 30 seconds after sending buy signal
                 logger.info("Sleeping for 30 seconds after sending buy signal...")
                 await asyncio.sleep(30)
                 logger.info("Resuming after 30 second sleep")
                 
+                # Return True to indicate success
+                return True
+                
             except Exception as tracker_error:
                 logger.error(f"Failed to send buy signal to portfolio tracker: {str(tracker_error)}")
-                raise
+                return False
             
             # 3. Then send Telegram alert
             buy_message = (
@@ -532,6 +558,8 @@ class RealTimeMonitor:
                 f"Symbol: {symbol}\n"
                 f"Entry Price: ${current_price:.2f}\n"
                 f"Target Price: ${price_targets['1mo']:.2f}\n"
+                f"Entry Date: {entry_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
+                f"Target Date: {target_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
                 f"Sentiment Score: {sentiment_score:.2f}\n\n"
                 f"Expected Movement:\n"
                 f"• 1 Hour: {trading_targets['short_term']:.2f}%\n"
@@ -543,7 +571,7 @@ class RealTimeMonitor:
             
         except Exception as e:
             logger.error(f"Error in send_buy_signal for {symbol}: {str(e)}", exc_info=True)
-            raise
+            return False
 
     def calculate_price_targets(self, current_price: float, price_movements: Dict) -> Dict:
         """Calculate price targets based on predicted movements"""
