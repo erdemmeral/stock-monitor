@@ -4,12 +4,23 @@ from typing import Optional
 from datetime import datetime, timedelta
 import pytz
 
+# Configure logger for this module
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Add a stream handler if not already added
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
 
 class PortfolioTrackerService:
     def __init__(self):
+        logger.info("Initializing PortfolioTrackerService")
         self.base_url = "https://portfolio-tracker-rough-dawn-5271.fly.dev"
         self.session = None
+        logger.info(f"Base URL set to: {self.base_url}")
         
     async def _ensure_session(self):
         """Ensure an active session exists"""

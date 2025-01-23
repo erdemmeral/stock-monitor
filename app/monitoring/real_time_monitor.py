@@ -120,11 +120,15 @@ class NewsAggregator:
 
 class RealTimeMonitor:
     def __init__(self):
+        logger.info("Initializing RealTimeMonitor")
         self.news_aggregator = NewsAggregator()
         self.portfolio = Portfolio()
         self.trade_history = TradeHistory()
-        self.portfolio_tracker = PortfolioTrackerService()  # Initialize portfolio tracker
-
+        
+        # Initialize portfolio tracker with proper logging
+        logger.info("Initializing PortfolioTrackerService")
+        self.portfolio_tracker = PortfolioTrackerService()
+        
         self.stop_loss_percentage = 5.0
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
         self.sentiment_weight = 0.3  # Configurable weight for sentiment impact
