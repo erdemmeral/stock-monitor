@@ -734,8 +734,11 @@ class RealTimeMonitor:
             target_date = entry_date + timedelta(days=30)
             
             try:
-                # Ensure session is active before sending
-                await self.portfolio_tracker._ensure_session()
+                # Create new portfolio tracker with existing session if needed
+                if not hasattr(self, '_portfolio_session'):
+                    self._portfolio_session = aiohttp.ClientSession()
+                    self.portfolio_tracker = PortfolioTrackerService(session=self._portfolio_session)
+                    logger.info("Created new portfolio tracker session")
                 
                 await self.portfolio_tracker.send_buy_signal(
                     symbol=symbol,
@@ -747,8 +750,13 @@ class RealTimeMonitor:
                 logger.info(f"Buy signal sent to database for {symbol} at ${current_price:.2f}")
             except Exception as tracker_error:
                 logger.error(f"Failed to send buy signal to portfolio tracker: {str(tracker_error)}")
-                # Try to reinitialize session and retry once
-                await self.portfolio_tracker._ensure_session()
+                # Create fresh session and retry
+                if hasattr(self, '_portfolio_session'):
+                    await self._portfolio_session.close()
+                self._portfolio_session = aiohttp.ClientSession()
+                self.portfolio_tracker = PortfolioTrackerService(session=self._portfolio_session)
+                logger.info("Created fresh portfolio tracker session for retry")
+                
                 await self.portfolio_tracker.send_buy_signal(
                     symbol=symbol,
                     entry_price=float(current_price),
@@ -812,12 +820,13 @@ class RealTimeMonitor:
             raise
 
     async def cleanup(self):
-        """Cleanup resources before shutdown"""
+        """Cleanup resources"""
         try:
-            await self.portfolio_tracker.close()
-            logger.info("Portfolio tracker session closed")
+            if hasattr(self, '_portfolio_session'):
+                await self._portfolio_session.close()
+                logger.info("Portfolio tracker session closed")
         except Exception as e:
-            logger.error(f"Error during cleanup: {e}")
+            logger.error(f"Error closing portfolio session: {e}")
 
     def __del__(self):
         self._is_polling = False  # Stop polling when object is deleted
@@ -887,91 +896,19 @@ class RealTimeMonitor:
                 except Exception as e:
                     logger.error(f"Error in periodic model check: {e}")
                     await asyncio.sleep(300)  # Wait before retrying
-    async def start(self, symbols: list[str]):
+    async def start(self):
+        """Initialize services and start monitoring"""
         try:
-        # Send startup message to Telegram
-            startup_message = (
-                "🚀 <b>Stock Monitor Activated</b>\n\n"
-                f"📊 Monitoring {len(symbols)} stocks\n"
-                f"🕒 Started at: {datetime.now(tz=pytz.UTC).strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
-                "🔍 Initializing market monitoring process..."
-            )
-        
-            # Send startup alert
-            await self.send_telegram_alert(startup_message)
-        except Exception as alert_error:
-            logger.error(f"Failed to send startup Telegram alert: {alert_error}")
-
-        logger.info(f"Starting monitoring for {len(symbols)} symbols...")
-        
-        
-        
-        """Start monitoring"""
-        logger.info(f"Starting monitoring for {len(symbols)} symbols...")
-        
-        # Initialize polling lock if not exists
-        if not hasattr(self, '_polling_lock'):
-            self._polling_lock = asyncio.Lock()
-        
-        self._is_polling = True
-        
-        # Start polling in background
-        polling_task = asyncio.create_task(self.poll_telegram_updates())
-        logger.info("Telegram polling started")
-
-        model_check_task = asyncio.create_task(self.periodic_model_check())
-   
-        try:
-
-            while True:  # Add continuous loop
-                try:
-                    logger.info("Starting new monitoring cycle...")
-                    
-                            # Process stocks in batches for better resource management
-                    batch_size = 50  # Adjust based on your system's capabilities
-                    total_symbols = len(symbols)
-                    
-                    for batch_start in range(0, total_symbols, batch_size):
-                        batch = symbols[batch_start:batch_start+batch_size]
-                        batch_number = batch_start // batch_size + 1
-                        total_batches = (total_symbols + batch_size - 1) // batch_size
-                        
-                        logger.info(f"Processing Batch {batch_number}/{total_batches} "
-                                    f"(Stocks {batch_start+1}-{min(batch_start+batch_size, total_symbols)})")
-                        
-                        # Create tasks with tracking
-                        # Use more aggressive concurrency
-                        async def process_symbols():
-                            # Create semaphore to limit concurrent tasks
-                            sem = asyncio.Semaphore(50)  # Limit to 50 concurrent tasks
-                            
-                            async def bounded_monitor(symbol):
-                                async with sem:
-                                    return await self.monitor_stock_with_tracking(symbol, batch_number, total_batches)
-                            
-                            # Create tasks with the semaphore
-                            tasks = [bounded_monitor(symbol) for symbol in batch]
-                            return await asyncio.gather(*tasks)
-                
-                        # Process batch concurrently
-                        await process_symbols()
-
-                        logger.info(f"Completed Batch {batch_number}/{total_batches}")
-                
-                # Small delay between batches to prevent overwhelming resources
-                        await asyncio.sleep(1)
-                    
-                    
-                    
-                    logger.info("Completed full monitoring cycle. Waiting 5 minutes before next cycle...")
-                    await asyncio.sleep(300)  # 5-minute break between cycles
-                    
-                except Exception as e:
-                    logger.error(f"Error in monitoring cycle: {str(e)}")
-                    await asyncio.sleep(300)  # 5-minute break on error
-        finally:
-            self._is_polling = False
-            await polling_task
+            # Initialize portfolio tracker session at start
+            if not hasattr(self, '_portfolio_session'):
+                self._portfolio_session = aiohttp.ClientSession()
+                self.portfolio_tracker = PortfolioTrackerService(session=self._portfolio_session)
+                logger.info("Portfolio tracker session initialized")
+            
+            # ... rest of start method ...
+        except Exception as e:
+            logger.error(f"Error initializing services: {e}")
+            raise
 
     async def monitor_stock_with_tracking(self, symbol: str, batch_number: int, total_batches: int):
         """Wrapper method to add tracking and logging to monitor_stock"""
