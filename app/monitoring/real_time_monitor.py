@@ -720,21 +720,39 @@ class RealTimeMonitor:
 
     async def send_buy_signal(self, symbol: str, sentiment_score: float, price_data: Dict) -> None:
         try:
+            logger.info(f"Starting buy signal process for {symbol}")
             current_price = price_data['current_price']
+            logger.info(f"Current price for {symbol}: ${current_price}")
+            
             price_targets = self.calculate_price_targets(current_price, price_data['price_movements'])
+            logger.info(f"Calculated price targets for {symbol}: {price_targets}")
+            
             trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
+            logger.info(f"Calculated trading targets for {symbol}: {trading_targets}")
+
+            # Prepare dates
+            entry_date = datetime.now(tz=pytz.UTC)
+            target_date = entry_date + timedelta(days=30)
+            logger.info(f"Entry date: {entry_date.isoformat()}, Target date: {target_date.isoformat()}")
 
             # Send buy signal to portfolio tracker
-            logger.info(f"Sending buy signal to portfolio tracker for {symbol}")
-            await self.portfolio_tracker.send_buy_signal(
+            logger.info(f"Attempting to send buy signal to portfolio tracker for {symbol}")
+            logger.info(f"Signal data: symbol={symbol}, entry_price={current_price}, target_price={price_targets['1mo']}")
+            
+            success = await self.portfolio_tracker.send_buy_signal(
                 symbol=symbol,
                 entry_price=current_price,
                 target_price=price_targets['1mo'],  # Using monthly target price
-                entry_date=datetime.now(tz=pytz.UTC).isoformat(),
-                target_date=(datetime.now(tz=pytz.UTC) + timedelta(days=30)).isoformat()
+                entry_date=entry_date.isoformat(),
+                target_date=target_date.isoformat()
             )
-            logger.info(f"Successfully sent buy signal to portfolio tracker for {symbol}")
+            
+            if success:
+                logger.info(f"Successfully sent buy signal to portfolio tracker for {symbol}")
+            else:
+                logger.error(f"Failed to send buy signal to portfolio tracker for {symbol}")
 
+            # Prepare and send Telegram message
             buy_message = (
                 f"🔔 <b>BUY Signal Generated!</b>\n\n"
                 f"Symbol: {symbol}\n"
@@ -748,9 +766,10 @@ class RealTimeMonitor:
                 f"🛡 Trailing Stop: {trailing_stop}%"
             )
             await self.send_telegram_alert(buy_message)
+            logger.info(f"Buy signal process completed for {symbol}")
             
         except Exception as e:
-            logger.error(f"Error sending buy signal for {symbol}: {str(e)}")
+            logger.error(f"Error in send_buy_signal for {symbol}: {str(e)}", exc_info=True)
             raise
 
     async def send_sell_signal(self, symbol: str, reason: str, position: Position) -> None:
