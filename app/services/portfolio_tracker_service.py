@@ -20,32 +20,33 @@ class PortfolioTrackerService:
             await self.session.close()
             self.session = None
             
-    async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float):
+    async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float, entry_date: str, target_date: str):
         """Send buy signal to portfolio tracker"""
         await self._ensure_session()
         
-        entry_date = datetime.now(tz=pytz.UTC)
-        target_date = entry_date + timedelta(days=30)
-        
         data = {
             "symbol": symbol.upper(),
-            "entryPrice": entry_price,
-            "targetPrice": target_price,
-            "entryDate": entry_date.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
-            "targetDate": target_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+            "entryPrice": float(entry_price),
+            "targetPrice": float(target_price),
+            "entryDate": entry_date,
+            "targetDate": target_date
         }
         
         try:
+            logger.info(f"Sending buy signal to portfolio tracker: {data}")
             async with self.session.post(f"{self.base_url}/api/positions", json=data) as response:
+                response_text = await response.text()
+                logger.info(f"Portfolio tracker response: {response.status} - {response_text}")
+                
                 if response.status == 201:
-                    logger.info(f"Buy signal sent for {symbol}")
-                    return await response.json()
+                    logger.info(f"Buy signal sent successfully for {symbol}")
+                    return True
                 else:
-                    logger.error(f"Failed to send buy signal for {symbol}. Status: {response.status}")
-                    return None
+                    logger.error(f"Failed to send buy signal for {symbol}. Status: {response.status}, Response: {response_text}")
+                    return False
         except Exception as e:
             logger.error(f"Error sending buy signal for {symbol}: {str(e)}")
-            return None
+            return False
             
     async def send_sell_signal(self, symbol: str, selling_price: float):
         """Send sell signal to portfolio tracker"""

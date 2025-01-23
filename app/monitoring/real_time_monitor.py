@@ -719,30 +719,39 @@ class RealTimeMonitor:
             logger.error(f"Error sending signal to localhost: {e}")
 
     async def send_buy_signal(self, symbol: str, sentiment_score: float, price_data: Dict) -> None:
-        current_price = price_data['current_price']
-        price_targets = self.calculate_price_targets(current_price, price_data['price_movements'])
-        trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
+        try:
+            current_price = price_data['current_price']
+            price_targets = self.calculate_price_targets(current_price, price_data['price_movements'])
+            trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
 
-        # Send buy signal to portfolio tracker
-        await self.portfolio_tracker.send_buy_signal(
-            symbol=symbol,
-            entry_price=current_price,
-            target_price=price_targets['1mo']  # Using monthly target price
-        )
+            # Send buy signal to portfolio tracker
+            logger.info(f"Sending buy signal to portfolio tracker for {symbol}")
+            await self.portfolio_tracker.send_buy_signal(
+                symbol=symbol,
+                entry_price=current_price,
+                target_price=price_targets['1mo'],  # Using monthly target price
+                entry_date=datetime.now(tz=pytz.UTC).isoformat(),
+                target_date=(datetime.now(tz=pytz.UTC) + timedelta(days=30)).isoformat()
+            )
+            logger.info(f"Successfully sent buy signal to portfolio tracker for {symbol}")
 
-        buy_message = (
-            f"🔔 <b>BUY Signal Generated!</b>\n\n"
-            f"Symbol: {symbol}\n"
-            f"Entry Price: ${current_price:.2f}\n"
-            f"Target Price: ${price_targets['1mo']:.2f}\n"
-            f"Sentiment Score: {sentiment_score:.2f}\n\n"
-            f"Expected Movement:\n"
-            f"• 1 Hour: {trading_targets['short_term']:.2f}%\n"
-            f"• 1 Week: {trading_targets['mid_term']:.2f}%\n"
-            f"• 1 Month: {trading_targets['long_term']:.2f}%\n\n"
-            f"🛡 Trailing Stop: {trailing_stop}%"
-        )
-        await self.send_telegram_alert(buy_message)
+            buy_message = (
+                f"🔔 <b>BUY Signal Generated!</b>\n\n"
+                f"Symbol: {symbol}\n"
+                f"Entry Price: ${current_price:.2f}\n"
+                f"Target Price: ${price_targets['1mo']:.2f}\n"
+                f"Sentiment Score: {sentiment_score:.2f}\n\n"
+                f"Expected Movement:\n"
+                f"• 1 Hour: {trading_targets['short_term']:.2f}%\n"
+                f"• 1 Week: {trading_targets['mid_term']:.2f}%\n"
+                f"• 1 Month: {trading_targets['long_term']:.2f}%\n\n"
+                f"🛡 Trailing Stop: {trailing_stop}%"
+            )
+            await self.send_telegram_alert(buy_message)
+            
+        except Exception as e:
+            logger.error(f"Error sending buy signal for {symbol}: {str(e)}")
+            raise
 
     async def send_sell_signal(self, symbol: str, reason: str, position: Position) -> None:
         # Send sell signal to portfolio tracker
