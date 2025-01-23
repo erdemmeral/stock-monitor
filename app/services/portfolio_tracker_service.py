@@ -29,7 +29,8 @@ class PortfolioTrackerService:
             "entryPrice": float(entry_price),
             "targetPrice": float(target_price),
             "entryDate": entry_date,
-            "targetDate": target_date
+            "targetDate": target_date,
+            "status": "OPEN"
         }
         
         try:
@@ -52,21 +53,39 @@ class PortfolioTrackerService:
         """Send sell signal to portfolio tracker"""
         await self._ensure_session()
         
-        data = {
-            "soldPrice": selling_price
-        }
-        
         try:
-            async with self.session.post(f"{self.base_url}/api/positions/{symbol}/sell", json=data) as response:
-                if response.status == 200:
-                    logger.info(f"Sell signal sent for {symbol}")
-                    return await response.json()
-                else:
-                    logger.error(f"Failed to send sell signal for {symbol}. Status: {response.status}")
-                    return None
+            # First, get all positions to find the one with matching symbol
+            async with self.session.get(f"{self.base_url}/api/portfolio") as response:
+                if response.status != 200:
+                    logger.error(f"Failed to get portfolio for sell signal. Status: {response.status}")
+                    return False
+                    
+                portfolio = await response.json()
+                position = next((pos for pos in portfolio if pos['symbol'] == symbol.upper() and pos['status'] == 'OPEN'), None)
+                
+                if not position:
+                    logger.error(f"No open position found for {symbol}")
+                    return False
+                    
+                position_id = position['_id']
+                
+                # Now send the sell signal with the position ID
+                data = {
+                    "soldPrice": float(selling_price),
+                    "status": "CLOSED"
+                }
+                
+                async with self.session.patch(f"{self.base_url}/api/positions/{position_id}/update-price", json=data) as sell_response:
+                    if sell_response.status == 200:
+                        logger.info(f"Sell signal sent successfully for {symbol}")
+                        return True
+                    else:
+                        logger.error(f"Failed to send sell signal for {symbol}. Status: {sell_response.status}")
+                        return False
+                        
         except Exception as e:
             logger.error(f"Error sending sell signal for {symbol}: {str(e)}")
-            return None
+            return False
 
     async def get_portfolio_status(self):
         """Get current portfolio status"""
