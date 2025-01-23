@@ -12,9 +12,22 @@ class PortfolioTrackerService:
         self.session = None
         
     async def _ensure_session(self):
-        if self.session is None:
-            self.session = aiohttp.ClientSession()
-            
+        """Ensure an active session exists"""
+        try:
+            if self.session is None:
+                logger.info("Creating new aiohttp session")
+                timeout = aiohttp.ClientTimeout(total=30)  # 30 seconds timeout
+                self.session = aiohttp.ClientSession(timeout=timeout)
+                logger.info("Session created successfully")
+            elif self.session.closed:
+                logger.info("Session was closed, creating new session")
+                timeout = aiohttp.ClientTimeout(total=30)
+                self.session = aiohttp.ClientSession(timeout=timeout)
+                logger.info("Session recreated successfully")
+        except Exception as e:
+            logger.error(f"Error ensuring session: {str(e)}", exc_info=True)
+            raise
+
     async def close(self):
         if self.session:
             await self.session.close()
@@ -40,11 +53,16 @@ class PortfolioTrackerService:
             logger.info(f"Request payload: {data}")
             
             try:
-                async with self.session.post(url, json=data) as response:
+                headers = {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+                
+                async with self.session.post(url, json=data, headers=headers) as response:
                     response_text = await response.text()
                     logger.info(f"Raw response from portfolio tracker: {response_text}")
                     logger.info(f"Response status: {response.status}")
-                    logger.info(f"Response headers: {response.headers}")
+                    logger.info(f"Response headers: {dict(response.headers)}")
                     
                     if response.status == 201:
                         logger.info(f"Buy signal successfully sent for {symbol}")
@@ -55,7 +73,7 @@ class PortfolioTrackerService:
                         return False
                         
             except aiohttp.ClientError as e:
-                logger.error(f"HTTP error while sending buy signal for {symbol}: {str(e)}")
+                logger.error(f"HTTP error while sending buy signal for {symbol}: {str(e)}", exc_info=True)
                 return False
                 
         except Exception as e:

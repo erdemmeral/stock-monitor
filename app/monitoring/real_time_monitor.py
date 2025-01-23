@@ -735,22 +735,30 @@ class RealTimeMonitor:
             target_date = entry_date + timedelta(days=30)
             logger.info(f"Entry date: {entry_date.isoformat()}, Target date: {target_date.isoformat()}")
 
+            # Ensure portfolio tracker session is active
+            if not hasattr(self, 'portfolio_tracker') or self.portfolio_tracker is None:
+                logger.info("Initializing portfolio tracker service")
+                self.portfolio_tracker = PortfolioTrackerService()
+
             # Send buy signal to portfolio tracker
             logger.info(f"Attempting to send buy signal to portfolio tracker for {symbol}")
             logger.info(f"Signal data: symbol={symbol}, entry_price={current_price}, target_price={price_targets['1mo']}")
             
-            success = await self.portfolio_tracker.send_buy_signal(
-                symbol=symbol,
-                entry_price=current_price,
-                target_price=price_targets['1mo'],  # Using monthly target price
-                entry_date=entry_date.isoformat(),
-                target_date=target_date.isoformat()
-            )
-            
-            if success:
-                logger.info(f"Successfully sent buy signal to portfolio tracker for {symbol}")
-            else:
-                logger.error(f"Failed to send buy signal to portfolio tracker for {symbol}")
+            try:
+                success = await self.portfolio_tracker.send_buy_signal(
+                    symbol=symbol,
+                    entry_price=current_price,
+                    target_price=price_targets['1mo'],  # Using monthly target price
+                    entry_date=entry_date.isoformat(),
+                    target_date=target_date.isoformat()
+                )
+                
+                if success:
+                    logger.info(f"Successfully sent buy signal to portfolio tracker for {symbol}")
+                else:
+                    logger.error(f"Failed to send buy signal to portfolio tracker for {symbol}")
+            except Exception as tracker_error:
+                logger.error(f"Portfolio tracker error for {symbol}: {str(tracker_error)}", exc_info=True)
 
             # Prepare and send Telegram message
             buy_message = (
