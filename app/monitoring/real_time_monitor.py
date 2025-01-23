@@ -419,42 +419,43 @@ class RealTimeMonitor:
                 current_time = datetime.now(tz=pytz.UTC)
                 target_date = current_time + target_dates[timeframe]
 
-                # Send buy signal to portfolio tracker
-                price_data = {
-                    'current_price': current_price,
-                    'price_movements': {
-                        'short_term': expected_change,
-                        'mid_term': expected_change,
-                        'long_term': expected_change
-                    }
-                }
-                
-                # Calculate average sentiment score from articles
-                sentiment_scores = [art.get('sentiment', 0) for art in articles]
-                avg_sentiment = sum(sentiment_scores) / len(sentiment_scores) if sentiment_scores else 0
-                
-                await self.send_buy_signal(
-                    symbol=symbol,
-                    sentiment_score=avg_sentiment,
-                    price_data=price_data
-                )
-                
                 # Ensure all required arguments are passed
                 if not self.portfolio.has_position(symbol):
-                    self.portfolio.add_position(
-                        symbol=symbol,
-                        entry_price=current_price,
-                        target_price=target_price,
-                        target_date=target_date,
-                        timeframe=timeframe,
-                        current_price=current_price,
-                        entry_date=current_time
-                    )
-                    logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
-                    logger.info(f"Target Price: ${target_price:.2f}")
-                    logger.info(f"Target Date: {target_date}")
+                    # Send buy signal to portfolio tracker first
+                    entry_date = datetime.now(tz=pytz.UTC)
+                    target_date = entry_date + timedelta(days=30)
+                    
+                    try:
+                        await self.portfolio_tracker.send_buy_signal(
+                            symbol=symbol,
+                            entry_price=float(current_price),
+                            target_price=float(target_price),
+                            entry_date=entry_date.isoformat(),
+                            target_date=target_date.isoformat()
+                        )
+                        logger.info(f"Buy signal sent to database for {symbol} at ${current_price:.2f}")
+                        
+                        # Only add to portfolio if signal was sent successfully
+                        self.portfolio.add_position(
+                            symbol=symbol,
+                            entry_price=current_price,
+                            target_price=target_price,
+                            target_date=target_date,
+                            timeframe=timeframe,
+                            current_price=current_price,
+                            entry_date=current_time
+                        )
+                        logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
+                        logger.info(f"Target Price: ${target_price:.2f}")
+                        logger.info(f"Target Date: {target_date}")
+                    except Exception as e:
+                        logger.error(f"Failed to send buy signal to portfolio tracker: {str(e)}")
+                        raise
+                else:
+                    logger.info(f"Already tracking position for {symbol}")
+
                 analysis_summary['decision'] = f"BUY - {best_timeframe[0]} Signal"
-            
+                
                 # Log decision details
                 logger.info("🟢 BUY SIGNAL DETECTED")
                 logger.info(f"Best Timeframe: {best_timeframe[0]}")
@@ -563,7 +564,13 @@ class RealTimeMonitor:
                         current_price=current_price,
                         entry_date=current_time
                     )
-
+                    await self.portfolio_tracker.send_buy_signal(
+                        symbol=symbol,
+                        entry_price=float(current_price),
+                        target_price=float(price_targets['1mo']),
+                        entry_date=entry_date.isoformat(),
+                        target_date=target_date.isoformat()
+                        )
                     logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
                     logger.info(f"Target Price: ${target_price:.2f}")
                     logger.info(f"Target Date: {target_date}")
