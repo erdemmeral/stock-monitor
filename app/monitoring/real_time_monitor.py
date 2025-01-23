@@ -125,8 +125,7 @@ class RealTimeMonitor:
         self.portfolio = Portfolio()
         self.trade_history = TradeHistory()
         
-        # Initialize portfolio tracker with proper logging
-        logger.info("Initializing PortfolioTrackerService")
+        # Initialize portfolio tracker at startup
         self.portfolio_tracker = PortfolioTrackerService()
         
         self.stop_loss_percentage = 5.0
@@ -730,16 +729,14 @@ class RealTimeMonitor:
             price_targets = self.calculate_price_targets(current_price, price_data['price_movements'])
             trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
             
-            # 2. Initialize portfolio tracker if needed
-            if not hasattr(self, 'portfolio_tracker') or self.portfolio_tracker is None:
-                self.portfolio_tracker = PortfolioTrackerService()
-                await self.portfolio_tracker._ensure_session()
-            
-            # 3. Send buy signal to portfolio tracker first
+            # 2. Send buy signal to portfolio tracker first
             entry_date = datetime.now(tz=pytz.UTC)
             target_date = entry_date + timedelta(days=30)
             
             try:
+                # Ensure session is active before sending
+                await self.portfolio_tracker._ensure_session()
+                
                 await self.portfolio_tracker.send_buy_signal(
                     symbol=symbol,
                     entry_price=float(current_price),
@@ -760,7 +757,7 @@ class RealTimeMonitor:
                     target_date=target_date.isoformat()
                 )
             
-            # 4. Then send Telegram alert
+            # 3. Then send Telegram alert
             buy_message = (
                 f"🔔 <b>BUY Signal Generated!</b>\n\n"
                 f"Symbol: {symbol}\n"
