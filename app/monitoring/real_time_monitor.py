@@ -301,7 +301,7 @@ class RealTimeMonitor:
 
     
     async def analyze_and_notify(self, symbol: str, articles: list, prices: pd.DataFrame):
-    # Initialize deadlines
+        # Initialize deadlines
         logger.info(f"📊 Comprehensive Stock Analysis: {symbol}")
         logger.info(f"Total News Articles Analyzed: {len(articles)}")
 
@@ -426,31 +426,43 @@ class RealTimeMonitor:
                     target_date = entry_date + timedelta(days=30)
                     
                     try:
-                        await self.portfolio_tracker.send_buy_signal(
+                        # Initialize session if needed
+                        if not hasattr(self, '_portfolio_session'):
+                            self._portfolio_session = aiohttp.ClientSession()
+                            self.portfolio_tracker = PortfolioTrackerService(session=self._portfolio_session)
+                            logger.info("Created new portfolio tracker session")
+                        
+                        # Send the buy signal
+                        success = await self.portfolio_tracker.send_buy_signal(
                             symbol=symbol,
                             entry_price=float(current_price),
                             target_price=float(target_price),
                             entry_date=entry_date.isoformat(),
                             target_date=target_date.isoformat()
                         )
-                        logger.info(f"Buy signal sent to database for {symbol} at ${current_price:.2f}")
                         
-                        # Only add to portfolio if signal was sent successfully
-                        self.portfolio.add_position(
-                            symbol=symbol,
-                            entry_price=current_price,
-                            target_price=target_price,
-                            target_date=target_date,
-                            timeframe=timeframe,
-                            current_price=current_price,
-                            entry_date=current_time
-                        )
-                        logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
-                        logger.info(f"Target Price: ${target_price:.2f}")
-                        logger.info(f"Target Date: {target_date}")
+                        if success:
+                            logger.info(f"Buy signal sent to database for {symbol} at ${current_price:.2f}")
+                            
+                            # Only add to portfolio if signal was sent successfully
+                            self.portfolio.add_position(
+                                symbol=symbol,
+                                entry_price=current_price,
+                                target_price=target_price,
+                                target_date=target_date,
+                                timeframe=timeframe,
+                                current_price=current_price,
+                                entry_date=current_time
+                            )
+                            logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
+                            logger.info(f"Target Price: ${target_price:.2f}")
+                            logger.info(f"Target Date: {target_date}")
+                        else:
+                            logger.error(f"Failed to send buy signal to portfolio tracker for {symbol}")
+                            
                     except Exception as e:
                         logger.error(f"Failed to send buy signal to portfolio tracker: {str(e)}")
-                        raise
+                        # Don't raise here, just log the error
                 else:
                     logger.info(f"Already tracking position for {symbol}")
 
@@ -461,24 +473,15 @@ class RealTimeMonitor:
                 logger.info(f"Best Timeframe: {best_timeframe[0]}")
                 logger.info(f"Prediction Strength: {best_timeframe[1]:.2f}%")
                 
-               
-                # Add to portfolio if first cycle is complete
-                
-                
-
-
-                timeframe_text = {'1h': '1 hour', '1wk': '1 week', '1mo': '1 month'}[best_timeframe[0]]
-                prediction = best_timeframe[1]
-                score = prediction / self.thresholds[best_timeframe[0]]
-                
-                message += (
-                    f"\n🎯 <b>Strongest Valid Signal:</b>\n"
-                    f"Timeframe: {timeframe_text}\n"
-                    f"Expected Change: {prediction:.2f}%\n"
-                    f"Score: {score:.2f}x threshold\n"
-                    f"Based on {len(articles)} news articles\n"
-                    f"Latest Deadline: {deadline.strftime('%Y-%m-%d %H:%M:%S UTC')}"
-                )
+                # Remove the duplicate signal sending section
+                if best_article:
+                    publish_time = datetime.fromtimestamp(best_article['article']['providerPublishTime'], tz=pytz.UTC)
+                    target_date = publish_time + target_dates[timeframe]
+                    logger.info(f"Target date based on news article published at {publish_time}")
+                else:
+                    current_time = datetime.now(tz=pytz.UTC)
+                    target_date = current_time + target_dates[timeframe]
+                    logger.info("No specific news article found, using current time for target date")
         else:
             logger.info("🔘 No Strong Signals - No Action")
         # Check if predictions already happened
