@@ -426,24 +426,17 @@ class RealTimeMonitor:
                     target_date = entry_date + timedelta(days=30)
                     
                     try:
-                        # Initialize session if needed
-                        if not hasattr(self, '_portfolio_session'):
-                            self._portfolio_session = aiohttp.ClientSession()
-                            self.portfolio_tracker = PortfolioTrackerService(session=self._portfolio_session)
-                            logger.info("Created new portfolio tracker session")
-                        
                         # Send the buy signal
                         success = await self.portfolio_tracker.send_buy_signal(
                             symbol=symbol,
                             entry_price=float(current_price),
                             target_price=float(target_price),
-                            entry_date=entry_date.isoformat(),
-                            target_date=target_date.isoformat()
+                            entry_date=entry_date.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+                            target_date=target_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
                         )
                         
                         if success:
-                            logger.info(f"Buy signal sent to database for {symbol} at ${current_price:.2f}")
-                            
+                            logger.info(f"Buy signal sent successfully to portfolio tracker for {symbol}")
                             # Only add to portfolio if signal was sent successfully
                             self.portfolio.add_position(
                                 symbol=symbol,
@@ -452,16 +445,14 @@ class RealTimeMonitor:
                                 target_date=target_date,
                                 timeframe=timeframe,
                                 current_price=current_price,
-                                entry_date=current_time
+                                entry_date=entry_date
                             )
                             logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
-                            logger.info(f"Target Price: ${target_price:.2f}")
-                            logger.info(f"Target Date: {target_date}")
                         else:
                             logger.error(f"Failed to send buy signal to portfolio tracker for {symbol}")
                             
                     except Exception as e:
-                        logger.error(f"Failed to send buy signal to portfolio tracker: {str(e)}")
+                        logger.error(f"Error in buy signal process: {str(e)}", exc_info=True)
                         # Don't raise here, just log the error
                 else:
                     logger.info(f"Already tracking position for {symbol}")
