@@ -419,16 +419,36 @@ class RealTimeMonitor:
                 current_time = datetime.now(tz=pytz.UTC)
                 target_date = current_time + target_dates[timeframe]
 
+                # Send buy signal to portfolio tracker
+                price_data = {
+                    'current_price': current_price,
+                    'price_movements': {
+                        'short_term': expected_change,
+                        'mid_term': expected_change,
+                        'long_term': expected_change
+                    }
+                }
+                
+                # Calculate average sentiment score from articles
+                sentiment_scores = [art.get('sentiment', 0) for art in articles]
+                avg_sentiment = sum(sentiment_scores) / len(sentiment_scores) if sentiment_scores else 0
+                
+                await self.send_buy_signal(
+                    symbol=symbol,
+                    sentiment_score=avg_sentiment,
+                    price_data=price_data
+                )
+                
                 # Ensure all required arguments are passed
                 if not self.portfolio.has_position(symbol):
                     self.portfolio.add_position(
-                    symbol=symbol,
-                    entry_price=current_price,
-                    target_price=target_price,
-                    target_date=target_date,
-                    timeframe=timeframe,
-                    current_price=current_price,  # Explicitly pass current price
-                    entry_date=current_time  # Explicitly pass entry date
+                        symbol=symbol,
+                        entry_price=current_price,
+                        target_price=target_price,
+                        target_date=target_date,
+                        timeframe=timeframe,
+                        current_price=current_price,
+                        entry_date=current_time
                     )
                     logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
                     logger.info(f"Target Price: ${target_price:.2f}")
