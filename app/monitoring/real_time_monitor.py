@@ -301,290 +301,36 @@ class RealTimeMonitor:
             return None
 
     
-    async def analyze_and_notify(self, symbol: str, articles: list, prices: pd.DataFrame):
-        # Initialize deadlines
-        logger.info(f"📊 Comprehensive Stock Analysis: {symbol}")
-        logger.info(f"Total News Articles Analyzed: {len(articles)}")
-
-        deadlines = {
-            '1h': timedelta(hours=1),
-            '1wk': timedelta(days=7),
-            '1mo': timedelta(days=30)
-        }
-        analysis_summary = {
-                'symbol': symbol,
-                'total_articles': len(articles),
-                'valid_predictions': {},
-                'decision': 'No Action'
-        }
-        # Start message with stock alert and articles summary
-        message = f"🔔 <b>Stock Alert: {symbol}</b>\n\n"
-        message += f"📰 <b>Recent News Articles:</b>\n"
-        
-        # Add all articles with their dates
-        for article_data in articles:
-            article = article_data['article']
-            publish_time = datetime.fromtimestamp(article['providerPublishTime'], tz=pytz.UTC)
-            message += f"• {article['title']} ({publish_time.strftime('%Y-%m-%d')})\n"
-
-        # Calculate valid timeframes and aggregate predictions
-        current_time = datetime.now(tz=pytz.UTC)
-        aggregated_preds = {}
-        valid_timeframes = {}
-        for timeframe in self.thresholds.keys():
-            valid_preds = []
-            timeframe_analysis = {
-                'total_predictions': 0,
-                'valid_predictions': [],
-                'mean_prediction': 0,
-                'meets_threshold': False
-            }
-            for article_data in articles:
-                predictions = article_data['predictions']
-                publish_time = datetime.fromtimestamp(article_data['article']['providerPublishTime'], tz=pytz.UTC)
-                time_passed = current_time - publish_time
-                deadline = deadlines[timeframe]
-
-                # Check if at least 70% of the timeframe is still available
-                time_remaining_ratio = (deadline - time_passed) / deadline
-
-                if (timeframe in predictions and 
-                time_passed < deadline and 
-                time_remaining_ratio >= 0.7):
-                
-                    valid_preds.append(predictions[timeframe])
-                    timeframe_analysis['valid_predictions'].append(predictions[timeframe])
-
-
-            if valid_preds:
-                aggregated_pred = sum(valid_preds) / len(valid_preds)
-                threshold = self.thresholds[timeframe]
-
-                timeframe_analysis.update({
-                    'total_predictions': len(valid_preds),
-                    'mean_prediction': aggregated_pred,
-                    'meets_threshold': aggregated_pred > 0 and aggregated_pred >= threshold
-                })
-                #Log detailed timeframe analysis
-                logger.info(f"🔍 {timeframe} Analysis:")
-                logger.info(f"  Total Predictions: {timeframe_analysis['total_predictions']}")
-                logger.info(f"  Mean Prediction: {aggregated_pred:.2f}%")
-                logger.info(f"  Threshold: {threshold}%")
-                logger.info(f"  Meets Threshold: {timeframe_analysis['meets_threshold']}")
-
-                # Only include if prediction is positive AND exceeds threshold
-                if aggregated_pred > 0 and aggregated_pred >= threshold:
-                    valid_timeframes[timeframe] = aggregated_pred
-                    analysis_summary['valid_predictions'][timeframe] = {
-                        'prediction': aggregated_pred,
-                        'score': aggregated_pred / threshold
-                    }
-
-        if not valid_timeframes:
-            return  # Don't send message if no predictions meet criteria
-        # Add predictions section
-        message += f"\n⏱ <b>Valid Predictions Remaining:</b>\n"
-        
-        for timeframe, pred in valid_timeframes.items():
-            threshold = self.thresholds[timeframe]
-            score = pred / threshold
-            latest_publish = max([datetime.fromtimestamp(art['article']['providerPublishTime'], tz=pytz.UTC) 
-                                for art in articles])
-            deadline = latest_publish + deadlines[timeframe]
-            
-            message += (
-                f"• {timeframe}: {pred:.2f}% "
-                f"(Score: {score:.2f}x threshold of {threshold}%)\n"
-                f"  Based on {len(articles)} news articles\n"
-                f"  Deadline: {deadline.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
-            )
-
-        # Find and add strongest signal
-        if valid_timeframes:
-            best_timeframe = max(valid_timeframes.items(), 
-                            key=lambda x: abs(x[1]/self.thresholds[x[0]]))
-            if abs(best_timeframe[1]/self.thresholds[best_timeframe[0]]) >= 1.0:
-                current_price = prices['Close'].iloc[-1]
-                timeframe = best_timeframe[0]
-                expected_change = best_timeframe[1]
-                target_price = current_price * (1 + expected_change/100)
-                
-                # Define target dates
-                target_dates = {
-                    '1h': timedelta(hours=1),
-                    '1wk': timedelta(days=7),
-                    '1mo': timedelta(days=30)
-                }
-                
-                # Calculate target date
-                current_time = datetime.now(tz=pytz.UTC)
-                target_date = current_time + target_dates[timeframe]
-
-                # Ensure all required arguments are passed
-                if not self.portfolio.has_position(symbol):
-                    # Send buy signal to portfolio tracker first
-                    entry_date = datetime.now(tz=pytz.UTC)
-                    target_date = entry_date + timedelta(days=30)
-                    
-                    try:
-                        # Send the buy signal
-                        await self.portfolio_tracker.send_buy_signal(
-                            symbol=symbol,
-                            entry_price=float(current_price),
-                            target_price=float(target_price),
-                            entry_date=entry_date.strftime("%Y-%m-%dT%H:%M:%S.000Z"),
-                            target_date=target_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
-                        )
-                        
-                        # Sleep for 30 seconds after sending buy signal
-                        logger.info("Sleeping for 30 seconds after sending buy signal...")
-                        await asyncio.sleep(30)
-                        logger.info("Resuming after 30 second sleep")
-                        
-                        if success:
-                            logger.info(f"Buy signal sent successfully to portfolio tracker for {symbol}")
-                            # Only add to portfolio if signal was sent successfully
-                            self.portfolio.add_position(
-                                symbol=symbol,
-                                entry_price=current_price,
-                                target_price=target_price,
-                                target_date=target_date,
-                                timeframe=timeframe,
-                                current_price=current_price,
-                                entry_date=entry_date
-                            )
-                            logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
-                        else:
-                            logger.error(f"Failed to send buy signal to portfolio tracker for {symbol}")
-                            
-                    except Exception as e:
-                        logger.error(f"Error in buy signal process: {str(e)}", exc_info=True)
-                        # Don't raise here, just log the error
-                else:
-                    logger.info(f"Already tracking position for {symbol}")
-
-                analysis_summary['decision'] = f"BUY - {best_timeframe[0]} Signal"
-                
-                # Log decision details
+    async def analyze_and_notify(self, symbol: str, articles: List[Dict], price_data: Dict) -> None:
+        try:
+            # Calculate predictions and check thresholds
+            prediction_result = await self._calculate_predictions(symbol, articles, price_data)
+            if prediction_result["should_buy"]:
                 logger.info("🟢 BUY SIGNAL DETECTED")
-                logger.info(f"Best Timeframe: {best_timeframe[0]}")
-                logger.info(f"Prediction Strength: {best_timeframe[1]:.2f}%")
+                logger.info(f"Best Timeframe: {prediction_result['best_timeframe']}")
+                logger.info(f"Prediction Strength: {prediction_result['prediction_strength']:.2f}%")
                 
-                # Remove the duplicate signal sending section
-                if best_article:
-                    publish_time = datetime.fromtimestamp(best_article['article']['providerPublishTime'], tz=pytz.UTC)
-                    target_date = publish_time + target_dates[timeframe]
-                    logger.info(f"Target date based on news article published at {publish_time}")
-                else:
-                    current_time = datetime.now(tz=pytz.UTC)
-                    target_date = current_time + target_dates[timeframe]
-                    logger.info("No specific news article found, using current time for target date")
-        else:
-            logger.info("🔘 No Strong Signals - No Action")
-        # Check if predictions already happened
-
-        # Log final analysis summary
-        logger.info("📈 Stock Analysis Summary:")
-        logger.info(f"Symbol: {analysis_summary['symbol']}")
-        logger.info(f"Total Articles: {analysis_summary['total_articles']}")
-        logger.info(f"Valid Predictions: {list(analysis_summary['valid_predictions'].keys())}")
-        logger.info(f"Final Decision: {analysis_summary['decision']}")
-
-        opportunity_messages = []
-        is_missed_opportunity = False  # Flag to track if this is a missed opportunity
-
-        for timeframe, pred in valid_timeframes.items():
-            if pred <= 0:
-                continue
-            earliest_publish = min([datetime.fromtimestamp(art['article']['providerPublishTime'], tz=pytz.UTC) 
-                                for art in articles])
-            mask = prices.index >= earliest_publish
-            period_prices = prices[mask]
-            
-            if not period_prices.empty:
-                start_price = period_prices.iloc[0]['Close']
-                highest_price = period_prices['High'].max()
-                max_change = ((highest_price - start_price) / start_price) * 100
-                
-                # Only check for upward movements
-                if max_change >= pred:
-                    is_missed_opportunity = True
-
-                    max_date = period_prices[period_prices['High'] == highest_price].index[0]
-                    days_taken = (max_date - earliest_publish).days
-                    opportunity_messages.append(
-                        f"\n⚠️ <b>Missed Opportunity:</b>\n"
-                        f"The predicted +{pred:.2f}% movement for {timeframe} already occurred!\n"
-                        f"Price moved +{max_change:.2f}% within {days_taken} days after the first news.\n"
-                        f"Max price reached on: {max_date.strftime('%Y-%m-%d')}"
-                    )
-    # Only add to portfolio if:
-        # 1. First cycle is complete
-        # 2. It's not a missed opportunity
-        # 3. We have valid signals
-        if not is_missed_opportunity and valid_timeframes:
-            best_timeframe = max(valid_timeframes.items(), 
-                            key=lambda x: abs(x[1]/self.thresholds[x[0]]))
-            if abs(best_timeframe[1]/self.thresholds[best_timeframe[0]]) >= 1.0:
-                current_price = prices['Close'].iloc[-1]
-                timeframe = best_timeframe[0]
-                expected_change = best_timeframe[1]
-                target_price = current_price * (1 + expected_change/100)
-                best_article = max(
-                    [
-                        article for article in articles 
-                        if timeframe in article['predictions'] and 
-                        article['predictions'][timeframe] > 0
-                    ],
-                    key=lambda x: abs(x['predictions'][timeframe]),
-                    default=None
+                # Send buy signal and store result
+                success = await self.send_buy_signal(
+                    symbol=symbol,
+                    entry_price=price_data["current_price"],
+                    target_price=prediction_result["target_price"],
+                    sentiment_score=prediction_result["sentiment_score"]
                 )
-                target_dates = {
-                    '1h': timedelta(hours=1),
-                    '1wk': timedelta(days=7),
-                    '1mo': timedelta(days=30)
-                }
-
-                if best_article:
-                    publish_time = datetime.fromtimestamp(best_article['article']['providerPublishTime'], tz=pytz.UTC)
-                    target_date = publish_time + target_dates[timeframe]
-                    logger.info(f"Target date based on news article published at {publish_time}")
-                else:
-                    current_time = datetime.now(tz=pytz.UTC)
-                    target_date = current_time + target_dates[timeframe]
-                    logger.info("No specific news article found, using current time for target date")
-                # Add to portfolio only if we're not already tracking this stock
-                if not self.portfolio.has_position(symbol):
+                
+                if success:
+                    # Add position to portfolio only if signal was sent successfully
                     self.portfolio.add_position(
                         symbol=symbol,
-                        entry_price=current_price,
-                        target_price=target_price,
-                        target_date=target_date,
-                        timeframe=timeframe,
-                        current_price=current_price,
-                        entry_date=current_time
+                        entry_price=price_data["current_price"],
+                        target_price=prediction_result["target_price"]
                     )
-                    await self.portfolio_tracker.send_buy_signal(
-                        symbol=symbol,
-                        entry_price=float(current_price),
-                        target_price=float(price_targets['1mo']),
-                        entry_date=entry_date.isoformat(),
-                        target_date=target_date.isoformat()
-                        )
-                    logger.info(f"Added new position: {symbol} at ${current_price:.2f}")
-                    logger.info(f"Target Price: ${target_price:.2f}")
-                    logger.info(f"Target Date: {target_date}")
                 else:
-                    logger.info(f"Already tracking position for {symbol}")
+                    logger.error(f"Failed to send buy signal for {symbol}")
+                
+        except Exception as e:
+            logger.error(f"Error monitoring {symbol}: {str(e)}")
 
-        # Add opportunity messages to the alert if any
-        if opportunity_messages:
-            message += "\n" + "\n".join(opportunity_messages)
-
-        asyncio.create_task(self.send_telegram_alert(message))
-
-        return analysis_summary
-       
     async def handle_telegram_update(self, request):
         try:
             data = await request.json()
@@ -1133,7 +879,7 @@ class RealTimeMonitor:
                 await self.analyze_and_notify(
                     symbol=symbol,
                     articles=all_predictions,
-                    prices=prices
+                    price_data=prices
                 )
         
         except Exception as e:
