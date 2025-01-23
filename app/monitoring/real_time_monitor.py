@@ -723,18 +723,14 @@ class RealTimeMonitor:
             logger.error(f"Error sending signal to localhost: {e}")
 
     async def send_buy_signal(self, symbol: str, sentiment_score: float, price_data: Dict) -> None:
+        """Send buy signal to Telegram and portfolio tracker"""
         try:
-            logger.info(f"Starting buy signal process for {symbol}")
+            # 1. Calculate prices and targets
             current_price = price_data['current_price']
-            logger.info(f"Current price for {symbol}: ${current_price}")
-            
             price_targets = self.calculate_price_targets(current_price, price_data['price_movements'])
-            logger.info(f"Calculated price targets for {symbol}: {price_targets}")
-            
             trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
-            logger.info(f"Calculated trading targets for {symbol}: {trading_targets}")
-
-            # Prepare and send Telegram message first
+            
+            # 2. Send Telegram alert first
             buy_message = (
                 f"🔔 <b>BUY Signal Generated!</b>\n\n"
                 f"Symbol: {symbol}\n"
@@ -747,75 +743,124 @@ class RealTimeMonitor:
                 f"• 1 Month: {trading_targets['long_term']:.2f}%\n\n"
                 f"🛡 Trailing Stop: {trailing_stop}%"
             )
-            # Send Telegram alert and wait for it to complete
             await self.send_telegram_alert(buy_message)
-            logger.info(f"Telegram alert sent for {symbol}")
-
-            # Now send to portfolio tracker
+            logger.info(f"✅ Telegram alert sent for {symbol}")
+            
+            # 3. Then send to portfolio tracker
             entry_date = datetime.now(tz=pytz.UTC)
             target_date = entry_date + timedelta(days=30)
-            logger.info(f"Sending to portfolio tracker: {symbol}")
-
-            # Ensure portfolio tracker session is active
+            
             if not hasattr(self, 'portfolio_tracker') or self.portfolio_tracker is None:
                 logger.info("Initializing portfolio tracker service")
                 self.portfolio_tracker = PortfolioTrackerService()
             
+            # Send buy signal with explicit float conversion and proper date formatting
             success = await self.portfolio_tracker.send_buy_signal(
                 symbol=symbol,
-                entry_price=current_price,
-                target_price=price_targets['1mo'],  # Using monthly target price
+                entry_price=float(current_price),
+                target_price=float(price_targets['1mo']),
                 entry_date=entry_date.isoformat(),
                 target_date=target_date.isoformat()
             )
             
             if success:
-                logger.info(f"Successfully sent buy signal to portfolio tracker for {symbol}")
+                logger.info(f"✅ Buy signal successfully sent to portfolio tracker for {symbol}")
             else:
-                logger.error(f"Failed to send buy signal to portfolio tracker for {symbol}")
-
-            logger.info(f"Buy signal process completed for {symbol}")
+                logger.error(f"❌ Failed to send buy signal to portfolio tracker for {symbol}")
             
         except Exception as e:
             logger.error(f"Error in send_buy_signal for {symbol}: {str(e)}", exc_info=True)
             raise
 
-    async def send_sell_signal(self, symbol: str, reason: str, position: Position) -> None:
-        # Send sell signal to portfolio tracker
-        await self.portfolio_tracker.send_sell_signal(
-            symbol=symbol,
-            selling_price=position.current_price
-        )
+    def calculate_price_targets(self, current_price: float, price_movements: Dict) -> Dict:
+        """Calculate price targets based on predicted movements"""
+        targets = {}
+        for timeframe, movement in price_movements.items():
+            target = current_price * (1 + movement/100)
+            targets[timeframe] = target
+        return targets
 
-        profit_loss = position.current_price - position.entry_price
-        profit_loss_pct = (profit_loss / position.entry_price) * 100
+    def calculate_trading_targets(self, price_movements: Dict) -> tuple:
+        """Calculate trading targets and trailing stop"""
+        trading_targets = {
+            'short_term': price_movements.get('1h', 0),
+            'mid_term': price_movements.get('1wk', 0),
+            'long_term': price_movements.get('1mo', 0)
+        }
         
-        # Add to trade history
-        trade = self.trade_history.add_trade(
-            symbol=symbol,
-            entry_price=position.entry_price,
-            exit_price=position.current_price,
-            entry_date=position.entry_date,
-            exit_date=datetime.now(tz=pytz.UTC),
-            timeframe=position.timeframe,
-            target_price=position.target_price,
-            reason=reason,
-            profit_loss=profit_loss
-        )
+        # Calculate trailing stop based on volatility
+        movements = list(price_movements.values())
+        volatility = np.std(movements) if movements else 0
+        trailing_stop = max(5.0, min(volatility * 2, 15.0))  # Between 5% and 15%
+        
+        return trading_targets, trailing_stop
 
-        sell_message = (
-            f"🔴 <b>SELL Signal Generated!</b>\n\n"
-            f"Symbol: {symbol}\n"
-            f"Reason: {reason}\n"
-            f"Entry Price: ${position.entry_price:.2f}\n"
-            f"Exit Price: ${position.current_price:.2f}\n"
-            f"P/L: ${profit_loss:.2f} ({profit_loss_pct:.2f}%)\n"
-            f"Hold Duration: {(datetime.now(tz=pytz.UTC) - position.entry_date).days} days\n"
-            f"Original Target: ${position.target_price:.2f}\n\n"
-            f"🏦 Total Account P/L: ${self.trade_history.get_total_profit_loss():.2f}\n"
-            f"📊 Win Rate: {self.trade_history.get_win_rate():.1f}%"
-        )
-        await self.send_telegram_alert(sell_message)
+    async def send_telegram_alert(self, message: str) -> None:
+        """Send alert message via Telegram"""
+        try:
+            await self.telegram_bot.send_message(
+                chat_id=self.telegram_chat_id,
+                text=message,
+                parse_mode='HTML'
+            )
+        except Exception as e:
+            logger.error(f"Failed to send Telegram alert: {e}")
+            raise
+
+    async def cleanup(self):
+        """Cleanup resources before shutdown"""
+        try:
+            await self.portfolio_tracker.close()
+            logger.info("Portfolio tracker session closed")
+        except Exception as e:
+            logger.error(f"Error during cleanup: {e}")
+
+    def __del__(self):
+        self._is_polling = False  # Stop polling when object is deleted
+        if hasattr(self, 'portfolio_tracker'):
+            asyncio.create_task(self.cleanup())
+
+    async def test_portfolio_tracker(self):
+        """Test function to verify portfolio tracker communication"""
+        try:
+            logger.info("=== Starting Portfolio Tracker Test ===")
+            
+            # Test data
+            symbol = "AAPL"
+            entry_price = 180.50
+            target_price = 200.00
+            entry_date = datetime.now(tz=pytz.UTC)
+            target_date = entry_date + timedelta(days=30)
+            
+            logger.info(f"Sending test buy signal for {symbol}")
+            logger.info(f"Entry Price: ${entry_price}")
+            logger.info(f"Target Price: ${target_price}")
+            logger.info(f"Entry Date: {entry_date.isoformat()}")
+            logger.info(f"Target Date: {target_date.isoformat()}")
+            
+            # Ensure portfolio tracker is initialized
+            if not hasattr(self, 'portfolio_tracker') or self.portfolio_tracker is None:
+                logger.info("Initializing portfolio tracker service")
+                self.portfolio_tracker = PortfolioTrackerService()
+            
+            # Send buy signal
+            success = await self.portfolio_tracker.send_buy_signal(
+                symbol=symbol,
+                entry_price=entry_price,
+                target_price=target_price,
+                entry_date=entry_date.isoformat(),
+                target_date=target_date.isoformat()
+            )
+            
+            if success:
+                logger.info("✅ Buy signal sent successfully")
+            else:
+                logger.error("❌ Failed to send buy signal")
+                
+            logger.info("=== Portfolio Tracker Test Completed ===")
+            
+        except Exception as e:
+            logger.error(f"Portfolio tracker test failed: {str(e)}", exc_info=True)
 
     async def periodic_model_check(self):
             """Periodically check and reload models"""
@@ -959,7 +1004,7 @@ class RealTimeMonitor:
             ]
 
             if not news:
-                logger.info(f"ℹ️ No recent news (last 30 days) found for {symbol}")
+                logger.info(f"ℹ️ No recent news (last 7 days) found for {symbol}")
                 return
 
             # Limit to top 10 recent news articles
@@ -1161,7 +1206,6 @@ class RealTimeMonitor:
             if not period_prices.empty:
                 end_price = period_prices['Close'].iloc[-1]
                 change = ((end_price - start_price) / start_price) * 100
-                changes[timeframe] = change
 
         # Calculate normalized scores
         scores = self.calculate_normalized_score(changes)
@@ -1260,17 +1304,6 @@ class RealTimeMonitor:
             if current['sentiment_score'] <= self.sentiment_threshold_sell:
                 asyncio.create_task(self.send_sell_signal(symbol))
 
-    def calculate_trading_targets(self, movements: List[Dict]) -> Dict:
-        targets = {
-            'short_term': movements[0]['change_pct'],  # 1h target
-            'mid_term': movements[2]['change_pct'],    # 1w target
-            'long_term': movements[3]['change_pct']    # 1m target
-        }
-    
-        # Set trailing stop based on historical volatility
-        trailing_stop = min(movements[0]['change_pct'], -5)  # Minimum 5% protection
-    
-        return targets, trailing_stop
     def should_ignore_news(self, headline: str, text: str = "") -> bool:
         """
         Filter out news that could give false signals
@@ -1349,48 +1382,6 @@ class RealTimeMonitor:
                 except Exception as e:
                     logger.error(f"Error polling telegram updates: {str(e)}")
                     await asyncio.sleep(5)  # Longer delay on error
-    async def send_sell_signal(self, symbol: str, reason: str, position: Position) -> None:
-        profit_loss = position.current_price - position.entry_price
-        
-        # Add to trade history
-        trade = self.trade_history.add_trade(
-            symbol=symbol,
-            entry_price=position.entry_price,
-            exit_price=position.current_price,
-            entry_date=position.entry_date,
-            exit_date=datetime.now(tz=pytz.UTC),
-            timeframe=position.timeframe,
-            target_price=position.target_price,
-            reason=reason,
-            profit_loss=profit_loss
-        )
-
-        sell_message = (
-            f"🔴 <b>SELL Signal Generated!</b>\n\n"
-            f"Symbol: {symbol}\n"
-            f"Reason: {reason}\n"
-            f"Entry Price: ${position.entry_price:.2f}\n"
-            f"Exit Price: ${position.current_price:.2f}\n"
-            f"P/L: ${profit_loss:.2f} ({trade['profit_loss_percentage']:.2f}%)\n"
-            f"Hold Duration: {(datetime.now(tz=pytz.UTC) - position.entry_date).days} days\n"
-            f"Original Target: ${position.target_price:.2f}\n\n"
-            f"🏦 Total Account P/L: ${self.trade_history.get_total_profit_loss():.2f}\n"
-            f"📊 Win Rate: {self.trade_history.get_win_rate():.1f}%"
-        )
-        await self.send_telegram_alert(sell_message)
-
-    async def cleanup(self):
-        """Cleanup resources before shutdown"""
-        try:
-            await self.portfolio_tracker.close()
-            logger.info("Portfolio tracker session closed")
-        except Exception as e:
-            logger.error(f"Error during cleanup: {e}")
-
-    def __del__(self):
-        self._is_polling = False  # Stop polling when object is deleted
-        if hasattr(self, 'portfolio_tracker'):
-            asyncio.create_task(self.cleanup())
 
 # Set up logging
 logging.basicConfig(
@@ -1408,12 +1399,21 @@ logging.getLogger('app.services.news_service').setLevel(logging.INFO)
 logging.getLogger('app.services.stock_analyzer').setLevel(logging.INFO)
 logging.getLogger('app.services.sentiment_analyzer').setLevel(logging.INFO)
 
-if __name__ == "__main__":
+async def main():
     logger.info("🚀 Market Monitor Starting...")
     logger.info("Initializing ML models and market data...")
     monitor = RealTimeMonitor()
+    
+    # Run the portfolio tracker test first
+    logger.info("Running portfolio tracker test...")
+    await monitor.test_portfolio_tracker()
+    
+    # Then continue with normal operation
     symbols = get_all_symbols()
-    asyncio.run(monitor.start(symbols))
+    await monitor.start(symbols)
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
 
 
