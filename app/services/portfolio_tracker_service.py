@@ -97,7 +97,7 @@ class PortfolioTrackerService:
         
         try:
             # First, get all positions to find the one with matching symbol
-            async with self.session.get(f"{self.base_url}/api/portfolio") as response:
+            async with self.session.get(f"{self.base_url}/api/positions") as response:
                 if response.status != 200:
                     logger.error(f"Failed to get portfolio for sell signal. Status: {response.status}")
                     return False
@@ -133,7 +133,7 @@ class PortfolioTrackerService:
         """Get current portfolio status"""
         await self._ensure_session()
         try:
-            async with self.session.get(f"{self.base_url}/api/portfolio") as response:
+            async with self.session.get(f"{self.base_url}/api/positions") as response:
                 if response.status == 200:
                     return await response.json()
                 else:
