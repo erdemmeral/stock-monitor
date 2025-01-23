@@ -50,13 +50,16 @@ class PortfolioTrackerService:
             logger.info(f"Ensuring session is active for {symbol}")
             await self._ensure_session()
             
+            # Format dates to match server expectations
+            entry_date_formatted = datetime.fromisoformat(entry_date.replace('Z', '+00:00')).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+            target_date_formatted = datetime.fromisoformat(target_date.replace('Z', '+00:00')).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+            
             data = {
                 "symbol": symbol.upper(),
                 "entryPrice": float(entry_price),
                 "targetPrice": float(target_price),
-                "entryDate": entry_date,
-                "targetDate": target_date,
-                "status": "OPEN"
+                "entryDate": entry_date_formatted,
+                "targetDate": target_date_formatted
             }
             
             url = f"{self.base_url}/api/positions"
@@ -69,7 +72,7 @@ class PortfolioTrackerService:
                     'Accept': 'application/json'
                 }
                 
-                async with self.session.post(url, json=data, headers=headers) as response:
+                async with self.session.post(url, json=data, headers=headers, ssl=False) as response:
                     response_text = await response.text()
                     logger.info(f"Raw response from portfolio tracker: {response_text}")
                     logger.info(f"Response status: {response.status}")
