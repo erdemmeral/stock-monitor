@@ -723,14 +723,44 @@ class RealTimeMonitor:
             logger.error(f"Error sending signal to localhost: {e}")
 
     async def send_buy_signal(self, symbol: str, sentiment_score: float, price_data: Dict) -> None:
-        """Send buy signal to Telegram and portfolio tracker"""
+        """Send buy signal to portfolio tracker first, then Telegram"""
         try:
             # 1. Calculate prices and targets
             current_price = price_data['current_price']
             price_targets = self.calculate_price_targets(current_price, price_data['price_movements'])
             trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
             
-            # 2. Send Telegram alert first
+            # 2. Initialize portfolio tracker if needed
+            if not hasattr(self, 'portfolio_tracker') or self.portfolio_tracker is None:
+                self.portfolio_tracker = PortfolioTrackerService()
+                await self.portfolio_tracker._ensure_session()
+            
+            # 3. Send buy signal to portfolio tracker first
+            entry_date = datetime.now(tz=pytz.UTC)
+            target_date = entry_date + timedelta(days=30)
+            
+            try:
+                await self.portfolio_tracker.send_buy_signal(
+                    symbol=symbol,
+                    entry_price=float(current_price),
+                    target_price=float(price_targets['1mo']),
+                    entry_date=entry_date.isoformat(),
+                    target_date=target_date.isoformat()
+                )
+                logger.info(f"Buy signal sent to database for {symbol} at ${current_price:.2f}")
+            except Exception as tracker_error:
+                logger.error(f"Failed to send buy signal to portfolio tracker: {str(tracker_error)}")
+                # Try to reinitialize session and retry once
+                await self.portfolio_tracker._ensure_session()
+                await self.portfolio_tracker.send_buy_signal(
+                    symbol=symbol,
+                    entry_price=float(current_price),
+                    target_price=float(price_targets['1mo']),
+                    entry_date=entry_date.isoformat(),
+                    target_date=target_date.isoformat()
+                )
+            
+            # 4. Then send Telegram alert
             buy_message = (
                 f"🔔 <b>BUY Signal Generated!</b>\n\n"
                 f"Symbol: {symbol}\n"
@@ -744,29 +774,6 @@ class RealTimeMonitor:
                 f"🛡 Trailing Stop: {trailing_stop}%"
             )
             await self.send_telegram_alert(buy_message)
-            logger.info(f"✅ Telegram alert sent for {symbol}")
-            
-            # 3. Then send to portfolio tracker
-            entry_date = datetime.now(tz=pytz.UTC)
-            target_date = entry_date + timedelta(days=30)
-            
-            if not hasattr(self, 'portfolio_tracker') or self.portfolio_tracker is None:
-                logger.info("Initializing portfolio tracker service")
-                self.portfolio_tracker = PortfolioTrackerService()
-            
-            # Send buy signal with explicit float conversion and proper date formatting
-            success = await self.portfolio_tracker.send_buy_signal(
-                symbol=symbol,
-                entry_price=float(current_price),
-                target_price=float(price_targets['1mo']),
-                entry_date=entry_date.isoformat(),
-                target_date=target_date.isoformat()
-            )
-            
-            if success:
-                logger.info(f"✅ Buy signal successfully sent to portfolio tracker for {symbol}")
-            else:
-                logger.error(f"❌ Failed to send buy signal to portfolio tracker for {symbol}")
             
         except Exception as e:
             logger.error(f"Error in send_buy_signal for {symbol}: {str(e)}", exc_info=True)
