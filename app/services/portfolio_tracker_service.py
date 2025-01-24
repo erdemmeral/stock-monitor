@@ -91,37 +91,35 @@ class PortfolioTrackerService:
 
         return None
 
-    async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float,
-                            entry_date: str, target_date: str) -> bool:
+    async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float, 
+                           entry_date: str, target_date: str) -> bool:
         """Send buy signal to portfolio tracker"""
         try:
             data = {
-                'symbol': symbol,
-                'entryPrice': entry_price,
-                'targetPrice': target_price,
-                'entryDate': entry_date,
-                'targetDate': target_date
+                "symbol": symbol,
+                "entryPrice": float(entry_price),
+                "targetPrice": float(target_price),
+                "entryDate": entry_date,
+                "targetDate": target_date
             }
             logger.info(f"Sending buy signal to tracker: {data}")
-            logger.info(f"Request data: {data}")
+            result = await self._make_request("POST", "positions", data)
             
-            url = f"{self.base_url}/api/positions"
-            logger.info(f"Making POST request to {url}")
-            
-            async with self.session.post(url, json=data, ssl=False) as response:
-                logger.info(f"Response status: {response.status}")
-                response_text = await response.text()
-                logger.info(f"Response body: {response_text}")
+            if result is not None:
+                logger.info(f"Successfully sent buy signal for {symbol}")
+                logger.info(f"Response data: {result}")
+                return True
+            else:
+                logger.error(f"Failed to send buy signal for {symbol}")
+                logger.error(f"Request data: {data}")
+                return False
                 
-                if response.status in (200, 201):
-                    logger.info("Successfully sent buy signal")
-                    return True
-                else:
-                    logger.error(f"Failed to send buy signal. Status: {response.status}, Response: {response_text}")
-                    return False
-                    
         except Exception as e:
-            logger.error(f"Error sending buy signal: {str(e)}", exc_info=True)
+            error_type = type(e).__name__
+            logger.error(f"Error type: {error_type}")
+            logger.error(f"Error message: {str(e)}")
+            logger.error("Stack trace:", exc_info=True)
+            logger.error(f"Failed request data: {data}")
             return False
 
     async def send_sell_signal(self, symbol: str, selling_price: float, sell_condition: str = None) -> bool:
