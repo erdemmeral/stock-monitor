@@ -4,11 +4,9 @@ from bs4 import BeautifulSoup
 import numpy as np
 import scipy.sparse
 
-
 import requests
 import telegram
 
-from app.models.trade_history import TradeHistory
 warnings.filterwarnings('ignore', message='.*The \'unit\' keyword in TimedeltaIndex.*')
 
 # Standard library imports
@@ -20,25 +18,22 @@ from typing import Dict, Set, Optional, List
 import random
 import os
 import logging
+
 # Third-party imports
 from aiohttp import web
 import aiohttp
 import yfinance as yf
 import joblib
-import pandas as pd  # Add this import
-import pytz         # Also add this if not already there
+import pandas as pd
+import pytz
 from telegram import Update
 from telegram.ext import Application, ContextTypes
 from telegram.error import TelegramError
 
-
 # Local application imports
 from app.services.news_service import NewsService
 from app.utils.sp500 import get_all_symbols
-from app.utils.telegram_notifier import TelegramNotifier
-from app.models.position import Position
 import torch
-from app.models.portfolio import Portfolio
 from app.training.market_ml_trainer import FinBERTSentimentAnalyzer
 from app.services.portfolio_tracker_service import PortfolioTrackerService
 
