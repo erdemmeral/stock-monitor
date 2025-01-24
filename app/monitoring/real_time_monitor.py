@@ -148,6 +148,7 @@ class RealTimeMonitor:
         
         try:
             if self.telegram_token and self.telegram_chat_id:
+                # Initialize bot with parse_mode set to HTML by default
                 self.telegram_bot = telegram.Bot(token=self.telegram_token)
                 logger.info("Telegram bot initialized successfully")
             else:
@@ -390,56 +391,54 @@ class RealTimeMonitor:
     async def send_help_message(self, chat_id):
         """Send help message using async client"""
         try:
-            async with telegram.Bot(self.telegram_token) as bot:
-                help_message = (
-                    "🤖 <b>Stock Monitor Bot Commands</b>\n\n"
-                    "📝 <b>Available Commands:</b>\n\n"
-                    "/help - Show this help message\n"
-                    "Get list of all available commands and their descriptions\n\n"
-                    "/portfolio - View current positions\n"
-                    "See your portfolio at the tracker website\n\n"
-                    "ℹ️ <b>About Alerts:</b>\n"
-                    "• Buy and sell signals are sent automatically\n"
-                    "• Signals are based on:\n"
-                    "  - ML predictions 🤖\n"
-                    "  - Sentiment analysis 📊\n"
-                    "  - Technical indicators 📈\n\n"
-                    "📊 <b>Portfolio Tracking:</b>\n"
-                    "• View your portfolio at: https://portfolio-tracker-rough-dawn-5271.fly.dev\n"
-                    "• All trades are automatically recorded\n"
-                    "• Real-time updates and analytics"
-                )
+            help_message = (
+                "🤖 <b>Stock Monitor Bot Commands</b>\n\n"
+                "📝 <b>Available Commands:</b>\n\n"
+                "/help - Show this help message\n"
+                "Get list of all available commands and their descriptions\n\n"
+                "/portfolio - View current positions\n"
+                "See your portfolio at the tracker website\n\n"
+                "ℹ️ <b>About Alerts:</b>\n"
+                "• Buy and sell signals are sent automatically\n"
+                "• Signals are based on:\n"
+                "  - ML predictions 🤖\n"
+                "  - Sentiment analysis 📊\n"
+                "  - Technical indicators 📈\n\n"
+                "📊 <b>Portfolio Tracking:</b>\n"
+                "• View your portfolio at: https://portfolio-tracker-rough-dawn-5271.fly.dev\n"
+                "• All trades are automatically recorded\n"
+                "• Real-time updates and analytics"
+            )
 
-                await bot.send_message(
-                    chat_id=chat_id,
-                    text=help_message,
-                    parse_mode='HTML'
-                )
-                logger.info("Help message sent successfully")
+            await self.telegram_bot.send_message(
+                chat_id=chat_id,
+                text=help_message,
+                parse_mode='HTML'
+            )
+            logger.info("Help message sent successfully")
         except Exception as e:
             logger.error(f"Error sending help message: {str(e)}")
 
     async def send_portfolio_status(self, chat_id):
         """Send portfolio status using async client"""
         try:
-            async with telegram.Bot(self.telegram_token) as bot:
-                message = (
-                    "📊 <b>Portfolio Status</b>\n\n"
-                    "View your portfolio and trade history at:\n"
-                    "https://portfolio-tracker-rough-dawn-5271.fly.dev\n\n"
-                    "Features:\n"
-                    "• Real-time position tracking\n"
-                    "• Performance analytics\n"
-                    "• Historical trade data\n"
-                    "• P/L tracking"
-                )
+            message = (
+                "📊 <b>Portfolio Status</b>\n\n"
+                "View your portfolio and trade history at:\n"
+                "https://portfolio-tracker-rough-dawn-5271.fly.dev\n\n"
+                "Features:\n"
+                "• Real-time position tracking\n"
+                "• Performance analytics\n"
+                "• Historical trade data\n"
+                "• P/L tracking"
+            )
 
-                await bot.send_message(
-                    chat_id=chat_id,
-                    text=message,
-                    parse_mode='HTML'
-                )
-                logger.info("Portfolio status sent successfully")
+            await self.telegram_bot.send_message(
+                chat_id=chat_id,
+                text=message,
+                parse_mode='HTML'
+            )
+            logger.info("Portfolio status sent successfully")
         except Exception as e:
             logger.error(f"Error sending portfolio status: {str(e)}")
 
@@ -459,22 +458,21 @@ class RealTimeMonitor:
 
     async def send_telegram_alert(self, message: str) -> None:
         """Send alert message via Telegram using async client"""
-        if not self.telegram_bot or not self.telegram_chat_id:
+        if not self.telegram_token or not self.telegram_chat_id:
             logger.warning("Telegram bot or chat ID not configured")
             return
 
         try:
-            # Create async context for telegram bot
-            async with telegram.Bot(self.telegram_token) as bot:
-                await bot.send_message(
-                    chat_id=self.telegram_chat_id,
-                    text=message,
-                    parse_mode='HTML',
-                    disable_web_page_preview=True
-                )
-                logger.info("Telegram alert sent successfully")
+            # Use the existing bot instance instead of creating a new one
+            await self.telegram_bot.send_message(
+                chat_id=self.telegram_chat_id,
+                text=message,
+                parse_mode='HTML',
+                disable_web_page_preview=True
+            )
+            logger.info("Telegram alert sent successfully")
         except Exception as e:
-            logger.error(f"Failed to send Telegram alert: {e}")
+            logger.error(f"Failed to send Telegram alert: {str(e)}")
             logger.error(f"Failed message content:\n{message}")
         
         # Add a small delay after sending
