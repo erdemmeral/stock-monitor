@@ -1,6 +1,6 @@
 import aiohttp
 import logging
-from typing import Optional
+from typing import Optional, List, Dict
 from datetime import datetime, timedelta
 import pytz
 import asyncio
@@ -19,86 +19,117 @@ if not logger.handlers:
 
 class PortfolioTrackerService:
     def __init__(self):
-        self.base_url = "https://portfolio-tracker-rough-dawn-5271.fly.dev"
+        self.base_url = "https://portfolio-tracker-rough-dawn-5271.fly.dev/api"
+        self.session = None
+        self.max_retries = 3
         self.timeout = aiohttp.ClientTimeout(total=30, connect=10)
+        self.retry_delay = 5  # seconds between retries
+
+    async def _init_session(self):
+        if self.session is None or self.session.closed:
+            self.session = aiohttp.ClientSession(timeout=self.timeout)
+
+    async def _make_request(self, method: str, endpoint: str, data: dict = None) -> Optional[dict]:
+        """Make HTTP request with retry logic"""
+        await self._init_session()
         
-    async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float, 
+        for attempt in range(self.max_retries):
+            try:
+                async with self.session.request(
+                    method=method,
+                    url=f"{self.base_url}/{endpoint}",
+                    json=data,
+                    timeout=self.timeout
+                ) as response:
+                    if response.status == 200:
+                        return await response.json()
+                    else:
+                        logger.error(f"Request failed with status {response.status}: {await response.text()}")
+                        return None
+
+            except asyncio.TimeoutError as e:
+                logger.error(f"Timeout on attempt {attempt + 1}/{self.max_retries}")
+                if attempt < self.max_retries - 1:
+                    await asyncio.sleep(self.retry_delay)
+                else:
+                    logger.error(f"Connection timeout to host {self.base_url}/{endpoint}")
+                    raise
+
+            except Exception as e:
+                logger.error(f"Error on attempt {attempt + 1}/{self.max_retries}: {str(e)}")
+                if attempt < self.max_retries - 1:
+                    await asyncio.sleep(self.retry_delay)
+                else:
+                    raise
+
+        return None
+
+    async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float,
                             entry_date: str, target_date: str) -> bool:
-        """Send buy signal to portfolio tracker using a fresh session"""
+        """Send buy signal to portfolio tracker"""
         try:
-            # Create a new session with increased timeout
-            timeout = aiohttp.ClientTimeout(total=60, connect=30)
-            async with aiohttp.ClientSession(timeout=timeout) as session:
-                data = {
-                    "symbol": symbol,
-                    "entryPrice": float(entry_price),
-                    "targetPrice": float(target_price),
-                    "entryDate": entry_date,
-                    "targetDate": target_date
-                }
-                
-                # Try up to 3 times with exponential backoff
-                for attempt in range(3):
-                    try:
-                        async with session.post(f"{self.base_url}/api/positions", json=data, ssl=False) as response:
-                            if response.status == 201:
-                                logger.info(f"Successfully sent buy signal for {symbol}")
-                                return True
-                            else:
-                                error_text = await response.text()
-                                logger.error(f"Failed to send buy signal for {symbol}. Status: {response.status}, Response: {error_text}")
-                                return False
-                    except TimeoutError as e:
-                        if attempt < 2:  # Don't sleep on last attempt
-                            sleep_time = (2 ** attempt) * 5  # 5s, 10s
-                            logger.warning(f"Timeout on attempt {attempt + 1}, retrying in {sleep_time}s...")
-                            await asyncio.sleep(sleep_time)
-                        else:
-                            raise  # Re-raise on final attempt
-                    
+            data = {
+                "symbol": symbol,
+                "entry_price": entry_price,
+                "target_price": target_price,
+                "entry_date": entry_date,
+                "target_date": target_date
+            }
+            
+            result = await self._make_request("POST", "positions", data)
+            success = result is not None
+            
+            if success:
+                logger.info(f"Successfully sent buy signal for {symbol}")
+            else:
+                logger.error(f"Failed to send buy signal for {symbol}")
+            
+            return success
+
         except Exception as e:
-            logger.error(f"Unexpected error in send_buy_signal for {symbol}")
-            logger.error(f"Error type: {type(e).__name__}")
+            error_type = type(e).__name__
+            logger.error(f"Error type: {error_type}")
             logger.error(f"Error message: {str(e)}")
             logger.error("Stack trace:", exc_info=True)
+            logger.error(f"Unexpected error in send_buy_signal for {symbol}")
             return False
 
-    async def send_sell_signal(self, symbol: str, selling_price: float):
+    async def send_sell_signal(self, symbol: str, selling_price: float, sell_condition: str = None) -> bool:
         """Send sell signal to portfolio tracker"""
-        async with aiohttp.ClientSession(timeout=self.timeout) as session:
-            try:
-                # First, get all positions to find the one with matching symbol
-                async with session.get(f"{self.base_url}/api/portfolio") as response:
-                    if response.status != 200:
-                        logger.error(f"Failed to get portfolio for sell signal. Status: {response.status}")
-                        return False
-                        
-                    portfolio = await response.json()
-                    position = next((pos for pos in portfolio if pos['symbol'] == symbol.upper() and pos['status'] == 'OPEN'), None)
-                    
-                    if not position:
-                        logger.error(f"No open position found for {symbol}")
-                        return False
-                        
-                    position_id = position['_id']
-                    
-                    # Now send the sell signal with the position ID
-                    data = {
-                        "soldPrice": float(selling_price),
-                        "status": "CLOSED"
-                    }
-                    
-                    async with session.patch(f"{self.base_url}/api/positions/{position_id}/update-price", json=data) as sell_response:
-                        if sell_response.status == 200:
-                            logger.info(f"Sell signal sent successfully for {symbol}")
-                            return True
-                        else:
-                            logger.error(f"Failed to send sell signal for {symbol}. Status: {sell_response.status}")
-                            return False
-                            
-            except Exception as e:
-                logger.error(f"Error sending sell signal for {symbol}: {str(e)}")
-                return False
+        try:
+            data = {
+                "symbol": symbol,
+                "selling_price": selling_price,
+                "sell_condition": sell_condition
+            }
+            
+            result = await self._make_request("POST", f"positions/{symbol}/sell", data)
+            success = result is not None
+            
+            if success:
+                logger.info(f"Successfully sent sell signal for {symbol}")
+            else:
+                logger.error(f"Failed to send sell signal for {symbol}")
+            
+            return success
+
+        except Exception as e:
+            logger.error(f"Unexpected error in send_sell_signal for {symbol}: {str(e)}")
+            return False
+
+    async def get_positions(self) -> Optional[List[Dict]]:
+        """Get current positions from portfolio tracker"""
+        try:
+            result = await self._make_request("GET", "positions")
+            return result if result else []
+        except Exception as e:
+            logger.error(f"Error getting positions: {str(e)}")
+            return []
+
+    async def close(self):
+        """Close the aiohttp session"""
+        if self.session and not self.session.closed:
+            await self.session.close()
 
     async def get_portfolio_status(self):
         """Get current portfolio status"""
