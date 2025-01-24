@@ -122,8 +122,6 @@ class RealTimeMonitor:
     def __init__(self):
         logger.info("Initializing RealTimeMonitor")
         self.news_aggregator = NewsAggregator()
-        self.portfolio = Portfolio()
-        self.trade_history = TradeHistory()
         
         # Initialize portfolio tracker
         self.portfolio_tracker = PortfolioTrackerService()
@@ -131,7 +129,7 @@ class RealTimeMonitor:
         
         self.stop_loss_percentage = 5.0
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
-        self.sentiment_weight = 0.3  # Configurable weight for sentiment impact
+        self.sentiment_weight = 0.3
 
         self.model_manager = ModelManager()
         
@@ -142,18 +140,11 @@ class RealTimeMonitor:
             '1wk': self.model_manager.models['1wk'],
             '1mo': self.model_manager.models['1mo']
         }
-        for timeframe, model in self.models.items():
-            logger.info(f"Model loaded for {timeframe}: {type(model)}")
-        for timeframe in ['1h', '1wk', '1mo']:
-            model_path = f'app/models/market_model_{timeframe}.joblib'
-            creation_time = datetime.fromtimestamp(os.path.getctime(model_path))
-            logger.info(f"Model {timeframe} created: {creation_time}")
-
-            logger.info(f"Vectorizer created: {datetime.fromtimestamp(os.path.getctime('app/models/vectorizer.joblib'))}")    
+        
+        # Initialize Telegram
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
         
-        # Initialize Telegram bot with async client
         try:
             if self.telegram_token and self.telegram_chat_id:
                 self.telegram_bot = telegram.Bot(token=self.telegram_token)
@@ -168,7 +159,6 @@ class RealTimeMonitor:
         self.news_service = NewsService()
         self.sentiment_analyzer = SentimentAnalyzer()
         self.processed_news = set()
-        self.portfolio = Portfolio()
 
         self.thresholds = {
             '1h': 5.0,
@@ -304,65 +294,82 @@ class RealTimeMonitor:
             logger.error(f"Error fetching article content: {e}")
             return None
 
-    
+    async def send_signal(self, signal_type: str, symbol: str, price: float, target_price: float, 
+                         sentiment_score: float, timeframe: str, reason: str) -> bool:
+        """Unified method to send buy/sell signals"""
+        try:
+            # Send signal to portfolio tracker
+            if signal_type.lower() == 'buy':
+                entry_date = datetime.now(tz=pytz.UTC)
+                target_date = entry_date + timedelta(days=30)  # Default to 30 days
+                
+                success = await self.portfolio_tracker.send_buy_signal(
+                    symbol=symbol,
+                    entry_price=float(price),
+                    target_price=float(target_price),
+                    entry_date=entry_date.isoformat(),
+                    target_date=target_date.isoformat()
+                )
+            else:  # sell signal
+                success = await self.portfolio_tracker.send_sell_signal(
+                    symbol=symbol,
+                    selling_price=float(price)
+                )
+
+            if not success:
+                logger.error(f"Failed to send {signal_type} signal to portfolio tracker for {symbol}")
+                return False
+
+            # Send Telegram notification
+            signal_emoji = "🔔" if signal_type.lower() == 'buy' else "💰"
+            message = (
+                f"{signal_emoji} <b>{signal_type.upper()} Signal Generated!</b>\n\n"
+                f"Symbol: {symbol}\n"
+                f"Price: ${price:.2f}\n"
+                f"Target Price: ${target_price:.2f}\n"
+                f"Timeframe: {timeframe}\n"
+                f"Sentiment Score: {sentiment_score:.2f}\n"
+                f"Reason: {reason}\n\n"
+                "View details at:\n"
+                "https://portfolio-tracker-rough-dawn-5271.fly.dev"
+            )
+            
+            await self.send_telegram_alert(message)
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error in send_signal for {symbol}: {str(e)}", exc_info=True)
+            return False
+
     async def analyze_and_notify(self, symbol: str, articles: List[Dict], price_data: Dict) -> None:
         try:
             # Calculate predictions and check thresholds
             prediction_result = await self._calculate_predictions(symbol, articles, price_data)
+            
             if prediction_result["should_buy"]:
                 logger.info("🟢 BUY SIGNAL DETECTED")
                 logger.info(f"Best Timeframe: {prediction_result['best_timeframe']}")
                 logger.info(f"Prediction Strength: {prediction_result['prediction_strength']:.2f}%")
                 
-                # Find the article with the highest prediction for the best timeframe
-                best_article = max(
-                    [article for article in articles if prediction_result['best_timeframe'] in article['predictions']],
-                    key=lambda x: x['predictions'][prediction_result['best_timeframe']]
-                )
-                
-                # Get the publish time of the best article
-                entry_date = datetime.fromtimestamp(best_article['article']['providerPublishTime'], tz=pytz.UTC)
-                
-                # Set target date based on best timeframe
-                timeframe_deltas = {
-                    '1h': timedelta(hours=1),
-                    '1wk': timedelta(weeks=1),
-                    '1mo': timedelta(days=30)
-                }
-                target_date = entry_date + timeframe_deltas[prediction_result['best_timeframe']]
-                
-                logger.info(f"Using article published at {entry_date} as entry date")
-                logger.info(f"Target date set to {target_date} based on {prediction_result['best_timeframe']} timeframe")
-                
-                # Send buy signal and store result
-                success = await self.send_buy_signal(
+                current_price = price_data["current_price"]
+                await self.send_signal(
+                    signal_type="buy",
                     symbol=symbol,
-                    entry_price=price_data["current_price"],
+                    price=current_price,
                     target_price=prediction_result["target_price"],
                     sentiment_score=prediction_result["sentiment_score"],
-                    entry_date=entry_date,
-                    target_date=target_date
+                    timeframe=prediction_result["best_timeframe"],
+                    reason=f"ML prediction: {prediction_result['prediction_strength']:.1f}% upside potential"
                 )
-                
-                if success:
-                    # Add position to portfolio only if signal was sent successfully
-                    self.portfolio.add_position(
-                        symbol=symbol,
-                        entry_price=price_data["current_price"],
-                        target_price=prediction_result["target_price"],
-                        entry_date=entry_date,
-                        target_date=target_date
-                    )
-                else:
-                    logger.error(f"Failed to send buy signal for {symbol}")
                 
         except Exception as e:
             logger.error(f"Error monitoring {symbol}: {str(e)}")
 
     async def handle_telegram_update(self, request):
+        """Handle Telegram bot commands"""
         try:
             data = await request.json()
-            logger.info(f"Received telegram update: {data}")  # Log the incoming update
+            logger.info(f"Received telegram update: {data}")
             
             if 'message' in data and 'text' in data['message']:
                 command = data['message']['text']
@@ -373,12 +380,9 @@ class RealTimeMonitor:
                     await self.send_help_message(chat_id)
                 elif command == '/portfolio':
                     await self.send_portfolio_status(chat_id)
-                elif command == '/history':
-                    await self.send_trading_history(chat_id)
 
         except Exception as e:
             logger.error(f"Error handling telegram update: {e}")
-            logger.exception(e)  # This will print the full traceback
         
         return web.Response(text='OK')
 
@@ -392,19 +396,17 @@ class RealTimeMonitor:
                     "/help - Show this help message\n"
                     "Get list of all available commands and their descriptions\n\n"
                     "/portfolio - View current positions\n"
-                    "See all active positions with entry prices, current P/L, and target prices\n\n"
-                    "/history - View trading history\n"
-                    "See recent trades, total P/L, and overall performance metrics\n\n"
+                    "See your portfolio at the tracker website\n\n"
                     "ℹ️ <b>About Alerts:</b>\n"
-                    "• Buy signals are sent automatically when significant opportunities are detected\n"
-                    "• Sell signals are sent when:\n"
-                    "  - Target price is reached 🎯\n"
-                    "  - Stop loss is triggered ⚠️\n"
-                    "  - Target date is reached 📅\n\n"
-                    "📊 <b>Performance Tracking:</b>\n"
+                    "• Buy and sell signals are sent automatically\n"
+                    "• Signals are based on:\n"
+                    "  - ML predictions 🤖\n"
+                    "  - Sentiment analysis 📊\n"
+                    "  - Technical indicators 📈\n\n"
+                    "📊 <b>Portfolio Tracking:</b>\n"
+                    "• View your portfolio at: https://portfolio-tracker-rough-dawn-5271.fly.dev\n"
                     "• All trades are automatically recorded\n"
-                    "• Use /history to view performance metrics\n"
-                    "• Use /portfolio to track current positions"
+                    "• Real-time updates and analytics"
                 )
 
                 await bot.send_message(
@@ -416,86 +418,20 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error sending help message: {str(e)}")
 
-    async def send_trading_history(self, chat_id):
-        """Send trading history using async client"""
-        try:
-            async with telegram.Bot(self.telegram_token) as bot:
-                if not self.trade_history.trades:
-                    message = "📊 <b>Trading History</b>\n\nNo completed trades yet."
-                else:
-                    message = "📊 <b>Trading History</b>\n\n"
-                    
-                    # Last 5 trades
-                    message += "<b>Recent Trades:</b>\n"
-                    for trade in self.trade_history.trades[-5:]:
-                        message += (
-                            f"🔄 {trade['symbol']}: {trade['profit_loss_percentage']:+.2f}%\n"
-                            f"   ${trade['profit_loss']:+.2f}\n"
-                            f"   {trade['reason']}\n\n"
-                        )
-
-                    # Summary statistics
-                    total_pl = self.trade_history.get_total_profit_loss()
-                    win_rate = self.trade_history.get_win_rate()
-                    
-                    message += (
-                        f"📈 <b>Overall Performance:</b>\n"
-                        f"Total P/L: ${total_pl:+.2f}\n"
-                        f"Win Rate: {win_rate:.1f}%\n"
-                        f"Total Trades: {len(self.trade_history.trades)}"
-                    )
-
-                await bot.send_message(
-                    chat_id=chat_id,
-                    text=message,
-                    parse_mode='HTML'
-                )
-                logger.info("Trading history sent successfully")
-        except Exception as e:
-            logger.error(f"Error sending trading history: {str(e)}")
-
     async def send_portfolio_status(self, chat_id):
         """Send portfolio status using async client"""
         try:
             async with telegram.Bot(self.telegram_token) as bot:
-                if not self.portfolio.positions:
-                    message = "📊 <b>Portfolio Status</b>\n\nNo active positions."
-                else:
-                    message = "📊 <b>Portfolio Status</b>\n\n"
-                    total_pl_percent = 0
-                    total_pl_dollar = 0
-
-                    for symbol, position in self.portfolio.positions.items():
-                        pl_dollar = position.current_price - position.entry_price
-                        pl_percent = (pl_dollar / position.entry_price) * 100
-                        total_pl_dollar += pl_dollar
-                        total_pl_percent += pl_percent
-
-                        duration = position.get_position_duration()
-                        entry_date_formatted = position.entry_date.strftime('%Y-%m-%d %H:%M:%S UTC')
-
-                        message += (
-                            f"🎯 <b>{symbol}</b>\n"
-                            f"Started: {entry_date_formatted}\n"
-                            f"Entry Price: ${position.entry_price:.2f}\n"
-                            f"Current Price: ${position.current_price:.2f}\n"
-                            f"Target: ${position.target_price:.2f}\n"
-                            f"P/L: ${pl_dollar:.2f} ({pl_percent:+.2f}%)\n"
-                            f"Held for: {duration['days']} days, {duration['hours']} hours\n"
-                            f"Target date: {position.target_date.strftime('%Y-%m-%d')} "
-                            f"({(position.target_date - datetime.now(tz=pytz.UTC)).days} days remaining)\n"
-                            f"Timeframe: {position.timeframe}\n\n"
-                        )
-
-                    num_positions = len(self.portfolio.positions)
-                    avg_pl_percent = total_pl_percent / num_positions if num_positions > 0 else 0
-                    
-                    message += (
-                        f"📈 <b>Portfolio Summary</b>\n"
-                        f"Active Positions: {num_positions}\n"
-                        f"Total P/L: ${total_pl_dollar:.2f}\n"
-                        f"Average P/L: {avg_pl_percent:.2f}%"
-                    )
+                message = (
+                    "📊 <b>Portfolio Status</b>\n\n"
+                    "View your portfolio and trade history at:\n"
+                    "https://portfolio-tracker-rough-dawn-5271.fly.dev\n\n"
+                    "Features:\n"
+                    "• Real-time position tracking\n"
+                    "• Performance analytics\n"
+                    "• Historical trade data\n"
+                    "• P/L tracking"
+                )
 
                 await bot.send_message(
                     chat_id=chat_id,
@@ -519,80 +455,6 @@ class RealTimeMonitor:
                         logger.error(f"Failed to send signal to localhost. Status: {response.status}")
         except Exception as e:
             logger.error(f"Error sending signal to localhost: {e}")
-
-    async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float, sentiment_score: float, entry_date: datetime, target_date: datetime) -> bool:
-        """Send buy signal to portfolio tracker first, then Telegram"""
-        try:
-            # 1. Send buy signal to portfolio tracker first
-            try:
-                # Send the buy signal
-                await self.portfolio_tracker.send_buy_signal(
-                    symbol=symbol,
-                    entry_price=float(entry_price),
-                    target_price=float(target_price),
-                    entry_date=entry_date.isoformat(),
-                    target_date=target_date.isoformat()
-                )
-                logger.info(f"Buy signal sent to database for {symbol} at ${entry_price:.2f}")
-                logger.info(f"Entry date: {entry_date.isoformat()}")
-                logger.info(f"Target date: {target_date.isoformat()}")
-                
-                # Sleep for 30 seconds after sending buy signal
-                logger.info("Sleeping for 30 seconds after sending buy signal...")
-                await asyncio.sleep(30)
-                logger.info("Resuming after 30 second sleep")
-                
-                # Return True to indicate success
-                return True
-                
-            except Exception as tracker_error:
-                logger.error(f"Failed to send buy signal to portfolio tracker: {str(tracker_error)}")
-                return False
-            
-            # 2. Then send Telegram alert
-            buy_message = (
-                f"🔔 <b>BUY Signal Generated!</b>\n\n"
-                f"Symbol: {symbol}\n"
-                f"Entry Price: ${entry_price:.2f}\n"
-                f"Target Price: ${target_price:.2f}\n"
-                f"Entry Date: {entry_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
-                f"Target Date: {target_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
-                f"Sentiment Score: {sentiment_score:.2f}\n\n"
-                f"Expected Movement:\n"
-                f"• Target Price: ${target_price:.2f} ({((target_price/entry_price - 1) * 100):.1f}%)\n"
-                f"• Stop Loss: ${entry_price * 0.95:.2f} (-5.0%)\n"
-                f"• Trailing Stop: 5.0%"
-            )
-            
-            await self.send_telegram_alert(buy_message)
-            return True
-            
-        except Exception as e:
-            logger.error(f"Error in send_buy_signal for {symbol}: {str(e)}", exc_info=True)
-            return False
-
-    def calculate_price_targets(self, current_price: float, price_movements: Dict) -> Dict:
-        """Calculate price targets based on predicted movements"""
-        targets = {}
-        for timeframe, movement in price_movements.items():
-            target = current_price * (1 + movement/100)
-            targets[timeframe] = target
-        return targets
-
-    def calculate_trading_targets(self, price_movements: Dict) -> tuple:
-        """Calculate trading targets and trailing stop"""
-        trading_targets = {
-            'short_term': price_movements.get('1h', 0),
-            'mid_term': price_movements.get('1wk', 0),
-            'long_term': price_movements.get('1mo', 0)
-        }
-        
-        # Calculate trailing stop based on volatility
-        movements = list(price_movements.values())
-        volatility = np.std(movements) if movements else 0
-        trailing_stop = max(5.0, min(volatility * 2, 15.0))  # Between 5% and 15%
-        
-        return trading_targets, trailing_stop
 
     async def send_telegram_alert(self, message: str) -> None:
         """Send alert message via Telegram using async client"""
@@ -651,7 +513,7 @@ class RealTimeMonitor:
             
             # Send buy signal
             success = await self.portfolio_tracker.send_buy_signal(
-                symbol=symbol,
+            symbol=symbol,
                 entry_price=entry_price,
                 target_price=target_price,
                 entry_date=entry_date.isoformat(),
@@ -936,20 +798,28 @@ class RealTimeMonitor:
                 price_change_percent = ((current_price - position.entry_price) / position.entry_price) * 100
                  # Check if target price achieved
                 if current_price >= position.target_price:
-                    await self.send_sell_signal(
-                        symbol, 
-                        reason=f"🎯 Target price ${position.target_price:.2f} achieved! ({price_change_percent:.2f}% gain)",
-                        position=position
+                    await self.send_signal(
+                        signal_type="sell",
+                        symbol=symbol,
+                        price=current_price,
+                        target_price=position.target_price,
+                        sentiment_score=0.0,
+                        timeframe=position.timeframe,
+                        reason=f"🎯 Target price ${position.target_price:.2f} achieved! ({price_change_percent:.2f}% gain)"
                     )
                     positions_to_remove.append(symbol)
                     continue
 
                 # Check for stop loss
                 if price_change_percent <= -self.stop_loss_percentage:
-                    await self.send_sell_signal(
-                        symbol, 
-                        reason=f"Stop loss triggered: Price dropped {abs(price_change_percent):.2f}%",
-                        position=position
+                    await self.send_signal(
+                        signal_type="sell",
+                        symbol=symbol,
+                        price=current_price,
+                        target_price=position.entry_price * 0.95,
+                        sentiment_score=0.0,
+                        timeframe=position.timeframe,
+                        reason=f"Stop loss triggered: Price dropped {abs(price_change_percent):.2f}%"
                     )
                     positions_to_remove.append(symbol)
                     continue
@@ -960,7 +830,15 @@ class RealTimeMonitor:
                         reason = f"Target date reached with {price_change_percent:.2f}% profit"
                     else:
                         reason = f"Target date reached with {price_change_percent:.2f}% loss"
-                    await self.send_sell_signal(symbol, reason=reason, position=position)
+                    await self.send_signal(
+                        signal_type="sell",
+                        symbol=symbol,
+                        price=current_price,
+                        target_price=position.entry_price * 0.95,
+                        sentiment_score=0.0,
+                        timeframe=position.timeframe,
+                        reason=reason
+                    )
                     positions_to_remove.append(symbol)
 
             except Exception as e:
@@ -1173,8 +1051,6 @@ class RealTimeMonitor:
                                         await self.send_help_message(chat_id)
                                     elif command == '/portfolio':
                                         await self.send_portfolio_status(chat_id)
-                                    elif command == '/history':
-                                        await self.send_trading_history(chat_id)
                                 except Exception as cmd_error:
                                     logger.error(f"Error handling command {command}: {str(cmd_error)}")
 
