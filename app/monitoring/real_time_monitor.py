@@ -419,21 +419,23 @@ class RealTimeMonitor:
 
             try:
                 # Clear existing updates first
-                updates = await bot.get_updates(offset=-1, timeout=1)
-                if updates:
-                    offset = updates[-1].update_id + 1
+                async with bot:
+                    updates = await bot.get_updates(offset=-1, timeout=1)
+                    if updates:
+                        offset = updates[-1].update_id + 1
                 logger.info("Cleared existing updates")
             except Exception as e:
                 logger.error(f"Error clearing updates: {str(e)}")
 
             while self._is_polling:
                 try:
-                    updates = await bot.get_updates(
-                        offset=offset,
-                        timeout=10,
-                        allowed_updates=['message'],
-                        limit=100
-                    )
+                    async with bot:
+                        updates = await bot.get_updates(
+                            offset=offset,
+                            timeout=10,
+                            allowed_updates=['message'],
+                            limit=100
+                        )
                     
                     if updates:
                         for update in updates:

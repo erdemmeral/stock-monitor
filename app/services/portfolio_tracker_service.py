@@ -35,16 +35,24 @@ class PortfolioTrackerService:
         
         for attempt in range(self.max_retries):
             try:
+                logger.info(f"Making {method} request to {self.base_url}/{endpoint}")
+                logger.info(f"Request data: {data}")
+                
                 async with self.session.request(
                     method=method,
                     url=f"{self.base_url}/{endpoint}",
                     json=data,
-                    timeout=self.timeout
+                    timeout=self.timeout,
+                    ssl=False  # Disable SSL verification
                 ) as response:
-                    if response.status == 200:
+                    response_text = await response.text()
+                    logger.info(f"Response status: {response.status}")
+                    logger.info(f"Response text: {response_text}")
+                    
+                    if response.status in [200, 201]:
                         return await response.json()
                     else:
-                        logger.error(f"Request failed with status {response.status}: {await response.text()}")
+                        logger.error(f"Request failed with status {response.status}: {response_text}")
                         return None
 
             except asyncio.TimeoutError as e:
@@ -76,6 +84,7 @@ class PortfolioTrackerService:
                 "targetDate": target_date
             }
             
+            logger.info(f"Sending buy signal to tracker: {data}")
             result = await self._make_request("POST", "positions", data)
             success = result is not None
             
@@ -83,6 +92,7 @@ class PortfolioTrackerService:
                 logger.info(f"Successfully sent buy signal for {symbol}")
             else:
                 logger.error(f"Failed to send buy signal for {symbol}")
+                logger.error(f"Request data: {data}")
             
             return success
 
@@ -91,7 +101,7 @@ class PortfolioTrackerService:
             logger.error(f"Error type: {error_type}")
             logger.error(f"Error message: {str(e)}")
             logger.error("Stack trace:", exc_info=True)
-            logger.error(f"Unexpected error in send_buy_signal for {symbol}")
+            logger.error(f"Failed request data: {data}")
             return False
 
     async def send_sell_signal(self, symbol: str, selling_price: float, sell_condition: str = None) -> bool:
