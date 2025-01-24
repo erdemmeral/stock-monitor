@@ -523,19 +523,7 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error sending portfolio status: {str(e)}")
 
-    async def send_signal_to_localhost(self, signal_data: dict):
-        """
-        Send signal to local host
-        """
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.post('http://localhost:5000/api/signals', json=signal_data) as response:
-                    if response.status == 200:
-                        logger.info(f"Signal sent to localhost successfully: {signal_data}")
-                    else:
-                        logger.error(f"Failed to send signal to localhost. Status: {response.status}")
-        except Exception as e:
-            logger.error(f"Error sending signal to localhost: {e}")
+    
 
     async def cleanup(self):
         """Cleanup resources before shutdown"""
