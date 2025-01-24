@@ -386,27 +386,6 @@ class RealTimeMonitor:
             logger.error(f"Error in send_signal for {symbol}: {str(e)}", exc_info=True)
             return False
 
-    async def handle_telegram_update(self, request):
-        """Handle Telegram bot commands"""
-        try:
-            data = await request.json()
-            logger.info(f"Received telegram update: {data}")
-            
-            if 'message' in data and 'text' in data['message']:
-                command = data['message']['text']
-                chat_id = data['message']['chat']['id']
-                logger.info(f"Received command: {command} from chat_id: {chat_id}")
-
-                if command == '/start' or command == '/help':
-                    await self.send_help_message(chat_id)
-                elif command == '/portfolio':
-                    await self.send_portfolio_status(chat_id)
-
-        except Exception as e:
-            logger.error(f"Error handling telegram update: {e}")
-        
-        return web.Response(text='OK')
-
     async def poll_telegram_updates(self):
         """Poll for Telegram updates"""
         if not self.telegram_token or not self.telegram_chat_id:
@@ -415,25 +394,27 @@ class RealTimeMonitor:
 
         async with self._polling_lock:  # Use lock to ensure single instance
             offset = None
-            bot = telegram.Bot(token=self.telegram_token)
+            app = telegram.Application.builder().token(self.telegram_token).build()
 
             try:
                 # Clear existing updates first
-                updates = await bot.get_updates(offset=-1, timeout=1)
-                if updates:
-                    offset = updates[-1].update_id + 1
-                logger.info("Cleared existing updates")
+                async with app:
+                    updates = await app.bot.get_updates(offset=-1, timeout=1)
+                    if updates:
+                        offset = updates[-1].update_id + 1
+                    logger.info("Cleared existing updates")
             except Exception as e:
                 logger.error(f"Error clearing updates: {str(e)}")
 
             while self._is_polling:
                 try:
-                    updates = await bot.get_updates(
-                        offset=offset,
-                        timeout=10,
-                        allowed_updates=['message'],
-                        limit=100
-                    )
+                    async with app:
+                        updates = await app.bot.get_updates(
+                            offset=offset,
+                            timeout=10,
+                            allowed_updates=['message'],
+                            limit=100
+                        )
                     
                     if updates:
                         for update in updates:
@@ -469,13 +450,14 @@ class RealTimeMonitor:
             return
 
         try:
-            bot = telegram.Bot(token=self.telegram_token)
-            await bot.send_message(
-                chat_id=self.telegram_chat_id,
-                text=message,
-                parse_mode='HTML',
-                disable_web_page_preview=True
-            )
+            app = telegram.Application.builder().token(self.telegram_token).build()
+            async with app:
+                await app.bot.send_message(
+                    chat_id=self.telegram_chat_id,
+                    text=message,
+                    parse_mode='HTML',
+                    disable_web_page_preview=True
+                )
             logger.info("Telegram alert sent successfully")
         except Exception as e:
             logger.error(f"Failed to send Telegram alert: {str(e)}")
@@ -503,12 +485,13 @@ class RealTimeMonitor:
                 "• Real-time updates and analytics"
             )
 
-            bot = telegram.Bot(token=self.telegram_token)
-            await bot.send_message(
-                chat_id=chat_id,
-                text=help_message,
-                parse_mode='HTML'
-            )
+            app = telegram.Application.builder().token(self.telegram_token).build()
+            async with app:
+                await app.bot.send_message(
+                    chat_id=chat_id,
+                    text=help_message,
+                    parse_mode='HTML'
+                )
             logger.info("Help message sent successfully")
         except Exception as e:
             logger.error(f"Error sending help message: {str(e)}")
@@ -527,12 +510,13 @@ class RealTimeMonitor:
                 "• P/L tracking"
             )
 
-            bot = telegram.Bot(token=self.telegram_token)
-            await bot.send_message(
-                chat_id=chat_id,
-                text=message,
-                parse_mode='HTML'
-            )
+            app = telegram.Application.builder().token(self.telegram_token).build()
+            async with app:
+                await app.bot.send_message(
+                    chat_id=chat_id,
+                    text=message,
+                    parse_mode='HTML'
+                )
             logger.info("Portfolio status sent successfully")
         except Exception as e:
             logger.error(f"Error sending portfolio status: {str(e)}")
