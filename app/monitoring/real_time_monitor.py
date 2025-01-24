@@ -1,6 +1,7 @@
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import numpy as np
+import scipy.sparse
 
 import requests
 import telegram
@@ -161,38 +162,29 @@ class RealTimeMonitor:
         self._is_polling = False
 
     def _pad_features(self, X):
-        """
-        Pad or truncate features to match expected dimensions
-        """
+        """Pad features to match model input size"""
         try:
-            # Expected number of features during training
-            expected_features = 95721
-            
-            # Ensure X is a sparse matrix
-            if not scipy.sparse.issparse(X):
-                X = scipy.sparse.csr_matrix(X)
-            
-            # Current number of features
+            # Get expected feature size from any model
+            expected_features = next(iter(self.models.values())).coef_.shape[1]
             current_features = X.shape[1]
-            
-            if current_features == expected_features:
-                return X
-            
-            # If fewer features, pad with zeros
+            logger.info(f"Input matrix shape: {X.shape}")
+
             if current_features < expected_features:
-                padding_size = expected_features - current_features
-                padding = scipy.sparse.csr_matrix(
-                    np.zeros((X.shape[0], padding_size))
-                )
-                return scipy.sparse.hstack([X, padding])
-            
-            # If more features, truncate
-            return X[:, :expected_features]
-        
+                # Create zero matrix for padding
+                padding = scipy.sparse.csr_matrix((X.shape[0], expected_features - current_features))
+                # Horizontally stack with original features
+                X_padded = scipy.sparse.hstack([X, padding])
+                return X_padded
+            elif current_features > expected_features:
+                # Truncate to expected size
+                return X[:, :expected_features]
+            else:
+                return X
         except Exception as e:
-            logger.error(f"Feature padding error: {e}")
+            logger.error(f"Feature padding error: {str(e)}")
             logger.error(f"Input matrix shape: {X.shape}")
-            return X
+            raise
+
     def predict_with_sentiment(self, text, timeframe):
         """
         Make a prediction integrating FinBERT sentiment
