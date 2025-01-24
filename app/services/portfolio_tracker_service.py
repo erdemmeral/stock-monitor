@@ -38,6 +38,9 @@ class PortfolioTrackerService:
                 logger.info(f"Attempt {attempt + 1}/{self.max_retries}")
                 logger.info(f"Making {method} request to {self.base_url}/{endpoint}")
                 logger.info(f"Request data: {data}")
+                if data and ('entryDate' in data or 'targetDate' in data):
+                    logger.info(f"Date fields - Entry: {data.get('entryDate', 'N/A')}, Target: {data.get('targetDate', 'N/A')}")
+                    logger.info(f"Date types - Entry: {type(data.get('entryDate', None))}, Target: {type(data.get('targetDate', None))}")
                 
                 async with self.session.request(
                     method=method,
@@ -47,32 +50,27 @@ class PortfolioTrackerService:
                     ssl=False,  # Disable SSL verification
                     headers={'Content-Type': 'application/json'}
                 ) as response:
-                    try:
-                        response_text = await response.text()
-                        logger.info(f"Response received - Status: {response.status}")
-                        logger.info(f"Response headers: {response.headers}")
-                        logger.info(f"Response text: {response_text}")
-                        
-                        if response.status in [200, 201]:
-                            try:
-                                json_response = await response.json()
-                                logger.info(f"Successfully parsed JSON response: {json_response}")
-                                return json_response
-                            except Exception as json_error:
-                                logger.error(f"Error parsing JSON response: {str(json_error)}")
-                                logger.error(f"Raw response: {response_text}")
-                                return None
-                        else:
-                            logger.error(f"Request failed with status {response.status}")
-                            logger.error(f"Response text: {response_text}")
-                            logger.error(f"Request URL: {self.base_url}/{endpoint}")
-                            logger.error(f"Request method: {method}")
-                            logger.error(f"Request data: {data}")
+                    response_text = await response.text()
+                    logger.info(f"Response received - Status: {response.status}")
+                    logger.info(f"Response headers: {dict(response.headers)}")
+                    logger.info(f"Response text: {response_text}")
+                    
+                    if response.status in [200, 201]:
+                        try:
+                            json_response = await response.json()
+                            logger.info(f"Successfully parsed JSON response: {json_response}")
+                            return json_response
+                        except Exception as json_error:
+                            logger.error(f"Error parsing JSON response: {str(json_error)}")
+                            logger.error(f"Raw response: {response_text}")
                             return None
-                    except Exception as resp_error:
-                        logger.error(f"Error processing response: {str(resp_error)}")
-                        raise
-
+                    else:
+                        logger.error(f"Request failed with status {response.status}")
+                        logger.error(f"Response text: {response_text}")
+                        logger.error(f"Request URL: {self.base_url}/{endpoint}")
+                        logger.error(f"Request method: {method}")
+                        logger.error(f"Request data: {data}")
+                        return None
             except asyncio.TimeoutError as e:
                 logger.error(f"Timeout on attempt {attempt + 1}/{self.max_retries}")
                 logger.error(f"Request URL: {self.base_url}/{endpoint}")
@@ -103,35 +101,34 @@ class PortfolioTrackerService:
                            entry_date: str, target_date: str) -> bool:
         """Send buy signal to portfolio tracker"""
         try:
-            await self._init_session()
-            
             data = {
                 "symbol": symbol,
-                "entryPrice": entry_price,
-                "targetPrice": target_price,
+                "entryPrice": float(entry_price),
+                "targetPrice": float(target_price),
                 "entryDate": entry_date,
                 "targetDate": target_date
             }
             logger.info(f"Sending buy signal to tracker: {data}")
+            logger.info(f"Date fields - Entry: {entry_date}, Target: {target_date}")
+            logger.info(f"Date types - Entry: {type(entry_date)}, Target: {type(target_date)}")
             
-            url = f"{self.base_url}/positions"
-            logger.info(f"Making POST request to {url}")
+            result = await self._make_request("POST", "positions", data)
             
-            async with self.session.post(url, json=data, ssl=False, headers={'Content-Type': 'application/json'}) as response:
-                response_text = await response.text()
-                logger.info(f"Response status: {response.status}")
-                logger.info(f"Response body: {response_text}")
+            if result is not None:
+                logger.info(f"Successfully sent buy signal for {symbol}")
+                logger.info(f"Response data: {result}")
+                return True
+            else:
+                logger.error(f"Failed to send buy signal for {symbol}")
+                logger.error(f"Request data: {data}")
+                return False
                 
-                if response.status in (200, 201):
-                    logger.info("Successfully sent buy signal")
-                    return True
-                else:
-                    logger.error(f"Failed to send buy signal. Status: {response.status}")
-                    logger.error(f"Response: {response_text}")
-                    return False
-                    
         except Exception as e:
-            logger.error(f"Error sending buy signal: {str(e)}", exc_info=True)
+            error_type = type(e).__name__
+            logger.error(f"Error type: {error_type}")
+            logger.error(f"Error message: {str(e)}")
+            logger.error("Stack trace:", exc_info=True)
+            logger.error(f"Failed request data: {data}")
             return False
 
     async def send_sell_signal(self, symbol: str, selling_price: float, sell_condition: str = None) -> bool:
