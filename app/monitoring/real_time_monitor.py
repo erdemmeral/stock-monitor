@@ -83,6 +83,7 @@ class ModelManager:
                         logger.error(f"Error reloading {name} model: {e}")
         except Exception as e:
             logger.error(f"Error in model check: {e}")
+
 class NewsAggregator:
     def __init__(self):
         self.stock_predictions = {}  # Store predictions by stock and timeframe
