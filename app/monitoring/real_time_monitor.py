@@ -1073,7 +1073,7 @@ class RealTimeMonitor:
 
                 # Check if prediction meets threshold for buy signal
                 threshold_met = best_prediction >= self.thresholds.get(best_timeframe, float('inf'))
-                sentiment_threshold_met = result["sentiment_score"] >= 0.3
+                sentiment_threshold_met = result["sentiment_score"] >= 0.8
 
                 # Generate buy signal if both thresholds are met
                 result["should_buy"] = threshold_met and sentiment_threshold_met
