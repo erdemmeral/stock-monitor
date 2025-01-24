@@ -1,26 +1,19 @@
 from urllib.parse import urlparse
-import warnings
 from bs4 import BeautifulSoup
 import numpy as np
-import scipy.sparse
 
 import requests
 import telegram
 
-warnings.filterwarnings('ignore', message='.*The \'unit\' keyword in TimedeltaIndex.*')
-
 # Standard library imports
 import asyncio
 import time
-import warnings
 from datetime import datetime, timezone, timedelta
 from typing import Dict, Set, Optional, List
-import random
 import os
 import logging
 
 # Third-party imports
-from aiohttp import web
 import aiohttp
 import yfinance as yf
 import joblib
@@ -36,6 +29,17 @@ from app.utils.sp500 import get_all_symbols
 import torch
 from app.training.market_ml_trainer import FinBERTSentimentAnalyzer
 from app.services.portfolio_tracker_service import PortfolioTrackerService
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler('stock_monitor.log')
+    ]
+)
+logger = logging.getLogger(__name__)
 
 class ModelManager:
     def __init__(self):
@@ -1050,22 +1054,6 @@ class RealTimeMonitor:
                 "sentiment_score": 0.0,
                 "best_article": None
             }
-
-# Set up logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('stock_monitor.log')
-    ]
-)
-logger = logging.getLogger(__name__)
-
-# Set more verbose logging for monitoring
-logging.getLogger('app.services.news_service').setLevel(logging.INFO)
-logging.getLogger('app.services.stock_analyzer').setLevel(logging.INFO)
-logging.getLogger('app.services.sentiment_analyzer').setLevel(logging.INFO)
 
 async def main():
     logger.info("🚀 Market Monitor Starting...")
