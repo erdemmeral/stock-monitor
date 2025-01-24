@@ -34,7 +34,6 @@ from telegram.error import TelegramError
 
 # Local application imports
 from app.services.news_service import NewsService
-from app.services.sentiment_analyzer import SentimentAnalyzer
 from app.utils.sp500 import get_all_symbols
 from app.utils.telegram_notifier import TelegramNotifier
 from app.models.position import Position
@@ -151,7 +150,6 @@ class RealTimeMonitor:
             logger.info("Telegram credentials loaded successfully")
                 
         self.news_service = NewsService()
-        self.sentiment_analyzer = SentimentAnalyzer()
         self.processed_news = set()
 
         self.thresholds = {
