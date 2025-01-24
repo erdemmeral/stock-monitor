@@ -31,12 +31,9 @@ import pytz         # Also add this if not already there
 
 
 # Local application imports
-from app.models.stock_analyzer import StockAnalyzer
 from app.services.news_service import NewsService
 from app.services.sentiment_analyzer import SentimentAnalyzer
 from app.utils.sp500 import get_all_symbols
-from app.models.stock import StockAnalysis
-from app.models.news import NewsArticle
 from app.utils.telegram_notifier import TelegramNotifier
 from app.models.position import Position
 import torch
@@ -410,6 +407,63 @@ class RealTimeMonitor:
         
         return web.Response(text='OK')
 
+    async def poll_telegram_updates(self):
+        """Poll for Telegram updates"""
+        if not self.telegram_token or not self.telegram_chat_id:
+            logger.warning("Telegram credentials not configured, polling disabled")
+            return
+
+        async with self._polling_lock:  # Use lock to ensure single instance
+            offset = None
+            bot = telegram.Bot(token=self.telegram_token)
+
+            try:
+                # Clear existing updates first
+                async with bot:
+                    updates = await bot.get_updates(offset=-1, timeout=1)
+                    if updates:
+                        offset = updates[-1].update_id + 1
+                logger.info("Cleared existing updates")
+            except Exception as e:
+                logger.error(f"Error clearing updates: {str(e)}")
+
+            while self._is_polling:
+                try:
+                    async with bot:
+                        updates = await bot.get_updates(
+                            offset=offset,
+                            timeout=10,
+                            allowed_updates=['message'],
+                            limit=100
+                        )
+                    
+                    if updates:
+                        for update in updates:
+                            if update.message and update.message.text:
+                                command = update.message.text
+                                chat_id = update.message.chat.id
+                                logger.info(f"Received command: {command} from chat_id: {chat_id}")
+
+                                try:
+                                    # Handle commands
+                                    if command == '/start' or command == '/help':
+                                        await self.send_help_message(chat_id)
+                                    elif command == '/portfolio':
+                                        await self.send_portfolio_status(chat_id)
+                                except Exception as cmd_error:
+                                    logger.error(f"Error handling command {command}: {str(cmd_error)}")
+
+                            # Update offset after processing each update
+                            offset = update.update_id + 1
+                            logger.debug(f"Updated offset to {offset}")
+
+                    # Small delay between polling requests
+                    await asyncio.sleep(1)
+                
+                except Exception as e:
+                    logger.error(f"Error polling telegram updates: {str(e)}")
+                    await asyncio.sleep(5)  # Longer delay on error
+
     async def send_help_message(self, chat_id):
         """Send help message using async client"""
         try:
@@ -432,11 +486,13 @@ class RealTimeMonitor:
                 "• Real-time updates and analytics"
             )
 
-            await self.telegram_bot.send_message(
-                chat_id=chat_id,
-                text=help_message,
-                parse_mode='HTML'
-            )
+            bot = telegram.Bot(token=self.telegram_token)
+            async with bot:
+                await bot.send_message(
+                    chat_id=chat_id,
+                    text=help_message,
+                    parse_mode='HTML'
+                )
             logger.info("Help message sent successfully")
         except Exception as e:
             logger.error(f"Error sending help message: {str(e)}")
@@ -455,11 +511,13 @@ class RealTimeMonitor:
                 "• P/L tracking"
             )
 
-            await self.telegram_bot.send_message(
-                chat_id=chat_id,
-                text=message,
-                parse_mode='HTML'
-            )
+            bot = telegram.Bot(token=self.telegram_token)
+            async with bot:
+                await bot.send_message(
+                    chat_id=chat_id,
+                    text=message,
+                    parse_mode='HTML'
+                )
             logger.info("Portfolio status sent successfully")
         except Exception as e:
             logger.error(f"Error sending portfolio status: {str(e)}")
@@ -959,58 +1017,6 @@ class RealTimeMonitor:
 
     async def handle_health_check(self, request):
         return web.Response(text="Bot is running!")
-    async def poll_telegram_updates(self):
-        """Poll for Telegram updates"""
-        async with self._polling_lock:  # Use lock to ensure single instance
-            try:
-                # Clear existing updates first using synchronous call
-                result = self.telegram_bot.getUpdates(offset=-1, timeout=1)
-                if result:
-                    offset = result[-1].update_id + 1
-                else:
-                    offset = None
-                logger.info("Cleared existing updates")
-            except Exception as e:
-                logger.error(f"Error clearing updates: {str(e)}")
-                offset = None
-
-            while self._is_polling:
-                try:
-                    # Get updates using synchronous call with proper timeout
-                    updates = self.telegram_bot.getUpdates(
-                        offset=offset,
-                        timeout=10,  # Reduced timeout
-                        allowed_updates=['message'],
-                        limit=100  # Limit number of updates per request
-                    )
-                    
-                    if updates:
-                        for update in updates:
-                            if update.message and update.message.text:
-                                command = update.message.text
-                                chat_id = update.message.chat.id
-                                logger.info(f"Received command: {command} from chat_id: {chat_id}")
-
-                                try:
-                                    # Handle commands
-                                    if command == '/start' or command == '/help':
-                                        await self.send_help_message(chat_id)
-                                    elif command == '/portfolio':
-                                        await self.send_portfolio_status(chat_id)
-                                except Exception as cmd_error:
-                                    logger.error(f"Error handling command {command}: {str(cmd_error)}")
-
-                                # Update offset after processing each update
-                                offset = update.update_id + 1
-                                logger.debug(f"Updated offset to {offset}")
-
-                    # Small delay between polling requests
-                    await asyncio.sleep(1)
-                
-                except Exception as e:
-                    logger.error(f"Error polling telegram updates: {str(e)}")
-                    await asyncio.sleep(5)  # Longer delay on error
-
     async def _calculate_predictions(self, symbol: str, articles: List[Dict], price_data: Dict) -> Dict:
         """Calculate predictions and determine if buy signal should be generated"""
         try:
