@@ -518,25 +518,20 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error sending signal to localhost: {e}")
 
-    async def send_buy_signal(self, symbol: str, sentiment_score: float, price_data: Dict, entry_date: datetime, target_date: datetime) -> None:
+    async def send_buy_signal(self, symbol: str, entry_price: float, target_price: float, sentiment_score: float, entry_date: datetime, target_date: datetime) -> bool:
         """Send buy signal to portfolio tracker first, then Telegram"""
         try:
-            # 1. Calculate prices and targets
-            current_price = price_data['current_price']
-            price_targets = self.calculate_price_targets(current_price, price_data['price_movements'])
-            trading_targets, trailing_stop = self.calculate_trading_targets(price_data['price_movements'])
-            
-            # 2. Send buy signal to portfolio tracker first
+            # 1. Send buy signal to portfolio tracker first
             try:
                 # Send the buy signal
                 await self.portfolio_tracker.send_buy_signal(
                     symbol=symbol,
-                    entry_price=float(current_price),
-                    target_price=float(price_targets['1mo']),
+                    entry_price=float(entry_price),
+                    target_price=float(target_price),
                     entry_date=entry_date.isoformat(),
                     target_date=target_date.isoformat()
                 )
-                logger.info(f"Buy signal sent to database for {symbol} at ${current_price:.2f}")
+                logger.info(f"Buy signal sent to database for {symbol} at ${entry_price:.2f}")
                 logger.info(f"Entry date: {entry_date.isoformat()}")
                 logger.info(f"Target date: {target_date.isoformat()}")
                 
@@ -552,22 +547,23 @@ class RealTimeMonitor:
                 logger.error(f"Failed to send buy signal to portfolio tracker: {str(tracker_error)}")
                 return False
             
-            # 3. Then send Telegram alert
+            # 2. Then send Telegram alert
             buy_message = (
                 f"🔔 <b>BUY Signal Generated!</b>\n\n"
                 f"Symbol: {symbol}\n"
-                f"Entry Price: ${current_price:.2f}\n"
-                f"Target Price: ${price_targets['1mo']:.2f}\n"
+                f"Entry Price: ${entry_price:.2f}\n"
+                f"Target Price: ${target_price:.2f}\n"
                 f"Entry Date: {entry_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
                 f"Target Date: {target_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
                 f"Sentiment Score: {sentiment_score:.2f}\n\n"
                 f"Expected Movement:\n"
-                f"• 1 Hour: {trading_targets['short_term']:.2f}%\n"
-                f"• 1 Week: {trading_targets['mid_term']:.2f}%\n"
-                f"• 1 Month: {trading_targets['long_term']:.2f}%\n\n"
-                f"🛡 Trailing Stop: {trailing_stop}%"
+                f"• Target Price: ${target_price:.2f} ({((target_price/entry_price - 1) * 100):.1f}%)\n"
+                f"• Stop Loss: ${entry_price * 0.95:.2f} (-5.0%)\n"
+                f"• Trailing Stop: 5.0%"
             )
-            #await self.send_telegram_alert(buy_message)
+            
+            await self.send_telegram_alert(buy_message)
+            return True
             
         except Exception as e:
             logger.error(f"Error in send_buy_signal for {symbol}: {str(e)}", exc_info=True)
@@ -1183,6 +1179,74 @@ class RealTimeMonitor:
                 except Exception as e:
                     logger.error(f"Error polling telegram updates: {str(e)}")
                     await asyncio.sleep(5)  # Longer delay on error
+
+    async def _calculate_predictions(self, symbol: str, articles: List[Dict], price_data: Dict) -> Dict:
+        """Calculate predictions and determine if buy signal should be generated"""
+        try:
+            # Initialize result dictionary
+            result = {
+                "should_buy": False,
+                "best_timeframe": None,
+                "prediction_strength": 0.0,
+                "target_price": 0.0,
+                "sentiment_score": 0.0
+            }
+
+            # Calculate average sentiment score
+            sentiment_scores = []
+            for article in articles:
+                if 'sentiment' in article and article['sentiment']:
+                    sentiment = article['sentiment']
+                    if isinstance(sentiment, dict) and 'label' in sentiment:
+                        # Convert sentiment label to score
+                        score_map = {'positive': 1.0, 'neutral': 0.0, 'negative': -1.0}
+                        score = score_map.get(sentiment['label'], 0.0)
+                        if 'probabilities' in sentiment:
+                            # Weight by confidence
+                            confidence = max(sentiment['probabilities'].values())
+                            score *= confidence
+                        sentiment_scores.append(score)
+
+            result["sentiment_score"] = sum(sentiment_scores) / len(sentiment_scores) if sentiment_scores else 0.0
+
+            # Find best prediction across timeframes
+            best_prediction = 0.0
+            best_timeframe = None
+
+            for article in articles:
+                if 'predictions' in article:
+                    for timeframe, prediction in article['predictions'].items():
+                        if prediction > best_prediction:
+                            best_prediction = prediction
+                            best_timeframe = timeframe
+
+            if best_timeframe and best_prediction:
+                result["best_timeframe"] = best_timeframe
+                result["prediction_strength"] = best_prediction
+
+                # Calculate target price based on prediction
+                current_price = price_data.get("current_price", 0)
+                if current_price > 0:
+                    result["target_price"] = current_price * (1 + best_prediction/100)
+
+                # Check if prediction meets threshold for buy signal
+                threshold_met = best_prediction >= self.thresholds.get(best_timeframe, float('inf'))
+                sentiment_threshold_met = result["sentiment_score"] >= 0.3
+
+                # Generate buy signal if both thresholds are met
+                result["should_buy"] = threshold_met and sentiment_threshold_met
+
+            return result
+
+        except Exception as e:
+            logger.error(f"Error calculating predictions for {symbol}: {str(e)}")
+            return {
+                "should_buy": False,
+                "best_timeframe": None,
+                "prediction_strength": 0.0,
+                "target_price": 0.0,
+                "sentiment_score": 0.0
+            }
 
 # Set up logging
 logging.basicConfig(
