@@ -43,21 +43,35 @@ class PortfolioTrackerService:
                     url=f"{self.base_url}/{endpoint}",
                     json=data,
                     timeout=self.timeout,
-                    ssl=False  # Disable SSL verification
+                    ssl=False,  # Disable SSL verification
+                    headers={'Content-Type': 'application/json'}
                 ) as response:
                     response_text = await response.text()
                     logger.info(f"Response status: {response.status}")
                     logger.info(f"Response text: {response_text}")
                     
                     if response.status in [200, 201]:
-                        return await response.json()
+                        try:
+                            return await response.json()
+                        except Exception as json_error:
+                            logger.error(f"Error parsing JSON response: {str(json_error)}")
+                            logger.error(f"Raw response: {response_text}")
+                            return None
                     else:
-                        logger.error(f"Request failed with status {response.status}: {response_text}")
+                        logger.error(f"Request failed with status {response.status}")
+                        logger.error(f"Response text: {response_text}")
+                        logger.error(f"Request URL: {self.base_url}/{endpoint}")
+                        logger.error(f"Request method: {method}")
+                        logger.error(f"Request data: {data}")
                         return None
 
             except asyncio.TimeoutError as e:
                 logger.error(f"Timeout on attempt {attempt + 1}/{self.max_retries}")
+                logger.error(f"Request URL: {self.base_url}/{endpoint}")
+                logger.error(f"Request method: {method}")
+                logger.error(f"Request data: {data}")
                 if attempt < self.max_retries - 1:
+                    logger.info(f"Waiting {self.retry_delay} seconds before retry...")
                     await asyncio.sleep(self.retry_delay)
                 else:
                     logger.error(f"Connection timeout to host {self.base_url}/{endpoint}")
@@ -65,7 +79,12 @@ class PortfolioTrackerService:
 
             except Exception as e:
                 logger.error(f"Error on attempt {attempt + 1}/{self.max_retries}: {str(e)}")
+                logger.error(f"Error type: {type(e).__name__}")
+                logger.error(f"Request URL: {self.base_url}/{endpoint}")
+                logger.error(f"Request method: {method}")
+                logger.error(f"Request data: {data}")
                 if attempt < self.max_retries - 1:
+                    logger.info(f"Waiting {self.retry_delay} seconds before retry...")
                     await asyncio.sleep(self.retry_delay)
                 else:
                     raise
@@ -86,15 +105,15 @@ class PortfolioTrackerService:
             
             logger.info(f"Sending buy signal to tracker: {data}")
             result = await self._make_request("POST", "positions", data)
-            success = result is not None
             
-            if success:
+            if result is not None:
                 logger.info(f"Successfully sent buy signal for {symbol}")
+                logger.info(f"Response data: {result}")
+                return True
             else:
                 logger.error(f"Failed to send buy signal for {symbol}")
                 logger.error(f"Request data: {data}")
-            
-            return success
+                return False
 
         except Exception as e:
             error_type = type(e).__name__
