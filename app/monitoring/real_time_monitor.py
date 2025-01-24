@@ -797,6 +797,8 @@ class RealTimeMonitor:
                     # Pad features BEFORE prediction
                     X_padded = self._pad_features(X)
                     
+                    predictions_log = []  # Collect all predictions for single log message
+                    
                     for timeframe, model in self.models.items():
                         try:
                             base_pred = model.predict(X_padded)[0]
@@ -814,11 +816,15 @@ class RealTimeMonitor:
                                 pred = base_pred
                             
                             article_predictions[timeframe] = pred
-                            logger.info(f"{timeframe} prediction: {pred:.2f}")
+                            predictions_log.append(f"{timeframe}: {pred:.2f}%")
                         
                         except Exception as e:
                             logger.error(f"Error in prediction for {timeframe}: {e}")
                             continue
+                    
+                    # Log all predictions in a single message
+                    if predictions_log:
+                        logger.info(f"Predictions for {symbol}: " + ", ".join(predictions_log))
                     
                     all_predictions.append({
                         'article': article,
