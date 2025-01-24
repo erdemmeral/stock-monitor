@@ -787,72 +787,91 @@ class RealTimeMonitor:
             return
 
     async def update_positions(self):
+        """Update and check all positions for selling conditions"""
         logger.info("Updating portfolio positions...")
         current_time = datetime.now(tz=pytz.UTC)
-        positions_to_remove = []
 
-        for symbol, position in self.portfolio.positions.items():
-            try:
-                stock = yf.Ticker(symbol)
-                current_price = float(stock.info.get('regularMarketPrice', 0))
-                
-                if current_price <= 0:
-                    continue
+        try:
+            # Get current positions from portfolio tracker
+            positions = await self.portfolio_tracker.get_positions()
+            if not positions:
+                logger.info("No active positions to update")
+                return
 
-                position.current_price = current_price
-                price_change_percent = ((current_price - position.entry_price) / position.entry_price) * 100
-                 # Check if target price achieved
-                if current_price >= position.target_price:
-                    await self.send_signal(
-                        signal_type="sell",
-                        symbol=symbol,
-                        price=current_price,
-                        target_price=position.target_price,
-                        sentiment_score=0.0,
-                        timeframe=position.timeframe,
-                        reason=f"🎯 Target price ${position.target_price:.2f} achieved! ({price_change_percent:.2f}% gain)"
-                    )
-                    positions_to_remove.append(symbol)
-                    continue
+            for position in positions:
+                try:
+                    symbol = position['symbol']
+                    entry_price = float(position['entry_price'])
+                    target_price = float(position['target_price'])
+                    target_date = datetime.fromisoformat(position['target_date'])
+                    timeframe = position.get('timeframe', '1wk')  # Default to 1wk if not specified
 
-                # Check for stop loss
-                if price_change_percent <= -self.stop_loss_percentage:
-                    await self.send_signal(
-                        signal_type="sell",
-                        symbol=symbol,
-                        price=current_price,
-                        target_price=position.entry_price * 0.95,
-                        sentiment_score=0.0,
-                        timeframe=position.timeframe,
-                        reason=f"Stop loss triggered: Price dropped {abs(price_change_percent):.2f}%"
-                    )
-                    positions_to_remove.append(symbol)
-                    continue
+                    # Get current price
+                    stock = yf.Ticker(symbol)
+                    current_price = float(stock.info.get('regularMarketPrice', 0))
+                    
+                    if current_price <= 0:
+                        logger.warning(f"Could not get valid price for {symbol}")
+                        continue
 
-                # Check if target date has passed
-                if current_time >= position.target_date:
-                    if price_change_percent > 0:
-                        reason = f"Target date reached with {price_change_percent:.2f}% profit"
-                    else:
-                        reason = f"Target date reached with {price_change_percent:.2f}% loss"
-                    await self.send_signal(
-                        signal_type="sell",
-                        symbol=symbol,
-                        price=current_price,
-                        target_price=position.entry_price * 0.95,
-                        sentiment_score=0.0,
-                        timeframe=position.timeframe,
-                        reason=reason
-                    )
-                    positions_to_remove.append(symbol)
+                    price_change_percent = ((current_price - entry_price) / entry_price) * 100
+                    logger.info(f"Checking {symbol} - Current: ${current_price:.2f}, Entry: ${entry_price:.2f}, Target: ${target_price:.2f}, Change: {price_change_percent:.2f}%")
 
-            except Exception as e:
-                logger.error(f"Error updating position for {symbol}: {str(e)}")
+                    sell_signal = None
+                    
+                    # Check selling conditions
+                    if current_price >= target_price:
+                        sell_signal = {
+                            "reason": f"🎯 Target price ${target_price:.2f} achieved! ({price_change_percent:.2f}% gain)",
+                            "condition": "TARGET_PRICE"
+                        }
+                    elif price_change_percent <= -self.stop_loss_percentage:
+                        sell_signal = {
+                            "reason": f"⚠️ Stop loss triggered: Price dropped {abs(price_change_percent):.2f}%",
+                            "condition": "STOP_LOSS"
+                        }
+                    elif current_time >= target_date:
+                        if price_change_percent > 0:
+                            reason = f"📅 Target date reached with {price_change_percent:.2f}% profit"
+                        else:
+                            reason = f"📅 Target date reached with {abs(price_change_percent):.2f}% loss"
+                        sell_signal = {
+                            "reason": reason,
+                            "condition": "TARGET_DATE"
+                        }
 
-        # Remove closed positions
-        for symbol in positions_to_remove:
-            self.portfolio.remove_position(symbol)
-        logger.info(f"Portfolio update complete. Active positions: {len(self.portfolio.positions)}")
+                    if sell_signal:
+                        logger.info(f"Selling condition met for {symbol}: {sell_signal['reason']}")
+                        
+                        # Send sell signal to portfolio tracker
+                        success = await self.portfolio_tracker.send_sell_signal(
+                            symbol=symbol,
+                            selling_price=current_price,
+                            sell_condition=sell_signal['condition']
+                        )
+
+                        if success:
+                            # Send Telegram notification
+                            await self.send_signal(
+                                signal_type="sell",
+                                symbol=symbol,
+                                price=current_price,
+                                target_price=target_price,
+                                sentiment_score=0.0,
+                                timeframe=timeframe,
+                                reason=sell_signal['reason']
+                            )
+                            logger.info(f"Successfully closed position for {symbol}")
+                        else:
+                            logger.error(f"Failed to send sell signal to portfolio tracker for {symbol}")
+
+                except Exception as e:
+                    logger.error(f"Error updating position for {symbol}: {str(e)}")
+
+        except Exception as e:
+            logger.error(f"Error in update_positions: {str(e)}")
+
+        logger.info("Portfolio update complete")
 
     def calculate_normalized_score(self, changes):
         """Normalize scores based on timeframe thresholds"""
