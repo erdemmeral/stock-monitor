@@ -70,10 +70,10 @@ class PortfolioTrackerService:
         try:
             data = {
                 "symbol": symbol,
-                "entry_price": entry_price,
-                "target_price": target_price,
-                "entry_date": entry_date,
-                "target_date": target_date
+                "entryPrice": float(entry_price),
+                "targetPrice": float(target_price),
+                "entryDate": entry_date,
+                "targetDate": target_date
             }
             
             result = await self._make_request("POST", "positions", data)
