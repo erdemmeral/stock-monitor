@@ -146,17 +146,10 @@ class RealTimeMonitor:
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
         
-        try:
-            if self.telegram_token and self.telegram_chat_id:
-                # Initialize bot with parse_mode set to HTML by default
-                self.telegram_bot = telegram.Bot(token=self.telegram_token)
-                logger.info("Telegram bot initialized successfully")
-            else:
-                logger.warning("Telegram credentials not found in environment variables")
-                self.telegram_bot = None
-        except Exception as e:
-            logger.error(f"Failed to initialize Telegram bot: {e}")
-            self.telegram_bot = None
+        if not self.telegram_token or not self.telegram_chat_id:
+            logger.warning("Telegram credentials not found in environment variables")
+        else:
+            logger.info("Telegram credentials loaded successfully")
                 
         self.news_service = NewsService()
         self.sentiment_analyzer = SentimentAnalyzer()
@@ -296,14 +289,58 @@ class RealTimeMonitor:
             logger.error(f"Error fetching article content: {e}")
             return None
 
+    async def analyze_and_notify(self, symbol: str, articles: List[Dict], price_data: Dict) -> None:
+        try:
+            # Calculate predictions and check thresholds
+            prediction_result = await self._calculate_predictions(symbol, articles, price_data)
+            
+            if prediction_result["should_buy"]:
+                logger.info("🟢 BUY SIGNAL DETECTED")
+                logger.info(f"Best Timeframe: {prediction_result['best_timeframe']}")
+                logger.info(f"Prediction Strength: {prediction_result['prediction_strength']:.2f}%")
+                
+                # Get the most significant article's publish date
+                best_article = prediction_result["best_article"]
+                entry_date = datetime.fromtimestamp(best_article['article']['providerPublishTime'], tz=pytz.UTC)
+                
+                # Calculate target date based on timeframe
+                timeframe_deltas = {
+                    '1h': timedelta(hours=1),
+                    '1wk': timedelta(weeks=1),
+                    '1mo': timedelta(days=30)
+                }
+                target_date = entry_date + timeframe_deltas[prediction_result['best_timeframe']]
+                
+                logger.info(f"Using article published at {entry_date} as entry date")
+                logger.info(f"Target date set to {target_date} based on {prediction_result['best_timeframe']} timeframe")
+                
+                current_price = price_data["current_price"]
+                await self.send_signal(
+                    signal_type="buy",
+                    symbol=symbol,
+                    price=current_price,
+                    target_price=prediction_result["target_price"],
+                    sentiment_score=prediction_result["sentiment_score"],
+                    timeframe=prediction_result["best_timeframe"],
+                    reason=f"ML prediction: {prediction_result['prediction_strength']:.1f}% upside potential",
+                    entry_date=entry_date,
+                    target_date=target_date
+                )
+                
+        except Exception as e:
+            logger.error(f"Error monitoring {symbol}: {str(e)}")
+
     async def send_signal(self, signal_type: str, symbol: str, price: float, target_price: float, 
-                         sentiment_score: float, timeframe: str, reason: str) -> bool:
+                         sentiment_score: float, timeframe: str, reason: str,
+                         entry_date: Optional[datetime] = None, target_date: Optional[datetime] = None) -> bool:
         """Unified method to send buy/sell signals"""
         try:
             # Send signal to portfolio tracker
             if signal_type.lower() == 'buy':
-                entry_date = datetime.now(tz=pytz.UTC)
-                target_date = entry_date + timedelta(days=30)  # Default to 30 days
+                if not entry_date:
+                    entry_date = datetime.now(tz=pytz.UTC)
+                if not target_date:
+                    target_date = entry_date + timedelta(days=30)
                 
                 success = await self.portfolio_tracker.send_buy_signal(
                     symbol=symbol,
@@ -331,6 +368,15 @@ class RealTimeMonitor:
                 f"Target Price: ${target_price:.2f}\n"
                 f"Timeframe: {timeframe}\n"
                 f"Sentiment Score: {sentiment_score:.2f}\n"
+            )
+            
+            if entry_date and target_date:
+                message += (
+                    f"Entry Date: {entry_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
+                    f"Target Date: {target_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
+                )
+            
+            message += (
                 f"Reason: {reason}\n\n"
                 "View details at:\n"
                 "https://portfolio-tracker-rough-dawn-5271.fly.dev"
@@ -342,30 +388,6 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error in send_signal for {symbol}: {str(e)}", exc_info=True)
             return False
-
-    async def analyze_and_notify(self, symbol: str, articles: List[Dict], price_data: Dict) -> None:
-        try:
-            # Calculate predictions and check thresholds
-            prediction_result = await self._calculate_predictions(symbol, articles, price_data)
-            
-            if prediction_result["should_buy"]:
-                logger.info("🟢 BUY SIGNAL DETECTED")
-                logger.info(f"Best Timeframe: {prediction_result['best_timeframe']}")
-                logger.info(f"Prediction Strength: {prediction_result['prediction_strength']:.2f}%")
-                
-                current_price = price_data["current_price"]
-                await self.send_signal(
-                    signal_type="buy",
-                    symbol=symbol,
-                    price=current_price,
-                    target_price=prediction_result["target_price"],
-                    sentiment_score=prediction_result["sentiment_score"],
-                    timeframe=prediction_result["best_timeframe"],
-                    reason=f"ML prediction: {prediction_result['prediction_strength']:.1f}% upside potential"
-                )
-                
-        except Exception as e:
-            logger.error(f"Error monitoring {symbol}: {str(e)}")
 
     async def handle_telegram_update(self, request):
         """Handle Telegram bot commands"""
@@ -463,14 +485,19 @@ class RealTimeMonitor:
             return
 
         try:
-            # Use the existing bot instance instead of creating a new one
-            await self.telegram_bot.send_message(
-                chat_id=self.telegram_chat_id,
-                text=message,
-                parse_mode='HTML',
-                disable_web_page_preview=True
-            )
+            # Create an async bot instance
+            bot = telegram.Bot(token=self.telegram_token)
+            
+            # Use the async send_message method
+            async with bot:
+                await bot.send_message(
+                    chat_id=self.telegram_chat_id,
+                    text=message,
+                    parse_mode='HTML',
+                    disable_web_page_preview=True
+                )
             logger.info("Telegram alert sent successfully")
+            
         except Exception as e:
             logger.error(f"Failed to send Telegram alert: {str(e)}")
             logger.error(f"Failed message content:\n{message}")
@@ -974,7 +1001,8 @@ class RealTimeMonitor:
                 "best_timeframe": None,
                 "prediction_strength": 0.0,
                 "target_price": 0.0,
-                "sentiment_score": 0.0
+                "sentiment_score": 0.0,
+                "best_article": None
             }
 
             # Calculate average sentiment score
@@ -994,9 +1022,10 @@ class RealTimeMonitor:
 
             result["sentiment_score"] = sum(sentiment_scores) / len(sentiment_scores) if sentiment_scores else 0.0
 
-            # Find best prediction across timeframes
+            # Find best prediction across timeframes and articles
             best_prediction = 0.0
             best_timeframe = None
+            best_article = None
 
             for article in articles:
                 if 'predictions' in article:
@@ -1004,10 +1033,12 @@ class RealTimeMonitor:
                         if prediction > best_prediction:
                             best_prediction = prediction
                             best_timeframe = timeframe
+                            best_article = article
 
-            if best_timeframe and best_prediction:
+            if best_timeframe and best_prediction and best_article:
                 result["best_timeframe"] = best_timeframe
                 result["prediction_strength"] = best_prediction
+                result["best_article"] = best_article
 
                 # Calculate target price based on prediction
                 current_price = price_data.get("current_price", 0)
@@ -1030,7 +1061,8 @@ class RealTimeMonitor:
                 "best_timeframe": None,
                 "prediction_strength": 0.0,
                 "target_price": 0.0,
-                "sentiment_score": 0.0
+                "sentiment_score": 0.0,
+                "best_article": None
             }
 
 # Set up logging
