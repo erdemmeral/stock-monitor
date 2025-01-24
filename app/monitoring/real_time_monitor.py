@@ -330,12 +330,16 @@ class RealTimeMonitor:
                 if not target_date:
                     target_date = entry_date + timedelta(days=30)
                 
+                # Format dates to match the expected format
+                entry_date_str = entry_date.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                target_date_str = target_date.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                
                 success = await self.portfolio_tracker.send_buy_signal(
                     symbol=symbol,
                     entry_price=float(price),
                     target_price=float(target_price),
-                    entry_date=entry_date.isoformat(),
-                    target_date=target_date.isoformat()
+                    entry_date=entry_date_str,
+                    target_date=target_date_str
                 )
             else:  # sell signal
                 success = await self.portfolio_tracker.send_sell_signal(

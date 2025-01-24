@@ -35,6 +35,7 @@ class PortfolioTrackerService:
         
         for attempt in range(self.max_retries):
             try:
+                logger.info(f"Attempt {attempt + 1}/{self.max_retries}")
                 logger.info(f"Making {method} request to {self.base_url}/{endpoint}")
                 logger.info(f"Request data: {data}")
                 
@@ -46,24 +47,31 @@ class PortfolioTrackerService:
                     ssl=False,  # Disable SSL verification
                     headers={'Content-Type': 'application/json'}
                 ) as response:
-                    response_text = await response.text()
-                    logger.info(f"Response status: {response.status}")
-                    logger.info(f"Response text: {response_text}")
-                    
-                    if response.status in [200, 201]:
-                        try:
-                            return await response.json()
-                        except Exception as json_error:
-                            logger.error(f"Error parsing JSON response: {str(json_error)}")
-                            logger.error(f"Raw response: {response_text}")
+                    try:
+                        response_text = await response.text()
+                        logger.info(f"Response received - Status: {response.status}")
+                        logger.info(f"Response headers: {response.headers}")
+                        logger.info(f"Response text: {response_text}")
+                        
+                        if response.status in [200, 201]:
+                            try:
+                                json_response = await response.json()
+                                logger.info(f"Successfully parsed JSON response: {json_response}")
+                                return json_response
+                            except Exception as json_error:
+                                logger.error(f"Error parsing JSON response: {str(json_error)}")
+                                logger.error(f"Raw response: {response_text}")
+                                return None
+                        else:
+                            logger.error(f"Request failed with status {response.status}")
+                            logger.error(f"Response text: {response_text}")
+                            logger.error(f"Request URL: {self.base_url}/{endpoint}")
+                            logger.error(f"Request method: {method}")
+                            logger.error(f"Request data: {data}")
                             return None
-                    else:
-                        logger.error(f"Request failed with status {response.status}")
-                        logger.error(f"Response text: {response_text}")
-                        logger.error(f"Request URL: {self.base_url}/{endpoint}")
-                        logger.error(f"Request method: {method}")
-                        logger.error(f"Request data: {data}")
-                        return None
+                    except Exception as resp_error:
+                        logger.error(f"Error processing response: {str(resp_error)}")
+                        raise
 
             except asyncio.TimeoutError as e:
                 logger.error(f"Timeout on attempt {attempt + 1}/{self.max_retries}")
@@ -189,4 +197,46 @@ class PortfolioTrackerService:
                         return None
             except Exception as e:
                 logger.error(f"Error getting performance metrics: {str(e)}")
-                return None 
+                return None
+
+    async def test_buy_signal(self):
+        """Test function to verify buy signal functionality"""
+        test_data = {
+            "symbol": "AIMD",
+            "entryPrice": 0.7630000114440918,
+            "targetPrice": 0.9266609814637333,
+            "entryDate": "2025-01-21T15:00:00+00:00",
+            "targetDate": "2025-02-20T15:00:00+00:00"
+        }
+        
+        logger.info("=== Starting Buy Signal Test ===")
+        logger.info(f"Test data: {test_data}")
+        
+        try:
+            success = await self.send_buy_signal(
+                symbol=test_data["symbol"],
+                entry_price=test_data["entryPrice"],
+                target_price=test_data["targetPrice"],
+                entry_date=test_data["entryDate"],
+                target_date=test_data["targetDate"]
+            )
+            
+            if success:
+                logger.info("✅ Buy signal test successful")
+            else:
+                logger.error("❌ Buy signal test failed")
+                
+        except Exception as e:
+            logger.error(f"Test failed with error: {str(e)}", exc_info=True)
+        
+        logger.info("=== Buy Signal Test Complete ===")
+
+async def run_test():
+    """Run the portfolio tracker test"""
+    service = PortfolioTrackerService()
+    await service.test_buy_signal()
+    await service.close()
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(run_test()) 
