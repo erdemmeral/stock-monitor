@@ -648,6 +648,15 @@ class RealTimeMonitor:
                 if prices.empty:
                     logger.warning(f"Skipping {symbol}: No recent price data available")
                     return
+                    
+                # Calculate current price from the most recent data
+                current_price = float(prices['Close'].iloc[-1])
+                price_data = {
+                    "current_price": current_price,
+                    "history": prices
+                }
+                logger.info(f"Current price for {symbol}: ${current_price:.2f}")
+                
             except Exception as e:
                 logger.warning(f"Skipping {symbol}: {str(e)}")
                 return
@@ -678,7 +687,6 @@ class RealTimeMonitor:
                 if news_id in self.processed_news:
                     continue
 
-                # Process one article completely before moving to next
                 try:
                     # Get full article text
                     url = article.get('link')
@@ -700,7 +708,6 @@ class RealTimeMonitor:
                 
                     # Make predictions for this specific article
                     article_predictions = {}
-                       # Vectorize text
                     X = self.vectorizer.transform([content])
                 
                     # Pad features BEFORE prediction
@@ -708,23 +715,16 @@ class RealTimeMonitor:
                     
                     for timeframe, model in self.models.items():
                         try:
-                        # Base prediction
                             base_pred = model.predict(X_padded)[0]
                             
-                            # Adjust prediction with sentiment if available
                             if sentiment:
-                                # Sentiment multiplier
                                 multiplier_map = {
-                                    'negative': 0.7,   # Reduce prediction
-                                    'neutral': 1.0,    # No change
-                                    'positive': 1.3    # Increase prediction
+                                    'negative': 0.7,
+                                    'neutral': 1.0,
+                                    'positive': 1.3
                                 }
-                                
-                                # Confidence-based adjustment
                                 confidence = max(sentiment['probabilities'].values())
                                 base_multiplier = multiplier_map.get(sentiment['label'], 1.0)
-                                
-                                # Adjusted prediction
                                 pred = base_pred * (1 + (base_multiplier - 1) * 0.3 * confidence)
                             else:
                                 pred = base_pred
@@ -733,13 +733,9 @@ class RealTimeMonitor:
                             logger.info(f"{timeframe} prediction: {pred:.2f}")
                         
                         except Exception as e:
-                            # Log detailed error information
                             logger.error(f"Error in prediction for {timeframe}: {e}")
-                            logger.error(f"Input matrix shape: {X_padded.shape}")
-                            logger.error(f"Model expected features: {model.coef_.shape[1]}")
                             continue
                     
-                    # Store predictions
                     all_predictions.append({
                         'article': article,
                         'predictions': article_predictions,
@@ -748,20 +744,17 @@ class RealTimeMonitor:
                     
                     self.processed_news.add(news_id)
                     processed_urls.add(url)
-
-                    # Add small delay before next article
                     await asyncio.sleep(1)
                     
                 except Exception as e:
                     logger.error(f"Error processing article for {symbol}: {str(e)}")
                     continue
             
-            # Analyze and notify if predictions exist
             if all_predictions:
                 await self.analyze_and_notify(
                     symbol=symbol,
                     articles=all_predictions,
-                    price_data=prices
+                    price_data=price_data
                 )
         
         except Exception as e:
