@@ -28,9 +28,7 @@ import aiohttp
 import uuid
 
 from requests import Session
-from requests_cache import CacheMixin, SQLiteCache
-from requests_ratelimiter import LimiterMixin, MemoryQueueBucket
-from pyrate_limiter import Duration, RequestRate, Limiter
+
 # Create logs directory if it doesn't exist
 import os
 if not os.path.exists('logs'):
@@ -56,55 +54,38 @@ logger.info(f"Starting new training session. Logging to: {log_filename}")
 # Then replace the print statements with logger calls
 class FinBERTSentimentAnalyzer:
     def __init__(self):
-        self.model_name = 'yiyanghkust/finbert-tone'
-        self.tokenizer = BertTokenizer.from_pretrained(self.model_name)
-        self.model = BertForSequenceClassification.from_pretrained(
-            self.model_name, 
-            num_labels=3
-        )
+        self.tokenizer = BertTokenizer.from_pretrained('ProsusAI/finbert')
+        self.model = BertForSequenceClassification.from_pretrained('ProsusAI/finbert')
+        self.model.eval()  # Set the model to evaluation mode
         
-        # Sentiment label mapping
-        self.labels = {0: 'neutral', 1: 'positive', 2: 'negative'}
-        
-        # Device configuration
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model.to(self.device)
-
     def analyze_sentiment(self, text):
-        """Analyze sentiment of financial text"""
         try:
-            # Tokenize input
-            inputs = self.tokenizer(
-                text, 
-                return_tensors="pt", 
-                truncation=True, 
-                padding=True, 
-                max_length=512
-            ).to(self.device)
+            # Tokenize the text
+            inputs = self.tokenizer(text, return_tensors="pt", max_length=512, truncation=True)
             
-            # Get predictions
+            # Get model predictions
             with torch.no_grad():
-                outputs = self.model(**inputs)[0]
-                probabilities = torch.softmax(outputs, dim=1)
+                outputs = self.model(**inputs)
+                predictions = torch.nn.functional.softmax(outputs.logits, dim=1)
+                
+            # Convert predictions to probabilities
+            probs = predictions[0].tolist()
             
-            # Convert to numpy
-            probs_np = probabilities.cpu().numpy()[0]
-            
-            # Determine label
-            predicted_label_idx = np.argmax(probs_np)
+            # Map indices to labels
+            label_map = {0: 'positive', 1: 'negative', 2: 'neutral'}
+            sentiment_label = label_map[torch.argmax(predictions).item()]
             
             return {
-                'label': self.labels[predicted_label_idx],
+                'label': sentiment_label,
                 'probabilities': {
-                    'neutral': probs_np[0],
-                    'positive': probs_np[1],
-                    'negative': probs_np[2]
-                },
-                'sentiment_score': probs_np[1] - probs_np[2]  # Positive - Negative
+                    'positive': probs[0],
+                    'negative': probs[1],
+                    'neutral': probs[2]
+                }
             }
-        
+            
         except Exception as e:
-            logger.error(f"FinBERT sentiment analysis error: {e}")
+            logger.error(f"Error in sentiment analysis: {str(e)}")
             return None
 
 class MarketMLTrainer:
