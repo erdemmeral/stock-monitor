@@ -164,8 +164,8 @@ class RealTimeMonitor:
     def _pad_features(self, X):
         """Pad features to match model input size"""
         try:
-            # Get expected feature size from any model
-            expected_features = next(iter(self.models.values())).coef_.shape[1]
+            # Hardcoded expected number of features from training
+            expected_features = 95721
             current_features = X.shape[1]
             logger.info(f"Input matrix shape: {X.shape}")
 
