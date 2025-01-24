@@ -475,6 +475,10 @@ class RealTimeMonitor:
                 logger.info("Telegram alert sent successfully")
         except Exception as e:
             logger.error(f"Failed to send Telegram alert: {e}")
+            logger.error(f"Failed message content:\n{message}")
+        
+        # Add a small delay after sending
+        await asyncio.sleep(1)
 
     async def cleanup(self):
         """Cleanup resources before shutdown"""
@@ -553,25 +557,18 @@ class RealTimeMonitor:
                     logger.error(f"Error in periodic model check: {e}")
                     await asyncio.sleep(300)  # Wait before retrying
     async def start(self, symbols: list[str]):
+        """Start the monitoring process"""
         try:
-        # Send startup message to Telegram
             startup_message = (
                 "🚀 <b>Stock Monitor Activated</b>\n\n"
                 f"📊 Monitoring {len(symbols)} stocks\n"
                 f"🕒 Started at: {datetime.now(tz=pytz.UTC).strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
                 "🔍 Initializing market monitoring process..."
             )
-        
-            # Send startup alert
             await self.send_telegram_alert(startup_message)
         except Exception as alert_error:
             logger.error(f"Failed to send startup Telegram alert: {alert_error}")
 
-        logger.info(f"Starting monitoring for {len(symbols)} symbols...")
-        
-        
-        
-        """Start monitoring"""
         logger.info(f"Starting monitoring for {len(symbols)} symbols...")
         
         # Initialize polling lock if not exists
@@ -587,13 +584,12 @@ class RealTimeMonitor:
         model_check_task = asyncio.create_task(self.periodic_model_check())
    
         try:
-
-            while True:  # Add continuous loop
+            while True:
                 try:
                     logger.info("Starting new monitoring cycle...")
                     
-                            # Process stocks in batches for better resource management
-                    batch_size = 50  # Adjust based on your system's capabilities
+                    # Process stocks in batches for better resource management
+                    batch_size = 50
                     total_symbols = len(symbols)
                     
                     for batch_start in range(0, total_symbols, batch_size):
@@ -601,42 +597,32 @@ class RealTimeMonitor:
                         batch_number = batch_start // batch_size + 1
                         total_batches = (total_symbols + batch_size - 1) // batch_size
                         
-                        logger.info(f"Processing Batch {batch_number}/{total_batches} "
-                                    f"(Stocks {batch_start+1}-{min(batch_start+batch_size, total_symbols)})")
+                        logger.info(f"Processing Batch {batch_number}/{total_batches}")
                         
-                        # Create tasks with tracking
-                        # Use more aggressive concurrency
                         async def process_symbols():
-                            # Create semaphore to limit concurrent tasks
-                            sem = asyncio.Semaphore(50)  # Limit to 50 concurrent tasks
+                            sem = asyncio.Semaphore(50)
                             
                             async def bounded_monitor(symbol):
                                 async with sem:
                                     return await self.monitor_stock_with_tracking(symbol, batch_number, total_batches)
                             
-                            # Create tasks with the semaphore
                             tasks = [bounded_monitor(symbol) for symbol in batch]
                             return await asyncio.gather(*tasks)
                 
-                        # Process batch concurrently
                         await process_symbols()
-
                         logger.info(f"Completed Batch {batch_number}/{total_batches}")
-                
-                # Small delay between batches to prevent overwhelming resources
                         await asyncio.sleep(1)
                     
-                    
-                    
-                    logger.info("Completed full monitoring cycle. Waiting 5 minutes before next cycle...")
-                    await asyncio.sleep(300)  # 5-minute break between cycles
+                    logger.info("Completed full monitoring cycle. Waiting 5 minutes...")
+                    await asyncio.sleep(300)
                     
                 except Exception as e:
                     logger.error(f"Error in monitoring cycle: {str(e)}")
-                    await asyncio.sleep(300)  # 5-minute break on error
+                    await asyncio.sleep(300)
         finally:
             self._is_polling = False
             await polling_task
+            await model_check_task
 
     async def monitor_stock_with_tracking(self, symbol: str, batch_number: int, total_batches: int):
         """Wrapper method to add tracking and logging to monitor_stock"""
@@ -934,84 +920,6 @@ class RealTimeMonitor:
             "label": ["bearish", "neutral", "bullish"][prediction]
         }
 
-    async def send_telegram_alert(self, message):
-        try:
-            logger.info("Attempting to send Telegram alert...")
-            logger.info(f"Message content:\n{message}")
-            
-            await self.telegram_bot.send_message(
-                chat_id=self.telegram_chat_id,
-                text=message,
-                parse_mode='HTML',
-                disable_web_page_preview=True
-            )
-            logger.info("✅ Telegram alert sent successfully")
-        except Exception as e:
-            logger.error(f"❌ Telegram notification error: {str(e)}")
-            logger.error(f"Failed message content:\n{message}")
-         # Add a small delay after sending
-        await asyncio.sleep(1)
-
-    def analyze_price_movement(self, prices, publish_time) -> List[Dict]:
-        publish_date = datetime.fromtimestamp(publish_time).date()
-        future_prices = prices[prices.index.date > publish_date]
-        
-        movements = []
-        check_periods = [
-            ('1h', 1/24),
-            ('1d', 1),
-            ('1w', 7),
-            ('1m', 30),
-            ('3m', 90)
-        ]
-        
-        for label, days in check_periods:
-            end_date = publish_date + timedelta(days=days)
-            period_prices = future_prices[future_prices.index.date <= end_date]
-            
-            if len(period_prices) > 0:
-                start_price = period_prices['Close'].iloc[0]
-                end_price = period_prices['Close'].iloc[-1]
-                change_pct = ((end_price - start_price) / start_price) * 100
-                
-                movements.append({
-                    'period': label,
-                    'change_pct': round(change_pct, 2)
-                })
-        
-        return movements
-
-    def update_portfolio_sentiment(self, symbol: str, new_sentiment: float) -> None:
-        if symbol in self.portfolio:
-            current = self.portfolio[symbol]
-            current['sentiment_score'] = (current['sentiment_score'] + new_sentiment) / 2
-            
-            if current['sentiment_score'] <= self.sentiment_threshold_sell:
-                asyncio.create_task(self.send_sell_signal(symbol))
-
-    def should_ignore_news(self, headline: str, text: str = "") -> bool:
-        """
-        Filter out news that could give false signals
-        """
-        ignore_phrases = [
-            'reverse stock split',
-            'reverse split',
-            'consolidation of shares',
-            'share consolidation',
-            'consolidates shares',
-            'consolidating shares'
-        ]
-        
-        # Combine headline and text for checking
-        full_text = f"{headline} {text}".lower()
-        
-        # Check for ignore phrases
-        for phrase in ignore_phrases:
-            if phrase in full_text:
-                logger.info(f"Ignoring news containing '{phrase}': {headline}")
-                return True
-                
-        return False
     async def handle_health_check(self, request):
         return web.Response(text="Bot is running!")
     async def poll_telegram_updates(self):
