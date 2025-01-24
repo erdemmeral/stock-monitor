@@ -7,7 +7,6 @@ import scipy.sparse
 
 import requests
 import telegram
-from telegram.error import NetworkError, Unauthorized
 
 from app.models.trade_history import TradeHistory
 warnings.filterwarnings('ignore', message='.*The \'unit\' keyword in TimedeltaIndex.*')
@@ -28,6 +27,9 @@ import yfinance as yf
 import joblib
 import pandas as pd  # Add this import
 import pytz         # Also add this if not already there
+from telegram import Update
+from telegram.ext import Application, ContextTypes
+from telegram.error import TelegramError
 
 
 # Local application imports
