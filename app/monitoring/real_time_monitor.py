@@ -419,23 +419,21 @@ class RealTimeMonitor:
 
             try:
                 # Clear existing updates first
-                async with bot:
-                    updates = await bot.get_updates(offset=-1, timeout=1)
-                    if updates:
-                        offset = updates[-1].update_id + 1
+                updates = await bot.get_updates(offset=-1, timeout=1)
+                if updates:
+                    offset = updates[-1].update_id + 1
                 logger.info("Cleared existing updates")
             except Exception as e:
                 logger.error(f"Error clearing updates: {str(e)}")
 
             while self._is_polling:
                 try:
-                    async with bot:
-                        updates = await bot.get_updates(
-                            offset=offset,
-                            timeout=10,
-                            allowed_updates=['message'],
-                            limit=100
-                        )
+                    updates = await bot.get_updates(
+                        offset=offset,
+                        timeout=10,
+                        allowed_updates=['message'],
+                        limit=100
+                    )
                     
                     if updates:
                         for update in updates:
@@ -464,6 +462,32 @@ class RealTimeMonitor:
                     logger.error(f"Error polling telegram updates: {str(e)}")
                     await asyncio.sleep(5)  # Longer delay on error
 
+    async def send_telegram_alert(self, message: str) -> None:
+        """Send alert message via Telegram using async client"""
+        if not self.telegram_token or not self.telegram_chat_id:
+            logger.warning("Telegram bot or chat ID not configured")
+            return
+
+        try:
+            # Create bot instance without context manager
+            bot = telegram.Bot(token=self.telegram_token)
+            
+            # Send message directly using await
+            await bot.send_message(
+                chat_id=self.telegram_chat_id,
+                text=message,
+                parse_mode='HTML',
+                disable_web_page_preview=True
+            )
+            logger.info("Telegram alert sent successfully")
+            
+        except Exception as e:
+            logger.error(f"Failed to send Telegram alert: {str(e)}")
+            logger.error(f"Failed message content:\n{message}")
+        
+        # Add a small delay after sending
+        await asyncio.sleep(1)
+
     async def send_help_message(self, chat_id):
         """Send help message using async client"""
         try:
@@ -486,13 +510,15 @@ class RealTimeMonitor:
                 "• Real-time updates and analytics"
             )
 
+            # Create bot instance without context manager
             bot = telegram.Bot(token=self.telegram_token)
-            async with bot:
-                await bot.send_message(
-                    chat_id=chat_id,
-                    text=help_message,
-                    parse_mode='HTML'
-                )
+            
+            # Send message directly
+            await bot.send_message(
+                chat_id=chat_id,
+                text=help_message,
+                parse_mode='HTML'
+            )
             logger.info("Help message sent successfully")
         except Exception as e:
             logger.error(f"Error sending help message: {str(e)}")
@@ -511,13 +537,15 @@ class RealTimeMonitor:
                 "• P/L tracking"
             )
 
+            # Create bot instance without context manager
             bot = telegram.Bot(token=self.telegram_token)
-            async with bot:
-                await bot.send_message(
-                    chat_id=chat_id,
-                    text=message,
-                    parse_mode='HTML'
-                )
+            
+            # Send message directly
+            await bot.send_message(
+                chat_id=chat_id,
+                text=message,
+                parse_mode='HTML'
+            )
             logger.info("Portfolio status sent successfully")
         except Exception as e:
             logger.error(f"Error sending portfolio status: {str(e)}")
@@ -535,33 +563,6 @@ class RealTimeMonitor:
                         logger.error(f"Failed to send signal to localhost. Status: {response.status}")
         except Exception as e:
             logger.error(f"Error sending signal to localhost: {e}")
-
-    async def send_telegram_alert(self, message: str) -> None:
-        """Send alert message via Telegram using async client"""
-        if not self.telegram_token or not self.telegram_chat_id:
-            logger.warning("Telegram bot or chat ID not configured")
-            return
-
-        try:
-            # Create an async bot instance
-            bot = telegram.Bot(token=self.telegram_token)
-            
-            # Use the async send_message method
-            async with bot:
-                await bot.send_message(
-                    chat_id=self.telegram_chat_id,
-                    text=message,
-                    parse_mode='HTML',
-                    disable_web_page_preview=True
-                )
-            logger.info("Telegram alert sent successfully")
-            
-        except Exception as e:
-            logger.error(f"Failed to send Telegram alert: {str(e)}")
-            logger.error(f"Failed message content:\n{message}")
-        
-        # Add a small delay after sending
-        await asyncio.sleep(1)
 
     async def cleanup(self):
         """Cleanup resources before shutdown"""
