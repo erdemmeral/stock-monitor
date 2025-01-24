@@ -381,6 +381,46 @@ class RealTimeMonitor:
             logger.error(f"Error in send_signal for {symbol}: {str(e)}", exc_info=True)
             return False
 
+    async def _init_telegram_bot(self):
+        """Initialize or reinitialize the Telegram bot"""
+        try:
+            bot = telegram.Bot(token=self.telegram_token)
+            # Test the connection
+            await bot.get_me()
+            return bot
+        except Exception as e:
+            logger.error(f"Error initializing Telegram bot: {str(e)}")
+            raise
+
+    async def send_telegram_alert(self, message: str) -> None:
+        """Send alert message via Telegram"""
+        if not self.telegram_token or not self.telegram_chat_id:
+            logger.warning("Telegram bot or chat ID not configured")
+            return
+
+        max_retries = 3
+        retry_delay = 5
+
+        for attempt in range(max_retries):
+            try:
+                bot = telegram.Bot(token=self.telegram_token)
+                await bot.send_message(
+                    chat_id=self.telegram_chat_id,
+                    text=message,
+                    parse_mode='HTML',
+                    disable_web_page_preview=True
+                )
+                logger.info("Telegram alert sent successfully")
+                return
+            except Exception as e:
+                logger.error(f"Failed to send Telegram alert (attempt {attempt + 1}/{max_retries}): {str(e)}")
+                if attempt < max_retries - 1:
+                    logger.info(f"Waiting {retry_delay} seconds before retry...")
+                    await asyncio.sleep(retry_delay)
+                else:
+                    logger.error(f"Failed message content:\n{message}")
+                    break
+
     async def poll_telegram_updates(self):
         """Poll for Telegram updates"""
         if not self.telegram_token or not self.telegram_chat_id:
@@ -389,71 +429,51 @@ class RealTimeMonitor:
 
         async with self._polling_lock:  # Use lock to ensure single instance
             offset = None
-            bot = telegram.Bot(token=self.telegram_token)
-
-            try:
-                # Clear existing updates first
-                updates = await bot.get_updates(offset=-1, timeout=1)
-                if updates:
-                    offset = updates[-1].update_id + 1
-                logger.info("Cleared existing updates")
-            except Exception as e:
-                logger.error(f"Error clearing updates: {str(e)}")
+            retry_delay = 5
+            max_retries = 3
 
             while self._is_polling:
-                try:
-                    updates = await bot.get_updates(
-                        offset=offset,
-                        timeout=10,
-                        allowed_updates=['message'],
-                        limit=100
-                    )
-                    
-                    if updates:
-                        for update in updates:
-                            if update.message and update.message.text:
-                                command = update.message.text
-                                chat_id = update.message.chat.id
-                                logger.info(f"Received command: {command} from chat_id: {chat_id}")
+                for attempt in range(max_retries):
+                    try:
+                        bot = await self._init_telegram_bot()
+                        updates = await bot.get_updates(
+                            offset=offset,
+                            timeout=30,
+                            allowed_updates=['message'],
+                            limit=100
+                        )
+                        
+                        if updates:
+                            for update in updates:
+                                if update.message and update.message.text:
+                                    command = update.message.text
+                                    chat_id = update.message.chat.id
+                                    logger.info(f"Received command: {command} from chat_id: {chat_id}")
 
-                                try:
-                                    # Handle commands
-                                    if command == '/start' or command == '/help':
-                                        await self.send_help_message(chat_id)
-                                    elif command == '/portfolio':
-                                        await self.send_portfolio_status(chat_id)
-                                except Exception as cmd_error:
-                                    logger.error(f"Error handling command {command}: {str(cmd_error)}")
+                                    try:
+                                        if command == '/start' or command == '/help':
+                                            await self.send_help_message(chat_id)
+                                        elif command == '/portfolio':
+                                            await self.send_portfolio_status(chat_id)
+                                    except Exception as cmd_error:
+                                        logger.error(f"Error handling command {command}: {str(cmd_error)}")
 
-                            # Update offset after processing each update
-                            offset = update.update_id + 1
-                            logger.debug(f"Updated offset to {offset}")
+                                # Update offset after processing each update
+                                offset = update.update_id + 1
+                                logger.debug(f"Updated offset to {offset}")
 
-                    # Small delay between polling requests
-                    await asyncio.sleep(1)
-                
-                except Exception as e:
-                    logger.error(f"Error polling telegram updates: {str(e)}")
-                    await asyncio.sleep(5)  # Longer delay on error
-
-    async def send_telegram_alert(self, message: str) -> None:
-        """Send alert message via Telegram"""
-        if not self.telegram_token or not self.telegram_chat_id:
-            logger.warning("Telegram bot or chat ID not configured")
-            return
-
-        try:
-            bot = telegram.Bot(token=self.telegram_token)
-            await bot.send_message(
-                chat_id=self.telegram_chat_id,
-                text=message,
-                parse_mode='HTML',
-                disable_web_page_preview=True
-            )
-            logger.info("Telegram alert sent successfully")
-        except Exception as e:
-            logger.error(f"Failed to send Telegram alert: {str(e)}")
-            logger.error(f"Failed message content:\n{message}")
+                        # Small delay between polling requests
+                        await asyncio.sleep(1)
+                        break  # Break the retry loop if successful
+                        
+                    except Exception as e:
+                        logger.error(f"Error polling telegram updates (attempt {attempt + 1}/{max_retries}): {str(e)}")
+                        if attempt < max_retries - 1:
+                            logger.info(f"Waiting {retry_delay} seconds before retry...")
+                            await asyncio.sleep(retry_delay)
+                        else:
+                            logger.error("Max retries reached, waiting longer before next attempt")
+                            await asyncio.sleep(30)  # Longer delay after all retries fail
 
     async def send_help_message(self, chat_id):
         """Send help message"""
@@ -477,7 +497,7 @@ class RealTimeMonitor:
                 "• Real-time updates and analytics"
             )
 
-            bot = telegram.Bot(token=self.telegram_token)
+            bot = await self._init_telegram_bot()
             await bot.send_message(
                 chat_id=chat_id,
                 text=help_message,
@@ -501,7 +521,7 @@ class RealTimeMonitor:
                 "• P/L tracking"
             )
 
-            bot = telegram.Bot(token=self.telegram_token)
+            bot = await self._init_telegram_bot()
             await bot.send_message(
                 chat_id=chat_id,
                 text=message,
@@ -971,8 +991,7 @@ class RealTimeMonitor:
             "label": ["bearish", "neutral", "bullish"][prediction]
         }
 
-    async def handle_health_check(self, request):
-        return web.Response(text="Bot is running!")
+
     async def _calculate_predictions(self, symbol: str, articles: List[Dict], price_data: Dict) -> Dict:
         """Calculate predictions and determine if buy signal should be generated"""
         try:
