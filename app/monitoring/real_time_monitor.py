@@ -152,16 +152,21 @@ class RealTimeMonitor:
             logger.info(f"Vectorizer created: {datetime.fromtimestamp(os.path.getctime('app/models/vectorizer.joblib'))}")    
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
-        # Initialize Telegram bot
+        
+        # Initialize Telegram bot with async client
         try:
-            if not hasattr(self, 'telegram_bot'):
+            if self.telegram_token and self.telegram_chat_id:
                 self.telegram_bot = telegram.Bot(token=self.telegram_token)
                 logger.info("Telegram bot initialized successfully")
+            else:
+                logger.warning("Telegram credentials not found in environment variables")
+                self.telegram_bot = None
         except Exception as e:
             logger.error(f"Failed to initialize Telegram bot: {e}")
+            self.telegram_bot = None
                 
         self.news_service = NewsService()
-        self.sentiment_analyzer = SentimentAnalyzer()  # Add this line
+        self.sentiment_analyzer = SentimentAnalyzer()
         self.processed_news = set()
         self.portfolio = Portfolio()
 
@@ -171,9 +176,8 @@ class RealTimeMonitor:
             '1mo': 20.0
         }
 
-
-        self._polling_lock = asyncio.Lock()  # Add this line
-        self._is_polling = False  # Add this line
+        self._polling_lock = asyncio.Lock()
+        self._is_polling = False
 
     def _pad_features(self, X):
         """
@@ -379,130 +383,128 @@ class RealTimeMonitor:
         return web.Response(text='OK')
 
     async def send_help_message(self, chat_id):
+        """Send help message using async client"""
         try:
-            bot = self.telegram_bot.bot  # Get bot instance
-            logger.info(f"Sending help message to chat_id: {chat_id}")
-            help_message = (
-                "🤖 <b>Stock Monitor Bot Commands</b>\n\n"
-                
-                "📝 <b>Available Commands:</b>\n\n"
-                
-                "/help - Show this help message\n"
-                "Get list of all available commands and their descriptions\n\n"
-                
-                "/portfolio - View current positions\n"
-                "See all active positions with entry prices, current P/L, and target prices\n\n"
-                
-                "/history - View trading history\n"
-                "See recent trades, total P/L, and overall performance metrics\n\n"
-                
-                "ℹ️ <b>About Alerts:</b>\n"
-                "• Buy signals are sent automatically when significant opportunities are detected\n"
-                "• Sell signals are sent when:\n"
-                "  - Target price is reached 🎯\n"
-                "  - Stop loss is triggered ⚠️\n"
-                "  - Target date is reached 📅\n\n"
-                
-                "📊 <b>Performance Tracking:</b>\n"
-                "• All trades are automatically recorded\n"
-                "• Use /history to view performance metrics\n"
-                "• Use /portfolio to track current positions"
-            )
+            async with telegram.Bot(self.telegram_token) as bot:
+                help_message = (
+                    "🤖 <b>Stock Monitor Bot Commands</b>\n\n"
+                    "📝 <b>Available Commands:</b>\n\n"
+                    "/help - Show this help message\n"
+                    "Get list of all available commands and their descriptions\n\n"
+                    "/portfolio - View current positions\n"
+                    "See all active positions with entry prices, current P/L, and target prices\n\n"
+                    "/history - View trading history\n"
+                    "See recent trades, total P/L, and overall performance metrics\n\n"
+                    "ℹ️ <b>About Alerts:</b>\n"
+                    "• Buy signals are sent automatically when significant opportunities are detected\n"
+                    "• Sell signals are sent when:\n"
+                    "  - Target price is reached 🎯\n"
+                    "  - Stop loss is triggered ⚠️\n"
+                    "  - Target date is reached 📅\n\n"
+                    "📊 <b>Performance Tracking:</b>\n"
+                    "• All trades are automatically recorded\n"
+                    "• Use /history to view performance metrics\n"
+                    "• Use /portfolio to track current positions"
+                )
 
-            self.telegram_bot.send_message(
-                chat_id=chat_id,
-                text=help_message,
-                parse_mode='HTML'
-            )
-            logger.info("Help message sent successfully")
+                await bot.send_message(
+                    chat_id=chat_id,
+                    text=help_message,
+                    parse_mode='HTML'
+                )
+                logger.info("Help message sent successfully")
         except Exception as e:
             logger.error(f"Error sending help message: {str(e)}")
-            logger.exception(e)
-    async def send_trading_history(self, chat_id):
-            
 
-            if not self.trade_history.trades:
-                message = "📊 <b>Trading History</b>\n\nNo completed trades yet."
-            else:
-                message = "📊 <b>Trading History</b>\n\n"
-                
-                # Last 5 trades
-                message += "<b>Recent Trades:</b>\n"
-                for trade in self.trade_history.trades[-5:]:
+    async def send_trading_history(self, chat_id):
+        """Send trading history using async client"""
+        try:
+            async with telegram.Bot(self.telegram_token) as bot:
+                if not self.trade_history.trades:
+                    message = "📊 <b>Trading History</b>\n\nNo completed trades yet."
+                else:
+                    message = "📊 <b>Trading History</b>\n\n"
+                    
+                    # Last 5 trades
+                    message += "<b>Recent Trades:</b>\n"
+                    for trade in self.trade_history.trades[-5:]:
+                        message += (
+                            f"🔄 {trade['symbol']}: {trade['profit_loss_percentage']:+.2f}%\n"
+                            f"   ${trade['profit_loss']:+.2f}\n"
+                            f"   {trade['reason']}\n\n"
+                        )
+
+                    # Summary statistics
+                    total_pl = self.trade_history.get_total_profit_loss()
+                    win_rate = self.trade_history.get_win_rate()
+                    
                     message += (
-                        f"🔄 {trade['symbol']}: {trade['profit_loss_percentage']:+.2f}%\n"
-                        f"   ${trade['profit_loss']:+.2f}\n"
-                        f"   {trade['reason']}\n\n"
+                        f"📈 <b>Overall Performance:</b>\n"
+                        f"Total P/L: ${total_pl:+.2f}\n"
+                        f"Win Rate: {win_rate:.1f}%\n"
+                        f"Total Trades: {len(self.trade_history.trades)}"
                     )
 
-                # Summary statistics
-                total_pl = self.trade_history.get_total_profit_loss()
-                win_rate = self.trade_history.get_win_rate()
-                
-                message += (
-                    f"📈 <b>Overall Performance:</b>\n"
-                    f"Total P/L: ${total_pl:+.2f}\n"
-                    f"Win Rate: {win_rate:.1f}%\n"
-                    f"Total Trades: {len(self.trade_history.trades)}"
+                await bot.send_message(
+                    chat_id=chat_id,
+                    text=message,
+                    parse_mode='HTML'
                 )
-
-            self.telegram_bot.send_message(
-                chat_id=chat_id,
-                text=message,
-                parse_mode='HTML'
-            )
-    async def send_portfolio_status(self, chat_id):
-        if not self.portfolio.positions:
-            message = "📊 <b>Portfolio Status</b>\n\nNo active positions."
-        else:
-            message = "📊 <b>Portfolio Status</b>\n\n"
-            total_pl_percent = 0
-            total_pl_dollar = 0
-
-            for symbol, position in self.portfolio.positions.items():
-                pl_dollar = position.current_price - position.entry_price
-                pl_percent = (pl_dollar / position.entry_price) * 100
-                total_pl_dollar += pl_dollar
-                total_pl_percent += pl_percent
-
-                # Calculate position duration
-                duration = position.get_position_duration()
-                
-                # Format entry date
-                entry_date_formatted = position.entry_date.strftime('%Y-%m-%d %H:%M:%S UTC')
-
-                message += (
-                    f"🎯 <b>{symbol}</b>\n"
-                    f"Started: {entry_date_formatted}\n"
-                    f"Entry Price: ${position.entry_price:.2f}\n"
-                    f"Current Price: ${position.current_price:.2f}\n"
-                    f"Target: ${position.target_price:.2f}\n"
-                    f"P/L: ${pl_dollar:.2f} ({pl_percent:+.2f}%)\n"
-                    f"Held for: {duration['days']} days, {duration['hours']} hours\n"
-                    f"Target date: {position.target_date.strftime('%Y-%m-%d')} "
-                    f"({(position.target_date - datetime.now(tz=pytz.UTC)).days} days remaining)\n"
-                    f"Timeframe: {position.timeframe}\n\n"
-                )
-
-            # Add portfolio summary
-            num_positions = len(self.portfolio.positions)
-            avg_pl_percent = total_pl_percent / num_positions if num_positions > 0 else 0
-            
-            message += (
-                f"📈 <b>Portfolio Summary</b>\n"
-                f"Active Positions: {num_positions}\n"
-                f"Total P/L: ${total_pl_dollar:.2f}\n"
-                f"Average P/L: {avg_pl_percent:.2f}%"
-            )
-
-        try:
-            self.telegram_bot.send_message(
-                chat_id=chat_id,
-                text=message,
-                parse_mode='HTML'
-            )
+                logger.info("Trading history sent successfully")
         except Exception as e:
-            logger.error(f"Error sending portfolio status: {e}")
+            logger.error(f"Error sending trading history: {str(e)}")
+
+    async def send_portfolio_status(self, chat_id):
+        """Send portfolio status using async client"""
+        try:
+            async with telegram.Bot(self.telegram_token) as bot:
+                if not self.portfolio.positions:
+                    message = "📊 <b>Portfolio Status</b>\n\nNo active positions."
+                else:
+                    message = "📊 <b>Portfolio Status</b>\n\n"
+                    total_pl_percent = 0
+                    total_pl_dollar = 0
+
+                    for symbol, position in self.portfolio.positions.items():
+                        pl_dollar = position.current_price - position.entry_price
+                        pl_percent = (pl_dollar / position.entry_price) * 100
+                        total_pl_dollar += pl_dollar
+                        total_pl_percent += pl_percent
+
+                        duration = position.get_position_duration()
+                        entry_date_formatted = position.entry_date.strftime('%Y-%m-%d %H:%M:%S UTC')
+
+                        message += (
+                            f"🎯 <b>{symbol}</b>\n"
+                            f"Started: {entry_date_formatted}\n"
+                            f"Entry Price: ${position.entry_price:.2f}\n"
+                            f"Current Price: ${position.current_price:.2f}\n"
+                            f"Target: ${position.target_price:.2f}\n"
+                            f"P/L: ${pl_dollar:.2f} ({pl_percent:+.2f}%)\n"
+                            f"Held for: {duration['days']} days, {duration['hours']} hours\n"
+                            f"Target date: {position.target_date.strftime('%Y-%m-%d')} "
+                            f"({(position.target_date - datetime.now(tz=pytz.UTC)).days} days remaining)\n"
+                            f"Timeframe: {position.timeframe}\n\n"
+                        )
+
+                    num_positions = len(self.portfolio.positions)
+                    avg_pl_percent = total_pl_percent / num_positions if num_positions > 0 else 0
+                    
+                    message += (
+                        f"📈 <b>Portfolio Summary</b>\n"
+                        f"Active Positions: {num_positions}\n"
+                        f"Total P/L: ${total_pl_dollar:.2f}\n"
+                        f"Average P/L: {avg_pl_percent:.2f}%"
+                    )
+
+                await bot.send_message(
+                    chat_id=chat_id,
+                    text=message,
+                    parse_mode='HTML'
+                )
+                logger.info("Portfolio status sent successfully")
+        except Exception as e:
+            logger.error(f"Error sending portfolio status: {str(e)}")
 
     async def send_signal_to_localhost(self, signal_data: dict):
         """
@@ -593,16 +595,23 @@ class RealTimeMonitor:
         return trading_targets, trailing_stop
 
     async def send_telegram_alert(self, message: str) -> None:
-        """Send alert message via Telegram"""
+        """Send alert message via Telegram using async client"""
+        if not self.telegram_bot or not self.telegram_chat_id:
+            logger.warning("Telegram bot or chat ID not configured")
+            return
+
         try:
-            await self.telegram_bot.send_message(
-                chat_id=self.telegram_chat_id,
-                text=message,
-                parse_mode='HTML'
-            )
+            # Create async context for telegram bot
+            async with telegram.Bot(self.telegram_token) as bot:
+                await bot.send_message(
+                    chat_id=self.telegram_chat_id,
+                    text=message,
+                    parse_mode='HTML',
+                    disable_web_page_preview=True
+                )
+                logger.info("Telegram alert sent successfully")
         except Exception as e:
             logger.error(f"Failed to send Telegram alert: {e}")
-            raise
 
     async def cleanup(self):
         """Cleanup resources before shutdown"""
