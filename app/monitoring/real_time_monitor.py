@@ -283,6 +283,18 @@ class RealTimeMonitor:
             prediction_result = await self._calculate_predictions(symbol, articles, price_data)
             
             if prediction_result["should_buy"]:
+                # Check if target price has already been reached
+                current_price = price_data["current_price"]
+                target_price = prediction_result["target_price"]
+                
+                # Calculate how much of the predicted move has already happened
+                predicted_move = ((target_price - current_price) / current_price) * 100
+                
+                # If more than 30% of the predicted move has already happened, skip this signal
+                if predicted_move <= 0 or predicted_move * 0.3 <= 0:
+                    logger.info(f"Skipping buy signal for {symbol} - Target price has already been reached or invalid")
+                    return
+                
                 logger.info("🟢 BUY SIGNAL DETECTED")
                 logger.info(f"Best Timeframe: {prediction_result['best_timeframe']}")
                 logger.info(f"Prediction Strength: {prediction_result['prediction_strength']:.2f}%")
@@ -302,12 +314,11 @@ class RealTimeMonitor:
                 logger.info(f"Using article published at {entry_date} as entry date")
                 logger.info(f"Target date set to {target_date} based on {prediction_result['best_timeframe']} timeframe")
                 
-                current_price = price_data["current_price"]
                 await self.send_signal(
                     signal_type="buy",
                     symbol=symbol,
                     price=current_price,
-                    target_price=prediction_result["target_price"],
+                    target_price=target_price,
                     sentiment_score=prediction_result["sentiment_score"],
                     timeframe=prediction_result["best_timeframe"],
                     reason=f"ML prediction: {prediction_result['prediction_strength']:.1f}% upside potential",
@@ -691,7 +702,8 @@ class RealTimeMonitor:
 
     async def monitor_stock(self, symbol: str):
         try:
-            one_week_ago = datetime.now(tz=pytz.UTC) - timedelta(days=7)
+            # Change from one week to 24 hours
+            one_day_ago = datetime.now(tz=pytz.UTC) - timedelta(hours=24)
 
             logger.info(f"🔄 Processing stock: {symbol}")
             stock = yf.Ticker(symbol)
@@ -714,14 +726,14 @@ class RealTimeMonitor:
                 logger.warning(f"Skipping {symbol}: {str(e)}")
                 return
 
-            # Filter news when fetching
+            # Filter news when fetching - changed to 24 hours
             news = [
                 article for article in stock.news 
-                if datetime.fromtimestamp(article['providerPublishTime'], tz=pytz.UTC) >= one_week_ago
+                if datetime.fromtimestamp(article['providerPublishTime'], tz=pytz.UTC) >= one_day_ago
             ]
 
             if not news:
-                logger.info(f"ℹ️ No recent news (last 7 days) found for {symbol}")
+                logger.info(f"ℹ️ No recent news (last 24 hours) found for {symbol}")
                 return
 
             # Limit to top 10 recent news articles
