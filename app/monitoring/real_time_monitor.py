@@ -1221,12 +1221,9 @@ async def main():
     logger.info("Initializing ML models and market data...")
     monitor = RealTimeMonitor()
     
-    # Run the portfolio tracker test first
-    logger.info("Running portfolio tracker test...")
-    await monitor.test_portfolio_tracker()
-    
-    # Then continue with normal operation
+    # Get symbols and start monitoring
     symbols = get_all_symbols()
+    logger.info(f"Loaded {len(symbols)} symbols")
     await monitor.start(symbols)
 
 if __name__ == "__main__":
