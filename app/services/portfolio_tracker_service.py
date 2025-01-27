@@ -157,10 +157,18 @@ class PortfolioTrackerService:
     async def send_sell_signal(self, symbol: str, selling_price: float, sell_condition: str = None) -> bool:
         """Send sell signal to portfolio tracker"""
         try:
+            # Map our sell conditions to backend's expected values
+            condition_mapping = {
+                'STOP_LOSS': 'STOP_LOSS',
+                'SENTIMENT_CHANGE': 'PREDICTION_BASED',
+                'TARGET_REACHED': 'TARGET_REACHED',
+                'MANUAL': 'MANUAL'
+            }
+
             data = {
                 "symbol": symbol,
-                "selling_price": selling_price,
-                "sell_condition": sell_condition
+                "soldPrice": float(selling_price),
+                "sellCondition": condition_mapping.get(sell_condition, 'PREDICTION_BASED')
             }
             
             result = await self._make_request("POST", f"positions/{symbol}/sell", data)
@@ -168,8 +176,10 @@ class PortfolioTrackerService:
             
             if success:
                 logger.info(f"Successfully sent sell signal for {symbol}")
+                logger.info(f"Sell details - Price: ${selling_price:.2f}, Condition: {sell_condition}")
             else:
                 logger.error(f"Failed to send sell signal for {symbol}")
+                logger.error(f"Failed sell details - Price: ${selling_price:.2f}, Condition: {sell_condition}")
             
             return success
 
@@ -250,6 +260,62 @@ class PortfolioTrackerService:
             logger.error(f"Test failed with error: {str(e)}", exc_info=True)
         
         logger.info("=== Buy Signal Test Complete ===")
+
+    async def get_position(self, symbol: str) -> Optional[Dict]:
+        """Get details of a specific position"""
+        try:
+            result = await self._make_request("GET", f"positions/{symbol}")
+            if result:
+                logger.info(f"Successfully retrieved position for {symbol}")
+                return result
+            else:
+                logger.info(f"No position found for {symbol}")
+                return None
+        except Exception as e:
+            logger.error(f"Error getting position for {symbol}: {str(e)}")
+            return None
+
+    async def update_position(self, symbol: str, target_price: float, sentiment_score: float, confidence_score: float) -> bool:
+        """Update an existing position with new target and sentiment data"""
+        try:
+            data = {
+                "symbol": symbol,
+                "targetPrice": float(target_price),
+                "sentimentScore": float(sentiment_score),
+                "confidenceScore": float(confidence_score),
+                "updateTime": datetime.now(tz=pytz.UTC).isoformat()
+            }
+            
+            result = await self._make_request("PATCH", f"positions/{symbol}", data)
+            success = result is not None
+            
+            if success:
+                logger.info(f"Successfully updated position for {symbol}")
+            else:
+                logger.error(f"Failed to update position for {symbol}")
+            
+            return success
+
+        except Exception as e:
+            logger.error(f"Error updating position for {symbol}: {str(e)}")
+            return False
+
+    async def update_position_price(self, symbol: str) -> bool:
+        """Update current price for a position"""
+        try:
+            result = await self._make_request("PATCH", f"positions/{symbol}/update-price")
+            success = result is not None
+            
+            if success:
+                logger.info(f"Successfully updated price for {symbol}")
+            else:
+                logger.error(f"Failed to update price for {symbol}")
+            
+            return success
+
+        except Exception as e:
+            logger.error(f"Error updating price for {symbol}: {str(e)}")
+            return False
 
 async def run_test():
     """Run the portfolio tracker test"""

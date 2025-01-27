@@ -7,8 +7,8 @@ aiohttp==3.9.1
 beautifulsoup4>=4.12.2
 python-telegram-bot==20.7
 pytz==2023.3
-scipy==1.10.1
-numpy==1.23.5
-scikit-learn==1.0.2
-torch>=1.8.0
+scipy>=1.11.3
+numpy>=1.23.5
+scikit-learn>=1.0.2
+torch>=2.0.0
 transformers>=4.15.0
