@@ -66,17 +66,21 @@ class FinBERTSentimentAnalyzer:
             # Get model predictions
             with torch.no_grad():
                 outputs = self.model(**inputs)
-                predictions = torch.nn.functional.softmax(outputs.logits, dim=1)
+                probabilities = torch.nn.functional.softmax(outputs.logits, dim=1)
                 
             # Convert predictions to probabilities
-            probs = predictions[0].tolist()
+            probs = probabilities[0].tolist()
             
-            # Map indices to labels
-            label_map = {0: 'positive', 1: 'negative', 2: 'neutral'}
-            sentiment_label = label_map[torch.argmax(predictions).item()]
+            # Calculate continuous sentiment score
+            # Map positive to 1, negative to -1, neutral to 0 and take weighted average
+            sentiment_score = probs[0] - probs[1]  # positive - negative
+            
+            # Calculate confidence score as the maximum of positive and negative probabilities
+            confidence_score = max(probs[0], probs[1])
             
             return {
-                'label': sentiment_label,
+                'score': sentiment_score,  # Continuous score between -1 and 1
+                'confidence': confidence_score,  # Confidence score between 0 and 1
                 'probabilities': {
                     'positive': probs[0],
                     'negative': probs[1],
@@ -284,7 +288,7 @@ class MarketMLTrainer:
                             processed_articles += 1
                         
                         # Log progress for each article
-                        logger.info(f"Processed article {i}: Sentiment={sentiment['label']}, Changes={bool(changes)}")
+                        logger.info(f"Processed article {i}: Sentiment={sentiment['score']:.2f}, Changes={bool(changes)}")
                     
                     except Exception as article_error:
                         logger.error(f"Unexpected error processing article {i} for {symbol}: {article_error}")
@@ -381,6 +385,149 @@ class MarketMLTrainer:
                 print(f"{timeframe} Change: {change:.2f}% (Normalized Score: {normalized_score:.2f})")
         return normalized_scores
     
+    def calculate_article_impact(self, sentiment_score, price_changes, timeframes=['1h', '1wk', '1mo']):
+        """Calculate the impact score of an article based on sentiment and actual price movements"""
+        impact_scores = {}
+        
+        for timeframe in timeframes:
+            if timeframe not in price_changes:
+                continue
+                
+            price_change = price_changes[timeframe]
+            threshold = self.thresholds[timeframe]
+            
+            # Check if price change exceeds threshold
+            if abs(price_change) >= threshold:
+                # Calculate direction alignment
+                sentiment_direction = np.sign(sentiment_score)
+                price_direction = np.sign(price_change)
+                direction_match = sentiment_direction == price_direction
+                
+                # Calculate impact score
+                # Higher score if:
+                # 1. Price change is larger relative to threshold
+                # 2. Sentiment correctly predicted direction
+                # 3. Shorter timeframe (more immediate impact)
+                timeframe_weight = {
+                    '1h': 1.0,
+                    '1wk': 0.8,
+                    '1mo': 0.6
+                }
+                
+                impact = (abs(price_change) / threshold) * timeframe_weight[timeframe]
+                if direction_match:
+                    impact *= 1.5  # Boost score for correct predictions
+                else:
+                    impact *= 0.5  # Reduce score for incorrect predictions
+                
+                impact_scores[timeframe] = impact
+            else:
+                impact_scores[timeframe] = 0.0
+                
+        return impact_scores
+
+    def prepare_training_sample(self, sample, impact_scores):
+        """Prepare a training sample with adjusted features based on historical impact"""
+        try:
+            # Get base TF-IDF features
+            sample_tfidf = self.vectorizer.transform([sample['text']])
+            
+            # Get sentiment features
+            sentiment = sample.get('sentiment', {})
+            if not sentiment:
+                return None, None
+            
+            # Calculate average impact across timeframes
+            avg_impact = np.mean(list(impact_scores.values()))
+            
+            # Adjust sentiment features based on historical impact
+            sentiment_features = [
+                sentiment['score'] * (1 + avg_impact),  # Amplify sentiment if historically impactful
+                sentiment['confidence'],
+                sentiment['probabilities']['positive'] * (1 + avg_impact),
+                sentiment['probabilities']['negative'] * (1 + avg_impact),
+                sentiment['probabilities']['neutral']
+            ]
+            
+            # Convert to sparse matrix
+            sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features).reshape(1, -1)
+            
+            # Combine features
+            combined_features = scipy.sparse.hstack([sample_tfidf, sentiment_sparse])
+            
+            return combined_features, avg_impact
+            
+        except Exception as e:
+            logger.error(f"Error preparing training sample: {str(e)}")
+            return None, None
+
+    def train_with_impact_scores(self, training_data, timeframe):
+        """Train model with impact-adjusted samples"""
+        try:
+            X_features_list = []
+            y = []
+            sample_weights = []
+            
+            for sample in training_data:
+                # Calculate impact scores for this sample
+                impact_scores = self.calculate_article_impact(
+                    sample['sentiment']['score'],
+                    sample['changes']
+                )
+                
+                # Prepare features with impact adjustment
+                features, impact = self.prepare_training_sample(sample, impact_scores)
+                if features is None:
+                    continue
+                
+                X_features_list.append(features)
+                y.append(sample['changes'].get(timeframe, 0))
+                
+                # Use impact as sample weight
+                weight = 1.0 + impact_scores.get(timeframe, 0)
+                sample_weights.append(weight)
+            
+            if not X_features_list:
+                return False
+                
+            # Combine features
+            X_combined = scipy.sparse.vstack(X_features_list)
+            y_array = np.array(y, dtype=float)
+            weights_array = np.array(sample_weights)
+            
+            # Remove NaN values
+            valid_mask = ~np.isnan(y_array)
+            X_clean = X_combined[valid_mask]
+            y_clean = y_array[valid_mask]
+            weights_clean = weights_array[valid_mask]
+            
+            if len(y_clean) == 0:
+                return False
+            
+            # Train model with sample weights
+            self.models[timeframe].fit(X_clean, y_clean, sample_weight=weights_clean)
+            
+            # Log training summary
+            logger.info(f"\nTraining Summary for {timeframe}:")
+            logger.info(f"Total samples: {len(y_clean)}")
+            logger.info(f"Average sample weight: {np.mean(weights_clean):.2f}")
+            logger.info(f"Max sample weight: {np.max(weights_clean):.2f}")
+            
+            # Show sample predictions
+            sample_indices = np.random.choice(len(y_clean), min(3, len(y_clean)), replace=False)
+            logger.info("\nSample predictions vs actual:")
+            for idx in sample_indices:
+                pred = self.models[timeframe].predict(X_clean[idx:idx+1])[0]
+                actual = y_clean[idx]
+                weight = weights_clean[idx]
+                logger.info(f"Pred: {pred:.1f}% | Actual: {actual:.1f}% | Weight: {weight:.2f}")
+            
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error in train_with_impact_scores: {str(e)}")
+            return False
+
     def collect_and_train(self, symbols):
         logger.info(" Starting training process...")
         training_data = []
@@ -466,27 +613,55 @@ class MarketMLTrainer:
 
 
         if failed_stocks:
-            logger.info(f"Retrying {len(failed_stocks)} failed stocks")
-            for symbol in list(failed_stocks):  # Convert to list for iteration
-                result = self.process_symbol(symbol)
-                if result and len(result) > 0:
-                    training_data.extend(result)
-                    failed_stocks.remove(symbol)
-                    logger.info(f"Successfully processed {symbol} on retry")
-                else:
-                    logger.info(f"Failed to process {symbol} on retry")
+            logger.info(f"\nRetrying {len(failed_stocks)} failed stocks")
+            retry_chunk_size = 25  # Smaller chunk size for retries
             
+            for retry_attempt in range(2):  # Try up to 2 more times
+                if not failed_stocks:
+                    break
+                    
+                logger.info(f"Retry attempt {retry_attempt + 1}/2 for {len(failed_stocks)} stocks")
+                retry_symbols = list(failed_stocks)
+                still_failed = set()
+                
+                # Process retry chunks with Pool
+                for i in range(0, len(retry_symbols), retry_chunk_size):
+                    retry_chunk = retry_symbols[i:i+retry_chunk_size]
+                    logger.info(f"\nProcessing retry chunk {i//retry_chunk_size + 1}/{len(retry_symbols)//retry_chunk_size + 1}")
+                    
+                    with Pool(processes=num_processes) as pool:
+                        retry_results = []
+                        for symbol, result in zip(retry_chunk, pool.imap_unordered(self.process_symbol, retry_chunk)):
+                            if result and len(result) > 0:
+                                retry_results.extend(result)
+                                failed_stocks.remove(symbol)
+                                logger.info(f"Successfully processed {symbol} on retry attempt {retry_attempt + 1}")
+                            else:
+                                still_failed.add(symbol)
+                                logger.info(f"Failed to process {symbol} on retry attempt {retry_attempt + 1}")
+                        
+                        training_data.extend(retry_results)
+                    
+                    # Add longer delay between retry chunks
+                    logger.info("Taking a break between retry chunks...")
+                    time.sleep(15)  # 15 second break between retry chunks
+                
+                failed_stocks = still_failed
+                if failed_stocks:
+                    logger.info(f"Still failed after retry attempt {retry_attempt + 1}: {len(failed_stocks)} stocks")
+                    logger.info("Waiting 30 seconds before next retry attempt...")
+                    time.sleep(30)  # Longer wait between retry attempts
+            
+            if failed_stocks:
+                logger.info("\nPermanently failed stocks:")
+                for symbol in sorted(failed_stocks):
+                    logger.info(f"- {symbol}")
         
         logger.info("\nTraining Data Summary:")
         logger.info(f"Total samples collected: {len(training_data)}")
-        logger.info(f"Remaining failed stocks: {failed_stocks}")
-        # Combine all results
-        
-        
-        training_data.extend(results)
+        logger.info(f"Final failed stocks count: {len(failed_stocks)}")
         
         # Train models if we have data
-           # Train models if we have data
         if training_data:
             logger.info("\nPreparing to train models...")
             logger.info(f"Total training samples collected: {len(training_data)}")
@@ -506,67 +681,85 @@ class MarketMLTrainer:
                 # Prepare features and target values
                 y = []
                 X_features_list = []
+                sample_weights = []
                 
                 for sample in training_data:
                     try:
-                        # Get TF-IDF features for this sample
+                        # Calculate impact score based on sentiment prediction accuracy
+                        sentiment_direction = np.sign(sample['sentiment']['score'])
+                        price_change = sample['changes'].get(timeframe, 0)
+                        price_direction = np.sign(price_change)
+                        
+                        # Calculate base impact score
+                        impact_score = abs(price_change) / self.thresholds[timeframe]
+                        
+                        # Adjust impact based on prediction accuracy
+                        if sentiment_direction == price_direction:
+                            impact_score *= 1.5  # Boost weight for correct predictions
+                        else:
+                            impact_score *= 0.5  # Reduce weight for incorrect predictions
+                            
+                        # Add time decay factor (more recent articles have higher weight)
+                        days_old = (datetime.now(tz=pytz.UTC) - sample['date']).days
+                        time_decay = 1.0 / (1.0 + days_old * 0.1)  # Decay factor
+                        
+                        # Final sample weight
+                        sample_weight = (1.0 + impact_score) * time_decay
+                        
+                        # Get TF-IDF features
                         sample_tfidf = self.vectorizer.transform([sample['text']])
                         
-                        # Add sentiment features if available
+                        # Add sentiment features
                         if sample.get('sentiment'):
                             sentiment = sample['sentiment']
+                            # Adjust sentiment features based on historical accuracy
                             sentiment_features = [
-                                sentiment['probabilities']['neutral'],
+                                sentiment['score'] * (1 + impact_score),  # Amplify if historically accurate
+                                sentiment['confidence'],
                                 sentiment['probabilities']['positive'],
                                 sentiment['probabilities']['negative'],
-                                1 if sentiment['label'] == 'positive' else 
-                                -1 if sentiment['label'] == 'negative' else 0
+                                sentiment['probabilities']['neutral']
                             ]
-                            
-                            # Convert sentiment features to sparse matrix
                             sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features).reshape(1, -1)
-                            
-                            # Combine TF-IDF and sentiment features
-                            combined_features = hstack([sample_tfidf, sentiment_sparse])
+                            combined_features = scipy.sparse.hstack([sample_tfidf, sentiment_sparse])
                             X_features_list.append(combined_features)
                         else:
                             X_features_list.append(sample_tfidf)
                         
-                        # Collect target values
-                        y.append(sample['changes'].get(timeframe, 0))
-                    
-                    except Exception as sample_error:
-                        logger.error(f"Error processing sample: {sample_error}")
+                        y.append(price_change)
+                        sample_weights.append(sample_weight)
+                        
+                    except Exception as e:
+                        logger.error(f"Error processing sample: {str(e)}")
                         continue
                 
-                # Combine features
+                # Combine features and convert to arrays
                 try:
                     X_combined = scipy.sparse.vstack(X_features_list)
                     y_array = np.array(y, dtype=float)
+                    weights_array = np.array(sample_weights)
                     
                     # Handle NaN values
                     valid_mask = ~np.isnan(y_array)
                     X_clean = X_combined[valid_mask]
                     y_clean = y_array[valid_mask]
-                    
-                    logger.info(f"Training data for {timeframe}:")
-                    logger.info(f"Total samples: {len(y_clean)}")
-                    logger.info(f"Feature matrix shape: {X_clean.shape}")
+                    weights_clean = weights_array[valid_mask]
                     
                     if len(y_clean) > 0:
-                        logger.info(f"Valid samples for {timeframe}: {len(y_clean)}")
+                        logger.info(f"Training {timeframe} model with {len(y_clean)} samples")
+                        logger.info(f"Average sample weight: {np.mean(weights_clean):.2f}")
                         
-                        # Train model with combined features
-                        self.models[timeframe].fit(X_clean, y_clean)
+                        # Train model with sample weights
+                        self.models[timeframe].fit(X_clean, y_clean, sample_weight=weights_clean)
                         
-                        # Show sample predictions
-                        try:
-                            sample_preds = self.models[timeframe].predict(X_clean[:5])
-                            logger.info("\nSample predictions vs actual:")
-                            for i in range(min(5, len(y_clean))):
-                                logger.info(f"Predicted: {sample_preds[i]:.2f}% | Actual: {y_clean[i]:.2f}%")
-                        except Exception as pred_error:
-                            logger.error(f"Error generating sample predictions: {pred_error}")
+                        # Show sample predictions with weights
+                        sample_indices = np.random.choice(len(y_clean), min(3, len(y_clean)), replace=False)
+                        logger.info("\nSample predictions vs actual:")
+                        for idx in sample_indices:
+                            pred = self.models[timeframe].predict(X_clean[idx:idx+1])[0]
+                            actual = y_clean[idx]
+                            weight = weights_clean[idx]
+                            logger.info(f"Pred: {pred:.1f}% | Actual: {actual:.1f}% | Weight: {weight:.2f}")
                     
                 except Exception as array_error:
                     logger.error(f"Error preparing training data for {timeframe}: {array_error}")
@@ -577,30 +770,27 @@ class MarketMLTrainer:
             logger.info(f"Total training samples: {len(training_data)}")
                 
             return self.models
-    def _get_sentiment_multiplier(self, label, probabilities):
+    def _get_sentiment_multiplier(self, sentiment):
         """
-        Adjust price change based on sentiment
+        Adjust price change based on continuous sentiment score
         
-        :param label: Sentiment label
-        :param probabilities: Sentiment probabilities
+        :param sentiment: Dictionary containing sentiment analysis results
         :return: Multiplier for price change
         """
-        # Sentiment confidence (highest probability)
-        confidence = max(probabilities.values())
+        # Get the continuous score and probabilities
+        score = sentiment['score']  # Between -1 and 1
+        confidence = sentiment['confidence']  # Max of positive/negative probabilities
+        neutral_prob = sentiment['probabilities']['neutral']
         
-        # Multipliers based on sentiment
-        multiplier_map = {
-            'negative': 0.7,   # Reduce prediction
-            'neutral': 1.0,    # No change
-            'positive': 1.3    # Increase prediction
-        }
+        # Calculate neutral dampener (reduce effect when neutral probability is high)
+        neutral_dampener = 1.0 - neutral_prob
         
-        # Base multiplier from label
-        base_multiplier = multiplier_map.get(label, 1.0)
+        # Calculate base multiplier from continuous score
+        # Maps [-1, 1] to [0.7, 1.3]
+        base_multiplier = 1.0 + (score * 0.3)
         
-        # Adjust multiplier with confidence
-        # More confident sentiments have stronger influence
-        adjusted_multiplier = 1 + (base_multiplier - 1) * confidence
+        # Adjust multiplier with confidence and neutral dampener
+        adjusted_multiplier = 1.0 + (base_multiplier - 1.0) * confidence * neutral_dampener
         
         return adjusted_multiplier
     
@@ -623,22 +813,17 @@ class MarketMLTrainer:
         
         # Adjust prediction with sentiment
         if sentiment:
-            sentiment_multiplier = self._get_sentiment_multiplier(
-                sentiment['label'], 
-                sentiment['probabilities']
-            )
+            sentiment_multiplier = self._get_sentiment_multiplier(sentiment)
             adjusted_pred = base_pred * sentiment_multiplier
             
             # Log detailed prediction breakdown
             logger.info(f"Prediction Breakdown for {timeframe}:")
             logger.info(f"Base Prediction: {base_pred:.2f}%")
-            logger.info(f"Sentiment: {sentiment['label']}")
+            logger.info(f"Sentiment: {sentiment['score']:.2f}")
             logger.info(f"Sentiment Multiplier: {sentiment_multiplier:.2f}")
             logger.info(f"Adjusted Prediction: {adjusted_pred:.2f}%")
             
             return adjusted_pred
-    
-        return base_pred
     
     def save_models(self):
         os.makedirs('app/models', exist_ok=True)
@@ -758,4 +943,3 @@ if __name__ == "__main__":
             logger.error(" Training failed!")
     except Exception as e:
         logger.error(f" Training error: {str(e)}")
-
