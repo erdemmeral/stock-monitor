@@ -241,12 +241,19 @@ class RealTimeMonitor:
             X_tfidf = self.vectorizer.transform([text])
             logger.info(f"Original TF-IDF shape: {X_tfidf.shape}")
             
+            # Normalize features (L2 norm)
+            X_normalized = scipy.sparse.csr_matrix(X_tfidf)
+            X_normalized.data = X_normalized.data / np.sqrt(np.sum(X_normalized.data ** 2))
+            
             # Pad features if needed
-            X_padded = self._pad_features(X_tfidf)
+            X_padded = self._pad_features(X_normalized)
             logger.info(f"After padding shape: {X_padded.shape}")
             
-            # Base prediction from model
+            # Make prediction and validate
             base_pred = self.models[timeframe].predict(X_padded)[0]
+            
+            # Clip prediction to reasonable range (-100% to +100%)
+            base_pred = np.clip(base_pred, -100, 100)
             
             # Analyze sentiment
             sentiment = self.finbert_analyzer.analyze_sentiment(text)
@@ -259,6 +266,9 @@ class RealTimeMonitor:
                 neutral_dampener = 1.0 - sentiment['probabilities']['neutral']
                 adjusted_multiplier = 1.0 + (base_multiplier - 1.0) * confidence * neutral_dampener
                 pred = base_pred * adjusted_multiplier
+                
+                # Clip final prediction again
+                pred = np.clip(pred, -100, 100)
                 
                 # Check if prediction meets threshold
                 threshold = self.thresholds.get(timeframe, float('inf'))
@@ -280,6 +290,8 @@ class RealTimeMonitor:
                     logger.info(f"Prediction {pred:.2f}% does not meet {timeframe} threshold of {threshold}%")
                     return 0.0
             
+            # Clip and validate final prediction
+            base_pred = np.clip(base_pred, -100, 100)
             return base_pred if abs(base_pred) >= self.thresholds.get(timeframe, float('inf')) else 0.0
         
         except Exception as e:
