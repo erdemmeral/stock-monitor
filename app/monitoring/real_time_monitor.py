@@ -1222,6 +1222,41 @@ class RealTimeMonitor:
                 }
             }
 
+    async def poll_news(self, symbols: List[str]):
+        """Poll news for a list of symbols in batches"""
+        try:
+            # Store symbols for use in process_market_news
+            self.symbols = symbols
+            
+            # Process symbols in batches of 10
+            batch_size = 10
+            total_batches = (len(symbols) + batch_size - 1) // batch_size
+            
+            for i in range(0, len(symbols), batch_size):
+                batch = symbols[i:i + batch_size]
+                batch_number = (i // batch_size) + 1
+                
+                logger.info(f"Processing batch {batch_number}/{total_batches} ({len(batch)} symbols)")
+                
+                # Process each symbol in the batch
+                tasks = [
+                    self.monitor_stock_with_tracking(symbol, batch_number, total_batches)
+                    for symbol in batch
+                ]
+                await asyncio.gather(*tasks)
+                
+                # Wait 5 seconds between batches to avoid rate limiting
+                if i + batch_size < len(symbols):
+                    await asyncio.sleep(5)
+            
+            # Wait 1 minute before next polling cycle
+            await asyncio.sleep(60)
+            
+        except Exception as e:
+            logger.error(f"Error in poll_news: {str(e)}")
+            # Wait 1 minute before retrying on error
+            await asyncio.sleep(60)
+
 async def main():
     logger.info("🚀 Market Monitor Starting...")
     logger.info("Initializing ML models and market data...")
