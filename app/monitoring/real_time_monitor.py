@@ -794,52 +794,29 @@ class RealTimeMonitor:
                     # Make predictions for this specific article
                     article_predictions = {}
                     
-                    # Get TF-IDF features
+                    # Get TF-IDF features only
                     X_tfidf = self.vectorizer.transform([content])
                     
-                    # Get sentiment analysis from FinBERT
+                    # Get sentiment analysis from FinBERT (for later adjustment)
                     sentiment = self.finbert_analyzer.analyze_sentiment(content)
                     
                     predictions_log = []  # Collect all predictions for single log message
                     
                     for timeframe, model in self.models.items():
                         try:
-                            # Prepare features exactly as in training
-                            if sentiment:
-                                # Create sentiment features array
-                                sentiment_features = np.array([
-                                    sentiment['score'],  # Base score
-                                    sentiment['confidence'],  # Confidence
-                                    sentiment['probabilities']['positive'],
-                                    sentiment['probabilities']['negative'],
-                                    sentiment['probabilities']['neutral']
-                                ]).reshape(1, -1)
-                                
-                                # Convert to sparse matrix
-                                sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
-                                
-                                # Combine features as done in training
-                                X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
-                            else:
-                                # If no sentiment, use zeros for sentiment features
-                                sentiment_features = np.zeros((1, 5))
-                                sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
-                                X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
-                            
-                            # Pad features if needed
-                            X_padded = self._pad_features(X)
-                            
-                            # Get prediction
-                            pred = model.predict(X_padded)[0]
+                            # Get base prediction using only TF-IDF features
+                            base_pred = model.predict(X_tfidf)[0]
                             
                             # Log prediction details
-                            logger.info(f"Prediction for {timeframe}: {pred:.2f}%")
+                            logger.info(f"Base prediction for {timeframe}: {base_pred:.2f}%")
+                            
+                            # Store the prediction
+                            article_predictions[timeframe] = base_pred
+                            predictions_log.append(f"{timeframe}: {base_pred:.2f}%")
+                            
                             if sentiment:
                                 logger.info(f"Sentiment Score: {sentiment['score']:.2f}")
                                 logger.info(f"Confidence: {sentiment['confidence']:.2f}")
-                            
-                            article_predictions[timeframe] = pred
-                            predictions_log.append(f"{timeframe}: {pred:.2f}%")
                         
                         except Exception as e:
                             logger.error(f"Error in prediction for {timeframe}: {e}")
