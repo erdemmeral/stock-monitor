@@ -304,6 +304,9 @@ class RealTimeMonitor:
                 best_article = prediction_result["best_article"]
                 entry_date = datetime.fromtimestamp(best_article['article']['providerPublishTime'], tz=pytz.UTC)
                 
+                # Store the best article for the signal
+                self._current_best_article = best_article
+                
                 # Calculate target date based on timeframe
                 timeframe_deltas = {
                     '1h': timedelta(hours=1),
@@ -326,6 +329,9 @@ class RealTimeMonitor:
                     entry_date=entry_date,
                     target_date=target_date
                 )
+                
+                # Clear the stored article after sending the signal
+                self._current_best_article = None
                 
         except Exception as e:
             logger.error(f"Error monitoring {symbol}: {str(e)}")
@@ -380,8 +386,15 @@ class RealTimeMonitor:
                     f"Target Date: {target_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
                 )
             
+            message += f"Reason: {reason}\n\n"
+            
+            # Add news article URL for buy signals
+            if signal_type.lower() == 'buy' and hasattr(self, '_current_best_article') and self._current_best_article:
+                article_url = self._current_best_article['article'].get('link', '')
+                if article_url:
+                    message += f"Based on news article:\n{article_url}\n\n"
+            
             message += (
-                f"Reason: {reason}\n\n"
                 "View details at:\n"
                 "https://portfolio-tracker-rough-dawn-5271.fly.dev"
             )
@@ -786,13 +799,17 @@ class RealTimeMonitor:
                             base_pred = model.predict(X_padded)[0]
                             
                             if sentiment:
-                                multiplier_map = {
-                                    'negative': 0.7,
-                                    'neutral': 1.0,
-                                    'positive': 1.3
-                                }
-                                confidence = max(sentiment['probabilities'].values())
-                                pred = base_pred * (1 + (multiplier_map.get(sentiment['label'], 1.0) - 1) * 0.3 * confidence)
+                                # Get continuous sentiment score (-1 to 1)
+                                sentiment_score = sentiment['score']
+                                
+                                # Calculate multiplier based on continuous score
+                                # Score of -1 -> multiplier of 0.7
+                                # Score of 0  -> multiplier of 1.0
+                                # Score of 1  -> multiplier of 1.3
+                                base_multiplier = 1.0 + (sentiment_score * 0.3)
+                                
+                                # Apply sentiment weight to the adjustment
+                                pred = base_pred * (1 + (base_multiplier - 1) * self.sentiment_weight)
                             else:
                                 pred = base_pred
                             
