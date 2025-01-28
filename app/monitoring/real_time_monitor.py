@@ -794,24 +794,24 @@ class RealTimeMonitor:
                     # Make predictions for this specific article
                     article_predictions = {}
                     
-                    # Get TF-IDF features only
+                    # Get TF-IDF features
                     X_tfidf = self.vectorizer.transform([content])
                     
-                    # Get sentiment analysis from FinBERT (for later adjustment)
+                    # Get sentiment analysis from FinBERT
                     sentiment = self.finbert_analyzer.analyze_sentiment(content)
                     
                     predictions_log = []  # Collect all predictions for single log message
                     
                     for timeframe, model in self.models.items():
                         try:
-                            # Create sentiment features array (same as in training)
+                            # Create sentiment features array without impact adjustment
                             if sentiment:
                                 sentiment_features = np.array([
-                                    sentiment['score'],  # Base score
-                                    sentiment['confidence'],  # Confidence
-                                    sentiment['probabilities']['positive'],
-                                    sentiment['probabilities']['negative'],
-                                    sentiment['probabilities']['neutral']
+                                    sentiment['score'],  # Raw sentiment score
+                                    sentiment['confidence'],  # Raw confidence
+                                    sentiment['probabilities']['positive'],  # Raw probability
+                                    sentiment['probabilities']['negative'],  # Raw probability
+                                    sentiment['probabilities']['neutral']  # Raw probability
                                 ]).reshape(1, -1)
                             else:
                                 # If no sentiment, use zeros
@@ -820,14 +820,19 @@ class RealTimeMonitor:
                             # Convert to sparse matrix
                             sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
                             
-                            # Combine features exactly as done in training
+                            # Combine features
                             X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
                             
-                            # Get prediction using combined features
-                            pred = model.predict(X)[0]
+                            # Get raw prediction
+                            raw_pred = model.predict(X)[0]
+                            
+                            # Denormalize prediction using the same thresholds used in training
+                            threshold = self.thresholds[timeframe]  # e.g., 5.0 for 1h, 10.0 for 1wk, 20.0 for 1mo
+                            pred = raw_pred * threshold
                             
                             # Log prediction details
-                            logger.info(f"Prediction for {timeframe}: {pred:.2f}%")
+                            logger.info(f"Raw normalized prediction for {timeframe}: {raw_pred:.4f}")
+                            logger.info(f"Denormalized prediction for {timeframe}: {pred:.2f}%")
                             if sentiment:
                                 logger.info(f"Sentiment Score: {sentiment['score']:.2f}")
                                 logger.info(f"Confidence: {sentiment['confidence']:.2f}")
