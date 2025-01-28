@@ -205,22 +205,26 @@ class RealTimeMonitor:
         self._portfolio_check_task = None
 
     def _pad_features(self, X):
-        """Pad features to match model input size"""
+        """Pad or truncate features to match model input size"""
         try:
-            # Hardcoded expected number of features from training
-            expected_features = 95721
+            # Get the expected number of features from the model
+            expected_features = 84953  # Based on the error message
             current_features = X.shape[1]
             logger.info(f"Input matrix shape: {X.shape}")
+            logger.info(f"Expected features: {expected_features}, Current features: {current_features}")
 
             if current_features < expected_features:
                 # Create zero matrix for padding
                 padding = scipy.sparse.csr_matrix((X.shape[0], expected_features - current_features))
                 # Horizontally stack with original features
                 X_padded = scipy.sparse.hstack([X, padding])
+                logger.info(f"Padded matrix shape: {X_padded.shape}")
                 return X_padded
             elif current_features > expected_features:
                 # Truncate to expected size
-                return X[:, :expected_features]
+                X_truncated = X[:, :expected_features]
+                logger.info(f"Truncated matrix shape: {X_truncated.shape}")
+                return X_truncated
             else:
                 return X
         except Exception as e:
@@ -235,9 +239,11 @@ class RealTimeMonitor:
         try:
             # Vectorize text
             X_tfidf = self.vectorizer.transform([text])
+            logger.info(f"Original TF-IDF shape: {X_tfidf.shape}")
             
             # Pad features if needed
             X_padded = self._pad_features(X_tfidf)
+            logger.info(f"After padding shape: {X_padded.shape}")
             
             # Base prediction from model
             base_pred = self.models[timeframe].predict(X_padded)[0]
