@@ -162,10 +162,10 @@ class RealTimeMonitor:
         self._is_polling = False
 
     def _pad_features(self, X):
-        """Pad features to match model input size"""
+        """Pad or truncate features to match model input size"""
         try:
-            # Hardcoded expected number of features from training
-            expected_features = 95721
+            # Expected number of features from the model
+            expected_features = 84953
             current_features = X.shape[1]
             logger.info(f"Input matrix shape: {X.shape}")
 
@@ -174,10 +174,13 @@ class RealTimeMonitor:
                 padding = scipy.sparse.csr_matrix((X.shape[0], expected_features - current_features))
                 # Horizontally stack with original features
                 X_padded = scipy.sparse.hstack([X, padding])
+                logger.info(f"Padded matrix shape: {X_padded.shape}")
                 return X_padded
             elif current_features > expected_features:
                 # Truncate to expected size
-                return X[:, :expected_features]
+                X_truncated = X[:, :expected_features]
+                logger.info(f"Truncated matrix shape: {X_truncated.shape}")
+                return X_truncated
             else:
                 return X
         except Exception as e:
