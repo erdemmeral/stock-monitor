@@ -196,8 +196,11 @@ class RealTimeMonitor:
             # Vectorize text
             X_tfidf = self.vectorizer.transform([text])
             
+            # Pad features to match expected size
+            X_padded = self._pad_features(X_tfidf)
+            
             # Base prediction from model
-            base_pred = self.models[timeframe].predict(X_tfidf)[0]
+            base_pred = self.models[timeframe].predict(X_padded)[0]
             
             # Analyze sentiment
             sentiment = self.finbert_analyzer.analyze_sentiment(text)
@@ -794,6 +797,9 @@ class RealTimeMonitor:
                     # Get TF-IDF features
                     X_tfidf = self.vectorizer.transform([content])
                     
+                    # Pad features to match expected size
+                    X_padded = self._pad_features(X_tfidf)
+                    
                     # Get sentiment analysis from FinBERT
                     sentiment = self.finbert_analyzer.analyze_sentiment(content)
                     
@@ -802,7 +808,7 @@ class RealTimeMonitor:
                     for timeframe, model in self.models.items():
                         try:
                             # Get base prediction from TF-IDF features
-                            base_pred = model.predict(X_tfidf)[0]
+                            base_pred = model.predict(X_padded)[0]
                             
                             # Adjust prediction with sentiment if available
                             if sentiment:
