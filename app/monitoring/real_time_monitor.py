@@ -804,19 +804,36 @@ class RealTimeMonitor:
                     
                     for timeframe, model in self.models.items():
                         try:
-                            # Get base prediction using only TF-IDF features
-                            base_pred = model.predict(X_tfidf)[0]
+                            # Create sentiment features array (same as in training)
+                            if sentiment:
+                                sentiment_features = np.array([
+                                    sentiment['score'],  # Base score
+                                    sentiment['confidence'],  # Confidence
+                                    sentiment['probabilities']['positive'],
+                                    sentiment['probabilities']['negative'],
+                                    sentiment['probabilities']['neutral']
+                                ]).reshape(1, -1)
+                            else:
+                                # If no sentiment, use zeros
+                                sentiment_features = np.zeros((1, 5))
+                            
+                            # Convert to sparse matrix
+                            sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
+                            
+                            # Combine features exactly as done in training
+                            X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
+                            
+                            # Get prediction using combined features
+                            pred = model.predict(X)[0]
                             
                             # Log prediction details
-                            logger.info(f"Base prediction for {timeframe}: {base_pred:.2f}%")
-                            
-                            # Store the prediction
-                            article_predictions[timeframe] = base_pred
-                            predictions_log.append(f"{timeframe}: {base_pred:.2f}%")
-                            
+                            logger.info(f"Prediction for {timeframe}: {pred:.2f}%")
                             if sentiment:
                                 logger.info(f"Sentiment Score: {sentiment['score']:.2f}")
                                 logger.info(f"Confidence: {sentiment['confidence']:.2f}")
+                            
+                            article_predictions[timeframe] = pred
+                            predictions_log.append(f"{timeframe}: {pred:.2f}%")
                         
                         except Exception as e:
                             logger.error(f"Error in prediction for {timeframe}: {e}")
