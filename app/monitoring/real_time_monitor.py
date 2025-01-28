@@ -55,47 +55,18 @@ class ModelManager:
         self.load_initial_models()
     
     def load_initial_models(self):
-        """Load all initial models with enhanced error handling"""
-        try:
-            # Load vectorizer first as it's required for other models
-            vectorizer_path = self.model_paths['vectorizer']
-            if not os.path.exists(vectorizer_path):
-                raise FileNotFoundError(f"Vectorizer file not found at {vectorizer_path}")
-            
-            self.models['vectorizer'] = joblib.load(vectorizer_path)
-            self.last_modified_times['vectorizer'] = os.path.getmtime(vectorizer_path)
-            logger.info("✅ Loaded vectorizer successfully")
-            
-            # Now load other models
-            for name, path in self.model_paths.items():
-                if name == 'vectorizer':
-                    continue
-                    
-                if not os.path.exists(path):
-                    raise FileNotFoundError(f"Model file not found at {path}")
-                
-                model = joblib.load(path)
-                # Store model coefficients for debugging
-                if hasattr(model, 'coef_'):
-                    logger.info(f"{name} model coefficients shape: {model.coef_.shape}")
-                    logger.info(f"{name} model non-zero coefficients: {np.count_nonzero(model.coef_)}")
-                
-                self.models[name] = model
+        for name, path in self.model_paths.items():
+            try:
+                self.models[name] = joblib.load(path)
                 self.last_modified_times[name] = os.path.getmtime(path)
-                logger.info(f"✅ Loaded {name} model successfully")
-                
-        except Exception as e:
-            logger.error(f"❌ Critical error loading models: {str(e)}")
-            raise  # Re-raise the exception as this is critical
+                logger.info(f"Loaded initial {name} model")
+            except Exception as e:
+                logger.error(f"Error loading initial {name} model: {e}")
 
     def check_and_reload_models(self):
         """Check if models have been updated and reload if necessary"""
         try:
             for name, path in self.model_paths.items():
-                if not os.path.exists(path):
-                    logger.error(f"❌ Model file not found at {path}")
-                    continue
-                    
                 current_mod_time = os.path.getmtime(path)
                 
                 if current_mod_time > self.last_modified_times.get(name, 0):
@@ -107,10 +78,9 @@ class ModelManager:
                         logger.info(f"🔄 Reloaded {name} model")
                         logger.info(f"Model last modified: {datetime.fromtimestamp(current_mod_time)}")
                     except Exception as e:
-                        logger.error(f"❌ Error reloading {name} model: {str(e)}")
-                        
+                        logger.error(f"Error reloading {name} model: {e}")
         except Exception as e:
-            logger.error(f"❌ Error in model check: {str(e)}")
+            logger.error(f"Error in model check: {e}")
 
 class NewsAggregator:
     def __init__(self):
@@ -158,41 +128,17 @@ class RealTimeMonitor:
         
         self.stop_loss_percentage = 5.0
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
-        
-        # Thresholds for significant price movements
-        self.thresholds = {
-            '1h': 5.0,   # 5% threshold
-            '1wk': 10.0,  # 10% threshold
-            '1mo': 20.0   # 20% threshold
-        }
-        
-        # Portfolio check interval (in minutes)
-        self.portfolio_check_interval = 5
-        
-        # Minimum requirements for signal generation
-        self.signal_criteria = {
-            'min_confidence': 0.6,
-            'min_alignment_rate': 0.6,
-            'min_sentiment_score': 0.3,
-            'max_neutral_probability': 0.4
-        }
+        self.sentiment_weight = 0.3
 
-        # Initialize ModelManager first
         self.model_manager = ModelManager()
-        logger.info("Model manager initialized")
         
-        # Get models from model manager
-        if 'vectorizer' not in self.model_manager.models:
-            raise ValueError("Vectorizer not found in model manager")
-        
+        # Use models from model manager
         self.vectorizer = self.model_manager.models['vectorizer']
         self.models = {
             '1h': self.model_manager.models['1h'],
             '1wk': self.model_manager.models['1wk'],
             '1mo': self.model_manager.models['1mo']
         }
-        
-        logger.info("ML models loaded successfully")
         
         # Initialize Telegram
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -206,110 +152,84 @@ class RealTimeMonitor:
         self.news_service = NewsService()
         self.processed_news = set()
 
+        self.thresholds = {
+            '1h': 5.0,
+            '1wk': 10.0,
+            '1mo': 20.0
+        }
+
         self._polling_lock = asyncio.Lock()
         self._is_polling = False
-        self._portfolio_check_task = None
 
     def _pad_features(self, X):
-        """Pad or truncate features to match model input size with proper normalization"""
+        """Pad features to match model input size"""
         try:
-            # Get the expected number of features from the model
-            expected_features = 84953
+            # Hardcoded expected number of features from training
+            expected_features = 95721
             current_features = X.shape[1]
             logger.info(f"Input matrix shape: {X.shape}")
-            logger.info(f"Expected features: {expected_features}, Current features: {current_features}")
-
-            # Normalize the features using L2 norm
-            X_normalized = scipy.sparse.csr_matrix(X)
-            norm = np.sqrt(X_normalized.multiply(X_normalized).sum(axis=1))
-            # Avoid division by zero
-            norm[norm == 0] = 1
-            X_normalized = scipy.sparse.diags(1/np.array(norm).flatten()) @ X_normalized
 
             if current_features < expected_features:
                 # Create zero matrix for padding
                 padding = scipy.sparse.csr_matrix((X.shape[0], expected_features - current_features))
                 # Horizontally stack with original features
-                X_padded = scipy.sparse.hstack([X_normalized, padding])
+                X_padded = scipy.sparse.hstack([X, padding])
+                return X_padded
             elif current_features > expected_features:
                 # Truncate to expected size
-                X_padded = X_normalized[:, :expected_features]
+                return X[:, :expected_features]
             else:
-                X_padded = X_normalized
-
-            logger.info(f"Padded matrix shape: {X_padded.shape}")
-            return X_padded
-
+                return X
         except Exception as e:
             logger.error(f"Feature padding error: {str(e)}")
+            logger.error(f"Input matrix shape: {X.shape}")
             raise
 
     def predict_with_sentiment(self, text, timeframe):
         """
-        Make a prediction integrating FinBERT sentiment with significance thresholds
+        Make a prediction integrating continuous FinBERT sentiment scores
         """
         try:
             # Vectorize text
             X_tfidf = self.vectorizer.transform([text])
-            logger.info(f"Original TF-IDF shape: {X_tfidf.shape}")
             
-            # Normalize features (L2 norm)
-            X_normalized = scipy.sparse.csr_matrix(X_tfidf)
-            X_normalized.data = X_normalized.data / np.sqrt(np.sum(X_normalized.data ** 2))
-            
-            # Pad features if needed
-            X_padded = self._pad_features(X_normalized)
-            logger.info(f"After padding shape: {X_padded.shape}")
-            
-            # Make prediction and validate
-            base_pred = self.models[timeframe].predict(X_padded)[0]
-            
-            # Clip prediction to reasonable range (-100% to +100%)
-            base_pred = np.clip(base_pred, -100, 100)
+            # Base prediction from model
+            base_pred = self.models[timeframe].predict(X_tfidf)[0]
             
             # Analyze sentiment
             sentiment = self.finbert_analyzer.analyze_sentiment(text)
             
             # If sentiment available, adjust prediction
             if sentiment:
-                # Calculate multiplier using continuous score
-                base_multiplier = 1.0 + (sentiment['score'] * 0.3)
-                confidence = sentiment['confidence']
-                neutral_dampener = 1.0 - sentiment['probabilities']['neutral']
-                adjusted_multiplier = 1.0 + (base_multiplier - 1.0) * confidence * neutral_dampener
-                pred = base_pred * adjusted_multiplier
+                # Get continuous sentiment score (-1 to 1)
+                sentiment_score = sentiment['score']
                 
-                # Clip final prediction again
-                pred = np.clip(pred, -100, 100)
+                # Calculate multiplier based on continuous score
+                # Score of -1 -> multiplier of 0.7
+                # Score of 0  -> multiplier of 1.0
+                # Score of 1  -> multiplier of 1.3
+                base_multiplier = 1.0 + (sentiment_score * 0.3)
                 
-                # Check if prediction meets threshold
-                threshold = self.thresholds.get(timeframe, float('inf'))
-                meets_threshold = abs(pred) >= threshold
+                # Adjusted prediction
+                adjusted_pred = base_pred * (
+                    1 + (base_multiplier - 1) * self.sentiment_weight
+                )
                 
                 # Logging for transparency
-                logger.info(f"\nPrediction Analysis for {timeframe}:")
+                logger.info(f"Prediction for {timeframe}:")
                 logger.info(f"Base Prediction: {base_pred:.2f}%")
-                logger.info(f"Sentiment Score: {sentiment['score']:.2f}")
-                logger.info(f"Confidence: {confidence:.2f}")
-                logger.info(f"Neutral Probability: {sentiment['probabilities']['neutral']:.2f}")
-                logger.info(f"Sentiment Multiplier: {adjusted_multiplier:.2f}")
-                logger.info(f"Adjusted Prediction: {pred:.2f}%")
-                logger.info(f"Threshold ({threshold}%) Met: {meets_threshold}")
+                logger.info(f"Sentiment Score: {sentiment_score:.2f}")
+                logger.info(f"Sentiment Multiplier: {base_multiplier:.2f}")
+                logger.info(f"Adjusted Prediction: {adjusted_pred:.2f}%")
                 
-                if meets_threshold:
-                    return pred
-                else:
-                    logger.info(f"Prediction {pred:.2f}% does not meet {timeframe} threshold of {threshold}%")
-                    return 0.0
+                return adjusted_pred
             
-            # Clip and validate final prediction
-            base_pred = np.clip(base_pred, -100, 100)
-            return base_pred if abs(base_pred) >= self.thresholds.get(timeframe, float('inf')) else 0.0
-        
+            return base_pred
+            
         except Exception as e:
             logger.error(f"Error in sentiment-integrated prediction: {e}")
-            return 0.0
-
+            return base_pred
+    
     def get_full_article_text(self,url):
         try:
             # Add headers to mimic browser request
@@ -355,178 +275,14 @@ class RealTimeMonitor:
             logger.error(f"Error fetching article content: {e}")
             return None
 
-    async def handle_position_update(self, symbol: str, current_price: float, prediction_result: Dict) -> None:
-        """Handle updates to existing positions based on new signals"""
-        try:
-            # Get current position for this symbol
-            position = await self.portfolio_tracker.get_position(symbol)
-            if not position:
-                return
-
-            entry_price = float(position['entryPrice'])
-            target_price = float(position['targetPrice'])
-            target_date = datetime.fromisoformat(position['targetDate'])
-            current_return = ((current_price - entry_price) / entry_price) * 100
-            current_time = datetime.now(tz=pytz.UTC)
-            
-            # Check for sell conditions
-            should_sell = False
-            sell_reason = None
-            sell_condition = None
-            
-            # 1. Stop loss hit
-            if current_return <= -self.stop_loss_percentage:
-                should_sell = True
-                sell_reason = f"Stop loss triggered at {current_return:.1f}% loss"
-                sell_condition = "STOP_LOSS"
-            
-            # 2. Target price reached
-            elif current_price >= target_price:
-                should_sell = True
-                sell_reason = f"Target price ${target_price:.2f} reached"
-                sell_condition = "TARGET_REACHED"
-            
-            # 3. Target date reached
-            elif current_time >= target_date:
-                if current_return > 0:
-                    sell_reason = f"Target date reached with {current_return:.1f}% profit"
-                else:
-                    sell_reason = f"Target date reached with {abs(current_return):.1f}% loss"
-                should_sell = True
-                sell_condition = "TARGET_DATE"
-            
-            # 4. Sentiment turned significantly negative
-            elif prediction_result['sentiment_score'] < -0.3 and prediction_result['confidence_score'] >= 0.6:
-                should_sell = True
-                sell_reason = f"Sentiment turned negative: {prediction_result['sentiment_score']:.2f}"
-                sell_condition = "PREDICTION_BASED"
-            
-            # 5. Prediction suggests price reversal
-            elif prediction_result['prediction_strength'] < -self.thresholds.get(prediction_result['best_timeframe'], 0):
-                should_sell = True
-                sell_reason = f"Price reversal predicted: {prediction_result['prediction_strength']:.1f}%"
-                sell_condition = "PREDICTION_BASED"
-
-            if should_sell:
-                logger.info(f"Selling {symbol} - Reason: {sell_reason}")
-                
-                # First send sell signal to portfolio tracker
-                sell_success = await self.portfolio_tracker.send_sell_signal(
-                    symbol=symbol,
-                    selling_price=current_price,
-                    sell_condition=sell_condition
-                )
-                
-                if sell_success:
-                    # Then send notification
-                    await self.send_signal(
-                        signal_type="sell",
-                        symbol=symbol,
-                        price=current_price,
-                        target_price=0.0,
-                        sentiment_score=prediction_result['sentiment_score'],
-                        timeframe=prediction_result['best_timeframe'],
-                        reason=sell_reason
-                    )
-                    logger.info(f"Successfully closed position for {symbol}")
-                else:
-                    logger.error(f"Failed to send sell signal to portfolio tracker for {symbol}")
-                return
-
-            # Check for position updates
-            if prediction_result['should_buy']:
-                # Update target if new prediction is significantly different
-                new_target = prediction_result['target_price']
-                target_change = abs((new_target - target_price) / target_price) * 100
-                
-                if target_change >= 5.0:  # Only update if target changes by 5% or more
-                    logger.info(f"Updating {symbol} position with new target: ${new_target:.2f}")
-                    await self.portfolio_tracker.update_position(
-                        symbol=symbol,
-                        target_price=new_target,
-                        sentiment_score=prediction_result['sentiment_score'],
-                        confidence_score=prediction_result['confidence_score']
-                    )
-                    
-                    # Send notification about position update
-                    update_message = (
-                        f"[UPDATE] Position Update for {symbol}\n"
-                        f"New Target: ${new_target:.2f}\n"
-                        f"Current Return: {current_return:.1f}%\n"
-                        f"Sentiment Score: {prediction_result['sentiment_score']:.2f}\n"
-                        f"Confidence Score: {prediction_result['confidence_score']:.2f}"
-                    )
-                    await self.send_telegram_alert(update_message)
-        
-        except Exception as e:
-            logger.error(f"Error handling position update for {symbol}: {str(e)}")
-
-    async def get_current_price(self, symbol: str, is_market_hours: bool = True) -> Optional[float]:
-        """Get current price considering market hours"""
-        try:
-            stock = yf.Ticker(symbol)
-            
-            if is_market_hours:
-                # During market hours, use regular price
-                price = stock.info.get('regularMarketPrice')
-                if price:
-                    return float(price)
-            
-            # For pre/post market, try to get the appropriate price
-            if stock.info.get('marketState') == 'PRE':
-                price = stock.info.get('preMarketPrice')
-                if price:
-                    return float(price)
-            elif stock.info.get('marketState') in ['POST', 'POSTPOST']:
-                price = stock.info.get('postMarketPrice')
-                if price:
-                    return float(price)
-            
-            # Fallback to regular market price if others not available
-            return float(stock.info.get('regularMarketPrice', 0))
-            
-        except Exception as e:
-            logger.error(f"Error getting current price for {symbol}: {str(e)}")
-            return None
-
-    def is_market_hours(self) -> bool:
-        """Check if it's currently regular market hours (9:30 AM - 4:00 PM ET, weekdays)"""
-        now = datetime.now(pytz.timezone('US/Eastern'))
-        
-        # Check if it's a weekday
-        if now.weekday() >= 5:  # 5 = Saturday, 6 = Sunday
-            return False
-        
-        # Create time objects for market open (9:30 AM) and close (4:00 PM)
-        market_open = now.replace(hour=9, minute=30, second=0, microsecond=0)
-        market_close = now.replace(hour=16, minute=0, second=0, microsecond=0)
-        
-        return market_open <= now <= market_close
-
     async def analyze_and_notify(self, symbol: str, articles: List[Dict], price_data: Dict) -> None:
         try:
-            # Get current price with market hours consideration
-            is_market = self.is_market_hours()
-            current_price = await self.get_current_price(symbol, is_market)
-            if not current_price:
-                logger.error(f"Could not get valid price for {symbol}")
-                return
-                
-            # Update price_data with accurate price
-            price_data["current_price"] = current_price
-            
-            # Calculate predictions
+            # Calculate predictions and check thresholds
             prediction_result = await self._calculate_predictions(symbol, articles, price_data)
             
-            # First check if we have an existing position
-            await self.handle_position_update(symbol, current_price, prediction_result)
-            
-            # Only proceed with new buy signal if we don't have an existing position
-            position = await self.portfolio_tracker.get_position(symbol)
-            if position:
-                return
-            
             if prediction_result["should_buy"]:
+                # Check if target price has already been reached
+                current_price = price_data["current_price"]
                 target_price = prediction_result["target_price"]
                 
                 # Calculate how much of the predicted move has already happened
@@ -552,6 +308,9 @@ class RealTimeMonitor:
                     '1mo': timedelta(days=30)
                 }
                 target_date = entry_date + timeframe_deltas[prediction_result['best_timeframe']]
+                
+                logger.info(f"Using article published at {entry_date} as entry date")
+                logger.info(f"Target date set to {target_date} based on {prediction_result['best_timeframe']} timeframe")
                 
                 await self.send_signal(
                     signal_type="buy",
@@ -781,45 +540,151 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error sending portfolio status: {str(e)}")
 
-    async def start_portfolio_checker(self):
-        """Start the periodic portfolio checker"""
-        logger.info(f"Starting portfolio checker (checking every {self.portfolio_check_interval} minutes)")
-        while True:
-            try:
-                await self.update_positions()
-                await asyncio.sleep(self.portfolio_check_interval * 60)  # Convert minutes to seconds
-            except Exception as e:
-                logger.error(f"Error in portfolio checker: {str(e)}")
-                await asyncio.sleep(60)  # Wait a minute before retrying if there's an error
+    
 
-    async def start(self, symbols: List[str]):
-        """Start the market monitor with portfolio checking"""
+    async def cleanup(self):
+        """Cleanup resources before shutdown"""
         try:
-            # Start portfolio checker in the background
-            self._portfolio_check_task = asyncio.create_task(self.start_portfolio_checker())
-            logger.info("Portfolio checker started successfully")
-            
-            # Start the main monitoring loop
-            while True:
-                if not self._is_polling:
-                    async with self._polling_lock:
-                        self._is_polling = True
-                        try:
-                            await self.poll_news(symbols)
-                        finally:
-                            self._is_polling = False
-                await asyncio.sleep(60)  # Wait 1 minute between polls
-                
+            await self.portfolio_tracker.close()
+            logger.info("Portfolio tracker session closed")
         except Exception as e:
-            logger.error(f"Error in market monitor: {str(e)}")
-        finally:
-            # Clean up portfolio checker if it's running
-            if self._portfolio_check_task:
-                self._portfolio_check_task.cancel()
+            logger.error(f"Error during cleanup: {e}")
+
+    def __del__(self):
+        self._is_polling = False  # Stop polling when object is deleted
+        if hasattr(self, 'portfolio_tracker'):
+            asyncio.create_task(self.cleanup())
+
+    async def test_portfolio_tracker(self):
+        """Test function to verify portfolio tracker communication"""
+        try:
+            logger.info("=== Starting Portfolio Tracker Test ===")
+            
+            # Test data
+            symbol = "AAPL"
+            entry_price = 180.50
+            target_price = 200.00
+            entry_date = datetime.now(tz=pytz.UTC)
+            target_date = entry_date + timedelta(days=30)
+            
+            logger.info(f"Sending test buy signal for {symbol}")
+            logger.info(f"Entry Price: ${entry_price}")
+            logger.info(f"Target Price: ${target_price}")
+            logger.info(f"Entry Date: {entry_date.isoformat()}")
+            logger.info(f"Target Date: {target_date.isoformat()}")
+            
+            # Ensure portfolio tracker is initialized
+            if not hasattr(self, 'portfolio_tracker') or self.portfolio_tracker is None:
+                logger.info("Initializing portfolio tracker service")
+                self.portfolio_tracker = PortfolioTrackerService()
+            
+            # Send buy signal
+            success = await self.portfolio_tracker.send_buy_signal(
+            symbol=symbol,
+                entry_price=entry_price,
+                target_price=target_price,
+                entry_date=entry_date.isoformat(),
+                target_date=target_date.isoformat()
+            )
+            
+            if success:
+                logger.info("✅ Buy signal sent successfully")
+            else:
+                logger.error("❌ Failed to send buy signal")
+                
+            logger.info("=== Portfolio Tracker Test Completed ===")
+            
+        except Exception as e:
+            logger.error(f"Portfolio tracker test failed: {str(e)}", exc_info=True)
+
+    async def periodic_model_check(self):
+            """Periodically check and reload models"""
+            while True:
                 try:
-                    await self._portfolio_check_task
-                except asyncio.CancelledError:
-                    pass
+                    # Check for model updates
+                    self.model_manager.check_and_reload_models()
+                    
+                    # Update local references to models
+                    self.vectorizer = self.model_manager.models['vectorizer']
+                    self.models = {
+                        '1h': self.model_manager.models['1h'],
+                        '1wk': self.model_manager.models['1wk'],
+                        '1mo': self.model_manager.models['1mo']
+                    }
+                    
+                    # Wait before next check
+                    await asyncio.sleep(300)  # Check every 5 minutes
+                
+                except Exception as e:
+                    logger.error(f"Error in periodic model check: {e}")
+                    await asyncio.sleep(300)  # Wait before retrying
+    async def start(self, symbols: list[str]):
+        """Start the monitoring process"""
+        try:
+            startup_message = (
+                "🚀 <b>Stock Monitor Activated</b>\n\n"
+                f"📊 Monitoring {len(symbols)} stocks\n"
+                f"🕒 Started at: {datetime.now(tz=pytz.UTC).strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
+                "🔍 Initializing market monitoring process..."
+            )
+            await self.send_telegram_alert(startup_message)
+        except Exception as alert_error:
+            logger.error(f"Failed to send startup Telegram alert: {alert_error}")
+
+        logger.info(f"Starting monitoring for {len(symbols)} symbols...")
+        
+        # Initialize polling lock if not exists
+        if not hasattr(self, '_polling_lock'):
+            self._polling_lock = asyncio.Lock()
+        
+        self._is_polling = True
+        
+        # Start polling in background
+        polling_task = asyncio.create_task(self.poll_telegram_updates())
+        logger.info("Telegram polling started")
+
+        model_check_task = asyncio.create_task(self.periodic_model_check())
+   
+        try:
+            while True:
+                try:
+                    logger.info("Starting new monitoring cycle...")
+                    
+                    # Process stocks in batches for better resource management
+                    batch_size = 50
+                    total_symbols = len(symbols)
+                    
+                    for batch_start in range(0, total_symbols, batch_size):
+                        batch = symbols[batch_start:batch_start+batch_size]
+                        batch_number = batch_start // batch_size + 1
+                        total_batches = (total_symbols + batch_size - 1) // batch_size
+                        
+                        logger.info(f"Processing Batch {batch_number}/{total_batches}")
+                        
+                        async def process_symbols():
+                            sem = asyncio.Semaphore(50)
+                            
+                            async def bounded_monitor(symbol):
+                                async with sem:
+                                    return await self.monitor_stock_with_tracking(symbol, batch_number, total_batches)
+                            
+                            tasks = [bounded_monitor(symbol) for symbol in batch]
+                            return await asyncio.gather(*tasks)
+                
+                        await process_symbols()
+                        logger.info(f"Completed Batch {batch_number}/{total_batches}")
+                        await asyncio.sleep(1)
+                    
+                    logger.info("Completed full monitoring cycle. Waiting 5 minutes...")
+                    await asyncio.sleep(300)
+                    
+                except Exception as e:
+                    logger.error(f"Error in monitoring cycle: {str(e)}")
+                    await asyncio.sleep(300)
+        finally:
+            self._is_polling = False
+            await polling_task
+            await model_check_task
 
     async def monitor_stock_with_tracking(self, symbol: str, batch_number: int, total_batches: int):
         """Wrapper method to add tracking and logging to monitor_stock"""
@@ -869,8 +734,8 @@ class RealTimeMonitor:
                 logger.info(f"ℹ️ No recent news (last 24 hours) found for {symbol}")
                 return
 
-            # Limit to top 12 recent news articles
-            news = news[:12]
+            # Limit to top 10 recent news articles
+            news = news[:10]
             all_predictions = []
             processed_urls = set()  # Track processed URLs to avoid duplicates
 
@@ -907,60 +772,35 @@ class RealTimeMonitor:
                     # Make predictions for this specific article
                     article_predictions = {}
                     X = self.vectorizer.transform([content])
+                
+                    # Pad features BEFORE prediction
                     X_padded = self._pad_features(X)
                     
-                    predictions_log = []
+                    predictions_log = []  # Collect all predictions for single log message
                     
                     for timeframe, model in self.models.items():
-                        if timeframe == 'vectorizer':  # Skip vectorizer entry
-                            continue
-                            
                         try:
-                            # Get raw prediction
-                            raw_pred = model.predict(X_padded)[0]
-                            
-                            # Scale prediction based on timeframe
-                            scaling_factors = {
-                                '1h': 0.2,   # More conservative for shorter timeframe
-                                '1wk': 0.5,  # Moderate for medium timeframe
-                                '1mo': 1.0   # Full scale for longer timeframe
-                            }
-                            
-                            # Apply timeframe-specific scaling
-                            scaled_pred = raw_pred * scaling_factors.get(timeframe, 1.0)
-                            
-                            # Apply sigmoid to bound predictions
-                            bounded_pred = 100 * (2 / (1 + np.exp(-scaled_pred/100)) - 1)
+                            base_pred = model.predict(X_padded)[0]
                             
                             if sentiment:
-                                # Calculate sentiment effect with timeframe-specific dampening
-                                sentiment_dampening = {
-                                    '1h': 0.1,   # Less sentiment impact on short term
-                                    '1wk': 0.2,  # Moderate sentiment impact
-                                    '1mo': 0.3   # More sentiment impact on long term
+                                multiplier_map = {
+                                    'negative': 0.7,
+                                    'neutral': 1.0,
+                                    'positive': 1.3
                                 }
-                                
-                                sentiment_effect = np.clip(
-                                    sentiment['score'] * sentiment_dampening.get(timeframe, 0.2),
-                                    -0.3, 0.3
-                                )
-                                
-                                confidence = sentiment['confidence']
-                                neutral_dampener = 1.0 - sentiment['probabilities']['neutral']
-                                
-                                # Apply sentiment adjustment
-                                adjusted_pred = bounded_pred * (1 + sentiment_effect * confidence * neutral_dampener)
-                                final_pred = np.clip(adjusted_pred, -100, 100)
+                                confidence = max(sentiment['probabilities'].values())
+                                pred = base_pred * (1 + (multiplier_map.get(sentiment['label'], 1.0) - 1) * 0.3 * confidence)
                             else:
-                                final_pred = np.clip(bounded_pred, -100, 100)
+                                pred = base_pred
                             
-                            article_predictions[timeframe] = final_pred
-                            predictions_log.append(f"{timeframe}: {final_pred:.2f}%")
-                            
+                            article_predictions[timeframe] = pred
+                            predictions_log.append(f"{timeframe}: {pred:.2f}%")
+                        
                         except Exception as e:
                             logger.error(f"Error in prediction for {timeframe}: {e}")
                             continue
                     
+                    # Log all predictions in a single message
                     if predictions_log:
                         logger.info(f"Predictions for {symbol}: " + ", ".join(predictions_log))
                     
@@ -1004,11 +844,14 @@ class RealTimeMonitor:
             for position in positions:
                 try:
                     symbol = position['symbol']
-                    entry_price = float(position['entryPrice'])
-                    target_price = float(position['targetPrice'])
-                    target_date = datetime.fromisoformat(position['targetDate'])
-                    current_return = ((current_price - entry_price) / entry_price) * 100
-                    current_price = float(position['currentPrice'])
+                    entry_price = float(position['entry_price'])
+                    target_price = float(position['target_price'])
+                    target_date = datetime.fromisoformat(position['target_date'])
+                    timeframe = position.get('timeframe', '1wk')  # Default to 1wk if not specified
+
+                    # Get current price
+                    stock = yf.Ticker(symbol)
+                    current_price = float(stock.info.get('regularMarketPrice', 0))
                     
                     if current_price <= 0:
                         logger.warning(f"Could not get valid price for {symbol}")
@@ -1034,7 +877,7 @@ class RealTimeMonitor:
                         if price_change_percent > 0:
                             reason = f"📅 Target date reached with {price_change_percent:.2f}% profit"
                         else:
-                            reason = f"📅 Target date reached with {abs(price_change_percent):.1f}% loss"
+                            reason = f"📅 Target date reached with {abs(price_change_percent):.2f}% loss"
                         sell_signal = {
                             "reason": reason,
                             "condition": "TARGET_DATE"
@@ -1056,7 +899,7 @@ class RealTimeMonitor:
                                 signal_type="sell",
                                 symbol=symbol,
                                 price=current_price,
-                                target_price=0.0,
+                                target_price=target_price,
                                 sentiment_score=0.0,
                                 timeframe=timeframe,
                                 reason=sell_signal['reason']
@@ -1134,19 +977,13 @@ class RealTimeMonitor:
         }            
     def process_market_news(self):
         for symbol in self.symbols:
-            try:
-                stock = yf.Ticker(symbol)
-                news = stock.news
-                if news:
-                    for article in news:
-                        news_id = f"{symbol}_{article.get('id', article.get('guid', ''))}"
-                        if news_id not in self.processed_news:
-                            self.monitor_stock(symbol)
-                            self.processed_news.add(news_id)
-            except Exception as e:
-                logger.error(f"Error processing news for {symbol}: {str(e)}")
-                continue
-
+            news_items = self.get_news_for_symbol(symbol)
+            for news in news_items:
+                news_id = f"{symbol}_{news['id']}"
+                if news_id not in self.processed_news:
+                    self.analyze_and_send_alert(news, symbol)
+                    self.processed_news.add(news_id)
+                    
     def run(self):
         while True:
             self.process_market_news()
@@ -1174,43 +1011,19 @@ class RealTimeMonitor:
                 "prediction_strength": 0.0,
                 "target_price": 0.0,
                 "sentiment_score": 0.0,
-                "confidence_score": 0.0,
-                "best_article": None,
-                "prediction_stats": {
-                    "total": 0,
-                    "significant": 0,
-                    "aligned": 0,
-                    "high_confidence": 0
-                }
+                "best_article": None
             }
 
-            # Calculate weighted sentiment scores with time decay
-            total_weight = 0
-            weighted_sentiment = 0
-            weighted_confidence = 0
-            
+            # Calculate average sentiment score using continuous scores
+            sentiment_scores = []
             for article in articles:
                 if 'sentiment' in article and article['sentiment']:
                     sentiment = article['sentiment']
-                    # Calculate time-based weight (more recent articles have higher weight)
-                    pub_time = datetime.fromtimestamp(article['article']['providerPublishTime'], tz=pytz.UTC)
-                    hours_old = (datetime.now(tz=pytz.UTC) - pub_time).total_seconds() / 3600
-                    weight = 1.0 / (1.0 + hours_old * 0.1)  # Slower decay
-                    
-                    # Track weighted scores
-                    weighted_sentiment += sentiment['score'] * weight
-                    weighted_confidence += sentiment['confidence'] * weight
-                    total_weight += weight
-                    
-                    # Track statistics
-                    result["prediction_stats"]["total"] += 1
-                    if sentiment['confidence'] >= self.signal_criteria['min_confidence']:
-                        result["prediction_stats"]["high_confidence"] += 1
+                    if isinstance(sentiment, dict) and 'score' in sentiment:
+                        # Use continuous score directly
+                        sentiment_scores.append(sentiment['score'])
 
-            # Calculate final weighted scores
-            if total_weight > 0:
-                result["sentiment_score"] = weighted_sentiment / total_weight
-                result["confidence_score"] = weighted_confidence / total_weight
+            result["sentiment_score"] = sum(sentiment_scores) / len(sentiment_scores) if sentiment_scores else 0.0
 
             # Find best prediction across timeframes and articles
             best_prediction = 0.0
@@ -1220,27 +1033,10 @@ class RealTimeMonitor:
             for article in articles:
                 if 'predictions' in article:
                     for timeframe, prediction in article['predictions'].items():
-                        threshold = self.thresholds.get(timeframe, float('inf'))
-                        
-                        # Only consider predictions that meet threshold
-                        if abs(prediction) >= threshold:
-                            result["prediction_stats"]["significant"] += 1
-                            
-                            # Check sentiment alignment (using continuous score)
-                            sentiment_score = article['sentiment']['score']
-                            prediction_direction = np.sign(prediction)
-                            sentiment_direction = np.sign(sentiment_score)
-                            
-                            # Consider aligned if directions match and confidence is good
-                            if prediction_direction == sentiment_direction and \
-                               article['sentiment']['confidence'] >= self.signal_criteria['min_confidence']:
-                                result["prediction_stats"]["aligned"] += 1
-                            
-                            # Update best prediction if current is stronger
-                            if abs(prediction) > abs(best_prediction):
-                                best_prediction = prediction
-                                best_timeframe = timeframe
-                                best_article = article
+                        if prediction > best_prediction:
+                            best_prediction = prediction
+                            best_timeframe = timeframe
+                            best_article = article
 
             if best_timeframe and best_prediction and best_article:
                 result["best_timeframe"] = best_timeframe
@@ -1252,42 +1048,13 @@ class RealTimeMonitor:
                 if current_price > 0:
                     result["target_price"] = current_price * (1 + best_prediction/100)
 
-                # Enhanced buy signal criteria
-                threshold_met = abs(best_prediction) >= self.thresholds.get(best_timeframe, float('inf'))
-                confidence_met = result["confidence_score"] >= self.signal_criteria['min_confidence']
-                sentiment_met = abs(result["sentiment_score"]) >= self.signal_criteria['min_sentiment_score']
-                
-                # Calculate alignment rate only for significant predictions
-                alignment_rate = (result["prediction_stats"]["aligned"] / result["prediction_stats"]["significant"]) \
-                               if result["prediction_stats"]["significant"] > 0 else 0
-                alignment_met = alignment_rate >= self.signal_criteria['min_alignment_rate']
+                # Check if prediction meets threshold for buy signal
+                threshold_met = best_prediction >= self.thresholds.get(best_timeframe, float('inf'))
+                # Use continuous sentiment threshold (-1 to 1 scale)
+                sentiment_threshold_met = result["sentiment_score"] >= 0.8  # Positive sentiment threshold
 
-                # Additional check for neutral probability
-                neutral_prob = best_article['sentiment']['probabilities']['neutral']
-                neutral_check = neutral_prob <= self.signal_criteria['max_neutral_probability']
-
-                result["should_buy"] = all([
-                    threshold_met,
-                    confidence_met,
-                    sentiment_met,
-                    alignment_met,
-                    neutral_check
-                ])
-
-                # Detailed logging of decision factors
-                logger.info(f"\nDecision Factors for {symbol}:")
-                logger.info(f"Best Timeframe: {best_timeframe}")
-                logger.info(f"Prediction Strength: {best_prediction:.2f}%")
-                logger.info(f"Sentiment Score: {result['sentiment_score']:.2f}")
-                logger.info(f"Confidence Score: {result['confidence_score']:.2f}")
-                logger.info(f"Neutral Probability: {neutral_prob:.2f}")
-                logger.info(f"Alignment Rate: {alignment_rate:.2f}")
-                logger.info(f"Threshold Met: {threshold_met}")
-                logger.info(f"Confidence Met: {confidence_met}")
-                logger.info(f"Sentiment Met: {sentiment_met}")
-                logger.info(f"Alignment Met: {alignment_met}")
-                logger.info(f"Neutral Check: {neutral_check}")
-                logger.info(f"Buy Signal Generated: {result['should_buy']}")
+                # Generate buy signal if both thresholds are met
+                result["should_buy"] = threshold_met and sentiment_threshold_met
 
             return result
 
@@ -1299,59 +1066,20 @@ class RealTimeMonitor:
                 "prediction_strength": 0.0,
                 "target_price": 0.0,
                 "sentiment_score": 0.0,
-                "confidence_score": 0.0,
-                "best_article": None,
-                "prediction_stats": {
-                    "total": 0,
-                    "significant": 0,
-                    "aligned": 0,
-                    "high_confidence": 0
-                }
+                "best_article": None
             }
-
-    async def poll_news(self, symbols: List[str]):
-        """Poll news for a list of symbols in batches"""
-        try:
-            # Store symbols for use in process_market_news
-            self.symbols = symbols
-            
-            # Process symbols in batches of 10
-            batch_size = 10
-            total_batches = (len(symbols) + batch_size - 1) // batch_size
-            
-            for i in range(0, len(symbols), batch_size):
-                batch = symbols[i:i + batch_size]
-                batch_number = (i // batch_size) + 1
-                
-                logger.info(f"Processing batch {batch_number}/{total_batches} ({len(batch)} symbols)")
-                
-                # Process each symbol in the batch
-                tasks = [
-                    self.monitor_stock_with_tracking(symbol, batch_number, total_batches)
-                    for symbol in batch
-                ]
-                await asyncio.gather(*tasks)
-                
-                # Wait 5 seconds between batches to avoid rate limiting
-                if i + batch_size < len(symbols):
-                    await asyncio.sleep(5)
-            
-            # Wait 1 minute before next polling cycle
-            await asyncio.sleep(60)
-            
-        except Exception as e:
-            logger.error(f"Error in poll_news: {str(e)}")
-            # Wait 1 minute before retrying on error
-            await asyncio.sleep(60)
 
 async def main():
     logger.info("🚀 Market Monitor Starting...")
     logger.info("Initializing ML models and market data...")
     monitor = RealTimeMonitor()
     
-    # Get symbols and start monitoring
+    # Run the portfolio tracker test first
+    logger.info("Running portfolio tracker test...")
+    await monitor.test_portfolio_tracker()
+    
+    # Then continue with normal operation
     symbols = get_all_symbols()
-    logger.info(f"Loaded {len(symbols)} symbols")
     await monitor.start(symbols)
 
 if __name__ == "__main__":
