@@ -1047,13 +1047,19 @@ class RealTimeMonitor:
         }            
     def process_market_news(self):
         for symbol in self.symbols:
-            news_items = self.get_news_for_symbol(symbol)
-            for news in news_items:
-                news_id = f"{symbol}_{news['id']}"
-                if news_id not in self.processed_news:
-                    self.analyze_and_send_alert(news, symbol)
-                    self.processed_news.add(news_id)
-                    
+            try:
+                stock = yf.Ticker(symbol)
+                news = stock.news
+                if news:
+                    for article in news:
+                        news_id = f"{symbol}_{article.get('id', article.get('guid', ''))}"
+                        if news_id not in self.processed_news:
+                            self.monitor_stock(symbol)
+                            self.processed_news.add(news_id)
+            except Exception as e:
+                logger.error(f"Error processing news for {symbol}: {str(e)}")
+                continue
+
     def run(self):
         while True:
             self.process_market_news()
