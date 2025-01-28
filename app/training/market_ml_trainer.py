@@ -440,19 +440,19 @@ class MarketMLTrainer:
             # Calculate average impact across timeframes
             avg_impact = np.mean(list(impact_scores.values()))
             
-            # Adjust sentiment features based on historical impact
-            sentiment_features = [
+            # Ensure sentiment features are 2D
+            sentiment_features = np.array([
                 sentiment['score'] * (1 + avg_impact),  # Amplify sentiment if historically impactful
                 sentiment['confidence'],
                 sentiment['probabilities']['positive'] * (1 + avg_impact),
                 sentiment['probabilities']['negative'] * (1 + avg_impact),
                 sentiment['probabilities']['neutral']
-            ]
+            ]).reshape(1, -1)  # Reshape to 2D array
             
-            # Convert to sparse matrix
-            sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features).reshape(1, -1)
+            # Convert to sparse matrix with proper shape
+            sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
             
-            # Combine features
+            # Combine features ensuring both are 2D
             combined_features = scipy.sparse.hstack([sample_tfidf, sentiment_sparse])
             
             return combined_features, avg_impact
@@ -461,8 +461,64 @@ class MarketMLTrainer:
             logger.error(f"Error preparing training sample: {str(e)}")
             return None, None
 
+    def calculate_impact(self, prices, publish_time):
+        """Calculate price impact with timezone-aware datetime handling"""
+        if prices.empty:
+            return {'impact': 1, 'scores': None, 'changes': None}
+
+        # Ensure publish_time is timezone-aware
+        publish_datetime = datetime.fromtimestamp(publish_time, tz=pytz.UTC)
+        logger.info(f"Publish Date: {publish_datetime.strftime('%Y-%m-%d %H:%M:%S %Z')}")
+
+        changes = {}
+        start_price = None
+        
+        # Convert index to UTC if not already
+        if prices.index.tz is None:
+            prices.index = prices.index.tz_localize(pytz.UTC)
+            
+        for idx, row in prices.iterrows():
+            if idx >= publish_datetime:
+                start_price = row['Close']
+                break
+
+        if start_price is None:
+            return {'impact': 1, 'scores': None, 'changes': None}
+
+        # Calculate changes for each timeframe
+        timeframes = {
+            '1h': timedelta(hours=1),
+            '1w': timedelta(days=7),
+            '1m': timedelta(days=30)
+        }
+
+        for timeframe, delta in timeframes.items():
+            end_time = publish_datetime + delta
+            period_prices = prices[prices.index <= end_time]
+            if not period_prices.empty:
+                end_price = period_prices['Close'].iloc[-1]
+                changes[timeframe] = ((end_price - start_price) / start_price) * 100
+
+        # Calculate normalized scores
+        scores = self.calculate_normalized_score(changes)
+
+        # Determine overall impact based on best normalized score
+        best_score = max(scores.values(), default=0)
+        if best_score >= 1.0:  # Met or exceeded threshold
+            impact = 2
+        elif best_score <= -1.0:  # Met or exceeded negative threshold
+            impact = 0
+        else:
+            impact = 1
+
+        return {
+            'impact': impact,
+            'scores': scores,
+            'changes': changes
+        }
+
     def train_with_impact_scores(self, training_data, timeframe):
-        """Train model with impact-adjusted samples"""
+        """Train model with impact-adjusted samples ensuring proper feature dimensionality"""
         try:
             X_features_list = []
             y = []
@@ -480,6 +536,10 @@ class MarketMLTrainer:
                 if features is None:
                     continue
                 
+                # Ensure features are 2D
+                if features.ndim == 1:
+                    features = features.reshape(1, -1)
+                
                 X_features_list.append(features)
                 y.append(sample['changes'].get(timeframe, 0))
                 
@@ -490,7 +550,7 @@ class MarketMLTrainer:
             if not X_features_list:
                 return False
                 
-            # Combine features
+            # Combine features ensuring proper dimensionality
             X_combined = scipy.sparse.vstack(X_features_list)
             y_array = np.array(y, dtype=float)
             weights_array = np.array(sample_weights)
@@ -501,275 +561,112 @@ class MarketMLTrainer:
             y_clean = y_array[valid_mask]
             weights_clean = weights_array[valid_mask]
             
-            if len(y_clean) == 0:
-                return False
-            
-            # Train model with sample weights
+            # Train the model
             self.models[timeframe].fit(X_clean, y_clean, sample_weight=weights_clean)
-            
-            # Log training summary
-            logger.info(f"\nTraining Summary for {timeframe}:")
-            logger.info(f"Total samples: {len(y_clean)}")
-            logger.info(f"Average sample weight: {np.mean(weights_clean):.2f}")
-            logger.info(f"Max sample weight: {np.max(weights_clean):.2f}")
-            
-            # Show sample predictions
-            sample_indices = np.random.choice(len(y_clean), min(3, len(y_clean)), replace=False)
-            logger.info("\nSample predictions vs actual:")
-            for idx in sample_indices:
-                pred = self.models[timeframe].predict(X_clean[idx:idx+1])[0]
-                actual = y_clean[idx]
-                weight = weights_clean[idx]
-                logger.info(f"Pred: {pred:.1f}% | Actual: {actual:.1f}% | Weight: {weight:.2f}")
-            
             return True
             
         except Exception as e:
-            logger.error(f"Error in train_with_impact_scores: {str(e)}")
+            logger.error(f"Error training model for {timeframe}: {str(e)}")
             return False
 
     def collect_and_train(self, symbols):
-        logger.info(" Starting training process...")
+        logger.info("Starting training process...")
         training_data = []
         failed_stocks = set()
-        sentiment_impact_analysis = {
-                '1h': {
-                    'total_samples': 0,
-                    'sentiment_distribution': {
-                        'positive': 0,
-                        'negative': 0,
-                        'neutral': 0
-                    },
-                    'price_changes_by_sentiment': {
-                        'positive': [],
-                        'negative': [],
-                        'neutral': []
-                    }
-                },
-                '1wk': {
-                    'total_samples': 0,
-                    'sentiment_distribution': {
-                        'positive': 0,
-                        'negative': 0,
-                        'neutral': 0
-                    },
-                    'price_changes_by_sentiment': {
-                        'positive': [],
-                        'negative': [],
-                        'neutral': []
-                    }
-                },
-                '1mo': {
-                    'total_samples': 0,
-                    'sentiment_distribution': {
-                        'positive': 0,
-                        'negative': 0,
-                        'neutral': 0
-                    },
-                    'price_changes_by_sentiment': {
-                        'positive': [],
-                        'negative': [],
-                        'neutral': []
-                    }
-                }
-            }
 
-
-
-
-
-         # Configure yfinance cache
+        # Configure yfinance cache
         cache_dir = Path("./cache/yfinance")
         cache_dir.mkdir(parents=True, exist_ok=True)
         yf.set_tz_cache_location(str(cache_dir))
-        # Determine number of processes (use 75% of available cores)
-        num_processes = 4  # Can increase processes
-         # Process symbols in smaller chunks
-        chunk_size = 50  # Process 50 symbols at a time
+        
+        # Process symbols in smaller chunks
+        chunk_size = 20  # Process 50 symbols at a time
+        num_processes = 4  # Use 4 processes
+        
+        # First pass: Process all chunks
+        logger.info("PHASE 1: Processing all stocks in chunks")
         for i in range(0, len(symbols), chunk_size):
             chunk = symbols[i:i+chunk_size]
-            logger.info(f"\nProcessing chunk {i//chunk_size + 1}/{len(symbols)//chunk_size + 1}")
-            logger.info(f"Chunk symbols: {chunk}")
+            chunk_num = i//chunk_size + 1
+            total_chunks = len(symbols)//chunk_size + 1
+            logger.info(f"\nProcessing chunk {chunk_num}/{total_chunks}")
+            logger.info(f"Symbols in chunk: {', '.join(chunk)}")
 
             with Pool(processes=num_processes) as pool:
                 results = []
                 for symbol, result in zip(chunk, pool.imap_unordered(self.process_symbol, chunk)):
-                    if result and len(result) > 0:  # Check if we got actual data
+                    if result and len(result) > 0:
                         results.extend(result)
                         logger.info(f"Successfully processed {symbol} with {len(result)} samples")
-
-                    else:  # If no data was returned
+                    else:
                         failed_stocks.add(symbol)
                         logger.info(f"Failed to process {symbol}")
 
                 training_data.extend(results)
                 logger.info(f"Total samples collected so far: {len(training_data)}")
-                logger.info(f"Failed stocks: {failed_stocks}")
+                logger.info(f"Failed stocks so far: {len(failed_stocks)}")
 
-            
             # Add delay between chunks
-            logger.info("Taking a break between chunks...")
-            time.sleep(10)  # 10 second break between chunks
+            if i + chunk_size < len(symbols):
+                logger.info("Taking a break between chunks...")
+                time.sleep(10)
 
-
+        # Second pass: Process failed stocks
         if failed_stocks:
-            logger.info(f"\nRetrying {len(failed_stocks)} failed stocks")
-            retry_chunk_size = 25  # Smaller chunk size for retries
+            logger.info(f"\nPHASE 2: Processing {len(failed_stocks)} failed stocks")
+            logger.info(f"Failed stocks: {', '.join(sorted(failed_stocks))}")
             
-            for retry_attempt in range(2):  # Try up to 2 more times
-                if not failed_stocks:
-                    break
-                    
-                logger.info(f"Retry attempt {retry_attempt + 1}/2 for {len(failed_stocks)} stocks")
-                retry_symbols = list(failed_stocks)
-                still_failed = set()
+            # Process failed stocks in a single chunk
+            retry_symbols = list(failed_stocks)
+            with Pool(processes=num_processes) as pool:
+                retry_results = []
+                for symbol, result in zip(retry_symbols, pool.imap_unordered(self.process_symbol, retry_symbols)):
+                    if result and len(result) > 0:
+                        retry_results.extend(result)
+                        failed_stocks.remove(symbol)
+                        logger.info(f"Successfully processed {symbol} on retry")
+                    else:
+                        logger.info(f"Permanently failed to process {symbol}")
                 
-                # Process retry chunks with Pool
-                for i in range(0, len(retry_symbols), retry_chunk_size):
-                    retry_chunk = retry_symbols[i:i+retry_chunk_size]
-                    logger.info(f"\nProcessing retry chunk {i//retry_chunk_size + 1}/{len(retry_symbols)//retry_chunk_size + 1}")
-                    
-                    with Pool(processes=num_processes) as pool:
-                        retry_results = []
-                        for symbol, result in zip(retry_chunk, pool.imap_unordered(self.process_symbol, retry_chunk)):
-                            if result and len(result) > 0:
-                                retry_results.extend(result)
-                                failed_stocks.remove(symbol)
-                                logger.info(f"Successfully processed {symbol} on retry attempt {retry_attempt + 1}")
-                            else:
-                                still_failed.add(symbol)
-                                logger.info(f"Failed to process {symbol} on retry attempt {retry_attempt + 1}")
-                        
-                        training_data.extend(retry_results)
-                    
-                    # Add longer delay between retry chunks
-                    logger.info("Taking a break between retry chunks...")
-                    time.sleep(15)  # 15 second break between retry chunks
-                
-                failed_stocks = still_failed
-                if failed_stocks:
-                    logger.info(f"Still failed after retry attempt {retry_attempt + 1}: {len(failed_stocks)} stocks")
-                    logger.info("Waiting 30 seconds before next retry attempt...")
-                    time.sleep(30)  # Longer wait between retry attempts
-            
-            if failed_stocks:
-                logger.info("\nPermanently failed stocks:")
-                for symbol in sorted(failed_stocks):
-                    logger.info(f"- {symbol}")
-        
-        logger.info("\nTraining Data Summary:")
-        logger.info(f"Total samples collected: {len(training_data)}")
-        logger.info(f"Final failed stocks count: {len(failed_stocks)}")
-        
-        # Train models if we have data
-        if training_data:
-            logger.info("\nPreparing to train models...")
-            logger.info(f"Total training samples collected: {len(training_data)}")
-            
-            # Fit the vectorizer BEFORE training
+                training_data.extend(retry_results)
+                logger.info(f"Additional samples from retry: {len(retry_results)}")
+
+        # Final summary
+        if failed_stocks:
+            logger.info("\nPermanently failed stocks:")
+            for symbol in sorted(failed_stocks):
+                logger.info(f"- {symbol}")
+
+        if not training_data:
+            logger.error("No training data collected!")
+            return None
+
+        logger.info("\nPreparing to train models...")
+        logger.info(f"Total training samples: {len(training_data)}")
+        logger.info(f"Total failed stocks: {len(failed_stocks)}")
+
+        try:
+            # Fit the vectorizer first
+            logger.info("Fitting TF-IDF vectorizer...")
             X_text = [sample['text'] for sample in training_data]
-            X = self.vectorizer.fit_transform(X_text)
-            logger.info(f"Text features shape: {X.shape}")
-            
-            # Prepare features for each timeframe
+            self.vectorizer.fit(X_text)
+            logger.info("Vectorizer fitted successfully")
+
+            # Train models for each timeframe
             for timeframe in ['1h', '1wk', '1mo']:
                 logger.info(f"\nTraining {timeframe} model...")
-                
-                # Use sparse matrix and memory-efficient processing
-                from scipy.sparse import hstack
-                
-                # Prepare features and target values
-                y = []
-                X_features_list = []
-                sample_weights = []
-                
-                for sample in training_data:
-                    try:
-                        # Calculate impact score based on sentiment prediction accuracy
-                        sentiment_direction = np.sign(sample['sentiment']['score'])
-                        price_change = sample['changes'].get(timeframe, 0)
-                        price_direction = np.sign(price_change)
-                        
-                        # Calculate base impact score
-                        impact_score = abs(price_change) / self.thresholds[timeframe]
-                        
-                        # Adjust impact based on prediction accuracy
-                        if sentiment_direction == price_direction:
-                            impact_score *= 1.5  # Boost weight for correct predictions
-                        else:
-                            impact_score *= 0.5  # Reduce weight for incorrect predictions
-                            
-                        # Add time decay factor (more recent articles have higher weight)
-                        days_old = (datetime.now(tz=pytz.UTC) - sample['date']).days
-                        time_decay = 1.0 / (1.0 + days_old * 0.1)  # Decay factor
-                        
-                        # Final sample weight
-                        sample_weight = (1.0 + impact_score) * time_decay
-                        
-                        # Get TF-IDF features
-                        sample_tfidf = self.vectorizer.transform([sample['text']])
-                        
-                        # Add sentiment features
-                        if sample.get('sentiment'):
-                            sentiment = sample['sentiment']
-                            # Adjust sentiment features based on historical accuracy
-                            sentiment_features = [
-                                sentiment['score'] * (1 + impact_score),  # Amplify if historically accurate
-                                sentiment['confidence'],
-                                sentiment['probabilities']['positive'],
-                                sentiment['probabilities']['negative'],
-                                sentiment['probabilities']['neutral']
-                            ]
-                            sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features).reshape(1, -1)
-                            combined_features = scipy.sparse.hstack([sample_tfidf, sentiment_sparse])
-                            X_features_list.append(combined_features)
-                        else:
-                            X_features_list.append(sample_tfidf)
-                        
-                        y.append(price_change)
-                        sample_weights.append(sample_weight)
-                        
-                    except Exception as e:
-                        logger.error(f"Error processing sample: {str(e)}")
-                        continue
-                
-                # Combine features and convert to arrays
-                try:
-                    X_combined = scipy.sparse.vstack(X_features_list)
-                    y_array = np.array(y, dtype=float)
-                    weights_array = np.array(sample_weights)
-                    
-                    # Handle NaN values
-                    valid_mask = ~np.isnan(y_array)
-                    X_clean = X_combined[valid_mask]
-                    y_clean = y_array[valid_mask]
-                    weights_clean = weights_array[valid_mask]
-                    
-                    if len(y_clean) > 0:
-                        logger.info(f"Training {timeframe} model with {len(y_clean)} samples")
-                        logger.info(f"Average sample weight: {np.mean(weights_clean):.2f}")
-                        
-                        # Train model with sample weights
-                        self.models[timeframe].fit(X_clean, y_clean, sample_weight=weights_clean)
-                        
-                        # Show sample predictions with weights
-                        sample_indices = np.random.choice(len(y_clean), min(3, len(y_clean)), replace=False)
-                        logger.info("\nSample predictions vs actual:")
-                        for idx in sample_indices:
-                            pred = self.models[timeframe].predict(X_clean[idx:idx+1])[0]
-                            actual = y_clean[idx]
-                            weight = weights_clean[idx]
-                            logger.info(f"Pred: {pred:.1f}% | Actual: {actual:.1f}% | Weight: {weight:.2f}")
-                    
-                except Exception as array_error:
-                    logger.error(f"Error preparing training data for {timeframe}: {array_error}")
-                    continue
+                success = self.train_with_impact_scores(training_data, timeframe)
+                if success:
+                    logger.info(f"Successfully trained {timeframe} model")
+                else:
+                    logger.error(f"Failed to train {timeframe} model")
 
-            logger.info("\nTraining Complete!")
-            logger.info(f"Total symbols processed: {len(symbols)}")
-            logger.info(f"Total training samples: {len(training_data)}")
-                
             return self.models
+
+        except Exception as e:
+            logger.error(f"Error in training process: {str(e)}")
+            return None
+
     def _get_sentiment_multiplier(self, sentiment):
         """
         Adjust price change based on continuous sentiment score
@@ -913,10 +810,6 @@ class PortfolioTrackerService:
             return None
 
 def main():
-    trainer = MarketMLTrainer()
-    trainer.collect_and_train(trainer.symbols)
-
-if __name__ == "__main__":
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(message)s',
@@ -927,19 +820,36 @@ if __name__ == "__main__":
     )
     logger = logging.getLogger(__name__)
     
-    logger.info(" Starting Market ML Training...")
+    logger.info("Starting Market ML Training...")
     trainer = MarketMLTrainer()
+    
+    # Get all symbols
     symbols = trainer.get_symbols()
-    logger.info(f"Loaded {len(symbols)} symbols")
+    logger.info(f"Total symbols to process: {len(symbols)}")
     
     try:
+        # Create models directory if it doesn't exist
+        os.makedirs('app/models', exist_ok=True)
+        
+        # Train models
+        logger.info("Starting training process...")
         models = trainer.collect_and_train(symbols)
+        
         if models:
-            logger.info(" Training completed successfully!")
-            trainer.save_models()  # This line is properly in the Python code
-            logger.info(" Models saved!")
-
+            logger.info("Training completed successfully")
+            trainer.save_models()
+            logger.info("Models saved successfully")
+            logger.info("Saved models:")
+            logger.info("- vectorizer.joblib")
+            logger.info("- market_model_1h.joblib")
+            logger.info("- market_model_1wk.joblib")
+            logger.info("- market_model_1mo.joblib")
         else:
-            logger.error(" Training failed!")
+            logger.error("Training failed - no models were produced")
+            
     except Exception as e:
-        logger.error(f" Training error: {str(e)}")
+        logger.error(f"Training error: {str(e)}")
+        logger.exception("Full error traceback:")
+
+if __name__ == "__main__":
+    main()
