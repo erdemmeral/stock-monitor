@@ -196,45 +196,41 @@ class RealTimeMonitor:
             # Vectorize text
             X_tfidf = self.vectorizer.transform([text])
             
-            # Pad features to match expected size
-            X_padded = self._pad_features(X_tfidf)
-            
-            # Base prediction from model
-            base_pred = self.models[timeframe].predict(X_padded)[0]
-            
-            # Analyze sentiment
+            # Get sentiment analysis
             sentiment = self.finbert_analyzer.analyze_sentiment(text)
+            if not sentiment:
+                logger.warning("No sentiment available for prediction")
+                return 0.0
+                
+            # Create sentiment features array matching training format
+            sentiment_features = np.array([
+                sentiment['score'],  # No impact adjustment during prediction
+                sentiment['confidence'],
+                sentiment['probabilities']['positive'],
+                sentiment['probabilities']['negative'],
+                sentiment['probabilities']['neutral']
+            ]).reshape(1, -1)  # Reshape to 2D array
             
-            # If sentiment available, adjust prediction
-            if sentiment:
-                # Get continuous sentiment score (-1 to 1)
-                sentiment_score = sentiment['score']
-                
-                # Calculate multiplier based on continuous score
-                # Score of -1 -> multiplier of 0.7
-                # Score of 0  -> multiplier of 1.0
-                # Score of 1  -> multiplier of 1.3
-                base_multiplier = 1.0 + (sentiment_score * 0.3)
-                
-                # Adjusted prediction
-                adjusted_pred = base_pred * (
-                    1 + (base_multiplier - 1) * self.sentiment_weight
-                )
-                
-                # Logging for transparency
-                logger.info(f"Prediction for {timeframe}:")
-                logger.info(f"Base Prediction: {base_pred:.2f}%")
-                logger.info(f"Sentiment Score: {sentiment_score:.2f}")
-                logger.info(f"Sentiment Multiplier: {base_multiplier:.2f}")
-                logger.info(f"Adjusted Prediction: {adjusted_pred:.2f}%")
-                
-                return adjusted_pred
+            # Convert to sparse matrix
+            sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
             
-            return base_pred
+            # Combine features like in training
+            combined_features = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
+            
+            # Make prediction with combined features
+            prediction = self.models[timeframe].predict(combined_features)[0]
+            
+            # Log prediction details
+            logger.info(f"Prediction for {timeframe}:")
+            logger.info(f"Raw Prediction: {prediction:.2f}%")
+            logger.info(f"Sentiment Score: {sentiment['score']:.2f}")
+            logger.info(f"Sentiment Confidence: {sentiment['confidence']:.2f}")
+            
+            return prediction
             
         except Exception as e:
             logger.error(f"Error in sentiment-integrated prediction: {e}")
-            return base_pred
+            return 0.0
     
     def get_full_article_text(self,url):
         try:
@@ -797,8 +793,9 @@ class RealTimeMonitor:
                     # Get TF-IDF features only
                     X_tfidf = self.vectorizer.transform([content])
                     
-                    # Pad features to match expected size
+                    # Pad features to match expected size (84953 features)
                     X_padded = self._pad_features(X_tfidf)
+                    logger.info(f"Padded features shape: {X_padded.shape}")
                     
                     # Get sentiment analysis from FinBERT
                     sentiment = self.finbert_analyzer.analyze_sentiment(content)
