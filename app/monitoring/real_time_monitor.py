@@ -796,20 +796,40 @@ class RealTimeMonitor:
                     
                     for timeframe, model in self.models.items():
                         try:
-                            base_pred = model.predict(X_padded)[0]
+                            # Get raw prediction
+                            raw_pred = model.predict(X_padded)[0]
+                            logger.info(f"Raw prediction for {timeframe}: {raw_pred:.4f}")
+                            
+                            # Scale the raw prediction to a reasonable percentage
+                            # Most stock movements are within ±5% for 1h, ±15% for 1wk, ±30% for 1mo
+                            scaling_factors = {
+                                '1h': 5.0,
+                                '1wk': 15.0,
+                                '1mo': 30.0
+                            }
+                            
+                            # Apply sigmoid to raw prediction to get a value between 0 and 1
+                            scaled_pred = 1 / (1 + np.exp(-raw_pred))  # sigmoid
+                            # Center around 0 and scale to appropriate range for timeframe
+                            base_pred = (scaled_pred - 0.5) * 2 * scaling_factors[timeframe]
+                            
+                            logger.info(f"Scaled base prediction for {timeframe}: {base_pred:.2f}%")
                             
                             if sentiment:
                                 # Get continuous sentiment score (-1 to 1)
                                 sentiment_score = sentiment['score']
+                                confidence = sentiment['confidence']
                                 
-                                # Calculate multiplier based on continuous score
+                                # Calculate multiplier based on continuous score and confidence
                                 # Score of -1 -> multiplier of 0.7
                                 # Score of 0  -> multiplier of 1.0
                                 # Score of 1  -> multiplier of 1.3
-                                base_multiplier = 1.0 + (sentiment_score * 0.3)
+                                base_multiplier = 1.0 + (sentiment_score * 0.3 * confidence)
                                 
-                                # Apply sentiment weight to the adjustment
-                                pred = base_pred * (1 + (base_multiplier - 1) * self.sentiment_weight)
+                                # Apply sentiment adjustment
+                                pred = base_pred * base_multiplier
+                                
+                                logger.info(f"Sentiment-adjusted prediction for {timeframe}: {pred:.2f}%")
                             else:
                                 pred = base_pred
                             
