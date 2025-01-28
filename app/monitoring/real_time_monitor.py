@@ -794,7 +794,7 @@ class RealTimeMonitor:
                     # Make predictions for this specific article
                     article_predictions = {}
                     
-                    # Get TF-IDF features
+                    # Get TF-IDF features only
                     X_tfidf = self.vectorizer.transform([content])
                     
                     # Get sentiment analysis from FinBERT
@@ -804,38 +804,36 @@ class RealTimeMonitor:
                     
                     for timeframe, model in self.models.items():
                         try:
-                            # Create sentiment features array without impact adjustment
+                            # Get base prediction using only TF-IDF features
+                            base_pred = model.predict(X_tfidf)[0]
+                            logger.info(f"Base prediction for {timeframe}: {base_pred:.2f}%")
+                            
+                            # Apply sentiment adjustment if available
                             if sentiment:
-                                sentiment_features = np.array([
-                                    sentiment['score'],  # Raw sentiment score
-                                    sentiment['confidence'],  # Raw confidence
-                                    sentiment['probabilities']['positive'],  # Raw probability
-                                    sentiment['probabilities']['negative'],  # Raw probability
-                                    sentiment['probabilities']['neutral']  # Raw probability
-                                ]).reshape(1, -1)
+                                # Get sentiment components
+                                score = sentiment['score']  # Between -1 and 1
+                                confidence = sentiment['confidence']  # Between 0 and 1
+                                neutral_prob = sentiment['probabilities']['neutral']  # Between 0 and 1
+                                
+                                # Calculate sentiment impact
+                                # TODO: In the future, remove this arbitrary multiplier and let the model learn sentiment impact
+                                base_multiplier = 1.0 + (score * 0.3)  # Maps [-1, 1] to [0.7, 1.3]
+                                neutral_dampener = 1.0 - neutral_prob  # Reduce impact if sentiment is neutral
+                                sentiment_multiplier = 1.0 + (base_multiplier - 1.0) * confidence * neutral_dampener
+                                
+                                # Apply sentiment multiplier to base prediction
+                                pred = base_pred * sentiment_multiplier
+                                
+                                # Log sentiment details
+                                logger.info(f"Sentiment details for {timeframe}:")
+                                logger.info(f"  Score: {score:.2f}")
+                                logger.info(f"  Confidence: {confidence:.2f}")
+                                logger.info(f"  Neutral Probability: {neutral_prob:.2f}")
+                                logger.info(f"  Final Multiplier: {sentiment_multiplier:.2f}")
+                                logger.info(f"  Adjusted Prediction: {pred:.2f}%")
                             else:
-                                # If no sentiment, use zeros
-                                sentiment_features = np.zeros((1, 5))
-                            
-                            # Convert to sparse matrix
-                            sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
-                            
-                            # Combine features
-                            X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
-                            
-                            # Get raw prediction
-                            raw_pred = model.predict(X)[0]
-                            
-                            # Denormalize prediction using the same thresholds used in training
-                            threshold = self.thresholds[timeframe]  # e.g., 5.0 for 1h, 10.0 for 1wk, 20.0 for 1mo
-                            pred = raw_pred * threshold
-                            
-                            # Log prediction details
-                            logger.info(f"Raw normalized prediction for {timeframe}: {raw_pred:.4f}")
-                            logger.info(f"Denormalized prediction for {timeframe}: {pred:.2f}%")
-                            if sentiment:
-                                logger.info(f"Sentiment Score: {sentiment['score']:.2f}")
-                                logger.info(f"Confidence: {sentiment['confidence']:.2f}")
+                                pred = base_pred
+                                logger.info(f"No sentiment available, using base prediction: {pred:.2f}%")
                             
                             article_predictions[timeframe] = pred
                             predictions_log.append(f"{timeframe}: {pred:.2f}%")
