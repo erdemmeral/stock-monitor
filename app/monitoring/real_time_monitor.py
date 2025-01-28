@@ -818,8 +818,12 @@ class RealTimeMonitor:
                         sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
                         X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
                     
-                    # Pad features BEFORE prediction
-                    X_padded = self._pad_features(X)
+                    # Normalize features using L2 norm to prevent extreme predictions
+                    X = scipy.sparse.csr_matrix(X)
+                    X_normalized = X.multiply(1/np.sqrt(X.multiply(X).sum(axis=1)))
+                    
+                    # Pad features AFTER normalization
+                    X_padded = self._pad_features(X_normalized)
                     
                     predictions_log = []  # Collect all predictions for single log message
                     
