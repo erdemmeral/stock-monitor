@@ -205,31 +205,37 @@ class RealTimeMonitor:
         self._portfolio_check_task = None
 
     def _pad_features(self, X):
-        """Pad or truncate features to match model input size"""
+        """Pad or truncate features to match model input size with proper normalization"""
         try:
             # Get the expected number of features from the model
-            expected_features = 84953  # Based on the error message
+            expected_features = 84953
             current_features = X.shape[1]
             logger.info(f"Input matrix shape: {X.shape}")
             logger.info(f"Expected features: {expected_features}, Current features: {current_features}")
+
+            # Normalize the features using L2 norm
+            X_normalized = scipy.sparse.csr_matrix(X)
+            norm = np.sqrt(X_normalized.multiply(X_normalized).sum(axis=1))
+            # Avoid division by zero
+            norm[norm == 0] = 1
+            X_normalized = scipy.sparse.diags(1/np.array(norm).flatten()) @ X_normalized
 
             if current_features < expected_features:
                 # Create zero matrix for padding
                 padding = scipy.sparse.csr_matrix((X.shape[0], expected_features - current_features))
                 # Horizontally stack with original features
-                X_padded = scipy.sparse.hstack([X, padding])
-                logger.info(f"Padded matrix shape: {X_padded.shape}")
-                return X_padded
+                X_padded = scipy.sparse.hstack([X_normalized, padding])
             elif current_features > expected_features:
                 # Truncate to expected size
-                X_truncated = X[:, :expected_features]
-                logger.info(f"Truncated matrix shape: {X_truncated.shape}")
-                return X_truncated
+                X_padded = X_normalized[:, :expected_features]
             else:
-                return X
+                X_padded = X_normalized
+
+            logger.info(f"Padded matrix shape: {X_padded.shape}")
+            return X_padded
+
         except Exception as e:
             logger.error(f"Feature padding error: {str(e)}")
-            logger.error(f"Input matrix shape: {X.shape}")
             raise
 
     def predict_with_sentiment(self, text, timeframe):
@@ -896,27 +902,35 @@ class RealTimeMonitor:
                     article_predictions = {}
                     X = self.vectorizer.transform([content])
                 
-                    # Pad features BEFORE prediction
+                    # Pad and normalize features BEFORE prediction
                     X_padded = self._pad_features(X)
                     
-                    predictions_log = []  # Collect all predictions for single log message
+                    predictions_log = []
                     
                     for timeframe, model in self.models.items():
                         try:
-                            base_pred = model.predict(X_padded)[0]
+                            # Make prediction and apply sigmoid to bound it
+                            raw_pred = model.predict(X_padded)[0]
+                            
+                            # Apply sigmoid transformation to bound predictions
+                            bounded_pred = 100 * (2 / (1 + np.exp(-raw_pred/100)) - 1)
                             
                             if sentiment:
-                                # Calculate multiplier using continuous score
-                                base_multiplier = 1.0 + (sentiment['score'] * 0.3)
+                                # Calculate multiplier using continuous score with dampened effect
+                                sentiment_effect = np.clip(sentiment['score'], -0.3, 0.3)
                                 confidence = sentiment['confidence']
                                 neutral_dampener = 1.0 - sentiment['probabilities']['neutral']
-                                adjusted_multiplier = 1.0 + (base_multiplier - 1.0) * confidence * neutral_dampener
-                                pred = base_pred * adjusted_multiplier
+                                
+                                # Apply a more conservative adjustment
+                                adjusted_pred = bounded_pred * (1 + sentiment_effect * confidence * neutral_dampener)
+                                
+                                # Final clip to ensure reasonable bounds
+                                final_pred = np.clip(adjusted_pred, -100, 100)
                             else:
-                                pred = base_pred
+                                final_pred = np.clip(bounded_pred, -100, 100)
                             
-                            article_predictions[timeframe] = pred
-                            predictions_log.append(f"{timeframe}: {pred:.2f}%")
+                            article_predictions[timeframe] = final_pred
+                            predictions_log.append(f"{timeframe}: {final_pred:.2f}%")
                         
                         except Exception as e:
                             logger.error(f"Error in prediction for {timeframe}: {e}")
