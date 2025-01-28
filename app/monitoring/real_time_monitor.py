@@ -55,18 +55,41 @@ class ModelManager:
         self.load_initial_models()
     
     def load_initial_models(self):
-        for name, path in self.model_paths.items():
-            try:
+        """Load all initial models with enhanced error handling"""
+        # Load vectorizer first as it's required for other models
+        try:
+            vectorizer_path = self.model_paths['vectorizer']
+            if not os.path.exists(vectorizer_path):
+                raise FileNotFoundError(f"Vectorizer file not found at {vectorizer_path}")
+            
+            self.models['vectorizer'] = joblib.load(vectorizer_path)
+            self.last_modified_times['vectorizer'] = os.path.getmtime(vectorizer_path)
+            logger.info("✅ Loaded vectorizer successfully")
+            
+            # Now load other models
+            for name, path in self.model_paths.items():
+                if name == 'vectorizer':
+                    continue
+                    
+                if not os.path.exists(path):
+                    raise FileNotFoundError(f"Model file not found at {path}")
+                
                 self.models[name] = joblib.load(path)
                 self.last_modified_times[name] = os.path.getmtime(path)
-                logger.info(f"Loaded initial {name} model")
-            except Exception as e:
-                logger.error(f"Error loading initial {name} model: {e}")
+                logger.info(f"✅ Loaded {name} model successfully")
+                
+        except Exception as e:
+            logger.error(f"❌ Critical error loading models: {str(e)}")
+            raise  # Re-raise the exception as this is critical
 
     def check_and_reload_models(self):
         """Check if models have been updated and reload if necessary"""
         try:
             for name, path in self.model_paths.items():
+                if not os.path.exists(path):
+                    logger.error(f"❌ Model file not found at {path}")
+                    continue
+                    
                 current_mod_time = os.path.getmtime(path)
                 
                 if current_mod_time > self.last_modified_times.get(name, 0):
@@ -78,9 +101,10 @@ class ModelManager:
                         logger.info(f"🔄 Reloaded {name} model")
                         logger.info(f"Model last modified: {datetime.fromtimestamp(current_mod_time)}")
                     except Exception as e:
-                        logger.error(f"Error reloading {name} model: {e}")
+                        logger.error(f"❌ Error reloading {name} model: {str(e)}")
+                        
         except Exception as e:
-            logger.error(f"Error in model check: {e}")
+            logger.error(f"❌ Error in model check: {str(e)}")
 
 class NewsAggregator:
     def __init__(self):
@@ -147,15 +171,22 @@ class RealTimeMonitor:
             'max_neutral_probability': 0.4
         }
 
+        # Initialize ModelManager first
         self.model_manager = ModelManager()
+        logger.info("Model manager initialized")
         
-        # Use models from model manager
+        # Get models from model manager
+        if 'vectorizer' not in self.model_manager.models:
+            raise ValueError("Vectorizer not found in model manager")
+        
         self.vectorizer = self.model_manager.models['vectorizer']
         self.models = {
             '1h': self.model_manager.models['1h'],
             '1wk': self.model_manager.models['1wk'],
             '1mo': self.model_manager.models['1mo']
         }
+        
+        logger.info("ML models loaded successfully")
         
         # Initialize Telegram
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
