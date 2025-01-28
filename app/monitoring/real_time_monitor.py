@@ -788,46 +788,53 @@ class RealTimeMonitor:
                         logger.info(f"Skipping article - not relevant to {symbol}")
                         continue
 
-                    # Analyze sentiment
-                    sentiment = self.finbert_analyzer.analyze_sentiment(content)
-                
                     # Make predictions for this specific article
                     article_predictions = {}
                     
-                    # Get TF-IDF features (no normalization needed - matches training)
+                    # Get TF-IDF features
                     X_tfidf = self.vectorizer.transform([content])
                     
-                    # Prepare sentiment features in the same format as training
-                    if sentiment:
-                        sentiment_features = np.array([
-                            sentiment['score'],  # Base sentiment score (-1 to 1)
-                            sentiment['confidence'],  # Already 0 to 1
-                            sentiment.get('probabilities', {}).get('positive', 0),  # 0 to 1
-                            sentiment.get('probabilities', {}).get('negative', 0),  # 0 to 1
-                            sentiment.get('probabilities', {}).get('neutral', 0)  # 0 to 1
-                        ]).reshape(1, -1)
-                    else:
-                        sentiment_features = np.zeros((1, 5))
-                    
-                    # Convert to sparse matrix
-                    sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
-                    
-                    # Combine features exactly as in training
-                    X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
-                    
-                    # Pad features to match expected size
-                    X_padded = self._pad_features(X)
+                    # Get sentiment analysis from FinBERT
+                    sentiment = self.finbert_analyzer.analyze_sentiment(content)
                     
                     predictions_log = []  # Collect all predictions for single log message
                     
                     for timeframe, model in self.models.items():
                         try:
-                            # Get raw prediction from model
-                            raw_pred = model.predict(X_padded)[0]
-                            logger.info(f"Raw prediction for {timeframe}: {raw_pred:.4f}")
+                            # Get base prediction from TF-IDF features
+                            base_pred = model.predict(X_tfidf)[0]
                             
-                            # Use prediction directly - no adjustments needed
-                            pred = raw_pred
+                            # Adjust prediction with sentiment if available
+                            if sentiment:
+                                # Get continuous score (-1 to 1) and confidence
+                                sentiment_score = sentiment['score']
+                                confidence = sentiment['confidence']
+                                neutral_prob = sentiment['probabilities']['neutral']
+                                
+                                # Calculate neutral dampener (reduce effect when neutral probability is high)
+                                neutral_dampener = 1.0 - neutral_prob
+                                
+                                # Calculate base multiplier from continuous score
+                                # Maps [-1, 1] to [0.7, 1.3]
+                                base_multiplier = 1.0 + (sentiment_score * 0.3)
+                                
+                                # Adjust multiplier with confidence and neutral dampener
+                                sentiment_multiplier = 1.0 + (base_multiplier - 1.0) * confidence * neutral_dampener
+                                
+                                # Apply sentiment adjustment
+                                pred = base_pred * sentiment_multiplier
+                                
+                                # Log detailed prediction breakdown
+                                logger.info(f"Prediction Breakdown for {timeframe}:")
+                                logger.info(f"Base Prediction: {base_pred:.2f}%")
+                                logger.info(f"Sentiment Score: {sentiment_score:.2f}")
+                                logger.info(f"Confidence: {confidence:.2f}")
+                                logger.info(f"Neutral Probability: {neutral_prob:.2f}")
+                                logger.info(f"Sentiment Multiplier: {sentiment_multiplier:.2f}")
+                                logger.info(f"Final Prediction: {pred:.2f}%")
+                            else:
+                                pred = base_pred
+                                logger.info(f"Prediction for {timeframe} (no sentiment): {pred:.2f}%")
                             
                             article_predictions[timeframe] = pred
                             predictions_log.append(f"{timeframe}: {pred:.2f}%")
