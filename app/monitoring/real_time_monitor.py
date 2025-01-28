@@ -797,6 +797,9 @@ class RealTimeMonitor:
                     # Get TF-IDF features only
                     X_tfidf = self.vectorizer.transform([content])
                     
+                    # Pad features to match expected size
+                    X_padded = self._pad_features(X_tfidf)
+                    
                     # Get sentiment analysis from FinBERT
                     sentiment = self.finbert_analyzer.analyze_sentiment(content)
                     
@@ -804,8 +807,8 @@ class RealTimeMonitor:
                     
                     for timeframe, model in self.models.items():
                         try:
-                            # Get base prediction using only TF-IDF features
-                            base_pred = model.predict(X_tfidf)[0]
+                            # Get base prediction using padded TF-IDF features
+                            base_pred = model.predict(X_padded)[0]
                             logger.info(f"Base prediction for {timeframe}: {base_pred:.2f}%")
                             
                             # Apply sentiment adjustment if available
