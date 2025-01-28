@@ -793,8 +793,31 @@ class RealTimeMonitor:
                 
                     # Make predictions for this specific article
                     article_predictions = {}
-                    X = self.vectorizer.transform([content])
-                
+                    
+                    # Get TF-IDF features
+                    X_tfidf = self.vectorizer.transform([content])
+                    
+                    # Prepare sentiment features in the same format as training
+                    if sentiment:
+                        sentiment_features = np.array([
+                            sentiment['score'],  # Base sentiment score
+                            sentiment['confidence'],  # Confidence
+                            sentiment.get('probabilities', {}).get('positive', 0),
+                            sentiment.get('probabilities', {}).get('negative', 0),
+                            sentiment.get('probabilities', {}).get('neutral', 0)
+                        ]).reshape(1, -1)
+                        
+                        # Convert to sparse matrix
+                        sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
+                        
+                        # Combine features as done in training
+                        X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
+                    else:
+                        # If no sentiment, use zero features
+                        sentiment_features = np.zeros((1, 5))
+                        sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
+                        X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
+                    
                     # Pad features BEFORE prediction
                     X_padded = self._pad_features(X)
                     
@@ -806,22 +829,8 @@ class RealTimeMonitor:
                             raw_pred = model.predict(X_padded)[0]
                             logger.info(f"Raw prediction for {timeframe}: {raw_pred:.4f}")
                             
-                            # Use the model's prediction directly
-                            base_pred = raw_pred
-                            logger.info(f"Raw model prediction for {symbol} ({timeframe}): {base_pred:.2f}%")
-                            
-                            if sentiment:
-                                # Get continuous sentiment score (-1 to 1) and confidence
-                                sentiment_score = sentiment['score']
-                                confidence = sentiment['confidence']
-                                
-                                # Apply sentiment adjustment based on the full sentiment impact
-                                sentiment_impact = sentiment_score * confidence
-                                pred = base_pred * (1 + sentiment_impact)
-                                
-                                logger.info(f"Sentiment-adjusted prediction for {timeframe}: {pred:.2f}%")
-                            else:
-                                pred = base_pred
+                            # Use the model's prediction directly since it was trained on actual percentage changes
+                            pred = raw_pred
                             
                             article_predictions[timeframe] = pred
                             predictions_log.append(f"{timeframe}: {pred:.2f}%")
