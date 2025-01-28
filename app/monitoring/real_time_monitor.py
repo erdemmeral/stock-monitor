@@ -782,7 +782,13 @@ class RealTimeMonitor:
                     content = article.get('title', '')
                     if full_text:
                         content = f"{content}\n\n{full_text}"
-                     # Analyze sentiment
+
+                    # Check if article is relevant to this stock
+                    if not self._is_article_relevant(content, symbol, stock.info.get('longName', '')):
+                        logger.info(f"Skipping article - not relevant to {symbol}")
+                        continue
+
+                    # Analyze sentiment
                     sentiment = self.finbert_analyzer.analyze_sentiment(content)
                 
                     # Make predictions for this specific article
@@ -796,38 +802,22 @@ class RealTimeMonitor:
                     
                     for timeframe, model in self.models.items():
                         try:
-                            # Get raw prediction
+                            # Get raw prediction from model
                             raw_pred = model.predict(X_padded)[0]
                             logger.info(f"Raw prediction for {timeframe}: {raw_pred:.4f}")
                             
-                            # Scale the raw prediction to a reasonable percentage
-                            # Most stock movements are within ±5% for 1h, ±15% for 1wk, ±30% for 1mo
-                            scaling_factors = {
-                                '1h': 5.0,
-                                '1wk': 15.0,
-                                '1mo': 30.0
-                            }
-                            
-                            # Apply sigmoid to raw prediction to get a value between 0 and 1
-                            scaled_pred = 1 / (1 + np.exp(-raw_pred))  # sigmoid
-                            # Center around 0 and scale to appropriate range for timeframe
-                            base_pred = (scaled_pred - 0.5) * 2 * scaling_factors[timeframe]
-                            
-                            logger.info(f"Scaled base prediction for {timeframe}: {base_pred:.2f}%")
+                            # Use the model's prediction directly
+                            base_pred = raw_pred
+                            logger.info(f"Raw model prediction for {symbol} ({timeframe}): {base_pred:.2f}%")
                             
                             if sentiment:
-                                # Get continuous sentiment score (-1 to 1)
+                                # Get continuous sentiment score (-1 to 1) and confidence
                                 sentiment_score = sentiment['score']
                                 confidence = sentiment['confidence']
                                 
-                                # Calculate multiplier based on continuous score and confidence
-                                # Score of -1 -> multiplier of 0.7
-                                # Score of 0  -> multiplier of 1.0
-                                # Score of 1  -> multiplier of 1.3
-                                base_multiplier = 1.0 + (sentiment_score * 0.3 * confidence)
-                                
-                                # Apply sentiment adjustment
-                                pred = base_pred * base_multiplier
+                                # Apply sentiment adjustment based on the full sentiment impact
+                                sentiment_impact = sentiment_score * confidence
+                                pred = base_pred * (1 + sentiment_impact)
                                 
                                 logger.info(f"Sentiment-adjusted prediction for {timeframe}: {pred:.2f}%")
                             else:
@@ -1108,6 +1098,37 @@ class RealTimeMonitor:
                 "sentiment_score": 0.0,
                 "best_article": None
             }
+
+    def _is_article_relevant(self, content: str, symbol: str, company_name: str) -> bool:
+        """
+        Check if the article is relevant to the given stock by looking for the stock symbol
+        and company name in the content.
+        """
+        if not content:
+            return False
+            
+        content = content.lower()
+        search_terms = set()
+        
+        # Add stock symbol variations
+        search_terms.add(symbol.lower())
+        search_terms.add(f"${symbol.lower()}")
+        
+        # Add company name variations if available
+        if company_name:
+            company_name = company_name.lower()
+            search_terms.add(company_name)
+            
+            # Add common company suffixes
+            for suffix in [' inc', ' corp', ' ltd', ' llc', ' company']:
+                if company_name.endswith(suffix):
+                    search_terms.add(company_name[:-len(suffix)])
+        
+        # Check if any search term appears in the content
+        mentions = sum(1 for term in search_terms if term in content)
+        
+        # Require at least 2 mentions for relevance
+        return mentions >= 2
 
 async def main():
     logger.info("🚀 Market Monitor Starting...")
