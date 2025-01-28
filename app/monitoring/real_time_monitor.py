@@ -56,8 +56,8 @@ class ModelManager:
     
     def load_initial_models(self):
         """Load all initial models with enhanced error handling"""
-        # Load vectorizer first as it's required for other models
         try:
+            # Load vectorizer first as it's required for other models
             vectorizer_path = self.model_paths['vectorizer']
             if not os.path.exists(vectorizer_path):
                 raise FileNotFoundError(f"Vectorizer file not found at {vectorizer_path}")
@@ -74,7 +74,13 @@ class ModelManager:
                 if not os.path.exists(path):
                     raise FileNotFoundError(f"Model file not found at {path}")
                 
-                self.models[name] = joblib.load(path)
+                model = joblib.load(path)
+                # Store model coefficients for debugging
+                if hasattr(model, 'coef_'):
+                    logger.info(f"{name} model coefficients shape: {model.coef_.shape}")
+                    logger.info(f"{name} model non-zero coefficients: {np.count_nonzero(model.coef_)}")
+                
+                self.models[name] = model
                 self.last_modified_times[name] = os.path.getmtime(path)
                 logger.info(f"✅ Loaded {name} model successfully")
                 
@@ -901,42 +907,60 @@ class RealTimeMonitor:
                     # Make predictions for this specific article
                     article_predictions = {}
                     X = self.vectorizer.transform([content])
-                
-                    # Pad and normalize features BEFORE prediction
                     X_padded = self._pad_features(X)
                     
                     predictions_log = []
                     
                     for timeframe, model in self.models.items():
+                        if timeframe == 'vectorizer':  # Skip vectorizer entry
+                            continue
+                            
                         try:
-                            # Make prediction and apply sigmoid to bound it
+                            # Get raw prediction
                             raw_pred = model.predict(X_padded)[0]
                             
-                            # Apply sigmoid transformation to bound predictions
-                            bounded_pred = 100 * (2 / (1 + np.exp(-raw_pred/100)) - 1)
+                            # Scale prediction based on timeframe
+                            scaling_factors = {
+                                '1h': 0.2,   # More conservative for shorter timeframe
+                                '1wk': 0.5,  # Moderate for medium timeframe
+                                '1mo': 1.0   # Full scale for longer timeframe
+                            }
+                            
+                            # Apply timeframe-specific scaling
+                            scaled_pred = raw_pred * scaling_factors.get(timeframe, 1.0)
+                            
+                            # Apply sigmoid to bound predictions
+                            bounded_pred = 100 * (2 / (1 + np.exp(-scaled_pred/100)) - 1)
                             
                             if sentiment:
-                                # Calculate multiplier using continuous score with dampened effect
-                                sentiment_effect = np.clip(sentiment['score'], -0.3, 0.3)
+                                # Calculate sentiment effect with timeframe-specific dampening
+                                sentiment_dampening = {
+                                    '1h': 0.1,   # Less sentiment impact on short term
+                                    '1wk': 0.2,  # Moderate sentiment impact
+                                    '1mo': 0.3   # More sentiment impact on long term
+                                }
+                                
+                                sentiment_effect = np.clip(
+                                    sentiment['score'] * sentiment_dampening.get(timeframe, 0.2),
+                                    -0.3, 0.3
+                                )
+                                
                                 confidence = sentiment['confidence']
                                 neutral_dampener = 1.0 - sentiment['probabilities']['neutral']
                                 
-                                # Apply a more conservative adjustment
+                                # Apply sentiment adjustment
                                 adjusted_pred = bounded_pred * (1 + sentiment_effect * confidence * neutral_dampener)
-                                
-                                # Final clip to ensure reasonable bounds
                                 final_pred = np.clip(adjusted_pred, -100, 100)
                             else:
                                 final_pred = np.clip(bounded_pred, -100, 100)
                             
                             article_predictions[timeframe] = final_pred
                             predictions_log.append(f"{timeframe}: {final_pred:.2f}%")
-                        
+                            
                         except Exception as e:
                             logger.error(f"Error in prediction for {timeframe}: {e}")
                             continue
                     
-                    # Log all predictions in a single message
                     if predictions_log:
                         logger.info(f"Predictions for {symbol}: " + ", ".join(predictions_log))
                     
