@@ -794,36 +794,29 @@ class RealTimeMonitor:
                     # Make predictions for this specific article
                     article_predictions = {}
                     
-                    # Get TF-IDF features
+                    # Get TF-IDF features (no normalization needed - matches training)
                     X_tfidf = self.vectorizer.transform([content])
                     
                     # Prepare sentiment features in the same format as training
                     if sentiment:
                         sentiment_features = np.array([
-                            sentiment['score'],  # Base sentiment score
-                            sentiment['confidence'],  # Confidence
-                            sentiment.get('probabilities', {}).get('positive', 0),
-                            sentiment.get('probabilities', {}).get('negative', 0),
-                            sentiment.get('probabilities', {}).get('neutral', 0)
+                            sentiment['score'],  # Base sentiment score (-1 to 1)
+                            sentiment['confidence'],  # Already 0 to 1
+                            sentiment.get('probabilities', {}).get('positive', 0),  # 0 to 1
+                            sentiment.get('probabilities', {}).get('negative', 0),  # 0 to 1
+                            sentiment.get('probabilities', {}).get('neutral', 0)  # 0 to 1
                         ]).reshape(1, -1)
-                        
-                        # Convert to sparse matrix
-                        sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
-                        
-                        # Combine features as done in training
-                        X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
                     else:
-                        # If no sentiment, use zero features
                         sentiment_features = np.zeros((1, 5))
-                        sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
-                        X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
                     
-                    # Normalize features using L2 norm to prevent extreme predictions
-                    X = scipy.sparse.csr_matrix(X)
-                    X_normalized = X.multiply(1/np.sqrt(X.multiply(X).sum(axis=1)))
+                    # Convert to sparse matrix
+                    sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
                     
-                    # Pad features AFTER normalization
-                    X_padded = self._pad_features(X_normalized)
+                    # Combine features exactly as in training
+                    X = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
+                    
+                    # Pad features to match expected size
+                    X_padded = self._pad_features(X)
                     
                     predictions_log = []  # Collect all predictions for single log message
                     
@@ -833,7 +826,7 @@ class RealTimeMonitor:
                             raw_pred = model.predict(X_padded)[0]
                             logger.info(f"Raw prediction for {timeframe}: {raw_pred:.4f}")
                             
-                            # Use the model's prediction directly since it was trained on actual percentage changes
+                            # Use prediction directly - no adjustments needed
                             pred = raw_pred
                             
                             article_predictions[timeframe] = pred
