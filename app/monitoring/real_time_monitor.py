@@ -52,14 +52,20 @@ class ModelManager:
         }
         self.last_modified_times = {}
         self.models = {}
+        self.vectorizer = None
         self.load_initial_models()
     
     def load_initial_models(self):
         for name, path in self.model_paths.items():
             try:
-                self.models[name] = joblib.load(path)
-                self.last_modified_times[name] = os.path.getmtime(path)
-                logger.info(f"Loaded initial {name} model")
+                if name == 'vectorizer':
+                    self.vectorizer = joblib.load(path)
+                    self.last_modified_times[name] = os.path.getmtime(path)
+                    logger.info(f"Loaded initial vectorizer")
+                else:
+                    self.models[name] = joblib.load(path)
+                    self.last_modified_times[name] = os.path.getmtime(path)
+                    logger.info(f"Loaded initial {name} model")
             except Exception as e:
                 logger.error(f"Error loading initial {name} model: {e}")
 
@@ -71,11 +77,15 @@ class ModelManager:
                 
                 if current_mod_time > self.last_modified_times.get(name, 0):
                     try:
-                        new_model = joblib.load(path)
-                        self.models[name] = new_model
-                        self.last_modified_times[name] = current_mod_time
-                        
-                        logger.info(f"🔄 Reloaded {name} model")
+                        if name == 'vectorizer':
+                            self.vectorizer = joblib.load(path)
+                            self.last_modified_times[name] = current_mod_time
+                            logger.info(f"🔄 Reloaded vectorizer")
+                        else:
+                            new_model = joblib.load(path)
+                            self.models[name] = new_model
+                            self.last_modified_times[name] = current_mod_time
+                            logger.info(f"🔄 Reloaded {name} model")
                         logger.info(f"Model last modified: {datetime.fromtimestamp(current_mod_time)}")
                     except Exception as e:
                         logger.error(f"Error reloading {name} model: {e}")
@@ -133,7 +143,7 @@ class RealTimeMonitor:
         self.model_manager = ModelManager()
         
         # Use models from model manager
-        self.vectorizer = self.model_manager.models['vectorizer']
+        self.vectorizer = self.model_manager.vectorizer
         self.models = {
             '1h': self.model_manager.models['1h'],
             '1wk': self.model_manager.models['1wk'],
@@ -620,7 +630,7 @@ class RealTimeMonitor:
                     self.model_manager.check_and_reload_models()
                     
                     # Update local references to models
-                    self.vectorizer = self.model_manager.models['vectorizer']
+                    self.vectorizer = self.model_manager.vectorizer
                     self.models = {
                         '1h': self.model_manager.models['1h'],
                         '1wk': self.model_manager.models['1wk'],
