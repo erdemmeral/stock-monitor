@@ -4,3 +4,4 @@ app/training/app/models/*.joblib filter=lfs diff=lfs merge=lfs -text
 *.py text eol=lf
 *.md text eol=lf
 *.json text eol=lf
+app/models/learned_patterns.joblib filter=lfs diff=lfs merge=lfs -text
