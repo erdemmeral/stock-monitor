@@ -44,9 +44,23 @@ logger = logging.getLogger(__name__)
 
 class ModelManager:
     def __init__(self):
-        # Get the absolute path to the models directory
-        base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        # Handle both Docker and local development paths
+        if os.path.exists('/app'):
+            # Docker environment
+            base_dir = '/app'
+        else:
+            # Local development environment
+            base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        
+        # Log the base directory being used
+        logger.info(f"Using base directory: {base_dir}")
+        
+        # Define models directory
         models_dir = os.path.join(base_dir, 'app', 'training', 'app', 'models')
+        logger.info(f"Models directory: {models_dir}")
+        
+        # Create models directory if it doesn't exist
+        os.makedirs(models_dir, exist_ok=True)
         
         self.model_paths = {
             'vectorizer': os.path.join(models_dir, 'vectorizer.joblib'),
@@ -55,11 +69,14 @@ class ModelManager:
             '1mo': os.path.join(models_dir, 'market_model_1mo.joblib')
         }
         
-        # Log the paths being used
+        # Log the paths and check file existence
         for name, path in self.model_paths.items():
             logger.info(f"Model path for {name}: {path}")
             if not os.path.exists(path):
                 logger.error(f"Model file not found: {path}")
+            else:
+                logger.info(f"Model file exists: {path}")
+                logger.info(f"File size: {os.path.getsize(path)} bytes")
         
         self.last_modified_times = {}
         self.models = {}
@@ -73,17 +90,21 @@ class ModelManager:
                 if not os.path.exists(path):
                     logger.error(f"Model file does not exist: {path}")
                     continue
-                    
+                
+                # Log attempt to load model
+                logger.info(f"Attempting to load {name} from {path}")
+                
                 if name == 'vectorizer':
                     self.vectorizer = joblib.load(path)
                     self.last_modified_times[name] = os.path.getmtime(path)
-                    logger.info(f"Loaded initial vectorizer from {path}")
+                    logger.info(f"Successfully loaded vectorizer from {path}")
                 else:
                     self.models[name] = joblib.load(path)
                     self.last_modified_times[name] = os.path.getmtime(path)
-                    logger.info(f"Loaded initial {name} model from {path}")
+                    logger.info(f"Successfully loaded {name} model from {path}")
             except Exception as e:
-                logger.error(f"Error loading initial {name} model from {path}: {str(e)}")
+                logger.error(f"Error loading {name} model from {path}: {str(e)}")
+                logger.error(f"Full error details: {str(e.__class__.__name__)}: {str(e)}")
                 if name == 'vectorizer':
                     self.vectorizer = None
                 else:
