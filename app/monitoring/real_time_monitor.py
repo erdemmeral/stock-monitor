@@ -44,30 +44,50 @@ logger = logging.getLogger(__name__)
 
 class ModelManager:
     def __init__(self):
+        # Get the absolute path to the models directory
+        base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        models_dir = os.path.join(base_dir, 'app', 'training', 'app', 'models')
+        
         self.model_paths = {
-            'vectorizer': 'app/models/vectorizer.joblib',
-            '1h': 'app/models/market_model_1h.joblib',
-            '1wk': 'app/models/market_model_1wk.joblib',
-            '1mo': 'app/models/market_model_1mo.joblib'
+            'vectorizer': os.path.join(models_dir, 'vectorizer.joblib'),
+            '1h': os.path.join(models_dir, 'market_model_1h.joblib'),
+            '1wk': os.path.join(models_dir, 'market_model_1wk.joblib'),
+            '1mo': os.path.join(models_dir, 'market_model_1mo.joblib')
         }
+        
+        # Log the paths being used
+        for name, path in self.model_paths.items():
+            logger.info(f"Model path for {name}: {path}")
+            if not os.path.exists(path):
+                logger.error(f"Model file not found: {path}")
+        
         self.last_modified_times = {}
         self.models = {}
         self.vectorizer = None
         self.load_initial_models()
     
     def load_initial_models(self):
+        """Load initial models with error handling"""
         for name, path in self.model_paths.items():
             try:
+                if not os.path.exists(path):
+                    logger.error(f"Model file does not exist: {path}")
+                    continue
+                    
                 if name == 'vectorizer':
                     self.vectorizer = joblib.load(path)
                     self.last_modified_times[name] = os.path.getmtime(path)
-                    logger.info(f"Loaded initial vectorizer")
+                    logger.info(f"Loaded initial vectorizer from {path}")
                 else:
                     self.models[name] = joblib.load(path)
                     self.last_modified_times[name] = os.path.getmtime(path)
-                    logger.info(f"Loaded initial {name} model")
+                    logger.info(f"Loaded initial {name} model from {path}")
             except Exception as e:
-                logger.error(f"Error loading initial {name} model: {e}")
+                logger.error(f"Error loading initial {name} model from {path}: {str(e)}")
+                if name == 'vectorizer':
+                    self.vectorizer = None
+                else:
+                    self.models[name] = None
 
     def check_and_reload_models(self):
         """Check if models have been updated and reload if necessary"""
@@ -142,13 +162,19 @@ class RealTimeMonitor:
 
         self.model_manager = ModelManager()
         
-        # Use models from model manager
+        # Check if models are loaded properly
+        if self.model_manager.vectorizer is None:
+            logger.error("Vectorizer not loaded properly")
+            raise RuntimeError("Required vectorizer model not available")
+            
+        # Use models from model manager with validation
         self.vectorizer = self.model_manager.vectorizer
-        self.models = {
-            '1h': self.model_manager.models['1h'],
-            '1wk': self.model_manager.models['1wk'],
-            '1mo': self.model_manager.models['1mo']
-        }
+        self.models = {}
+        
+        for timeframe in ['1h', '1wk', '1mo']:
+            if timeframe not in self.model_manager.models or self.model_manager.models[timeframe] is None:
+                logger.error(f"Model for timeframe {timeframe} not loaded properly")
+                raise RuntimeError(f"Required model for {timeframe} not available")
         
         # Initialize Telegram
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
