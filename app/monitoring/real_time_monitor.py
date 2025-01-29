@@ -55,15 +55,15 @@ class ModelManager:
         # Log the base directory being used
         logger.info(f"Using base directory: {base_dir}")
         
-        # Define models directory
-        models_dir = os.path.join(base_dir, 'app', 'training', 'app', 'models')
+        # Define models directory - now using ./app/models
+        models_dir = os.path.join(base_dir, 'app', 'models')
         logger.info(f"Models directory: {models_dir}")
         
         # Create models directory if it doesn't exist
         os.makedirs(models_dir, exist_ok=True)
         
         self.model_paths = {
-            'vectorizer': os.path.join(models_dir, 'vectorizer.joblib'),
+            'vectorizer': os.path.join(models_dir, 'vectorizer.joblib'),  # Updated to match market_ml_trainer.py
             '1h': os.path.join(models_dir, 'market_model_1h.joblib'),
             '1wk': os.path.join(models_dir, 'market_model_1wk.joblib'),
             '1mo': os.path.join(models_dir, 'market_model_1mo.joblib')
