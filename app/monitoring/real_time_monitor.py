@@ -28,7 +28,7 @@ from telegram.error import TelegramError
 from app.services.news_service import NewsService
 from app.utils.sp500 import get_all_symbols
 import torch
-from app.training.market_ml_trainer import FinBERTSentimentAnalyzer
+from app.training.market_ml_trainer import FinBERTSentimentAnalyzer, MarketMLTrainer
 from app.services.portfolio_tracker_service import PortfolioTrackerService
 
 # Configure logging
