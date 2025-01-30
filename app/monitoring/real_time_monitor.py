@@ -23,6 +23,9 @@ import pytz
 from telegram import Update
 from telegram.ext import Application, ContextTypes
 from telegram.error import TelegramError
+from transformers import AutoTokenizer, AutoModel
+import torch
+from collections import defaultdict
 
 # Local application imports
 from app.services.news_service import NewsService

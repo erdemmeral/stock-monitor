@@ -640,8 +640,10 @@ class MarketMLTrainer:
             y = []
             sample_weights = []
             
+            logger.info(f"\n{'='*20} Training {timeframe} Model {'='*20}")
             logger.info(f"Processing {len(training_data)} samples for {timeframe} model")
             
+            valid_samples = 0
             for sample in training_data:
                 # Calculate impact scores for this sample
                 impact_scores = self.calculate_article_impact(
@@ -658,25 +660,27 @@ class MarketMLTrainer:
                 if features.ndim == 1:
                     features = features.reshape(1, -1)
                 
-                X_features_list.append(features)
-                
                 # Get the change value for this timeframe
                 change = sample['changes'].get(timeframe)
                 if change is None:
-                    logger.warning(f"No change value found for timeframe {timeframe}")
                     continue
                     
+                X_features_list.append(features)
                 y.append(change)
                 
                 # Use impact as sample weight
                 weight = 1.0 + impact_scores.get(timeframe, 0)
                 sample_weights.append(weight)
+                valid_samples += 1
+                
+                if valid_samples % 100 == 0:
+                    logger.info(f"Processed {valid_samples} valid samples for {timeframe}")
             
             if not X_features_list:
                 logger.error(f"No valid samples collected for {timeframe} model")
                 return False
                 
-            logger.info(f"Collected {len(X_features_list)} valid samples for {timeframe} model")
+            logger.info(f"Collected {valid_samples} valid samples for {timeframe} model")
                 
             # Combine features ensuring proper dimensionality
             X_combined = scipy.sparse.vstack(X_features_list)
@@ -707,11 +711,12 @@ class MarketMLTrainer:
             
             # Train the model
             self.models[timeframe].fit(X_clean, y_clean, sample_weight=weights_clean)
-            logger.info(f"Successfully trained {timeframe} model")
+            logger.info(f"✅ Successfully trained {timeframe} model")
+            logger.info(f"{'='*60}\n")
             return True
             
         except Exception as e:
-            logger.error(f"Error training model for {timeframe}: {str(e)}")
+            logger.error(f"❌ Error training model for {timeframe}: {str(e)}")
             logger.exception("Full traceback:")
             return False
 
@@ -773,11 +778,11 @@ class MarketMLTrainer:
 
         try:
             # Fit the vectorizer first without limiting features
-            logger.info("Fitting TF-IDF vectorizer...")
+            logger.info("\nFitting TF-IDF vectorizer...")
             X_text = [sample['text'] for sample in training_data]
             self.vectorizer.fit(X_text)
             vocab_size = len(self.vectorizer.vocabulary_)
-            logger.info(f"Vectorizer fitted successfully. Vocabulary size: {vocab_size}")
+            logger.info(f"✅ Vectorizer fitted successfully. Vocabulary size: {vocab_size}")
 
             # Initialize models with correct feature dimensions
             feature_sample = self.prepare_training_sample(training_data[0], {})
@@ -796,13 +801,23 @@ class MarketMLTrainer:
                     )
 
             # Train models for each timeframe
+            training_results = {}
             for timeframe in ['1h', '1wk', '1mo']:
-                logger.info(f"\nTraining {timeframe} model...")
                 success = self.train_with_impact_scores(training_data, timeframe)
-                if success:
-                    logger.info(f"Successfully trained {timeframe} model")
-                else:
-                    logger.error(f"Failed to train {timeframe} model")
+                training_results[timeframe] = success
+
+            # Log final training summary
+            logger.info("\n=== Training Summary ===")
+            for timeframe, success in training_results.items():
+                status = "✅ Success" if success else "❌ Failed"
+                logger.info(f"{timeframe} model: {status}")
+
+            if all(training_results.values()):
+                logger.info("\n✅ All models trained successfully!")
+            else:
+                logger.warning("\n⚠️ Some models failed to train")
+                failed_models = [tf for tf, success in training_results.items() if not success]
+                logger.warning(f"Failed models: {', '.join(failed_models)}")
 
             return self.models
 
