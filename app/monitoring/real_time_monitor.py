@@ -270,6 +270,24 @@ class RealTimeMonitor:
             logger.error(f"Input matrix shape: {X.shape}")
             raise
 
+    def _adjust_features(self, X, expected_features):
+        """Adjust feature matrix to match expected dimensions"""
+        current_features = X.shape[1]
+        logger.info(f"Current features: {current_features}, Expected: {expected_features}")
+        
+        if current_features < expected_features:
+            # Pad with zeros
+            padding = scipy.sparse.csr_matrix((X.shape[0], expected_features - current_features))
+            X_adjusted = scipy.sparse.hstack([X, padding])
+            logger.info(f"Padded features to {X_adjusted.shape[1]}")
+            return X_adjusted
+        elif current_features > expected_features:
+            # Truncate
+            X_adjusted = X[:, :expected_features]
+            logger.info(f"Truncated features to {X_adjusted.shape[1]}")
+            return X_adjusted
+        return X
+
     def predict_with_sentiment(self, text, timeframe):
         """
         Make a prediction integrating sentiment scores and semantic analysis
@@ -283,16 +301,10 @@ class RealTimeMonitor:
             actual_features = X_tfidf.shape[1]
             
             if actual_features != expected_features:
-                logger.error(f"Feature mismatch: Model expects {expected_features} features but got {actual_features}")
-                # Try to reload models
-                if self.model_manager.check_and_reload_models():
-                    logger.info("Successfully reloaded models")
-                    self.vectorizer = self.model_manager.vectorizer
-                    self.models[timeframe] = self.model_manager.models[timeframe]
-                    # Try transform again with updated vectorizer
-                    X_tfidf = self.vectorizer.transform([text])
-                else:
-                    logger.error("Failed to reload models")
+                logger.info(f"Adjusting features from {actual_features} to {expected_features}")
+                X_tfidf = self._adjust_features(X_tfidf, expected_features)
+                if X_tfidf.shape[1] != expected_features:
+                    logger.error(f"Feature adjustment failed. Got {X_tfidf.shape[1]}, expected {expected_features}")
                     return 0.0
             
             base_pred = self.models[timeframe].predict(X_tfidf)[0]
