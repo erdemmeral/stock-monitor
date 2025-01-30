@@ -47,94 +47,73 @@ logger = logging.getLogger(__name__)
 
 class ModelManager:
     def __init__(self):
-        # Handle both Docker and local development paths
-        if os.path.exists('/app'):
-            # Docker environment
-            base_dir = '/app'
-        else:
-            # Local development environment
-            base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-        
-        # Log the base directory being used
-        logger.info(f"Using base directory: {base_dir}")
-        
-        # Define models directory - now using ./app/models
-        models_dir = os.path.join(base_dir, 'app', 'models')
-        logger.info(f"Models directory: {models_dir}")
-        
-        # Create models directory if it doesn't exist
-        os.makedirs(models_dir, exist_ok=True)
-        
-        self.model_paths = {
-            'vectorizer': os.path.join(models_dir, 'vectorizer.joblib'),  # Updated to match market_ml_trainer.py
-            '1h': os.path.join(models_dir, 'market_model_1h.joblib'),
-            '1wk': os.path.join(models_dir, 'market_model_1wk.joblib'),
-            '1mo': os.path.join(models_dir, 'market_model_1mo.joblib')
+        self.models = {
+            '1h': None,
+            '1wk': None,
+            '1mo': None
         }
-        
-        # Log the paths and check file existence
-        for name, path in self.model_paths.items():
-            logger.info(f"Model path for {name}: {path}")
-            if not os.path.exists(path):
-                logger.error(f"Model file not found: {path}")
-            else:
-                logger.info(f"Model file exists: {path}")
-                logger.info(f"File size: {os.path.getsize(path)} bytes")
-        
-        self.last_modified_times = {}
-        self.models = {}
         self.vectorizer = None
-        self.load_initial_models()
-    
-    def load_initial_models(self):
-        """Load initial models with error handling"""
-        for name, path in self.model_paths.items():
-            try:
-                if not os.path.exists(path):
-                    logger.error(f"Model file does not exist: {path}")
-                    continue
-                
-                # Log attempt to load model
-                logger.info(f"Attempting to load {name} from {path}")
-                
-                if name == 'vectorizer':
-                    self.vectorizer = joblib.load(path)
-                    self.last_modified_times[name] = os.path.getmtime(path)
-                    logger.info(f"Successfully loaded vectorizer from {path}")
-                else:
-                    self.models[name] = joblib.load(path)
-                    self.last_modified_times[name] = os.path.getmtime(path)
-                    logger.info(f"Successfully loaded {name} model from {path}")
-            except Exception as e:
-                logger.error(f"Error loading {name} model from {path}: {str(e)}")
-                logger.error(f"Full error details: {str(e.__class__.__name__)}: {str(e)}")
-                if name == 'vectorizer':
-                    self.vectorizer = None
-                else:
-                    self.models[name] = None
+        self.last_load_time = None
+        self.model_paths = {
+            '1h': 'app/models/market_model_1h.joblib',
+            '1wk': 'app/models/market_model_1wk.joblib',
+            '1mo': 'app/models/market_model_1mo.joblib',
+            'vectorizer': 'app/models/vectorizer.joblib'
+        }
+
+    def load_models(self):
+        """Load all models and vectorizer"""
+        try:
+            # Load vectorizer first
+            if not os.path.exists(self.model_paths['vectorizer']):
+                logger.error("Vectorizer file not found")
+                return False
+
+            self.vectorizer = joblib.load(self.model_paths['vectorizer'])
+            logger.info("Loaded vectorizer successfully")
+
+            # Load models
+            for timeframe in self.models.keys():
+                model_path = self.model_paths[timeframe]
+                if not os.path.exists(model_path):
+                    logger.error(f"Model file for {timeframe} not found")
+                    return False
+                self.models[timeframe] = joblib.load(model_path)
+                logger.info(f"Loaded {timeframe} model successfully")
+
+            self.last_load_time = datetime.now()
+            return True
+
+        except Exception as e:
+            logger.error(f"Error loading models: {str(e)}")
+            return False
 
     def check_and_reload_models(self):
-        """Check if models have been updated and reload if necessary"""
+        """Check if models need to be reloaded and reload them if necessary"""
         try:
-            for name, path in self.model_paths.items():
-                current_mod_time = os.path.getmtime(path)
+            # Check if any model files have been modified
+            current_time = datetime.now()
+            should_reload = False
+
+            for path in self.model_paths.values():
+                if not os.path.exists(path):
+                    logger.error(f"Model file not found: {path}")
+                    return False
                 
-                if current_mod_time > self.last_modified_times.get(name, 0):
-                    try:
-                        if name == 'vectorizer':
-                            self.vectorizer = joblib.load(path)
-                            self.last_modified_times[name] = current_mod_time
-                            logger.info(f"🔄 Reloaded vectorizer")
-                        else:
-                            new_model = joblib.load(path)
-                            self.models[name] = new_model
-                            self.last_modified_times[name] = current_mod_time
-                            logger.info(f"🔄 Reloaded {name} model")
-                        logger.info(f"Model last modified: {datetime.fromtimestamp(current_mod_time)}")
-                    except Exception as e:
-                        logger.error(f"Error reloading {name} model: {e}")
+                mod_time = datetime.fromtimestamp(os.path.getmtime(path))
+                if self.last_load_time is None or mod_time > self.last_load_time:
+                    should_reload = True
+                    break
+
+            if should_reload:
+                logger.info("Detected model updates, reloading models...")
+                return self.load_models()
+            
+            return True
+
         except Exception as e:
-            logger.error(f"Error in model check: {e}")
+            logger.error(f"Error checking models: {str(e)}")
+            return False
 
 class NewsSemanticAnalyzer:
     def __init__(self):
@@ -229,8 +208,6 @@ class RealTimeMonitor:
     def __init__(self):
         logger.info("Initializing RealTimeMonitor")
         self.news_aggregator = NewsAggregator()
-
-        # Initialize portfolio tracker
         self.portfolio_tracker = PortfolioTrackerService()
         logger.info("Portfolio tracker service initialized")
 
@@ -242,40 +219,26 @@ class RealTimeMonitor:
         self.semantic_analyzer = NewsSemanticAnalyzer()
         logger.info("Semantic analyzer initialized")
 
+        # Initialize model manager
         self.model_manager = ModelManager()
-        
-        # Check if models are loaded properly
-        if self.model_manager.vectorizer is None:
-            logger.error("Vectorizer not loaded properly")
-            raise RuntimeError("Required vectorizer model not available")
+        if not self.model_manager.load_models():
+            raise RuntimeError("Failed to load required models")
             
-        # Use models from model manager with validation
+        # Use models from model manager
         self.vectorizer = self.model_manager.vectorizer
-        self.models = {}
+        self.models = self.model_manager.models
         
-        for timeframe in ['1h', '1wk', '1mo']:
-            if timeframe not in self.model_manager.models or self.model_manager.models[timeframe] is None:
-                logger.error(f"Model for timeframe {timeframe} not loaded properly")
-                raise RuntimeError(f"Required model for {timeframe} not available")
-            self.models[timeframe] = self.model_manager.models[timeframe]
+        logger.info("Models loaded successfully")
+        
+        # Set thresholds for predictions
+        self.thresholds = {
+            '1h': 5.0,   # 5% threshold
+            '1wk': 10.0,  # 10% threshold
+            '1mo': 20.0   # 20% threshold
+        }
 
-        # Initialize Telegram
-        self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
-        self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
-        
-        if not self.telegram_token or not self.telegram_chat_id:
-            logger.warning("Telegram credentials not found in environment variables")
-        else:
-            logger.info("Telegram credentials loaded successfully")
-                
         self.news_service = NewsService()
         self.processed_news = set()
-
-        self.thresholds = {
-            '1h': 5.0,
-            '1wk': 10.0,
-            '1mo': 20.0
-        }
 
         self._polling_lock = asyncio.Lock()
         self._is_polling = False
@@ -355,27 +318,36 @@ class RealTimeMonitor:
 
             # 4. Combine predictions with weights
             if semantic_pred is not None:
-                # Weight the predictions:
+                # Weight the predictions exactly as in training:
                 # - Base ML prediction: 40%
                 # - Semantic prediction: 40%
                 # - Sentiment adjustment: 20%
                 weighted_pred = (
-                    0.4 * base_pred +
-                    0.4 * semantic_pred +
-                    0.2 * (base_pred * sentiment_multiplier)
+                    0.4 * base_pred +  # 40% ML prediction
+                    0.4 * semantic_pred +  # 40% semantic prediction
+                    0.2 * (base_pred * sentiment_multiplier)  # 20% sentiment-adjusted prediction
                 )
+                
+                logger.info(f"\nPrediction Breakdown for {timeframe}:")
+                logger.info(f"1. Base ML Prediction (40%): {base_pred:.2f}% -> {0.4 * base_pred:.2f}%")
+                logger.info(f"2. Semantic Prediction (40%): {semantic_pred:.2f}% -> {0.4 * semantic_pred:.2f}%")
+                if sentiment:
+                    adjusted_sentiment = base_pred * sentiment_multiplier
+                    logger.info(f"3. Sentiment-Adjusted (20%):")
+                    logger.info(f"   - Score: {sentiment['score']:.2f}")
+                    logger.info(f"   - Multiplier: {sentiment_multiplier:.2f}")
+                    logger.info(f"   - Impact: {adjusted_sentiment:.2f}% -> {0.2 * adjusted_sentiment:.2f}%")
+                logger.info(f"Final Weighted Prediction: {weighted_pred:.2f}%")
             else:
                 # If no semantic prediction available, use sentiment-adjusted base prediction
                 weighted_pred = base_pred * sentiment_multiplier
-
-            # Log prediction details
-            logger.info(f"\nPrediction Breakdown for {timeframe}:")
-            logger.info(f"1. Base ML Prediction: {base_pred:.2f}%")
-            if sentiment:
-                logger.info(f"2. Sentiment Score: {sentiment['score']:.2f}")
-                logger.info(f"   Sentiment Multiplier: {sentiment_multiplier:.2f}")
-            if semantic_pred is not None:
-                logger.info(f"3. Semantic Prediction: {semantic_pred:.2f}%")
+                logger.info(f"\nPrediction Breakdown for {timeframe} (No Semantic Data):")
+                logger.info(f"1. Base ML Prediction: {base_pred:.2f}%")
+                if sentiment:
+                    logger.info(f"2. Sentiment Adjustment:")
+                    logger.info(f"   - Score: {sentiment['score']:.2f}")
+                    logger.info(f"   - Multiplier: {sentiment_multiplier:.2f}")
+                logger.info(f"Final Prediction: {weighted_pred:.2f}%")
 
             return weighted_pred
 

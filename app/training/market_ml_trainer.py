@@ -711,12 +711,12 @@ class MarketMLTrainer:
             
             # Train the model
             self.models[timeframe].fit(X_clean, y_clean, sample_weight=weights_clean)
-            logger.info(f"✅ Successfully trained {timeframe} model")
+            logger.info(f" Successfully trained {timeframe} model")
             logger.info(f"{'='*60}\n")
             return True
             
         except Exception as e:
-            logger.error(f"❌ Error training model for {timeframe}: {str(e)}")
+            logger.error(f" Error training model for {timeframe}: {str(e)}")
             logger.exception("Full traceback:")
             return False
 
@@ -782,7 +782,7 @@ class MarketMLTrainer:
             X_text = [sample['text'] for sample in training_data]
             self.vectorizer.fit(X_text)
             vocab_size = len(self.vectorizer.vocabulary_)
-            logger.info(f"✅ Vectorizer fitted successfully. Vocabulary size: {vocab_size}")
+            logger.info(f" Vectorizer fitted successfully. Vocabulary size: {vocab_size}")
 
             # Initialize models with correct feature dimensions
             feature_sample = self.prepare_training_sample(training_data[0], {})
@@ -809,8 +809,31 @@ class MarketMLTrainer:
             # Log final training summary
             logger.info("\n=== Training Summary ===")
             for timeframe, success in training_results.items():
-                status = "✅ Success" if success else "❌ Failed"
+                status = " Success" if success else " Failed"
                 logger.info(f"{timeframe} model: {status}")
+
+            # Log semantic analysis statistics
+            num_patterns = len(self.semantic_analyzer.news_embeddings)
+            num_clusters = len(self.semantic_analyzer.news_clusters)
+            logger.info(f"\nSemantic Analysis Statistics:")
+            logger.info(f"Total patterns collected: {num_patterns}")
+            logger.info(f"Number of news clusters: {num_clusters}")
+
+            # Log cluster statistics for each timeframe
+            timeframes = ['1h', '1wk', '1mo']
+            for timeframe in timeframes:
+                logger.info(f"\nCluster Statistics for {timeframe}:")
+                for cluster_id in sorted(self.semantic_analyzer.news_clusters.keys()):
+                    indices = self.semantic_analyzer.news_clusters[cluster_id]
+                    # Calculate average impact for this timeframe
+                    impacts = []
+                    for idx in indices:
+                        if timeframe in self.semantic_analyzer.price_impacts[idx]:
+                            impacts.append(self.semantic_analyzer.price_impacts[idx][timeframe])
+                    
+                    if impacts:
+                        avg_impact = np.mean(impacts)
+                        logger.info(f"Cluster {cluster_id}: {len(indices)} articles, Avg {timeframe} impact: {avg_impact:.2f}%")
 
             if all(training_results.values()):
                 logger.info("\n✅ All models trained successfully!")
@@ -1127,14 +1150,21 @@ def main():
             logger.info(f"Total patterns collected: {num_patterns}")
             logger.info(f"Number of news clusters: {num_clusters}")
 
-            # Log cluster statistics
-            if num_clusters > 0:
-                logger.info("\nCluster Statistics:")
-                for cluster_id in trainer.semantic_analyzer.news_clusters.keys():
-                    cluster_size = len(trainer.semantic_analyzer.news_clusters[cluster_id])
-                    impacts = trainer.semantic_analyzer.cluster_impacts[cluster_id]
-                    avg_impact = np.mean([impact.get('1mo', 0) for impact in impacts])
-                    logger.info(f"Cluster {cluster_id}: {cluster_size} articles, Avg 1mo impact: {avg_impact:.2f}%")
+            # Log cluster statistics for each timeframe
+            timeframes = ['1h', '1wk', '1mo']
+            for timeframe in timeframes:
+                logger.info(f"\nCluster Statistics for {timeframe}:")
+                for cluster_id in sorted(trainer.semantic_analyzer.news_clusters.keys()):
+                    indices = trainer.semantic_analyzer.news_clusters[cluster_id]
+                    # Calculate average impact for this timeframe
+                    impacts = []
+                    for idx in indices:
+                        if timeframe in trainer.semantic_analyzer.price_impacts[idx]:
+                            impacts.append(trainer.semantic_analyzer.price_impacts[idx][timeframe])
+                    
+                    if impacts:
+                        avg_impact = np.mean(impacts)
+                        logger.info(f"Cluster {cluster_id}: {len(indices)} articles, Avg {timeframe} impact: {avg_impact:.2f}%")
         else:
             logger.error("Training failed - no models were produced")
 
