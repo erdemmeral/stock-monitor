@@ -26,6 +26,7 @@ from telegram.error import TelegramError
 from transformers import AutoTokenizer, AutoModel
 import torch
 from collections import defaultdict
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Local application imports
 from app.services.news_service import NewsService
@@ -140,34 +141,42 @@ class NewsSemanticAnalyzer:
 
     def find_similar_news(self, embedding, threshold=0.8):
         """Find similar historical news articles based on embedding similarity"""
-        if not self.news_embeddings:
+        try:
+            if not self.news_embeddings:
+                return []
+            similarities = cosine_similarity([embedding], self.news_embeddings)[0]
+            similar_indices = np.where(similarities >= threshold)[0]
+            return [(idx, similarities[idx]) for idx in similar_indices]
+        except Exception as e:
+            logger.error(f"Error in finding similar news: {str(e)}")
             return []
-        similarities = cosine_similarity([embedding], self.news_embeddings)[0]
-        similar_indices = np.where(similarities >= threshold)[0]
-        return [(idx, similarities[idx]) for idx in similar_indices]
 
     def get_semantic_impact_prediction(self, text, timeframe):
         """Predict price impact based on semantic similarity to historical patterns"""
-        embedding = self.get_embedding(text)
-        similar_news = self.find_similar_news(embedding)
+        try:
+            embedding = self.get_embedding(text)
+            similar_news = self.find_similar_news(embedding)
 
-        if not similar_news:
+            if not similar_news:
+                return None
+
+            weighted_impacts = []
+            total_weight = 0
+
+            for idx, similarity in similar_news:
+                if timeframe in self.price_impacts[idx]:
+                    impact = self.price_impacts[idx][timeframe]
+                    weight = similarity
+                    weighted_impacts.append(impact * weight)
+                    total_weight += weight
+
+            if total_weight == 0:
+                return None
+
+            return sum(weighted_impacts) / total_weight
+        except Exception as e:
+            logger.error(f"Error in semantic impact prediction: {str(e)}")
             return None
-
-        weighted_impacts = []
-        total_weight = 0
-
-        for idx, similarity in similar_news:
-            if timeframe in self.price_impacts[idx]:
-                impact = self.price_impacts[idx][timeframe]
-                weight = similarity
-                weighted_impacts.append(impact * weight)
-                total_weight += weight
-
-        if total_weight == 0:
-            return None
-
-        return sum(weighted_impacts) / total_weight
 
 class NewsAggregator:
     def __init__(self):
