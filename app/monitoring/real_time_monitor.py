@@ -314,6 +314,24 @@ class RealTimeMonitor:
         try:
             # 1. Get base ML prediction
             X_tfidf = self.vectorizer.transform([text])
+            
+            # Check if feature dimensions match
+            expected_features = self.models[timeframe].n_features_in_
+            actual_features = X_tfidf.shape[1]
+            
+            if actual_features != expected_features:
+                logger.error(f"Feature mismatch: Model expects {expected_features} features but got {actual_features}")
+                # Try to reload models
+                if self.model_manager.check_and_reload_models():
+                    logger.info("Successfully reloaded models")
+                    self.vectorizer = self.model_manager.vectorizer
+                    self.models[timeframe] = self.model_manager.models[timeframe]
+                    # Try transform again with updated vectorizer
+                    X_tfidf = self.vectorizer.transform([text])
+                else:
+                    logger.error("Failed to reload models")
+                    return 0.0
+            
             base_pred = self.models[timeframe].predict(X_tfidf)[0]
 
             # 2. Get sentiment analysis
@@ -358,17 +376,6 @@ class RealTimeMonitor:
                 logger.info(f"   Sentiment Multiplier: {sentiment_multiplier:.2f}")
             if semantic_pred is not None:
                 logger.info(f"3. Semantic Prediction: {semantic_pred:.2f}%")
-
-            # Log similar patterns if available
-            embedding = self.semantic_analyzer.get_embedding(text)
-            if embedding is not None:
-                similar_news = self.semantic_analyzer.find_similar_news(embedding)
-                if similar_news:
-                    logger.info("\nSimilar Historical Patterns:")
-                    for idx, similarity in similar_news[:3]:  # Show top 3
-                        impact = self.semantic_analyzer.price_impacts[idx].get(timeframe)
-                        if impact is not None:
-                            logger.info(f"- Similarity: {similarity:.2f}, Impact: {impact:.2f}%")
 
             return weighted_pred
 
@@ -931,6 +938,12 @@ class RealTimeMonitor:
                         logger.info(f"Skipping article - not relevant to {symbol}")
                         continue
 
+                    # Get sentiment analysis first
+                    sentiment = self.finbert_analyzer.analyze_sentiment(content)
+                    if not sentiment:
+                        logger.warning(f"Could not get sentiment for article: {article.get('title', '')}")
+                        continue
+
                     # Make predictions for this specific article
                     article_predictions = {}
 
@@ -977,7 +990,7 @@ class RealTimeMonitor:
                     all_predictions.append({
                         'article': article,
                         'predictions': article_predictions,
-                        'sentiment': sentiment
+                        'sentiment': sentiment  # Now sentiment is properly defined
                     })
                     
                     self.processed_news.add(news_id)
@@ -1101,11 +1114,17 @@ class RealTimeMonitor:
         if prices.empty:
             return {'impact': 1, 'scores': None, 'changes': None}
 
-        publish_datetime = datetime.fromtimestamp(publish_time)
-        print("Publish Date: ", publish_datetime.strftime('%Y-%m-%d %H:%M:%S'))
+        # Ensure publish_datetime is timezone-aware
+        publish_datetime = datetime.fromtimestamp(publish_time, tz=pytz.UTC)
+        logger.info(f"Publish Date: {publish_datetime.strftime('%Y-%m-%d %H:%M:%S %Z')}")
 
         changes = {}
         start_price = None
+        
+        # Convert index to UTC if not already
+        if prices.index.tz is None:
+            prices.index = prices.index.tz_localize(pytz.UTC)
+            
         for idx, row in prices.iterrows():
             if idx >= publish_datetime:
                 start_price = row['Close']
@@ -1117,8 +1136,8 @@ class RealTimeMonitor:
         # Calculate changes for each timeframe
         timeframes = {
             '1h': timedelta(hours=1),
-            '1w': timedelta(days=7),
-            '1m': timedelta(days=30)
+            '1wk': timedelta(days=7),
+            '1mo': timedelta(days=30)
         }
 
         for timeframe, delta in timeframes.items():
@@ -1126,7 +1145,7 @@ class RealTimeMonitor:
             period_prices = prices[prices.index <= end_time]
             if not period_prices.empty:
                 end_price = period_prices['Close'].iloc[-1]
-                change = ((end_price - start_price) / start_price) * 100
+                changes[timeframe] = ((end_price - start_price) / start_price) * 100
 
         # Calculate normalized scores
         scores = self.calculate_normalized_score(changes)
