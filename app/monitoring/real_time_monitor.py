@@ -62,8 +62,34 @@ class ModelManager:
             'vectorizer': 'app/models/vectorizer.joblib'
         }
 
+    def validate_model(self, model, timeframe):
+        """Validate model properties and configuration"""
+        try:
+            # Check if model has expected attributes
+            if not hasattr(model, 'predict'):
+                logger.error(f"{timeframe} model missing predict method")
+                return False
+                
+            # Check if model was trained
+            if hasattr(model, 'n_features_in_'):
+                logger.info(f"{timeframe} model expects {model.n_features_in_} features")
+            else:
+                logger.error(f"{timeframe} model missing n_features_in_")
+                return False
+                
+            # Log model type and parameters
+            logger.info(f"{timeframe} model type: {type(model).__name__}")
+            if hasattr(model, 'get_params'):
+                params = model.get_params()
+                logger.info(f"{timeframe} model parameters: {params}")
+                
+            return True
+        except Exception as e:
+            logger.error(f"Error validating {timeframe} model: {str(e)}")
+            return False
+
     def load_models(self):
-        """Load all models and vectorizer"""
+        """Load all models and vectorizer with validation"""
         try:
             # Load vectorizer first
             if not os.path.exists(self.model_paths['vectorizer']):
@@ -71,15 +97,22 @@ class ModelManager:
                 return False
 
             self.vectorizer = joblib.load(self.model_paths['vectorizer'])
-            logger.info("Loaded vectorizer successfully")
+            logger.info(f"Loaded vectorizer: {type(self.vectorizer).__name__}")
+            logger.info(f"Vectorizer vocabulary size: {len(self.vectorizer.vocabulary_)}")
 
-            # Load models
+            # Load and validate models
             for timeframe in self.models.keys():
                 model_path = self.model_paths[timeframe]
                 if not os.path.exists(model_path):
                     logger.error(f"Model file for {timeframe} not found")
                     return False
-                self.models[timeframe] = joblib.load(model_path)
+                    
+                model = joblib.load(model_path)
+                if not self.validate_model(model, timeframe):
+                    logger.error(f"Model validation failed for {timeframe}")
+                    return False
+                    
+                self.models[timeframe] = model
                 logger.info(f"Loaded {timeframe} model successfully")
 
             self.last_load_time = datetime.now()
@@ -216,6 +249,15 @@ class NewsAggregator:
 class RealTimeMonitor:
     def __init__(self):
         logger.info("Initializing RealTimeMonitor")
+        # Initialize Telegram token
+        self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
+        if not self.telegram_token:
+            logger.warning("TELEGRAM_BOT_TOKEN environment variable not set")
+        
+        self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
+        if not self.telegram_chat_id:
+            logger.warning("TELEGRAM_CHAT_ID environment variable not set")
+            
         self.news_aggregator = NewsAggregator()
         self.portfolio_tracker = PortfolioTrackerService()
         logger.info("Portfolio tracker service initialized")
@@ -305,6 +347,12 @@ class RealTimeMonitor:
             # 1. Get base ML prediction
             X_tfidf = self.vectorizer.transform([text])
             
+            # Log feature statistics for debugging
+            logger.info(f"\nFeature Statistics for {timeframe}:")
+            logger.info(f"Non-zero features: {X_tfidf.nnz}")
+            logger.info(f"Max feature value: {X_tfidf.max()}")
+            logger.info(f"Mean of non-zero values: {X_tfidf.sum() / X_tfidf.nnz if X_tfidf.nnz > 0 else 0}")
+            
             # Check if feature dimensions match
             expected_features = self.models[timeframe].n_features_in_
             actual_features = X_tfidf.shape[1]
@@ -316,8 +364,26 @@ class RealTimeMonitor:
                     logger.error(f"Feature adjustment failed. Got {X_tfidf.shape[1]}, expected {expected_features}")
                     return 0.0
             
-            base_pred = self.models[timeframe].predict(X_tfidf)[0]
-
+            # Log model coefficients statistics
+            coef = self.models[timeframe].coef_[0] if hasattr(self.models[timeframe], 'coef_') else None
+            if coef is not None:
+                logger.info(f"Model Coefficient Stats:")
+                logger.info(f"Max coefficient: {coef.max()}")
+                logger.info(f"Min coefficient: {coef.min()}")
+                logger.info(f"Mean coefficient: {coef.mean()}")
+            
+            # Get raw prediction before any transformations
+            raw_pred = self.models[timeframe].predict(X_tfidf)[0]
+            logger.info(f"Raw prediction (before any processing): {raw_pred}")
+            
+            # Check prediction method
+            if hasattr(self.models[timeframe], '_final_estimator'):
+                logger.info(f"Model type: Pipeline with final estimator {type(self.models[timeframe]._final_estimator).__name__}")
+            else:
+                logger.info(f"Model type: {type(self.models[timeframe]).__name__}")
+            
+            base_pred = raw_pred
+            
             # 2. Get sentiment analysis
             sentiment = self.finbert_analyzer.analyze_sentiment(text)
             if not sentiment:
