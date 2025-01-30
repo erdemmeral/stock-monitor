@@ -665,11 +665,14 @@ class MarketMLTrainer:
                 if change is None:
                     continue
                     
+                # Cap extreme price changes to prevent model instability
+                change = np.clip(change, -100, 100)
+                    
                 X_features_list.append(features)
                 y.append(change)
                 
-                # Use impact as sample weight
-                weight = 1.0 + impact_scores.get(timeframe, 0)
+                # Use impact as sample weight, but cap it to prevent instability
+                weight = min(1.0 + impact_scores.get(timeframe, 0), 2.0)
                 sample_weights.append(weight)
                 valid_samples += 1
                 
@@ -695,22 +698,39 @@ class MarketMLTrainer:
             
             logger.info(f"Final feature matrix shape for {timeframe}: {X_clean.shape}")
             logger.info(f"Final target vector shape for {timeframe}: {y_clean.shape}")
+            logger.info(f"Target value range: min={y_clean.min():.2f}%, max={y_clean.max():.2f}%")
             
-            # Initialize the model with the correct number of features
+            # Initialize the model with the correct number of features and proper regularization
             if self.models[timeframe] is None:
                 n_features = X_clean.shape[1]
                 logger.info(f"Initializing {timeframe} model with {n_features} features")
                 self.models[timeframe] = SGDRegressor(
+                    loss='huber',           # More robust to outliers than squared loss
+                    penalty='elasticnet',   # Combine L1 and L2 regularization
+                    alpha=0.001,            # Regularization strength
+                    l1_ratio=0.15,          # Ratio of L1 regularization
                     learning_rate='adaptive',
                     eta0=0.01,
                     max_iter=1000,
                     tol=1e-3,
                     early_stopping=True,
-                    warm_start=True  # Allow incremental learning
+                    validation_fraction=0.1,
+                    n_iter_no_change=5,
+                    warm_start=True,        # Allow incremental learning
+                    average=True            # Use averaged SGD for better stability
                 )
             
             # Train the model
             self.models[timeframe].fit(X_clean, y_clean, sample_weight=weights_clean)
+            
+            # Log coefficient statistics after training
+            coef = self.models[timeframe].coef_
+            logger.info(f"\nModel coefficient statistics after training:")
+            logger.info(f"Max coefficient: {coef.max():.6f}")
+            logger.info(f"Min coefficient: {coef.min():.6f}")
+            logger.info(f"Mean coefficient: {coef.mean():.6f}")
+            logger.info(f"Coefficient std: {coef.std():.6f}")
+            
             logger.info(f" Successfully trained {timeframe} model")
             logger.info(f"{'='*60}\n")
             return True
@@ -731,18 +751,19 @@ class MarketMLTrainer:
         cache_dir.mkdir(parents=True, exist_ok=True)
         yf.set_tz_cache_location(str(cache_dir))
         
-        # Process only first 100 stocks for testing
-        test_symbols = symbols[:100]
+        # Process first 100 stocks for stable initial training
+        test_symbols = symbols[:100]  # Take first 100 stocks
         chunk_size = 20  # Process 20 symbols at a time
         num_processes = 4  # Use 4 processes
+        total_chunks = len(test_symbols) // chunk_size + (1 if len(test_symbols) % chunk_size > 0 else 0)
 
-        # First pass: Process test stocks in chunks
-        logger.info("PHASE 1: Processing first 100 stocks in chunks")
+        logger.info(f"Processing first 100 stocks in {total_chunks} chunks")
+        logger.info(f"Using {num_processes} parallel processes")
         logger.info(f"Selected stocks: {', '.join(test_symbols[:10])}...")
+
         for i in range(0, len(test_symbols), chunk_size):
             chunk = test_symbols[i:i+chunk_size]
             chunk_num = i//chunk_size + 1
-            total_chunks = len(symbols)//chunk_size + 1
             logger.info(f"\nProcessing chunk {chunk_num}/{total_chunks}")
             logger.info(f"Symbols in chunk: {', '.join(chunk)}")
 
@@ -763,10 +784,10 @@ class MarketMLTrainer:
             # Update semantic patterns after each chunk
             self.update_semantic_patterns(training_data)
 
-            # Add delay between chunks
-            if i + chunk_size < len(symbols):
-                logger.info("Taking a break between chunks...")
-                time.sleep(10)
+            # Add delay between chunks to avoid rate limiting
+            if i + chunk_size < len(test_symbols):
+                logger.info("Taking a break between chunks to avoid rate limiting...")
+                time.sleep(15)  # Increased delay to be more conservative with API limits
 
         if not training_data:
             logger.error("No training data collected!")
@@ -777,12 +798,12 @@ class MarketMLTrainer:
         logger.info(f"Total failed stocks: {len(failed_stocks)}")
 
         try:
-            # Fit the vectorizer first without limiting features
+            # Fit the vectorizer first
             logger.info("\nFitting TF-IDF vectorizer...")
             X_text = [sample['text'] for sample in training_data]
             self.vectorizer.fit(X_text)
             vocab_size = len(self.vectorizer.vocabulary_)
-            logger.info(f" Vectorizer fitted successfully. Vocabulary size: {vocab_size}")
+            logger.info(f"Vectorizer fitted successfully. Vocabulary size: {vocab_size}")
 
             # Initialize models with correct feature dimensions
             feature_sample = self.prepare_training_sample(training_data[0], {})
@@ -792,12 +813,19 @@ class MarketMLTrainer:
                 
                 for timeframe in ['1h', '1wk', '1mo']:
                     self.models[timeframe] = SGDRegressor(
+                        loss='huber',           # More robust to outliers
+                        penalty='elasticnet',   # Combined L1 and L2 regularization
+                        alpha=0.001,            # Regularization strength
+                        l1_ratio=0.15,          # Balance between L1 and L2
                         learning_rate='adaptive',
                         eta0=0.01,
                         max_iter=1000,
                         tol=1e-3,
                         early_stopping=True,
-                        warm_start=True  # Allow incremental learning
+                        validation_fraction=0.1,
+                        n_iter_no_change=5,
+                        warm_start=True,
+                        average=True            # Use averaged SGD for stability
                     )
 
             # Train models for each timeframe
@@ -836,9 +864,9 @@ class MarketMLTrainer:
                         logger.info(f"Cluster {cluster_id}: {len(indices)} articles, Avg {timeframe} impact: {avg_impact:.2f}%")
 
             if all(training_results.values()):
-                logger.info("\n✅ All models trained successfully!")
+                logger.info("\n All models trained successfully!")
             else:
-                logger.warning("\n⚠️ Some models failed to train")
+                logger.warning("\nSome models failed to train")
                 failed_models = [tf for tf, success in training_results.items() if not success]
                 logger.warning(f"Failed models: {', '.join(failed_models)}")
 
