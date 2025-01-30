@@ -133,6 +133,60 @@ class ModelManager:
         except Exception as e:
             logger.error(f"Error in model check: {e}")
 
+class NewsSemanticAnalyzer:
+    def __init__(self):
+        self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+        self.model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+
+        # Store historical patterns
+        self.news_embeddings = []
+        self.price_impacts = []
+        self.news_clusters = defaultdict(list)
+        self.cluster_impacts = defaultdict(list)
+
+    def get_embedding(self, text):
+        """Generate embedding for text using BERT"""
+        inputs = self.tokenizer(text, padding=True, truncation=True, max_length=512, return_tensors="pt")
+
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+            attention_mask = inputs['attention_mask']
+            token_embeddings = outputs.last_hidden_state
+            input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
+            embedding = torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
+            return embedding[0].numpy()
+
+    def find_similar_news(self, embedding, threshold=0.8):
+        """Find similar historical news articles based on embedding similarity"""
+        if not self.news_embeddings:
+            return []
+        similarities = cosine_similarity([embedding], self.news_embeddings)[0]
+        similar_indices = np.where(similarities >= threshold)[0]
+        return [(idx, similarities[idx]) for idx in similar_indices]
+
+    def get_semantic_impact_prediction(self, text, timeframe):
+        """Predict price impact based on semantic similarity to historical patterns"""
+        embedding = self.get_embedding(text)
+        similar_news = self.find_similar_news(embedding)
+
+        if not similar_news:
+            return None
+
+        weighted_impacts = []
+        total_weight = 0
+
+        for idx, similarity in similar_news:
+            if timeframe in self.price_impacts[idx]:
+                impact = self.price_impacts[idx][timeframe]
+                weight = similarity
+                weighted_impacts.append(impact * weight)
+                total_weight += weight
+
+        if total_weight == 0:
+            return None
+
+        return sum(weighted_impacts) / total_weight
+
 class NewsAggregator:
     def __init__(self):
         self.stock_predictions = {}  # Store predictions by stock and timeframe
@@ -172,14 +226,18 @@ class RealTimeMonitor:
     def __init__(self):
         logger.info("Initializing RealTimeMonitor")
         self.news_aggregator = NewsAggregator()
-        
+
         # Initialize portfolio tracker
         self.portfolio_tracker = PortfolioTrackerService()
         logger.info("Portfolio tracker service initialized")
-        
+
         self.stop_loss_percentage = 5.0
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
         self.sentiment_weight = 0.3
+
+        # Initialize semantic analyzer with clustering
+        self.semantic_analyzer = NewsSemanticAnalyzer()
+        logger.info("Semantic analyzer initialized")
 
         self.model_manager = ModelManager()
         
@@ -196,7 +254,8 @@ class RealTimeMonitor:
             if timeframe not in self.model_manager.models or self.model_manager.models[timeframe] is None:
                 logger.error(f"Model for timeframe {timeframe} not loaded properly")
                 raise RuntimeError(f"Required model for {timeframe} not available")
-        
+            self.models[timeframe] = self.model_manager.models[timeframe]
+
         # Initialize Telegram
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
@@ -247,46 +306,71 @@ class RealTimeMonitor:
 
     def predict_with_sentiment(self, text, timeframe):
         """
-        Make a prediction integrating continuous FinBERT sentiment scores
+        Make a prediction integrating sentiment scores and semantic analysis
         """
         try:
-            # Vectorize text
+            # 1. Get base ML prediction
             X_tfidf = self.vectorizer.transform([text])
-            
-            # Get sentiment analysis
+            base_pred = self.models[timeframe].predict(X_tfidf)[0]
+
+            # 2. Get sentiment analysis
             sentiment = self.finbert_analyzer.analyze_sentiment(text)
             if not sentiment:
                 logger.warning("No sentiment available for prediction")
-                return 0.0
-                
-            # Create sentiment features array matching training format
-            sentiment_features = np.array([
-                sentiment['score'],  # No impact adjustment during prediction
-                sentiment['confidence'],
-                sentiment['probabilities']['positive'],
-                sentiment['probabilities']['negative'],
-                sentiment['probabilities']['neutral']
-            ]).reshape(1, -1)  # Reshape to 2D array
-            
-            # Convert to sparse matrix
-            sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
-            
-            # Combine features like in training
-            combined_features = scipy.sparse.hstack([X_tfidf, sentiment_sparse])
-            
-            # Make prediction with combined features
-            prediction = self.models[timeframe].predict(combined_features)[0]
-            
+                sentiment_multiplier = 1.0
+            else:
+                # Calculate sentiment multiplier
+                score = sentiment['score']
+                confidence = sentiment['confidence']
+                neutral_prob = sentiment['probabilities']['neutral']
+
+                # Calculate sentiment impact
+                base_multiplier = 1.0 + (score * 0.3)  # Maps [-1, 1] to [0.7, 1.3]
+                neutral_dampener = 1.0 - neutral_prob  # Reduce impact if sentiment is neutral
+                sentiment_multiplier = 1.0 + (base_multiplier - 1.0) * confidence * neutral_dampener
+
+            # 3. Get semantic prediction
+            semantic_pred = self.semantic_analyzer.get_semantic_impact_prediction(text, timeframe)
+
+            # 4. Combine predictions with weights
+            if semantic_pred is not None:
+                # Weight the predictions:
+                # - Base ML prediction: 40%
+                # - Semantic prediction: 40%
+                # - Sentiment adjustment: 20%
+                weighted_pred = (
+                    0.4 * base_pred +
+                    0.4 * semantic_pred +
+                    0.2 * (base_pred * sentiment_multiplier)
+                )
+            else:
+                # If no semantic prediction available, use sentiment-adjusted base prediction
+                weighted_pred = base_pred * sentiment_multiplier
+
             # Log prediction details
-            logger.info(f"Prediction for {timeframe}:")
-            logger.info(f"Raw Prediction: {prediction:.2f}%")
-            logger.info(f"Sentiment Score: {sentiment['score']:.2f}")
-            logger.info(f"Sentiment Confidence: {sentiment['confidence']:.2f}")
-            
-            return prediction
-            
+            logger.info(f"\nPrediction Breakdown for {timeframe}:")
+            logger.info(f"1. Base ML Prediction: {base_pred:.2f}%")
+            if sentiment:
+                logger.info(f"2. Sentiment Score: {sentiment['score']:.2f}")
+                logger.info(f"   Sentiment Multiplier: {sentiment_multiplier:.2f}")
+            if semantic_pred is not None:
+                logger.info(f"3. Semantic Prediction: {semantic_pred:.2f}%")
+
+            # Log similar patterns if available
+            embedding = self.semantic_analyzer.get_embedding(text)
+            if embedding is not None:
+                similar_news = self.semantic_analyzer.find_similar_news(embedding)
+                if similar_news:
+                    logger.info("\nSimilar Historical Patterns:")
+                    for idx, similarity in similar_news[:3]:  # Show top 3
+                        impact = self.semantic_analyzer.price_impacts[idx].get(timeframe)
+                        if impact is not None:
+                            logger.info(f"- Similarity: {similarity:.2f}, Impact: {impact:.2f}%")
+
+            return weighted_pred
+
         except Exception as e:
-            logger.error(f"Error in sentiment-integrated prediction: {e}")
+            logger.error(f"Error in enhanced prediction: {e}")
             return 0.0
     
     def get_full_article_text(self,url):
@@ -846,55 +930,39 @@ class RealTimeMonitor:
 
                     # Make predictions for this specific article
                     article_predictions = {}
-                    
-                    # Get TF-IDF features only
-                    X_tfidf = self.vectorizer.transform([content])
-                    
-                    # Pad features to match expected size (84953 features)
-                    X_padded = self._pad_features(X_tfidf)
-                    logger.info(f"Padded features shape: {X_padded.shape}")
-                    
-                    # Get sentiment analysis from FinBERT
-                    sentiment = self.finbert_analyzer.analyze_sentiment(content)
-                    
+
+                    # Get article embedding for semantic analysis
+                    try:
+                        embedding = self.semantic_analyzer.get_embedding(content)
+                        self.semantic_analyzer.news_embeddings.append(embedding)
+
+                        # Calculate actual price impacts for different timeframes
+                        price_impacts = {}
+                        publish_time = article['providerPublishTime']
+
+                        for timeframe in ['1h', '1wk', '1mo']:
+                            impact = self.calculate_impact(prices, publish_time)
+                            if impact['changes'] and timeframe in impact['changes']:
+                                price_impacts[timeframe] = impact['changes'][timeframe]
+
+                        # Store price impacts for future reference
+                        self.semantic_analyzer.price_impacts.append(price_impacts)
+
+                        logger.info(f"Stored new pattern with impacts: {price_impacts}")
+                    except Exception as e:
+                        logger.error(f"Error in semantic processing: {e}")
+
+                    # Make predictions using enhanced analysis
                     predictions_log = []  # Collect all predictions for single log message
-                    
-                    for timeframe, model in self.models.items():
+
+                    for timeframe in ['1h', '1wk', '1mo']:
                         try:
-                            # Get base prediction using padded TF-IDF features
-                            base_pred = model.predict(X_padded)[0]
-                            logger.info(f"Base prediction for {timeframe}: {base_pred:.2f}%")
-                            
-                            # Apply sentiment adjustment if available
-                            if sentiment:
-                                # Get sentiment components
-                                score = sentiment['score']  # Between -1 and 1
-                                confidence = sentiment['confidence']  # Between 0 and 1
-                                neutral_prob = sentiment['probabilities']['neutral']  # Between 0 and 1
-                                
-                                # Calculate sentiment impact
-                                # TODO: In the future, remove this arbitrary multiplier and let the model learn sentiment impact
-                                base_multiplier = 1.0 + (score * 0.3)  # Maps [-1, 1] to [0.7, 1.3]
-                                neutral_dampener = 1.0 - neutral_prob  # Reduce impact if sentiment is neutral
-                                sentiment_multiplier = 1.0 + (base_multiplier - 1.0) * confidence * neutral_dampener
-                                
-                                # Apply sentiment multiplier to base prediction
-                                pred = base_pred * sentiment_multiplier
-                                
-                                # Log sentiment details
-                                logger.info(f"Sentiment details for {timeframe}:")
-                                logger.info(f"  Score: {score:.2f}")
-                                logger.info(f"  Confidence: {confidence:.2f}")
-                                logger.info(f"  Neutral Probability: {neutral_prob:.2f}")
-                                logger.info(f"  Final Multiplier: {sentiment_multiplier:.2f}")
-                                logger.info(f"  Adjusted Prediction: {pred:.2f}%")
-                            else:
-                                pred = base_pred
-                                logger.info(f"No sentiment available, using base prediction: {pred:.2f}%")
-                            
+                            # Get prediction using enhanced analysis
+                            pred = self.predict_with_sentiment(content, timeframe)
+
                             article_predictions[timeframe] = pred
                             predictions_log.append(f"{timeframe}: {pred:.2f}%")
-                        
+
                         except Exception as e:
                             logger.error(f"Error in prediction for {timeframe}: {e}")
                             continue
@@ -1101,70 +1169,93 @@ class RealTimeMonitor:
 
 
     async def _calculate_predictions(self, symbol: str, articles: List[Dict], price_data: Dict) -> Dict:
-        """Calculate predictions and determine if buy signal should be generated"""
+        """Calculate predictions with semantic pattern matching"""
         try:
-            # Initialize result dictionary
-            result = {
-                "should_buy": False,
-                "best_timeframe": None,
-                "prediction_strength": 0.0,
-                "target_price": 0.0,
-                "sentiment_score": 0.0,
-                "best_article": None
+            best_prediction = None
+            best_article = None
+            best_timeframe = None
+            prediction_strength = 0.0
+            sentiment_score = 0.0
+            should_buy = False
+            target_price = None
+
+            current_price = price_data["current_price"]
+
+            for article_data in articles:
+                article = article_data['article']
+                sentiment = article_data['sentiment']
+                content = article.get('title', '') + ' ' + (article.get('description', '') or '')
+
+                # Get embedding for semantic analysis
+                embedding = self.semantic_analyzer.get_embedding(content)
+                if embedding is None:
+                    continue
+
+                # Find similar patterns and their impacts
+                similar_patterns = self.semantic_analyzer.find_similar_news(embedding)
+                if not similar_patterns:
+                    continue
+
+                # Calculate weighted predictions for each timeframe
+                for timeframe in ['1h', '1wk', '1mo']:
+                    # Get ML model prediction
+                    ml_pred = article_data['predictions'].get(timeframe, 0.0)
+
+                    # Get semantic pattern prediction
+                    pattern_pred = self.semantic_analyzer.get_semantic_impact_prediction(content, timeframe)
+                    if pattern_pred is None:
+                        pattern_pred = 0.0
+
+                    # Combine predictions with weights
+                    combined_pred = (ml_pred * 0.6) + (pattern_pred * 0.4)
+                    
+                    # Log predictions
+                    logger.info(f"{symbol} {timeframe} predictions:")
+                    logger.info(f"  ML: {ml_pred:.2f}%")
+                    logger.info(f"  Pattern: {pattern_pred:.2f}%")
+                    logger.info(f"  Combined: {combined_pred:.2f}%")
+
+                    # Update best prediction if this is stronger
+                    threshold = self.thresholds[timeframe]
+                    if combined_pred > threshold and (best_prediction is None or combined_pred > best_prediction):
+                        best_prediction = combined_pred
+                        best_article = article_data
+                        best_timeframe = timeframe
+                        prediction_strength = combined_pred
+                        sentiment_score = sentiment['score']
+
+            if best_prediction is not None:
+                should_buy = True
+                # Calculate target price based on prediction
+                target_price = current_price * (1 + (best_prediction / 100))
+                
+                # Log cluster information if available
+                if hasattr(self.semantic_analyzer, 'news_clusters'):
+                    for cluster_id, indices in self.semantic_analyzer.news_clusters.items():
+                        impact_stats = self.semantic_analyzer.analyze_cluster_impact(cluster_id, best_timeframe)
+                        if impact_stats:
+                            logger.info(f"Cluster {cluster_id} stats for {best_timeframe}:")
+                            logger.info(f"  Mean impact: {impact_stats['mean']:.2f}%")
+                            logger.info(f"  Std dev: {impact_stats['std']:.2f}%")
+                            logger.info(f"  Sample size: {impact_stats['count']}")
+
+            return {
+                "should_buy": should_buy,
+                "best_timeframe": best_timeframe,
+                "prediction_strength": prediction_strength,
+                "sentiment_score": sentiment_score,
+                "target_price": target_price,
+                "best_article": best_article
             }
 
-            # Calculate average sentiment score using continuous scores
-            sentiment_scores = []
-            for article in articles:
-                if 'sentiment' in article and article['sentiment']:
-                    sentiment = article['sentiment']
-                    if isinstance(sentiment, dict) and 'score' in sentiment:
-                        # Use continuous score directly
-                        sentiment_scores.append(sentiment['score'])
-
-            result["sentiment_score"] = sum(sentiment_scores) / len(sentiment_scores) if sentiment_scores else 0.0
-
-            # Find best prediction across timeframes and articles
-            best_prediction = 0.0
-            best_timeframe = None
-            best_article = None
-
-            for article in articles:
-                if 'predictions' in article:
-                    for timeframe, prediction in article['predictions'].items():
-                        if prediction > best_prediction:
-                            best_prediction = prediction
-                            best_timeframe = timeframe
-                            best_article = article
-
-            if best_timeframe and best_prediction and best_article:
-                result["best_timeframe"] = best_timeframe
-                result["prediction_strength"] = best_prediction
-                result["best_article"] = best_article
-
-                # Calculate target price based on prediction
-                current_price = price_data.get("current_price", 0)
-                if current_price > 0:
-                    result["target_price"] = current_price * (1 + best_prediction/100)
-
-                # Check if prediction meets threshold for buy signal
-                threshold_met = best_prediction >= self.thresholds.get(best_timeframe, float('inf'))
-                # Use continuous sentiment threshold (-1 to 1 scale)
-                sentiment_threshold_met = result["sentiment_score"] >= 0.8  # Positive sentiment threshold
-
-                # Generate buy signal if both thresholds are met
-                result["should_buy"] = threshold_met and sentiment_threshold_met
-
-            return result
-
         except Exception as e:
-            logger.error(f"Error calculating predictions for {symbol}: {str(e)}")
+            logger.error(f"Error calculating predictions: {str(e)}")
             return {
                 "should_buy": False,
                 "best_timeframe": None,
                 "prediction_strength": 0.0,
-                "target_price": 0.0,
                 "sentiment_score": 0.0,
+                "target_price": None,
                 "best_article": None
             }
 

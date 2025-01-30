@@ -9,13 +9,21 @@ import pandas as pd
 import pytz
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier, SGDRegressor
+from sklearn.cluster import DBSCAN
+from sklearn.metrics.pairwise import cosine_similarity
 import time
 import os
 import joblib
 import logging
 from pathlib import Path
 import torch
-from transformers import BertTokenizer, BertForSequenceClassification
+from transformers import (
+    BertTokenizer,
+    BertForSequenceClassification,
+    BertModel,
+    AutoTokenizer,
+    AutoModel
+)
 import numpy as np
 import signal
 import functools
@@ -26,6 +34,7 @@ import time
 import scipy.sparse
 import aiohttp
 import uuid
+from collections import defaultdict
 
 from requests import Session
 
@@ -52,6 +61,147 @@ logger.info(f"Starting new training session. Logging to: {log_filename}")
 # Configure logger at the top of the file
 
 # Then replace the print statements with logger calls
+class NewsSemanticAnalyzer:
+    def __init__(self):
+        # Initialize BERT model for semantic understanding
+        self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+        self.model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+        self.model.eval()
+
+        # Store historical patterns
+        self.news_embeddings = []  # Store embeddings
+        self.price_impacts = []    # Store corresponding price impacts
+        self.news_clusters = defaultdict(list)  # Store clustered news
+        self.cluster_impacts = defaultdict(list)  # Store impact patterns per cluster
+
+    def get_embedding(self, text):
+        """Generate embedding for text using BERT"""
+        try:
+            # Tokenize and get BERT embedding
+            inputs = self.tokenizer(text, padding=True, truncation=True, max_length=512, return_tensors="pt")
+
+            with torch.no_grad():
+                outputs = self.model(**inputs)
+                # Use mean pooling to get text embedding
+                attention_mask = inputs['attention_mask']
+                token_embeddings = outputs.last_hidden_state
+                input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
+                embedding = torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
+
+            return embedding[0].numpy()
+
+        except Exception as e:
+            logger.error(f"Error generating embedding: {str(e)}")
+            return None
+
+    def find_similar_news(self, embedding, threshold=0.8):
+        """Find similar historical news articles based on embedding similarity"""
+        if not self.news_embeddings:
+            return []
+
+        # Calculate cosine similarity with all stored embeddings
+        similarities = cosine_similarity([embedding], self.news_embeddings)[0]
+
+        # Get indices of similar news
+        similar_indices = np.where(similarities >= threshold)[0]
+
+        return [(idx, similarities[idx]) for idx in similar_indices]
+
+    def cluster_news(self, embeddings, eps=0.3):
+        """Cluster news articles using DBSCAN"""
+        if len(embeddings) < 2:
+            return [-1] * len(embeddings)
+
+        clustering = DBSCAN(eps=eps, min_samples=2, metric='cosine').fit(embeddings)
+        return clustering.labels_
+
+    def analyze_cluster_impact(self, cluster_id, timeframe):
+        """Analyze historical price impact patterns for a cluster"""
+        if cluster_id not in self.cluster_impacts:
+            return None
+
+        impacts = self.cluster_impacts[cluster_id]
+        if not impacts:
+            return None
+
+        # Calculate statistics
+        impacts_array = np.array([impact[timeframe] for impact in impacts if timeframe in impact])
+        if len(impacts_array) == 0:
+            return None
+
+        return {
+            'mean': np.mean(impacts_array),
+            'std': np.std(impacts_array),
+            'median': np.median(impacts_array),
+            'count': len(impacts_array)
+        }
+
+    def update_patterns(self, text, price_impacts):
+        """Update historical patterns with new data"""
+        try:
+            embedding = self.get_embedding(text)
+            if embedding is None:
+                logger.warning("Failed to generate embedding for text")
+                return
+
+            # Store new data
+            self.news_embeddings.append(embedding)
+            self.price_impacts.append(price_impacts)
+            
+            logger.info(f"Added new pattern. Total patterns: {len(self.news_embeddings)}")
+
+            # Recluster if we have enough data
+            if len(self.news_embeddings) >= 10:
+                logger.info("Reclustering patterns...")
+                clusters = self.cluster_news(np.array(self.news_embeddings))
+
+                # Reset clusters
+                self.news_clusters.clear()
+                self.cluster_impacts.clear()
+
+                # Update clusters and their impacts
+                for idx, cluster_id in enumerate(clusters):
+                    if cluster_id != -1:  # Not noise
+                        self.news_clusters[cluster_id].append(idx)
+                        self.cluster_impacts[cluster_id].append(self.price_impacts[idx])
+                
+                logger.info(f"Created {len(self.news_clusters)} clusters")
+                for cluster_id, indices in self.news_clusters.items():
+                    logger.info(f"Cluster {cluster_id}: {len(indices)} articles")
+
+        except Exception as e:
+            logger.error(f"Error updating patterns: {str(e)}")
+            logger.exception("Full traceback:")
+
+    def get_semantic_impact_prediction(self, text, timeframe):
+        """Predict price impact based on semantic similarity to historical patterns"""
+        embedding = self.get_embedding(text)
+        if embedding is None:
+            return None
+
+        similar_news = self.find_similar_news(embedding)
+        if not similar_news:
+            return None
+
+        # Weight predictions by similarity
+        weighted_impacts = []
+        total_weight = 0
+
+        for idx, similarity in similar_news:
+            if timeframe in self.price_impacts[idx]:
+                impact = self.price_impacts[idx][timeframe]
+                weight = similarity
+                weighted_impacts.append(impact * weight)
+                total_weight += weight
+
+        if not weighted_impacts:
+            return None
+
+        # Calculate weighted average impact
+        predicted_impact = sum(weighted_impacts) / total_weight
+
+        return predicted_impact
+
 class FinBERTSentimentAnalyzer:
     def __init__(self):
         self.tokenizer = BertTokenizer.from_pretrained('ProsusAI/finbert')
@@ -95,31 +245,26 @@ class FinBERTSentimentAnalyzer:
 class MarketMLTrainer:
     def __init__(self):
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
-        self.vectorizer = TfidfVectorizer()
+        self.semantic_analyzer = NewsSemanticAnalyzer()
+        # Initialize TF-IDF vectorizer without limiting features
+        self.vectorizer = TfidfVectorizer(
+            min_df=5,           # Minimum document frequency
+            max_df=0.95,        # Maximum document frequency
+            stop_words='english',
+        )
         self.symbols = self.get_symbols()
-        # Modified SGDRegressor initialization with better parameters
+        # Initialize models to None, will be properly initialized after feature creation
         self.models = {
-            '1h': SGDRegressor(
-                learning_rate='adaptive',
-                eta0=0.01,
-                max_iter=1000,
-                tol=1e-3,
-                early_stopping=True
-            ),
-            '1wk': SGDRegressor(
-                learning_rate='adaptive',
-                eta0=0.01,
-                max_iter=1000,
-                tol=1e-3,
-                early_stopping=True
-            ),
-            '1mo': SGDRegressor(
-                learning_rate='adaptive',
-                eta0=0.01,
-                max_iter=1000,
-                tol=1e-3,
-                early_stopping=True
-            )
+            '1h': None,
+            '1wk': None,
+            '1mo': None
+        }
+        
+        # Store semantic patterns
+        self.semantic_patterns = {
+            '1h': defaultdict(list),
+            '1wk': defaultdict(list),
+            '1mo': defaultdict(list)
         }
         self.thresholds = {
             '1h': 5.0,   # 5% threshold
@@ -145,7 +290,7 @@ class MarketMLTrainer:
                 'consistency': 0.7
             }
         }
-        
+
     def get_symbols(self):
         try:
             with open('./stock_tickers.txt', 'r') as file:
@@ -197,119 +342,88 @@ class MarketMLTrainer:
             logger.error(f"Error fetching article content: {e}")
             return None
     def process_symbol(self, symbol):
-        max_retries = 3  # Maximum number of retry attempts
-        retry_count = 0
-        while retry_count < max_retries:
-            try:
-                stock = yf.Ticker(symbol)
-                
-                # Use cached data
-                try:
-                    news = stock.news
-                except json.JSONDecodeError:
-                    logger.error(f"Error getting news for {symbol}: JSON decode error")
-                    retry_count += 1
-                    if retry_count < max_retries:
-                        logger.info(f"Retrying {symbol} (Attempt {retry_count + 1}/{max_retries})")
-                        time.sleep(5)  # Wait 5 seconds before retrying
-                        continue
-                    else:
-                        logger.error(f"Failed to get news for {symbol} after {max_retries} attempts")
-                        return []
-                except Exception as e:
-                    logger.error(f"Error getting news for {symbol}: {str(e)}")
-                    return []
-                    
-                symbol_data = []
-                processed_articles = 0
-                max_articles = 10 
-                
-                for i, article in enumerate(news, 1):
-            # Break if max articles reached
-                    if processed_articles >= max_articles:
-                        logger.info(f"Reached max articles limit for {symbol}")
-                        break
-                    
-                    try:
-                        # Extract article details
-                        title = article.get('title', '')
-                        link = article.get('link', '')
-                        
-                        # Log article being processed
-                        logger.info(f"Processing article {i}/{len(news)} for {symbol}")
-                        logger.debug(f"Article title: {title}")
-                        logger.debug(f"Article link: {link}")
-                        
-                        # Get full article text
-                        try:
-                            full_text = self.get_full_article_text(link) or ''
-                        except Exception as text_error:
-                            logger.error(f"Error getting full article text for {symbol}: {text_error}")
-                            full_text = ''
-                        
-                        # Combine content
-                        content = title + ' ' + full_text
-                        
-                        # Skip very short content
-                        if len(content.strip()) < 10:
-                            logger.warning(f"Skipping article with insufficient content")
-                            continue
-                        
-                        # Analyze sentiment
-                        try:
-                            sentiment = self.finbert_analyzer.analyze_sentiment(content)
-                            
-                            # Ensure sentiment is not None
-                            if not sentiment:
-                                logger.warning(f"Sentiment analysis returned None for an article")
-                                continue
-                        except Exception as sentiment_error:
-                            logger.error(f"Sentiment analysis error for {symbol}: {sentiment_error}")
-                            continue
-                        
-                        # Analyze stock price changes
-                        try:
-                            publish_date = datetime.fromtimestamp(article['providerPublishTime'])
-                            changes = self.analyze_stock(stock, publish_date)
-                        except Exception as changes_error:
-                            logger.error(f"Error analyzing stock changes for {symbol}: {changes_error}")
-                            continue
-                        
-                        # Create sample if changes exist
-                        if changes:
-                            sample = {
-                                'text': content,
-                                'changes': changes,
-                                'symbol': symbol,
-                                'date': publish_date,
-                                'sentiment': sentiment
-                            }
-                            symbol_data.append(sample)
-                            processed_articles += 1
-                        
-                        # Log progress for each article
-                        logger.info(f"Processed article {i}: Sentiment={sentiment['score']:.2f}, Changes={bool(changes)}")
-                    
-                    except Exception as article_error:
-                        logger.error(f"Unexpected error processing article {i} for {symbol}: {article_error}")
-                        continue
-                
-                # Final logging
-                logger.info(f"Completed processing {symbol}")
-                logger.info(f"Total valid samples: {len(symbol_data)}")
-                logger.info(f"Total processed articles: {processed_articles}")
-                
-                return symbol_data
+        """Process a single symbol and collect training data"""
+        try:
+            # Create a local semantic analyzer for this process
+            local_semantic_analyzer = NewsSemanticAnalyzer()
+            stock = yf.Ticker(symbol)
+            news = stock.news
             
-            except Exception as final_error:
-                logger.error(f"Critical error in process_symbol for {symbol}: {final_error}")
-                logger.exception("Full error traceback")
+            if not news:
+                logger.warning(f"No news found for {symbol}")
                 return []
-    def analyze_stock(self, stock, publish_date):
+                
+            symbol_data = []
+            processed_articles = 0
+            max_articles = 10
+            
+            logger.info(f"Processing {len(news)} news articles for {symbol}")
+            
+            for article in news:
+                if processed_articles >= max_articles:
+                    break
+                    
+                try:
+                    # Extract article details
+                    title = article.get('title', '')
+                    link = article.get('link', '')
+                    publish_time = article.get('providerPublishTime')
+                    
+                    if not all([title, link, publish_time]):
+                        continue
+                    
+                    # Get full article text
+                    full_text = self.get_full_article_text(link) or ''
+                    content = title + ' ' + full_text
+                    
+                    if len(content.strip()) < 10:
+                        continue
+                    
+                    # Analyze sentiment
+                    sentiment = self.finbert_analyzer.analyze_sentiment(content)
+                    if not sentiment:
+                        continue
+                    
+                    # Analyze stock price changes
+                    changes = self.analyze_stock(stock, publish_time)
+                    if not changes:
+                        continue
+                    
+                    # Create sample with semantic data
+                    embedding = local_semantic_analyzer.get_embedding(content)
+                    if embedding is not None:
+                        sample = {
+                            'text': content,
+                            'changes': changes,
+                            'symbol': symbol,
+                            'date': datetime.fromtimestamp(publish_time),
+                            'sentiment': sentiment,
+                            'embedding': embedding  # Store embedding with the sample
+                        }
+                        symbol_data.append(sample)
+                        processed_articles += 1
+                        logger.info(f"Processed article {processed_articles} for {symbol}")
+                    
+                except Exception as e:
+                    logger.error(f"Error processing article for {symbol}: {str(e)}")
+                    continue
+            
+            logger.info(f"Successfully processed {len(symbol_data)} articles for {symbol}")
+            return symbol_data
+            
+        except Exception as e:
+            logger.error(f"Error processing symbol {symbol}: {str(e)}")
+            return []
+
+    def analyze_stock(self, stock, publish_time):
         import warnings
         warnings.filterwarnings('ignore', category=FutureWarning, 
                           message='The \'unit\' keyword in TimedeltaIndex construction is deprecated')
         changes = {}
+        
+        # Convert publish_time from timestamp to datetime
+        publish_date = datetime.fromtimestamp(publish_time)
+        
         timeframes = {
             '1h': {'interval': '1h', 'days_before': 2, 'days_after': 2},
             '1wk': {'interval': '1d', 'days_before': 10, 'days_after': 10},
@@ -338,14 +452,13 @@ class MarketMLTrainer:
                 end_price = period_prices['Close'].iloc[-1]
                 
                 change = ((end_price - start_price) / start_price) * 100
-                changes[timeframe] = change
                 if not pd.isna(change):  # Only add valid changes
                     changes[timeframe] = change
                     if abs(change) > 1.0:  # Only log significant changes
                         logger.info(f"{stock.ticker}: {timeframe} change of {change:.2f}%")
                     
             except Exception as e:
-                logger.error(f" Error processing {stock.ticker} for {timeframe}: {str(e)}")
+                logger.error(f"Error processing {stock.ticker} for {timeframe}: {str(e)}")
                     
         return changes
 
@@ -431,6 +544,7 @@ class MarketMLTrainer:
         try:
             # Get base TF-IDF features
             sample_tfidf = self.vectorizer.transform([sample['text']])
+            logger.info(f"TF-IDF features shape: {sample_tfidf.shape}")
             
             # Get sentiment features
             sentiment = sample.get('sentiment', {})
@@ -451,9 +565,11 @@ class MarketMLTrainer:
             
             # Convert to sparse matrix with proper shape
             sentiment_sparse = scipy.sparse.csr_matrix(sentiment_features)
+            logger.info(f"Sentiment features shape: {sentiment_sparse.shape}")
             
             # Combine features ensuring both are 2D
             combined_features = scipy.sparse.hstack([sample_tfidf, sentiment_sparse])
+            logger.info(f"Combined features shape: {combined_features.shape}")
             
             return combined_features, avg_impact
             
@@ -524,6 +640,8 @@ class MarketMLTrainer:
             y = []
             sample_weights = []
             
+            logger.info(f"Processing {len(training_data)} samples for {timeframe} model")
+            
             for sample in training_data:
                 # Calculate impact scores for this sample
                 impact_scores = self.calculate_article_impact(
@@ -541,14 +659,24 @@ class MarketMLTrainer:
                     features = features.reshape(1, -1)
                 
                 X_features_list.append(features)
-                y.append(sample['changes'].get(timeframe, 0))
+                
+                # Get the change value for this timeframe
+                change = sample['changes'].get(timeframe)
+                if change is None:
+                    logger.warning(f"No change value found for timeframe {timeframe}")
+                    continue
+                    
+                y.append(change)
                 
                 # Use impact as sample weight
                 weight = 1.0 + impact_scores.get(timeframe, 0)
                 sample_weights.append(weight)
             
             if not X_features_list:
+                logger.error(f"No valid samples collected for {timeframe} model")
                 return False
+                
+            logger.info(f"Collected {len(X_features_list)} valid samples for {timeframe} model")
                 
             # Combine features ensuring proper dimensionality
             X_combined = scipy.sparse.vstack(X_features_list)
@@ -561,15 +689,34 @@ class MarketMLTrainer:
             y_clean = y_array[valid_mask]
             weights_clean = weights_array[valid_mask]
             
+            logger.info(f"Final feature matrix shape for {timeframe}: {X_clean.shape}")
+            logger.info(f"Final target vector shape for {timeframe}: {y_clean.shape}")
+            
+            # Initialize the model with the correct number of features
+            if self.models[timeframe] is None:
+                n_features = X_clean.shape[1]
+                logger.info(f"Initializing {timeframe} model with {n_features} features")
+                self.models[timeframe] = SGDRegressor(
+                    learning_rate='adaptive',
+                    eta0=0.01,
+                    max_iter=1000,
+                    tol=1e-3,
+                    early_stopping=True,
+                    warm_start=True  # Allow incremental learning
+                )
+            
             # Train the model
             self.models[timeframe].fit(X_clean, y_clean, sample_weight=weights_clean)
+            logger.info(f"Successfully trained {timeframe} model")
             return True
             
         except Exception as e:
             logger.error(f"Error training model for {timeframe}: {str(e)}")
+            logger.exception("Full traceback:")
             return False
 
     def collect_and_train(self, symbols):
+        """Collect news data and train models."""
         logger.info("Starting training process...")
         training_data = []
         failed_stocks = set()
@@ -579,14 +726,16 @@ class MarketMLTrainer:
         cache_dir.mkdir(parents=True, exist_ok=True)
         yf.set_tz_cache_location(str(cache_dir))
         
-        # Process symbols in smaller chunks
-        chunk_size = 20  # Process 50 symbols at a time
+        # Process only first 100 stocks for testing
+        test_symbols = symbols[:100]
+        chunk_size = 20  # Process 20 symbols at a time
         num_processes = 4  # Use 4 processes
-        
-        # First pass: Process all chunks
-        logger.info("PHASE 1: Processing all stocks in chunks")
-        for i in range(0, len(symbols), chunk_size):
-            chunk = symbols[i:i+chunk_size]
+
+        # First pass: Process test stocks in chunks
+        logger.info("PHASE 1: Processing first 100 stocks in chunks")
+        logger.info(f"Selected stocks: {', '.join(test_symbols[:10])}...")
+        for i in range(0, len(test_symbols), chunk_size):
+            chunk = test_symbols[i:i+chunk_size]
             chunk_num = i//chunk_size + 1
             total_chunks = len(symbols)//chunk_size + 1
             logger.info(f"\nProcessing chunk {chunk_num}/{total_chunks}")
@@ -606,36 +755,13 @@ class MarketMLTrainer:
                 logger.info(f"Total samples collected so far: {len(training_data)}")
                 logger.info(f"Failed stocks so far: {len(failed_stocks)}")
 
+            # Update semantic patterns after each chunk
+            self.update_semantic_patterns(training_data)
+
             # Add delay between chunks
             if i + chunk_size < len(symbols):
                 logger.info("Taking a break between chunks...")
                 time.sleep(10)
-
-        # Second pass: Process failed stocks
-        if failed_stocks:
-            logger.info(f"\nPHASE 2: Processing {len(failed_stocks)} failed stocks")
-            logger.info(f"Failed stocks: {', '.join(sorted(failed_stocks))}")
-            
-            # Process failed stocks in a single chunk
-            retry_symbols = list(failed_stocks)
-            with Pool(processes=num_processes) as pool:
-                retry_results = []
-                for symbol, result in zip(retry_symbols, pool.imap_unordered(self.process_symbol, retry_symbols)):
-                    if result and len(result) > 0:
-                        retry_results.extend(result)
-                        failed_stocks.remove(symbol)
-                        logger.info(f"Successfully processed {symbol} on retry")
-                    else:
-                        logger.info(f"Permanently failed to process {symbol}")
-                
-                training_data.extend(retry_results)
-                logger.info(f"Additional samples from retry: {len(retry_results)}")
-
-        # Final summary
-        if failed_stocks:
-            logger.info("\nPermanently failed stocks:")
-            for symbol in sorted(failed_stocks):
-                logger.info(f"- {symbol}")
 
         if not training_data:
             logger.error("No training data collected!")
@@ -646,11 +772,28 @@ class MarketMLTrainer:
         logger.info(f"Total failed stocks: {len(failed_stocks)}")
 
         try:
-            # Fit the vectorizer first
+            # Fit the vectorizer first without limiting features
             logger.info("Fitting TF-IDF vectorizer...")
             X_text = [sample['text'] for sample in training_data]
             self.vectorizer.fit(X_text)
-            logger.info("Vectorizer fitted successfully")
+            vocab_size = len(self.vectorizer.vocabulary_)
+            logger.info(f"Vectorizer fitted successfully. Vocabulary size: {vocab_size}")
+
+            # Initialize models with correct feature dimensions
+            feature_sample = self.prepare_training_sample(training_data[0], {})
+            if feature_sample[0] is not None:
+                n_features = feature_sample[0].shape[1]
+                logger.info(f"Initializing models with {n_features} features")
+                
+                for timeframe in ['1h', '1wk', '1mo']:
+                    self.models[timeframe] = SGDRegressor(
+                        learning_rate='adaptive',
+                        eta0=0.01,
+                        max_iter=1000,
+                        tol=1e-3,
+                        early_stopping=True,
+                        warm_start=True  # Allow incremental learning
+                    )
 
             # Train models for each timeframe
             for timeframe in ['1h', '1wk', '1mo']:
@@ -666,6 +809,40 @@ class MarketMLTrainer:
         except Exception as e:
             logger.error(f"Error in training process: {str(e)}")
             return None
+
+    def update_semantic_patterns(self, samples):
+        """Update semantic patterns after collecting samples"""
+        try:
+            # Reset semantic analyzer
+            self.semantic_analyzer = NewsSemanticAnalyzer()
+            
+            # Add all patterns
+            for sample in samples:
+                if 'embedding' in sample:
+                    self.semantic_analyzer.news_embeddings.append(sample['embedding'])
+                    self.semantic_analyzer.price_impacts.append(sample['changes'])
+            
+            # Perform clustering if we have enough samples
+            if len(self.semantic_analyzer.news_embeddings) >= 10:
+                logger.info(f"Clustering {len(self.semantic_analyzer.news_embeddings)} patterns...")
+                clusters = self.semantic_analyzer.cluster_news(np.array(self.semantic_analyzer.news_embeddings))
+                
+                # Update clusters
+                self.semantic_analyzer.news_clusters.clear()
+                self.semantic_analyzer.cluster_impacts.clear()
+                
+                for idx, cluster_id in enumerate(clusters):
+                    if cluster_id != -1:  # Not noise
+                        self.semantic_analyzer.news_clusters[cluster_id].append(idx)
+                        self.semantic_analyzer.cluster_impacts[cluster_id].append(self.semantic_analyzer.price_impacts[idx])
+                
+                logger.info(f"Created {len(self.semantic_analyzer.news_clusters)} clusters")
+                for cluster_id, indices in self.semantic_analyzer.news_clusters.items():
+                    logger.info(f"Cluster {cluster_id}: {len(indices)} articles")
+                    
+        except Exception as e:
+            logger.error(f"Error updating semantic patterns: {str(e)}")
+            logger.exception("Full traceback:")
 
     def _get_sentiment_multiplier(self, sentiment):
         """
@@ -693,49 +870,122 @@ class MarketMLTrainer:
     
     def predict(self, text, timeframe):
         """
-        Make a prediction with sentiment integration
-        
+        Make a prediction with sentiment and semantic integration
+
         :param text: Input text
         :param timeframe: Prediction timeframe
         :return: Predicted price change
         """
         # Vectorize text
         X_tfidf = self.vectorizer.transform([text])
-        
+
         # Analyze sentiment
         sentiment = self.finbert_analyzer.analyze_sentiment(text)
-        
-        # Get base prediction
+
+        # Get semantic prediction
+        semantic_pred = self.semantic_analyzer.get_semantic_impact_prediction(text, timeframe)
+
+        # Get base prediction from ML model
         base_pred = self.models[timeframe].predict(X_tfidf)[0]
-        
-        # Adjust prediction with sentiment
+
+        # Get sentiment multiplier
+        sentiment_multiplier = self._get_sentiment_multiplier(sentiment) if sentiment else 1.0
+
+        # Combine predictions
+        if semantic_pred is not None:
+            # Weight the predictions:
+            # - Base ML prediction: 40%
+            # - Semantic prediction: 40%
+            # - Sentiment adjustment: 20%
+            weighted_pred = (
+                0.4 * base_pred +
+                0.4 * semantic_pred +
+                0.2 * (base_pred * sentiment_multiplier)
+            )
+        else:
+            # If no semantic prediction, fall back to sentiment-adjusted base prediction
+            weighted_pred = base_pred * sentiment_multiplier
+
+        # Log detailed prediction breakdown
+        logger.info(f"\nPrediction Breakdown for {timeframe}:")
+        logger.info(f"1. Base ML Prediction: {base_pred:.2f}%")
         if sentiment:
-            sentiment_multiplier = self._get_sentiment_multiplier(sentiment)
-            adjusted_pred = base_pred * sentiment_multiplier
-            
-            # Log detailed prediction breakdown
-            logger.info(f"Prediction Breakdown for {timeframe}:")
-            logger.info(f"Base Prediction: {base_pred:.2f}%")
-            logger.info(f"Sentiment: {sentiment['score']:.2f}")
-            logger.info(f"Sentiment Multiplier: {sentiment_multiplier:.2f}")
-            logger.info(f"Adjusted Prediction: {adjusted_pred:.2f}%")
-            
-            return adjusted_pred
+            logger.info(f"2. Sentiment Score: {sentiment['score']:.2f}")
+            logger.info(f"   Sentiment Multiplier: {sentiment_multiplier:.2f}")
+        if semantic_pred is not None:
+            logger.info(f"3. Semantic Prediction: {semantic_pred:.2f}%")
+
+            # Find and log similar historical patterns
+            embedding = self.semantic_analyzer.get_embedding(text)
+            if embedding is not None:
+                similar_news = self.semantic_analyzer.find_similar_news(embedding)
+                if similar_news:
+                    logger.info("\nSimilar Historical Patterns:")
+                    for idx, similarity in similar_news[:3]:  # Show top 3
+                        impact = self.semantic_analyzer.price_impacts[idx].get(timeframe)
+                        if impact is not None:
+                            logger.info(f"- Similarity: {similarity:.2f}, Impact: {impact:.2f}%")
+
+        logger.info(f"\nFinal Weighted Prediction: {weighted_pred:.2f}%")
+
+        return weighted_pred
     
     def save_models(self):
         os.makedirs('app/models', exist_ok=True)
-        
+
         # Save each timeframe model
         for timeframe, model in self.models.items():
             model_path = f'app/models/market_model_{timeframe}.joblib'
             joblib.dump(model, model_path)
             logger.info(f"Saved {timeframe} model to {model_path}")
-        
+
         # Save vectorizer
         vectorizer_path = 'app/models/vectorizer.joblib'
         joblib.dump(self.vectorizer, vectorizer_path)
         logger.info(f"Saved vectorizer to {vectorizer_path}")
-        
+
+        # Save semantic patterns
+        semantic_data = {
+            'embeddings': self.semantic_analyzer.news_embeddings,
+            'price_impacts': self.semantic_analyzer.price_impacts,
+            'clusters': dict(self.semantic_analyzer.news_clusters),
+            'cluster_impacts': dict(self.semantic_analyzer.cluster_impacts)
+        }
+        semantic_path = 'app/models/semantic_patterns.joblib'
+        joblib.dump(semantic_data, semantic_path)
+        logger.info(f"Saved semantic patterns to {semantic_path}")
+
+    def load_models(self):
+        """Load trained models and patterns"""
+        try:
+            # Load semantic patterns if they exist
+            semantic_path = 'app/models/semantic_patterns.joblib'
+            if os.path.exists(semantic_path):
+                semantic_data = joblib.load(semantic_path)
+                self.semantic_analyzer.news_embeddings = semantic_data['embeddings']
+                self.semantic_analyzer.price_impacts = semantic_data['price_impacts']
+                self.semantic_analyzer.news_clusters = defaultdict(list, semantic_data['clusters'])
+                self.semantic_analyzer.cluster_impacts = defaultdict(list, semantic_data['cluster_impacts'])
+                logger.info("Loaded semantic patterns successfully")
+
+            # Load models for each timeframe
+            for timeframe in self.models.keys():
+                model_path = f'app/models/market_model_{timeframe}.joblib'
+                if os.path.exists(model_path):
+                    self.models[timeframe] = joblib.load(model_path)
+                    logger.info(f"Loaded {timeframe} model successfully")
+
+            # Load vectorizer
+            vectorizer_path = 'app/models/vectorizer.joblib'
+            if os.path.exists(vectorizer_path):
+                self.vectorizer = joblib.load(vectorizer_path)
+                logger.info("Loaded vectorizer successfully")
+
+            return True
+        except Exception as e:
+            logger.error(f"Error loading models: {str(e)}")
+            return False
+
 class PortfolioTrackerService:
     def __init__(self):
         self.base_url = "https://portfolio-tracker-rough-dawn-5271.fly.dev"
@@ -819,34 +1069,60 @@ def main():
         ]
     )
     logger = logging.getLogger(__name__)
-    
+
     logger.info("Starting Market ML Training...")
     trainer = MarketMLTrainer()
-    
+
     # Get all symbols
     symbols = trainer.get_symbols()
     logger.info(f"Total symbols to process: {len(symbols)}")
-    
+
     try:
         # Create models directory if it doesn't exist
         os.makedirs('app/models', exist_ok=True)
-        
-        # Train models
+
+        # Try to load existing models and patterns
+        logger.info("Checking for existing models and patterns...")
+        if trainer.load_models():
+            logger.info("Successfully loaded existing models and patterns")
+            logger.info("Will update existing patterns with new data")
+        else:
+            logger.info("No existing models found or loading failed")
+            logger.info("Will train new models from scratch")
+
+        # Train/update models
         logger.info("Starting training process...")
         models = trainer.collect_and_train(symbols)
-        
+
         if models:
             logger.info("Training completed successfully")
             trainer.save_models()
-            logger.info("Models saved successfully")
-            logger.info("Saved models:")
+            logger.info("Models and patterns saved successfully")
+            logger.info("Saved files:")
             logger.info("- vectorizer.joblib")
             logger.info("- market_model_1h.joblib")
             logger.info("- market_model_1wk.joblib")
             logger.info("- market_model_1mo.joblib")
+            logger.info("- semantic_patterns.joblib")
+
+            # Log semantic analysis statistics
+            num_patterns = len(trainer.semantic_analyzer.news_embeddings)
+            num_clusters = len(trainer.semantic_analyzer.news_clusters)
+            logger.info(f"\nSemantic Analysis Statistics:")
+            logger.info(f"Total patterns collected: {num_patterns}")
+            logger.info(f"Number of news clusters: {num_clusters}")
+
+            # Log cluster statistics
+            if num_clusters > 0:
+                logger.info("\nCluster Statistics:")
+                for cluster_id in trainer.semantic_analyzer.news_clusters.keys():
+                    cluster_size = len(trainer.semantic_analyzer.news_clusters[cluster_id])
+                    impacts = trainer.semantic_analyzer.cluster_impacts[cluster_id]
+                    avg_impact = np.mean([impact.get('1mo', 0) for impact in impacts])
+                    logger.info(f"Cluster {cluster_id}: {cluster_size} articles, Avg 1mo impact: {avg_impact:.2f}%")
         else:
             logger.error("Training failed - no models were produced")
-            
+
     except Exception as e:
         logger.error(f"Training error: {str(e)}")
         logger.exception("Full error traceback:")
