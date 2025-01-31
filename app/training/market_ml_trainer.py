@@ -246,11 +246,12 @@ class MarketMLTrainer:
     def __init__(self):
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
         self.semantic_analyzer = NewsSemanticAnalyzer()
-        # Initialize TF-IDF vectorizer without limiting features
+        # Initialize TF-IDF vectorizer with max features to ensure consistency
         self.vectorizer = TfidfVectorizer(
             min_df=5,           # Minimum document frequency
             max_df=0.95,        # Maximum document frequency
             stop_words='english',
+            max_features=16928  # Match model's expected feature count
         )
         self.symbols = self.get_symbols()
         # Initialize models to None, will be properly initialized after feature creation
@@ -665,14 +666,11 @@ class MarketMLTrainer:
                 if change is None:
                     continue
                     
-                # Cap extreme price changes to prevent model instability
-                change = np.clip(change, -100, 100)
-                    
                 X_features_list.append(features)
                 y.append(change)
                 
-                # Use impact as sample weight, but cap it to prevent instability
-                weight = min(1.0 + impact_scores.get(timeframe, 0), 2.0)
+                # Use impact as sample weight
+                weight = 1.0 + impact_scores.get(timeframe, 0)
                 sample_weights.append(weight)
                 valid_samples += 1
                 
@@ -698,39 +696,23 @@ class MarketMLTrainer:
             
             logger.info(f"Final feature matrix shape for {timeframe}: {X_clean.shape}")
             logger.info(f"Final target vector shape for {timeframe}: {y_clean.shape}")
-            logger.info(f"Target value range: min={y_clean.min():.2f}%, max={y_clean.max():.2f}%")
+            logger.info(f"Target value range: min={min(y_clean):.2f}%, max={max(y_clean):.2f}%")
             
-            # Initialize the model with the correct number of features and proper regularization
+            # Initialize the model with the correct number of features
             if self.models[timeframe] is None:
                 n_features = X_clean.shape[1]
                 logger.info(f"Initializing {timeframe} model with {n_features} features")
                 self.models[timeframe] = SGDRegressor(
-                    loss='huber',           # More robust to outliers than squared loss
-                    penalty='elasticnet',   # Combine L1 and L2 regularization
-                    alpha=0.001,            # Regularization strength
-                    l1_ratio=0.15,          # Ratio of L1 regularization
                     learning_rate='adaptive',
                     eta0=0.01,
                     max_iter=1000,
                     tol=1e-3,
                     early_stopping=True,
-                    validation_fraction=0.1,
-                    n_iter_no_change=5,
-                    warm_start=True,        # Allow incremental learning
-                    average=True            # Use averaged SGD for better stability
+                    warm_start=True  # Allow incremental learning
                 )
             
             # Train the model
             self.models[timeframe].fit(X_clean, y_clean, sample_weight=weights_clean)
-            
-            # Log coefficient statistics after training
-            coef = self.models[timeframe].coef_
-            logger.info(f"\nModel coefficient statistics after training:")
-            logger.info(f"Max coefficient: {coef.max():.6f}")
-            logger.info(f"Min coefficient: {coef.min():.6f}")
-            logger.info(f"Mean coefficient: {coef.mean():.6f}")
-            logger.info(f"Coefficient std: {coef.std():.6f}")
-            
             logger.info(f" Successfully trained {timeframe} model")
             logger.info(f"{'='*60}\n")
             return True
@@ -740,63 +722,140 @@ class MarketMLTrainer:
             logger.exception("Full traceback:")
             return False
 
-    def collect_and_train(self):
-        """Collect data and train models for all timeframes"""
+    def collect_and_train(self, symbols):
+        """Collect news data and train models."""
+        logger.info("Starting training process...")
+        training_data = []
+        failed_stocks = set()
+
+        # Configure yfinance cache
+        cache_dir = Path("./cache/yfinance")
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        yf.set_tz_cache_location(str(cache_dir))
+        
+        # Process all stocks in batches
+        chunk_size = 20  # Process 50 stocks at a time
+        num_processes = 4  # Use 4 processes
+
+        # First pass: Process all stocks in chunks
+        logger.info("PHASE 1: Processing all stocks in chunks")
+        logger.info(f"Total stocks to process: {len(symbols)}")
+        logger.info(f"Selected stocks: {', '.join(symbols[:10])}...")
+        
+        for i in range(0, len(symbols), chunk_size):
+            chunk = symbols[i:i+chunk_size]
+            chunk_num = i//chunk_size + 1
+            total_chunks = len(symbols)//chunk_size + 1
+            logger.info(f"\nProcessing chunk {chunk_num}/{total_chunks}")
+            logger.info(f"Symbols in chunk: {', '.join(chunk)}")
+
+            with Pool(processes=num_processes) as pool:
+                results = []
+                for symbol, result in zip(chunk, pool.imap_unordered(self.process_symbol, chunk)):
+                    if result and len(result) > 0:
+                        results.extend(result)
+                        logger.info(f"Successfully processed {symbol} with {len(result)} samples")
+                    else:
+                        failed_stocks.add(symbol)
+                        logger.info(f"Failed to process {symbol}")
+
+                training_data.extend(results)
+                logger.info(f"Total samples collected so far: {len(training_data)}")
+                logger.info(f"Failed stocks so far: {len(failed_stocks)}")
+
+            # Update semantic patterns after each chunk
+            self.update_semantic_patterns(training_data)
+
+            # Add delay between chunks to avoid rate limiting
+            if i + chunk_size < len(symbols):
+                logger.info("Taking a break between chunks to avoid rate limiting...")
+                time.sleep(15)  # Increased delay to 15 seconds
+
+            # Save intermediate results every 200 stocks
+            if (i + chunk_size) % 200 == 0:
+                logger.info("Saving intermediate models and patterns...")
+                self.save_models()
+                logger.info("Intermediate save completed")
+
+        if not training_data:
+            logger.error("No training data collected!")
+            return None
+
+        logger.info("\nPreparing to train models...")
+        logger.info(f"Total training samples: {len(training_data)}")
+        logger.info(f"Total failed stocks: {len(failed_stocks)}")
+
         try:
-            # Get list of stock symbols
-            symbols = self.get_symbols()
-            if not symbols:
-                logger.error("No stock symbols found")
-                return False
+            # Fit the vectorizer first without limiting features
+            logger.info("\nFitting TF-IDF vectorizer...")
+            X_text = [sample['text'] for sample in training_data]
+            self.vectorizer.fit(X_text)
+            vocab_size = len(self.vectorizer.vocabulary_)
+            logger.info(f" Vectorizer fitted successfully. Vocabulary size: {vocab_size}")
+
+            # Initialize models with correct feature dimensions
+            feature_sample = self.prepare_training_sample(training_data[0], {})
+            if feature_sample[0] is not None:
+                n_features = feature_sample[0].shape[1]
+                logger.info(f"Initializing models with {n_features} features")
                 
-            logger.info(f"Total stocks to process: {len(symbols)}")
-            
-            # Process stocks in chunks to manage memory and API limits
-            chunk_size = 20
-            num_processes = 4  # Use 4 processes as requested
-            
-            # Calculate number of chunks
-            num_chunks = (len(symbols) + chunk_size - 1) // chunk_size
-            logger.info(f"Processing {len(symbols)} stocks in {num_chunks} chunks of {chunk_size}")
-            
-            all_data = []
-            processed_count = 0
-            
-            for chunk_idx in range(num_chunks):
-                start_idx = chunk_idx * chunk_size
-                end_idx = min(start_idx + chunk_size, len(symbols))
-                chunk_symbols = symbols[start_idx:end_idx]
-                
-                logger.info(f"\nProcessing chunk {chunk_idx + 1}/{num_chunks}")
-                logger.info(f"Stocks in this chunk: {', '.join(chunk_symbols)}")
-                
-                # Process chunk with parallel execution
-                with Pool(processes=num_processes) as pool:
-                    chunk_results = pool.map(self.process_symbol, chunk_symbols)
-                
-                # Filter out None results and extend all_data
-                valid_results = [r for r in chunk_results if r is not None]
-                all_data.extend(valid_results)
-                
-                processed_count += len(chunk_symbols)
-                logger.info(f"Processed {processed_count}/{len(symbols)} stocks")
-                
-                # Add delay between chunks to avoid rate limiting
-                if chunk_idx < num_chunks - 1:
-                    logger.info("Waiting 15 seconds before next chunk...")
-                    time.sleep(15)
-            
-            if not all_data:
-                logger.error("No valid data collected")
-                return False
-            
+                for timeframe in ['1h', '1wk', '1mo']:
+                    self.models[timeframe] = SGDRegressor(
+                        learning_rate='adaptive',
+                        eta0=0.01,
+                        max_iter=1000,
+                        tol=1e-3,
+                        early_stopping=True,
+                        warm_start=True  # Allow incremental learning
+                    )
+
             # Train models for each timeframe
-            logger.info("\nTraining models...")
-            return self.train_models(all_data)
-            
+            training_results = {}
+            for timeframe in ['1h', '1wk', '1mo']:
+                success = self.train_with_impact_scores(training_data, timeframe)
+                training_results[timeframe] = success
+
+            # Log final training summary
+            logger.info("\n=== Training Summary ===")
+            for timeframe, success in training_results.items():
+                status = " Success" if success else " Failed"
+                logger.info(f"{timeframe} model: {status}")
+
+            # Log semantic analysis statistics
+            num_patterns = len(self.semantic_analyzer.news_embeddings)
+            num_clusters = len(self.semantic_analyzer.news_clusters)
+            logger.info(f"\nSemantic Analysis Statistics:")
+            logger.info(f"Total patterns collected: {num_patterns}")
+            logger.info(f"Number of news clusters: {num_clusters}")
+
+            # Log cluster statistics for each timeframe
+            timeframes = ['1h', '1wk', '1mo']
+            for timeframe in timeframes:
+                logger.info(f"\nCluster Statistics for {timeframe}:")
+                for cluster_id in sorted(self.semantic_analyzer.news_clusters.keys()):
+                    indices = self.semantic_analyzer.news_clusters[cluster_id]
+                    # Calculate average impact for this timeframe
+                    impacts = []
+                    for idx in indices:
+                        if timeframe in self.semantic_analyzer.price_impacts[idx]:
+                            impacts.append(self.semantic_analyzer.price_impacts[idx][timeframe])
+                    
+                    if impacts:
+                        avg_impact = np.mean(impacts)
+                        logger.info(f"Cluster {cluster_id}: {len(indices)} articles, Avg {timeframe} impact: {avg_impact:.2f}%")
+
+            if all(training_results.values()):
+                logger.info("\n✅ All models trained successfully!")
+            else:
+                logger.warning("\n⚠️ Some models failed to train")
+                failed_models = [tf for tf, success in training_results.items() if not success]
+                logger.warning(f"Failed models: {', '.join(failed_models)}")
+
+            return self.models
+
         except Exception as e:
-            logger.error(f"Error in collect_and_train: {str(e)}")
-            return False
+            logger.error(f"Error in training process: {str(e)}")
+            return None
 
     def update_semantic_patterns(self, samples):
         """Update semantic patterns after collecting samples"""
@@ -974,102 +1033,6 @@ class MarketMLTrainer:
             logger.error(f"Error loading models: {str(e)}")
             return False
 
-    def train_models(self, all_data):
-        """Train models for all timeframes using collected data"""
-        try:
-            if not all_data:
-                logger.error("No training data provided")
-                return False
-
-            # Flatten the list if it contains nested lists
-            flat_data = []
-            for item in all_data:
-                if isinstance(item, list):
-                    flat_data.extend(item)
-                else:
-                    flat_data.append(item)
-
-            logger.info(f"Training with {len(flat_data)} total samples")
-
-            # Train semantic patterns first
-            logger.info("\nTraining semantic patterns...")
-            embeddings = []
-            price_impacts = []
-            
-            for sample in flat_data:
-                try:
-                    # Get embedding for the text
-                    text = sample['text']
-                    embedding = self.semantic_analyzer.get_embedding(text)
-                    if embedding is not None:
-                        embeddings.append(embedding)
-                        price_impacts.append(sample['changes'])
-                except Exception as e:
-                    logger.error(f"Error processing sample for semantic analysis: {str(e)}")
-                    continue
-
-            # Update semantic analyzer with collected patterns
-            self.semantic_analyzer.news_embeddings = embeddings
-            self.semantic_analyzer.price_impacts = price_impacts
-
-            # Perform clustering if we have enough samples
-            if len(embeddings) >= 10:
-                logger.info(f"Clustering {len(embeddings)} semantic patterns...")
-                clusters = self.semantic_analyzer.cluster_news(np.array(embeddings))
-                
-                # Update clusters
-                self.semantic_analyzer.news_clusters.clear()
-                self.semantic_analyzer.cluster_impacts.clear()
-                
-                for idx, cluster_id in enumerate(clusters):
-                    if cluster_id != -1:  # Not noise
-                        self.semantic_analyzer.news_clusters[cluster_id].append(idx)
-                        self.semantic_analyzer.cluster_impacts[cluster_id].append(price_impacts[idx])
-                
-                logger.info(f"Created {len(self.semantic_analyzer.news_clusters)} semantic clusters")
-                
-                # Log cluster statistics
-                for cluster_id, indices in self.semantic_analyzer.news_clusters.items():
-                    logger.info(f"Cluster {cluster_id}: {len(indices)} articles")
-                    # Calculate average impact for each timeframe
-                    for timeframe in ['1h', '1wk', '1mo']:
-                        impacts = []
-                        for idx in indices:
-                            if timeframe in price_impacts[idx]:
-                                impacts.append(price_impacts[idx][timeframe])
-                        if impacts:
-                            avg_impact = np.mean(impacts)
-                            std_impact = np.std(impacts)
-                            logger.info(f"  {timeframe} - Avg Impact: {avg_impact:.2f}%, Std: {std_impact:.2f}%")
-
-            # Fit vectorizer
-            logger.info("\nFitting TF-IDF vectorizer...")
-            X_text = [sample['text'] for sample in flat_data]
-            self.vectorizer.fit(X_text)
-            vocab_size = len(self.vectorizer.vocabulary_)
-            logger.info(f"Vectorizer fitted successfully. Vocabulary size: {vocab_size}")
-
-            # Train models for each timeframe
-            success = {}
-            for timeframe in ['1h', '1wk', '1mo']:
-                logger.info(f"\nTraining {timeframe} model...")
-                success[timeframe] = self.train_with_impact_scores(flat_data, timeframe)
-
-            # Save models and semantic patterns if all training was successful
-            if all(success.values()):
-                logger.info("\nAll models trained successfully. Saving models and patterns...")
-                self.save_models()  # This now includes saving semantic patterns
-                return True
-            else:
-                failed_timeframes = [tf for tf, success in success.items() if not success]
-                logger.error(f"Training failed for timeframes: {', '.join(failed_timeframes)}")
-                return False
-
-        except Exception as e:
-            logger.error(f"Error in train_models: {str(e)}")
-            logger.exception("Full traceback:")
-            return False
-
 class PortfolioTrackerService:
     def __init__(self):
         self.base_url = "https://portfolio-tracker-rough-dawn-5271.fly.dev"
@@ -1176,7 +1139,7 @@ def main():
 
         # Train/update models
         logger.info("Starting training process...")
-        models = trainer.collect_and_train()
+        models = trainer.collect_and_train(symbols)
 
         if models:
             logger.info("Training completed successfully")

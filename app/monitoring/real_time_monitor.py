@@ -294,33 +294,6 @@ class RealTimeMonitor:
         self._polling_lock = asyncio.Lock()
         self._is_polling = False
 
-    def _pad_features(self, X):
-        """Pad or truncate features to match model input size"""
-        try:
-            # Expected number of features from the model
-            expected_features = 84953
-            current_features = X.shape[1]
-            logger.info(f"Input matrix shape: {X.shape}")
-
-            if current_features < expected_features:
-                # Create zero matrix for padding
-                padding = scipy.sparse.csr_matrix((X.shape[0], expected_features - current_features))
-                # Horizontally stack with original features
-                X_padded = scipy.sparse.hstack([X, padding])
-                logger.info(f"Padded matrix shape: {X_padded.shape}")
-                return X_padded
-            elif current_features > expected_features:
-                # Truncate to expected size
-                X_truncated = X[:, :expected_features]
-                logger.info(f"Truncated matrix shape: {X_truncated.shape}")
-                return X_truncated
-            else:
-                return X
-        except Exception as e:
-            logger.error(f"Feature padding error: {str(e)}")
-            logger.error(f"Input matrix shape: {X.shape}")
-            raise
-
     def _adjust_features(self, X, expected_features):
         """Adjust feature matrix to match expected dimensions"""
         current_features = X.shape[1]
