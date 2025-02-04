@@ -371,7 +371,45 @@ class RealTimeMonitor:
         self._polling_lock = asyncio.Lock()
         self._is_polling = False
 
+    async def _get_recent_news(self, symbol):
+        """Get only very recent news for a symbol"""
+        try:
+            ticker = yf.Ticker(symbol)
+            news = ticker.news
+            
+            if not news:
+                return None
+                
+            # Get current time in UTC
+            current_time = datetime.now(tz=timezone.utc)
+            recent_news = []
+            
+            for article in news:
+                # Convert timestamp to datetime
+                publish_time = datetime.fromtimestamp(article['providerPublishTime'], tz=timezone.utc)
+                time_diff = current_time - publish_time
+                
+                # Only include news from last 24 hours
+                if time_diff.total_seconds() <= (24 * 3600):  # 24 hours in seconds
+                    # Check if we've already processed this article
+                    article_id = article.get('uuid', '')
+                    if article_id not in self.processed_news:
+                        self.processed_news.add(article_id)
+                        recent_news.append(article)
+                        logger.info(f"Found recent news for {symbol} published at {publish_time}")
+                        logger.info(f"News title: {article.get('title', 'No title')}")
+            
+            if recent_news:
+                logger.info(f"Found {len(recent_news)} recent news articles for {symbol}")
+            
+            return recent_news
+            
+        except Exception as e:
+            logger.error(f"Error getting news for {symbol}: {str(e)}")
+            return None
+
     async def monitor_stock(self, symbol):
+        """Monitor a single stock for trading opportunities"""
         try:
             # Get current price first for comparison
             current_price = await self._get_current_price(symbol)
@@ -379,15 +417,7 @@ class RealTimeMonitor:
                 logger.error(f"Could not get current price for {symbol}")
                 return
 
-            # Get price from 24h ago for movement check
-            price_24h_ago = await self._get_historical_price(symbol, days=1)
-            if price_24h_ago:
-                price_change_24h = ((current_price - price_24h_ago) / price_24h_ago) * 100
-                if price_change_24h > self.max_prior_price_increase:
-                    logger.info(f"Skipping {symbol} - price already up {price_change_24h:.2f}% in 24h")
-                    return
-
-            # Get news articles
+            # Get recent news articles
             news_items = await self._get_recent_news(symbol)
             if not news_items:
                 return
@@ -396,21 +426,18 @@ class RealTimeMonitor:
             
             for article in news_items:
                 try:
-                    # Check if article is recent enough
-                    publish_time = pd.Timestamp(article['providerPublishTime'], unit='s', tz='UTC')
-                    time_diff = pd.Timestamp.now(tz='UTC') - publish_time
-                    
-                    if time_diff.total_seconds() > (self.max_news_age_hours * 3600):
-                        continue
-
                     # Get article content
                     content = await self.get_full_article_text(article['link'])
                     if not content:
+                        logger.warning(f"Could not get content for article: {article.get('title', 'No title')}")
                         continue
 
-                    # Get predictions for each timeframe
-                    timeframe_predictions = {}
+                    publish_time = datetime.fromtimestamp(article['providerPublishTime'], tz=timezone.utc)
+                    logger.info(f"\nAnalyzing article from {publish_time}")
+                    logger.info(f"Title: {article.get('title', 'No title')}")
                     
+                    # Get predictions for both timeframes
+                    predictions = {}
                     for timeframe in ['1wk', '1mo']:
                         prediction = await self._get_prediction(
                             symbol=symbol,
@@ -420,16 +447,17 @@ class RealTimeMonitor:
                             current_price=current_price
                         )
                         
-                        if prediction:
-                            timeframe_predictions[timeframe] = prediction
-
-                    # Only proceed if we have valid predictions for both timeframes
-                    if len(timeframe_predictions) == 2:  # Both 1wk and 1mo predictions
+                        if prediction and prediction['prediction'] > 0:  # Only consider positive predictions
+                            predictions[timeframe] = prediction
+                            logger.info(f"Valid {timeframe} prediction: {prediction['prediction']:.2f}%")
+                    
+                    if predictions:  # If we have any valid predictions
                         valid_predictions.append({
                             'article': article,
-                            'predictions': timeframe_predictions,
+                            'predictions': predictions,
                             'publish_time': publish_time
                         })
+                        logger.info(f"Added valid prediction for {symbol} based on news from {publish_time}")
 
                 except Exception as e:
                     logger.error(f"Error processing article for {symbol}: {str(e)}")
@@ -443,45 +471,75 @@ class RealTimeMonitor:
             logger.error(f"Error monitoring {symbol}: {str(e)}")
 
     async def _get_prediction(self, symbol, content, timeframe, publish_time, current_price):
-        """Get prediction with strict criteria"""
+        """Get prediction for a specific timeframe"""
         try:
+            logger.info("\n" + "="*50)
+            logger.info(f"PREDICTION ANALYSIS: {symbol} - {timeframe}")
+            logger.info("="*50)
+            
+            # Log the content being analyzed
+            logger.info(f"Analyzing content (first 200 chars):\n{content[:200]}...\n")
+            
             # 1. Get base ML prediction
+            logger.info("1. ML Model Prediction:")
             X_tfidf = self.vectorizers[timeframe].transform([content])
             ml_prediction = self.models[timeframe].predict(X_tfidf)[0]
             weighted_ml = ml_prediction * 0.4
+            logger.info(f"   Raw ML prediction: {ml_prediction:.2f}%")
+            logger.info(f"   Weighted ML (40%): {weighted_ml:.2f}%")
 
             # 2. Get semantic prediction
+            logger.info("\n2. Semantic Analysis:")
             semantic_pred = self.semantic_analyzer.get_semantic_impact_prediction(content, timeframe)
-            weighted_semantic = semantic_pred * 0.4 if semantic_pred is not None else None
+            if semantic_pred is not None:
+                weighted_semantic = semantic_pred * 0.4
+                logger.info(f"   Raw Semantic prediction: {semantic_pred:.2f}%")
+                logger.info(f"   Weighted Semantic (40%): {weighted_semantic:.2f}%")
+            else:
+                weighted_semantic = None
+                logger.info("   No semantic prediction available")
 
             # 3. Get sentiment
+            logger.info("\n3. Sentiment Analysis:")
             sentiment = self.finbert_analyzer.analyze_sentiment(content)
-            if not sentiment:
-                return None
-
-            # Check all criteria
-            if (weighted_ml <= 0 or 
-                weighted_semantic is None or 
-                weighted_semantic <= 0 or 
-                sentiment['score'] <= 0):
+            if sentiment:
+                logger.info(f"   Score: {sentiment['score']:.2f}")
+                logger.info(f"   Confidence: {sentiment['confidence']:.2f}")
+                logger.info("   Probabilities:")
+                logger.info(f"      Positive: {sentiment['probabilities']['positive']:.2f}")
+                logger.info(f"      Negative: {sentiment['probabilities']['negative']:.2f}")
+                logger.info(f"      Neutral:  {sentiment['probabilities']['neutral']:.2f}")
+            else:
+                logger.info("   Failed to get sentiment")
                 return None
 
             # Calculate final prediction
-            weighted_pred = (
-                weighted_ml + 
-                weighted_semantic + 
-                (weighted_ml * sentiment['score'] * 0.2)
-            )
+            logger.info("\n4. Final Prediction Calculation:")
+            if weighted_semantic is not None:
+                weighted_pred = (
+                    weighted_ml + 
+                    weighted_semantic + 
+                    (weighted_ml * sentiment['score'] * 0.2)
+                )
+                logger.info("   Using ML + Semantic + Sentiment formula")
+            else:
+                weighted_pred = weighted_ml * (1 + sentiment['score'] * 0.2)
+                logger.info("   Using ML + Sentiment formula")
+
+            logger.info(f"   Final prediction: {weighted_pred:.2f}%")
+            logger.info(f"   Required threshold: {self.prediction_thresholds[timeframe]:.2f}%")
 
             # Check minimum threshold
             if weighted_pred < self.prediction_thresholds[timeframe]:
+                logger.info("\nPrediction rejected: Below threshold")
+                logger.info("="*50)
                 return None
 
-            logger.info(f"\nStrong Prediction Found for {symbol} ({timeframe}):")
-            logger.info(f"ML Prediction: {weighted_ml:.2f}%")
-            logger.info(f"Semantic Prediction: {weighted_semantic:.2f}%")
-            logger.info(f"Sentiment Score: {sentiment['score']:.2f}")
-            logger.info(f"Final Prediction: {weighted_pred:.2f}%")
+            logger.info("\nPrediction accepted!")
+            logger.info(f"Time frame: {timeframe}")
+            logger.info(f"Current price: ${current_price:.2f}")
+            logger.info(f"Target price: ${current_price * (1 + weighted_pred/100):.2f}")
+            logger.info("="*50)
 
             return {
                 'prediction': weighted_pred,
