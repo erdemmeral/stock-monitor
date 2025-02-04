@@ -35,6 +35,7 @@ import gc
 import psutil
 from scipy import sparse
 from sklearn.base import BaseEstimator, ClassifierMixin
+from sentence_transformers import SentenceTransformer
 
 # Local application imports
 import torch
@@ -60,15 +61,46 @@ class HybridMarketPredictor(BaseEstimator, ClassifierMixin):
         self.lstm_model = None
         self.n_features_in_ = None
         
-    def fit(self, X, y=None):
-        self.n_features_in_ = X.shape[1]
-        return self
+    def fit(self, X, y):
+        """Fit the model to the training data"""
+        try:
+            # Store number of features
+            self.n_features_in_ = X.shape[1]
+            
+            # Convert sparse matrix to dense if needed
+            if scipy.sparse.issparse(X):
+                X = X.toarray()
+            
+            # Convert y to numpy array if needed
+            y = np.array(y)
+            
+            # Simple linear regression for now
+            # Calculate weights using normal equation: w = (X^T X)^(-1) X^T y
+            X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
+            self.weights = np.linalg.pinv(X_with_bias.T @ X_with_bias) @ X_with_bias.T @ y
+            
+            return self
+            
+        except Exception as e:
+            logger.error(f"Error in HybridMarketPredictor fit: {str(e)}")
+            raise
         
     def predict(self, X):
-        if isinstance(X, np.ndarray):
-            return X.mean(axis=1)
-        else:
-            return X.toarray().mean(axis=1)
+        """Make predictions on new data"""
+        try:
+            # Convert sparse matrix to dense if needed
+            if scipy.sparse.issparse(X):
+                X = X.toarray()
+            
+            # Add bias term
+            X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
+            
+            # Make predictions
+            return X_with_bias @ self.weights
+            
+        except Exception as e:
+            logger.error(f"Error in HybridMarketPredictor predict: {str(e)}")
+            raise
 
 class ModelManager:
     def __init__(self):
@@ -280,7 +312,8 @@ class NewsLSTM(torch.nn.Module):
                 torch.zeros(self.num_layers, batch_size, self.hidden_size).to(device))
 
 class NewsSemanticAnalyzer:
-    def __init__(self):
+    def __init__(self, embedding_model):
+        self.embedding_model = embedding_model
         self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
         self.model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
 
@@ -389,9 +422,10 @@ class RealTimeMonitor:
         self.models = {}
         self.vectorizers = {}
         
-        # Add price cache
+        # Add price cache with limits
         self.price_cache = {}
         self.price_cache_ttl = 60  # Cache prices for 60 seconds
+        self.price_cache_max_size = 1000  # Maximum number of cached prices
         self.last_price_fetch = {}  # Track last fetch time for rate limiting
         self.price_fetch_delay = 2  # Minimum seconds between fetches for same symbol
         
@@ -400,23 +434,16 @@ class RealTimeMonitor:
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
         self.telegram_session = None
         
-        if not self.telegram_token or not self.telegram_chat_id:
-            logger.warning("Telegram credentials not configured")
+        # Initialize processed news with TTL
+        self.processed_news = {}  # Change to dict to store timestamps
+        self.processed_news_ttl = 86400  # Clear news older than 24 hours
+        self.last_cache_cleanup = time.time()
+        self.cleanup_interval = 3600  # Cleanup every hour
         
-        models_dir = 'app/models'
-        for timeframe in ['1wk', '1mo']:
-            model_path = os.path.join(models_dir, f'market_model_{timeframe}.joblib')
-            vectorizer_path = os.path.join(models_dir, f'vectorizer_{timeframe}.joblib')
-            
-            if os.path.exists(model_path) and os.path.exists(vectorizer_path):
-                self.models[timeframe] = joblib.load(model_path)
-                self.vectorizers[timeframe] = joblib.load(vectorizer_path)
-                logger.info(f"Loaded model and vectorizer for {timeframe}")
-            else:
-                raise RuntimeError(f"Missing model files for {timeframe}")
-        
+        # Share embedding model instance
+        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
-        self.semantic_analyzer = NewsSemanticAnalyzer()
+        self.semantic_analyzer = NewsSemanticAnalyzer(embedding_model=self.embedding_model)
         logger.info("Analyzers initialized")
         
         logger.info("Models loaded successfully")
@@ -448,9 +475,47 @@ class RealTimeMonitor:
         self.max_concurrent_symbols = self.max_workers * 2  # Double the number of concurrent symbols
         
         # Initialize other components
-        self.processed_news = set()
         self._polling_lock = asyncio.Lock()
         self._is_polling = False
+
+    def _cleanup_caches(self):
+        """Clean up old cache entries"""
+        try:
+            current_time = time.time()
+            
+            # Only cleanup if enough time has passed
+            if current_time - self.last_cache_cleanup < self.cleanup_interval:
+                return
+                
+            # Cleanup price cache
+            expired_prices = []
+            for symbol, (cache_time, _) in self.price_cache.items():
+                if current_time - cache_time > self.price_cache_ttl:
+                    expired_prices.append(symbol)
+            for symbol in expired_prices:
+                del self.price_cache[symbol]
+            
+            # Cleanup processed news
+            expired_news = []
+            for article_id, process_time in self.processed_news.items():
+                if current_time - process_time > self.processed_news_ttl:
+                    expired_news.append(article_id)
+            for article_id in expired_news:
+                del self.processed_news[article_id]
+            
+            # Enforce maximum cache sizes
+            if len(self.price_cache) > self.price_cache_max_size:
+                # Remove oldest entries
+                sorted_cache = sorted(self.price_cache.items(), key=lambda x: x[1][0])
+                self.price_cache = dict(sorted_cache[-self.price_cache_max_size:])
+            
+            self.last_cache_cleanup = current_time
+            gc.collect()
+            
+            logger.info(f"Cache cleanup completed. Sizes - Prices: {len(self.price_cache)}, News: {len(self.processed_news)}")
+            
+        except Exception as e:
+            logger.error(f"Error in cache cleanup: {str(e)}")
 
     async def _get_news_for_symbol(self, symbol):
         """Get news articles for a symbol with error handling"""
@@ -458,13 +523,13 @@ class RealTimeMonitor:
             # Use yf.Search instead of ticker.news
             search = yf.Search(
                 query=symbol,
-                news_count=20,
+                news_count=8,
                 include_nav_links=False,
                 include_research=True
             )
-            news = search.news
+            news = search.news.copy()  # Make a copy of the news data
             
-            # Clear search object
+            # Clear search object immediately
             del search
             gc.collect()
             
@@ -473,6 +538,8 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error getting news for {symbol}: {str(e)}")
             return []
+        finally:
+            gc.collect()
 
     async def _validate_article(self, article, current_time):
         """Validate article data and check if it should be processed"""
@@ -515,10 +582,15 @@ class RealTimeMonitor:
         except Exception as e:
             logger.error(f"Error validating article: {str(e)}")
             return None, None
+        finally:
+            gc.collect()
 
     async def monitor_stock(self, symbol):
         """Monitor a single stock for trading opportunities"""
         try:
+            # Cleanup caches periodically
+            self._cleanup_caches()
+            
             # Get current price first for comparison
             current_price = await self._get_current_price(symbol)
             if not current_price:
@@ -544,7 +616,7 @@ class RealTimeMonitor:
                     if article_id in self.processed_news:
                         continue
                         
-                    self.processed_news.add(article_id)
+                    self.processed_news[article_id] = current_time
                     
                     # Get article content with timeout
                     try:
@@ -923,6 +995,7 @@ class RealTimeMonitor:
             while True:
                 try:
                     logger.info("Starting new monitoring cycle...")
+                    self._cleanup_caches()  # Cleanup at the start of each cycle
                     
                     # Process in optimized batches
                     total_symbols = len(symbols)
@@ -939,13 +1012,20 @@ class RealTimeMonitor:
                         
                         async def process_with_semaphore(symbol):
                             async with sem:
-                                return await self.monitor_stock(symbol)
+                                try:
+                                    return await self.monitor_stock(symbol)
+                                finally:
+                                    gc.collect()  # Cleanup after each symbol
                         
                         for symbol in batch:
                             task = asyncio.create_task(process_with_semaphore(symbol))
                             tasks.append(task)
                             
                         await asyncio.gather(*tasks)
+                        
+                        # Clear completed tasks
+                        tasks.clear()
+                        gc.collect()
                         
                         logger.info(f"Completed Batch {batch_number}/{total_batches}")
                         

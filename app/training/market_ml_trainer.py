@@ -105,9 +105,11 @@ class NewsSemanticAnalyzer:
         os.makedirs(self.embeddings_dir, exist_ok=True)
         os.makedirs(self.clusters_dir, exist_ok=True)
 
-        # In-memory index for quick lookups
+        # In-memory index with size limits
         self.embedding_index = {}  # Maps ID to file location
         self.cluster_index = {}    # Maps cluster ID to file location
+        self.max_embeddings = 10000  # Maximum number of embeddings to keep in memory
+        self.max_clusters = 1000   # Maximum number of clusters to keep in memory
         
         # Batch processing settings
         self.batch_size = 100
@@ -135,16 +137,85 @@ class NewsSemanticAnalyzer:
                 'cluster_stats': {}
             }
         }
+        
+        # Add cleanup settings
+        self.last_cleanup = time.time()
+        self.cleanup_interval = 3600  # 1 hour
+        self.data_ttl = 86400 * 7    # 7 days
+
+    def cleanup_memory(self):
+        """Clean up memory periodically"""
+        current_time = time.time()
+        if current_time - self.last_cleanup < self.cleanup_interval:
+            return
+
+        try:
+            # Cleanup embeddings
+            if len(self.embedding_index) > self.max_embeddings:
+                # Keep only the most recent embeddings
+                sorted_embeddings = sorted(self.embedding_index.items(), key=lambda x: x[1]['timestamp'])
+                self.embedding_index = dict(sorted_embeddings[-self.max_embeddings:])
+
+            # Cleanup clusters
+            if len(self.cluster_index) > self.max_clusters:
+                sorted_clusters = sorted(self.cluster_index.items(), key=lambda x: x[1]['timestamp'])
+                self.cluster_index = dict(sorted_clusters[-self.max_clusters:])
+
+            # Cleanup cluster data
+            for timeframe in self.cluster_data:
+                data = self.cluster_data[timeframe]
+                if len(data['embeddings']) > self.max_embeddings:
+                    # Keep only the most recent data
+                    data['embeddings'] = data['embeddings'][-self.max_embeddings:]
+                    data['timestamps'] = data['timestamps'][-self.max_embeddings:]
+                    data['price_changes'] = data['price_changes'][-self.max_embeddings:]
+                    if data['cluster_labels'] is not None:
+                        data['cluster_labels'] = data['cluster_labels'][-self.max_embeddings:]
+
+            # Force garbage collection
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+
+            self.last_cleanup = current_time
+            logger.info("Memory cleanup completed")
+
+        except Exception as e:
+            logger.error(f"Error during memory cleanup: {str(e)}")
+
+    def cleanup_old_files(self):
+        """Clean up old cache files"""
+        try:
+            current_time = time.time()
+            
+            # Clean up embeddings directory
+            for filename in os.listdir(self.embeddings_dir):
+                file_path = os.path.join(self.embeddings_dir, filename)
+                if current_time - os.path.getmtime(file_path) > self.data_ttl:
+                    os.remove(file_path)
+                    logger.info(f"Removed old embedding file: {filename}")
+            
+            # Clean up clusters directory
+            for filename in os.listdir(self.clusters_dir):
+                file_path = os.path.join(self.clusters_dir, filename)
+                if current_time - os.path.getmtime(file_path) > self.data_ttl:
+                    os.remove(file_path)
+                    logger.info(f"Removed old cluster file: {filename}")
+                    
+        except Exception as e:
+            logger.error(f"Error cleaning up old files: {str(e)}")
 
     def get_embedding(self, text):
-        """Generate embedding for text using SentenceTransformer"""
+        """Generate embedding for text using BERT"""
         try:
-            # Use SentenceTransformer directly - it's more efficient
-            embedding = self.embedding_model.encode(text, convert_to_tensor=True)
-            return embedding.cpu().numpy()
+            self.cleanup_memory()  # Periodic cleanup
+            embedding = self.embedding_model.encode(text)
+            return embedding
         except Exception as e:
             logger.error(f"Error generating embedding: {str(e)}")
             return None
+        finally:
+            gc.collect()
 
     def cluster_news(self, embeddings, timestamps=None, price_changes=None, timeframe=None, eps=0.25):
         """Enhanced clustering with temporal patterns and saving cluster information"""
@@ -875,14 +946,15 @@ class MarketMLTrainer:
         # Pass the shared embedding model
         self.semantic_analyzer = NewsSemanticAnalyzer(embedding_model=self.embedding_model)
         
-        # Initialize cluster data
+        # Initialize cluster data with size limits
         self.cluster_data = defaultdict(lambda: {
             'centroids': None,
             'embeddings': [],
             'timestamps': [],
             'price_changes': [],
             'cluster_labels': None,
-            'cluster_stats': {}
+            'cluster_stats': {},
+            'max_size': 10000  # Maximum number of items to keep
         })
 
         # CPU and memory management
@@ -910,102 +982,117 @@ class MarketMLTrainer:
         os.makedirs(self.cache_dir, exist_ok=True)
         
         # Cache management
-        self.max_cache_age = 86400
+        self.max_cache_age = 86400  # 24 hours
         self.max_cache_size = 1000
         self.cache_cleanup_threshold = 0.9
+        self.last_cache_cleanup = time.time()
+        self.cleanup_interval = 3600  # 1 hour
+
+        # Add training history tracking
+        self.training_history = {
+            '1wk': {
+                'best_score': float('-inf'),
+                'samples_processed': 0,
+                'last_improvement': time.time()
+            },
+            '1mo': {
+                'best_score': float('-inf'),
+                'samples_processed': 0,
+                'last_improvement': time.time()
+            }
+        }
         
-        # Cache file buffers
-        self._cache_buffers = {}
-        self._buffer_size = 50
-        self._last_cleanup_time = time.time()
-        self._cleanup_interval = 3600
+        # Training data backup
+        self.training_data_backup = {'1wk': [], '1mo': []}
+        self.max_backup_size = 10000  # Maximum samples to keep in backup
+        
+        # Minimum improvement threshold
+        self.min_improvement = 0.01  # 1% improvement required to save model
 
     def _cleanup_cache(self, force=False):
         """Clean up old cache files"""
         try:
             current_time = time.time()
-            
-            # Only cleanup if forced or enough time has passed
-            if not force and (current_time - self._last_cleanup_time) < self._cleanup_interval:
+            if not force and current_time - self.last_cache_cleanup < self.cleanup_interval:
                 return
-            
-            logger.info("Starting cache cleanup...")
-            cache_files = os.listdir(self.cache_dir)
-            
-            if len(cache_files) > (self.max_cache_size * self.cache_cleanup_threshold) or force:
-                # Get file stats
-                file_stats = []
-                for filename in cache_files:
-                    file_path = os.path.join(self.cache_dir, filename)
-                    try:
-                        stats = os.stat(file_path)
-                        file_stats.append((file_path, stats.st_mtime))
-                    except Exception as e:
-                        logger.error(f"Error getting stats for {filename}: {str(e)}")
-                
-                # Sort by modification time (oldest first)
-                file_stats.sort(key=lambda x: x[1])
-                
-                # Remove old files
-                files_to_remove = len(file_stats) - self.max_cache_size
-                if files_to_remove > 0:
-                    for file_path, _ in file_stats[:files_to_remove]:
-                        try:
-                            os.remove(file_path)
-                            logger.info(f"Removed old cache file: {os.path.basename(file_path)}")
-                        except Exception as e:
-                            logger.error(f"Error removing {file_path}: {str(e)}")
-                
-                # Remove expired files
-                for file_path, mtime in file_stats[files_to_remove:]:
-                    if (current_time - mtime) > self.max_cache_age:
-                        try:
-                            os.remove(file_path)
-                            logger.info(f"Removed expired cache file: {os.path.basename(file_path)}")
-                        except Exception as e:
-                            logger.error(f"Error removing {file_path}: {str(e)}")
-            
-            self._last_cleanup_time = current_time
-            
-            # Clear memory
-            gc.collect()
-            if torch.cuda.is_available():
-                torch.cuda.empty_cache()
-                
-            logger.info("Cache cleanup completed")
-            
-        except Exception as e:
-            logger.error(f"Error during cache cleanup: {str(e)}")
 
-    def _clear_memory(self):
-        """Enhanced memory clearing"""
+            # Get list of cache files
+            cache_files = [f for f in os.listdir(self.cache_dir) if f.endswith('_cache.json')]
+            
+            # Remove old cache files
+            for cache_file in cache_files:
+                file_path = os.path.join(self.cache_dir, cache_file)
+                if current_time - os.path.getmtime(file_path) > self.max_cache_age:
+                    os.remove(file_path)
+                    logger.info(f"Removed old cache file: {cache_file}")
+
+            # If we're still over the limit, remove oldest files
+            cache_files = [f for f in os.listdir(self.cache_dir) if f.endswith('_cache.json')]
+            if len(cache_files) > self.max_cache_size:
+                cache_files.sort(key=lambda x: os.path.getmtime(os.path.join(self.cache_dir, x)))
+                files_to_remove = cache_files[:-self.max_cache_size]
+                for file_to_remove in files_to_remove:
+                    os.remove(os.path.join(self.cache_dir, file_to_remove))
+                    logger.info(f"Removed excess cache file: {file_to_remove}")
+
+            self.last_cache_cleanup = current_time
+            gc.collect()
+
+        except Exception as e:
+            logger.error(f"Error cleaning cache: {str(e)}")
+
+    def process_symbol(self, symbol):
+        """Process a single symbol with optimized disk caching"""
         try:
-            logger.info("Starting memory cleanup...")
+            self._cleanup_cache()  # Periodic cleanup
             
-            # Clear cache buffers
-            self._cache_buffers.clear()
+            cache_file = os.path.join(self.cache_dir, f'{symbol}_results_cache.json')
             
-            # Clear any temporary data in semantic analyzer
-            self.semantic_analyzer.cleanup_old_data()
+            # Check disk cache
+            if os.path.exists(cache_file):
+                cache_age = time.time() - os.path.getmtime(cache_file)
+                if cache_age < 86400:  # Cache valid for 24 hours
+                    with open(cache_file, 'r') as f:
+                        return json.load(f)
             
-            # Force garbage collection
+            # If not cached, process the symbol
+            stock = yf.Ticker(symbol)
+            news_items = self.get_news_for_symbol(symbol)
+            
+            if not news_items:
+                logger.warning(f"No news found for {symbol}")
+                return []
+            
+            # Process articles in parallel
+            with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+                futures = [
+                    executor.submit(self._process_article, article, symbol, stock)
+                    for article in news_items
+                ]
+                samples = [
+                    result for future in as_completed(futures)
+                    if (result := future.result()) is not None
+                ]
+            
+            # Write final results to cache
+            if samples:
+                with open(cache_file, 'w') as f:
+                    json.dump(samples, f)
+            
+            # Clear objects
+            del stock
+            del news_items
             gc.collect()
             
-            # Clear PyTorch cache if using GPU
-            if torch.cuda.is_available():
-                torch.cuda.empty_cache()
-            
-            # Clear embedding model cache if it exists
-            if hasattr(self.embedding_model, 'clear_cache'):
-                self.embedding_model.clear_cache()
-            
-            # Run cache cleanup if needed
-            self._cleanup_cache(force=True)
-            
-            logger.info("Memory cleanup completed")
+            return samples
             
         except Exception as e:
-            logger.error(f"Error during memory cleanup: {str(e)}")
+            logger.error(f"Error processing symbol {symbol}: {str(e)}")
+            return []
+        finally:
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
 
     def train(self):
         """Main training function"""
@@ -1108,108 +1195,93 @@ class MarketMLTrainer:
             logger.error(f"Error saving models: {str(e)}")
             return False
 
-    def train_with_impact_scores(self, training_data, timeframe):
-        """Train model with impact scores using disk-based data management"""
+    def evaluate_model(self, timeframe, validation_data):
+        """Evaluate model performance on validation data"""
         try:
-            logger.info(f"\nTraining model for {timeframe}")
+            if not validation_data:
+                return float('-inf')
+                
+            model = self.models.get(timeframe)
+            if not model:
+                return float('-inf')
+                
+            # Split features and targets
+            X = [sample['text'] for sample in validation_data]
+            y = [sample['changes'][timeframe] for sample in validation_data]
             
-            # Process training data in batches
-            for sample in training_data:
-                if timeframe in sample['changes']:
-                    self.add_training_sample(timeframe, sample)
+            # Transform features
+            X_tfidf = self.vectorizers[timeframe].transform(X)
             
-            # Save any remaining samples
-            self._save_training_batch(timeframe)
+            # Get predictions
+            predictions = model.predict(X_tfidf)
             
-            # Initialize models if needed
-            if timeframe not in self.vectorizers:
-                self.vectorizers[timeframe] = TfidfVectorizer(max_features=1000)
-            if timeframe not in self.target_scalers:
-                self.target_scalers[timeframe] = StandardScaler()
-            if timeframe not in self.models:
-                self.models[timeframe] = HybridMarketPredictor()
+            # Calculate score (use mean absolute error)
+            score = -np.mean(np.abs(predictions - np.array(y)))
+            logger.info(f"{timeframe} model evaluation score: {score:.4f}")
             
-            # Train using batched data
-            for batch in self._get_training_data_generator(timeframe, batch_size=100):
-                try:
-                    # Process batch
-                    X_tfidf = self.vectorizers[timeframe].fit_transform(batch['texts'])
-                    X_sentiment = np.array(batch['sentiments'])
-                    y = np.array(batch['price_changes']).reshape(-1, 1)
-                    
-                    # Scale features
-                    y_scaled = self.target_scalers[timeframe].fit_transform(y).ravel()
-                    
-                    # Combine features
-                    X_combined = scipy.sparse.hstack([
-                        X_tfidf,
-                        scipy.sparse.csr_matrix(X_sentiment)
-                    ]).tocsr()
-                    
-                    # Train on batch
-                    self.models[timeframe].train(
-                        X_combined=X_combined,
-                        embeddings=batch['embeddings'],
-                        y=y_scaled,
-                        sample_weights=None
-                    )
-                    
-                    # Clear batch data
-                    del X_tfidf
-                    del X_sentiment
-                    del X_combined
-                    gc.collect()
-                except Exception as e:
-                    logger.error(f"Error processing batch: {str(e)}")
-                    continue
-            
-            logger.info(f"Successfully trained model for {timeframe}")
-            return True
+            return score
             
         except Exception as e:
-            logger.error(f"Error in training process: {str(e)}")
-            logger.exception("Full traceback:")
+            logger.error(f"Error evaluating {timeframe} model: {str(e)}")
+            return float('-inf')
+
+    def train_with_impact_scores(self, training_data, timeframe):
+        """Train model with impact scores and validate improvement"""
+        try:
+            if len(training_data) < 100:
+                logger.warning(f"Insufficient training data for {timeframe}")
+                return False
+                
+            # Initialize models if they don't exist
+            if timeframe not in self.vectorizers:
+                from sklearn.feature_extraction.text import TfidfVectorizer
+                self.vectorizers[timeframe] = TfidfVectorizer(max_features=1000)
+                
+            if timeframe not in self.models:
+                self.models[timeframe] = HybridMarketPredictor()
+                
+            # Split into train and validation
+            train_size = int(len(training_data) * 0.8)
+            train_data = training_data[:train_size]
+            val_data = training_data[train_size:]
+            
+            # Get current performance as baseline
+            current_score = self.evaluate_model(timeframe, val_data)
+            
+            # Train the model
+            X_train = [sample['text'] for sample in train_data]
+            y_train = [sample['changes'][timeframe] for sample in train_data]
+            
+            # Fit vectorizer and transform
+            X_train_tfidf = self.vectorizers[timeframe].fit_transform(X_train)
+            
+            # Train model
+            self.models[timeframe].fit(X_train_tfidf, y_train)
+            
+            # Evaluate new performance
+            new_score = self.evaluate_model(timeframe, val_data)
+            
+            # Check if model improved
+            if new_score > self.training_history[timeframe]['best_score'] + self.min_improvement:
+                logger.info(f"{timeframe} model improved: {new_score:.4f} > {self.training_history[timeframe]['best_score']:.4f}")
+                self.training_history[timeframe]['best_score'] = new_score
+                self.training_history[timeframe]['last_improvement'] = time.time()
+                self.save_models()
+                
+                # Update backup with new data
+                self.training_data_backup[timeframe].extend(training_data)
+                if len(self.training_data_backup[timeframe]) > self.max_backup_size:
+                    self.training_data_backup[timeframe] = self.training_data_backup[timeframe][-self.max_backup_size:]
+                
+                return True
+            else:
+                logger.warning(f"{timeframe} model did not improve significantly: {new_score:.4f} <= {self.training_history[timeframe]['best_score']:.4f}")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Error in train_with_impact_scores for {timeframe}: {str(e)}")
+            logger.exception("Full traceback:")  # Add full traceback for better debugging
             return False
-
-    def _prepare_checkpoint_data(self, training_data, stock_stats, processed_symbols):
-        """Prepare checkpoint data for JSON serialization"""
-        # Deep copy the data to avoid modifying the original
-        checkpoint_data = {
-            'training_data': training_data,
-            'processed_symbols': list(processed_symbols),
-            'stock_stats': {
-                'total': stock_stats['total'],
-                'processed': stock_stats['processed'],
-                'failed': stock_stats['failed'],
-                'no_news': stock_stats['no_news'],
-                'with_news': stock_stats['with_news'],
-                'by_timeframe': {
-                    timeframe: {
-                        'stocks': list(stats['stocks']),  # Convert set to list
-                        'samples': stats['samples']
-                    }
-                    for timeframe, stats in stock_stats['by_timeframe'].items()
-                }
-            }
-        }
-        return checkpoint_data
-
-    def _restore_checkpoint_data(self, checkpoint):
-        """Restore checkpoint data, converting lists back to sets"""
-        training_data = checkpoint['training_data']
-        processed_symbols = set(checkpoint['processed_symbols'])
-        stock_stats = checkpoint['stock_stats']
-        
-        # Convert lists back to sets in by_timeframe stats
-        stock_stats['by_timeframe'] = {
-            timeframe: {
-                'stocks': set(stats['stocks']),  # Convert list back to set
-                'samples': stats['samples']
-            }
-            for timeframe, stats in stock_stats['by_timeframe'].items()
-        }
-        
-        return training_data, stock_stats, processed_symbols
 
     def collect_and_train(self, symbols):
         """Collect news data and train models with checkpointing"""
@@ -1277,34 +1349,9 @@ class MarketMLTrainer:
                         else:
                             stock_stats['no_news'] += 1
                         
-                        # Save checkpoint after each symbol
-                        checkpoint_data = self._prepare_checkpoint_data(
-                            training_data=training_data,
-                            stock_stats=stock_stats,
-                            processed_symbols=processed_symbols
-                        )
-                        with open(checkpoint_file, 'w') as f:
-                            json.dump(checkpoint_data, f)
-                            
-                        # Clear memory after each symbol
-                        gc.collect()
-                        if torch.cuda.is_available():
-                            torch.cuda.empty_cache()
-                            
-                        # Add small delay between symbols to avoid rate limiting
-                        time.sleep(self.delay_between_symbols)
-                            
                     except Exception as e:
                         logger.error(f"Error processing symbol {symbol}: {str(e)}")
                         stock_stats['failed'] += 1
-                        # Save checkpoint even if symbol fails
-                        checkpoint_data = self._prepare_checkpoint_data(
-                            training_data=training_data,
-                            stock_stats=stock_stats,
-                            processed_symbols=processed_symbols
-                        )
-                        with open(checkpoint_file, 'w') as f:
-                            json.dump(checkpoint_data, f)
                         continue
                 
                 # Train models after each chunk if we have enough data
@@ -1313,11 +1360,9 @@ class MarketMLTrainer:
                     for timeframe, data in training_data.items():
                         if len(data) >= 100:  # Only train if we have enough samples
                             try:
-                                self.train_with_impact_scores(data, timeframe)
-                                # Save models after successful training
-                                self.save_models()
-                                # Clear training data after successful training
-                                training_data[timeframe] = []
+                                if self.train_with_impact_scores(data, timeframe):
+                                    # Only clear data if model improved and was saved
+                                    training_data[timeframe] = []
                             except Exception as e:
                                 logger.error(f"Error training {timeframe} model: {str(e)}")
                 
@@ -1344,7 +1389,6 @@ class MarketMLTrainer:
             if data:  # Train with any remaining data
                 try:
                     self.train_with_impact_scores(data, timeframe)
-                    self.save_models()
                 except Exception as e:
                     logger.error(f"Error in final training for {timeframe}: {str(e)}")
         
@@ -1382,149 +1426,6 @@ class MarketMLTrainer:
             logger.error(f"Error reading symbols file: {e}")
             return []
     
-    def process_symbol(self, symbol):
-        """Process a single symbol with optimized disk caching"""
-        try:
-            cache_file = os.path.join(self.cache_dir, f'{symbol}_results_cache.json')
-            
-            # Check disk cache
-            if os.path.exists(cache_file):
-                cache_age = time.time() - os.path.getmtime(cache_file)
-                if cache_age < 86400:  # Cache valid for 24 hours
-                    with open(cache_file, 'r') as f:
-                        return json.load(f)
-            
-            # If not cached, process the symbol
-            stock = yf.Ticker(symbol)
-            news_items = self.get_news_for_symbol(symbol)
-            
-            if not news_items:
-                logger.warning(f"No news found for {symbol}")
-                return []
-            
-            # Process articles in parallel
-            with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
-                futures = [
-                    executor.submit(self._process_article, article, symbol, stock)
-                    for article in news_items
-                ]
-                samples = [
-                    result for future in as_completed(futures)
-                    if (result := future.result()) is not None
-                ]
-            
-            # Write final results to cache
-            if samples:
-                with open(cache_file, 'w') as f:
-                    json.dump(samples, f)
-            
-            # Clear objects
-            del stock
-            del news_items
-            
-            return samples
-            
-        except Exception as e:
-            logger.error(f"Error processing symbol {symbol}: {str(e)}")
-            return []
-        finally:
-            gc.collect()
-            if torch.cuda.is_available():
-                torch.cuda.empty_cache()
-
-    def _process_article(self, article, symbol, stock):
-        """Helper method to process a single article"""
-        try:
-            # First check if the article's publish date is valid for any timeframe
-            publish_time = article['providerPublishTime']
-            publish_date = pd.Timestamp(publish_time, unit='s', tz='UTC')
-            current_date = pd.Timestamp.now(tz='UTC')
-            
-            # Check if article is valid for any timeframe
-            valid_for_timeframes = {}
-            for timeframe, params in self.TIMEFRAMES.items():
-                future_date = publish_date + pd.Timedelta(days=params['days'])
-                days_into_future = (future_date - current_date).total_seconds() / (24 * 3600)
-                
-                # Skip if we would need future data
-                if days_into_future <= 0:
-                    # Get price data to verify we have enough points
-                    prices = stock.history(
-                        start=publish_date,
-                        end=future_date,
-                        interval=params['interval']
-                    )
-                    if len(prices) >= params['min_points']:
-                        valid_for_timeframes[timeframe] = {
-                            'start_date': publish_date,
-                            'end_date': future_date,
-                            'prices': prices
-                        }
-
-            # If not valid for any timeframe, skip downloading content
-            if not valid_for_timeframes:
-                logger.info(f"Skipping article - No valid timeframes for publish date: {publish_date}")
-                return None
-            
-            logger.info(f"\nProcessing article for {symbol}:")
-            logger.info(f"  Title: {article.get('title', 'No title')}")
-            logger.info(f"  Publisher: {article.get('publisher', 'Unknown')}")
-            logger.info(f"  Link: {article['link']}")
-            logger.info(f"  Publish Time: {publish_date}")
-            logger.info(f"  Valid timeframes: {', '.join(valid_for_timeframes.keys())}")
-            
-            # Now download the content since we know we'll use it
-            content = self.get_full_article_text(article['link'])
-            if not content:
-                return None
-                
-            logger.info(f"  Content Length: {len(content)} characters")
-            
-            # Get sentiment and embedding in parallel with increased workers
-            with ThreadPoolExecutor(max_workers=4) as executor:
-                sentiment_future = executor.submit(self.finbert_analyzer.analyze_sentiment, content)
-                embedding_future = executor.submit(self.semantic_analyzer.get_embedding, content)
-                
-                sentiment = sentiment_future.result()
-                embedding = embedding_future.result()
-            
-            if sentiment:
-                logger.info(f"  Sentiment Scores:")
-                logger.info(f"    Positive: {sentiment['probabilities']['positive']:.3f}")
-                logger.info(f"    Negative: {sentiment['probabilities']['negative']:.3f}")
-                logger.info(f"    Neutral: {sentiment['probabilities']['neutral']:.3f}")
-            
-            if sentiment and embedding is not None:
-                # Calculate price changes for valid timeframes
-                changes = {}
-                for timeframe, data in valid_for_timeframes.items():
-                    prices = data['prices']
-                    start_price = prices['Close'].iloc[0]
-                    end_price = prices['Close'].iloc[-1]
-                    percent_change = ((end_price - start_price) / start_price) * 100
-                    changes[timeframe] = percent_change
-                    
-                    logger.info(f"\n{timeframe} Price Change:")
-                    logger.info(f"  Start Date: {data['start_date']}")
-                    logger.info(f"  End Date: {data['end_date']}")
-                    logger.info(f"  Start Price: ${start_price:.2f}")
-                    logger.info(f"  End Price: ${end_price:.2f}")
-                    logger.info(f"  Percent Change: {percent_change:.2f}%")
-                
-                return {
-                    'text': content,
-                    'symbol': symbol,
-                    'date': publish_date.isoformat(),
-                    'sentiment': sentiment,
-                    'embedding': embedding.tolist(),
-                    'changes': changes
-                }
-            return None
-            
-        except Exception as e:
-            logger.error(f"Error processing article: {str(e)}")
-            return None
-
     def get_news_for_symbol(self, symbol):
         """Get news articles with optimized disk-based caching"""
         cache_file = os.path.join(self.cache_dir, f'{symbol}_news_cache.json')
@@ -1561,6 +1462,120 @@ class MarketMLTrainer:
             return []
         finally:
             gc.collect()
+
+    def _process_article(self, article, symbol, stock):
+        """Process a single news article and calculate its impact"""
+        try:
+            # Extract article data
+            publish_time = article.get('providerPublishTime')
+            if not publish_time:
+                return None
+
+            # Convert timestamp to datetime and ensure UTC
+            publish_date = pd.Timestamp(publish_time, unit='s', tz='UTC')
+            current_date = pd.Timestamp.now(tz='UTC')
+            
+            # Skip if article is too recent to have enough future data
+            min_required_days = 35  # For monthly predictions
+            if (current_date - publish_date).days < min_required_days:
+                logger.info(f"Article for {symbol} is too recent, skipping")
+                return None
+            
+            # Get article content
+            title = article.get('title', '')
+            summary = article.get('summary', '')
+            content = f"{title} {summary}"
+            
+            if not content.strip():
+                return None
+                
+            # Get price changes for different timeframes
+            changes = {}
+            try:
+                # Get historical data with padding
+                start_date = publish_date - pd.Timedelta(days=5)  # 5 days before for context
+                end_date = publish_date + pd.Timedelta(days=40)   # 40 days after for monthly data
+                
+                # Get daily data
+                history = stock.history(
+                    start=start_date.strftime('%Y-%m-%d'),
+                    end=end_date.strftime('%Y-%m-%d'),
+                    interval='1d'
+                )
+                
+                if len(history) < 2:
+                    logger.warning(f"Insufficient price history for {symbol}")
+                    return None
+                
+                # Find the closest price after publication date
+                future_prices = history.loc[history.index >= publish_date]
+                if len(future_prices) == 0:
+                    logger.warning(f"No price data after publication date for {symbol}")
+                    return None
+                
+                # Get the first available price after publication
+                publish_price = future_prices.iloc[0]['Close']
+                publish_actual_date = future_prices.index[0]
+                
+                # Calculate weekly change
+                week_later = publish_actual_date + pd.Timedelta(days=7)
+                week_data = history.loc[history.index >= week_later]
+                if len(week_data) > 0:
+                    week_price = week_data.iloc[0]['Close']
+                    week_actual_date = week_data.index[0]
+                    # Only include if within reasonable range (5-9 days)
+                    days_diff = (week_actual_date - publish_actual_date).days
+                    if 5 <= days_diff <= 9:
+                        changes['1wk'] = ((week_price - publish_price) / publish_price) * 100
+                
+                # Calculate monthly change
+                month_later = publish_actual_date + pd.Timedelta(days=30)
+                month_data = history.loc[history.index >= month_later]
+                if len(month_data) > 0:
+                    month_price = month_data.iloc[0]['Close']
+                    month_actual_date = month_data.index[0]
+                    # Only include if within reasonable range (28-32 days)
+                    days_diff = (month_actual_date - publish_actual_date).days
+                    if 28 <= days_diff <= 32:
+                        changes['1mo'] = ((month_price - publish_price) / publish_price) * 100
+                
+                if not changes:
+                    logger.info(f"No valid price changes within acceptable ranges for {symbol}")
+                    return None
+                
+            except Exception as e:
+                logger.error(f"Error calculating price changes for {symbol}: {str(e)}")
+                return None
+            
+            # Get sentiment analysis
+            sentiment = self.finbert_analyzer.analyze_sentiment(content)
+            if not sentiment:
+                return None
+            
+            # Get semantic embedding
+            embedding = self.semantic_analyzer.get_embedding(content)
+            if embedding is None:
+                return None
+            
+            # Create training sample
+            sample = {
+                'symbol': symbol,
+                'text': content,
+                'publish_date': publish_date.isoformat(),
+                'sentiment': sentiment,
+                'embedding': embedding.tolist(),
+                'changes': changes
+            }
+            
+            return sample
+            
+        except Exception as e:
+            logger.error(f"Error processing article for {symbol}: {str(e)}")
+            return None
+        finally:
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
 
     def analyze_stock(self, stock, publish_time):
         """Analyze stock price changes after news publication"""
