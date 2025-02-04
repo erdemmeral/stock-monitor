@@ -323,20 +323,26 @@ class RealTimeMonitor:
 
         # Initialize prediction components
         self.market_trainer = MarketMLTrainer()
-        # Train models if they don't exist
-        if not self.market_trainer.load_models():
-            logger.info("No pre-trained models found. Training new models...")
-            if not self.market_trainer.train():
-                raise RuntimeError("Failed to train models")
-        logger.info("Market ML models loaded")
+        
+        # Load models directly from the models directory
+        self.models = {}
+        self.vectorizers = {}
+        
+        models_dir = 'app/models'
+        for timeframe in ['1wk', '1mo']:
+            model_path = os.path.join(models_dir, f'market_model_{timeframe}.joblib')
+            vectorizer_path = os.path.join(models_dir, f'vectorizer_{timeframe}.joblib')
+            
+            if os.path.exists(model_path) and os.path.exists(vectorizer_path):
+                self.models[timeframe] = joblib.load(model_path)
+                self.vectorizers[timeframe] = joblib.load(vectorizer_path)
+                logger.info(f"Loaded model and vectorizer for {timeframe}")
+            else:
+                raise RuntimeError(f"Missing model files for {timeframe}")
         
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
         self.semantic_analyzer = NewsSemanticAnalyzer()
         logger.info("Analyzers initialized")
-
-        # Use models from market trainer
-        self.vectorizers = self.market_trainer.vectorizers
-        self.models = self.market_trainer.models
         
         logger.info("Models loaded successfully")
         
@@ -417,47 +423,59 @@ class RealTimeMonitor:
                 logger.error(f"Could not get current price for {symbol}")
                 return
 
-            # Get recent news articles
-            news_items = await self._get_recent_news(symbol)
-            if not news_items:
+            # Get news directly from yfinance
+            ticker = yf.Ticker(symbol)
+            news = ticker.news
+            
+            if not news:
                 return
 
             valid_predictions = []
+            current_time = datetime.now(tz=timezone.utc)
             
-            for article in news_items:
+            for article in news:
                 try:
-                    # Get article content
-                    content = await self.get_full_article_text(article['link'])
-                    if not content:
-                        logger.warning(f"Could not get content for article: {article.get('title', 'No title')}")
-                        continue
-
+                    # Convert timestamp to datetime
                     publish_time = datetime.fromtimestamp(article['providerPublishTime'], tz=timezone.utc)
-                    logger.info(f"\nAnalyzing article from {publish_time}")
-                    logger.info(f"Title: {article.get('title', 'No title')}")
+                    time_diff = current_time - publish_time
                     
-                    # Get predictions for both timeframes
-                    predictions = {}
-                    for timeframe in ['1wk', '1mo']:
-                        prediction = await self._get_prediction(
-                            symbol=symbol,
-                            content=content,
-                            timeframe=timeframe,
-                            publish_time=publish_time,
-                            current_price=current_price
-                        )
-                        
-                        if prediction and prediction['prediction'] > 0:  # Only consider positive predictions
-                            predictions[timeframe] = prediction
-                            logger.info(f"Valid {timeframe} prediction: {prediction['prediction']:.2f}%")
-                    
-                    if predictions:  # If we have any valid predictions
-                        valid_predictions.append({
-                            'article': article,
-                            'predictions': predictions,
-                            'publish_time': publish_time
-                        })
-                        logger.info(f"Added valid prediction for {symbol} based on news from {publish_time}")
+                    # Only process articles from last 24 hours that we haven't seen
+                    if time_diff.total_seconds() <= (24 * 3600):  # 24 hours
+                        article_id = article.get('uuid', '')
+                        if article_id not in self.processed_news:
+                            self.processed_news.add(article_id)
+                            
+                            # Get article content
+                            content = await self.get_full_article_text(article['link'])
+                            if not content:
+                                logger.warning(f"Could not get content for article: {article.get('title', 'No title')}")
+                                continue
+
+                            logger.info(f"\nAnalyzing article from {publish_time}")
+                            logger.info(f"Title: {article.get('title', 'No title')}")
+                            
+                            # Make predictions for both timeframes
+                            predictions = {}
+                            for timeframe in ['1wk', '1mo']:
+                                prediction = await self._get_prediction(
+                                    symbol=symbol,
+                                    content=content,
+                                    timeframe=timeframe,
+                                    publish_time=publish_time,
+                                    current_price=current_price
+                                )
+                                
+                                if prediction and prediction['prediction'] > 0:
+                                    predictions[timeframe] = prediction
+                                    logger.info(f"Valid {timeframe} prediction: {prediction['prediction']:.2f}%")
+                            
+                            if predictions:
+                                valid_predictions.append({
+                                    'article': article,
+                                    'predictions': predictions,
+                                    'publish_time': publish_time
+                                })
+                                logger.info(f"Added valid prediction for {symbol} based on news from {publish_time}")
 
                 except Exception as e:
                     logger.error(f"Error processing article for {symbol}: {str(e)}")
