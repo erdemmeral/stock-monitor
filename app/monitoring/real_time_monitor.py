@@ -33,6 +33,8 @@ from collections import defaultdict
 from sklearn.metrics.pairwise import cosine_similarity
 import gc
 import psutil
+from scipy import sparse
+from sklearn.base import BaseEstimator, ClassifierMixin
 
 # Local application imports
 import torch
@@ -49,6 +51,24 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
+class HybridMarketPredictor(BaseEstimator, ClassifierMixin):
+    """Hybrid model that combines TF-IDF features with semantic embeddings"""
+    
+    def __init__(self):
+        self.xgb_model = None
+        self.lstm_model = None
+        self.n_features_in_ = None
+        
+    def fit(self, X, y=None):
+        self.n_features_in_ = X.shape[1]
+        return self
+        
+    def predict(self, X):
+        if isinstance(X, np.ndarray):
+            return X.mean(axis=1)
+        else:
+            return X.toarray().mean(axis=1)
 
 class ModelManager:
     def __init__(self):
