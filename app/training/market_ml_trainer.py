@@ -875,6 +875,16 @@ class MarketMLTrainer:
         # Pass the shared embedding model
         self.semantic_analyzer = NewsSemanticAnalyzer(embedding_model=self.embedding_model)
         
+        # Initialize cluster data
+        self.cluster_data = defaultdict(lambda: {
+            'centroids': None,
+            'embeddings': [],
+            'timestamps': [],
+            'price_changes': [],
+            'cluster_labels': None,
+            'cluster_stats': {}
+        })
+
         # CPU and memory management
         total_cpus = multiprocessing.cpu_count()
         self.max_workers = max(1, min(total_cpus - 1, 8))
@@ -1099,162 +1109,61 @@ class MarketMLTrainer:
             return False
 
     def train_with_impact_scores(self, training_data, timeframe):
-        """Train model with impact scores for a specific timeframe"""
+        """Train model with impact scores using disk-based data management"""
         try:
             logger.info(f"\nTraining model for {timeframe}")
-            logger.info(f"Number of samples: {len(training_data)}")
             
-            # Initialize models and components if they don't exist
+            # Process training data in batches
+            for sample in training_data:
+                if timeframe in sample['changes']:
+                    self.add_training_sample(timeframe, sample)
+            
+            # Save any remaining samples
+            self._save_training_batch(timeframe)
+            
+            # Initialize models if needed
             if timeframe not in self.vectorizers:
-                logger.info(f"Initializing new vectorizer for {timeframe}")
                 self.vectorizers[timeframe] = TfidfVectorizer(max_features=1000)
-            
             if timeframe not in self.target_scalers:
-                logger.info(f"Initializing new scaler for {timeframe}")
                 self.target_scalers[timeframe] = StandardScaler()
-            
             if timeframe not in self.models:
-                logger.info(f"Initializing new model for {timeframe}")
                 self.models[timeframe] = HybridMarketPredictor()
             
-            # Extract and validate features and targets
-            texts = []
-            sentiment_features = []
-            embeddings = []
-            timestamps = []
-            y = []
-            
-            for sample in training_data:
-                if timeframe not in sample['changes']:
-                    continue
-                
-                # Validate price change value
-                price_change = sample['changes'][timeframe]
-                if not isinstance(price_change, (int, float)) or np.isnan(price_change) or np.isinf(price_change):
-                    logger.warning(f"Skipping sample with invalid price change: {price_change}")
-                    continue
-                    
-                # Clip extreme values to reasonable range (-100% to +100%)
-                price_change = np.clip(price_change, -1.0, 1.0)
-                
-                texts.append(sample['text'])
-                sentiment_features.append([
-                    sample['sentiment']['probabilities']['positive'],
-                    sample['sentiment']['probabilities']['negative'],
-                    sample['sentiment']['probabilities']['neutral']
-                ])
-                embeddings.append(sample['embedding'])
-                timestamps.append(pd.to_datetime(sample['date']))
-                y.append(price_change)
-            
-            if not texts:
-                logger.warning(f"No valid samples for {timeframe}")
-                return False
-            
-            logger.info(f"Processing {len(texts)} valid samples")
-            
-            # Convert texts to TF-IDF features
-            X_tfidf = self.vectorizers[timeframe].fit_transform(texts)
-            
-            # Perform clustering on embeddings if we have enough samples
-            embeddings_array = None
-            if len(embeddings) >= 3:  # Need at least 3 samples for meaningful clustering
+            # Train using batched data
+            for batch in self._get_training_data_generator(timeframe, batch_size=100):
                 try:
-                    from sklearn.metrics.pairwise import cosine_similarity
-                    from sklearn.cluster import DBSCAN
+                    # Process batch
+                    X_tfidf = self.vectorizers[timeframe].fit_transform(batch['texts'])
+                    X_sentiment = np.array(batch['sentiments'])
+                    y = np.array(batch['price_changes']).reshape(-1, 1)
                     
-                    embeddings_array = np.array(embeddings)
-                    timestamps_array = np.array(timestamps)
+                    # Scale features
+                    y_scaled = self.target_scalers[timeframe].fit_transform(y).ravel()
                     
-                    # Calculate similarity matrix and handle negative values
-                    similarity_matrix = cosine_similarity(embeddings_array)
-                    # Convert similarities to distances and take absolute values
-                    distances = np.abs(1 - similarity_matrix)
+                    # Combine features
+                    X_combined = scipy.sparse.hstack([
+                        X_tfidf,
+                        scipy.sparse.csr_matrix(X_sentiment)
+                    ]).tocsr()
                     
-                    # Perform clustering with adjusted parameters
-                    clustering = DBSCAN(
-                        eps=0.3,
-                        min_samples=2,
-                        metric='precomputed'
+                    # Train on batch
+                    self.models[timeframe].train(
+                        X_combined=X_combined,
+                        embeddings=batch['embeddings'],
+                        y=y_scaled,
+                        sample_weights=None
                     )
-                    labels = clustering.fit_predict(distances)
                     
-                    if labels is not None and isinstance(labels, np.ndarray):
-                        # Analyze clusters
-                        unique_labels = np.unique(labels)
-                        valid_clusters = unique_labels[unique_labels != -1]  # Exclude noise points
-                        noise_points = np.sum(labels == -1)
-                        
-                        logger.info(f"\nClustering Results:")
-                        logger.info(f"Found {len(valid_clusters)} clusters")
-                        logger.info(f"Noise points: {noise_points}")
-                        logger.info(f"Points per cluster: {[np.sum(labels == label) for label in valid_clusters]}")
-                        
-                        # Store cluster information
-                        for idx, label in enumerate(labels):
-                            if label != -1:  # Skip noise points
-                                if timeframe not in self.cluster_data:
-                                    self.cluster_data[timeframe] = defaultdict(list)
-                                self.cluster_data[timeframe][label].append({
-                                    'embedding': embeddings[idx],
-                                    'timestamp': timestamps[idx],
-                                    'price_change': y[idx]
-                                })
-                        
-                        # Clear memory
-                        del similarity_matrix
-                        del distances
-                        gc.collect()
-                        
+                    # Clear batch data
+                    del X_tfidf
+                    del X_sentiment
+                    del X_combined
+                    gc.collect()
                 except Exception as e:
-                    logger.error(f"Error in clustering: {str(e)}")
-                    logger.error("Continuing without clustering")
-                    embeddings_array = np.array(embeddings)
-            else:
-                logger.info("Not enough samples for clustering")
-                embeddings_array = np.array(embeddings)
+                    logger.error(f"Error processing batch: {str(e)}")
+                    continue
             
-            # Scale features and validate
-            X_sentiment = np.array(sentiment_features)
-            y_array = np.array(y).reshape(-1, 1)
-            
-            # Additional validation of target values
-            if np.any(np.isnan(y_array)) or np.any(np.isinf(y_array)):
-                logger.error("Invalid values found in target array after preprocessing")
-                return False
-                
-            y_scaled = self.target_scalers[timeframe].fit_transform(y_array).ravel()
-            
-            # Final validation check
-            if not np.all(np.isfinite(y_scaled)):
-                logger.error("Invalid values found in scaled target array")
-                return False
-            
-            # Combine features
-            X_combined = scipy.sparse.hstack([
-                X_tfidf,
-                scipy.sparse.csr_matrix(X_sentiment)
-            ]).tocsr()
-            
-            # Train model
-            self.models[timeframe].train(
-                X_combined=X_combined,
-                embeddings=embeddings_array,
-                y=y_scaled,
-                sample_weights=None
-            )
-            
-            logger.info(f"Successfully trained model for {timeframe} with {len(y)} samples")
-            
-            # Clear memory
-            del X_tfidf
-            del X_sentiment
-            del embeddings_array
-            gc.collect()
-            
-            # Log final resource usage
-            self._log_resource_usage()
-            
+            logger.info(f"Successfully trained model for {timeframe}")
             return True
             
         except Exception as e:

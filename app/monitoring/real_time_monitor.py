@@ -1096,109 +1096,30 @@ class RealTimeMonitor:
         return message
 
     async def get_full_article_text(self, url):
-        """Get full article text with caching and improved error handling"""
+        """Get full text content from news article URL"""
         try:
-            # Initialize cache if not exists
-            if not hasattr(self, 'article_cache'):
-                self.article_cache = {}
-                self.article_cache_ttl = 3600  # 1 hour cache
-                self.last_article_fetch = {}
-                self.article_fetch_delay = 2  # 2 seconds between fetches
-            
-            current_time = time.time()
-            
-            # Check cache first
-            if url in self.article_cache:
-                cache_time, cached_text = self.article_cache[url]
-                if current_time - cache_time < self.article_cache_ttl:
-                    return cached_text
-            
-            # Rate limiting check
-            if url in self.last_article_fetch:
-                time_since_last_fetch = current_time - self.last_article_fetch[url]
-                if time_since_last_fetch < self.article_fetch_delay:
-                    await asyncio.sleep(self.article_fetch_delay - time_since_last_fetch)
-            
-            # Update last fetch time
-            self.last_article_fetch[url] = current_time
-            
-            # Add headers to mimic browser request
             headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                'Accept-Language': 'en-US,en;q=0.5',
-                'Connection': 'keep-alive',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             }
             
             async with aiohttp.ClientSession() as session:
                 async with session.get(url, headers=headers, timeout=10) as response:
                     if response.status != 200:
-                        logger.error(f"Failed to fetch article: {url}, Status: {response.status}")
                         return None
-                        
                     html = await response.text()
-                    
+            
             soup = BeautifulSoup(html, 'html.parser')
             
-            # Get domain to handle different sites
-            domain = urlparse(url).netloc
-            
-            # Different parsing rules for different sites
-            if 'yahoo.com' in domain:
-                # Yahoo Finance articles
-                article_content = soup.find('div', {'class': 'caas-body'})
-                if article_content:
-                    text = article_content.get_text(separator=' ', strip=True)
-                    self.article_cache[url] = (current_time, text)
-                    return text
-                    
-            elif 'seekingalpha.com' in domain:
-                # Seeking Alpha articles
-                article_content = soup.find('div', {'data-test-id': 'article-content'})
-                if article_content:
-                    text = article_content.get_text(separator=' ', strip=True)
-                    self.article_cache[url] = (current_time, text)
-                    return text
-                    
-            elif 'reuters.com' in domain:
-                # Reuters articles
-                article_content = soup.find('div', {'class': 'article-body'})
-                if article_content:
-                    text = article_content.get_text(separator=' ', strip=True)
-                    self.article_cache[url] = (current_time, text)
-                    return text
-            
-            # Generic article content extraction
-            # Look for common article container classes/IDs
-            possible_content = soup.find(['article', 'main', 'div'], 
-                                    {'class': ['article', 'content', 'article-content', 'story-content']})
-            if possible_content:
-                text = possible_content.get_text(separator=' ', strip=True)
-                if len(text) > 100:  # Ensure we got meaningful content
-                    logger.info(f"Successfully retrieved article text: {len(text)} characters")
-                    self.article_cache[url] = (current_time, text)
-                    return text
-            
-            # Try meta description as fallback
-            meta_desc = soup.find('meta', {'name': 'description'})
-            if meta_desc and meta_desc.get('content'):
-                text = meta_desc['content']
-                logger.info(f"Using meta description: {len(text)} characters")
-                self.article_cache[url] = (current_time, text)
-                return text
-            
-            logger.warning(f"Could not extract content from {url}")
-            return None
-            
-        except aiohttp.ClientError as e:
-            logger.error(f"Network error fetching article {url}: {str(e)}")
+            # Extract text based on common article containers
+            article_content = soup.find(['article', 'main', 'div'], 
+                                     {'class': ['article', 'content', 'article-content']})
+            if article_content:
+                return article_content.get_text(separator=' ', strip=True)
+        
             return None
         except Exception as e:
-            logger.error(f"Error fetching article {url}: {str(e)}")
+            logger.error(f"Error fetching article content: {e}")
             return None
-        finally:
-            # Clean up
-            gc.collect()
 
 def get_all_symbols():
     """Get list of stock symbols to monitor"""
