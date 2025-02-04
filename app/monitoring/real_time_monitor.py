@@ -238,6 +238,47 @@ class ModelManager:
             logger.exception("Full traceback:")
             return None
 
+class NewsLSTM(torch.nn.Module):
+    """LSTM model for news analysis"""
+    def __init__(self, input_size=768, hidden_size=256, num_layers=2, dropout=0.2):
+        super(NewsLSTM, self).__init__()
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        
+        # LSTM layers
+        self.lstm = torch.nn.LSTM(
+            input_size=input_size,
+            hidden_size=hidden_size,
+            num_layers=num_layers,
+            batch_first=True,
+            dropout=dropout if num_layers > 1 else 0
+        )
+        
+        # Fully connected layer
+        self.fc = torch.nn.Linear(hidden_size, 1)
+        
+        # Dropout layer
+        self.dropout = torch.nn.Dropout(dropout)
+        
+    def forward(self, x, hidden=None):
+        # Forward pass through LSTM
+        lstm_out, hidden = self.lstm(x, hidden)
+        
+        # Get the output from the last time step
+        last_output = lstm_out[:, -1, :]
+        
+        # Apply dropout
+        last_output = self.dropout(last_output)
+        
+        # Pass through fully connected layer
+        out = self.fc(last_output)
+        return out, hidden
+    
+    def init_hidden(self, batch_size, device):
+        """Initialize hidden state"""
+        return (torch.zeros(self.num_layers, batch_size, self.hidden_size).to(device),
+                torch.zeros(self.num_layers, batch_size, self.hidden_size).to(device))
+
 class NewsSemanticAnalyzer:
     def __init__(self):
         self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
@@ -348,6 +389,12 @@ class RealTimeMonitor:
         self.models = {}
         self.vectorizers = {}
         
+        # Add price cache
+        self.price_cache = {}
+        self.price_cache_ttl = 60  # Cache prices for 60 seconds
+        self.last_price_fetch = {}  # Track last fetch time for rate limiting
+        self.price_fetch_delay = 2  # Minimum seconds between fetches for same symbol
+        
         models_dir = 'app/models'
         for timeframe in ['1wk', '1mo']:
             model_path = os.path.join(models_dir, f'market_model_{timeframe}.joblib')
@@ -443,11 +490,20 @@ class RealTimeMonitor:
                 logger.error(f"Could not get current price for {symbol}")
                 return
 
-            # Get news directly from yfinance
-            ticker = yf.Ticker(symbol)
-            news = ticker.news
-            
-            if not news:
+            # Get news with error handling and memory management
+            try:
+                ticker = yf.Ticker(symbol)
+                news = ticker.news
+                
+                # Clear ticker object to free memory
+                del ticker
+                gc.collect()
+                
+                if not news:
+                    return
+                    
+            except Exception as e:
+                logger.error(f"Error fetching news for {symbol}: {str(e)}")
                 return
 
             valid_predictions = []
@@ -465,8 +521,12 @@ class RealTimeMonitor:
                         if article_id not in self.processed_news:
                             self.processed_news.add(article_id)
                             
-                            # Get article content
-                            content = await self.get_full_article_text(article['link'])
+                            # Get article content with timeout
+                            content = await asyncio.wait_for(
+                                self.get_full_article_text(article['link']),
+                                timeout=10
+                            )
+                            
                             if not content:
                                 logger.warning(f"Could not get content for article: {article.get('title', 'No title')}")
                                 continue
@@ -477,17 +537,22 @@ class RealTimeMonitor:
                             # Make predictions for both timeframes
                             predictions = {}
                             for timeframe in ['1wk', '1mo']:
-                                prediction = await self._get_prediction(
-                                    symbol=symbol,
-                                    content=content,
-                                    timeframe=timeframe,
-                                    publish_time=publish_time,
-                                    current_price=current_price
-                                )
-                                
-                                if prediction and prediction['prediction'] > 0:
-                                    predictions[timeframe] = prediction
-                                    logger.info(f"Valid {timeframe} prediction: {prediction['prediction']:.2f}%")
+                                try:
+                                    prediction = await self._get_prediction(
+                                        symbol=symbol,
+                                        content=content,
+                                        timeframe=timeframe,
+                                        publish_time=publish_time,
+                                        current_price=current_price
+                                    )
+                                    
+                                    if prediction and prediction['prediction'] > 0:
+                                        predictions[timeframe] = prediction
+                                        logger.info(f"Valid {timeframe} prediction: {prediction['prediction']:.2f}%")
+                                        
+                                except Exception as pred_error:
+                                    logger.error(f"Error getting prediction for {symbol} {timeframe}: {str(pred_error)}")
+                                    continue
                             
                             if predictions:
                                 valid_predictions.append({
@@ -505,11 +570,19 @@ class RealTimeMonitor:
             if valid_predictions:
                 await self.analyze_and_notify(symbol, valid_predictions, {'current_price': current_price})
 
+            # Clear memory
+            del valid_predictions
+            gc.collect()
+
         except Exception as e:
             logger.error(f"Error monitoring {symbol}: {str(e)}")
+            
+        finally:
+            # Ensure memory is cleaned up
+            gc.collect()
 
     async def _get_prediction(self, symbol, content, timeframe, publish_time, current_price):
-        """Get prediction for a specific timeframe"""
+        """Get prediction for a specific timeframe with improved error handling"""
         try:
             logger.info("\n" + "="*50)
             logger.info(f"PREDICTION ANALYSIS: {symbol} - {timeframe}")
@@ -520,163 +593,251 @@ class RealTimeMonitor:
             
             # 1. Get base ML prediction
             logger.info("1. ML Model Prediction:")
-            X_tfidf = self.vectorizers[timeframe].transform([content])
-            ml_prediction = self.models[timeframe].predict(X_tfidf)[0]
-            weighted_ml = ml_prediction * 0.4
-            logger.info(f"   Raw ML prediction: {ml_prediction:.2f}%")
-            logger.info(f"   Weighted ML (40%): {weighted_ml:.2f}%")
+            try:
+                X_tfidf = self.vectorizers[timeframe].transform([content])
+                ml_prediction = self.models[timeframe].predict(X_tfidf)[0]
+                weighted_ml = ml_prediction * 0.4
+                logger.info(f"   Raw ML prediction: {ml_prediction:.2f}%")
+                logger.info(f"   Weighted ML (40%): {weighted_ml:.2f}%")
+            except Exception as e:
+                logger.error(f"Error in ML prediction: {str(e)}")
+                return None
 
             # 2. Get semantic prediction
             logger.info("\n2. Semantic Analysis:")
-            semantic_pred = self.semantic_analyzer.get_semantic_impact_prediction(content, timeframe)
-            if semantic_pred is not None:
-                weighted_semantic = semantic_pred * 0.4
-                logger.info(f"   Raw Semantic prediction: {semantic_pred:.2f}%")
-                logger.info(f"   Weighted Semantic (40%): {weighted_semantic:.2f}%")
-            else:
+            try:
+                semantic_pred = self.semantic_analyzer.get_semantic_impact_prediction(content, timeframe)
+                if semantic_pred is not None:
+                    weighted_semantic = semantic_pred * 0.4
+                    logger.info(f"   Raw Semantic prediction: {semantic_pred:.2f}%")
+                    logger.info(f"   Weighted Semantic (40%): {weighted_semantic:.2f}%")
+                else:
+                    weighted_semantic = None
+                    logger.info("   No semantic prediction available")
+            except Exception as e:
+                logger.error(f"Error in semantic analysis: {str(e)}")
                 weighted_semantic = None
-                logger.info("   No semantic prediction available")
 
             # 3. Get sentiment
             logger.info("\n3. Sentiment Analysis:")
-            sentiment = self.finbert_analyzer.analyze_sentiment(content)
-            if sentiment:
-                logger.info(f"   Score: {sentiment['score']:.2f}")
-                logger.info(f"   Confidence: {sentiment['confidence']:.2f}")
-                logger.info("   Probabilities:")
-                logger.info(f"      Positive: {sentiment['probabilities']['positive']:.2f}")
-                logger.info(f"      Negative: {sentiment['probabilities']['negative']:.2f}")
-                logger.info(f"      Neutral:  {sentiment['probabilities']['neutral']:.2f}")
-            else:
-                logger.info("   Failed to get sentiment")
+            try:
+                sentiment = self.finbert_analyzer.analyze_sentiment(content)
+                if sentiment:
+                    logger.info(f"   Score: {sentiment['score']:.2f}")
+                    logger.info(f"   Confidence: {sentiment['confidence']:.2f}")
+                    logger.info("   Probabilities:")
+                    logger.info(f"      Positive: {sentiment['probabilities']['positive']:.2f}")
+                    logger.info(f"      Negative: {sentiment['probabilities']['negative']:.2f}")
+                    logger.info(f"      Neutral:  {sentiment['probabilities']['neutral']:.2f}")
+                else:
+                    logger.info("   Failed to get sentiment")
+                    return None
+            except Exception as e:
+                logger.error(f"Error in sentiment analysis: {str(e)}")
                 return None
 
             # Calculate final prediction
             logger.info("\n4. Final Prediction Calculation:")
-            if weighted_semantic is not None:
-                weighted_pred = (
-                    weighted_ml + 
-                    weighted_semantic + 
-                    (weighted_ml * sentiment['score'] * 0.2)
-                )
-                logger.info("   Using ML + Semantic + Sentiment formula")
-            else:
-                weighted_pred = weighted_ml * (1 + sentiment['score'] * 0.2)
-                logger.info("   Using ML + Sentiment formula")
+            try:
+                if weighted_semantic is not None:
+                    weighted_pred = (
+                        weighted_ml + 
+                        weighted_semantic + 
+                        (weighted_ml * sentiment['score'] * 0.2)
+                    )
+                    logger.info("   Using ML + Semantic + Sentiment formula")
+                else:
+                    weighted_pred = weighted_ml * (1 + sentiment['score'] * 0.2)
+                    logger.info("   Using ML + Sentiment formula")
 
-            logger.info(f"   Final prediction: {weighted_pred:.2f}%")
-            logger.info(f"   Required threshold: {self.prediction_thresholds[timeframe]:.2f}%")
+                logger.info(f"   Final prediction: {weighted_pred:.2f}%")
+                logger.info(f"   Required threshold: {self.prediction_thresholds[timeframe]:.2f}%")
 
-            # Check minimum threshold
-            if weighted_pred < self.prediction_thresholds[timeframe]:
-                logger.info("\nPrediction rejected: Below threshold")
+                # Check minimum threshold
+                if weighted_pred < self.prediction_thresholds[timeframe]:
+                    logger.info("\nPrediction rejected: Below threshold")
+                    logger.info("="*50)
+                    return None
+
+                logger.info("\nPrediction accepted!")
+                logger.info(f"Time frame: {timeframe}")
+                logger.info(f"Current price: ${current_price:.2f}")
+                logger.info(f"Target price: ${current_price * (1 + weighted_pred/100):.2f}")
                 logger.info("="*50)
-                return None
 
-            logger.info("\nPrediction accepted!")
-            logger.info(f"Time frame: {timeframe}")
-            logger.info(f"Current price: ${current_price:.2f}")
-            logger.info(f"Target price: ${current_price * (1 + weighted_pred/100):.2f}")
-            logger.info("="*50)
-
-            return {
-                'prediction': weighted_pred,
-                'confidence': sentiment['confidence'],
-                'sentiment_score': sentiment['score'],
-                'components': {
-                    'ml_prediction': weighted_ml,
-                    'semantic_prediction': weighted_semantic,
-                    'sentiment_score': sentiment['score']
+                return {
+                    'prediction': weighted_pred,
+                    'confidence': sentiment['confidence'],
+                    'sentiment_score': sentiment['score'],
+                    'components': {
+                        'ml_prediction': weighted_ml,
+                        'semantic_prediction': weighted_semantic,
+                        'sentiment_score': sentiment['score']
+                    }
                 }
-            }
+            except Exception as e:
+                logger.error(f"Error in final prediction calculation: {str(e)}")
+                return None
 
         except Exception as e:
             logger.error(f"Error in prediction: {str(e)}")
             return None
+        finally:
+            # Clean up any large objects
+            gc.collect()
 
     async def analyze_and_notify(self, symbol, valid_predictions, price_data):
-        """Analyze predictions and send notifications if criteria met"""
+        """Analyze predictions and send notifications if needed"""
         try:
-            best_prediction = None
-            highest_confidence = 0
+            current_price = price_data.get('current_price')
+            if not current_price:
+                logger.error(f"No current price available for {symbol}")
+                return
 
+            # Track best prediction for each timeframe
+            best_predictions = {
+                '1wk': {'prediction': None, 'article': None, 'score': 0},
+                '1mo': {'prediction': None, 'article': None, 'score': 0}
+            }
+
+            # Analyze each prediction
             for pred_data in valid_predictions:
-                # Check if either timeframe shows strong positive predictions
-                week_pred = pred_data['predictions'].get('1wk', {}).get('prediction', 0)
-                month_pred = pred_data['predictions'].get('1mo', {}).get('prediction', 0)
+                article = pred_data['article']
+                predictions = pred_data['predictions']
+                publish_time = pred_data['publish_time']
 
-                # Signal is valid if either timeframe meets its threshold
-                if (week_pred >= self.prediction_thresholds['1wk'] or 
-                    month_pred >= self.prediction_thresholds['1mo']):
-                    
-                    # Calculate combined confidence
-                    confidences = []
-                    if week_pred >= self.prediction_thresholds['1wk']:
-                        confidences.append(pred_data['predictions']['1wk']['confidence'])
-                    if month_pred >= self.prediction_thresholds['1mo']:
-                        confidences.append(pred_data['predictions']['1mo']['confidence'])
-                    
-                    avg_confidence = sum(confidences) / len(confidences)
+                for timeframe, prediction in predictions.items():
+                    try:
+                        # Calculate prediction score based on confidence and prediction value
+                        score = prediction['prediction'] * prediction['confidence']
+                        
+                        # Update best prediction if this is better
+                        if score > best_predictions[timeframe]['score']:
+                            best_predictions[timeframe] = {
+                                'prediction': prediction,
+                                'article': article,
+                                'score': score,
+                                'publish_time': publish_time
+                            }
+                    except Exception as e:
+                        logger.error(f"Error processing prediction for {symbol} {timeframe}: {str(e)}")
+                        continue
 
-                    if avg_confidence > highest_confidence:
-                        highest_confidence = avg_confidence
-                        best_prediction = pred_data
+            # Process signals for each timeframe
+            for timeframe, best in best_predictions.items():
+                try:
+                    if not best['prediction']:
+                        continue
 
-            if best_prediction:
-                # Calculate target prices
-                current_price = price_data['current_price']
-                
-                # Determine which timeframe to use based on strongest prediction
-                week_pred = best_prediction['predictions'].get('1wk', {}).get('prediction', 0)
-                month_pred = best_prediction['predictions'].get('1mo', {}).get('prediction', 0)
-                
-                # Use the timeframe with the stronger signal
-                if (week_pred >= self.prediction_thresholds['1wk'] and 
-                    (week_pred > month_pred or month_pred < self.prediction_thresholds['1mo'])):
-                    # Weekly prediction is stronger or monthly doesn't meet threshold
-                    timeframe = '1wk'
-                    target_price = current_price * (1 + week_pred/100)
-                    extended_target = current_price * (1 + month_pred/100) if month_pred > 0 else None
-                    target_days = 7
-                else:
-                    # Monthly prediction is stronger
-                    timeframe = '1mo'
-                    target_price = current_price * (1 + month_pred/100)
-                    extended_target = None
-                    target_days = 30
+                    prediction = best['prediction']
+                    article = best['article']
+                    publish_time = best['publish_time']
 
-                # Send signal
-                await self.send_signal(
-                    signal_type='buy',
-                    symbol=symbol,
-                    price=current_price,
-                    target_price=target_price,
-                    extended_target=extended_target,
-                    sentiment_score=best_prediction['predictions'][timeframe]['sentiment_score'],
-                    timeframe=timeframe,
-                    reason=(
-                        f"Strong {timeframe} signal: {best_prediction['predictions'][timeframe]['prediction']:.1f}% "
-                        f"upside potential"
-                    ),
-                    entry_date=best_prediction['publish_time'],
-                    target_date=best_prediction['publish_time'] + timedelta(days=target_days)
-                )
+                    # Calculate target price
+                    predicted_change = prediction['prediction'] / 100  # Convert to decimal
+                    target_price = current_price * (1 + predicted_change)
+
+                    # Set entry and target dates
+                    entry_date = datetime.now(tz=timezone.utc)
+                    target_date = entry_date + timedelta(days=7 if timeframe == '1wk' else 30)
+
+                    # Prepare signal details
+                    signal_details = {
+                        'symbol': symbol,
+                        'entry_price': current_price,
+                        'target_price': target_price,
+                        'predicted_change': predicted_change,
+                        'confidence': prediction['confidence'],
+                        'sentiment_score': prediction['sentiment_score'],
+                        'timeframe': timeframe,
+                        'entry_date': entry_date,
+                        'target_date': target_date,
+                        'article_url': article.get('link', ''),
+                        'article_title': article.get('title', '')
+                    }
+
+                    # Send signal
+                    await self.send_signal(
+                        signal_type='buy',
+                        symbol=symbol,
+                        price=current_price,
+                        target_price=target_price,
+                        sentiment_score=prediction['sentiment_score'],
+                        timeframe=timeframe,
+                        reason=f"News-based prediction: {prediction['prediction']:.2f}% upside",
+                        entry_date=entry_date,
+                        target_date=target_date
+                    )
+
+                    logger.info(f"Signal sent for {symbol} ({timeframe})")
+                    logger.info(f"Predicted change: {predicted_change:.2%}")
+                    logger.info(f"Target price: ${target_price:.2f}")
+
+                except Exception as e:
+                    logger.error(f"Error sending signal for {symbol} {timeframe}: {str(e)}")
+                    continue
 
         except Exception as e:
             logger.error(f"Error in analyze_and_notify for {symbol}: {str(e)}")
+        finally:
+            # Clean up
+            gc.collect()
 
     async def _get_historical_price(self, symbol, days=1):
-        """Get historical price for a symbol"""
+        """Get historical price data with caching"""
         try:
-            end_date = datetime.now()
-            start_date = end_date - timedelta(days=days)
+            cache_key = f"{symbol}_{days}"
+            current_time = time.time()
             
+            # Check cache first
+            if hasattr(self, 'historical_price_cache'):
+                if cache_key in self.historical_price_cache:
+                    cache_time, cached_data = self.historical_price_cache[cache_key]
+                    # Cache for 1 hour for historical data
+                    if current_time - cache_time < 3600:  # 1 hour in seconds
+                        return cached_data
+            else:
+                self.historical_price_cache = {}
+            
+            # Rate limiting check
+            if hasattr(self, 'last_historical_fetch'):
+                if symbol in self.last_historical_fetch:
+                    time_since_last_fetch = current_time - self.last_historical_fetch[symbol]
+                    if time_since_last_fetch < self.price_fetch_delay:
+                        await asyncio.sleep(self.price_fetch_delay - time_since_last_fetch)
+            else:
+                self.last_historical_fetch = {}
+            
+            # Update last fetch time
+            self.last_historical_fetch[symbol] = current_time
+            
+            # Fetch historical data
             ticker = yf.Ticker(symbol)
-            hist = ticker.history(start=start_date, end=end_date, interval='1d')
+            history = ticker.history(period=f"{days}d")
             
-            if not hist.empty:
-                return hist['Close'].iloc[0]
-            return None
+            if history.empty:
+                logger.error(f"No historical data available for {symbol}")
+                return None
+                
+            # Calculate required values
+            result = {
+                'open': history['Open'].iloc[0],
+                'close': history['Close'].iloc[-1],
+                'high': history['High'].max(),
+                'low': history['Low'].min(),
+                'volume': history['Volume'].sum(),
+                'dates': history.index.tolist()
+            }
+            
+            # Cache the result
+            self.historical_price_cache[cache_key] = (current_time, result)
+            
+            # Clear ticker to free memory
+            del ticker
+            gc.collect()
+            
+            return result
+            
         except Exception as e:
             logger.error(f"Error getting historical price for {symbol}: {str(e)}")
             return None
@@ -690,17 +851,11 @@ class RealTimeMonitor:
                 f"🕒 Started at: {datetime.now(tz=pytz.UTC).strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
                 f"💻 Using {self.max_workers} CPUs for processing\n"
                 f"⚡ Processing {self.batch_size} symbols per batch\n"
-                f"🔄 {self.max_concurrent_symbols} symbols processed concurrently\n"
-                "🔍 Initializing market monitoring process..."
+                f"🔄 {self.max_concurrent_symbols} symbols processed concurrently"
             )
             await self.send_telegram_alert(startup_message)
             
-            logger.info(f"Starting monitoring for {len(symbols)} symbols...")
-            logger.info(f"Using {self.max_workers} CPUs for processing")
-            
             self._is_polling = True
-            polling_task = asyncio.create_task(self.poll_telegram_updates())
-            model_check_task = asyncio.create_task(self.periodic_model_check())
             
             while True:
                 try:
@@ -715,7 +870,7 @@ class RealTimeMonitor:
                         
                         logger.info(f"Processing Batch {batch_number}/{total_batches}")
                         
-                        # Process symbols concurrently with increased parallelism
+                        # Process symbols concurrently
                         sem = asyncio.Semaphore(self.max_concurrent_symbols)
                         tasks = []
                         
@@ -723,475 +878,27 @@ class RealTimeMonitor:
                             async with sem:
                                 return await self.monitor_stock(symbol)
                         
-                        # Create tasks with increased concurrency
                         for symbol in batch:
                             task = asyncio.create_task(process_with_semaphore(symbol))
                             tasks.append(task)
                         
-                        # Wait for all tasks in batch to complete
                         await asyncio.gather(*tasks)
                         
                         logger.info(f"Completed Batch {batch_number}/{total_batches}")
                         
-                        # Add small delay between batches
                         if batch_number < total_batches:
                             await asyncio.sleep(self.delay_between_batches)
                     
                     logger.info("Completed full monitoring cycle")
-                    await asyncio.sleep(30)  # Reduced wait time between cycles to 30 seconds
+                    await asyncio.sleep(30)  # Wait 30 seconds before next cycle
                     
                 except Exception as e:
                     logger.error(f"Error in monitoring cycle: {str(e)}")
                     await asyncio.sleep(30)
                     
-        finally:
+        except Exception as e:
+            logger.error(f"Error in start: {str(e)}")
             self._is_polling = False
-            self.thread_pool.shutdown()
-            await polling_task
-            await model_check_task
-
-    def _adjust_features(self, X, expected_features):
-        """Adjust feature matrix to match expected dimensions"""
-        current_features = X.shape[1]
-        logger.info(f"Current features: {current_features}, Expected: {expected_features}")
-        
-        if current_features < expected_features:
-            # Pad with zeros
-            padding = scipy.sparse.csr_matrix((X.shape[0], expected_features - current_features))
-            X_adjusted = scipy.sparse.hstack([X, padding])
-            logger.info(f"Padded features to {X_adjusted.shape[1]}")
-            return X_adjusted
-        elif current_features > expected_features:
-            # Truncate
-            X_adjusted = X[:, :expected_features]
-            logger.info(f"Truncated features to {X_adjusted.shape[1]}")
-            return X_adjusted
-        return X
-
-    def predict_with_sentiment(self, text, timeframe, symbol=None, publish_time=None):
-        """
-        Make a prediction integrating sentiment scores and semantic analysis
-        """
-        try:
-            # 1. Get base ML prediction
-            X_tfidf = self.vectorizers[timeframe].transform([text])
-            
-            # Log feature statistics for debugging
-            logger.info(f"\nFeature Statistics for {timeframe}:")
-            logger.info(f"Non-zero features: {X_tfidf.nnz}")
-            logger.info(f"Max feature value: {X_tfidf.max()}")
-            logger.info(f"Mean of non-zero values: {X_tfidf.sum() / X_tfidf.nnz if X_tfidf.nnz > 0 else 0}")
-            
-            # Check if feature dimensions match
-            expected_features = self.models[timeframe].n_features_in_
-            actual_features = X_tfidf.shape[1]
-            
-            if actual_features != expected_features:
-                logger.info(f"Adjusting features from {actual_features} to {expected_features}")
-                X_tfidf = self._adjust_features(X_tfidf, expected_features)
-                if X_tfidf.shape[1] != expected_features:
-                    logger.error(f"Feature adjustment failed. Got {X_tfidf.shape[1]}, expected {expected_features}")
-                    return 0.0
-            
-            # Get raw prediction
-            raw_prediction = self.models[timeframe].predict(X_tfidf)[0]
-            logger.info(f"Raw prediction (before any processing): {raw_prediction}")
-            
-            # Log model coefficient stats
-            logger.info("Model Coefficient Stats:")
-            logger.info(f"Max coefficient: {np.max(self.models[timeframe].coef_)}")
-            logger.info(f"Min coefficient: {np.min(self.models[timeframe].coef_)}")
-            logger.info(f"Mean coefficient: {np.mean(self.models[timeframe].coef_)}")
-            
-            # Clip prediction to reasonable bounds based on timeframe
-            max_change = self.min_price_changes[timeframe] * 10  # Allow up to 10x the threshold
-            base_prediction = np.clip(raw_prediction, -max_change, max_change)
-            logger.info(f"Clipped prediction: {base_prediction}")
-
-            # Weight the predictions (40% ML, 40% semantic, 20% sentiment)
-            ml_weight = 0.4
-            semantic_weight = 0.4
-            sentiment_weight = 0.2
-
-            # 1. Base ML prediction (40%)
-            weighted_ml = base_prediction * ml_weight
-            logger.info(f"1. Base ML Prediction (40%): {base_prediction}% -> {weighted_ml}%")
-            
-            # 2. Get sentiment analysis
-            sentiment = self.finbert_analyzer.analyze_sentiment(text)
-            if not sentiment:
-                logger.warning("No sentiment available for prediction")
-                sentiment_multiplier = 1.0
-            else:
-                # Calculate sentiment multiplier
-                score = sentiment['score']
-                confidence = sentiment['confidence']
-                neutral_prob = sentiment['probabilities']['neutral']
-
-                # Calculate sentiment impact
-                base_multiplier = 1.0 + (score * 0.3)  # Maps [-1, 1] to [0.7, 1.3]
-                neutral_dampener = 1.0 - neutral_prob  # Reduce impact if sentiment is neutral
-                sentiment_multiplier = 1.0 + (base_multiplier - 1.0) * confidence * neutral_dampener
-
-            # 3. Get semantic prediction
-            semantic_pred = self.semantic_analyzer.get_semantic_impact_prediction(text, timeframe)
-
-            # 4. Combine predictions with weights
-            if semantic_pred is not None:
-                weighted_pred = (
-                    0.4 * weighted_ml +  # 40% ML prediction
-                    0.4 * semantic_pred +  # 40% semantic prediction
-                    0.2 * (weighted_ml * sentiment_multiplier)  # 20% sentiment-adjusted prediction
-                )
-            else:
-                weighted_pred = weighted_ml * sentiment_multiplier
-
-            # Log prediction breakdown
-            logger.info(f"\nPrediction Breakdown for {timeframe}:")
-            logger.info(f"1. Base ML Prediction (40%): {weighted_ml:.2f}%")
-            if semantic_pred is not None:
-                logger.info(f"2. Semantic Prediction (40%): {semantic_pred:.2f}%")
-            if sentiment:
-                logger.info(f"3. Sentiment Score: {sentiment['score']:.2f}")
-                logger.info(f"   Sentiment Multiplier: {sentiment_multiplier:.2f}")
-            logger.info(f"Final Prediction: {weighted_pred:.2f}%")
-
-            # Store prediction if symbol and publish_time provided
-            if symbol and publish_time:
-                if timeframe == '1h':
-                    deadline = publish_time + timedelta(hours=1)
-                elif timeframe == '1wk':
-                    deadline = publish_time + timedelta(days=7)
-                else:
-                    deadline = publish_time + timedelta(days=30)
-                
-                self.news_aggregator.add_prediction(
-                    symbol=symbol,
-                    timeframe=timeframe,
-                    prediction=weighted_pred,
-                    publish_time=publish_time,
-                    deadline=deadline
-                )
-                
-                # Send alert if prediction is significant
-                if abs(weighted_pred) >= self.min_price_changes[timeframe]:
-                    asyncio.create_task(self._send_prediction_alert(
-                        symbol=symbol,
-                        timeframe=timeframe,
-                        prediction=weighted_pred,
-                        news_text=text
-                    ))
-
-            return weighted_pred
-
-        except Exception as e:
-            logger.error(f"Error in enhanced prediction: {e}")
-            return 0.0
-
-    async def _send_prediction_alert(self, symbol: str, timeframe: str, prediction: float, news_text: str):
-        """Internal method to send prediction alerts"""
-        try:
-            if not self.telegram_token or not self.telegram_chat_id:
-                return
-                
-            timeframe_text = {
-                '1h': '1 hour',
-                '1wk': '1 week',
-                '1mo': '1 month'
-            }
-            
-            direction = "UP 📈" if prediction > 0 else "DOWN 📉"
-            message = (
-                f"🚨 Significant Movement Predicted!\n\n"
-                f"Symbol: {symbol}\n"
-                f"Timeframe: {timeframe_text[timeframe]}\n"
-                f"Prediction: {direction} {abs(prediction):.2f}%\n\n"
-                f"News Summary:\n{news_text[:200]}..."
-            )
-            
-            bot = telegram.Bot(token=self.telegram_token)
-            await bot.send_message(chat_id=self.telegram_chat_id, text=message)
-            
-        except Exception as e:
-            logger.error(f"Error sending prediction alert: {str(e)}")
-
-    def get_full_article_text(self,url):
-        try:
-            # Add headers to mimic browser request
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
-            
-            response = requests.get(url, headers=headers, timeout=10)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            
-            # Get domain to handle different sites
-            domain = urlparse(url).netloc
-            
-            # Different parsing rules for different sites
-            if 'yahoo.com' in domain:
-                # Yahoo Finance articles
-                article_content = soup.find('div', {'class': 'caas-body'})
-                if article_content:
-                    return article_content.get_text(separator=' ', strip=True)
-            elif 'seekingalpha.com' in domain:
-                # Seeking Alpha articles
-                article_content = soup.find('div', {'data-test-id': 'article-content'})
-                if article_content:
-                    return article_content.get_text(separator=' ', strip=True)
-            elif 'reuters.com' in domain:
-                # Reuters articles
-                article_content = soup.find('div', {'class': 'article-body'})
-                if article_content:
-                    return article_content.get_text(separator=' ', strip=True)
-            
-            # Generic article content extraction
-            # Look for common article container classes/IDs
-            possible_content = soup.find(['article', 'main', 'div'], 
-                                    {'class': ['article', 'content', 'article-content', 'story-content']})
-            if possible_content:
-                text = possible_content.get_text(separator=' ', strip=True)
-                logger.info(f"Successfully retrieved article text: {len(text)} characters")
-                #logger.info(f"Article content: {text}")
-                return text
-                
-            return None
-        except Exception as e:
-            logger.error(f"Error fetching article content: {e}")
-            return None
-
-    async def send_signal(self, signal_type: str, symbol: str, price: float, target_price: float, 
-                         sentiment_score: float, timeframe: str, reason: str,
-                         entry_date: Optional[datetime] = None, target_date: Optional[datetime] = None) -> bool:
-            """Unified method to send buy/sell signals"""
-            try:
-                # Send signal to portfolio tracker
-                if signal_type.lower() == 'buy':
-                    if not entry_date:
-                        entry_date = datetime.now(tz=pytz.UTC)
-                    if not target_date:
-                        target_date = entry_date + timedelta(days=30)
-                    
-                    # Format dates to match the expected format
-                    entry_date_str = entry_date.strftime('%Y-%m-%dT%H:%M:%S+00:00')
-                    target_date_str = target_date.strftime('%Y-%m-%dT%H:%M:%S+00:00')
-                    
-                    success = await self.portfolio_tracker.send_buy_signal(
-                        symbol=symbol,
-                        entry_price=float(price),
-                        target_price=float(target_price),
-                        entry_date=entry_date_str,
-                        target_date=target_date_str
-                    )
-                else:  # sell signal
-                    success = await self.portfolio_tracker.send_sell_signal(
-                        symbol=symbol,
-                        selling_price=float(price)
-                    )
-
-                if not success:
-                    logger.error(f"Failed to send {signal_type} signal to portfolio tracker for {symbol}")
-                    return False
-
-                # Send Telegram notification
-                signal_emoji = "🔔" if signal_type.lower() == 'buy' else "💰"
-                message = (
-                    f"{signal_emoji} <b>{signal_type.upper()} Signal Generated!</b>\n\n"
-                    f"Symbol: {symbol}\n"
-                    f"Price: ${price:.2f}\n"
-                    f"Target Price: ${target_price:.2f}\n"
-                    f"Timeframe: {timeframe}\n"
-                    f"Sentiment Score: {sentiment_score:.2f}\n"
-                )
-                
-                if entry_date and target_date:
-                    message += (
-                        f"Entry Date: {entry_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
-                        f"Target Date: {target_date.strftime('%Y-%m-%d %H:%M:%S UTC')}\n"
-                    )
-                
-                message += f"Reason: {reason}\n\n"
-                
-                # Add news article URL for buy signals
-                if signal_type.lower() == 'buy' and hasattr(self, '_current_best_article') and self._current_best_article:
-                    article_url = self._current_best_article['article'].get('link', '')
-                    if article_url:
-                        message += f"Based on news article:\n{article_url}\n\n"
-                
-                message += (
-                    "View details at:\n"
-                    "https://portfolio-tracker-rough-dawn-5271.fly.dev"
-                )
-                
-                await self.send_telegram_alert(message)
-                return True
-                
-            except Exception as e:
-                logger.error(f"Error in send_signal for {symbol}: {str(e)}", exc_info=True)
-                return False
-
-    async def _init_telegram_bot(self):
-        """Initialize or reinitialize the Telegram bot"""
-        try:
-            bot = telegram.Bot(token=self.telegram_token)
-            # Test the connection
-            await bot.get_me()
-            return bot
-        except Exception as e:
-            logger.error(f"Error initializing Telegram bot: {str(e)}")
-            raise
-
-    async def send_telegram_alert(self, message: str) -> None:
-        """Send alert message via Telegram"""
-        if not self.telegram_token or not self.telegram_chat_id:
-            logger.warning("Telegram bot or chat ID not configured")
-            return
-
-        max_retries = 3
-        retry_delay = 5
-
-        for attempt in range(max_retries):
-            try:
-                bot = telegram.Bot(token=self.telegram_token)
-                await bot.send_message(
-                    chat_id=self.telegram_chat_id,
-                    text=message,
-                    parse_mode='HTML',
-                    disable_web_page_preview=True
-                )
-                logger.info("Telegram alert sent successfully")
-                return
-            except Exception as e:
-                logger.error(f"Failed to send Telegram alert (attempt {attempt + 1}/{max_retries}): {str(e)}")
-                if attempt < max_retries - 1:
-                    logger.info(f"Waiting {retry_delay} seconds before retry...")
-                    await asyncio.sleep(retry_delay)
-                else:
-                    logger.error(f"Failed message content:\n{message}")
-                    break
-
-    async def poll_telegram_updates(self):
-        """Poll for Telegram updates"""
-        if not self.telegram_token or not self.telegram_chat_id:
-            logger.warning("Telegram credentials not configured, polling disabled")
-            return
-
-        async with self._polling_lock:  # Use lock to ensure single instance
-            offset = None
-            retry_delay = 5
-            max_retries = 3
-
-            while self._is_polling:
-                for attempt in range(max_retries):
-                    try:
-                        bot = await self._init_telegram_bot()
-                        updates = await bot.get_updates(
-                            offset=offset,
-                            timeout=30,
-                            allowed_updates=['message'],
-                            limit=100
-                        )
-                        
-                        if updates:
-                            for update in updates:
-                                if update.message and update.message.text:
-                                    command = update.message.text
-                                    chat_id = update.message.chat.id
-                                    logger.info(f"Received command: {command} from chat_id: {chat_id}")
-
-                                    try:
-                                        if command == '/start' or command == '/help':
-                                            await self.send_help_message(chat_id)
-                                        elif command == '/portfolio':
-                                            await self.send_portfolio_status(chat_id)
-                                    except Exception as cmd_error:
-                                        logger.error(f"Error handling command {command}: {str(cmd_error)}")
-
-                                # Update offset after processing each update
-                                offset = update.update_id + 1
-                                logger.debug(f"Updated offset to {offset}")
-
-                        # Small delay between polling requests
-                        await asyncio.sleep(1)
-                        break  # Break the retry loop if successful
-                        
-                    except Exception as e:
-                        logger.error(f"Error polling telegram updates (attempt {attempt + 1}/{max_retries}): {str(e)}")
-                        if attempt < max_retries - 1:
-                            logger.info(f"Waiting {retry_delay} seconds before retry...")
-                            await asyncio.sleep(retry_delay)
-                        else:
-                            logger.error("Max retries reached, waiting longer before next attempt")
-                            await asyncio.sleep(30)  # Longer delay after all retries fail
-
-    async def send_help_message(self, chat_id):
-        """Send help message"""
-        try:
-            help_message = (
-                "🤖 <b>Stock Monitor Bot Commands</b>\n\n"
-                "📝 <b>Available Commands:</b>\n\n"
-                "/help - Show this help message\n"
-                "Get list of all available commands and their descriptions\n\n"
-                "/portfolio - View current positions\n"
-                "See your portfolio at the tracker website\n\n"
-                "ℹ️ <b>About Alerts:</b>\n"
-                "• Buy and sell signals are sent automatically\n"
-                "• Signals are based on:\n"
-                "  - ML predictions 🤖\n"
-                "  - Sentiment analysis 📊\n"
-                "  - Technical indicators 📈\n\n"
-                "📊 <b>Portfolio Tracking:</b>\n"
-                "• View your portfolio at: https://portfolio-tracker-rough-dawn-5271.fly.dev\n"
-                "• All trades are automatically recorded\n"
-                "• Real-time updates and analytics"
-            )
-
-            bot = await self._init_telegram_bot()
-            await bot.send_message(
-                chat_id=chat_id,
-                text=help_message,
-                parse_mode='HTML'
-            )
-            logger.info("Help message sent successfully")
-        except Exception as e:
-            logger.error(f"Error sending help message: {str(e)}")
-
-    async def send_portfolio_status(self, chat_id):
-        """Send portfolio status"""
-        try:
-            message = (
-                "📊 <b>Portfolio Status</b>\n\n"
-                "View your portfolio and trade history at:\n"
-                "https://portfolio-tracker-rough-dawn-5271.fly.dev\n\n"
-                "Features:\n"
-                "• Real-time position tracking\n"
-                "• Performance analytics\n"
-                "• Historical trade data\n"
-                "• P/L tracking"
-            )
-
-            bot = await self._init_telegram_bot()
-            await bot.send_message(
-                chat_id=chat_id,
-                text=message,
-                parse_mode='HTML'
-            )
-            logger.info("Portfolio status sent successfully")
-        except Exception as e:
-            logger.error(f"Error sending portfolio status: {str(e)}")
-
-    async def cleanup(self):
-        """Cleanup resources before shutdown"""
-        try:
-            await self.portfolio_tracker.close()
-            logger.info("Portfolio tracker session closed")
-        except Exception as e:
-            logger.error(f"Error during cleanup: {e}")
-
-    def __del__(self):
-        self._is_polling = False  # Stop polling when object is deleted
-        if hasattr(self, 'portfolio_tracker'):
-            asyncio.create_task(self.cleanup())
 
     async def test_portfolio_tracker(self):
         """Test function to verify portfolio tracker communication"""
@@ -1206,19 +913,10 @@ class RealTimeMonitor:
             target_date = entry_date + timedelta(days=30)
             
             logger.info(f"Sending test buy signal for {symbol}")
-            logger.info(f"Entry Price: ${entry_price}")
-            logger.info(f"Target Price: ${target_price}")
-            logger.info(f"Entry Date: {entry_date.isoformat()}")
-            logger.info(f"Target Date: {target_date.isoformat()}")
             
-            # Ensure portfolio tracker is initialized
-            if not hasattr(self, 'portfolio_tracker') or self.portfolio_tracker is None:
-                logger.info("Initializing portfolio tracker service")
-                self.portfolio_tracker = PortfolioTrackerService()
-            
-            # Send buy signal
+            # Send test buy signal
             success = await self.portfolio_tracker.send_buy_signal(
-            symbol=symbol,
+                symbol=symbol,
                 entry_price=entry_price,
                 target_price=target_price,
                 entry_date=entry_date.isoformat(),
@@ -1226,462 +924,48 @@ class RealTimeMonitor:
             )
             
             if success:
-                logger.info("✅ Buy signal sent successfully")
+                logger.info("✅ Portfolio tracker test successful")
             else:
-                logger.error("❌ Failed to send buy signal")
+                logger.error("❌ Portfolio tracker test failed")
                 
-            logger.info("=== Portfolio Tracker Test Completed ===")
-            
         except Exception as e:
-            logger.error(f"Portfolio tracker test failed: {str(e)}", exc_info=True)
+            logger.error(f"Portfolio tracker test failed: {str(e)}")
+            raise  # Re-raise to prevent startup if test fails
 
-    async def periodic_model_check(self):
-            """Periodically check and reload models"""
-            while True:
-                try:
-                    # Check for model updates
-                    self.model_manager.check_and_reload_models()
-                    
-                    # Update local references to models
-                    self.vectorizers = self.model_manager.vectorizers
-                    self.models = {
-                        '1h': self.model_manager.models['1h'],
-                        '1wk': self.model_manager.models['1wk'],
-                        '1mo': self.model_manager.models['1mo']
-                    }
-                    
-                    # Wait before next check
-                    await asyncio.sleep(300)  # Check every 5 minutes
-                
-                except Exception as e:
-                    logger.error(f"Error in periodic model check: {e}")
-                    await asyncio.sleep(300)  # Wait before retrying
-
-    async def _calculate_predictions(self, symbol: str, articles: List[Dict], price_data: Dict) -> Dict:
-        """Calculate predictions with semantic pattern matching"""
-        try:
-            best_prediction = None
-            best_article = None
-            best_timeframe = None
-            prediction_strength = 0.0
-            sentiment_score = 0.0
-            should_buy = False
-            target_price = None
-
-            current_price = price_data["current_price"]
-
-            for article_data in articles:
-                article = article_data['article']
-                sentiment = article_data['sentiment']
-                content = article.get('title', '') + ' ' + (article.get('description', '') or '')
-
-                # Get embedding for semantic analysis
-                embedding = self.semantic_analyzer.get_embedding(content)
-                if embedding is None:
-                    continue
-
-                # Find similar patterns and their impacts
-                similar_patterns = self.semantic_analyzer.find_similar_news(embedding)
-                if not similar_patterns:
-                    continue
-
-                # Calculate weighted predictions for each timeframe
-                for timeframe in ['1h', '1wk', '1mo']:
-                    # Get ML model prediction
-                    ml_pred = article_data['predictions'].get(timeframe, 0.0)
-
-                    # Get semantic pattern prediction
-                    pattern_pred = self.semantic_analyzer.get_semantic_impact_prediction(content, timeframe)
-                    if pattern_pred is None:
-                        pattern_pred = 0.0
-
-                    # Combine predictions with weights
-                    combined_pred = (ml_pred * 0.6) + (pattern_pred * 0.4)
-                    
-                    # Log predictions
-                    logger.info(f"{symbol} {timeframe} predictions:")
-                    logger.info(f"  ML: {ml_pred:.2f}%")
-                    logger.info(f"  Pattern: {pattern_pred:.2f}%")
-                    logger.info(f"  Combined: {combined_pred:.2f}%")
-
-                    # Update best prediction if this is stronger
-                    threshold = self.min_price_changes[timeframe]
-                    if combined_pred > threshold and (best_prediction is None or combined_pred > best_prediction):
-                        best_prediction = combined_pred
-                        best_article = article_data
-                        best_timeframe = timeframe
-                        prediction_strength = combined_pred
-                        sentiment_score = sentiment['score']
-
-            if best_prediction is not None:
-                should_buy = True
-                # Calculate target price based on prediction
-                target_price = current_price * (1 + (best_prediction / 100))
-                
-                # Log cluster information if available
-                if hasattr(self.semantic_analyzer, 'news_clusters'):
-                    for cluster_id, indices in self.semantic_analyzer.news_clusters.items():
-                        impact_stats = self.semantic_analyzer.analyze_cluster_impact(cluster_id, best_timeframe)
-                        if impact_stats:
-                            logger.info(f"Cluster {cluster_id} stats for {best_timeframe}:")
-                            logger.info(f"  Mean impact: {impact_stats['mean']:.2f}%")
-                            logger.info(f"  Std dev: {impact_stats['std']:.2f}%")
-                            logger.info(f"  Sample size: {impact_stats['count']}")
-
-            return {
-                "should_buy": should_buy,
-                "best_timeframe": best_timeframe,
-                "prediction_strength": prediction_strength,
-                "sentiment_score": sentiment_score,
-                "target_price": target_price,
-                "best_article": best_article
-            }
-
-        except Exception as e:
-            logger.error(f"Error calculating predictions: {str(e)}")
-            return {
-                "should_buy": False,
-                "best_timeframe": None,
-                "prediction_strength": 0.0,
-                "sentiment_score": 0.0,
-                "target_price": None,
-                "best_article": None
-            }
-
-    def _is_article_relevant(self, content: str, symbol: str, company_name: str) -> bool:
-        """
-        Check if the article is relevant to the given stock by looking for the stock symbol
-        and company name in the content.
-        """
-        if not content:
-            return False
-            
-        content = content.lower()
-        search_terms = set()
-        
-        # Add stock symbol variations
-        search_terms.add(symbol.lower())
-        search_terms.add(f"${symbol.lower()}")
-        
-        # Add company name variations if available
-        if company_name:
-            company_name = company_name.lower()
-            search_terms.add(company_name)
-            
-            # Add common company suffixes
-            for suffix in [' inc', ' corp', ' ltd', ' llc', ' company']:
-                if company_name.endswith(suffix):
-                    search_terms.add(company_name[:-len(suffix)])
-        
-        # Check if any search term appears in the content
-        mentions = sum(1 for term in search_terms if term in content)
-        
-        # Require at least 2 mentions for relevance
-        return mentions >= 2
-
-    def analyze_trading_signal(self, news_item, timeframe='1wk'):
-        """
-        Analyze news item for trading signals
-        Returns: dict with signal analysis or None if no clear signal
-        """
-        try:
-            # Get detailed prediction
-            prediction = self.model_manager.predict_with_details(news_item['text'], timeframe)
-            if not prediction:
-                logger.warning(f"Could not get prediction for news item: {news_item['symbol']}")
-                return None
-                
-            # Initialize signal analysis
-            signal_analysis = {
-                'symbol': news_item['symbol'],
-                'timestamp': news_item['timestamp'],
-                'signal': 'HOLD',  # Default signal
-                'confidence': 0.0,
-                'predicted_change': 0.0,
-                'analysis_components': {}
-            }
-            
-            # 1. Check base prediction confidence
-            if prediction['confidence_score'] < self.min_confidence_threshold:
-                logger.info(f"Low prediction confidence for {news_item['symbol']}: {prediction['confidence_score']:.2f}")
-                return signal_analysis
-            
-            # 2. Analyze sentiment
-            sentiment = prediction['sentiment_analysis']
-            if sentiment['confidence'] < self.min_sentiment_confidence:
-                logger.info(f"Low sentiment confidence for {news_item['symbol']}: {sentiment['confidence']:.2f}")
-                return signal_analysis
-            
-            # 3. Check cluster analysis
-            cluster_info = prediction['cluster_analysis']
-            cluster_valid = False
-            if cluster_info and cluster_info['similarity_score'] > self.min_cluster_similarity:
-                cluster_stats = cluster_info['cluster_stats']
-                cluster_valid = (
-                    cluster_stats['size'] >= 3 and  # At least 3 similar articles
-                    cluster_stats['std_price_change'] / abs(cluster_stats['avg_price_change']) < 0.5  # Consistent impact
-                )
-            
-            # 4. Calculate combined signal strength
-            predicted_change = prediction['price_change_prediction']
-            sentiment_score = sentiment['scores']['positive'] - sentiment['scores']['negative']
-            
-            # Combine all components for final analysis
-            signal_strength = 0.0
-            signal_components = {
-                'model_prediction': {
-                    'value': predicted_change,
-                    'confidence': prediction['confidence_score'],
-                    'weight': 0.4
-                },
-                'sentiment': {
-                    'value': sentiment_score,
-                    'confidence': sentiment['confidence'],
-                    'weight': 0.3
-                },
-                'cluster': {
-                    'value': cluster_info['cluster_stats']['avg_price_change'] if cluster_valid else 0,
-                    'confidence': cluster_info['similarity_score'] if cluster_valid else 0,
-                    'weight': 0.3
-                } if cluster_valid else None
-            }
-            
-            # Calculate weighted signal strength
-            total_weight = 0
-            for component_name, component in signal_components.items():
-                if component is not None:
-                    weighted_value = (
-                        component['value'] * 
-                        component['confidence'] * 
-                        component['weight']
-                    )
-                    signal_strength += weighted_value
-                    total_weight += component['weight']
-            
-            if total_weight > 0:
-                signal_strength = signal_strength / total_weight
-            
-            # 5. Make final decision
-            signal_analysis.update({
-                'predicted_change': signal_strength,
-                'confidence': prediction['confidence_score'],
-                'analysis_components': {
-                    'model_prediction': predicted_change,
-                    'sentiment_score': sentiment_score,
-                    'cluster_impact': cluster_info['cluster_stats']['avg_price_change'] if cluster_valid else None,
-                    'signal_strength': signal_strength
-                }
-            })
-            
-            # Determine signal based on strength and confidence
-            if abs(signal_strength) >= self.min_price_changes[timeframe]:
-                if signal_strength > 0:
-                    signal_analysis['signal'] = 'BUY'
-                    logger.info(f"BUY signal for {news_item['symbol']} - Predicted change: {signal_strength:.2%}")
-                else:
-                    signal_analysis['signal'] = 'SELL'
-                    logger.info(f"SELL signal for {news_item['symbol']} - Predicted change: {signal_strength:.2%}")
-                
-                # Log detailed analysis
-                logger.info(f"Signal Analysis for {news_item['symbol']}:")
-                logger.info(f"Timeframe: {timeframe}")
-                logger.info(f"Confidence: {prediction['confidence_score']:.2f}")
-                logger.info(f"Model Prediction: {predicted_change:.2%}")
-                logger.info(f"Sentiment Score: {sentiment_score:.2f}")
-                if cluster_valid:
-                    logger.info(f"Cluster Impact: {cluster_info['cluster_stats']['avg_price_change']:.2%}")
-                logger.info(f"Final Signal Strength: {signal_strength:.2%}")
-            
-            return signal_analysis
-            
-        except Exception as e:
-            logger.error(f"Error analyzing trading signal for {news_item['symbol']}: {str(e)}")
-            return None
-    
-    def filter_strong_signals(self, news_items, timeframe='1wk'):
-        """
-        Filter news items to find the strongest trading signals
-        Returns: List of items with strong buy/sell signals
-        """
-        strong_signals = []
-        
-        for item in news_items:
-            signal_analysis = self.analyze_trading_signal(item, timeframe)
-            if signal_analysis and signal_analysis['signal'] != 'HOLD':
-                strong_signals.append(signal_analysis)
-        
-        # Sort by confidence * predicted_change
-        strong_signals.sort(
-            key=lambda x: abs(x['predicted_change'] * x['confidence']),
-            reverse=True
-        )
-        
-        return strong_signals
-    
-    def get_buy_recommendations(self, news_items, max_positions=5):
-        """
-        Get top buy recommendations from news items
-        Returns: List of recommended positions with confidence levels
-        """
-        # First check if models are up to date
-        if not self.model_manager.check_and_reload_models():
-            logger.error("Failed to check/reload models")
-            return []
-            
-        # Analyze both timeframes
-        signals_1wk = self.filter_strong_signals(news_items, '1wk')
-        signals_1mo = self.filter_strong_signals(news_items, '1mo')
-        
-        # Process signals by symbol
-        combined_signals = {}
-        
-        # Process all signals and keep the strongest one for each symbol
-        for signal in signals_1wk + signals_1mo:
-            if signal['signal'] != 'BUY':
-                continue
-                
-            symbol = signal['symbol']
-            timeframe = signal.get('timeframe', '1wk')  # Default to 1wk if not specified
-            score = signal['predicted_change'] * signal['confidence']
-            
-            # Check if prediction meets minimum threshold for its timeframe
-            if abs(signal['predicted_change']) < self.min_price_changes[timeframe]:
-                continue
-                
-            if symbol not in combined_signals:
-                # First signal for this symbol
-                combined_signals[symbol] = {
-                    'symbol': symbol,
-                    'signal': signal,
-                    'score': score
-                }
-            else:
-                # Compare with existing signal
-                existing_score = combined_signals[symbol]['score']
-                if score > existing_score:
-                    # Replace with stronger signal
-                    combined_signals[symbol] = {
-                        'symbol': symbol,
-                        'signal': signal,
-                        'score': score
-                    }
-        
-        # Convert to list and sort by score
-        recommendations = list(combined_signals.values())
-        recommendations.sort(key=lambda x: x['score'], reverse=True)
-        
-        # Take top N recommendations
-        top_recommendations = recommendations[:max_positions]
-        
-        # Log recommendations
-        logger.info("\n" + "="*50)
-        logger.info("TOP BUY RECOMMENDATIONS")
-        logger.info("="*50)
-        
-        for rec in top_recommendations:
-            signal = rec['signal']
-            logger.info(f"\nSymbol: {rec['symbol']}")
-            logger.info(f"Timeframe: {signal.get('timeframe', '1wk')}")
-            logger.info(f"Predicted Change: {signal['predicted_change']:.2%}")
-            logger.info(f"Confidence: {signal['confidence']:.2f}")
-            logger.info(f"Score: {rec['score']:.2%}")
-            
-            # Log analysis components
-            components = signal['analysis_components']
-            logger.info("Analysis Components:")
-            logger.info(f"  Model Prediction: {components['model_prediction']:.2%}")
-            logger.info(f"  Sentiment Score: {components['sentiment_score']:.2f}")
-            if components.get('cluster_impact'):
-                logger.info(f"  Cluster Impact: {components['cluster_impact']:.2%}")
-        
-        logger.info("="*50)
-        
-        return top_recommendations
-    
-    async def process_news_update(self, news_items):
-        """Process new news items and generate trading signals"""
-        try:
-            # Get buy recommendations
-            recommendations = self.get_buy_recommendations(news_items)
-            
-            if not recommendations:
-                return []
-            
-            # Log summary
-            logger.info(f"\nProcessed {len(news_items)} news items")
-            logger.info(f"Generated {len(recommendations)} buy recommendations")
-            
-            # Process each recommendation
-            for rec in recommendations:
-                symbol = rec['symbol']
-                signal = rec['signal']
-                
-                try:
-                    # Calculate target price based on predicted change
-                    current_price = await self._get_current_price(symbol)
-                    if not current_price:
-                        logger.error(f"Could not get current price for {symbol}")
-                        continue
-                    
-                    # Calculate entry and target prices
-                    entry_price = current_price
-                    predicted_change = signal['predicted_change']
-                    target_price = entry_price * (1 + predicted_change)
-                    
-                    # Calculate dates
-                    entry_date = datetime.now(tz=pytz.UTC)
-                    timeframe = signal.get('timeframe', '1wk')
-                    target_date = entry_date + timedelta(
-                        days=7 if timeframe == '1wk' else 30
-                    )
-                    
-                    # Send buy signal to portfolio tracker
-                    tracking_result = await self.portfolio_tracker.send_buy_signal(
-                        symbol=symbol,
-                        entry_price=entry_price,
-                        target_price=target_price,
-                        entry_date=entry_date.isoformat(),
-                        target_date=target_date.isoformat()
-                    )
-                    
-                    if tracking_result:
-                        # Update position with sentiment and confidence scores
-                        await self.portfolio_tracker.update_position(
-                            symbol=symbol,
-                            target_price=target_price,
-                            sentiment_score=signal['analysis_components']['sentiment_score'],
-                            confidence_score=signal['confidence']
-                        )
-                        
-                        logger.info(f"Successfully added position for {symbol}")
-                        logger.info(f"Entry Price: ${entry_price:.2f}")
-                        logger.info(f"Target Price: ${target_price:.2f}")
-                        logger.info(f"Predicted Change: {predicted_change:.2%}")
-                        logger.info(f"Timeframe: {timeframe}")
-                        logger.info(f"Score: {rec['score']:.2%}")
-                    else:
-                        logger.warning(f"Failed to send buy signal for {symbol}")
-                        
-                except Exception as e:
-                    logger.error(f"Error processing recommendation for {symbol}: {str(e)}")
-                    continue
-            
-            return recommendations
-            
-        except Exception as e:
-            logger.error(f"Error processing news update: {str(e)}")
-            return []
-    
     async def _get_current_price(self, symbol):
-        """Get current price for a symbol using yfinance"""
+        """Get current price for a symbol with caching and rate limiting"""
         try:
+            current_time = time.time()
+            
+            # Check cache first
+            if symbol in self.price_cache:
+                cache_time, cached_price = self.price_cache[symbol]
+                if current_time - cache_time < self.price_cache_ttl:
+                    return cached_price
+            
+            # Rate limiting check
+            if symbol in self.last_price_fetch:
+                time_since_last_fetch = current_time - self.last_price_fetch[symbol]
+                if time_since_last_fetch < self.price_fetch_delay:
+                    await asyncio.sleep(self.price_fetch_delay - time_since_last_fetch)
+            
+            # Update last fetch time
+            self.last_price_fetch[symbol] = current_time
+            
+            # Fetch new price
             ticker = yf.Ticker(symbol)
-            current = ticker.history(period='1d')
-            if not current.empty:
-                return current['Close'].iloc[-1]
+            price = ticker.info.get('regularMarketPrice')
+            
+            if price:
+                price = float(price)
+                # Update cache
+                self.price_cache[symbol] = (current_time, price)
+                return price
+                
             return None
+            
         except Exception as e:
-            logger.error(f"Error getting current price for {symbol}: {str(e)}")
+            logger.error(f"Error getting price for {symbol}: {str(e)}")
             return None
 
     def _format_recommendation_message(self, recommendation):
@@ -1717,6 +1001,111 @@ class RealTimeMonitor:
         message += f"• Stop Loss: {self.stop_loss_percentage:.1f}%\n"
         
         return message
+
+    async def get_full_article_text(self, url):
+        """Get full article text with caching and improved error handling"""
+        try:
+            # Initialize cache if not exists
+            if not hasattr(self, 'article_cache'):
+                self.article_cache = {}
+                self.article_cache_ttl = 3600  # 1 hour cache
+                self.last_article_fetch = {}
+                self.article_fetch_delay = 2  # 2 seconds between fetches
+            
+            current_time = time.time()
+            
+            # Check cache first
+            if url in self.article_cache:
+                cache_time, cached_text = self.article_cache[url]
+                if current_time - cache_time < self.article_cache_ttl:
+                    return cached_text
+            
+            # Rate limiting check
+            if url in self.last_article_fetch:
+                time_since_last_fetch = current_time - self.last_article_fetch[url]
+                if time_since_last_fetch < self.article_fetch_delay:
+                    await asyncio.sleep(self.article_fetch_delay - time_since_last_fetch)
+            
+            # Update last fetch time
+            self.last_article_fetch[url] = current_time
+            
+            # Add headers to mimic browser request
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Connection': 'keep-alive',
+            }
+            
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, headers=headers, timeout=10) as response:
+                    if response.status != 200:
+                        logger.error(f"Failed to fetch article: {url}, Status: {response.status}")
+                        return None
+                        
+                    html = await response.text()
+                    
+            soup = BeautifulSoup(html, 'html.parser')
+            
+            # Get domain to handle different sites
+            domain = urlparse(url).netloc
+            
+            # Different parsing rules for different sites
+            if 'yahoo.com' in domain:
+                # Yahoo Finance articles
+                article_content = soup.find('div', {'class': 'caas-body'})
+                if article_content:
+                    text = article_content.get_text(separator=' ', strip=True)
+                    self.article_cache[url] = (current_time, text)
+                    return text
+                    
+            elif 'seekingalpha.com' in domain:
+                # Seeking Alpha articles
+                article_content = soup.find('div', {'data-test-id': 'article-content'})
+                if article_content:
+                    text = article_content.get_text(separator=' ', strip=True)
+                    self.article_cache[url] = (current_time, text)
+                    return text
+                    
+            elif 'reuters.com' in domain:
+                # Reuters articles
+                article_content = soup.find('div', {'class': 'article-body'})
+                if article_content:
+                    text = article_content.get_text(separator=' ', strip=True)
+                    self.article_cache[url] = (current_time, text)
+                    return text
+            
+            # Generic article content extraction
+            # Look for common article container classes/IDs
+            possible_content = soup.find(['article', 'main', 'div'], 
+                                    {'class': ['article', 'content', 'article-content', 'story-content']})
+            if possible_content:
+                text = possible_content.get_text(separator=' ', strip=True)
+                if len(text) > 100:  # Ensure we got meaningful content
+                    logger.info(f"Successfully retrieved article text: {len(text)} characters")
+                    self.article_cache[url] = (current_time, text)
+                    return text
+            
+            # Try meta description as fallback
+            meta_desc = soup.find('meta', {'name': 'description'})
+            if meta_desc and meta_desc.get('content'):
+                text = meta_desc['content']
+                logger.info(f"Using meta description: {len(text)} characters")
+                self.article_cache[url] = (current_time, text)
+                return text
+            
+            logger.warning(f"Could not extract content from {url}")
+            return None
+            
+        except aiohttp.ClientError as e:
+            logger.error(f"Network error fetching article {url}: {str(e)}")
+            return None
+        except Exception as e:
+            logger.error(f"Error fetching article {url}: {str(e)}")
+            return None
+        finally:
+            # Clean up
+            gc.collect()
 
 def get_all_symbols():
     """Get list of stock symbols to monitor"""
