@@ -851,7 +851,7 @@ class RealTimeMonitor:
             return None
 
     async def send_telegram_alert(self, message: str) -> None:
-        """Send alert message via Telegram with proper session handling"""
+        """Send alert message via Telegram"""
         if not self.telegram_token or not self.telegram_chat_id:
             logger.warning("Telegram bot or chat ID not configured")
             return
@@ -861,10 +861,10 @@ class RealTimeMonitor:
 
         for attempt in range(max_retries):
             try:
-                if not self.telegram_session:
-                    self.telegram_session = aiohttp.ClientSession()
+                # Create bot without session
+                application = Application.builder().token(self.telegram_token).build()
+                bot = application.bot
                 
-                bot = telegram.Bot(token=self.telegram_token, session=self.telegram_session)
                 await bot.send_message(
                     chat_id=self.telegram_chat_id,
                     text=message,
@@ -994,14 +994,15 @@ class RealTimeMonitor:
             raise  # Re-raise to prevent startup if test fails
 
     async def _get_current_price(self, symbol):
-        """Get current price for a symbol with caching and rate limiting"""
+        """Get real-time current price for a symbol with caching and rate limiting"""
         try:
             current_time = time.time()
             
-            # Check cache first
+            # Check cache first (use shorter cache time for real-time data)
             if symbol in self.price_cache:
                 cache_time, cached_price = self.price_cache[symbol]
-                if current_time - cache_time < self.price_cache_ttl:
+                # Only cache for 30 seconds for real-time data
+                if current_time - cache_time < 30:
                     return cached_price
             
             # Rate limiting check
@@ -1013,21 +1014,47 @@ class RealTimeMonitor:
             # Update last fetch time
             self.last_price_fetch[symbol] = current_time
             
-            # Fetch new price
+            # Get real-time price
             ticker = yf.Ticker(symbol)
-            price = ticker.info.get('regularMarketPrice')
+            history = ticker.history(
+                period="1d",          # Get today's data
+                interval="1m",        # 1-minute intervals
+                prepost=True,         # Include pre/post market
+                repair=True,          # Repair any missing data
+                keepna=False          # Remove any NA values
+            )
             
-            if price:
-                price = float(price)
-                # Update cache
-                self.price_cache[symbol] = (current_time, price)
-                return price
+            if not history.empty:
+                # Get most recent price
+                last_row = history.iloc[-1]
+                price = last_row['Close']
                 
+                # Log price details for debugging
+                logger.debug(f"Latest price for {symbol}:")
+                logger.debug(f"Time: {history.index[-1]}")
+                logger.debug(f"Open: {last_row['Open']:.2f}")
+                logger.debug(f"High: {last_row['High']:.2f}")
+                logger.debug(f"Low: {last_row['Low']:.2f}")
+                logger.debug(f"Close: {last_row['Close']:.2f}")
+                logger.debug(f"Volume: {last_row['Volume']}")
+                
+                # Update cache with shorter TTL for real-time data
+                self.price_cache[symbol] = (current_time, float(price))
+                return float(price)
+            
+            logger.error(f"No price data available for {symbol}")
             return None
             
         except Exception as e:
             logger.error(f"Error getting price for {symbol}: {str(e)}")
             return None
+        finally:
+            # Clean up
+            if 'ticker' in locals():
+                del ticker
+            if 'history' in locals():
+                del history
+            gc.collect()
 
     def _format_recommendation_message(self, recommendation):
         """Format recommendation details for Telegram notification"""
