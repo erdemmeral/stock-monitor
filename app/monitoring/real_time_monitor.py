@@ -35,8 +35,6 @@ import gc
 import psutil
 
 # Local application imports
-from app.services.news_service import NewsService
-from app.utils.sp500 import get_all_symbols
 import torch
 from app.training.market_ml_trainer import FinBERTSentimentAnalyzer, MarketMLTrainer
 from app.services.portfolio_tracker_service import PortfolioTrackerService
@@ -366,7 +364,6 @@ class RealTimeMonitor:
         self.max_concurrent_symbols = 10
         
         # Initialize other components
-        self.news_service = NewsService()
         self.processed_news = set()
         self._polling_lock = asyncio.Lock()
         self._is_polling = False
