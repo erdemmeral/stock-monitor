@@ -36,6 +36,8 @@ import psutil
 from scipy import sparse
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sentence_transformers import SentenceTransformer
+import xgboost as xgb
+import torch.nn as nn
 
 # Local application imports
 import torch
@@ -53,181 +55,131 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+class NewsLSTM(nn.Module):
+    """LSTM model for news impact prediction"""
+    def __init__(self, input_size, hidden_size=64, num_layers=2, dropout=0.2):
+        super().__init__()
+        self.input_size = input_size  # Now required parameter
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
+        
+        # LSTM layer
+        self.lstm = nn.LSTM(
+            input_size=self.input_size,
+            hidden_size=hidden_size,
+            num_layers=num_layers,
+            batch_first=True,
+            dropout=dropout if num_layers > 1 else 0
+        )
+        
+        # Output layer
+        self.fc = nn.Linear(hidden_size, 1)
+    
+    def forward(self, x):
+        # Ensure input is 3D: [batch_size, seq_length, input_size]
+        if len(x.shape) == 2:
+            x = x.unsqueeze(1)  # Add sequence dimension
+            
+        # Initialize hidden state
+        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
+        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
+        
+        # LSTM forward pass
+        lstm_out, _ = self.lstm(x, (h0, c0))
+        
+        # Use last output
+        last_output = lstm_out[:, -1, :]
+        
+        # Final prediction
+        out = self.fc(last_output)
+        
+        return out, None  # Return None for attention as we've simplified the model
+
 class HybridMarketPredictor(BaseEstimator, ClassifierMixin):
-    """Hybrid model that combines TF-IDF features with semantic embeddings"""
+    """Model for predicting news impact on stock prices"""
     
     def __init__(self):
-        self.xgb_model = None
-        self.lstm_model = None
         self.n_features_in_ = None
-        self.weights = None
-        
-    def fit(self, X, y):
-        """Fit the model to the training data"""
-        try:
-            # Store number of features
-            self.n_features_in_ = X.shape[1]
-            
-            # Convert sparse matrix to dense if needed
-            if scipy.sparse.issparse(X):
-                X = X.toarray()
-            
-            # Convert y to numpy array if needed
-            y = np.array(y)
-            
-            # Simple linear regression for now
-            # Calculate weights using normal equation: w = (X^T X)^(-1) X^T y
-            X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
-            self.weights = np.linalg.pinv(X_with_bias.T @ X_with_bias) @ X_with_bias.T @ y
-            
-            return self
-            
-        except Exception as e:
-            logger.error(f"Error in HybridMarketPredictor fit: {str(e)}")
-            raise
+        self.linear_weights = None
+        self.xgb_model = xgb.XGBRegressor(
+            n_estimators=100,
+            learning_rate=0.1,
+            max_depth=5
+        )
+        self.lstm_model = None  # Initialize as None, will be set after getting feature size
         
     def predict(self, X):
-        """Make predictions on new data"""
+        """Make predictions using trained models"""
         try:
-            if self.weights is None:
-                raise ValueError("Model has not been fitted yet")
+            if self.linear_weights is None:
+                raise ValueError("Model not trained")
                 
             # Convert sparse matrix to dense if needed
             if scipy.sparse.issparse(X):
                 X = X.toarray()
-                
-            # Check feature dimensions
-            if X.shape[1] != self.n_features_in_:
-                logger.warning(f"Feature dimension mismatch. Expected {self.n_features_in_}, got {X.shape[1]}")
-                # Pad or truncate features to match expected dimensions
-                if X.shape[1] < self.n_features_in_:
-                    # Pad with zeros
-                    padding = np.zeros((X.shape[0], self.n_features_in_ - X.shape[1]))
-                    X = np.hstack([X, padding])
-                else:
-                    # Truncate
-                    X = X[:, :self.n_features_in_]
             
-            # Add bias term
-            X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
+            # Initialize LSTM if not done yet
+            if self.lstm_model is None and hasattr(self, 'n_features_in_'):
+                self.lstm_model = NewsLSTM(input_size=self.n_features_in_)
             
-            # Make predictions
-            return X_with_bias @ self.weights
+            # Get predictions from each model
+            predictions = []
+            
+            # 1. Linear Model
+            try:
+                X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
+                linear_pred = X_with_bias @ self.linear_weights
+                predictions.append(linear_pred)
+            except Exception as e:
+                logger.error(f"Error in linear prediction: {str(e)}")
+            
+            # 2. XGBoost
+            try:
+                xgb_pred = self.xgb_model.predict(X)
+                predictions.append(xgb_pred)
+            except Exception as e:
+                logger.error(f"Error in XGBoost prediction: {str(e)}")
+            
+            # 3. LSTM
+            try:
+                if self.lstm_model is not None:
+                    X_tensor = torch.FloatTensor(X)
+                    self.lstm_model.eval()
+                    with torch.no_grad():
+                        lstm_pred, _ = self.lstm_model(X_tensor)
+                        predictions.append(lstm_pred.numpy().squeeze())
+            except Exception as e:
+                logger.error(f"Error in LSTM prediction: {str(e)}")
+            
+            # Combine predictions
+            if predictions:
+                final_predictions = np.mean(predictions, axis=0)
+                return np.clip(final_predictions, -50, 50)  # Clip to reasonable range
+            else:
+                raise ValueError("All models failed to make predictions")
             
         except Exception as e:
-            logger.error(f"Error in HybridMarketPredictor predict: {str(e)}")
+            logger.error(f"Error in prediction: {str(e)}")
             raise
 
 class ModelManager:
     def __init__(self):
         self.models = {}
         self.vectorizers = {}
-        self.scalers = {}
-        self.semantic_patterns = None
         # Initialize embedding model
         self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         self.semantic_analyzer = NewsSemanticAnalyzer(embedding_model=self.embedding_model)
+        self.finbert_analyzer = FinBERTSentimentAnalyzer()
         self.model_paths = {
             '1wk': {
                 'model': 'app/models/market_model_1wk.joblib',
-                'vectorizer': 'app/models/vectorizer_1wk.joblib',
-                'scaler': 'app/models/scaler_1wk.joblib'
+                'vectorizer': 'app/models/vectorizer_1wk.joblib'
             },
             '1mo': {
                 'model': 'app/models/market_model_1mo.joblib',
-                'vectorizer': 'app/models/vectorizer_1mo.joblib',
-                'scaler': 'app/models/scaler_1mo.joblib'
-            },
-            'semantic_patterns': 'app/models/semantic_patterns.joblib'
+                'vectorizer': 'app/models/vectorizer_1mo.joblib'
+            }
         }
-
-    def load_models(self):
-        """Load all models, vectorizers, and scalers with validation"""
-        try:
-            # Load models for each timeframe
-            for timeframe in ['1wk', '1mo']:
-                paths = self.model_paths[timeframe]
-                
-                # Check if all required files exist
-                for key, path in paths.items():
-                    if not os.path.exists(path):
-                        logger.error(f"{timeframe} {key} file not found: {path}")
-                        return False
-                
-                # Load model components
-                self.models[timeframe] = joblib.load(paths['model'])
-                self.vectorizers[timeframe] = joblib.load(paths['vectorizer'])
-                self.scalers[timeframe] = joblib.load(paths['scaler'])
-                
-                # Validate components
-                self.validate_model(timeframe)
-                logger.info(f"Loaded and validated {timeframe} model components")
-            
-            # Load semantic patterns
-            patterns_path = self.model_paths['semantic_patterns']
-            if os.path.exists(patterns_path):
-                self.semantic_patterns = joblib.load(patterns_path)
-                logger.info("Loaded semantic patterns")
-            else:
-                logger.warning("Semantic patterns file not found")
-
-            return True
-            
-        except Exception as e:
-            logger.error(f"Error loading models: {str(e)}")
-            logger.exception("Full traceback:")
-            return False
-
-    def validate_model(self, timeframe):
-        """Validate loaded model components"""
-        model = self.models[timeframe]
-        vectorizer = self.vectorizers[timeframe]
-        scaler = self.scalers[timeframe]
-        
-        # Validate model
-        if not hasattr(model, 'predict'):
-            raise ValueError(f"{timeframe} model missing predict method")
-            
-        # Validate vectorizer
-        if not hasattr(vectorizer, 'transform'):
-            raise ValueError(f"{timeframe} vectorizer missing transform method")
-        
-        # Validate scaler
-        if not hasattr(scaler, 'transform'):
-            raise ValueError(f"{timeframe} scaler missing transform method")
-        
-        logger.info(f"Model components for {timeframe}:")
-        logger.info(f"  Model type: {type(model).__name__}")
-        logger.info(f"  Vectorizer vocabulary size: {len(vectorizer.vocabulary_)}")
-        logger.info(f"  Scaler: {type(scaler).__name__}")
-
-    def check_and_reload_models(self):
-        """Check if models need to be reloaded and reload them if necessary"""
-        try:
-            current_time = datetime.now()
-            should_reload = False
-
-            # Check all model files
-            for timeframe in ['1wk', '1mo']:
-                for path in self.model_paths[timeframe].values():
-                    if not os.path.exists(path):
-                        logger.error(f"Model file not found: {path}")
-                        return False
-                
-                mod_time = datetime.fromtimestamp(os.path.getmtime(path))
-                if current_time > mod_time:
-                    should_reload = True
-                    break
-
-            if should_reload:
-                logger.info("Detected model updates, reloading models...")
-                return self.load_models()
-            
-            return True
-
-        except Exception as e:
-            logger.error(f"Error checking models: {str(e)}")
-            return False
 
     def predict(self, text, timeframe):
         """Make a prediction using the loaded models"""
@@ -239,135 +191,189 @@ class ModelManager:
             # Get model components
             model = self.models[timeframe]
             vectorizer = self.vectorizers[timeframe]
-            scaler = self.scalers[timeframe]
             
             # Transform text using vectorizer
             X_tfidf = vectorizer.transform([text])
-            logger.debug(f"TF-IDF features shape: {X_tfidf.shape}")
             
             # Get sentiment features
-            finbert = FinBERTSentimentAnalyzer()
-            sentiment = finbert.analyze_sentiment(text)
+            sentiment = self.finbert_analyzer.analyze_sentiment(text)
             if not sentiment:
-                logger.error("Failed to get sentiment analysis")
+                logger.error("Failed to analyze sentiment")
                 return None
-                
-            # Create sentiment features array
-            sentiment_features = np.array([[
-                sentiment['probabilities']['positive'],
-                sentiment['probabilities']['negative'],
-                sentiment['probabilities']['neutral']
-            ]])
-            logger.debug(f"Sentiment features shape: {sentiment_features.shape}")
             
-            # Combine features
-            X_combined = scipy.sparse.hstack([
-                X_tfidf,
-                scipy.sparse.csr_matrix(sentiment_features)
-            ]).tocsr()
-            logger.debug(f"Combined features shape: {X_combined.shape}")
-            
-            # Get embedding using the shared semantic analyzer
+            # Get semantic embedding
             embedding = self.semantic_analyzer.get_embedding(text)
-            if embedding is not None:
-                embedding_features = np.array([embedding])
-                logger.debug(f"Embedding features shape: {embedding_features.shape}")
-                X_combined = scipy.sparse.hstack([
-                    X_combined,
-                    scipy.sparse.csr_matrix(embedding_features)
-                ]).tocsr()
-                logger.debug(f"Final combined features shape: {X_combined.shape}")
+            if embedding is None:
+                logger.error("Failed to get semantic embedding")
+                return None
             
             # Make prediction
-            try:
-                prediction = model.predict(X_combined)[0]
-                logger.debug(f"Raw prediction: {prediction}")
-            except ValueError as ve:
-                logger.error(f"Prediction error: {str(ve)}")
-                return None
+            prediction = model.predict(X_tfidf)
             
-            # Inverse transform the prediction
-            prediction_unscaled = scaler.inverse_transform([[prediction]])[0][0]
-            logger.debug(f"Unscaled prediction: {prediction_unscaled}")
-            
-            return prediction_unscaled
+            # Return prediction with details
+            return {
+                'timeframe': timeframe,
+                'price_impact': float(prediction[0]),
+                'sentiment': sentiment,
+                'confidence': sentiment['confidence']
+            }
             
         except Exception as e:
             logger.error(f"Error making prediction: {str(e)}")
-            logger.exception("Full traceback:")
             return None
 
-class NewsLSTM(torch.nn.Module):
-    """LSTM model for news analysis"""
-    def __init__(self, input_size=768, hidden_size=256, num_layers=2, dropout=0.2):
-        super(NewsLSTM, self).__init__()
-        self.hidden_size = hidden_size
-        self.num_layers = num_layers
-        
-        # LSTM layers
-        self.lstm = torch.nn.LSTM(
-            input_size=input_size,
-            hidden_size=hidden_size,
-            num_layers=num_layers,
-            batch_first=True,
-            dropout=dropout if num_layers > 1 else 0
-        )
-        
-        # Fully connected layer
-        self.fc = torch.nn.Linear(hidden_size, 1)
-        
-        # Dropout layer
-        self.dropout = torch.nn.Dropout(dropout)
-        
-    def forward(self, x, hidden=None):
-        # Forward pass through LSTM
-        lstm_out, hidden = self.lstm(x, hidden)
-        
-        # Get the output from the last time step
-        last_output = lstm_out[:, -1, :]
-        
-        # Apply dropout
-        last_output = self.dropout(last_output)
-        
-        # Pass through fully connected layer
-        out = self.fc(last_output)
-        return out, hidden
-    
-    def init_hidden(self, batch_size, device):
-        """Initialize hidden state"""
-        return (torch.zeros(self.num_layers, batch_size, self.hidden_size).to(device),
-                torch.zeros(self.num_layers, batch_size, self.hidden_size).to(device))
+    def load_models(self):
+        """Load all models and components"""
+        try:
+            logger.info("Loading models and components...")
+            
+            # Load models for each timeframe
+            for timeframe in ['1wk', '1mo']:
+                paths = self.model_paths[timeframe]
+                
+                # Check if files exist
+                if not os.path.exists(paths['model']) or not os.path.exists(paths['vectorizer']):
+                    logger.error(f"Model files not found for {timeframe}")
+                    return False
+                
+                # Load components
+                self.models[timeframe] = joblib.load(paths['model'])
+                self.vectorizers[timeframe] = joblib.load(paths['vectorizer'])
+                
+                logger.info(f"Loaded model components for {timeframe}")
+            
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error loading models: {str(e)}")
+            return False
+
+    def check_and_reload_models(self):
+        """Check if models need to be reloaded"""
+        try:
+            current_time = datetime.now()
+            should_reload = False
+
+            # Check model files
+            for timeframe in ['1wk', '1mo']:
+                paths = self.model_paths[timeframe]
+                for path in paths.values():
+                    if not os.path.exists(path):
+                        logger.error(f"Model file not found: {path}")
+                        return False
+                    
+                    mod_time = datetime.fromtimestamp(os.path.getmtime(path))
+                    if current_time > mod_time:
+                        should_reload = True
+                        break
+
+            if should_reload:
+                logger.info("Detected model updates, reloading models...")
+                return self.load_models()
+            
+            return True
+
+        except Exception as e:
+            logger.error(f"Error checking models: {str(e)}")
+            return False
 
 class NewsSemanticAnalyzer:
     def __init__(self, embedding_model):
         self.embedding_model = embedding_model
-        self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
-        self.model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+        # Don't load additional BERT models if we have embedding_model
+        if not hasattr(self.embedding_model, 'encode'):
+            self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+            self.model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+        else:
+            self.tokenizer = None
+            self.model = None
 
-        # Store historical patterns
-        self.news_embeddings = []
-        self.price_impacts = []
-        self.news_clusters = defaultdict(list)
-        self.cluster_impacts = defaultdict(list)
+        # Use disk storage for embeddings
+        self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+        self.embeddings_dir = os.path.join(self.data_dir, 'embeddings')
+        os.makedirs(self.embeddings_dir, exist_ok=True)
+        
+        # Keep minimal in-memory data
+        self.embedding_cache = {}
+        self.cache_size_limit = 100  # Only keep last 100 embeddings in memory
+        self.last_cleanup = time.time()
+        self.cleanup_interval = 300  # Cleanup every 5 minutes
+
+    def cleanup_memory(self):
+        """Periodic memory cleanup"""
+        current_time = time.time()
+        if current_time - self.last_cleanup < self.cleanup_interval:
+            return
+
+        try:
+            # Clear embedding cache if too large
+            if len(self.embedding_cache) > self.cache_size_limit:
+                # Keep only most recent entries
+                sorted_cache = sorted(self.embedding_cache.items(), key=lambda x: x[1]['timestamp'])
+                self.embedding_cache = dict(sorted_cache[-self.cache_size_limit:])
+
+            # Force garbage collection
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+
+            self.last_cleanup = current_time
+
+        except Exception as e:
+            logger.error(f"Error in memory cleanup: {str(e)}")
 
     def get_embedding(self, text):
-        """Generate embedding for text using BERT"""
-        inputs = self.tokenizer(text, padding=True, truncation=True, max_length=512, return_tensors="pt")
+        """Generate embedding for text using existing embedding model or BERT"""
+        try:
+            self.cleanup_memory()
+            
+            # Check cache first
+            text_hash = hash(text)
+            if text_hash in self.embedding_cache:
+                return self.embedding_cache[text_hash]['embedding']
 
-        with torch.no_grad():
-            outputs = self.model(**inputs)
-            attention_mask = inputs['attention_mask']
-            token_embeddings = outputs.last_hidden_state
-            input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
-            embedding = torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
-            return embedding[0].numpy()
+            # Generate embedding
+            if hasattr(self.embedding_model, 'encode'):
+                embedding = self.embedding_model.encode(text)
+            else:
+                inputs = self.tokenizer(text, padding=True, truncation=True, max_length=512, return_tensors="pt")
+                with torch.no_grad():
+                    outputs = self.model(**inputs)
+                    attention_mask = inputs['attention_mask']
+                    token_embeddings = outputs.last_hidden_state
+                    input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
+                    embedding = torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
+                    embedding = embedding[0].numpy()
+
+            # Update cache
+            self.embedding_cache[text_hash] = {
+                'embedding': embedding,
+                'timestamp': time.time()
+            }
+
+            return embedding
+
+        except Exception as e:
+            logger.error(f"Error generating embedding: {str(e)}")
+            return None
+        finally:
+            # Cleanup references
+            if 'inputs' in locals():
+                del inputs
+            if 'outputs' in locals():
+                del outputs
+            if 'token_embeddings' in locals():
+                del token_embeddings
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
 
     def find_similar_news(self, embedding, threshold=0.8):
         """Find similar historical news articles based on embedding similarity"""
         try:
-            if not self.news_embeddings:
+            if not self.embedding_cache:
                 return []
-            similarities = cosine_similarity([embedding], self.news_embeddings)[0]
+            similarities = cosine_similarity([embedding], list(self.embedding_cache.values()))[0]
             similar_indices = np.where(similarities >= threshold)[0]
             return [(idx, similarities[idx]) for idx in similar_indices]
         except Exception as e:
@@ -387,8 +393,8 @@ class NewsSemanticAnalyzer:
             total_weight = 0
 
             for idx, similarity in similar_news:
-                if timeframe in self.price_impacts[idx]:
-                    impact = self.price_impacts[idx][timeframe]
+                if timeframe in self.embedding_cache[idx]['embedding']:
+                    impact = self.embedding_cache[idx]['embedding'][timeframe]
                     weight = similarity
                     weighted_impacts.append(impact * weight)
                     total_weight += weight
@@ -447,21 +453,19 @@ class RealTimeMonitor:
         if not self.model_manager.load_models():
             logger.error("Failed to load models")
             raise RuntimeError("Model initialization failed")
-            
-        self.models = self.model_manager.models
-        self.vectorizers = self.model_manager.vectorizers
-        self.scalers = self.model_manager.scalers
-        logger.info("Models loaded successfully")
         
-        # Initialize prediction components
-        self.market_trainer = MarketMLTrainer()
+        # Share components from model manager
+        self.embedding_model = self.model_manager.embedding_model
+        self.finbert_analyzer = self.model_manager.finbert_analyzer
+        self.semantic_analyzer = self.model_manager.semantic_analyzer
+        logger.info("Models and analyzers initialized")
         
-        # Add price cache with limits
+        # Use LRU cache for prices with size limit
         self.price_cache = {}
         self.price_cache_ttl = 60  # Cache prices for 60 seconds
-        self.price_cache_max_size = 1000  # Maximum number of cached prices
-        self.last_price_fetch = {}  # Track last fetch time for rate limiting
-        self.price_fetch_delay = 2  # Minimum seconds between fetches for same symbol
+        self.price_cache_max_size = 100  # Reduced from 1000
+        self.last_price_fetch = {}
+        self.price_fetch_delay = 2
         
         # Initialize Telegram settings
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -469,100 +473,107 @@ class RealTimeMonitor:
         self.telegram_session = None
         
         # Initialize processed news with TTL
-        self.processed_news = {}  # Change to dict to store timestamps
-        self.processed_news_ttl = 86400  # Clear news older than 24 hours
+        self.processed_news = {}
+        self.processed_news_ttl = 3600  # Reduced from 86400 to 1 hour
         self.last_cache_cleanup = time.time()
-        self.cleanup_interval = 3600  # Cleanup every hour
-        
-        # Share embedding model and analyzers from model manager
-        self.embedding_model = self.model_manager.embedding_model
-        self.finbert_analyzer = FinBERTSentimentAnalyzer()
-        self.semantic_analyzer = self.model_manager.semantic_analyzer
-        logger.info("Analyzers initialized")
+        self.cleanup_interval = 300  # Reduced from 3600 to 5 minutes
         
         # Prediction thresholds
         self.prediction_thresholds = {
-            '1wk': 10.0,  # 10% minimum for weekly predictions
-            '1mo': 20.0   # 20% minimum for monthly predictions
+            '1wk': 10.0,
+            '1mo': 20.0
         }
         
-        # Time window for news
-        self.max_news_age_hours = 24
-        
-        # Maximum allowed prior price increase
-        self.max_prior_price_increase = 5.0  # 5%
-        
-        # CPU Management - Use all available CPUs
-        self.max_workers = multiprocessing.cpu_count()
-        logger.info(f"Using all {self.max_workers} available CPUs")
+        # Processing settings
+        self.batch_size = 50  # Reduced from 100
+        self.delay_between_batches = 2  # Increased from 1
+        self.max_workers = min(multiprocessing.cpu_count(), 4)  # Limit max workers
+        self.max_concurrent_symbols = self.max_workers  # Reduced from 2x
         
         # Memory management
         self.process = psutil.Process(os.getpid())
         self.memory_warning_threshold = 60.0
         self.memory_critical_threshold = 75.0
         
-        # Processing settings
-        self.batch_size = 100  # Increased batch size for more parallel processing
-        self.delay_between_batches = 1  # Reduced delay between batches
-        self.max_concurrent_symbols = self.max_workers * 2  # Double the number of concurrent symbols
-        
         # Initialize other components
         self._polling_lock = asyncio.Lock()
         self._is_polling = False
+        
+        logger.info(f"Initialized with {self.max_workers} workers and {self.batch_size} batch size")
 
     def _cleanup_caches(self):
-        """Clean up old cache entries"""
+        """Clean up memory and caches"""
         try:
             current_time = time.time()
-            
-            # Only cleanup if enough time has passed
             if current_time - self.last_cache_cleanup < self.cleanup_interval:
                 return
+
+            # Check memory usage
+            memory_percent = self.process.memory_percent()
+            if memory_percent > self.memory_warning_threshold:
+                logger.warning(f"High memory usage: {memory_percent:.1f}%")
                 
-            # Cleanup price cache
-            expired_prices = []
-            for symbol, (cache_time, _) in self.price_cache.items():
-                if current_time - cache_time > self.price_cache_ttl:
-                    expired_prices.append(symbol)
-            for symbol in expired_prices:
-                del self.price_cache[symbol]
-            
-            # Cleanup processed news
-            expired_news = []
-            for article_id, process_time in self.processed_news.items():
-                if current_time - process_time > self.processed_news_ttl:
-                    expired_news.append(article_id)
-            for article_id in expired_news:
-                del self.processed_news[article_id]
-            
-            # Enforce maximum cache sizes
-            if len(self.price_cache) > self.price_cache_max_size:
+                # Aggressive cleanup if critical
+                if memory_percent > self.memory_critical_threshold:
+                    self.price_cache.clear()
+                    self.processed_news.clear()
+                    gc.collect()
+                    if torch.cuda.is_available():
+                        torch.cuda.empty_cache()
+                    logger.warning("Performed emergency memory cleanup")
+                    return
+
+            # Normal cleanup
+            # Clean price cache
+            current_cache_size = len(self.price_cache)
+            if current_cache_size > self.price_cache_max_size:
                 # Remove oldest entries
                 sorted_cache = sorted(self.price_cache.items(), key=lambda x: x[1][0])
                 self.price_cache = dict(sorted_cache[-self.price_cache_max_size:])
-            
-            self.last_cache_cleanup = current_time
+                logger.info(f"Cleaned price cache: {current_cache_size} -> {len(self.price_cache)}")
+
+            # Clean processed news
+            old_news_count = len(self.processed_news)
+            self.processed_news = {
+                k: v for k, v in self.processed_news.items()
+                if current_time - v < self.processed_news_ttl
+            }
+            if old_news_count > len(self.processed_news):
+                logger.info(f"Cleaned processed news: {old_news_count} -> {len(self.processed_news)}")
+
+            # Force garbage collection
             gc.collect()
-            
-            logger.info(f"Cache cleanup completed. Sizes - Prices: {len(self.price_cache)}, News: {len(self.processed_news)}")
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+
+            self.last_cache_cleanup = current_time
             
         except Exception as e:
             logger.error(f"Error in cache cleanup: {str(e)}")
 
     async def _get_news_for_symbol(self, symbol):
-        """Get news articles for a symbol with error handling"""
+        """Get news articles with memory-efficient processing"""
         try:
-            # Use yf.Search instead of ticker.news
-            search = yf.Search(
-                query=symbol,
-                news_count=8,
-                include_nav_links=False,
-                include_research=True
-            )
-            news = search.news.copy()  # Make a copy of the news data
+            # Use yf.Ticker instead of Search for more focused results
+            ticker = yf.Ticker(symbol)
+            news = ticker.news
             
-            # Clear search object immediately
-            del search
+            if news:
+                # Only keep essential fields to reduce memory
+                filtered_news = []
+                for article in news:
+                    filtered_article = {
+                        'title': article.get('title', ''),
+                        'link': article.get('link', ''),
+                        'publisher': article.get('publisher', ''),
+                        'providerPublishTime': article.get('providerPublishTime', 0),
+                        'uuid': article.get('uuid', '')
+                    }
+                    filtered_news.append(filtered_article)
+                news = filtered_news
+            
+            # Clear ticker object
+            del ticker
             gc.collect()
             
             return news
@@ -573,256 +584,153 @@ class RealTimeMonitor:
         finally:
             gc.collect()
 
-    async def _validate_article(self, article, current_time):
-        """Validate article data and check if it should be processed"""
-        try:
-            if not isinstance(article, dict):
-                logger.warning("Invalid article format")
-                return None, None
-                
-            publish_time = article.get('providerPublishTime')
-            if not publish_time:
-                logger.warning(f"Missing publish time for article: {article.get('title', 'No title')}")
-                return None, None
-                
-            article_link = article.get('link')
-            if not article_link:
-                logger.warning(f"Missing link for article: {article.get('title', 'No title')}")
-                return None, None
-            
-            # Convert timestamp to datetime
-            try:
-                publish_date = pd.Timestamp(publish_time, unit='s', tz='UTC')
-            except Exception as e:
-                logger.error(f"Error converting publish time {publish_time}: {str(e)}")
-                return None, None
-                
-            time_diff = current_time - publish_date
-            
-            # Check if article is recent enough
-            if time_diff.total_seconds() > (24 * 3600):  # older than 24 hours
-                return None, None
-                
-            # Create unique article ID
-            article_id = article.get('uuid', '')
-            if not article_id:
-                title = article.get('title', '')
-                article_id = f"{title}_{publish_time}"
-                
-            return article_id, publish_date
-            
-        except Exception as e:
-            logger.error(f"Error validating article: {str(e)}")
-            return None, None
-        finally:
-            gc.collect()
-
     async def monitor_stock(self, symbol):
         """Monitor a single stock for trading opportunities"""
         try:
-            # Cleanup caches periodically
-            self._cleanup_caches()
-            
-            # Get current price first for comparison
-            current_price = await self._get_current_price(symbol)
-            if not current_price:
-                logger.error(f"Could not get current price for {symbol}")
-                return
-
-            # Get news with error handling
+            # Get news articles
             news = await self._get_news_for_symbol(symbol)
             if not news:
                 return
-
-            valid_predictions = []
-            current_time = datetime.now(tz=timezone.utc)
+            
+            current_time = pd.Timestamp.now(tz='UTC')
+            predictions = []
             
             for article in news:
                 try:
-                    # Validate article and get publish date
-                    article_id, publish_date = await self._validate_article(article, current_time)
-                    if not article_id or not publish_date:
+                    # Basic validation
+                    if not isinstance(article, dict):
                         continue
                         
-                    # Skip if already processed
+                    publish_time = article.get('providerPublishTime')
+                    article_link = article.get('link')
+                    if not publish_time or not article_link:
+                        continue
+                    
+                    # Check if article is recent and not processed
+                    publish_date = pd.Timestamp(publish_time, unit='s', tz='UTC')
+                    if (current_time - publish_date).total_seconds() > self.processed_news_ttl:
+                        continue
+                        
+                    article_id = article.get('uuid') or f"{article.get('title', '')}_{publish_time}"
                     if article_id in self.processed_news:
                         continue
-                        
-                    self.processed_news[article_id] = current_time
                     
-                    # Get article content with timeout
-                    try:
-                        content = await asyncio.wait_for(
-                            self.get_full_article_text(article['link']),
-                            timeout=10
-                        )
-                    except asyncio.TimeoutError:
-                        logger.warning(f"Timeout getting content for article: {article.get('title', 'No title')}")
-                        continue
-                    except Exception as e:
-                        logger.error(f"Error getting content: {str(e)}")
-                        continue
+                    # Process article
+                    content = f"{article.get('title', '')} {article.get('publisher', '')}"
                     
-                    if not content:
-                        logger.warning(f"No content for article: {article.get('title', 'No title')}")
-                        continue
-
-                    logger.info(f"\nAnalyzing article from {publish_date}")
-                    logger.info(f"Title: {article.get('title', 'No title')}")
-                    logger.info(f"Publisher: {article.get('publisher', 'Unknown')}")
+                    # Get predictions for each timeframe
+                    for timeframe in self.prediction_thresholds:
+                        prediction = await self._get_prediction(symbol, content, timeframe)
+                        if prediction and prediction >= self.prediction_thresholds[timeframe]:
+                            predictions.append({
+                                'timeframe': timeframe,
+                                'prediction': prediction,
+                                'article': article
+                            })
                     
-                    # Make predictions for both timeframes
-                    predictions = {}
-                    for timeframe in ['1wk', '1mo']:
-                        try:
-                            prediction = await self._get_prediction(
-                                symbol=symbol,
-                                content=content,
-                                timeframe=timeframe,
-                                publish_time=publish_date,
-                                current_price=current_price
-                            )
-                            
-                            if prediction and prediction['prediction'] > 0:
-                                predictions[timeframe] = prediction
-                                logger.info(f"Valid {timeframe} prediction: {prediction['prediction']:.2f}%")
-                                
-                        except Exception as pred_error:
-                            logger.error(f"Error getting prediction for {symbol} {timeframe}: {str(pred_error)}")
-                            continue
+                    # Mark article as processed
+                    self.processed_news[article_id] = time.time()
                     
-                    if predictions:
-                        valid_predictions.append({
-                            'article': article,
-                            'predictions': predictions,
-                            'publish_time': publish_date
-                        })
-                        logger.info(f"Added valid prediction for {symbol} based on news from {publish_date}")
                 except Exception as e:
                     logger.error(f"Error processing article for {symbol}: {str(e)}")
-                    continue
-
-            # If we have valid predictions, analyze and notify
-            if valid_predictions:
-                await self.analyze_and_notify(symbol, valid_predictions, {'current_price': current_price})
-
-            # Clear memory
-            del valid_predictions
-            gc.collect()
-
+                finally:
+                    # Clear any temporary objects
+                    gc.collect()
+            
+            # Process valid predictions
+            if predictions:
+                await self._process_predictions(symbol, predictions)
+            
         except Exception as e:
             logger.error(f"Error monitoring {symbol}: {str(e)}")
         finally:
-            # Ensure memory is cleaned up
+            # Cleanup after processing
+            self._cleanup_caches()
             gc.collect()
 
-    async def _get_prediction(self, symbol, content, timeframe, publish_time, current_price):
+    async def _process_predictions(self, symbol, predictions):
+        """Process valid predictions and send notifications"""
+        try:
+            for pred in predictions:
+                timeframe = pred['timeframe']
+                prediction = pred['prediction']
+                article = pred['article']
+                
+                message = (
+                    f"🚨 Trading Signal for {symbol}\n"
+                    f"Timeframe: {timeframe}\n"
+                    f"Prediction: {prediction:.2f}%\n"
+                    f"Article: {article.get('title')}\n"
+                    f"Source: {article.get('publisher')}\n"
+                    f"Link: {article.get('link')}"
+                )
+                
+                # Send notification
+                if self.telegram_token and self.telegram_chat_id:
+                    await self._send_telegram_message(message)
+                
+                logger.info(f"Trading signal generated for {symbol}: {prediction:.2f}% ({timeframe})")
+                
+        except Exception as e:
+            logger.error(f"Error processing predictions for {symbol}: {str(e)}")
+        finally:
+            gc.collect()
+
+    async def _get_prediction(self, symbol, content, timeframe):
         """Get prediction for a specific timeframe with improved error handling"""
         try:
-            logger.info("\n" + "="*50)
-            logger.info(f"PREDICTION ANALYSIS: {symbol} - {timeframe}")
-            logger.info("="*50)
-            
-            # Log the content being analyzed
-            logger.info(f"Analyzing content (first 200 chars):\n{content[:200]}...\n")
-            
-            # 1. Get base ML prediction
-            logger.info("1. ML Model Prediction:")
-            try:
-                # Get prediction using model manager
-                ml_prediction = self.model_manager.predict(content, timeframe)
-                if ml_prediction is not None:
-                    weighted_ml = ml_prediction * 0.4
-                    logger.info(f"   Raw ML prediction: {ml_prediction:.2f}%")
-                    logger.info(f"   Weighted ML (40%): {weighted_ml:.2f}%")
-                else:
-                    logger.error("Model prediction returned None")
-                    return None
-            except Exception as e:
-                logger.error(f"Error in ML prediction: {str(e)}")
+            # 1. Get ML prediction from model manager
+            ml_prediction = self.model_manager.predict(content, timeframe)
+            if not ml_prediction:
                 return None
-
-            # 2. Get semantic prediction
-            logger.info("\n2. Semantic Analysis:")
-            try:
+                
+            weighted_ml = ml_prediction['price_impact'] * 0.4
+            
+            # Early exit if ML prediction is too low
+            if weighted_ml < (self.prediction_thresholds[timeframe] * 0.2):  # If ML component can't reach 20% of threshold
+                return None
+            
+            # 2. Get sentiment (faster than semantic)
+            sentiment = self.finbert_analyzer.analyze_sentiment(content)
+            if not sentiment:
+                return None
+                
+            # Early exit if sentiment is very negative
+            if sentiment['score'] < -0.5:
+                return None
+            
+            # 3. Get semantic prediction only if needed
+            weighted_semantic = None
+            if weighted_ml >= (self.prediction_thresholds[timeframe] * 0.3):  # Only get semantic if ML shows promise
                 semantic_pred = self.semantic_analyzer.get_semantic_impact_prediction(content, timeframe)
                 if semantic_pred is not None:
                     weighted_semantic = semantic_pred * 0.4
-                    logger.info(f"   Raw Semantic prediction: {semantic_pred:.2f}%")
-                    logger.info(f"   Weighted Semantic (40%): {weighted_semantic:.2f}%")
-                else:
-                    weighted_semantic = None
-                    logger.info("   No semantic prediction available")
-            except Exception as e:
-                logger.error(f"Error in semantic analysis: {str(e)}")
-                weighted_semantic = None
-
-            # 3. Get sentiment
-            logger.info("\n3. Sentiment Analysis:")
-            try:
-                sentiment = self.finbert_analyzer.analyze_sentiment(content)
-                if sentiment:
-                    logger.info(f"   Score: {sentiment['score']:.2f}")
-                    logger.info(f"   Confidence: {sentiment['confidence']:.2f}")
-                    logger.info("   Probabilities:")
-                    logger.info(f"      Positive: {sentiment['probabilities']['positive']:.2f}")
-                    logger.info(f"      Negative: {sentiment['probabilities']['negative']:.2f}")
-                    logger.info(f"      Neutral:  {sentiment['probabilities']['neutral']:.2f}")
-                else:
-                    logger.info("   Failed to get sentiment")
-                    return None
-            except Exception as e:
-                logger.error(f"Error in sentiment analysis: {str(e)}")
-                return None
-
+            
             # Calculate final prediction
-            logger.info("\n4. Final Prediction Calculation:")
-            try:
+            if weighted_semantic is not None:
+                weighted_pred = (
+                    weighted_ml + 
+                    weighted_semantic + 
+                    (weighted_ml * sentiment['score'] * 0.2)
+                )
+            else:
+                weighted_pred = weighted_ml * (1 + sentiment['score'] * 0.2)
+            
+            # Log prediction details
+            if weighted_pred >= self.prediction_thresholds[timeframe]:
+                logger.info(f"\nValid prediction for {symbol} ({timeframe}):")
+                logger.info(f"ML Impact: {weighted_ml:.2f}%")
                 if weighted_semantic is not None:
-                    weighted_pred = (
-                        weighted_ml + 
-                        weighted_semantic + 
-                        (weighted_ml * sentiment['score'] * 0.2)
-                    )
-                    logger.info("   Using ML + Semantic + Sentiment formula")
-                else:
-                    weighted_pred = weighted_ml * (1 + sentiment['score'] * 0.2)
-                    logger.info("   Using ML + Sentiment formula")
-
-                logger.info(f"   Final prediction: {weighted_pred:.2f}%")
-                logger.info(f"   Required threshold: {self.prediction_thresholds[timeframe]:.2f}%")
-
-                # Check minimum threshold
-                if weighted_pred < self.prediction_thresholds[timeframe]:
-                    logger.info("\nPrediction rejected: Below threshold")
-                    logger.info("="*50)
-                    return None
-
-                logger.info("\nPrediction accepted!")
-                logger.info(f"Time frame: {timeframe}")
-                logger.info(f"Current price: ${current_price:.2f}")
-                logger.info(f"Target price: ${current_price * (1 + weighted_pred/100):.2f}")
-                logger.info("="*50)
-
-                return {
-                    'prediction': weighted_pred,
-                    'confidence': sentiment['confidence'],
-                    'sentiment_score': sentiment['score'],
-                    'components': {
-                        'ml_prediction': weighted_ml,
-                        'semantic_prediction': weighted_semantic,
-                        'sentiment_score': sentiment['score']
-                    }
-                }
-            except Exception as e:
-                logger.error(f"Error in final prediction calculation: {str(e)}")
-                return None
-
+                    logger.info(f"Semantic Impact: {weighted_semantic:.2f}%")
+                logger.info(f"Sentiment Score: {sentiment['score']:.2f}")
+                logger.info(f"Final Prediction: {weighted_pred:.2f}%")
+            
+            return weighted_pred if weighted_pred >= self.prediction_thresholds[timeframe] else None
+            
         except Exception as e:
-            logger.error(f"Error in prediction: {str(e)}")
+            logger.error(f"Error in prediction for {symbol}: {str(e)}")
             return None
         finally:
-            # Clean up any large objects
             gc.collect()
 
     async def analyze_and_notify(self, symbol, valid_predictions, price_data):

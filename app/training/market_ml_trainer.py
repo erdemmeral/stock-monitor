@@ -685,54 +685,44 @@ class FinBERTSentimentAnalyzer:
             return None
 
 class NewsLSTM(nn.Module):
-    def __init__(self, embedding_dim, hidden_dim, num_layers=2, dropout=0.2):
-        super(NewsLSTM, self).__init__()
-        self.hidden_dim = hidden_dim
+    """LSTM model for news impact prediction"""
+    def __init__(self, input_size, hidden_size=64, num_layers=2, dropout=0.2):
+        super().__init__()
+        self.input_size = input_size  # Now required parameter
+        self.hidden_size = hidden_size
         self.num_layers = num_layers
         
         # LSTM layer
         self.lstm = nn.LSTM(
-            input_size=embedding_dim,
-            hidden_size=hidden_dim,
+            input_size=self.input_size,
+            hidden_size=hidden_size,
             num_layers=num_layers,
             batch_first=True,
             dropout=dropout if num_layers > 1 else 0
         )
         
-        # Attention layer
-        self.attention = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim),
-            nn.Tanh(),
-            nn.Linear(hidden_dim, 1)
-        )
-        
         # Output layer
-        self.fc = nn.Linear(hidden_dim, 1)
+        self.fc = nn.Linear(hidden_size, 1)
     
-    def forward(self, x, lengths):
-        # Pack padded sequence
-        packed = nn.utils.rnn.pack_padded_sequence(
-            x, lengths, batch_first=True, enforce_sorted=False
-        )
+    def forward(self, x):
+        # Ensure input is 3D: [batch_size, seq_length, input_size]
+        if len(x.shape) == 2:
+            x = x.unsqueeze(1)  # Add sequence dimension
+            
+        # Initialize hidden state
+        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
+        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
         
         # LSTM forward pass
-        lstm_out, _ = self.lstm(packed)
+        lstm_out, _ = self.lstm(x, (h0, c0))
         
-        # Unpack sequence
-        lstm_out, _ = nn.utils.rnn.pad_packed_sequence(
-            lstm_out, batch_first=True
-        )
-        
-        # Attention mechanism
-        attention_weights = self.attention(lstm_out)
-        attention_weights = torch.softmax(attention_weights, dim=1)
-        
-        # Apply attention
-        context = torch.sum(attention_weights * lstm_out, dim=1)
+        # Use last output
+        last_output = lstm_out[:, -1, :]
         
         # Final prediction
-        out = self.fc(context)
-        return out
+        out = self.fc(last_output)
+        
+        return out, None  # Return None for attention as we've simplified the model
 
 class NewsDataset(Dataset):
     def __init__(self, embeddings, targets, max_seq_length=10):
@@ -759,16 +749,20 @@ class NewsDataset(Dataset):
         return embedding_seq, target, len(embedding_seq)
 
 class HybridMarketPredictor(BaseEstimator, ClassifierMixin):
-    """Hybrid model that combines TF-IDF features with semantic embeddings"""
+    """Model that learns historical relationships between news content and price changes"""
     
     def __init__(self):
-        self.xgb_model = None
-        self.lstm_model = None
         self.n_features_in_ = None
-        self.weights = None
+        self.linear_weights = None
+        self.xgb_model = xgb.XGBRegressor(
+            n_estimators=100,
+            learning_rate=0.1,
+            max_depth=5
+        )
+        self.lstm_model = None  # Will be initialized after getting feature size
         
-    def fit(self, X, y):
-        """Fit the model to the training data"""
+    def fit(self, X, y, semantic_features=None):
+        """Learn historical relationships between news features and price changes"""
         try:
             # Store number of features
             self.n_features_in_ = X.shape[1]
@@ -777,38 +771,95 @@ class HybridMarketPredictor(BaseEstimator, ClassifierMixin):
             if scipy.sparse.issparse(X):
                 X = X.toarray()
             
+            # Add semantic features if provided
+            if semantic_features is not None:
+                X = np.hstack([X, semantic_features])
+                self.n_features_in_ = X.shape[1]
+            
             # Convert y to numpy array if needed
             y = np.array(y)
             
-            # Simple linear regression for now
-            # Calculate weights using normal equation: w = (X^T X)^(-1) X^T y
-            X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
-            self.weights = np.linalg.pinv(X_with_bias.T @ X_with_bias) @ X_with_bias.T @ y
+            # Remove extreme price changes
+            mask = np.abs(y) <= 50
+            if not np.any(mask):
+                raise ValueError("No valid price changes within reasonable range")
+            
+            X = X[mask]
+            y = y[mask]
+            
+            logger.info("\nTraining Analysis:")
+            
+            # 1. Linear Regression Analysis
+            logger.info("\n1. Linear Impact Analysis:")
+            try:
+                X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
+                self.linear_weights = np.linalg.pinv(X_with_bias.T @ X_with_bias) @ X_with_bias.T @ y
+                linear_impact = X_with_bias @ self.linear_weights
+                linear_mae = np.mean(np.abs(linear_impact - y))
+                logger.info(f"   Average Impact Error: {linear_mae:.4f}%")
+                logger.info(f"   Max Positive Impact: {np.max(linear_impact):.2f}%")
+                logger.info(f"   Max Negative Impact: {np.min(linear_impact):.2f}%")
+            except Exception as e:
+                logger.error(f"Error in linear analysis: {str(e)}")
+            
+            # 2. XGBoost Analysis
+            logger.info("\n2. Non-linear Impact Analysis:")
+            try:
+                self.xgb_model.fit(X, y)
+                xgb_impact = self.xgb_model.predict(X)
+                xgb_mae = np.mean(np.abs(xgb_impact - y))
+                logger.info(f"   Average Impact Error: {xgb_mae:.4f}%")
+                
+                # Feature importance analysis
+                importances = self.xgb_model.feature_importances_
+                logger.info(f"   Most influential feature weight: {np.max(importances):.4f}")
+                logger.info(f"   Average feature influence: {np.mean(importances):.4f}")
+            except Exception as e:
+                logger.error(f"Error in XGBoost analysis: {str(e)}")
+            
+            # 3. LSTM Analysis
+            logger.info("\n3. Sequential Impact Analysis:")
+            try:
+                # Initialize LSTM with correct input size
+                self.lstm_model = NewsLSTM(input_size=self.n_features_in_)
+                
+                # Prepare data for LSTM
+                X_tensor = torch.FloatTensor(X)
+                y_tensor = torch.FloatTensor(y)
+                dataset = NewsDataset([X_tensor], [y_tensor])
+                dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+                
+                # Train LSTM
+                criterion = nn.MSELoss()
+                optimizer = torch.optim.Adam(self.lstm_model.parameters())
+                
+                for epoch in range(10):
+                    total_loss = 0
+                    for batch_x, batch_y, _ in dataloader:
+                        optimizer.zero_grad()
+                        out, _ = self.lstm_model(batch_x)
+                        loss = criterion(out.squeeze(), batch_y)
+                        loss.backward()
+                        optimizer.step()
+                        total_loss += loss.item()
+                    
+                    if epoch % 2 == 0:
+                        avg_loss = total_loss/len(dataloader)
+                        logger.info(f"   Epoch {epoch}: Avg Impact Error = {avg_loss:.4f}%")
+                
+                # Final impact analysis
+                self.lstm_model.eval()
+                with torch.no_grad():
+                    lstm_impact, _ = self.lstm_model(X_tensor)
+                    lstm_mae = np.mean(np.abs(lstm_impact.numpy().squeeze() - y))
+                    logger.info(f"   Final Average Impact Error: {lstm_mae:.4f}%")
+            except Exception as e:
+                logger.error(f"Error in LSTM analysis: {str(e)}")
             
             return self
             
         except Exception as e:
-            logger.error(f"Error in HybridMarketPredictor fit: {str(e)}")
-            raise
-        
-    def predict(self, X):
-        """Make predictions on new data"""
-        try:
-            if self.weights is None:
-                raise ValueError("Need to call fit or load_model beforehand")
-                
-            # Convert sparse matrix to dense if needed
-            if scipy.sparse.issparse(X):
-                X = X.toarray()
-            
-            # Add bias term
-            X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
-            
-            # Make predictions
-            return X_with_bias @ self.weights
-            
-        except Exception as e:
-            logger.error(f"Error in HybridMarketPredictor predict: {str(e)}")
+            logger.error(f"Error in model training: {str(e)}")
             raise
 
 class MarketMLTrainer:
@@ -831,7 +882,6 @@ class MarketMLTrainer:
         
         self.models = {}
         self.vectorizers = {}
-        self.target_scalers = {}
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
         # Pass the shared embedding model
         self.semantic_analyzer = NewsSemanticAnalyzer(embedding_model=self.embedding_model)
@@ -863,9 +913,9 @@ class MarketMLTrainer:
         # Processing settings with optimized delays
         self.batch_size = 50
         self.api_chunk_size = 25
-        self.delay_between_batches = 0.5  # Reduced from 2s to 0.5s
-        self.delay_between_chunks = 5  # Reduced from 15s to 5s
-        self.delay_between_symbols = 0.1  # Reduced from 0.2s to 0.1s
+        self.delay_between_batches = 0.5
+        self.delay_between_chunks = 5
+        self.delay_between_symbols = 0.1
         
         # Cache settings
         self.cache_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cache')
@@ -1123,12 +1173,25 @@ class MarketMLTrainer:
                 logger.warning(f"Insufficient training data for {timeframe}")
                 return False
                 
+            # Print training data statistics
+            logger.info("\n" + "="*50)
+            logger.info(f"TRAINING ANALYSIS FOR {timeframe}")
+            logger.info("="*50)
+            
+            # Data statistics
+            total_samples = len(training_data)
+            unique_symbols = len(set(sample['symbol'] for sample in training_data))
+            logger.info(f"\nTraining Data Stats:")
+            logger.info(f"Total samples: {total_samples}")
+            logger.info(f"Unique symbols: {unique_symbols}")
+            
             # Initialize models if they don't exist
             if timeframe not in self.vectorizers:
-                from sklearn.feature_extraction.text import TfidfVectorizer
+                logger.info(f"Initializing new TF-IDF vectorizer for {timeframe}")
                 self.vectorizers[timeframe] = TfidfVectorizer(max_features=1000)
                 
             if timeframe not in self.models:
+                logger.info(f"Initializing new HybridMarketPredictor for {timeframe}")
                 self.models[timeframe] = HybridMarketPredictor()
                 
             # Split into train and validation
@@ -1136,52 +1199,164 @@ class MarketMLTrainer:
             train_data = training_data[:train_size]
             val_data = training_data[train_size:]
             
+            # Get texts and semantic features for training
+            X_train = [sample['text'] for sample in train_data]
+            semantic_features = np.array([sample['embedding'] for sample in train_data])
+            y_train = np.array([sample['changes'][timeframe] for sample in train_data])
+
             # Get current performance as baseline
             current_score = self.evaluate_model(timeframe, val_data)
-            
-            # Train the model
-            X_train = [sample['text'] for sample in train_data]
-            y_train = np.array([sample['changes'][timeframe] for sample in train_data])
-            
-            # Check for valid training data
-            mask = ~np.isnan(y_train)
-            if not np.any(mask):
-                logger.warning(f"No valid training samples for {timeframe}")
-                return False
+            logger.info(f"\nBaseline Score: {current_score:.4f}")
+
+            # Cluster Analysis
+            logger.info("\nCluster Analysis:")
+            try:
+                # Define stop words to filter out common terms
+                stop_words = {
+                    # News sources
+                    'Zacks', 'Reuters', 'Bloomberg', 'MarketWatch', 'Inc.', 'Corp.', 'LLC', 'Ltd',
+                    # Common financial terms
+                    'stock', 'stocks', 'share', 'shares', 'market', 'markets', 'trading', 'price', 'prices',
+                    # Common words
+                    'with', 'that', 'this', 'from', 'the', 'and', 'for', 'are', 'was', 'has', 'its', 'have',
+                    'will', 'been', 'were', 'would', 'could', 'should', 'than', 'what', 'when', 'who',
+                    'which', 'their', 'about', 'into', 'there', 'other', 'these', 'some', 'them',
+                    # Common financial reporting terms
+                    'quarter', 'quarterly', 'fiscal', 'year', 'annual', 'earnings', 'revenue', 'report',
+                    'reported', 'financial', 'results'
+                }
                 
-            # Use only valid samples for training
-            X_train_filtered = [X_train[i] for i in range(len(X_train)) if mask[i]]
-            y_train_filtered = y_train[mask]
+                # Perform clustering on semantic embeddings
+                clustering = DBSCAN(eps=0.3, min_samples=3, metric='cosine').fit(semantic_features)
+                labels = clustering.labels_
+                n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
+                n_noise = list(labels).count(-1)
+                
+                logger.info(f"Initial clusters: {n_clusters}")
+                logger.info(f"Noise points: {n_noise} ({(n_noise/len(labels))*100:.1f}%)")
+                
+                # Analyze each cluster
+                cluster_stats = {}
+                for cluster_id in set(labels):
+                    if cluster_id == -1:
+                        continue
+                        
+                    cluster_mask = labels == cluster_id
+                    cluster_samples = [train_data[i] for i, is_member in enumerate(cluster_mask) if is_member]
+                    cluster_changes = [sample['changes'][timeframe] for sample in cluster_samples if timeframe in sample['changes']]
+                    cluster_changes = [c for c in cluster_changes if not np.isnan(c)]
+                    
+                    if cluster_changes:
+                        # Basic cluster info
+                        logger.info(f"\nCluster {cluster_id}:")
+                        logger.info(f"  Size: {len(cluster_samples)} articles")
+                        
+                        # Stock analysis
+                        cluster_symbols = set(s['symbol'] for s in cluster_samples)
+                        logger.info(f"  Unique stocks: {len(cluster_symbols)}")
+                        logger.info(f"  Symbols: {', '.join(cluster_symbols)}")
+                        
+                        # Price impact analysis
+                        logger.info(f"  Price Impact Analysis:")
+                        logger.info(f"    Mean change: {np.mean(cluster_changes):.2f}%")
+                        logger.info(f"    Median change: {np.median(cluster_changes):.2f}%")
+                        logger.info(f"    Std dev: {np.std(cluster_changes):.2f}%")
+                        
+                        # Sentiment analysis
+                        cluster_sentiments = [s['sentiment']['score'] for s in cluster_samples]
+                        pos_sent = len([s for s in cluster_sentiments if s > 0])
+                        neg_sent = len([s for s in cluster_sentiments if s < 0])
+                        logger.info(f"  Sentiment Analysis:")
+                        logger.info(f"    Mean sentiment: {np.mean(cluster_sentiments):.3f}")
+                        logger.info(f"    Positive articles: {pos_sent} ({pos_sent/len(cluster_sentiments)*100:.1f}%)")
+                        logger.info(f"    Negative articles: {neg_sent} ({neg_sent/len(cluster_sentiments)*100:.1f}%)")
+                        
+                        # Content analysis
+                        all_text = ' '.join(s['text'] for s in cluster_samples)
+                        words = all_text.split()
+                        word_freq = {}
+                        for word in words:
+                            if len(word) > 3 and word not in stop_words:  # Skip short words and stop words
+                                word_freq[word] = word_freq.get(word, 0) + 1
+                        common_words = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)[:10]
+                        logger.info(f"  Content Analysis:")
+                        logger.info(f"    Top terms: {', '.join(f'{word}({freq})' for word, freq in common_words)}")
+                        
+                        # Store stats for inter-cluster analysis
+                        cluster_stats[cluster_id] = {
+                            'size': len(cluster_samples),
+                            'symbols': cluster_symbols,
+                            'mean_change': np.mean(cluster_changes),
+                            'mean_sentiment': np.mean(cluster_sentiments),
+                            'common_words': [word for word, _ in common_words[:5]]
+                        }
+                
+                # Inter-cluster analysis
+                if len(cluster_stats) > 1:
+                    logger.info("\nInter-cluster Relationships:")
+                    for i, (c1_id, c1_stats) in enumerate(cluster_stats.items()):
+                        for c2_id, c2_stats in list(cluster_stats.items())[i+1:]:
+                            # Calculate similarities
+                            common_symbols = c1_stats['symbols'] & c2_stats['symbols']
+                            sentiment_diff = abs(c1_stats['mean_sentiment'] - c2_stats['mean_sentiment'])
+                            price_impact_diff = abs(c1_stats['mean_change'] - c2_stats['mean_change'])
+                            
+                            # Only show meaningful relationships
+                            if len(common_symbols) >= 2 or (sentiment_diff < 0.1 and price_impact_diff < 2.0):
+                                logger.info(f"\n  Clusters {c1_id} and {c2_id} Relationship:")
+                                if common_symbols:
+                                    logger.info(f"    Common stocks: {', '.join(common_symbols)}")
+                                logger.info(f"    Sentiment similarity: {1 - sentiment_diff:.2f}")
+                                logger.info(f"    Price impact similarity: {100 - price_impact_diff:.1f}%")
+                                
+            except Exception as e:
+                logger.error(f"Error in cluster analysis: {str(e)}")
             
-            # Fit vectorizer and transform
-            X_train_tfidf = self.vectorizers[timeframe].fit_transform(X_train_filtered)
+            # Fit and transform the vectorizer
+            logger.info(f"\nFitting TF-IDF vectorizer on {len(X_train)} samples")
+            X_train_tfidf = self.vectorizers[timeframe].fit_transform(X_train)
             
-            # Train model
-            self.models[timeframe].fit(X_train_tfidf, y_train_filtered)
+            # Train the model with both TF-IDF and semantic features
+            logger.info("Training HybridMarketPredictor with TF-IDF and semantic features")
+            self.models[timeframe].fit(X_train_tfidf, y_train, semantic_features=semantic_features)
             
             # Evaluate new performance
             new_score = self.evaluate_model(timeframe, val_data)
+            logger.info(f"\nNew Model Score: {new_score:.4f}")
             
             # Check if model improved
             if new_score > self.training_history[timeframe]['best_score'] + self.min_improvement:
-                logger.info(f"{timeframe} model improved: {new_score:.4f} > {self.training_history[timeframe]['best_score']:.4f}")
+                improvement = new_score - self.training_history[timeframe]['best_score']
+                logger.info(f"\nModel improved by {improvement:.4f} points")
                 self.training_history[timeframe]['best_score'] = new_score
                 self.training_history[timeframe]['last_improvement'] = time.time()
-                self.save_models()
                 
-                # Update backup with new data
-                self.training_data_backup[timeframe].extend(training_data)
-                if len(self.training_data_backup[timeframe]) > self.max_backup_size:
-                    self.training_data_backup[timeframe] = self.training_data_backup[timeframe][-self.max_backup_size:]
-                
-                return True
+                # Save models when there's improvement
+                logger.info(f"Saving improved {timeframe} model...")
+                try:
+                    model_path = os.path.join(self.models_dir, f'market_model_{timeframe}.joblib')
+                    vectorizer_path = os.path.join(self.models_dir, f'vectorizer_{timeframe}.joblib')
+                    
+                    joblib.dump(self.models[timeframe], model_path)
+                    joblib.dump(self.vectorizers[timeframe], vectorizer_path)
+                    
+                    logger.info(f"Successfully saved {timeframe} model components")
+                    
+                    # Update backup with new data
+                    self.training_data_backup[timeframe].extend(training_data)
+                    if len(self.training_data_backup[timeframe]) > self.max_backup_size:
+                        self.training_data_backup[timeframe] = self.training_data_backup[timeframe][-self.max_backup_size:]
+                    
+                except Exception as e:
+                    logger.error(f"Error saving {timeframe} model: {str(e)}")
             else:
-                logger.warning(f"{timeframe} model did not improve significantly: {new_score:.4f} <= {self.training_history[timeframe]['best_score']:.4f}")
-                return False
-                
+                logger.info("\nNo significant improvement, model not saved")
+            
+            return True
+            
         except Exception as e:
-            logger.error(f"Error in train_with_impact_scores for {timeframe}: {str(e)}")
-            logger.exception("Full traceback:")
+            logger.error(f"Error in training: {str(e)}")
+            logger.error(traceback.format_exc())  # Add full traceback
             return False
 
     def collect_and_train(self, symbols):
@@ -1399,8 +1574,8 @@ class MarketMLTrainer:
                 
                 # Get daily data
                 history = stock.history(
-                    start=start_date.strftime('%Y-%m-%d'),
-                    end=end_date.strftime('%Y-%m-%d'),
+                    start=start_date,
+                    end=end_date,
                     interval='1d'
                 )
                 
@@ -1574,103 +1749,48 @@ class MarketMLTrainer:
             logger.error(f"Error fetching article content: {e}")
             return None
 
-class ModelManager:
-    def predict_with_details(self, text, timeframe):
-        """Make a prediction with detailed components and confidence scores"""
+    def _prepare_checkpoint_data(self, training_data, stock_stats, processed_symbols):
+        """Prepare data for checkpoint saving"""
+        # Convert sets to lists for JSON serialization
+        serializable_stats = stock_stats.copy()
+        serializable_stats['by_timeframe'] = {
+            timeframe: {
+                'stocks': list(data['stocks']),
+                'samples': data['samples']
+            }
+            for timeframe, data in stock_stats['by_timeframe'].items()
+        }
+        
+        return {
+            'training_data': training_data,
+            'stock_stats': serializable_stats,
+            'processed_symbols': list(processed_symbols)
+        }
+    
+    def _restore_checkpoint_data(self, checkpoint):
+        """Restore data from checkpoint"""
         try:
-            if timeframe not in self.models or not self.models[timeframe]:
-                raise ValueError(f"No model loaded for timeframe {timeframe}")
+            training_data = checkpoint['training_data']
             
-            # Get sentiment
-            sentiment = self.finbert_analyzer.analyze_sentiment(text)
-            if not sentiment:
-                raise ValueError("Failed to analyze sentiment")
-            
-            # Prepare features
-            text_vector = self.vectorizers[timeframe].transform([text])
-            sentiment_features = np.array([[
-                sentiment['probabilities']['positive'],
-                sentiment['probabilities']['negative'],
-                sentiment['probabilities']['neutral']
-            ]])
-            
-            # Combine features
-            X_combined = scipy.sparse.hstack([
-                text_vector,
-                scipy.sparse.csr_matrix(sentiment_features)
-            ]).tocsr()
-            
-            # Get embedding if available
-            embedding = self.semantic_analyzer.get_embedding(text) if self.semantic_analyzer else None
-            embeddings_array = np.array([embedding]) if embedding else None
-            
-            # Get detailed prediction components
-            prediction_details = self.models[timeframe].get_prediction_components(
-                X_combined=X_combined,
-                embeddings=embeddings_array
-            )
-            
-            # Get final prediction
-            raw_prediction = self.models[timeframe].predict(
-                X_combined=X_combined,
-                embeddings=embeddings_array
-            )
-            
-            # Unscale prediction
-            unscaled_prediction = self.target_scalers[timeframe].inverse_transform(
-                raw_prediction.reshape(-1, 1)
-            ).ravel()[0]
-            
-            # Get cluster prediction
-            cluster_info = self.semantic_analyzer.predict_cluster(text, timeframe) if self.semantic_analyzer else None
-            
-            # Prepare detailed response
-            prediction_response = {
-                'timeframe': timeframe,
-                'price_change_prediction': unscaled_prediction,
-                'confidence_score': prediction_details['confidence_score'],
-                'sentiment_analysis': {
-                    'scores': prediction_details['sentiment_scores'],
-                    'label': sentiment['label'],
-                    'confidence': sentiment['confidence']
-                },
-                'model_components': {
-                    'xgb_contribution': prediction_details['xgb_prediction'][0] if prediction_details['xgb_prediction'] is not None else None,
-                    'lstm_contribution': prediction_details['lstm_prediction'][0] if prediction_details['lstm_prediction'] is not None else None
-                },
-                'feature_importance': {
-                    'top_features': self._get_top_features(
-                        self.vectorizers[timeframe].get_feature_names_out(),
-                        prediction_details['feature_importance']
-                    ) if prediction_details['feature_importance'] is not None else None
-                },
-                'cluster_analysis': cluster_info
+            # Restore stock stats with sets
+            stock_stats = checkpoint['stock_stats']
+            stock_stats['by_timeframe'] = {
+                timeframe: {
+                    'stocks': set(data['stocks']),
+                    'samples': data['samples']
+                }
+                for timeframe, data in stock_stats['by_timeframe'].items()
             }
             
-            # Adjust confidence based on cluster information
-            if cluster_info and cluster_info['prediction_confidence'] > 0.5:
-                # Boost confidence if article belongs to a cluster with consistent price impact
-                cluster_std = cluster_info['cluster_stats']['std_price_change']
-                cluster_mean = abs(cluster_info['cluster_stats']['avg_price_change'])
-                if cluster_mean > 0 and cluster_std / cluster_mean < 0.5:  # Low variance in price impact
-                    prediction_response['confidence_score'] = (
-                        prediction_response['confidence_score'] * 0.7 +
-                        cluster_info['prediction_confidence'] * 0.3
-                    )
+            # Restore processed symbols set
+            processed_symbols = set(checkpoint['processed_symbols'])
             
-            return prediction_response
+            return training_data, stock_stats, processed_symbols
             
         except Exception as e:
-            logger.error(f"Error in predict_with_details: {str(e)}")
-            return None
-    
-    def _get_top_features(self, feature_names, importance_scores, top_n=10):
-        """Get top N most important features and their scores"""
-        if importance_scores is None or len(importance_scores) != len(feature_names):
-            return None
-            
-        feature_importance = list(zip(feature_names, importance_scores))
-        return sorted(feature_importance, key=lambda x: x[1], reverse=True)[:top_n]
+            logger.error(f"Error restoring checkpoint: {str(e)}")
+            # Return fresh data if restoration fails
+            return self._initialize_fresh_data([])
 
 def main():
     """Main entry point for training"""
