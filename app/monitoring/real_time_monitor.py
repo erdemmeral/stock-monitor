@@ -415,12 +415,19 @@ class RealTimeMonitor:
         self.portfolio_tracker = PortfolioTrackerService()
         logger.info("Portfolio tracker service initialized")
         
+        # Initialize model manager and load models
+        self.model_manager = ModelManager()
+        if not self.model_manager.load_models():
+            logger.error("Failed to load models")
+            raise RuntimeError("Model initialization failed")
+            
+        self.models = self.model_manager.models
+        self.vectorizers = self.model_manager.vectorizers
+        self.scalers = self.model_manager.scalers
+        logger.info("Models loaded successfully")
+        
         # Initialize prediction components
         self.market_trainer = MarketMLTrainer()
-        
-        # Load models directly from the models directory
-        self.models = {}
-        self.vectorizers = {}
         
         # Add price cache with limits
         self.price_cache = {}
@@ -445,8 +452,6 @@ class RealTimeMonitor:
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
         self.semantic_analyzer = NewsSemanticAnalyzer(embedding_model=self.embedding_model)
         logger.info("Analyzers initialized")
-        
-        logger.info("Models loaded successfully")
         
         # Prediction thresholds
         self.prediction_thresholds = {
@@ -697,11 +702,15 @@ class RealTimeMonitor:
             # 1. Get base ML prediction
             logger.info("1. ML Model Prediction:")
             try:
-                X_tfidf = self.vectorizers[timeframe].transform([content])
-                ml_prediction = self.models[timeframe].predict(X_tfidf)[0]
-                weighted_ml = ml_prediction * 0.4
-                logger.info(f"   Raw ML prediction: {ml_prediction:.2f}%")
-                logger.info(f"   Weighted ML (40%): {weighted_ml:.2f}%")
+                # Get prediction using model manager
+                ml_prediction = self.model_manager.predict(content, timeframe)
+                if ml_prediction is not None:
+                    weighted_ml = ml_prediction * 0.4
+                    logger.info(f"   Raw ML prediction: {ml_prediction:.2f}%")
+                    logger.info(f"   Weighted ML (40%): {weighted_ml:.2f}%")
+                else:
+                    logger.error("Model prediction returned None")
+                    return None
             except Exception as e:
                 logger.error(f"Error in ML prediction: {str(e)}")
                 return None

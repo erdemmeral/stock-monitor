@@ -55,6 +55,7 @@ import warnings
 warnings.filterwarnings('ignore')
 import psutil
 import gc
+from sklearn.base import BaseEstimator, ClassifierMixin
 
 # Create logs directory if it doesn't exist
 import os
@@ -757,169 +758,58 @@ class NewsDataset(Dataset):
         
         return embedding_seq, target, len(embedding_seq)
 
-class HybridMarketPredictor:
-    def __init__(self, embedding_dim=384, hidden_dim=256):
-        self.embedding_dim = embedding_dim
-        self.hidden_dim = hidden_dim
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        
-        # Initialize models
-        self.lstm_model = NewsLSTM(embedding_dim, hidden_dim).to(self.device)
-        self.xgb_model = xgb.XGBRegressor(
-            n_estimators=100,
-            learning_rate=0.1,
-            max_depth=5
-        )
-        self.use_lstm = False
-        
-        # Initialize optimizers
-        self.lstm_optimizer = torch.optim.Adam(self.lstm_model.parameters())
-        self.criterion = nn.MSELoss()
+class HybridMarketPredictor(BaseEstimator, ClassifierMixin):
+    """Hybrid model that combines TF-IDF features with semantic embeddings"""
     
-    def prepare_sequence_data(self, embeddings, window_size=5):
-        """Prepare sequential data for LSTM only"""
-        if len(embeddings) < window_size:
-            return None
-        sequences = []
-        for i in range(len(embeddings) - window_size + 1):
-            sequences.append(embeddings[i:i + window_size])
-        return sequences
-    
-    def train(self, X_combined, embeddings=None, y=None, sample_weights=None):
-        """Train both XGBoost and LSTM models"""
-        if y is None:
-            raise ValueError("Target values (y) must be provided")
-
-        # Train XGBoost with combined features
-        self.xgb_model.fit(
-            X_combined, 
-            y,
-            sample_weight=sample_weights
-        )
+    def __init__(self):
+        self.xgb_model = None
+        self.lstm_model = None
+        self.n_features_in_ = None
+        self.weights = None
         
-        # Train LSTM only if we have embeddings
-        if embeddings is not None and len(embeddings) >= 5:  # Minimum sequence length
-            sequences = self.prepare_sequence_data(embeddings)
-            if sequences:
-                # Convert sequences to torch tensors
-                sequences = [torch.tensor(seq, dtype=torch.float32) for seq in sequences]
-                
-                # Create dataset and dataloader
-                dataset = NewsDataset(
-                    sequences, 
-                    y[4:],  # Adjust target indices for sequences
-                    max_seq_length=10
-                )
-                
-                dataloader = DataLoader(
-                    dataset,
-                    batch_size=32,
-                    shuffle=True,
-                    collate_fn=lambda x: zip(*x)
-                )
-                
-                # Train LSTM
-                self.lstm_model.train()
-                for epoch in range(10):
-                    total_loss = 0
-                    for batch_embeddings, batch_targets, batch_lengths in dataloader:
-                        # Move to device
-                        batch_embeddings = torch.stack(batch_embeddings).to(self.device)
-                        batch_targets = torch.tensor(batch_targets, dtype=torch.float32).to(self.device)
-                        batch_lengths = torch.tensor(batch_lengths)
-                        
-                        # Forward pass
-                        self.lstm_optimizer.zero_grad()
-                        outputs = self.lstm_model(batch_embeddings, batch_lengths)
-                        loss = self.criterion(outputs.squeeze(), batch_targets)
-                        
-                        # Backward pass
-                        loss.backward()
-                        self.lstm_optimizer.step()
-                        
-                        total_loss += loss.item()
-                    
-                    logger.info(f"Epoch {epoch+1}, Loss: {total_loss/len(dataloader):.4f}")
-                
-                logger.info("LSTM training completed successfully")
-    
-    def predict(self, X_combined, embeddings_sequence=None):
-        """Get predictions from both models and combine them"""
-        # XGBoost prediction (always available)
-        xgb_pred = self.xgb_model.predict(X_combined)[0]
-        
-        # LSTM prediction (if sequence available)
-        lstm_pred = None
-        if embeddings_sequence is not None and len(embeddings_sequence) >= 5:
-            self.lstm_model.eval()
-            with torch.no_grad():
-                # Prepare sequence
-                sequence = torch.tensor(embeddings_sequence[-5:]).unsqueeze(0).to(self.device)  # Use last 5 embeddings
-                lengths = torch.tensor([5])  # Fixed length for prediction
-                
-                # Get LSTM prediction
-                lstm_pred = self.lstm_model(sequence, lengths).item()
-        
-        # Combine predictions
-        if lstm_pred is not None:
-            final_pred = (xgb_pred + lstm_pred) / 2
-        else:
-            final_pred = xgb_pred
-        
-        return final_pred, {
-            'xgb_pred': xgb_pred,
-            'lstm_pred': lstm_pred
-        }
-
-    def get_prediction_components(self, X_combined, embeddings=None):
-        """Get detailed prediction components with confidence scores"""
-        prediction_details = {
-            'xgb_prediction': None,
-            'lstm_prediction': None,
-            'sentiment_scores': None,
-            'confidence_score': None,
-            'feature_importance': None
-        }
-        
+    def fit(self, X, y):
+        """Fit the model to the training data"""
         try:
-            # Get XGBoost prediction and feature importance
-            xgb_pred = self.xgb_model.predict(X_combined)
-            prediction_details['xgb_prediction'] = xgb_pred
+            # Store number of features
+            self.n_features_in_ = X.shape[1]
             
-            # Get feature importance from XGBoost
-            feature_importance = self.xgb_model.feature_importances_
-            prediction_details['feature_importance'] = feature_importance
+            # Convert sparse matrix to dense if needed
+            if scipy.sparse.issparse(X):
+                X = X.toarray()
             
-            # Extract sentiment scores (last 3 features of X_combined)
-            sentiment_features = X_combined[:, -3:].toarray()
-            prediction_details['sentiment_scores'] = {
-                'positive': sentiment_features[0][0],
-                'negative': sentiment_features[0][1],
-                'neutral': sentiment_features[0][2]
-            }
+            # Convert y to numpy array if needed
+            y = np.array(y)
             
-            # Calculate confidence score based on feature importance and sentiment consensus
-            sentiment_confidence = max(sentiment_features[0]) - min(sentiment_features[0])
-            feature_confidence = np.mean(feature_importance[feature_importance > np.mean(feature_importance)])
-            prediction_details['confidence_score'] = (sentiment_confidence + feature_confidence) / 2
+            # Simple linear regression for now
+            # Calculate weights using normal equation: w = (X^T X)^(-1) X^T y
+            X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
+            self.weights = np.linalg.pinv(X_with_bias.T @ X_with_bias) @ X_with_bias.T @ y
             
-            # Add LSTM prediction if available
-            if self.use_lstm and embeddings is not None and self.lstm_model is not None:
-                lstm_pred = self.lstm_model.predict(embeddings)
-                prediction_details['lstm_prediction'] = lstm_pred
-                
-                # Adjust confidence score with LSTM
-                lstm_confidence = 1 - np.std(lstm_pred) / np.mean(np.abs(lstm_pred))
-                prediction_details['confidence_score'] = (
-                    prediction_details['confidence_score'] * 0.7 + 
-                    lstm_confidence * 0.3
-                )
-            
-            return prediction_details
+            return self
             
         except Exception as e:
-            logger.error(f"Error getting prediction components: {str(e)}")
-            return prediction_details
+            logger.error(f"Error in HybridMarketPredictor fit: {str(e)}")
+            raise
+        
+    def predict(self, X):
+        """Make predictions on new data"""
+        try:
+            if self.weights is None:
+                raise ValueError("Need to call fit or load_model beforehand")
+                
+            # Convert sparse matrix to dense if needed
+            if scipy.sparse.issparse(X):
+                X = X.toarray()
+            
+            # Add bias term
+            X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
+            
+            # Make predictions
+            return X_with_bias @ self.weights
+            
+        except Exception as e:
+            logger.error(f"Error in HybridMarketPredictor predict: {str(e)}")
+            raise
 
 class MarketMLTrainer:
     # Class constants
@@ -1120,47 +1010,35 @@ class MarketMLTrainer:
             return False
 
     def load_models(self):
-        """Load all trained models and components"""
+        """Load all models and components"""
         try:
-            logger.info("Loading trained models and components...")
-            
-            # Check if models directory exists
-            if not os.path.exists(self.models_dir):
-                logger.error(f"Models directory not found: {self.models_dir}")
-                return False
+            logger.info("Loading models and components...")
             
             # Load models for each timeframe
-            for timeframe in self.TIMEFRAMES.keys():
-                model_path = os.path.join(self.models_dir, f'market_model_{timeframe}.joblib')
-                vectorizer_path = os.path.join(self.models_dir, f'vectorizer_{timeframe}.joblib')
-                scaler_path = os.path.join(self.models_dir, f'scaler_{timeframe}.joblib')
-                
-                # Check if all required files exist
-                if not all(os.path.exists(p) for p in [model_path, vectorizer_path, scaler_path]):
-                    logger.error(f"Missing model files for timeframe {timeframe}")
-                    continue
-                
+            for timeframe in ['1wk', '1mo']:
                 try:
-                    # Load model components
-                    self.models[timeframe] = joblib.load(model_path)
-                    self.vectorizers[timeframe] = joblib.load(vectorizer_path)
-                    self.target_scalers[timeframe] = joblib.load(scaler_path)
+                    model_path = os.path.join(self.models_dir, f'market_model_{timeframe}.joblib')
+                    vectorizer_path = os.path.join(self.models_dir, f'vectorizer_{timeframe}.joblib')
                     
-                    logger.info(f"Successfully loaded model components for {timeframe}")
+                    # Load if files exist
+                    if os.path.exists(model_path) and os.path.exists(vectorizer_path):
+                        self.models[timeframe] = joblib.load(model_path)
+                        self.vectorizers[timeframe] = joblib.load(vectorizer_path)
+                        logger.info(f"Successfully loaded model components for {timeframe}")
+                    else:
+                        logger.warning(f"Model files not found for {timeframe}")
+                        
                 except Exception as e:
                     logger.error(f"Error loading model components for {timeframe}: {str(e)}")
+                    logger.exception("Full traceback:")
                     continue
             
-            # Verify that we have at least one timeframe loaded
-            if not self.models:
-                logger.error("No models were successfully loaded")
-                return False
-            
-            logger.info(f"Successfully loaded models for timeframes: {list(self.models.keys())}")
+            logger.info("Model loading completed")
             return True
             
         except Exception as e:
             logger.error(f"Error loading models: {str(e)}")
+            logger.exception("Full traceback:")
             return False
 
     def save_models(self):
@@ -1173,19 +1051,20 @@ class MarketMLTrainer:
             
             # Save models for each timeframe
             for timeframe in self.models.keys():
-                model_path = os.path.join(self.models_dir, f'market_model_{timeframe}.joblib')
-                vectorizer_path = os.path.join(self.models_dir, f'vectorizer_{timeframe}.joblib')
-                scaler_path = os.path.join(self.models_dir, f'scaler_{timeframe}.joblib')
-                
                 try:
-                    # Save model components
+                    # Save model and vectorizer
+                    model_path = os.path.join(self.models_dir, f'market_model_{timeframe}.joblib')
+                    vectorizer_path = os.path.join(self.models_dir, f'vectorizer_{timeframe}.joblib')
+                    
+                    # Save components
                     joblib.dump(self.models[timeframe], model_path)
                     joblib.dump(self.vectorizers[timeframe], vectorizer_path)
-                    joblib.dump(self.target_scalers[timeframe], scaler_path)
                     
                     logger.info(f"Successfully saved model components for {timeframe}")
+                    
                 except Exception as e:
                     logger.error(f"Error saving model components for {timeframe}: {str(e)}")
+                    logger.exception("Full traceback:")
                     continue
             
             logger.info("All models and components saved successfully")
@@ -1193,6 +1072,7 @@ class MarketMLTrainer:
             
         except Exception as e:
             logger.error(f"Error saving models: {str(e)}")
+            logger.exception("Full traceback:")
             return False
 
     def evaluate_model(self, timeframe, validation_data):
@@ -1207,7 +1087,12 @@ class MarketMLTrainer:
                 
             # Split features and targets
             X = [sample['text'] for sample in validation_data]
-            y = [sample['changes'][timeframe] for sample in validation_data]
+            y = np.array([sample['changes'][timeframe] for sample in validation_data])
+            
+            # Check for valid target values
+            if len(y) == 0 or np.all(np.isnan(y)):
+                logger.warning(f"No valid target values for {timeframe}")
+                return float('-inf')
             
             # Transform features
             X_tfidf = self.vectorizers[timeframe].transform(X)
@@ -1215,9 +1100,15 @@ class MarketMLTrainer:
             # Get predictions
             predictions = model.predict(X_tfidf)
             
-            # Calculate score (use mean absolute error)
-            score = -np.mean(np.abs(predictions - np.array(y)))
-            logger.info(f"{timeframe} model evaluation score: {score:.4f}")
+            # Handle NaN values
+            mask = ~np.isnan(predictions) & ~np.isnan(y)
+            if not np.any(mask):
+                logger.warning(f"No valid predictions for {timeframe}")
+                return float('-inf')
+                
+            # Calculate score only on valid values
+            score = -np.mean(np.abs(predictions[mask] - y[mask]))
+            logger.info(f"{timeframe} model evaluation score: {score:.4f} (on {np.sum(mask)} valid samples)")
             
             return score
             
@@ -1250,13 +1141,23 @@ class MarketMLTrainer:
             
             # Train the model
             X_train = [sample['text'] for sample in train_data]
-            y_train = [sample['changes'][timeframe] for sample in train_data]
+            y_train = np.array([sample['changes'][timeframe] for sample in train_data])
+            
+            # Check for valid training data
+            mask = ~np.isnan(y_train)
+            if not np.any(mask):
+                logger.warning(f"No valid training samples for {timeframe}")
+                return False
+                
+            # Use only valid samples for training
+            X_train_filtered = [X_train[i] for i in range(len(X_train)) if mask[i]]
+            y_train_filtered = y_train[mask]
             
             # Fit vectorizer and transform
-            X_train_tfidf = self.vectorizers[timeframe].fit_transform(X_train)
+            X_train_tfidf = self.vectorizers[timeframe].fit_transform(X_train_filtered)
             
             # Train model
-            self.models[timeframe].fit(X_train_tfidf, y_train)
+            self.models[timeframe].fit(X_train_tfidf, y_train_filtered)
             
             # Evaluate new performance
             new_score = self.evaluate_model(timeframe, val_data)
@@ -1280,7 +1181,7 @@ class MarketMLTrainer:
                 
         except Exception as e:
             logger.error(f"Error in train_with_impact_scores for {timeframe}: {str(e)}")
-            logger.exception("Full traceback:")  # Add full traceback for better debugging
+            logger.exception("Full traceback:")
             return False
 
     def collect_and_train(self, symbols):
