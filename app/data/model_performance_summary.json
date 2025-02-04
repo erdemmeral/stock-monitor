@@ -1,0 +1,728 @@
+{
+  "1h": {
+    "base_ml_model": {
+      "total_predictions": 515,
+      "average_error": 12.168488367032639,
+      "direction_accuracy": 0.0,
+      "rmse": 17.2673627170439,
+      "last_updated": "2025-02-03T18:48:07.775372+00:00",
+      "recent_predictions": [
+        {
+          "timestamp": "2025-02-03T18:47:59.298268+00:00",
+          "predicted": 0.0,
+          "actual": 2.621380850867046,
+          "error": 2.621380850867046,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:48:00.325736+00:00",
+          "predicted": 0.0,
+          "actual": 18.85714285714286,
+          "error": 18.85714285714286,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:48:01.383738+00:00",
+          "predicted": 0.0,
+          "actual": -0.5145784579527799,
+          "error": 0.5145784579527799,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:48:02.354096+00:00",
+          "predicted": 0.0,
+          "actual": 2.5270758122743624,
+          "error": 2.5270758122743624,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:48:03.170564+00:00",
+          "predicted": 0.0,
+          "actual": 1.535242983559854,
+          "error": 1.535242983559854,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:48:03.980669+00:00",
+          "predicted": 0.0,
+          "actual": -23.2843137254902,
+          "error": 23.2843137254902,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:48:04.962655+00:00",
+          "predicted": 0.0,
+          "actual": -8.740238968858774,
+          "error": 8.740238968858774,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:48:05.788954+00:00",
+          "predicted": 0.0,
+          "actual": -29.431938093563137,
+          "error": 29.431938093563137,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:48:06.771997+00:00",
+          "predicted": 0.0,
+          "actual": -0.6325992498099157,
+          "error": 0.6325992498099157,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:48:07.775372+00:00",
+          "predicted": 0.0,
+          "actual": -33.54037267080746,
+          "error": 33.54037267080746,
+          "direction_correct": false
+        }
+      ],
+      "all_predictions_count": 515
+    },
+    "semantic_analysis": {
+      "total_predictions": 609,
+      "average_error": 0.0,
+      "direction_accuracy": 1.0,
+      "rmse": 0.0,
+      "last_updated": "2025-02-03T19:59:07.180674+00:00",
+      "recent_predictions": [
+        {
+          "timestamp": "2025-02-03T19:59:00.070248+00:00",
+          "predicted": -1.3461725671363567,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:00.937054+00:00",
+          "predicted": -4.5131511466041445,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:00.947053+00:00",
+          "predicted": -4.5131511466041445,
+          "actual": -4.5131511466041445,
+          "error": 0.0,
+          "direction_correct": "True"
+        },
+        {
+          "timestamp": "2025-02-03T19:59:01.941129+00:00",
+          "predicted": -0.8043147315663814,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:03.048786+00:00",
+          "predicted": -5.058159388365986,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:03.920384+00:00",
+          "predicted": 0.2012126343315348,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:04.740458+00:00",
+          "predicted": 0.07707002659468142,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:05.575906+00:00",
+          "predicted": -0.012824593283505343,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:06.344359+00:00",
+          "predicted": -0.08335641175900693,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:07.180674+00:00",
+          "predicted": 0.1946830617319519,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        }
+      ],
+      "all_predictions_count": 609
+    },
+    "combined_prediction": {
+      "total_predictions": 609,
+      "average_error": 0.0,
+      "direction_accuracy": 1.0,
+      "rmse": 0.0,
+      "last_updated": "2025-02-03T19:59:07.180674+00:00",
+      "recent_predictions": [
+        {
+          "timestamp": "2025-02-03T19:59:00.070248+00:00",
+          "predicted": -1.3461725671363567,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:00.937054+00:00",
+          "predicted": -4.5131511466041445,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:00.947053+00:00",
+          "predicted": -4.5131511466041445,
+          "actual": -4.5131511466041445,
+          "error": 0.0,
+          "direction_correct": "True"
+        },
+        {
+          "timestamp": "2025-02-03T19:59:01.941129+00:00",
+          "predicted": -0.8043147315663814,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:03.048786+00:00",
+          "predicted": -5.058159388365986,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:03.920384+00:00",
+          "predicted": 0.2012126343315348,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:04.740458+00:00",
+          "predicted": 0.07707002659468142,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:05.575906+00:00",
+          "predicted": -0.012824593283505343,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:06.344359+00:00",
+          "predicted": -0.08335641175900693,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        },
+        {
+          "timestamp": "2025-02-03T19:59:07.180674+00:00",
+          "predicted": 0.1946830617319519,
+          "actual": null,
+          "error": null,
+          "direction_correct": null
+        }
+      ],
+      "all_predictions_count": 609
+    }
+  },
+  "1wk": {
+    "base_ml_model": {
+      "total_predictions": 273,
+      "average_error": 11.84527718003504,
+      "direction_accuracy": 0.0,
+      "rmse": 15.891761223016246,
+      "last_updated": "2025-02-03T18:50:25.647708+00:00",
+      "recent_predictions": [
+        {
+          "timestamp": "2025-02-03T18:50:17.312734+00:00",
+          "predicted": 0.0,
+          "actual": -7.196034371556465,
+          "error": 7.196034371556465,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:50:18.258573+00:00",
+          "predicted": 0.0,
+          "actual": -4.714647289015246,
+          "error": 4.714647289015246,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:50:19.247334+00:00",
+          "predicted": 0.0,
+          "actual": 37.93102994685239,
+          "error": 37.93102994685239,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:50:20.189707+00:00",
+          "predicted": 0.0,
+          "actual": 1.7543927160695634,
+          "error": 1.7543927160695634,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:50:21.015630+00:00",
+          "predicted": 0.0,
+          "actual": 1.5761847983646906,
+          "error": 1.5761847983646906,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:50:21.834344+00:00",
+          "predicted": 0.0,
+          "actual": -15.838508879870282,
+          "error": 15.838508879870282,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:50:22.855070+00:00",
+          "predicted": 0.0,
+          "actual": -1.9264471590109113,
+          "error": 1.9264471590109113,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:50:23.671522+00:00",
+          "predicted": 0.0,
+          "actual": -15.838508879870282,
+          "error": 15.838508879870282,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:50:24.650175+00:00",
+          "predicted": 0.0,
+          "actual": -15.838508879870282,
+          "error": 15.838508879870282,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:50:25.647708+00:00",
+          "predicted": 0.0,
+          "actual": -15.838508879870282,
+          "error": 15.838508879870282,
+          "direction_correct": false
+        }
+      ],
+      "all_predictions_count": 273
+    },
+    "semantic_analysis": {
+      "total_predictions": 273,
+      "average_error": 2.4424906541753446e-16,
+      "direction_accuracy": 1.0,
+      "rmse": 5.747482092719373e-16,
+      "last_updated": "2025-02-03T18:50:25.647708+00:00",
+      "recent_predictions": [
+        {
+          "timestamp": "2025-02-03T18:50:17.312734+00:00",
+          "predicted": -7.196034371556465,
+          "actual": -7.196034371556465,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:18.258573+00:00",
+          "predicted": -4.714647289015246,
+          "actual": -4.714647289015246,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:19.247334+00:00",
+          "predicted": 37.93102994685239,
+          "actual": 37.93102994685239,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:20.189707+00:00",
+          "predicted": 1.7543927160695632,
+          "actual": 1.7543927160695634,
+          "error": 2.220446049250313e-16,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:21.015630+00:00",
+          "predicted": 1.5761847983646908,
+          "actual": 1.5761847983646906,
+          "error": 2.220446049250313e-16,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:21.834344+00:00",
+          "predicted": -15.838508879870282,
+          "actual": -15.838508879870282,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:22.855070+00:00",
+          "predicted": -1.9264471590109111,
+          "actual": -1.9264471590109113,
+          "error": 2.220446049250313e-16,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:23.671522+00:00",
+          "predicted": -15.838508879870284,
+          "actual": -15.838508879870282,
+          "error": 1.7763568394002505e-15,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:24.650175+00:00",
+          "predicted": -15.838508879870282,
+          "actual": -15.838508879870282,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:25.647708+00:00",
+          "predicted": -15.838508879870282,
+          "actual": -15.838508879870282,
+          "error": 0.0,
+          "direction_correct": true
+        }
+      ],
+      "all_predictions_count": 273
+    },
+    "combined_prediction": {
+      "total_predictions": 273,
+      "average_error": 5.92263859001752,
+      "direction_accuracy": 1.0,
+      "rmse": 7.945880611508123,
+      "last_updated": "2025-02-03T18:50:25.647708+00:00",
+      "recent_predictions": [
+        {
+          "timestamp": "2025-02-03T18:50:17.312734+00:00",
+          "predicted": -3.5980171857782324,
+          "actual": -7.196034371556465,
+          "error": 3.5980171857782324,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:18.258573+00:00",
+          "predicted": -2.357323644507623,
+          "actual": -4.714647289015246,
+          "error": 2.357323644507623,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:19.247334+00:00",
+          "predicted": 18.965514973426195,
+          "actual": 37.93102994685239,
+          "error": 18.965514973426195,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:20.189707+00:00",
+          "predicted": 0.8771963580347816,
+          "actual": 1.7543927160695634,
+          "error": 0.8771963580347818,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:21.015630+00:00",
+          "predicted": 0.7880923991823454,
+          "actual": 1.5761847983646906,
+          "error": 0.7880923991823452,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:21.834344+00:00",
+          "predicted": -7.919254439935141,
+          "actual": -15.838508879870282,
+          "error": 7.919254439935141,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:22.855070+00:00",
+          "predicted": -0.9632235795054556,
+          "actual": -1.9264471590109113,
+          "error": 0.9632235795054558,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:23.671522+00:00",
+          "predicted": -7.919254439935142,
+          "actual": -15.838508879870282,
+          "error": 7.91925443993514,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:24.650175+00:00",
+          "predicted": -7.919254439935141,
+          "actual": -15.838508879870282,
+          "error": 7.919254439935141,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:50:25.647708+00:00",
+          "predicted": -7.919254439935141,
+          "actual": -15.838508879870282,
+          "error": 7.919254439935141,
+          "direction_correct": true
+        }
+      ],
+      "all_predictions_count": 273
+    }
+  },
+  "1mo": {
+    "base_ml_model": {
+      "total_predictions": 91,
+      "average_error": 21.777895270563654,
+      "direction_accuracy": 0.0,
+      "rmse": 23.907427609119157,
+      "last_updated": "2025-02-03T18:51:08.516388+00:00",
+      "recent_predictions": [
+        {
+          "timestamp": "2025-02-03T18:50:59.114093+00:00",
+          "predicted": 0.0,
+          "actual": -1.5544067906882515,
+          "error": 1.5544067906882515,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:51:00.300587+00:00",
+          "predicted": 0.0,
+          "actual": -18.181819895210793,
+          "error": 18.181819895210793,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:51:01.383246+00:00",
+          "predicted": 0.0,
+          "actual": -14.090911603170925,
+          "error": 14.090911603170925,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:51:02.403449+00:00",
+          "predicted": 0.0,
+          "actual": -34.36532900804142,
+          "error": 34.36532900804142,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:51:03.408465+00:00",
+          "predicted": 0.0,
+          "actual": -18.504668948889563,
+          "error": 18.504668948889563,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:51:04.351848+00:00",
+          "predicted": 0.0,
+          "actual": -32.298135174299894,
+          "error": 32.298135174299894,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:51:05.377146+00:00",
+          "predicted": 0.0,
+          "actual": -29.333337148030598,
+          "error": 29.333337148030598,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:51:06.335108+00:00",
+          "predicted": 0.0,
+          "actual": -33.12693272211569,
+          "error": 33.12693272211569,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:51:07.349883+00:00",
+          "predicted": 0.0,
+          "actual": -18.14159151997858,
+          "error": 18.14159151997858,
+          "direction_correct": false
+        },
+        {
+          "timestamp": "2025-02-03T18:51:08.516388+00:00",
+          "predicted": 0.0,
+          "actual": -18.181819895210793,
+          "error": 18.181819895210793,
+          "direction_correct": false
+        }
+      ],
+      "all_predictions_count": 91
+    },
+    "semantic_analysis": {
+      "total_predictions": 91,
+      "average_error": 0.0,
+      "direction_accuracy": 1.0,
+      "rmse": 0.0,
+      "last_updated": "2025-02-03T18:51:08.516388+00:00",
+      "recent_predictions": [
+        {
+          "timestamp": "2025-02-03T18:50:59.114093+00:00",
+          "predicted": -1.5544067906882515,
+          "actual": -1.5544067906882515,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:00.300587+00:00",
+          "predicted": -18.181819895210793,
+          "actual": -18.181819895210793,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:01.383246+00:00",
+          "predicted": -14.090911603170925,
+          "actual": -14.090911603170925,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:02.403449+00:00",
+          "predicted": -34.36532900804142,
+          "actual": -34.36532900804142,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:03.408465+00:00",
+          "predicted": -18.504668948889563,
+          "actual": -18.504668948889563,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:04.351848+00:00",
+          "predicted": -32.298135174299894,
+          "actual": -32.298135174299894,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:05.377146+00:00",
+          "predicted": -29.333337148030598,
+          "actual": -29.333337148030598,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:06.335108+00:00",
+          "predicted": -33.12693272211569,
+          "actual": -33.12693272211569,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:07.349883+00:00",
+          "predicted": -18.14159151997858,
+          "actual": -18.14159151997858,
+          "error": 0.0,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:08.516388+00:00",
+          "predicted": -18.181819895210793,
+          "actual": -18.181819895210793,
+          "error": 0.0,
+          "direction_correct": true
+        }
+      ],
+      "all_predictions_count": 91
+    },
+    "combined_prediction": {
+      "total_predictions": 91,
+      "average_error": 10.888947635281827,
+      "direction_accuracy": 1.0,
+      "rmse": 11.953713804559579,
+      "last_updated": "2025-02-03T18:51:08.516388+00:00",
+      "recent_predictions": [
+        {
+          "timestamp": "2025-02-03T18:50:59.114093+00:00",
+          "predicted": -0.7772033953441257,
+          "actual": -1.5544067906882515,
+          "error": 0.7772033953441257,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:00.300587+00:00",
+          "predicted": -9.090909947605397,
+          "actual": -18.181819895210793,
+          "error": 9.090909947605397,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:01.383246+00:00",
+          "predicted": -7.0454558015854625,
+          "actual": -14.090911603170925,
+          "error": 7.0454558015854625,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:02.403449+00:00",
+          "predicted": -17.18266450402071,
+          "actual": -34.36532900804142,
+          "error": 17.18266450402071,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:03.408465+00:00",
+          "predicted": -9.252334474444782,
+          "actual": -18.504668948889563,
+          "error": 9.252334474444782,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:04.351848+00:00",
+          "predicted": -16.149067587149947,
+          "actual": -32.298135174299894,
+          "error": 16.149067587149947,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:05.377146+00:00",
+          "predicted": -14.666668574015299,
+          "actual": -29.333337148030598,
+          "error": 14.666668574015299,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:06.335108+00:00",
+          "predicted": -16.563466361057845,
+          "actual": -33.12693272211569,
+          "error": 16.563466361057845,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:07.349883+00:00",
+          "predicted": -9.07079575998929,
+          "actual": -18.14159151997858,
+          "error": 9.07079575998929,
+          "direction_correct": true
+        },
+        {
+          "timestamp": "2025-02-03T18:51:08.516388+00:00",
+          "predicted": -9.090909947605397,
+          "actual": -18.181819895210793,
+          "error": 9.090909947605397,
+          "direction_correct": true
+        }
+      ],
+      "all_predictions_count": 91
+    }
+  }
+}
