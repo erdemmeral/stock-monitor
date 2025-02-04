@@ -60,6 +60,7 @@ class HybridMarketPredictor(BaseEstimator, ClassifierMixin):
         self.xgb_model = None
         self.lstm_model = None
         self.n_features_in_ = None
+        self.weights = None
         
     def fit(self, X, y):
         """Fit the model to the training data"""
@@ -88,9 +89,24 @@ class HybridMarketPredictor(BaseEstimator, ClassifierMixin):
     def predict(self, X):
         """Make predictions on new data"""
         try:
+            if self.weights is None:
+                raise ValueError("Model has not been fitted yet")
+                
             # Convert sparse matrix to dense if needed
             if scipy.sparse.issparse(X):
                 X = X.toarray()
+                
+            # Check feature dimensions
+            if X.shape[1] != self.n_features_in_:
+                logger.warning(f"Feature dimension mismatch. Expected {self.n_features_in_}, got {X.shape[1]}")
+                # Pad or truncate features to match expected dimensions
+                if X.shape[1] < self.n_features_in_:
+                    # Pad with zeros
+                    padding = np.zeros((X.shape[0], self.n_features_in_ - X.shape[1]))
+                    X = np.hstack([X, padding])
+                else:
+                    # Truncate
+                    X = X[:, :self.n_features_in_]
             
             # Add bias term
             X_with_bias = np.column_stack([np.ones(X.shape[0]), X])
@@ -227,6 +243,7 @@ class ModelManager:
             
             # Transform text using vectorizer
             X_tfidf = vectorizer.transform([text])
+            logger.debug(f"TF-IDF features shape: {X_tfidf.shape}")
             
             # Get sentiment features
             finbert = FinBERTSentimentAnalyzer()
@@ -241,22 +258,37 @@ class ModelManager:
                 sentiment['probabilities']['negative'],
                 sentiment['probabilities']['neutral']
             ]])
+            logger.debug(f"Sentiment features shape: {sentiment_features.shape}")
             
             # Combine features
             X_combined = scipy.sparse.hstack([
                 X_tfidf,
                 scipy.sparse.csr_matrix(sentiment_features)
             ]).tocsr()
+            logger.debug(f"Combined features shape: {X_combined.shape}")
             
             # Get embedding using the shared semantic analyzer
             embedding = self.semantic_analyzer.get_embedding(text)
-            embeddings_sequence = [embedding] if embedding is not None else None
+            if embedding is not None:
+                embedding_features = np.array([embedding])
+                logger.debug(f"Embedding features shape: {embedding_features.shape}")
+                X_combined = scipy.sparse.hstack([
+                    X_combined,
+                    scipy.sparse.csr_matrix(embedding_features)
+                ]).tocsr()
+                logger.debug(f"Final combined features shape: {X_combined.shape}")
             
             # Make prediction
-            prediction = model.predict(X_combined)[0]
+            try:
+                prediction = model.predict(X_combined)[0]
+                logger.debug(f"Raw prediction: {prediction}")
+            except ValueError as ve:
+                logger.error(f"Prediction error: {str(ve)}")
+                return None
             
             # Inverse transform the prediction
             prediction_unscaled = scaler.inverse_transform([[prediction]])[0][0]
+            logger.debug(f"Unscaled prediction: {prediction_unscaled}")
             
             return prediction_unscaled
             
