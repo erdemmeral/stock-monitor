@@ -1102,13 +1102,8 @@ class RealTimeMonitor:
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             }
             
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url, headers=headers, timeout=10) as response:
-                    if response.status != 200:
-                        return None
-                    html = await response.text()
-            
-            soup = BeautifulSoup(html, 'html.parser')
+            response = requests.get(url, headers=headers, timeout=10)
+            soup = BeautifulSoup(response.text, 'html.parser')
             
             # Extract text based on common article containers
             article_content = soup.find(['article', 'main', 'div'], 
