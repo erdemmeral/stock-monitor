@@ -1718,6 +1718,17 @@ class RealTimeMonitor:
         
         return message
 
+def get_all_symbols():
+    """Get list of stock symbols to monitor"""
+    try:
+        with open('stock_tickers.txt', 'r') as f:
+            symbols = [line.strip() for line in f if line.strip()]
+        logger.info(f"Loaded {len(symbols)} symbols to monitor")
+        return symbols
+    except Exception as e:
+        logger.error(f"Error loading symbols: {str(e)}")
+        return []
+
 async def main():
     logger.info("🚀 Market Monitor Starting...")
     logger.info("Initializing ML models and market data...")
