@@ -108,6 +108,9 @@ class ModelManager:
         self.vectorizers = {}
         self.scalers = {}
         self.semantic_patterns = None
+        # Initialize embedding model
+        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        self.semantic_analyzer = NewsSemanticAnalyzer(embedding_model=self.embedding_model)
         self.model_paths = {
             '1wk': {
                 'model': 'app/models/market_model_1wk.joblib',
@@ -245,23 +248,15 @@ class ModelManager:
                 scipy.sparse.csr_matrix(sentiment_features)
             ]).tocsr()
             
-            # Get embedding for LSTM
-            semantic_analyzer = NewsSemanticAnalyzer()
-            embedding = semantic_analyzer.get_embedding(text)
+            # Get embedding using the shared semantic analyzer
+            embedding = self.semantic_analyzer.get_embedding(text)
             embeddings_sequence = [embedding] if embedding is not None else None
             
             # Make prediction
-            prediction, details = model.predict(X_combined, embeddings_sequence)
+            prediction = model.predict(X_combined)[0]
             
             # Inverse transform the prediction
             prediction_unscaled = scaler.inverse_transform([[prediction]])[0][0]
-            
-            logger.info(f"\nPrediction for {timeframe}:")
-            logger.info(f"  Raw prediction: {prediction:.4f}")
-            logger.info(f"  Unscaled prediction: {prediction_unscaled:.2f}%")
-            if details['lstm_pred'] is not None:
-                logger.info(f"  XGBoost prediction: {details['xgb_pred']:.4f}")
-                logger.info(f"  LSTM prediction: {details['lstm_pred']:.4f}")
             
             return prediction_unscaled
             
@@ -447,10 +442,10 @@ class RealTimeMonitor:
         self.last_cache_cleanup = time.time()
         self.cleanup_interval = 3600  # Cleanup every hour
         
-        # Share embedding model instance
-        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        # Share embedding model and analyzers from model manager
+        self.embedding_model = self.model_manager.embedding_model
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
-        self.semantic_analyzer = NewsSemanticAnalyzer(embedding_model=self.embedding_model)
+        self.semantic_analyzer = self.model_manager.semantic_analyzer
         logger.info("Analyzers initialized")
         
         # Prediction thresholds
