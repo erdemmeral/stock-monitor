@@ -323,21 +323,20 @@ class RealTimeMonitor:
 
         # Initialize prediction components
         self.market_trainer = MarketMLTrainer()
-        self.market_trainer.load_models()  # Load pre-trained models
+        # Train models if they don't exist
+        if not self.market_trainer.load_models():
+            logger.info("No pre-trained models found. Training new models...")
+            if not self.market_trainer.train():
+                raise RuntimeError("Failed to train models")
         logger.info("Market ML models loaded")
         
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
         self.semantic_analyzer = NewsSemanticAnalyzer()
         logger.info("Analyzers initialized")
 
-        # Initialize model manager
-        self.model_manager = ModelManager()
-        if not self.model_manager.load_models():
-            raise RuntimeError("Failed to load required models")
-            
-        # Use models from model manager
-        self.vectorizers = self.model_manager.vectorizers
-        self.models = self.model_manager.models
+        # Use models from market trainer
+        self.vectorizers = self.market_trainer.vectorizers
+        self.models = self.market_trainer.models
         
         logger.info("Models loaded successfully")
         
@@ -353,15 +352,19 @@ class RealTimeMonitor:
         # Maximum allowed prior price increase
         self.max_prior_price_increase = 5.0  # 5%
         
+        # CPU Management - Use all available CPUs
+        self.max_workers = multiprocessing.cpu_count()
+        logger.info(f"Using all {self.max_workers} available CPUs")
+        
         # Memory management
         self.process = psutil.Process(os.getpid())
         self.memory_warning_threshold = 60.0
         self.memory_critical_threshold = 75.0
         
         # Processing settings
-        self.batch_size = 50
-        self.delay_between_batches = 2
-        self.max_concurrent_symbols = 10
+        self.batch_size = 100  # Increased batch size for more parallel processing
+        self.delay_between_batches = 1  # Reduced delay between batches
+        self.max_concurrent_symbols = self.max_workers * 2  # Double the number of concurrent symbols
         
         # Initialize other components
         self.processed_news = set()

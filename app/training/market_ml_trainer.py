@@ -960,56 +960,80 @@ class MarketMLTrainer:
             logger.error(f"Training error: {str(e)}")
             return False
 
-    def save_models(self):
-        """Save all trained models and components"""
+    def load_models(self):
+        """Load all trained models and components"""
         try:
-            os.makedirs(self.models_dir, exist_ok=True)
-            logger.info("\n" + "="*80)
-            logger.info("Saving models and components:")
-            logger.info(f"Models directory: {self.models_dir}")
+            logger.info("Loading trained models and components...")
             
-            # Save base ML models and vectorizers
-            for timeframe in ['1wk', '1mo']:
-                logger.info(f"\nSaving {timeframe} models:")
-                if timeframe in self.models:
-                    model_path = os.path.join(self.models_dir, f'market_model_{timeframe}.joblib')
-                    joblib.dump(self.models[timeframe], model_path)
-                    logger.info(f"    Saved model: {model_path}")
-                else:
-                    logger.warning(f"     No model available for {timeframe}")
+            # Check if models directory exists
+            if not os.path.exists(self.models_dir):
+                logger.error(f"Models directory not found: {self.models_dir}")
+                return False
+            
+            # Load models for each timeframe
+            for timeframe in self.TIMEFRAMES.keys():
+                model_path = os.path.join(self.models_dir, f'market_model_{timeframe}.joblib')
+                vectorizer_path = os.path.join(self.models_dir, f'vectorizer_{timeframe}.joblib')
+                scaler_path = os.path.join(self.models_dir, f'scaler_{timeframe}.joblib')
+                
+                # Check if all required files exist
+                if not all(os.path.exists(p) for p in [model_path, vectorizer_path, scaler_path]):
+                    logger.error(f"Missing model files for timeframe {timeframe}")
+                    continue
+                
+                try:
+                    # Load model components
+                    self.models[timeframe] = joblib.load(model_path)
+                    self.vectorizers[timeframe] = joblib.load(vectorizer_path)
+                    self.target_scalers[timeframe] = joblib.load(scaler_path)
                     
-                if timeframe in self.vectorizers:
-                    vectorizer_path = os.path.join(self.models_dir, f'vectorizer_{timeframe}.joblib')
-                    joblib.dump(self.vectorizers[timeframe], vectorizer_path)
-                    logger.info(f"    Saved vectorizer: {vectorizer_path}")
-                else:
-                    logger.warning(f"     No vectorizer available for {timeframe}")
-                    
-                if timeframe in self.target_scalers:
-                    scaler_path = os.path.join(self.models_dir, f'scaler_{timeframe}.joblib')
-                    joblib.dump(self.target_scalers[timeframe], scaler_path)
-                    logger.info(f"    Saved scaler: {scaler_path}")
-                else:
-                    logger.warning(f"     No scaler available for {timeframe}")
+                    logger.info(f"Successfully loaded model components for {timeframe}")
+                except Exception as e:
+                    logger.error(f"Error loading model components for {timeframe}: {str(e)}")
+                    continue
             
-            # Save semantic patterns
-            logger.info("\nSaving semantic patterns:")
-            semantic_data = {
-                'embeddings': self.semantic_analyzer.news_embeddings,
-                'clusters': self.semantic_analyzer.news_clusters,
-                'impacts': self.semantic_analyzer.cluster_impacts
-            }
-            patterns_path = os.path.join(self.models_dir, 'semantic_patterns.joblib')
-            joblib.dump(semantic_data, patterns_path)
-            logger.info(f"    Saved semantic patterns: {patterns_path}")
+            # Verify that we have at least one timeframe loaded
+            if not self.models:
+                logger.error("No models were successfully loaded")
+                return False
             
-            logger.info("\nModel saving completed successfully")
-            logger.info("="*80)
+            logger.info(f"Successfully loaded models for timeframes: {list(self.models.keys())}")
             return True
+            
+        except Exception as e:
+            logger.error(f"Error loading models: {str(e)}")
+            return False
 
+    def save_models(self):
+        """Save all models and components"""
+        try:
+            logger.info("Saving models and components...")
+            
+            # Create models directory if it doesn't exist
+            os.makedirs(self.models_dir, exist_ok=True)
+            
+            # Save models for each timeframe
+            for timeframe in self.models.keys():
+                model_path = os.path.join(self.models_dir, f'market_model_{timeframe}.joblib')
+                vectorizer_path = os.path.join(self.models_dir, f'vectorizer_{timeframe}.joblib')
+                scaler_path = os.path.join(self.models_dir, f'scaler_{timeframe}.joblib')
+                
+                try:
+                    # Save model components
+                    joblib.dump(self.models[timeframe], model_path)
+                    joblib.dump(self.vectorizers[timeframe], vectorizer_path)
+                    joblib.dump(self.target_scalers[timeframe], scaler_path)
+                    
+                    logger.info(f"Successfully saved model components for {timeframe}")
+                except Exception as e:
+                    logger.error(f"Error saving model components for {timeframe}: {str(e)}")
+                    continue
+            
+            logger.info("All models and components saved successfully")
+            return True
+            
         except Exception as e:
             logger.error(f"Error saving models: {str(e)}")
-            logger.exception("Full traceback:")
             return False
 
     def train_with_impact_scores(self, training_data, timeframe):
