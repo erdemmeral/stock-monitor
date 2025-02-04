@@ -47,7 +47,7 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 from requests import Session
 from scipy.cluster.hierarchy import linkage, fcluster
-from scipy.spatial.distance import euclidean
+from scipy.spatial.distance import euclidean, cosine
 from scipy.stats import pearsonr
 from sentence_transformers import SentenceTransformer
 from typing import Dict, List, Optional, Union
@@ -88,22 +88,35 @@ logger.info("="*80)
 
 # Then replace the print statements with logger calls
 class NewsSemanticAnalyzer:
-    def __init__(self):
-        # Initialize BERT model for semantic understanding
-        self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
-        self.model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
-        self.model.eval()
-
-        # Store historical patterns
-        self.news_embeddings = []  # Store embeddings
-        self.price_impacts = []    # Store corresponding price impacts
-        self.news_clusters = defaultdict(list)  # Store clustered news
-        self.cluster_impacts = defaultdict(list)  # Store impact patterns per cluster
-        self.timestamps = []  # Store timestamps for temporal analysis
-        self.news_timestamps = []  # Store timestamps as a list, not defaultdict
-        self.temporal_patterns = defaultdict(list)  # Store temporal patterns
+    def __init__(self, embedding_model=None):
+        # Use shared embedding model if provided
+        self.embedding_model = embedding_model
+        if not self.embedding_model:
+            self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         
-        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        # We don't need separate BERT models since we're using SentenceTransformer
+        self.model = None
+        self.tokenizer = None
+
+        # Create data storage directories
+        self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+        self.embeddings_dir = os.path.join(self.data_dir, 'embeddings')
+        self.clusters_dir = os.path.join(self.data_dir, 'clusters')
+        os.makedirs(self.embeddings_dir, exist_ok=True)
+        os.makedirs(self.clusters_dir, exist_ok=True)
+
+        # In-memory index for quick lookups
+        self.embedding_index = {}  # Maps ID to file location
+        self.cluster_index = {}    # Maps cluster ID to file location
+        
+        # Batch processing settings
+        self.batch_size = 100
+        self.current_batch = {
+            'embeddings': [],
+            'timestamps': [],
+            'impacts': []
+        }
+        
         self.cluster_data = {
             '1wk': {
                 'centroids': None,
@@ -122,23 +135,13 @@ class NewsSemanticAnalyzer:
                 'cluster_stats': {}
             }
         }
-        
+
     def get_embedding(self, text):
-        """Generate embedding for text using BERT"""
+        """Generate embedding for text using SentenceTransformer"""
         try:
-            # Tokenize and get BERT embedding
-            inputs = self.tokenizer(text, padding=True, truncation=True, max_length=512, return_tensors="pt")
-
-            with torch.no_grad():
-                outputs = self.model(**inputs)
-                # Use mean pooling to get text embedding
-                attention_mask = inputs['attention_mask']
-                token_embeddings = outputs.last_hidden_state
-                input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
-                embedding = torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
-
-            return embedding[0].numpy()
-
+            # Use SentenceTransformer directly - it's more efficient
+            embedding = self.embedding_model.encode(text, convert_to_tensor=True)
+            return embedding.cpu().numpy()
         except Exception as e:
             logger.error(f"Error generating embedding: {str(e)}")
             return None
@@ -532,6 +535,43 @@ class NewsSemanticAnalyzer:
             logger.error(f"Error predicting cluster: {str(e)}")
             return None
 
+    def cleanup_old_data(self):
+        """Cleanup old data to prevent memory growth"""
+        try:
+            if len(self.news_embeddings) > self.max_stored_items:
+                # Keep only the most recent items
+                self.news_embeddings = self.news_embeddings[-self.max_stored_items:]
+                self.price_impacts = self.price_impacts[-self.max_stored_items:]
+                self.timestamps = self.timestamps[-self.max_stored_items:]
+                self.news_timestamps = self.news_timestamps[-self.max_stored_items:]
+
+            # Cleanup clusters
+            for cluster_id in list(self.news_clusters.keys()):
+                if len(self.news_clusters[cluster_id]) > self.max_stored_items:
+                    self.news_clusters[cluster_id] = self.news_clusters[cluster_id][-self.max_stored_items:]
+                    self.cluster_impacts[cluster_id] = self.cluster_impacts[cluster_id][-self.max_stored_items:]
+
+            # Cleanup temporal patterns
+            for pattern_id in list(self.temporal_patterns.keys()):
+                if len(self.temporal_patterns[pattern_id]) > self.max_stored_items:
+                    self.temporal_patterns[pattern_id] = self.temporal_patterns[pattern_id][-self.max_stored_items:]
+
+            # Cleanup cluster data
+            for timeframe in self.cluster_data:
+                if len(self.cluster_data[timeframe]['embeddings']) > self.max_stored_items:
+                    self.cluster_data[timeframe]['embeddings'] = self.cluster_data[timeframe]['embeddings'][-self.max_stored_items:]
+                    self.cluster_data[timeframe]['timestamps'] = self.cluster_data[timeframe]['timestamps'][-self.max_stored_items:]
+                    self.cluster_data[timeframe]['price_changes'] = self.cluster_data[timeframe]['price_changes'][-self.max_stored_items:]
+
+            # Force garbage collection
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+
+            logger.info("Successfully cleaned up old data")
+        except Exception as e:
+            logger.error(f"Error during data cleanup: {str(e)}")
+
 class FinBERTSentimentAnalyzer:
     def __init__(self):
         self.tokenizer = BertTokenizer.from_pretrained('ProsusAI/finbert')
@@ -820,19 +860,24 @@ class MarketMLTrainer:
     def __init__(self):
         """Initialize the trainer with required components"""
         self.models_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'models')
+        self.data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+        self.training_data_dir = os.path.join(self.data_dir, 'training')
+        os.makedirs(self.models_dir, exist_ok=True)
+        os.makedirs(self.training_data_dir, exist_ok=True)
+        
+        # Initialize shared embedding model
+        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        
         self.models = {}
         self.vectorizers = {}
         self.target_scalers = {}
-        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         self.finbert_analyzer = FinBERTSentimentAnalyzer()
-        self.semantic_analyzer = NewsSemanticAnalyzer()
-        
-        # Initialize cluster data
-        self.cluster_data = defaultdict(lambda: defaultdict(list))
+        # Pass the shared embedding model
+        self.semantic_analyzer = NewsSemanticAnalyzer(embedding_model=self.embedding_model)
         
         # CPU and memory management
         total_cpus = multiprocessing.cpu_count()
-        self.max_workers = max(1, min(total_cpus - 1, 8))  # Use up to 8 CPUs, leave 1 for system
+        self.max_workers = max(1, min(total_cpus - 1, 8))
         
         logger.info(f"System has {total_cpus} CPUs, using {self.max_workers} for processing")
         
@@ -840,100 +885,117 @@ class MarketMLTrainer:
         self.process = psutil.Process(os.getpid())
         
         # Memory thresholds (in percentage)
-        self.memory_warning_threshold = 75.0  # Warn at 75% memory usage
-        self.memory_critical_threshold = 85.0  # Take action at 85% memory usage
+        self.memory_warning_threshold = 75.0
+        self.memory_critical_threshold = 85.0
         
-        # Processing settings
-        self.batch_size = 50  # Process 50 symbols at a time for parallel processing
-        self.api_chunk_size = 25  # Process 25 symbols per API request to avoid rate limits
-        self.delay_between_batches = 2  # 2 seconds between processing batches
-        self.delay_between_chunks = 15  # 15 seconds between API request chunks
-        self.delay_between_symbols = 0.2  # 0.2 seconds between symbols
+        # Processing settings with optimized delays
+        self.batch_size = 50
+        self.api_chunk_size = 25
+        self.delay_between_batches = 0.5  # Reduced from 2s to 0.5s
+        self.delay_between_chunks = 5  # Reduced from 15s to 5s
+        self.delay_between_symbols = 0.1  # Reduced from 0.2s to 0.1s
         
         # Cache settings
         self.cache_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cache')
         os.makedirs(self.cache_dir, exist_ok=True)
         
-        # Cache file buffers - Increased for parallel processing
-        self._cache_buffers = {}
-        self._buffer_size = 100  # Increased buffer size for faster processing
+        # Cache management
+        self.max_cache_age = 86400
+        self.max_cache_size = 1000
+        self.cache_cleanup_threshold = 0.9
         
-    def _write_cache_buffer(self, symbol):
-        """Write cached data buffer to disk"""
-        if symbol in self._cache_buffers and len(self._cache_buffers[symbol]) >= self._buffer_size:
-            cache_file = os.path.join(self.cache_dir, f'{symbol}_cache.json')
-            try:
-                with open(cache_file, 'w') as f:
-                    json.dump(self._cache_buffers[symbol], f)
-                self._cache_buffers[symbol] = []
-            except Exception as e:
-                logger.error(f"Error writing cache buffer for {symbol}: {str(e)}")
+        # Cache file buffers
+        self._cache_buffers = {}
+        self._buffer_size = 50
+        self._last_cleanup_time = time.time()
+        self._cleanup_interval = 3600
 
-    def _add_to_cache_buffer(self, symbol, data):
-        """Add data to cache buffer"""
-        if symbol not in self._cache_buffers:
-            self._cache_buffers[symbol] = []
-        self._cache_buffers[symbol].append(data)
-        if len(self._cache_buffers[symbol]) >= self._buffer_size:
-            self._write_cache_buffer(symbol)
-
-    def _check_memory_usage(self):
-        """Check memory usage and take action if needed"""
+    def _cleanup_cache(self, force=False):
+        """Clean up old cache files"""
         try:
-            memory_percent = self.process.memory_percent()
+            current_time = time.time()
             
-            if memory_percent > self.memory_critical_threshold:
-                logger.warning(f"Critical memory usage detected: {memory_percent:.1f}%")
-                self._clear_memory()
-                return False
-            elif memory_percent > self.memory_warning_threshold:
-                logger.warning(f"High memory usage detected: {memory_percent:.1f}%")
-                self._clear_memory()
+            # Only cleanup if forced or enough time has passed
+            if not force and (current_time - self._last_cleanup_time) < self._cleanup_interval:
+                return
             
-            return True
+            logger.info("Starting cache cleanup...")
+            cache_files = os.listdir(self.cache_dir)
+            
+            if len(cache_files) > (self.max_cache_size * self.cache_cleanup_threshold) or force:
+                # Get file stats
+                file_stats = []
+                for filename in cache_files:
+                    file_path = os.path.join(self.cache_dir, filename)
+                    try:
+                        stats = os.stat(file_path)
+                        file_stats.append((file_path, stats.st_mtime))
+                    except Exception as e:
+                        logger.error(f"Error getting stats for {filename}: {str(e)}")
+                
+                # Sort by modification time (oldest first)
+                file_stats.sort(key=lambda x: x[1])
+                
+                # Remove old files
+                files_to_remove = len(file_stats) - self.max_cache_size
+                if files_to_remove > 0:
+                    for file_path, _ in file_stats[:files_to_remove]:
+                        try:
+                            os.remove(file_path)
+                            logger.info(f"Removed old cache file: {os.path.basename(file_path)}")
+                        except Exception as e:
+                            logger.error(f"Error removing {file_path}: {str(e)}")
+                
+                # Remove expired files
+                for file_path, mtime in file_stats[files_to_remove:]:
+                    if (current_time - mtime) > self.max_cache_age:
+                        try:
+                            os.remove(file_path)
+                            logger.info(f"Removed expired cache file: {os.path.basename(file_path)}")
+                        except Exception as e:
+                            logger.error(f"Error removing {file_path}: {str(e)}")
+            
+            self._last_cleanup_time = current_time
+            
+            # Clear memory
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+                
+            logger.info("Cache cleanup completed")
             
         except Exception as e:
-            logger.error(f"Error checking memory usage: {str(e)}")
-            return True
-    
+            logger.error(f"Error during cache cleanup: {str(e)}")
+
     def _clear_memory(self):
-        """Clear memory by forcing garbage collection and clearing caches"""
+        """Enhanced memory clearing"""
         try:
+            logger.info("Starting memory cleanup...")
+            
+            # Clear cache buffers
+            self._cache_buffers.clear()
+            
+            # Clear any temporary data in semantic analyzer
+            self.semantic_analyzer.cleanup_old_data()
+            
             # Force garbage collection
             gc.collect()
+            
+            # Clear PyTorch cache if using GPU
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
             
             # Clear embedding model cache if it exists
             if hasattr(self.embedding_model, 'clear_cache'):
                 self.embedding_model.clear_cache()
             
-            # Clear torch cache if using GPU
-            if torch.cuda.is_available():
-                torch.cuda.empty_cache()
+            # Run cache cleanup if needed
+            self._cleanup_cache(force=True)
             
-            logger.info("Memory cleared successfully")
+            logger.info("Memory cleanup completed")
             
         except Exception as e:
-            logger.error(f"Error clearing memory: {str(e)}")
-
-    def _log_resource_usage(self):
-        """Log current resource usage"""
-        try:
-            memory_info = self.process.memory_info()
-            cpu_percent = self.process.cpu_percent()
-            memory_percent = self.process.memory_percent()
-            
-            logger.info("Resource Usage:")
-            logger.info(f"CPU Usage: {cpu_percent}%")
-            logger.info(f"Memory Usage: {memory_percent}%")
-            logger.info(f"RSS Memory: {memory_info.rss / 1024 / 1024:.2f} MB")
-            logger.info(f"VMS Memory: {memory_info.vms / 1024 / 1024:.2f} MB")
-            
-            # Check memory thresholds
-            if not self._check_memory_usage():
-                raise MemoryError("Critical memory threshold exceeded")
-                
-        except Exception as e:
-            logger.error(f"Error logging resource usage: {str(e)}")
+            logger.error(f"Error during memory cleanup: {str(e)}")
 
     def train(self):
         """Main training function"""
@@ -1431,17 +1493,16 @@ class MarketMLTrainer:
                 logger.warning(f"No news found for {symbol}")
                 return []
             
-            samples = []
-            for article in news_items:
-                try:
-                    result = self._process_article(article, symbol, stock)
-                    if result:
-                        samples.append(result)
-                        # Add to cache buffer
-                        self._add_to_cache_buffer(symbol, result)
-                except Exception as e:
-                    logger.error(f"Error processing article: {str(e)}")
-                    continue
+            # Process articles in parallel
+            with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+                futures = [
+                    executor.submit(self._process_article, article, symbol, stock)
+                    for article in news_items
+                ]
+                samples = [
+                    result for future in as_completed(futures)
+                    if (result := future.result()) is not None
+                ]
             
             # Write final results to cache
             if samples:

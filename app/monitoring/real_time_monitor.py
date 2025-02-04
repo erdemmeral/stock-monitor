@@ -136,7 +136,7 @@ class ModelManager:
         # Validate model
         if not hasattr(model, 'predict'):
             raise ValueError(f"{timeframe} model missing predict method")
-        
+            
         # Validate vectorizer
         if not hasattr(vectorizer, 'transform'):
             raise ValueError(f"{timeframe} vectorizer missing transform method")
@@ -162,11 +162,11 @@ class ModelManager:
                     if not os.path.exists(path):
                         logger.error(f"Model file not found: {path}")
                         return False
-                    
-                    mod_time = datetime.fromtimestamp(os.path.getmtime(path))
-                    if current_time > mod_time:
-                        should_reload = True
-                        break
+                
+                mod_time = datetime.fromtimestamp(os.path.getmtime(path))
+                if current_time > mod_time:
+                    should_reload = True
+                    break
 
             if should_reload:
                 logger.info("Detected model updates, reloading models...")
@@ -381,7 +381,7 @@ class RealTimeMonitor:
         logger.info("Initializing RealTimeMonitor")
         self.portfolio_tracker = PortfolioTrackerService()
         logger.info("Portfolio tracker service initialized")
-
+        
         # Initialize prediction components
         self.market_trainer = MarketMLTrainer()
         
@@ -452,42 +452,69 @@ class RealTimeMonitor:
         self._polling_lock = asyncio.Lock()
         self._is_polling = False
 
-    async def _get_recent_news(self, symbol):
-        """Get only very recent news for a symbol"""
+    async def _get_news_for_symbol(self, symbol):
+        """Get news articles for a symbol with error handling"""
         try:
-            ticker = yf.Ticker(symbol)
-            news = ticker.news
+            # Use yf.Search instead of ticker.news
+            search = yf.Search(
+                query=symbol,
+                news_count=20,
+                include_nav_links=False,
+                include_research=True
+            )
+            news = search.news
             
-            if not news:
-                return None
-                
-            # Get current time in UTC
-            current_time = datetime.now(tz=timezone.utc)
-            recent_news = []
+            # Clear search object
+            del search
+            gc.collect()
             
-            for article in news:
-                # Convert timestamp to datetime
-                publish_time = datetime.fromtimestamp(article['providerPublishTime'], tz=timezone.utc)
-                time_diff = current_time - publish_time
-                
-                # Only include news from last 24 hours
-                if time_diff.total_seconds() <= (24 * 3600):  # 24 hours in seconds
-                    # Check if we've already processed this article
-                    article_id = article.get('uuid', '')
-                    if article_id not in self.processed_news:
-                        self.processed_news.add(article_id)
-                        recent_news.append(article)
-                        logger.info(f"Found recent news for {symbol} published at {publish_time}")
-                        logger.info(f"News title: {article.get('title', 'No title')}")
-            
-            if recent_news:
-                logger.info(f"Found {len(recent_news)} recent news articles for {symbol}")
-            
-            return recent_news
+            return news
             
         except Exception as e:
             logger.error(f"Error getting news for {symbol}: {str(e)}")
-            return None
+            return []
+
+    async def _validate_article(self, article, current_time):
+        """Validate article data and check if it should be processed"""
+        try:
+            if not isinstance(article, dict):
+                logger.warning("Invalid article format")
+                return None, None
+                
+            publish_time = article.get('providerPublishTime')
+            if not publish_time:
+                logger.warning(f"Missing publish time for article: {article.get('title', 'No title')}")
+                return None, None
+                
+            article_link = article.get('link')
+            if not article_link:
+                logger.warning(f"Missing link for article: {article.get('title', 'No title')}")
+                return None, None
+            
+            # Convert timestamp to datetime
+            try:
+                publish_date = pd.Timestamp(publish_time, unit='s', tz='UTC')
+            except Exception as e:
+                logger.error(f"Error converting publish time {publish_time}: {str(e)}")
+                return None, None
+                
+            time_diff = current_time - publish_date
+            
+            # Check if article is recent enough
+            if time_diff.total_seconds() > (24 * 3600):  # older than 24 hours
+                return None, None
+                
+            # Create unique article ID
+            article_id = article.get('uuid', '')
+            if not article_id:
+                title = article.get('title', '')
+                article_id = f"{title}_{publish_time}"
+                
+            return article_id, publish_date
+            
+        except Exception as e:
+            logger.error(f"Error validating article: {str(e)}")
+            return None, None
 
     async def monitor_stock(self, symbol):
         """Monitor a single stock for trading opportunities"""
@@ -498,20 +525,9 @@ class RealTimeMonitor:
                 logger.error(f"Could not get current price for {symbol}")
                 return
 
-            # Get news with error handling and memory management
-            try:
-                ticker = yf.Ticker(symbol)
-                news = ticker.news
-                
-                # Clear ticker object to free memory
-                del ticker
-                gc.collect()
-                
-                if not news:
-                    return
-                    
-            except Exception as e:
-                logger.error(f"Error fetching news for {symbol}: {str(e)}")
+            # Get news with error handling
+            news = await self._get_news_for_symbol(symbol)
+            if not news:
                 return
 
             valid_predictions = []
@@ -519,57 +535,65 @@ class RealTimeMonitor:
             
             for article in news:
                 try:
-                    # Convert timestamp to datetime
-                    publish_time = datetime.fromtimestamp(article['providerPublishTime'], tz=timezone.utc)
-                    time_diff = current_time - publish_time
+                    # Validate article and get publish date
+                    article_id, publish_date = await self._validate_article(article, current_time)
+                    if not article_id or not publish_date:
+                        continue
+                        
+                    # Skip if already processed
+                    if article_id in self.processed_news:
+                        continue
+                        
+                    self.processed_news.add(article_id)
                     
-                    # Only process articles from last 24 hours that we haven't seen
-                    if time_diff.total_seconds() <= (24 * 3600):  # 24 hours
-                        article_id = article.get('uuid', '')
-                        if article_id not in self.processed_news:
-                            self.processed_news.add(article_id)
-                            
-                            # Get article content with timeout
-                            content = await asyncio.wait_for(
-                                self.get_full_article_text(article['link']),
-                                timeout=10
+                    # Get article content with timeout
+                    try:
+                        content = await asyncio.wait_for(
+                            self.get_full_article_text(article['link']),
+                            timeout=10
+                        )
+                    except asyncio.TimeoutError:
+                        logger.warning(f"Timeout getting content for article: {article.get('title', 'No title')}")
+                        continue
+                    except Exception as e:
+                        logger.error(f"Error getting content: {str(e)}")
+                        continue
+                    
+                    if not content:
+                        logger.warning(f"No content for article: {article.get('title', 'No title')}")
+                        continue
+
+                    logger.info(f"\nAnalyzing article from {publish_date}")
+                    logger.info(f"Title: {article.get('title', 'No title')}")
+                    logger.info(f"Publisher: {article.get('publisher', 'Unknown')}")
+                    
+                    # Make predictions for both timeframes
+                    predictions = {}
+                    for timeframe in ['1wk', '1mo']:
+                        try:
+                            prediction = await self._get_prediction(
+                                symbol=symbol,
+                                content=content,
+                                timeframe=timeframe,
+                                publish_time=publish_date,
+                                current_price=current_price
                             )
                             
-                            if not content:
-                                logger.warning(f"Could not get content for article: {article.get('title', 'No title')}")
-                                continue
-
-                            logger.info(f"\nAnalyzing article from {publish_time}")
-                            logger.info(f"Title: {article.get('title', 'No title')}")
-                            
-                            # Make predictions for both timeframes
-                            predictions = {}
-                            for timeframe in ['1wk', '1mo']:
-                                try:
-                                    prediction = await self._get_prediction(
-                                        symbol=symbol,
-                                        content=content,
-                                        timeframe=timeframe,
-                                        publish_time=publish_time,
-                                        current_price=current_price
-                                    )
-                                    
-                                    if prediction and prediction['prediction'] > 0:
-                                        predictions[timeframe] = prediction
-                                        logger.info(f"Valid {timeframe} prediction: {prediction['prediction']:.2f}%")
-                                        
-                                except Exception as pred_error:
-                                    logger.error(f"Error getting prediction for {symbol} {timeframe}: {str(pred_error)}")
-                                    continue
-                            
-                            if predictions:
-                                valid_predictions.append({
-                                    'article': article,
-                                    'predictions': predictions,
-                                    'publish_time': publish_time
-                                })
-                                logger.info(f"Added valid prediction for {symbol} based on news from {publish_time}")
-
+                            if prediction and prediction['prediction'] > 0:
+                                predictions[timeframe] = prediction
+                                logger.info(f"Valid {timeframe} prediction: {prediction['prediction']:.2f}%")
+                                
+                        except Exception as pred_error:
+                            logger.error(f"Error getting prediction for {symbol} {timeframe}: {str(pred_error)}")
+                            continue
+                    
+                    if predictions:
+                        valid_predictions.append({
+                            'article': article,
+                            'predictions': predictions,
+                            'publish_time': publish_date
+                        })
+                        logger.info(f"Added valid prediction for {symbol} based on news from {publish_date}")
                 except Exception as e:
                     logger.error(f"Error processing article for {symbol}: {str(e)}")
                     continue
@@ -584,7 +608,6 @@ class RealTimeMonitor:
 
         except Exception as e:
             logger.error(f"Error monitoring {symbol}: {str(e)}")
-            
         finally:
             # Ensure memory is cleaned up
             gc.collect()
@@ -715,55 +738,36 @@ class RealTimeMonitor:
                 publish_time = pred_data['publish_time']
 
                 for timeframe, prediction in predictions.items():
-                    try:
-                        # Calculate prediction score based on confidence and prediction value
-                        score = prediction['prediction'] * prediction['confidence']
-                        
-                        # Update best prediction if this is better
-                        if score > best_predictions[timeframe]['score']:
-                            best_predictions[timeframe] = {
-                                'prediction': prediction,
-                                'article': article,
-                                'score': score,
-                                'publish_time': publish_time
-                            }
-                    except Exception as e:
-                        logger.error(f"Error processing prediction for {symbol} {timeframe}: {str(e)}")
-                        continue
+                    # Calculate prediction score based on confidence and prediction value
+                    score = prediction['prediction'] * prediction['confidence']
+                    
+                    # Update best prediction if this is better
+                    if score > best_predictions[timeframe]['score']:
+                        best_predictions[timeframe] = {
+                            'prediction': prediction,
+                            'article': article,
+                            'score': score,
+                            'publish_time': publish_time
+                        }
 
             # Process signals for each timeframe
             for timeframe, best in best_predictions.items():
+                if not best['prediction']:
+                    continue
+
+                prediction = best['prediction']
+                article = best['article']
+                publish_time = best['publish_time']
+
+                # Calculate target price
+                predicted_change = prediction['prediction'] / 100  # Convert to decimal
+                target_price = current_price * (1 + predicted_change)
+
+                # Set entry and target dates
+                entry_date = datetime.now(tz=timezone.utc)
+                target_date = entry_date + timedelta(days=7 if timeframe == '1wk' else 30)
+
                 try:
-                    if not best['prediction']:
-                        continue
-
-                    prediction = best['prediction']
-                    article = best['article']
-                    publish_time = best['publish_time']
-
-                    # Calculate target price
-                    predicted_change = prediction['prediction'] / 100  # Convert to decimal
-                    target_price = current_price * (1 + predicted_change)
-
-                    # Set entry and target dates
-                    entry_date = datetime.now(tz=timezone.utc)
-                    target_date = entry_date + timedelta(days=7 if timeframe == '1wk' else 30)
-
-                    # Prepare signal details
-                    signal_details = {
-                        'symbol': symbol,
-                        'entry_price': current_price,
-                        'target_price': target_price,
-                        'predicted_change': predicted_change,
-                        'confidence': prediction['confidence'],
-                        'sentiment_score': prediction['sentiment_score'],
-                        'timeframe': timeframe,
-                        'entry_date': entry_date,
-                        'target_date': target_date,
-                        'article_url': article.get('link', ''),
-                        'article_title': article.get('title', '')
-                    }
-
                     # Send signal
                     await self.send_signal(
                         signal_type='buy',
@@ -776,14 +780,12 @@ class RealTimeMonitor:
                         entry_date=entry_date,
                         target_date=target_date
                     )
-
+                    
                     logger.info(f"Signal sent for {symbol} ({timeframe})")
                     logger.info(f"Predicted change: {predicted_change:.2%}")
                     logger.info(f"Target price: ${target_price:.2f}")
-
                 except Exception as e:
                     logger.error(f"Error sending signal for {symbol} {timeframe}: {str(e)}")
-                    continue
 
         except Exception as e:
             logger.error(f"Error in analyze_and_notify for {symbol}: {str(e)}")
@@ -845,10 +847,16 @@ class RealTimeMonitor:
             gc.collect()
             
             return result
-            
+                
         except Exception as e:
             logger.error(f"Error getting historical price for {symbol}: {str(e)}")
             return None
+        finally:
+            if 'ticker' in locals():
+                del ticker
+            if 'history' in locals():
+                del history
+            gc.collect()
 
     async def send_telegram_alert(self, message: str) -> None:
         """Send alert message via Telegram"""
@@ -893,7 +901,7 @@ class RealTimeMonitor:
             if self.telegram_session:
                 await self.telegram_session.close()
                 logger.info("Telegram session closed")
-                
+            
         except Exception as e:
             logger.error(f"Error during cleanup: {e}")
 
@@ -912,53 +920,50 @@ class RealTimeMonitor:
             
             self._is_polling = True
             
-            try:
-                while True:
-                    try:
-                        logger.info("Starting new monitoring cycle...")
+            while True:
+                try:
+                    logger.info("Starting new monitoring cycle...")
+                    
+                    # Process in optimized batches
+                    total_symbols = len(symbols)
+                    for batch_start in range(0, total_symbols, self.batch_size):
+                        batch = symbols[batch_start:batch_start + self.batch_size]
+                        batch_number = batch_start // self.batch_size + 1
+                        total_batches = (total_symbols + self.batch_size - 1) // self.batch_size
                         
-                        # Process in optimized batches
-                        total_symbols = len(symbols)
-                        for batch_start in range(0, total_symbols, self.batch_size):
-                            batch = symbols[batch_start:batch_start + self.batch_size]
-                            batch_number = batch_start // self.batch_size + 1
-                            total_batches = (total_symbols + self.batch_size - 1) // self.batch_size
-                            
-                            logger.info(f"Processing Batch {batch_number}/{total_batches}")
-                            
-                            # Process symbols concurrently
-                            sem = asyncio.Semaphore(self.max_concurrent_symbols)
-                            tasks = []
-                            
-                            async def process_with_semaphore(symbol):
-                                async with sem:
-                                    return await self.monitor_stock(symbol)
-                            
-                            for symbol in batch:
-                                task = asyncio.create_task(process_with_semaphore(symbol))
-                                tasks.append(task)
-                            
-                            await asyncio.gather(*tasks)
-                            
-                            logger.info(f"Completed Batch {batch_number}/{total_batches}")
-                            
-                            if batch_number < total_batches:
-                                await asyncio.sleep(self.delay_between_batches)
+                        logger.info(f"Processing Batch {batch_number}/{total_batches}")
                         
-                        logger.info("Completed full monitoring cycle")
-                        await asyncio.sleep(30)  # Wait 30 seconds before next cycle
+                        # Process symbols concurrently
+                        sem = asyncio.Semaphore(self.max_concurrent_symbols)
+                        tasks = []
                         
-                    except Exception as e:
-                        logger.error(f"Error in monitoring cycle: {str(e)}")
-                        await asyncio.sleep(30)
+                        async def process_with_semaphore(symbol):
+                            async with sem:
+                                return await self.monitor_stock(symbol)
                         
-            finally:
-                # Ensure cleanup happens
-                await self.cleanup()
+                        for symbol in batch:
+                            task = asyncio.create_task(process_with_semaphore(symbol))
+                            tasks.append(task)
+                            
+                        await asyncio.gather(*tasks)
+                        
+                        logger.info(f"Completed Batch {batch_number}/{total_batches}")
+                        
+                        if batch_number < total_batches:
+                            await asyncio.sleep(self.delay_between_batches)
+                    
+                    logger.info("Completed full monitoring cycle")
+                    await asyncio.sleep(30)  # Wait 30 seconds before next cycle
+                    
+                except Exception as e:
+                    logger.error(f"Error in monitoring cycle: {str(e)}")
+                    await asyncio.sleep(30)
                     
         except Exception as e:
             logger.error(f"Error in start: {str(e)}")
             self._is_polling = False
+        finally:
+            # Ensure cleanup happens
             await self.cleanup()
 
     async def test_portfolio_tracker(self):
@@ -977,9 +982,9 @@ class RealTimeMonitor:
             
             # Send test buy signal
             success = await self.portfolio_tracker.send_buy_signal(
-                symbol=symbol,
+                        symbol=symbol,
                 entry_price=entry_price,
-                target_price=target_price,
+                        target_price=target_price,
                 entry_date=entry_date.isoformat(),
                 target_date=target_date.isoformat()
             )
@@ -988,7 +993,7 @@ class RealTimeMonitor:
                 logger.info("✅ Portfolio tracker test successful")
             else:
                 logger.error("❌ Portfolio tracker test failed")
-                
+
         except Exception as e:
             logger.error(f"Portfolio tracker test failed: {str(e)}")
             raise  # Re-raise to prevent startup if test fails
@@ -1044,7 +1049,7 @@ class RealTimeMonitor:
             
             logger.error(f"No price data available for {symbol}")
             return None
-            
+
         except Exception as e:
             logger.error(f"Error getting price for {symbol}: {str(e)}")
             return None
