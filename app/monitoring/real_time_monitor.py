@@ -395,6 +395,14 @@ class RealTimeMonitor:
         self.last_price_fetch = {}  # Track last fetch time for rate limiting
         self.price_fetch_delay = 2  # Minimum seconds between fetches for same symbol
         
+        # Initialize Telegram settings
+        self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
+        self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
+        self.telegram_session = None
+        
+        if not self.telegram_token or not self.telegram_chat_id:
+            logger.warning("Telegram credentials not configured")
+        
         models_dir = 'app/models'
         for timeframe in ['1wk', '1mo']:
             model_path = os.path.join(models_dir, f'market_model_{timeframe}.joblib')
@@ -842,6 +850,53 @@ class RealTimeMonitor:
             logger.error(f"Error getting historical price for {symbol}: {str(e)}")
             return None
 
+    async def send_telegram_alert(self, message: str) -> None:
+        """Send alert message via Telegram with proper session handling"""
+        if not self.telegram_token or not self.telegram_chat_id:
+            logger.warning("Telegram bot or chat ID not configured")
+            return
+
+        max_retries = 3
+        retry_delay = 5
+
+        for attempt in range(max_retries):
+            try:
+                if not self.telegram_session:
+                    self.telegram_session = aiohttp.ClientSession()
+                
+                bot = telegram.Bot(token=self.telegram_token, session=self.telegram_session)
+                await bot.send_message(
+                    chat_id=self.telegram_chat_id,
+                    text=message,
+                    parse_mode='HTML',
+                    disable_web_page_preview=True
+                )
+                logger.info("Telegram alert sent successfully")
+                return
+            except Exception as e:
+                logger.error(f"Failed to send Telegram alert (attempt {attempt + 1}/{max_retries}): {str(e)}")
+                if attempt < max_retries - 1:
+                    logger.info(f"Waiting {retry_delay} seconds before retry...")
+                    await asyncio.sleep(retry_delay)
+                else:
+                    logger.error(f"Failed message content:\n{message}")
+                    break
+
+    async def cleanup(self):
+        """Cleanup resources before shutdown"""
+        try:
+            # Close portfolio tracker
+            await self.portfolio_tracker.close()
+            logger.info("Portfolio tracker session closed")
+            
+            # Close telegram session if exists
+            if self.telegram_session:
+                await self.telegram_session.close()
+                logger.info("Telegram session closed")
+                
+        except Exception as e:
+            logger.error(f"Error during cleanup: {e}")
+
     async def start(self, symbols: list[str]):
         """Start the monitoring process with optimized batch processing"""
         try:
@@ -857,48 +912,54 @@ class RealTimeMonitor:
             
             self._is_polling = True
             
-            while True:
-                try:
-                    logger.info("Starting new monitoring cycle...")
-                    
-                    # Process in optimized batches
-                    total_symbols = len(symbols)
-                    for batch_start in range(0, total_symbols, self.batch_size):
-                        batch = symbols[batch_start:batch_start + self.batch_size]
-                        batch_number = batch_start // self.batch_size + 1
-                        total_batches = (total_symbols + self.batch_size - 1) // self.batch_size
+            try:
+                while True:
+                    try:
+                        logger.info("Starting new monitoring cycle...")
                         
-                        logger.info(f"Processing Batch {batch_number}/{total_batches}")
+                        # Process in optimized batches
+                        total_symbols = len(symbols)
+                        for batch_start in range(0, total_symbols, self.batch_size):
+                            batch = symbols[batch_start:batch_start + self.batch_size]
+                            batch_number = batch_start // self.batch_size + 1
+                            total_batches = (total_symbols + self.batch_size - 1) // self.batch_size
+                            
+                            logger.info(f"Processing Batch {batch_number}/{total_batches}")
+                            
+                            # Process symbols concurrently
+                            sem = asyncio.Semaphore(self.max_concurrent_symbols)
+                            tasks = []
+                            
+                            async def process_with_semaphore(symbol):
+                                async with sem:
+                                    return await self.monitor_stock(symbol)
+                            
+                            for symbol in batch:
+                                task = asyncio.create_task(process_with_semaphore(symbol))
+                                tasks.append(task)
+                            
+                            await asyncio.gather(*tasks)
+                            
+                            logger.info(f"Completed Batch {batch_number}/{total_batches}")
+                            
+                            if batch_number < total_batches:
+                                await asyncio.sleep(self.delay_between_batches)
                         
-                        # Process symbols concurrently
-                        sem = asyncio.Semaphore(self.max_concurrent_symbols)
-                        tasks = []
+                        logger.info("Completed full monitoring cycle")
+                        await asyncio.sleep(30)  # Wait 30 seconds before next cycle
                         
-                        async def process_with_semaphore(symbol):
-                            async with sem:
-                                return await self.monitor_stock(symbol)
+                    except Exception as e:
+                        logger.error(f"Error in monitoring cycle: {str(e)}")
+                        await asyncio.sleep(30)
                         
-                        for symbol in batch:
-                            task = asyncio.create_task(process_with_semaphore(symbol))
-                            tasks.append(task)
-                        
-                        await asyncio.gather(*tasks)
-                        
-                        logger.info(f"Completed Batch {batch_number}/{total_batches}")
-                        
-                        if batch_number < total_batches:
-                            await asyncio.sleep(self.delay_between_batches)
-                    
-                    logger.info("Completed full monitoring cycle")
-                    await asyncio.sleep(30)  # Wait 30 seconds before next cycle
-                    
-                except Exception as e:
-                    logger.error(f"Error in monitoring cycle: {str(e)}")
-                    await asyncio.sleep(30)
+            finally:
+                # Ensure cleanup happens
+                await self.cleanup()
                     
         except Exception as e:
             logger.error(f"Error in start: {str(e)}")
             self._is_polling = False
+            await self.cleanup()
 
     async def test_portfolio_tracker(self):
         """Test function to verify portfolio tracker communication"""
@@ -1123,13 +1184,19 @@ async def main():
     logger.info("Initializing ML models and market data...")
     monitor = RealTimeMonitor()
     
-    # Run the portfolio tracker test first
-    logger.info("Running portfolio tracker test...")
-    await monitor.test_portfolio_tracker()
-    
-    # Then continue with normal operation
-    symbols = get_all_symbols()
-    await monitor.start(symbols)
+    try:
+        # Run the portfolio tracker test first
+        logger.info("Running portfolio tracker test...")
+        await monitor.test_portfolio_tracker()
+        
+        # Then continue with normal operation
+        symbols = get_all_symbols()
+        await monitor.start(symbols)
+    except Exception as e:
+        logger.error(f"Error in main: {str(e)}")
+    finally:
+        # Ensure cleanup happens even on error
+        await monitor.cleanup()
 
 if __name__ == "__main__":
     asyncio.run(main())
